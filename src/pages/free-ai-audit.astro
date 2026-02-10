@@ -7,7 +7,6 @@ import Features from '~/components/widgets/Features.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import Content from '~/components/widgets/Content.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
-import ContactUs from '~/components/widgets/Contact.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
@@ -25,7 +24,8 @@ const metadata = {
       {
         variant: 'primary',
         text: 'Book Your Free Audit',
-        href: '#form',
+        href: 'https://outlook.office.com/book/FuturionSolutions@futurion.es/',
+        target: '_blank',
         icon: 'tabler:clipboard-check',
       },
     ]}
@@ -258,51 +258,30 @@ const metadata = {
     ]}
   />
 
-  <!-- Booking Form -->
+  <!-- Booking Widget -->
 
-  <ContactUs
-    id="form"
-    title="Book your free AI audit"
-    subtitle="Fill out the form below and we'll schedule your initial consultation within 48 hours. The entire audit takes 5-7 business days."
-    inputs={[
-      {
-        type: 'text',
-        name: 'name',
-        label: 'Your Name',
-      },
-      {
-        type: 'email',
-        name: 'email',
-        label: 'Email Address',
-      },
-      {
-        type: 'tel',
-        name: 'phone',
-        label: 'Phone Number',
-      },
-      {
-        type: 'text',
-        name: 'practice_type',
-        label: 'Practice Type (e.g., Dental Clinic, Pharmacy, Medical Clinic)',
-      },
-      {
-        type: 'text',
-        name: 'practice_size',
-        label: 'Number of Employees',
-      },
-    ]}
-    textarea={{
-      label: 'What are your biggest administrative challenges?',
-      name: 'challenges',
-      placeholder: 'Tell us about the tasks that consume the most time, any compliance concerns, or areas where you think automation could help...',
-    }}
-    disclaimer={{
-      label:
-        'By submitting this form, you agree to the collection of your information for the purpose of scheduling your free AI audit. Your data is processed in accordance with our Privacy Policy and GDPR requirements.',
-    }}
-    button="Book My Free Audit"
-    description="We respond within 48 hours. Your information is never shared with third parties."
-  />
+  <div id="form" class="max-w-5xl mx-auto px-4 py-12 md:py-16 lg:py-20">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight dark:text-white mb-4">Book your free AI audit</h2>
+      <p class="text-lg text-gray-600 dark:text-slate-400 max-w-3xl mx-auto">
+        Select a time that works for you. The entire audit takes 5-7 business days after your initial consultation.
+      </p>
+    </div>
+    <div class="rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden bg-white dark:bg-slate-900 shadow-lg">
+      <iframe
+        src="https://outlook.office.com/book/FuturionSolutions@futurion.es/"
+        width="100%"
+        height="700"
+        scrolling="yes"
+        style="border:0"
+        title="Book a Free AI Audit with Futurion Solutions"
+        loading="lazy"
+      ></iframe>
+    </div>
+    <p class="text-sm text-gray-500 dark:text-slate-500 text-center mt-4">
+      Your information is processed in accordance with our <a href="/privacy" class="underline hover:text-primary">Privacy Policy</a> and GDPR requirements.
+    </p>
+  </div>
 
   <!-- Urgency CTA -->
 
@@ -311,7 +290,8 @@ const metadata = {
       {
         variant: 'primary',
         text: 'Book Your Free Audit Now',
-        href: '#form',
+        href: 'https://outlook.office.com/book/FuturionSolutions@futurion.es/',
+        target: '_blank',
         icon: 'tabler:clipboard-check',
       },
     ]}

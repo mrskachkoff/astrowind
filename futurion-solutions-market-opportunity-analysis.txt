@@ -1,0 +1,145 @@
+# Market Opportunity Analysis – Compliance-First AI Automation Agency
+
+## Executive Summary
+This document outlines the market opportunity for a compliance-first AI automation agency focused on small regulated healthcare providers (Dental Clinics, Pharmacies, Small Clinics). The company differentiates through deep expertise in GDPR, HIPAA, GRC, SOC2, ISO27001, and the ability to deploy secure cloud, hybrid, and on‑prem AI systems.
+
+**Headline Numbers (EU, long-term):**
+- **TAM:** €1.8–2.1B  
+- **SAM (Spain + early EU):** €180–220M  
+- **SOM (5-year realistic):** €10–18M ARR potential  
+
+---
+
+## 1. Market Definition
+
+### Problem
+Small healthcare providers want AI-driven automation but face:
+- High data privacy and regulatory risk (GDPR, HIPAA)
+- Lack of internal IT/compliance expertise
+- Solutions that are cloud-only and not privacy-safe
+
+### Solution
+A compliance-first AI agency offering:
+- Free AI & process audit
+- Secure automation implementation
+- Ongoing compliant AI operations support
+- Hybrid / on‑prem architectures where required
+
+### Target Customers
+- B2B: Dental Clinics, Pharmacies, Small Clinics
+- Size: ≤30 employees
+- Buyer: Owner, Operations Manager, Compliance Officer
+
+### Geography
+- Initial: Valencia / Spain  
+- Expansion: EU regulated healthcare markets
+
+---
+
+## 2. Business Model
+
+1. **Free AI Audit** – lead generation & trust building  
+2. **Implementation Project** – fixed price ~€2,000  
+3. **Subscription Support** – ~€200/month (€2,400/year)
+
+**3‑Year Average Value per Client:**  
+~€9,200 total → ~€3,000 annualized
+
+---
+
+## 3. Bottom‑Up TAM Analysis
+
+### Addressable Entities
+
+**Spain**
+- Dental clinics: ~23,000
+- Pharmacies: ~22,000
+- Small clinics/labs: ~15,000  
+**Total:** ~60,000 entities
+
+**EU**
+- Dental clinics: ~250,000
+- Pharmacies: ~160,000
+- Small clinics/outpatient centers: ~200,000  
+**Total:** ~610,000 entities
+
+### TAM Calculation
+- Spain TAM:  
+  60,000 × €3,000/year ≈ **€180M**
+- EU TAM:  
+  610,000 × €3,000/year ≈ **€1.83B**
+
+---
+
+## 4. Top‑Down Validation
+
+- EU healthcare IT spend: ~€60–80B/year
+- Small providers (~20%)
+- Automation & compliance slice (~15%)
+
+**€70B × 20% × 15% ≈ €2.1B**
+
+Top‑down and bottom‑up are aligned.
+
+---
+
+## 5. SAM Calculation
+
+Applied filters:
+- Geographic focus (Spain + early EU): 35%
+- AI readiness: 50%
+- Willingness to pay: 60%
+
+**SAM ≈ €180–220M**
+
+---
+
+## 6. SOM Projection (Realistic)
+
+### Agency‑Phase Capacity
+- Year 3: ~150 clients → ~€450K ARR
+- Year 5: ~400 clients → ~€1.2–1.3M ARR
+
+### Post‑Productization Potential
+- 1,000 clients × €200/month ≈ **€2.4M ARR**
+
+**Long‑term SOM framing:**  
+~0.5–1% of SAM → **€10–18M obtainable**
+
+---
+
+## 7. Market Growth & Drivers
+- Healthcare AI CAGR: 20–30%
+- Increased GDPR & AI Act enforcement
+- Margin pressure on clinics
+- Rising need for compliant automation
+
+---
+
+## 8. Competitive Landscape
+
+### Alternatives
+- Generic AI agencies (no compliance depth)
+- SaaS tools (cloud-only, limited privacy control)
+- Big consultancies (too expensive)
+
+### Competitive Moat
+- Compliance‑first positioning
+- Hybrid & on‑prem AI capability
+- Enterprise security standards applied to SMBs
+- Rare skill combination at accessible pricing
+
+---
+
+## 9. Investment Thesis
+
+This is a **wedge strategy**:
+- Start as a trusted compliance AI agency
+- Build repeatable audits, templates, and IP
+- Transition into a productized compliance automation platform
+
+The bootstrapping plan to €10K MRR before VC readiness is realistic and strategically sound.
+
+---
+
+**Prepared for strategic planning, investor discussions, and pitch materials.**

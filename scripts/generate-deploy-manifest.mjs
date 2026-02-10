@@ -25,7 +25,7 @@ const manifest = {
     {
       name: 'default',
       entrypoint: 'entry.mjs',
-      runtime: 'nodejs18.x',
+      runtime: 'nodejs20.x',
     },
   ],
   framework: {

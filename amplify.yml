@@ -8,8 +8,16 @@ frontend:
       commands:
         - env | grep -e MEDGEMMA_ >> .env || true
         - npm run build
+        # Restructure output for Amplify WEB_COMPUTE
+        - mkdir -p .amplify-hosting/static
+        - mkdir -p .amplify-hosting/compute/default
+        - cp -r dist/client/. .amplify-hosting/static/
+        - cp -r dist/server/. .amplify-hosting/compute/default/
+        - cp -r node_modules .amplify-hosting/compute/default/node_modules
+        - cp package.json .amplify-hosting/compute/default/package.json
+        - node scripts/generate-deploy-manifest.mjs
   artifacts:
-    baseDirectory: dist
+    baseDirectory: .amplify-hosting
     files:
       - '**/*'
   cache:

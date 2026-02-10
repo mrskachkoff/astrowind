@@ -13,8 +13,8 @@ frontend:
         - mkdir -p .amplify-hosting/compute/default
         - cp -r dist/client/. .amplify-hosting/static/
         - cp -r dist/server/. .amplify-hosting/compute/default/
-        - cp -r node_modules .amplify-hosting/compute/default/node_modules
-        - cp package.json .amplify-hosting/compute/default/package.json
+        # Install only production deps in compute (minimal footprint)
+        - cd .amplify-hosting/compute/default && npm init -y && npm install astro @astrojs/node --omit=dev --no-package-lock
         - node scripts/generate-deploy-manifest.mjs
   artifacts:
     baseDirectory: .amplify-hosting

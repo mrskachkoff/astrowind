@@ -14,8 +14,9 @@ frontend:
         - cp -r dist/client/. .amplify-hosting/static/
         - cp -r dist/server/. .amplify-hosting/compute/default/
         # Install only production deps in compute (minimal footprint)
-        - cd .amplify-hosting/compute/default && npm init -y && npm install astro @astrojs/node --omit=dev --no-package-lock && cd "$CODEBUILD_SRC_DIR"
-        - node scripts/generate-deploy-manifest.mjs
+        - cd .amplify-hosting/compute/default && npm init -y && npm install astro @astrojs/node --omit=dev --no-package-lock
+        # Generate deploy manifest inline
+        - echo '{"version":1,"routes":[{"path":"/_astro/*","target":{"kind":"Static"}},{"path":"/api/*","target":{"kind":"Compute","src":"default"}},{"path":"/*.*","target":{"kind":"Static"}},{"path":"/*","target":{"kind":"Static"},"fallback":{"kind":"Compute","src":"default"}}],"computeResources":[{"name":"default","entrypoint":"entry.mjs","runtime":"nodejs20.x"}],"framework":{"name":"astro","version":"5.0.0"}}' > .amplify-hosting/deploy-manifest.json
   artifacts:
     baseDirectory: .amplify-hosting
     files:

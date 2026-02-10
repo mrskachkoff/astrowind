@@ -1,0 +1,542 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Note from '~/components/widgets/Note.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+
+const metadata = {
+  title: 'MedCore Private AI — Medical-Grade On-Premise AI for Healthcare',
+  description:
+    'MedCore Private AI delivers fully on-premise, medical-grade AI infrastructure for medium healthcare organizations. GDPR, HIPAA, and data sovereignty compliant. Fine-tuning, RAG, and multilingual support.',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Section 1: Hero -->
+
+  <Hero
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Schedule Assessment',
+        href: '/contact',
+        icon: 'tabler:calendar-event',
+      },
+      { text: 'Try Free Demo', href: '/medical-ai-demo', icon: 'tabler:player-play' },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Secure on-premise server infrastructure for healthcare AI',
+    }}
+  >
+    <Fragment slot="title">
+      MedCore Private AI<br />
+      <span class="text-accent dark:text-white">Medical-Grade AI Infrastructure for Data-Sovereign Healthcare</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      <span class="hidden sm:inline">
+        Deploy medical-grade large language models entirely on your own infrastructure. No patient data leaves your premises. Purpose-built for clinic networks, specialized healthcare centers, and compliance-critical organizations across the EU.
+      </span>
+      <span class="block mb-1 sm:hidden font-bold text-green-700">On-premise medical AI. Your data never leaves.</span>
+      Full GDPR, HIPAA, and data sovereignty compliance by architecture — not by policy.
+    </Fragment>
+  </Hero>
+
+  <!-- Section 2: Trust Stats -->
+
+  <Stats
+    stats={[
+      { title: '100% On-Premise', amount: 'Zero Cloud', icon: 'tabler:server' },
+      { title: 'Medical-Grade LLMs', amount: 'Purpose-Built', icon: 'tabler:brain' },
+      { title: 'Multi-Language', amount: 'EU-Wide', icon: 'tabler:language' },
+      { title: 'Compliance-First', amount: 'By Design', icon: 'tabler:shield-check' },
+    ]}
+  />
+
+  <!-- Section 3: Problem -->
+
+  <Content
+    isReversed
+    tagline="The Challenge"
+    title="Cloud AI Does Not Meet Healthcare Data Residency Requirements"
+    items={[
+      {
+        title: 'Patient data leaves your control',
+        description:
+          'Cloud-based AI sends sensitive medical records to external servers in jurisdictions you cannot control — violating the fundamental principle of data sovereignty.',
+      },
+      {
+        title: 'Regulatory exposure grows with scale',
+        description:
+          'Medium healthcare organizations process thousands of patient records. Each cloud AI interaction multiplies your GDPR and HIPAA compliance risk.',
+      },
+      {
+        title: 'Generic models lack medical accuracy',
+        description:
+          'General-purpose AI models produce hallucinations and errors when applied to medical terminology, drug interactions, and clinical workflows.',
+      },
+      {
+        title: 'Vendor lock-in limits your options',
+        description:
+          'Proprietary cloud AI platforms lock you into their ecosystem, pricing models, and data handling practices — with no transparency into how patient data is used.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1563986768609-322da13575f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Data security concerns in healthcare',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Healthcare needs a different approach to AI
+      </h3>
+      When patient data is involved, "trust the cloud provider" is not a compliance strategy. You need AI infrastructure that keeps data sovereign by design — not by contractual promise.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Section 4: Solution Overview — 3 Core Pillars -->
+
+  <Features2
+    title="Three pillars of MedCore Private AI"
+    subtitle="A complete on-premise medical AI platform designed from the ground up for healthcare data sovereignty."
+    columns={3}
+    items={[
+      {
+        title: 'Medical-Grade LLMs',
+        description:
+          'Purpose-built language models trained on medical literature, clinical guidelines, and healthcare terminology. Not general-purpose AI repurposed for medicine.',
+        icon: 'tabler:brain',
+      },
+      {
+        title: 'Full On-Premise Deployment',
+        description:
+          'Every component runs on your infrastructure. Patient data never leaves your premises. Complete data sovereignty with zero external dependencies.',
+        icon: 'tabler:server',
+      },
+      {
+        title: 'Fine-Tuning & RAG',
+        description:
+          'Customize models with your protocols, formularies, and institutional knowledge. Retrieval-Augmented Generation grounds responses in your own verified medical data.',
+        icon: 'tabler:adjustments',
+      },
+    ]}
+  />
+
+  <!-- Section 5: Capabilities — Deep Dives -->
+
+  <Content
+    tagline="Capabilities"
+    title="Medical Intelligence That Understands Your Domain"
+    items={[
+      {
+        title: 'Clinical documentation assistance',
+        description:
+          'Generate, summarize, and structure clinical notes, discharge summaries, and referral letters — grounded in your templates and terminology.',
+      },
+      {
+        title: 'Medical knowledge retrieval',
+        description:
+          'Query drug interactions, treatment protocols, and clinical guidelines using your institution\'s verified knowledge base via RAG.',
+      },
+      {
+        title: 'Multilingual patient communication',
+        description:
+          'Generate patient-facing materials in Spanish, English, French, German, and other EU languages — culturally appropriate and medically accurate.',
+      },
+      {
+        title: 'Administrative automation',
+        description:
+          'Automate coding, billing preparation, appointment triage, and referral routing with AI that understands medical context.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Medical professional using AI-assisted technology',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Medical Intelligence
+      </h3>
+      AI that speaks medicine — not an AI that has been told what medicine is. All outputs are assistive only; clinical validation remains the responsibility of qualified healthcare professionals.
+    </Fragment>
+  </Content>
+
+  <Content
+    isReversed
+    isAfterContent
+    items={[
+      {
+        title: 'Air-gapped deployment option',
+        description:
+          'For maximum security, deploy in fully air-gapped environments with no internet connectivity. Complete isolation for the most sensitive workloads.',
+      },
+      {
+        title: 'End-to-end encryption',
+        description:
+          'Data encrypted at rest (AES-256) and in transit (TLS 1.3). Encryption keys managed on-premise — never shared with any external party.',
+      },
+      {
+        title: 'Role-based access control',
+        description:
+          'Granular permissions aligned with healthcare roles. Audit trails for every AI interaction, query, and data access event.',
+      },
+      {
+        title: 'Compliance documentation included',
+        description:
+          'Pre-built GDPR Data Protection Impact Assessments, processing records, and compliance documentation for your specific deployment.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1510511459019-5dda7724fd87?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Secure data infrastructure',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Privacy Architecture
+      </h3>
+      Security is not a feature — it is the architecture. Every layer of MedCore is designed to ensure patient data sovereignty.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <Content
+    isAfterContent
+    items={[
+      {
+        title: 'Domain-specific fine-tuning',
+        description:
+          'Train models on your specialty — cardiology, oncology, dentistry, pharmacy — using your own de-identified datasets and clinical protocols.',
+      },
+      {
+        title: 'Retrieval-Augmented Generation (RAG)',
+        description:
+          'Connect AI to your formularies, treatment guidelines, and institutional knowledge bases. Responses are grounded in your verified data.',
+      },
+      {
+        title: 'Continuous learning pipeline',
+        description:
+          'Models improve over time as your team validates outputs and provides feedback — all within your secure on-premise environment.',
+      },
+      {
+        title: 'Model versioning and rollback',
+        description:
+          'Full version control for all model configurations. Test new versions in staging before production deployment. Roll back instantly if needed.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'AI model customization and fine-tuning',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Customization Engine
+      </h3>
+      Your AI, your specialty, your data. MedCore adapts to how your organization practices medicine — not the other way around.
+    </Fragment>
+  </Content>
+
+  <Content
+    isReversed
+    isAfterContent
+    items={[
+      {
+        title: 'GPU-optimized server configurations',
+        description:
+          'We specify, source, and configure AI-ready hardware tailored to your workload — from single-server setups to multi-node clusters.',
+      },
+      {
+        title: 'Scalable architecture',
+        description:
+          'Start with a single deployment and scale horizontally as usage grows. Architecture designed for 10 to 10,000+ concurrent users.',
+      },
+      {
+        title: 'Existing infrastructure integration',
+        description:
+          'MedCore integrates with your EMR/EHR systems, existing databases, and clinical workflows through standard APIs and HL7/FHIR interfaces.',
+      },
+      {
+        title: 'Redundancy and disaster recovery',
+        description:
+          'High-availability configurations with automatic failover. On-premise backup and disaster recovery plans included in every deployment.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Server hardware infrastructure',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Hardware & Infrastructure
+      </h3>
+      We handle the full stack — from GPU hardware specification to production deployment. You focus on patient care.
+    </Fragment>
+  </Content>
+
+  <!-- Section 6: Demo CTA -->
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Try Free Medical AI Demo',
+        href: '/medical-ai-demo',
+        icon: 'tabler:player-play',
+      },
+    ]}
+  >
+    <Fragment slot="title">Experience Medical AI Before You Commit</Fragment>
+
+    <Fragment slot="subtitle">
+      Try our free medical AI demo to see how purpose-built medical language models handle clinical queries, documentation, and multilingual communication. No signup required.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
+    </Fragment>
+  </CallToAction>
+
+  <!-- Section 7: Target Customers -->
+
+  <Features
+    columns={3}
+    tagline="Who MedCore Serves"
+    title="Built for medium healthcare organizations"
+    subtitle="MedCore Private AI is designed for organizations that process significant volumes of patient data and require institutional-grade AI capabilities."
+    items={[
+      {
+        title: 'Clinic Networks',
+        description:
+          'Multi-location dental, medical, or specialty clinic groups that need consistent AI capabilities across all sites with centralized data governance.',
+        icon: 'tabler:building-hospital',
+      },
+      {
+        title: 'Specialized Healthcare Centers',
+        description:
+          'Oncology centers, cardiology practices, fertility clinics, and other specialty groups with domain-specific AI requirements.',
+        icon: 'tabler:heart-rate-monitor',
+      },
+      {
+        title: 'International Healthcare Groups',
+        description:
+          'Organizations operating across EU member states that need multilingual AI with consistent data sovereignty compliance in every jurisdiction.',
+        icon: 'tabler:world',
+      },
+      {
+        title: 'Research-Active Hospitals',
+        description:
+          'Healthcare institutions conducting clinical research that need AI capabilities without exposing research data to external platforms.',
+        icon: 'tabler:microscope',
+      },
+      {
+        title: 'Healthcare IT Providers',
+        description:
+          'Managed service providers and healthcare IT companies that want to offer private AI capabilities to their healthcare clients.',
+        icon: 'tabler:device-desktop-analytics',
+      },
+      {
+        title: 'Compliance-Critical Organizations',
+        description:
+          'Any healthcare entity where data residency requirements, regulatory audits, or institutional policy prohibit the use of cloud-based AI.',
+        icon: 'tabler:shield-lock',
+      },
+    ]}
+  />
+
+  <!-- Section 8: Differentiators -->
+
+  <Features2
+    tagline="Why MedCore"
+    title="What sets MedCore Private AI apart"
+    subtitle="Not another cloud AI wrapper. MedCore is fundamentally different in architecture, purpose, and philosophy."
+    columns={2}
+    items={[
+      {
+        title: 'True On-Premise — No Exceptions',
+        description:
+          'Every component runs on your infrastructure. No "hybrid cloud" workarounds, no telemetry calls home, no external API dependencies. Your data is sovereign.',
+        icon: 'tabler:server',
+      },
+      {
+        title: 'Medical-Specific Language Models',
+        description:
+          'Models trained on medical literature and clinical data — not general-purpose models with a medical prompt. Higher accuracy for medical terminology, drug interactions, and clinical workflows.',
+        icon: 'tabler:brain',
+      },
+      {
+        title: 'Privacy-First Architecture',
+        description:
+          'Security is the architecture, not an add-on. Air-gapped deployment options, AES-256 encryption, role-based access, and complete audit trails from day one.',
+        icon: 'tabler:lock',
+      },
+      {
+        title: 'Fine-Tuning Flexibility',
+        description:
+          'Customize models for your specialty, your protocols, and your institutional knowledge. RAG integration grounds AI in your verified medical data.',
+        icon: 'tabler:adjustments',
+      },
+      {
+        title: 'Hardware + Software + Compliance',
+        description:
+          'We deliver the complete stack: AI-ready hardware, optimized software, and compliance documentation. One partner for the entire lifecycle.',
+        icon: 'tabler:stack-2',
+      },
+      {
+        title: 'No Vendor Lock-In',
+        description:
+          'Open standards, standard APIs, and your data on your hardware. If you ever want to change direction, everything stays with you.',
+        icon: 'tabler:key',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  <!-- Section 9: Process -->
+
+  <Steps
+    title="How we deploy MedCore"
+    subtitle="A structured 6-step process from initial assessment to production deployment and ongoing optimization."
+    items={[
+      {
+        title: 'Step 1: <span class="font-medium">Infrastructure Assessment</span>',
+        description:
+          'We evaluate your existing infrastructure, data volumes, compliance requirements, and use cases to design the optimal MedCore deployment architecture.',
+        icon: 'tabler:clipboard-check',
+      },
+      {
+        title: 'Step 2: <span class="font-medium">Architecture Design</span>',
+        description:
+          'Custom architecture tailored to your organization — hardware specifications, network topology, security controls, and integration points with existing systems.',
+        icon: 'tabler:layout-board',
+      },
+      {
+        title: 'Step 3: <span class="font-medium">Model Selection & Customization</span>',
+        description:
+          'Select and configure medical LLMs for your specialty. Fine-tune on your de-identified datasets. Build RAG pipelines connected to your knowledge bases.',
+        icon: 'tabler:brain',
+      },
+      {
+        title: 'Step 4: <span class="font-medium">On-Premise Deployment</span>',
+        description:
+          'Hardware procurement, installation, and full software deployment on your infrastructure. Complete testing in your environment before go-live.',
+        icon: 'tabler:rocket',
+      },
+      {
+        title: 'Step 5: <span class="font-medium">Clinical Validation</span>',
+        description:
+          'Your clinical team validates AI outputs against real-world scenarios. We iterate on model configuration until accuracy meets your institutional standards.',
+        icon: 'tabler:stethoscope',
+      },
+      {
+        title: 'Step 6: <span class="font-medium">Ongoing Support & Optimization</span>',
+        description:
+          'Monthly support, model updates, compliance monitoring, and continuous optimization. Your dedicated AI operations partner for the long term.',
+        icon: 'tabler:heart-handshake',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Professional team planning deployment',
+    }}
+  />
+
+  <!-- Section 10: Pricing Note -->
+
+  <Note
+    icon="tabler:info-circle"
+    title="Project-Based Pricing."
+    description='MedCore Private AI deployments are priced per project based on infrastructure scope, model requirements, and organization size. Typical engagements range from &euro;25,000 to &euro;150,000+, with monthly support plans available. <a href="/contact" class="underline font-bold">Contact us for a detailed assessment and quote</a>.'
+  />
+
+  <!-- Section 11: FAQs -->
+
+  <FAQs
+    title="MedCore Private AI — Frequently Asked Questions"
+    subtitle="Enterprise-focused answers for healthcare IT leaders, compliance officers, and clinical directors."
+    tagline="FAQs"
+    classes={{ container: 'max-w-6xl' }}
+    items={[
+      {
+        title: 'How does MedCore compare to Azure OpenAI or AWS Bedrock for healthcare?',
+        description:
+          'Cloud AI services like Azure OpenAI and AWS Bedrock still send data to external infrastructure managed by the cloud provider. Even with "private endpoints," you are trusting a third party with patient data residency. MedCore runs entirely on your hardware — zero external data transfer, zero third-party trust requirements. For organizations with strict data sovereignty mandates, this is the only compliant approach.',
+      },
+      {
+        title: 'Does MedCore integrate with our EMR/EHR system?',
+        description:
+          'Yes. MedCore integrates with major EMR/EHR systems through standard APIs, HL7, and FHIR interfaces. During the assessment phase, we map your specific integration requirements and design the connection architecture. We have experience integrating with systems commonly used across EU healthcare organizations.',
+      },
+      {
+        title: 'What hardware do we need?',
+        description:
+          'Hardware requirements depend on your use case, user count, and model selection. Typical deployments use GPU-accelerated servers (NVIDIA A100 or H100 class). We specify, source, and configure all hardware as part of the deployment — you do not need existing AI infrastructure. We can also work with hardware you already own.',
+      },
+      {
+        title: 'How long does deployment take?',
+        description:
+          'Typical deployments take 8-16 weeks from assessment to production, depending on infrastructure complexity, custom fine-tuning requirements, and procurement timelines. We provide a detailed timeline during the architecture design phase. Pilot deployments for evaluation can be operational in 4-6 weeks.',
+      },
+      {
+        title: 'What compliance certifications does MedCore support?',
+        description:
+          'MedCore deployments are designed to support GDPR (including healthcare-specific provisions), HIPAA, SOC2, ISO 27001, and the EU AI Act. We provide pre-built Data Protection Impact Assessments, processing records, and compliance documentation specific to your deployment. Your compliance team reviews and approves all documentation before go-live.',
+      },
+      {
+        title: 'Can we run a pilot before committing to full deployment?',
+        description:
+          'Absolutely. We recommend starting with a scoped pilot — typically a single use case or department — to validate the technology in your environment. Pilot deployments include all core capabilities at smaller scale, and can be expanded to full production when you are ready.',
+      },
+      {
+        title: 'What happens if we want to change AI models later?',
+        description:
+          'MedCore uses an open architecture with no vendor lock-in. You can swap underlying models, add new capabilities, or adjust configurations at any time. All your fine-tuning data, RAG knowledge bases, and custom configurations remain on your infrastructure and are fully portable.',
+      },
+      {
+        title: 'Who is responsible for clinical validation of AI outputs?',
+        description:
+          'MedCore Private AI is an assistive technology. All AI outputs must be reviewed and validated by qualified healthcare professionals before clinical use. We provide the tools and infrastructure for clinical validation workflows, but responsibility for clinical decisions remains with your licensed medical staff. This is consistent with EU AI Act requirements for high-risk AI systems in healthcare.',
+      },
+    ]}
+  />
+
+  <!-- Section 12: Final CTA -->
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Schedule Assessment',
+        href: '/contact',
+        icon: 'tabler:calendar-event',
+      },
+      { text: 'Try Free Demo', href: '/medical-ai-demo', icon: 'tabler:player-play' },
+    ]}
+  >
+    <Fragment slot="title">Ready to Deploy Private Medical AI?</Fragment>
+
+    <Fragment slot="subtitle">
+      Schedule a free infrastructure assessment to explore how MedCore Private AI can bring medical-grade AI capabilities to your organization — with complete data sovereignty. Or try our free demo to experience medical AI firsthand.
+    </Fragment>
+  </CallToAction>
+</Layout>

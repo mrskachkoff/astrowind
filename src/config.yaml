@@ -11,7 +11,7 @@ metadata:
   title:
     default: Futurion Solutions
     template: '%s — Futurion Solutions'
-  description: 'Compliance-first AI automation for small healthcare providers. GDPR-safe, hybrid/on-prem AI solutions for dental clinics, pharmacies, and small clinics in Spain and the EU.'
+  description: 'Compliance-first AI automation for small healthcare practices + MedCore Private AI for medium healthcare groups. GDPR-safe solutions for dental clinics, pharmacies, medical clinics, and specialized healthcare centers in Spain and the EU.'
   robots:
     index: true
     follow: true

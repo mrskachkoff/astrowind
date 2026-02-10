@@ -20,7 +20,7 @@ const metadata = {
   <Hero
     tagline="Our Services"
     title="AI Automation That Puts Compliance First"
-    subtitle="From initial audit to ongoing support, we deliver AI solutions designed with healthcare data privacy at their core. Three service pillars that work together to transform your practice safely."
+    subtitle="From initial audit to ongoing support, we deliver AI solutions designed with healthcare data privacy at their core. Service pillars that work together to transform your practice safely — with enterprise-grade options for larger organizations."
     actions={[
       { variant: 'primary', text: 'Start with a Free Audit', href: '/free-ai-audit', icon: 'tabler:clipboard-check' },
     ]}
@@ -33,9 +33,9 @@ const metadata = {
   <!-- Service Overview: 3 Pillars -->
 
   <Features2
-    title="Three pillars of compliant automation"
-    subtitle="Each service builds on the previous one, creating a complete compliance-first automation system for your practice."
-    columns={3}
+    title="Our service pillars"
+    subtitle="Each service builds on the previous one, creating a complete compliance-first automation system for your practice — with enterprise options for larger organizations."
+    columns={2}
     items={[
       {
         title: 'Free AI Compliance Audit',
@@ -51,6 +51,11 @@ const metadata = {
         title: 'Ongoing Support & Monitoring',
         description: 'Continuous optimization, compliance updates as regulations evolve, and performance monitoring. Your long-term AI compliance partner.',
         icon: 'tabler:heart-handshake',
+      },
+      {
+        title: 'MedCore Private AI (Enterprise)',
+        description: 'Fully on-premise, medical-grade AI infrastructure for medium healthcare organizations. Purpose-built LLMs, fine-tuning, and complete data sovereignty.',
+        icon: 'tabler:server-2',
       },
     ]}
   >
@@ -165,6 +170,49 @@ const metadata = {
 
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- MedCore Private AI — Enterprise Option -->
+
+  <Content
+    tagline="Enterprise Solution"
+    title="MedCore Private AI — For Medium Healthcare Organizations"
+    items={[
+      {
+        title: 'Fully on-premise medical AI',
+        description: 'Deploy medical-grade language models entirely on your infrastructure. No patient data ever leaves your premises.',
+      },
+      {
+        title: 'Purpose-built for medicine',
+        description: 'Models trained on medical literature and clinical data — not general-purpose AI with a medical prompt.',
+      },
+      {
+        title: 'Fine-tuning & RAG',
+        description: 'Customize AI for your specialty, protocols, and institutional knowledge using your own verified data.',
+      },
+      {
+        title: 'Complete compliance stack',
+        description: 'GDPR, HIPAA, SOC2, and EU AI Act compliance documentation included. Hardware, software, and compliance — one partner.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'On-premise server infrastructure for healthcare AI',
+    }}
+    callToAction={{
+      text: 'Explore MedCore Private AI',
+      href: '/medcore-private-ai',
+      icon: 'tabler:arrow-right',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Beyond small practice automation</h3>
+      For clinic networks, specialized healthcare centers, and compliance-critical organizations that need institutional-grade AI with complete data sovereignty.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
     </Fragment>
   </Content>
 

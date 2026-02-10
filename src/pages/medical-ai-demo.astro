@@ -1,0 +1,137 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Content from '~/components/widgets/Content.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Free Medical AI Demo — Experience MedCore Private AI',
+  description:
+    'Try our free medical AI demo. See how purpose-built medical language models handle clinical documentation, medical knowledge retrieval, and multilingual patient communication.',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero -->
+
+  <Hero
+    tagline="Free Medical AI Demo"
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Launch Demo',
+        href: '#demo',
+        icon: 'tabler:player-play',
+      },
+      { text: 'Learn About MedCore', href: '/medcore-private-ai' },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Interactive medical AI demonstration',
+    }}
+  >
+    <Fragment slot="title">
+      Experience Medical AI<br />
+      <span class="text-accent dark:text-white">Before You Commit</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      See how purpose-built medical language models handle clinical queries, documentation assistance, and multilingual communication. This demo showcases a sample of MedCore Private AI capabilities — no signup required.
+    </Fragment>
+  </Hero>
+
+  <!-- What to Expect -->
+
+  <Features2
+    title="What the demo covers"
+    subtitle="A guided experience showcasing the core capabilities of MedCore Private AI in a safe, non-clinical environment."
+    columns={3}
+    items={[
+      {
+        title: 'Clinical Documentation',
+        description:
+          'See how medical LLMs generate structured clinical notes, discharge summaries, and referral letters from unstructured input — using proper medical terminology.',
+        icon: 'tabler:file-text',
+      },
+      {
+        title: 'Medical Knowledge Retrieval',
+        description:
+          'Query drug interactions, treatment protocols, and clinical guidelines. See how RAG-powered responses are grounded in verified medical data sources.',
+        icon: 'tabler:search',
+      },
+      {
+        title: 'Multilingual Communication',
+        description:
+          'Generate patient-facing materials in multiple EU languages — culturally appropriate, medically accurate, and ready for clinical review.',
+        icon: 'tabler:language',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  <!-- Demo Section -->
+
+  <Content
+    id="demo"
+    tagline="Interactive Demo"
+    title="Try Medical AI Now"
+    items={[
+      {
+        title: 'Sample clinical scenarios',
+        description: 'Pre-built scenarios for dental, pharmacy, and general practice workflows demonstrate real-world application of medical AI.',
+      },
+      {
+        title: 'Safe demonstration environment',
+        description: 'This demo uses synthetic data only. No real patient data is involved. The demo runs in a sandboxed environment separate from production MedCore deployments.',
+      },
+      {
+        title: 'Assistive outputs only',
+        description: 'All AI outputs in this demo are for demonstration purposes. They are not validated for clinical use and must not be used for actual medical decisions.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Medical AI demo interface',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Live demo coming soon
+      </h3>
+      <p class="mb-4">
+        Our interactive medical AI demo is currently being prepared. In the meantime, schedule a personalized walkthrough where we demonstrate MedCore capabilities tailored to your specific use case and specialty.
+      </p>
+      <a
+        href="/contact"
+        class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-green-700 hover:bg-green-800 rounded-lg transition-colors"
+      >
+        Schedule a Personalized Walkthrough
+      </a>
+    </Fragment>
+  </Content>
+
+  <!-- CTA: Full Assessment -->
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Schedule Full Assessment',
+        href: '/contact',
+        icon: 'tabler:calendar-event',
+      },
+      { text: 'MedCore Private AI Details', href: '/medcore-private-ai' },
+    ]}
+  >
+    <Fragment slot="title">Ready for the Full Picture?</Fragment>
+
+    <Fragment slot="subtitle">
+      The demo shows a fraction of what MedCore Private AI can do. Schedule a free infrastructure assessment to explore how on-premise medical AI can transform your organization — with complete data sovereignty.
+    </Fragment>
+  </CallToAction>
+</Layout>

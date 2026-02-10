@@ -4,7 +4,24 @@ export const headerData = {
   links: [
     {
       text: 'Services',
-      href: getPermalink('/services'),
+      links: [
+        {
+          text: 'For Small Practices',
+          href: getPermalink('/services'),
+        },
+        {
+          text: 'MedCore Private AI',
+          href: getPermalink('/medcore-private-ai'),
+        },
+        {
+          text: 'Free AI Audit',
+          href: getPermalink('/free-ai-audit'),
+        },
+        {
+          text: 'Pricing',
+          href: getPermalink('/pricing'),
+        },
+      ],
     },
     {
       text: 'Free AI Audit',
@@ -31,9 +48,10 @@ export const footerData = {
     {
       title: 'Services',
       links: [
+        { text: 'Small Practice Automation', href: getPermalink('/services') },
+        { text: 'MedCore Private AI', href: getPermalink('/medcore-private-ai') },
         { text: 'Free AI Audit', href: getPermalink('/free-ai-audit') },
-        { text: 'AI Implementation', href: getPermalink('/services') },
-        { text: 'Ongoing Support', href: getPermalink('/services') },
+        { text: 'Medical AI Demo', href: getPermalink('/medical-ai-demo') },
         { text: 'Pricing', href: getPermalink('/pricing') },
       ],
     },

@@ -8,6 +8,7 @@ import Content from '~/components/widgets/Content.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
+import Note from '~/components/widgets/Note.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 
 const metadata = {
@@ -112,7 +113,7 @@ const metadata = {
       {
         title: 'Hybrid & On-Prem AI',
         description:
-          'Patient data stays in your clinic. We design solutions that work locally or in hybrid setups, never sending sensitive data to external clouds.',
+          'Patient data stays in your clinic. We design solutions that work locally or in hybrid setups, never sending sensitive data to external clouds. For larger organizations, MedCore Private AI delivers fully on-premise medical-grade AI infrastructure.',
         icon: 'tabler:server',
       },
       {
@@ -238,6 +239,14 @@ const metadata = {
       We assess your clinic's data flows, identify safe automation opportunities, and deliver a clear compliance roadmap — at no cost. Limited to 8 audits per month.
     </Fragment>
   </CallToAction>
+
+  <!-- MedCore Note -->
+
+  <Note
+    icon="tabler:server"
+    title="For Medium Healthcare Organizations:"
+    description='Explore <a href="/medcore-private-ai" class="underline font-bold">MedCore Private AI</a> — fully on-premise, medical-grade AI infrastructure with complete data sovereignty.'
+  />
 
   <!-- FAQs -->
 

@@ -6,10 +6,10 @@ import Stats from '~/components/widgets/Stats.astro';
 import Content from '~/components/widgets/Content.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 import Features from '~/components/widgets/Features.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import Note from '~/components/widgets/Note.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
+import MedicalChat from '~/components/widgets/MedicalChat.astro';
 
 const metadata = {
   title: 'MedCore Private AI — Medical-Grade On-Premise AI for Healthcare',
@@ -25,11 +25,10 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'Schedule Assessment',
+        text: 'Free AI Audit',
         href: '/contact',
         icon: 'tabler:calendar-event',
       },
-      { text: 'Try Free Demo', href: '/medical-ai-demo', icon: 'tabler:player-play' },
     ]}
     image={{
       src: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
@@ -291,28 +290,9 @@ const metadata = {
     </Fragment>
   </Content>
 
-  <!-- Section 6: Demo CTA -->
+  <!-- Section 6: Embedded Medical AI Demo Chat -->
 
-  <CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Try Free Medical AI Demo',
-        href: '/medical-ai-demo',
-        icon: 'tabler:player-play',
-      },
-    ]}
-  >
-    <Fragment slot="title">Experience Medical AI Before You Commit</Fragment>
-
-    <Fragment slot="subtitle">
-      Try our free medical AI demo to see how purpose-built medical language models handle clinical queries, documentation, and multilingual communication. No signup required.
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
-    </Fragment>
-  </CallToAction>
+  <MedicalChat />
 
   <!-- Section 7: Target Customers -->
 
@@ -520,23 +500,4 @@ const metadata = {
     ]}
   />
 
-  <!-- Section 12: Final CTA -->
-
-  <CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Schedule Assessment',
-        href: '/contact',
-        icon: 'tabler:calendar-event',
-      },
-      { text: 'Try Free Demo', href: '/medical-ai-demo', icon: 'tabler:player-play' },
-    ]}
-  >
-    <Fragment slot="title">Ready to Deploy Private Medical AI?</Fragment>
-
-    <Fragment slot="subtitle">
-      Schedule a free infrastructure assessment to explore how MedCore Private AI can bring medical-grade AI capabilities to your organization — with complete data sovereignty. Or try our free demo to experience medical AI firsthand.
-    </Fragment>
-  </CallToAction>
 </Layout>

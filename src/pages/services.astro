@@ -1,224 +1,264 @@
 ---
-import CallToAction from '~/components/widgets/CallToAction.astro';
-import Content from '~/components/widgets/Content.astro';
-import Features2 from '~/components/widgets/Features2.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Testimonials from '~/components/widgets/Testimonials.astro';
 import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features from '~/components/widgets/Features.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
   title: 'Services',
+  description: 'Compliance-first AI automation services for healthcare providers. Free AI Audit, implementation, and ongoing support for dental clinics, pharmacies, and small medical practices.',
 };
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
+  <!-- Hero -->
 
   <Hero
-    tagline="Services"
-    title="Elevate your projects with our stunning templates"
-    subtitle="Explore our meticulously crafted templates tailored to various industries and purposes. From captivating presentations to functional website designs, we offer the tools you need to succeed."
-    actions={[{ variant: 'primary', target: '_blank', text: 'Start exploring', href: '/' }]}
+    tagline="Our Services"
+    title="AI Automation That Puts Compliance First"
+    subtitle="From initial audit to ongoing support, we deliver AI solutions designed with healthcare data privacy at their core. Three service pillars that work together to transform your practice safely."
+    actions={[
+      { variant: 'primary', text: 'Start with a Free Audit', href: '/free-ai-audit', icon: 'tabler:clipboard-check' },
+    ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
-      alt: 'AstroWind Hero Image',
+      src: 'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Professional team working together',
     }}
   />
 
-  <!-- Features2 Widget ************** -->
+  <!-- Service Overview: 3 Pillars -->
 
   <Features2
-    title="Explore our diverse templates"
-    subtitle="Discover our selection below to streamline and elevate your projects."
+    title="Three pillars of compliant automation"
+    subtitle="Each service builds on the previous one, creating a complete compliance-first automation system for your practice."
     columns={3}
     items={[
       {
-        title: 'Educational',
-        description:
-          'By harmonizing instructional design and visual appeal, templates streamline content creation for varied materials, expediting development and cultivating engaging educational spaces.',
-        icon: 'tabler:school',
+        title: 'Free AI Compliance Audit',
+        description: 'A 5-7 day assessment of your data flows, compliance posture, and automation opportunities. You receive a detailed report with risk scores and a clear roadmap.',
+        icon: 'tabler:clipboard-check',
       },
       {
-        title: 'Interior Design',
-        description:
-          'Crafting functional, visually appealing spaces for residential and commercial use. Templates emphasize layout, colors, and furniture setups, offering a versatile toolkit for your design vision.',
-        icon: 'tabler:home-star',
+        title: 'Compliant Implementation',
+        description: 'We build and deploy AI automations using on-prem or hybrid architectures. Every solution is designed with GDPR principles from day one.',
+        icon: 'tabler:settings-automation',
       },
       {
-        title: 'Photography',
-        description: `Empowering photographers, our templates facilitate captivating storytelling. With a keen focus on layout, galleries, and typography, they cater to both professionals and enthusiasts.`,
-        icon: 'tabler:photo',
-      },
-      {
-        title: 'E-commerce',
-        description:
-          'Developing engaging online stores, our E-commerce templates ensure a dynamic presence to effectively showcase products. Ideal for startups or revamps.',
-        icon: 'tabler:shopping-cart',
-      },
-      {
-        title: 'Blog',
-        description:
-          'With attention to typography, these templates empower effective content presentation for writers at any stage, ensuring visually engaging and user-friendly blogs.',
-        icon: 'tabler:article',
-      },
-      {
-        title: 'Business',
-        description:
-          'Providing polished options for effective visual communication, these templates empower both startups and established companies for a professional brand presence.',
-        icon: 'tabler:building-store',
-      },
-      {
-        title: 'Branding',
-        description:
-          'Offering pre-designed elements for a consistent brand identity, including logos and marketing materials. Ideal for new ventures or revamps.',
-        icon: 'tabler:arrow-big-up-lines',
-      },
-      {
-        title: 'Medical',
-        description: `From presentations to patient forms, these tools enhance communication effectiveness for healthcare professionals. Ideal for medical practices and research pursuits.`,
-        icon: 'tabler:vaccine',
-      },
-      {
-        title: 'Fashion Design',
-        description:
-          'With attention to detail, customization, and contemporary design, they empower designers to showcase ideas cohesively. Ideal for all levels of designers.',
-        icon: 'tabler:tie',
+        title: 'Ongoing Support & Monitoring',
+        description: 'Continuous optimization, compliance updates as regulations evolve, and performance monitoring. Your long-term AI compliance partner.',
+        icon: 'tabler:heart-handshake',
       },
     ]}
-  />
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
 
-  <!-- Content Widget **************** -->
+  <!-- Service 1: AI Audit (Detail) -->
 
   <Content
     isReversed
+    tagline="Service 1"
+    title="Free AI Compliance Audit"
     items={[
       {
-        title: 'High-Quality Designs',
-        description:
-          'Our templates feature top-tier designs that ensure a professional and polished appearance for your projects.',
-        icon: 'tabler:wand',
+        title: 'Clinic profile & risk assessment',
+        description: 'We evaluate your clinic size, patient volume, digital maturity, and existing tools to determine your risk tier.',
       },
       {
-        title: 'Customization Tools',
-        description:
-          'Tailor each template to your unique needs with user-friendly customization tools that let you personalize colors, fonts, and content.',
-        icon: 'tabler:settings',
+        title: 'Complete data flow mapping',
+        description: 'Patient intake, records, imaging, billing, communications — every data flow mapped and classified by sensitivity.',
       },
       {
-        title: 'Pre-Designed Elements',
-        description:
-          'Save time and effort with our ready-to-use elements, including graphics, icons, and layouts that enhance the visual appeal of your creations.',
-        icon: 'tabler:presentation',
+        title: 'Process bottleneck analysis',
+        description: 'Each workflow scored by manual effort, error risk, data sensitivity, and automation potential.',
       },
       {
-        title: 'Preview and Mockup Views',
-        description:
-          'Visualize the final outcome before making any changes using our preview and mockup views, ensuring your projects meet your expectations.',
-        icon: 'tabler:carousel-horizontal',
+        title: 'AI architecture recommendations',
+        description: 'Cloud, hybrid, or on-prem — we determine the safe approach for each process with GDPR justification.',
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1525909002-1b05e0c869d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
-      alt: 'Features Image',
+      src: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Professional analyzing documents',
     }}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Main Features</h3>
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Where it all starts</h3>
+      A thorough risk and process audit with AI feasibility overlay. Not a sales pitch — a genuine assessment you can act on independently. Delivered in 5-7 business days.
     </Fragment>
   </Content>
 
-  <!-- Content Widget **************** -->
+  <!-- Service 2: Implementation -->
 
   <Content
     isAfterContent
+    tagline="Service 2"
+    title="Compliant AI Implementation"
     items={[
       {
-        title: 'Time Savings',
-        description:
-          'Streamline your workflow, enabling you to create stunning materials efficiently and allocate more time to your core tasks.',
-        icon: 'tabler:clock',
+        title: 'Quick-win automations (€1,500-3,000)',
+        description: '1-2 high-impact automations deployed in 2-4 weeks. Appointment reminders, patient follow-ups, or billing workflows.',
       },
       {
-        title: 'Professional Appearance',
-        description:
-          'Elevate your projects with the polished and sophisticated look that our templates provide, making a lasting impression on your audience.',
-        icon: 'tabler:school',
+        title: 'Comprehensive packages (€5,000-15,000)',
+        description: 'Full practice transformation over 6-12 weeks. Multiple workflow automations with integrated compliance controls.',
       },
       {
-        title: 'Cost-Efficiency',
-        description:
-          'Benefit from cost savings by avoiding the need for custom design work, as our templates offer professional-grade designs at a fraction of the cost.',
-        icon: 'tabler:coin',
+        title: 'On-prem & hybrid architecture',
+        description: 'Patient data stays in your clinic. We design solutions that work locally, with external AI only for non-sensitive tasks.',
       },
       {
-        title: 'Instant Download',
-        description:
-          'Enjoy immediate access to your chosen templates upon purchase, enabling you to begin working on your projects without delay.',
-        icon: 'tabler:file-download',
+        title: 'Built-in compliance controls',
+        description: 'Audit trails, data processing agreements, consent management, and documentation — all included from day one.',
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1552664688-cf412ec27db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-      alt: 'Benefits Image',
+      src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Technology implementation and dashboard',
     }}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Benefits</h3>
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">From roadmap to results</h3>
+      We don't just digitize broken workflows — we fix them first, then automate them. You get efficiency gains that actually stick, with compliance built in from day one.
     </Fragment>
   </Content>
 
-  <!-- Testimonials Widget *********** -->
+  <!-- Service 3: Ongoing Support -->
 
-  <Testimonials
-    title="Words from real customers"
-    testimonials={[
+  <Content
+    isReversed
+    tagline="Service 3"
+    title="Ongoing Support & Monitoring"
+    items={[
       {
-        testimonial: `The designs are not only visually appealing but also highly professional. The templates have saved me a significant amount of time while helping me make a lasting impression on my clients.`,
-        name: 'Emily Kennedy',
-        job: 'Front-end developer',
-        image: {
-          src: 'https://images.unsplash.com/photo-1618835962148-cf177563c6c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=930&q=80',
-          alt: 'Emily Kennedy Image',
-        },
+        title: 'Monthly support (from €200/month)',
+        description: 'Dedicated support for your automations — troubleshooting, adjustments, and optimization as your practice evolves.',
       },
       {
-        testimonial: `It beautifully showcases my work, with its clean and elegant design that lets my photographs shine. Customization was a breeze, even for a non-tech person like me. The result is a professional and immersive portfolio that's garnered numerous compliments.`,
-        name: 'Sarah Hansen',
-        job: 'Photographer',
-        image: {
-          src: 'https://images.unsplash.com/photo-1561406636-b80293969660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-          alt: 'Sarah Hansen Image',
-        },
+        title: 'Compliance updates',
+        description: 'Regulations change. We update your compliance controls and documentation as GDPR, AEPD, and AI Act requirements evolve.',
       },
       {
-        testimonial: `I discovered these templates and I'm impressed by their variety and quality. They've helped me establish a consistent brand image across my marketing and social platforms, elevating my business's overall appearance.`,
-        name: 'Mark Wilkinson',
-        job: 'Small business owner',
-        image: {
-          src: 'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=824&q=80',
-          alt: 'Mark Wilkinson Image',
-        },
+        title: 'Performance monitoring',
+        description: 'Regular reviews of automation performance, time savings metrics, and opportunities for further optimization.',
+      },
+      {
+        title: 'New automation opportunities',
+        description: 'As your practice grows, we identify additional workflows that can be safely automated — building on the foundation already in place.',
       },
     ]}
-    callToAction={{
-      target: '_blank',
-      text: 'More testimonials...',
-      href: 'https://github.com/arthelokyo/astrowind',
-      icon: 'tabler:chevron-right',
+    image={{
+      src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Team providing ongoing support',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Your long-term AI partner</h3>
+      We're not interested in one-time projects. We build long-term partnerships with healthcare practices that want to modernize their operations while maintaining compliance.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Why Choose Futurion -->
+
+  <Features
+    title="Why healthcare practices choose us"
+    subtitle="The combination of compliance expertise and AI automation knowledge that sets us apart."
+    columns={3}
+    items={[
+      {
+        title: 'Compliance + AI Expertise',
+        description: 'Most AI agencies don\'t understand GDPR. Most compliance consultants don\'t understand AI. We bridge both worlds.',
+        icon: 'tabler:shield-check',
+      },
+      {
+        title: 'Process-First Approach',
+        description: 'We optimize before automating. We fix broken workflows first, then automate them — so efficiency gains actually stick.',
+        icon: 'tabler:arrows-sort',
+      },
+      {
+        title: 'Enterprise Experience, SMB Pricing',
+        description: 'Years of enterprise process optimization, now applied to small healthcare businesses at accessible price points.',
+        icon: 'tabler:building',
+      },
+      {
+        title: 'Data Privacy by Design',
+        description: 'Data minimization, purpose limitation, security controls, and audit trails — built in from architecture, not bolted on later.',
+        icon: 'tabler:lock',
+      },
+      {
+        title: 'No-Nonsense Results',
+        description: 'We skip the AI buzzwords and focus on outcomes: 10-15 hours saved per week, reduced compliance risk, better patient care.',
+        icon: 'tabler:target',
+      },
+      {
+        title: 'Risk-Aware Implementation',
+        description: 'We don\'t just ask "Can AI do this?" — we ask "Should it, and how do we implement it safely?" SOC2 and ISO 27001 thinking applied.',
+        icon: 'tabler:alert-triangle',
+      },
+    ]}
+  />
+
+  <!-- Process Overview -->
+
+  <Steps
+    title="Our engagement process"
+    subtitle="A clear path from first contact to long-term partnership."
+    isReversed={true}
+    items={[
+      {
+        title: 'Free consultation',
+        description: 'We discuss your practice, understand your pain points, and determine if our audit is a good fit.',
+        icon: 'tabler:phone',
+      },
+      {
+        title: 'AI compliance audit (5-7 days)',
+        description: 'Thorough assessment of data flows, compliance posture, and automation opportunities. Free, no obligations.',
+        icon: 'tabler:clipboard-check',
+      },
+      {
+        title: 'Implementation proposal',
+        description: 'Based on audit findings, we present a fixed-price proposal for the automations that will deliver the most impact.',
+        icon: 'tabler:file-invoice',
+      },
+      {
+        title: 'Build & deploy',
+        description: 'We implement automations with compliance controls built in. Quick wins in 2-4 weeks, full transformations in 6-12 weeks.',
+        icon: 'tabler:rocket',
+      },
+      {
+        title: 'Ongoing partnership',
+        description: 'Monthly support, compliance updates, performance monitoring, and identification of new automation opportunities.',
+        icon: 'tabler:heart-handshake',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Professional business engagement',
     }}
   />
 
-  <!-- CallToAction Widget *********** -->
+  <!-- CTA -->
 
   <CallToAction
     actions={[
       {
         variant: 'primary',
-        text: 'Start exploring',
-        href: '/',
+        text: 'Book Your Free AI Audit',
+        href: '/free-ai-audit',
+        icon: 'tabler:clipboard-check',
       },
     ]}
-    title="Dive into our template collection"
-    subtitle="Whether you're in business, design, or education, our templates are here to elevate your projects."
+    title="Ready to see where AI can help your practice?"
+    subtitle="Start with a free 5-7 day compliance audit. No obligations, no pressure — just honest recommendations based on your unique situation."
   />
 </Layout>

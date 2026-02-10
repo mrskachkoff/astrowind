@@ -1,0 +1,325 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Features from '~/components/widgets/Features.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Content from '~/components/widgets/Content.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import ContactUs from '~/components/widgets/Contact.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Free AI Compliance Audit',
+  description: 'Get a free 5-7 day AI compliance audit for your healthcare practice. We assess data flows, identify safe automation opportunities, and deliver a clear GDPR compliance roadmap.',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero -->
+
+  <Hero
+    tagline="Free AI Audit"
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Book Your Free Audit',
+        href: '#form',
+        icon: 'tabler:clipboard-check',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Professional reviewing compliance documents',
+    }}
+  >
+    <Fragment slot="title">
+      Free 5-7 Day<br />
+      <span class="text-accent dark:text-white">AI Compliance Audit</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      We assess your clinic's data handling, map compliance gaps, and identify where AI can safely automate tasks — completely free. You receive a detailed report with risk scores, safe automation recommendations, and a clear roadmap.
+    </Fragment>
+  </Hero>
+
+  <!-- Value Prop: What You'll Receive -->
+
+  <Features2
+    title="What you'll receive"
+    subtitle="A comprehensive compliance and automation assessment delivered in 5-7 business days."
+    tagline="Deliverables"
+    items={[
+      {
+        title: 'AI & Compliance Risk Score',
+        description: 'A clear rating of your clinic\'s data handling practices and automation readiness, with specific risk areas identified.',
+        icon: 'tabler:report-analytics',
+      },
+      {
+        title: 'Data Flow Diagram',
+        description: 'A visual map of how patient data moves through your clinic — where it\'s stored, who accesses it, and where gaps exist.',
+        icon: 'tabler:hierarchy',
+      },
+      {
+        title: 'Automation Feasibility Matrix',
+        description: 'A scored analysis of every workflow — which tasks are safe to automate, which are risky, and which should never be automated.',
+        icon: 'tabler:table',
+      },
+      {
+        title: 'Implementation Roadmap',
+        description: 'A phased plan: fix compliance gaps first, then implement safe automations, then establish ongoing monitoring.',
+        icon: 'tabler:road',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  <!-- Audit Coverage: 5 Blocks -->
+
+  <Features
+    title="What we assess"
+    subtitle="Our audit covers five critical areas that most AI agencies ignore entirely."
+    columns={3}
+    items={[
+      {
+        title: 'Clinic Profile & Risk Context',
+        description: 'We assess your clinic size, patient volume, digital maturity, and existing tools to determine your risk tier and automation readiness.',
+        icon: 'tabler:building-hospital',
+      },
+      {
+        title: 'Data Mapping & GDPR Compliance',
+        description: 'We map every patient data flow — intake, records, imaging, billing, communications — and classify each by sensitivity and compliance exposure.',
+        icon: 'tabler:database',
+      },
+      {
+        title: 'Process Bottleneck Analysis',
+        description: 'We identify admin-heavy workflows, score each by manual effort, error risk, and data sensitivity, then shortlist safe automation candidates.',
+        icon: 'tabler:analyze',
+      },
+      {
+        title: 'AI Risk & Architecture Assessment',
+        description: 'For each automation candidate, we evaluate whether cloud, hybrid, or on-prem AI is appropriate — with GDPR article references for each decision.',
+        icon: 'tabler:cpu',
+      },
+      {
+        title: 'Compliance Gap & Action Plan',
+        description: 'We identify missing documentation, unsafe data handling, and governance gaps — then turn findings into a clear, prioritized implementation plan.',
+        icon: 'tabler:checklist',
+      },
+    ]}
+  />
+
+  <!-- Process Timeline -->
+
+  <Steps
+    title="How the audit works"
+    subtitle="A structured process that respects your time while delivering thorough results."
+    items={[
+      {
+        title: 'Day 1: <span class="font-medium">Initial Consultation</span>',
+        description: 'A 60-75 minute guided conversation about your clinic\'s operations, tools, data handling, and pain points. No technical jargon — we ask questions you can answer.',
+        icon: 'tabler:messages',
+      },
+      {
+        title: 'Days 2-3: <span class="font-medium">Data Mapping & Analysis</span>',
+        description: 'We map your data flows, classify sensitive information, and analyze every workflow for automation potential and compliance exposure.',
+        icon: 'tabler:search',
+      },
+      {
+        title: 'Days 4-5: <span class="font-medium">Risk Assessment & Architecture</span>',
+        description: 'We evaluate AI options for each process, determine safe architectures (on-prem vs. hybrid), and identify compliance gaps.',
+        icon: 'tabler:shield-check',
+      },
+      {
+        title: 'Days 6-7: <span class="font-medium">Report & Recommendations</span>',
+        description: 'You receive a complete report: risk scores, data flow diagrams, automation matrix, and a clear implementation roadmap you can act on — with or without us.',
+        icon: 'tabler:file-report',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Structured planning process',
+    }}
+  />
+
+  <!-- Who It's For -->
+
+  <Content
+    isReversed
+    tagline="Is this for you?"
+    title="Built for small healthcare practices"
+    items={[
+      {
+        title: 'Dental clinics with 1-10 employees',
+        description: 'Solo practitioners to small group practices dealing with appointment management, patient communications, and billing.',
+      },
+      {
+        title: 'Independent pharmacies',
+        description: 'Pharmacies handling patient data, prescription workflows, and supplier communications that need compliance-safe automation.',
+      },
+      {
+        title: 'Small medical clinics (2-5 practitioners)',
+        description: 'Multi-practitioner clinics with high admin overhead, complex scheduling, and patient data compliance requirements.',
+      },
+      {
+        title: 'Practice owners who are...',
+        description: 'Overwhelmed by administrative tasks, concerned about data privacy with new technology, or considering hiring additional staff to handle the workload.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=2068&q=80',
+      alt: 'Dental clinic environment',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">You don't need a big IT budget</h3>
+      Our audit is designed for practices that don't have dedicated IT teams or compliance officers — that's exactly why it's valuable.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Specific Deliverables -->
+
+  <Features2
+    title="What's in the report"
+    subtitle="Every audit delivers these specific, actionable outputs."
+    items={[
+      {
+        title: 'Executive Risk Summary',
+        description: 'A 2-page overview for practice owners — clear language, no jargon, focused on what matters for your business.',
+        icon: 'tabler:file-text',
+      },
+      {
+        title: 'Compliance Gap List',
+        description: 'Every missing document, unsafe practice, and governance gap — prioritized by risk level and effort to fix.',
+        icon: 'tabler:list-check',
+      },
+      {
+        title: 'Safe / Unsafe / Conditional AI List',
+        description: 'Each workflow clearly rated: what\'s safe to automate, what requires conditions, and what should never be automated.',
+        icon: 'tabler:traffic-lights',
+      },
+      {
+        title: 'Approved Architecture Plan',
+        description: 'For each safe automation, the recommended approach — on-prem, hybrid, or (rarely) cloud — with GDPR justification.',
+        icon: 'tabler:server',
+      },
+      {
+        title: 'Workflow Automation Matrix',
+        description: 'Every admin process scored by manual effort, error risk, data sensitivity, automation potential, and compliance exposure.',
+        icon: 'tabler:table',
+      },
+      {
+        title: 'Phased Implementation Roadmap',
+        description: 'Phase 1: Fix compliance risks. Phase 2: Implement safe automations. Phase 3: Establish ongoing monitoring and optimization.',
+        icon: 'tabler:road',
+      },
+    ]}
+  />
+
+  <!-- Audit FAQs -->
+
+  <FAQs
+    title="Audit Questions"
+    subtitle="Common questions about the free AI compliance audit."
+    classes={{ container: 'max-w-6xl' }}
+    items={[
+      {
+        title: 'How much of my time does it require?',
+        description: 'About 2-3 short conversations totaling 60-75 minutes. We do the heavy analysis work. Your role is to answer questions about your current operations and tools.',
+      },
+      {
+        title: 'Is there really no obligation?',
+        description: 'None. You receive a complete report you can act on independently. About 40-60% of audited clinics choose to proceed with implementation, but there is no pressure or commitment required.',
+      },
+      {
+        title: 'What if you find serious compliance issues?',
+        description: 'We report them clearly and prioritize them in your roadmap. This happens frequently — most clinics have gaps they\'re unaware of. We never use findings to pressure you. We present facts and recommendations.',
+      },
+      {
+        title: 'Can we implement the recommendations ourselves?',
+        description: 'Yes. The report is designed to be actionable regardless of whether you work with us. We include specific steps, not vague suggestions. Many practices fix simple compliance gaps on their own.',
+      },
+      {
+        title: 'Why do you offer this for free?',
+        description: 'The audit builds trust and demonstrates our expertise. When practices see the depth of analysis and the quality of recommendations, many choose to work with us for implementation. It\'s our way of proving value before asking for a commitment.',
+      },
+      {
+        title: 'What happens after the audit?',
+        description: 'We present the report and walk you through the findings. If you want to proceed with implementation, we provide a fixed-price proposal based on the audit findings. If not, you keep the report with no strings attached.',
+      },
+    ]}
+  />
+
+  <!-- Booking Form -->
+
+  <ContactUs
+    id="form"
+    title="Book your free AI audit"
+    subtitle="Fill out the form below and we'll schedule your initial consultation within 48 hours. The entire audit takes 5-7 business days."
+    inputs={[
+      {
+        type: 'text',
+        name: 'name',
+        label: 'Your Name',
+      },
+      {
+        type: 'email',
+        name: 'email',
+        label: 'Email Address',
+      },
+      {
+        type: 'tel',
+        name: 'phone',
+        label: 'Phone Number',
+      },
+      {
+        type: 'text',
+        name: 'practice_type',
+        label: 'Practice Type (e.g., Dental Clinic, Pharmacy, Medical Clinic)',
+      },
+      {
+        type: 'text',
+        name: 'practice_size',
+        label: 'Number of Employees',
+      },
+    ]}
+    textarea={{
+      label: 'What are your biggest administrative challenges?',
+      name: 'challenges',
+      placeholder: 'Tell us about the tasks that consume the most time, any compliance concerns, or areas where you think automation could help...',
+    }}
+    disclaimer={{
+      label:
+        'By submitting this form, you agree to the collection of your information for the purpose of scheduling your free AI audit. Your data is processed in accordance with our Privacy Policy and GDPR requirements.',
+    }}
+    button="Book My Free Audit"
+    description="We respond within 48 hours. Your information is never shared with third parties."
+  />
+
+  <!-- Urgency CTA -->
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Book Your Free Audit Now',
+        href: '#form',
+        icon: 'tabler:clipboard-check',
+      },
+    ]}
+  >
+    <Fragment slot="title">Limited to 8 Audits Per Month</Fragment>
+
+    <Fragment slot="subtitle">
+      Each audit receives our full attention — thorough analysis, detailed reporting, and personalized recommendations. We limit capacity to maintain quality. Secure your spot today.
+    </Fragment>
+  </CallToAction>
+</Layout>

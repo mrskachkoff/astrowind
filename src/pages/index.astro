@@ -2,398 +2,317 @@
 import Layout from '~/layouts/PageLayout.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
-import Note from '~/components/widgets/Note.astro';
-import Features from '~/components/widgets/Features.astro';
-import Features2 from '~/components/widgets/Features2.astro';
-import Steps from '~/components/widgets/Steps.astro';
-import Content from '~/components/widgets/Content.astro';
-import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
 import Stats from '~/components/widgets/Stats.astro';
+import Features from '~/components/widgets/Features.astro';
+import Content from '~/components/widgets/Content.astro';
+import Steps from '~/components/widgets/Steps.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 
 const metadata = {
-  title: 'AstroWind — Free template for creating websites with Astro + Tailwind CSS',
+  title: 'Futurion Solutions — Compliance-First AI Automation for Healthcare',
   ignoreTitleTemplate: true,
 };
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
+  <!-- Hero: Compliance-First AI Automation -->
 
   <Hero
     actions={[
       {
         variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/arthelokyo/astrowind',
-        target: '_blank',
-        icon: 'tabler:download',
+        text: 'Get Your Free AI Audit',
+        href: '/free-ai-audit',
+        icon: 'tabler:clipboard-check',
       },
-      { text: 'Learn more', href: '#features' },
+      { text: 'See Our Services', href: '/services' },
     ]}
-    image={{ src: '~/assets/images/hero-image.png', alt: 'AstroWind Hero Image' }}
+    image={{ src: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80', alt: 'Healthcare professional using technology in a modern clinic' }}
   >
     <Fragment slot="title">
-      Free template for <span class="hidden xl:inline">creating websites with</span>
-      <span class="text-accent dark:text-white"> Astro 5.0</span> + Tailwind CSS
+      Compliance-First AI Automation<br />
+      <span class="text-accent dark:text-white">for Healthcare Providers</span>
     </Fragment>
 
     <Fragment slot="subtitle">
       <span class="hidden sm:inline">
-        <span class="font-semibold">AstroWind</span> is a free, customizable and production-ready template for Astro 5.0
-        + Tailwind CSS.</span
-      >
-      <span class="block mb-1 sm:hidden font-bold text-blue-600">AstroWind: Production-ready.</span>
-      Suitable for Startups, Small Business, SaaS websites, Professional Portfolios, Marketing websites, Landing Pages &
-      Blogs.
+        We help dental clinics, pharmacies, and small medical practices save 10-15 hours per week through AI automation — without compromising patient data security or GDPR compliance.
+      </span>
+      <span class="block mb-1 sm:hidden font-bold text-blue-600">AI automation that keeps patient data safe.</span>
+      Enterprise-level compliance expertise, built for healthcare SMBs in Spain and the EU.
     </Fragment>
   </Hero>
 
-  <!-- Note Widget ******************* -->
+  <!-- Trust Stats -->
 
-  <Note title="Philosophy:" description="Simplicity, Best Practices and High Performance" />
+  <Stats
+    stats={[
+      { title: 'Compliance Frameworks', amount: '4+', icon: 'tabler:shield-check' },
+      { title: 'Hours Saved Weekly', amount: '10-15', icon: 'tabler:clock' },
+      { title: 'Data Risk Reduction', amount: '90%', icon: 'tabler:lock' },
+      { title: 'Audit Conversion', amount: '40-60%', icon: 'tabler:chart-arrows' },
+    ]}
+  />
 
-  <!-- Features Widget *************** -->
+  <!-- Problem / Pain Points -->
+
+  <Content
+    isReversed
+    tagline="The Challenge"
+    title="Healthcare Compliance Is Complex — AI Makes It Harder"
+    items={[
+      {
+        title: 'GDPR complexity for small practices',
+        description:
+          'You face the same data protection requirements as large hospitals, but without dedicated IT teams or compliance officers.',
+      },
+      {
+        title: 'Cloud AI risks with patient data',
+        description:
+          'Most AI tools send patient data to external cloud servers — a potential GDPR violation that puts your practice at risk.',
+      },
+      {
+        title: 'Administrative overload stealing patient time',
+        description:
+          'Appointment scheduling, follow-ups, billing, and paperwork consume hours that should be spent on patient care.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Person overwhelmed by administrative work',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Sound familiar?</h3>
+      Most AI agencies don't understand healthcare regulations. Most compliance consultants don't understand AI. You need both.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Differentiators -->
 
   <Features
     id="features"
-    tagline="Features"
-    title="What you get with AstroWind"
-    subtitle="One of the most professional and comprehensive templates currently on the market. Most starred & forked Astro theme in 2022, 2023 and 2024."
+    tagline="Why Futurion Solutions"
+    title="What makes us different"
+    subtitle="We bridge the gap between AI automation and healthcare compliance — so you don't have to choose between efficiency and data protection."
+    columns={3}
     items={[
       {
-        title: 'Astro + Tailwind CSS Integration',
+        title: 'Compliance-First Approach',
         description:
-          'A seamless integration between two great frameworks that offer high productivity, performance and versatility.',
-        icon: 'tabler:brand-tailwind',
+          'Every automation is built with GDPR, HIPAA, and data privacy requirements at its core — not added as an afterthought.',
+        icon: 'tabler:shield-check',
       },
       {
-        title: 'Ready-to-use Components',
+        title: 'Hybrid & On-Prem AI',
         description:
-          'Widgets made with Tailwind CSS ready to be used in Marketing Websites, SaaS, Blogs, Personal Profiles, Small Business...',
-        icon: 'tabler:components',
+          'Patient data stays in your clinic. We design solutions that work locally or in hybrid setups, never sending sensitive data to external clouds.',
+        icon: 'tabler:server',
       },
       {
-        title: 'Best Practices',
+        title: 'Healthcare Specialized',
         description:
-          'Creating secure, efficient, and user-friendly websites that deliver exceptional experiences and lasting value.',
-        icon: 'tabler:list-check',
+          'We focus exclusively on dental clinics, pharmacies, and small medical practices. We understand your workflows and regulations.',
+        icon: 'tabler:stethoscope',
       },
       {
-        title: 'Excellent Page Speed',
+        title: 'Enterprise Security for SMBs',
         description:
-          'Having a good page speed impacts organic search ranking, improves user experience (UI/UX) and increase conversion rates.',
-        icon: 'tabler:rocket',
+          'SOC2, ISO 27001, and enterprise-grade security practices — scaled and priced for small healthcare businesses.',
+        icon: 'tabler:lock',
       },
       {
-        title: 'Search Engine Optimization (SEO)',
+        title: 'End-to-End Support',
         description:
-          "SEO lies in its ability to enhance a website's visibility, driving organic traffic and enabling it to reach a wider audience.",
-        icon: 'tabler:arrows-right-left',
+          'From initial audit through implementation to ongoing monitoring. We are your long-term AI compliance partner, not a one-time vendor.',
+        icon: 'tabler:lifebuoy',
       },
       {
-        title: 'Open to new ideas and contributions',
+        title: 'Spain & EU Focus',
         description:
-          'Embracing a culture that is open to new ideas and contributions is integral fostering innovation, collaboration, and a dynamic user experience.',
-        icon: 'tabler:bulb',
+          'Based in Valencia, Spain. Deep understanding of EU regulations, AEPD requirements, and the local healthcare landscape.',
+        icon: 'tabler:map-pin',
       },
     ]}
   />
 
-  <!-- Content Widget **************** -->
-
-  <Content
-    isReversed
-    tagline="Inside template"
-    title="AstroWind's Blueprint: Fun Meets Functionality!"
-    items={[
-      {
-        title: 'Built on top of Astro 5.0',
-        description:
-          'Benefiting from the performance and developer-friendly features of this modern static site generator.',
-      },
-      {
-        title: 'Styled using Tailwind CSS',
-        description:
-          'Facilitating rapid design and consistent styling with this highly popular utility-first CSS framework.',
-      },
-      {
-        title: 'Cross-browser compatibility',
-        description:
-          'Ensure your website looks and functions consistently across various web browsers, delivering a seamless experience to all users.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Colorful Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Building on modern foundations</h3>
-      Gain a competitive advantage by incorporating industry leading practices
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <!-- Content Widget **************** -->
-
-  <Content
-    isAfterContent
-    items={[
-      {
-        title: 'High level of customization',
-        description: `Tailor the template effortlessly to match your brand's identity and requirements, making your website distinct and saving you time.`,
-      },
-      {
-        title: 'Multiple layout possibilities',
-        description:
-          'Explore various layout options to find the structure that best presents your content, enhancing user engagement and navigation.',
-      },
-      {
-        title: 'Fully responsive design',
-        description:
-          "Ensure your website's optimal performance on various devices and screen sizes, providing a consistent and enjoyable user experience.",
-      },
-      {
-        title: 'Integration of media',
-        description:
-          'Seamlessly incorporate images, videos, and multimedia elements that enhance your content and engage visitors effectively.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2194&q=80',
-      alt: 'Blueprint Image',
-    }}
-  >
-    <Fragment slot="content">Ensure your online presence truly represents you.</Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <!-- Content Widget **************** -->
-
-  <Content
-    isReversed
-    isAfterContent
-    items={[
-      {
-        title: 'Enhanced user engagement',
-        description:
-          'Captivate your audience with interactive elements, intuitive navigation, and visually appealing layouts, encouraging longer visits.',
-      },
-      {
-        title: 'Continuous improvement',
-        description:
-          'Ensure your website stays aligned with the latest trends and technologies through regular updates and enhancements.',
-      },
-      {
-        title: 'Time and resource efficiency',
-        description:
-          'Skip the time-consuming process of building a website from scratch and launch your online presence sooner with AstroWind.',
-      },
-      {
-        title: 'Community support',
-        description: `Join the growing AstroWind community for insights, resources, and assistance, ensuring you're never alone on your web development journey.`,
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1611462985358-60d3498e0364?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Astronauts Image',
-    }}
-  >
-    <Fragment slot="content">Designed to foster growth and success.</Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <!-- Steps Widget ****************** -->
+  <!-- How It Works -->
 
   <Steps
-    title="Get your dream website up and running in no time with AstroWind."
+    title="How it works"
+    subtitle="From initial audit to ongoing support, we make AI adoption safe and simple for your practice."
     items={[
       {
-        title: 'Step 1: <span class="font-medium">Download</span>',
+        title: 'Step 1: <span class="font-medium">Free AI Compliance Audit</span>',
         description:
-          "Kickstart with GitHub! Either fork the AstroWind template or simply click 'Use this template'. Your canvas awaits, ready for your digital masterpiece. In just a few clicks, you've already set the foundation.",
-        icon: 'tabler:package',
+          'We assess your clinic\'s data flows, compliance posture, and automation opportunities in a free 5-7 day audit. You receive a detailed report with risk scores and safe automation recommendations.',
+        icon: 'tabler:clipboard-check',
       },
       {
-        title: 'Step 2: <span class="font-medium">Add content</span>',
+        title: 'Step 2: <span class="font-medium">Compliant Implementation</span>',
         description:
-          "Pour your vision into it. Add images, text, and all that jazz to breathe life into your digital space. Remember, it's the content that tells your story, so make it captivating.",
-        icon: 'tabler:letter-case',
+          'We build and deploy AI automations designed with data privacy at their core. On-prem or hybrid architecture ensures patient data never leaves your control.',
+        icon: 'tabler:settings-automation',
       },
       {
-        title: 'Step 3: <span class="font-medium">Customize styles</span>',
+        title: 'Step 3: <span class="font-medium">Ongoing Support & Monitoring</span>',
         description:
-          'Give it your personal touch. Tailor colors, fonts, and layouts until it feels just right. Your unique flair, amplified by AstroWind! Precision in design ensures a seamless user experience.',
-        icon: 'tabler:paint',
+          'We monitor your automations, update compliance controls as regulations evolve, and optimize performance. Your trusted AI partner, month after month.',
+        icon: 'tabler:heart-handshake',
       },
       {
-        title: 'Ready!',
+        title: 'Results: Save 10-15 hours per week',
         icon: 'tabler:check',
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1616198814651-e71f960c3180?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-      alt: 'Steps image',
+      src: 'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Team collaborating on a project',
     }}
   />
 
-  <!-- Features2 Widget ************** -->
+  <!-- Service Details -->
 
-  <Features2
-    title="Most used widgets"
-    subtitle="Provides frequently used components for building websites using Tailwind CSS"
-    tagline="Components"
+  <Content
+    isAfterContent
+    tagline="Our Solutions"
+    title="What's included in our compliance automation"
     items={[
       {
-        title: 'Headers',
-        description: "Ever tried driving without GPS? Boom! That's why websites need headers for direction.",
-        icon: 'flat-color-icons:template',
-      },
-      {
-        title: 'Heros',
+        title: 'Appointment automation',
         description:
-          "Picture a superhero landing – epic, right? That's the job of a Hero section, making grand entrances!",
-        icon: 'flat-color-icons:gallery',
+          'Smart scheduling, reminders, and follow-ups that reduce no-shows by up to 30% — all GDPR compliant.',
       },
       {
-        title: 'Features',
+        title: 'Patient communication workflows',
         description:
-          'Where websites strut their stuff and show off superpowers. No holding back on the bragging rights here!',
-        icon: 'flat-color-icons:approval',
+          'Automated but personal communications through compliant channels, replacing risky WhatsApp and personal email usage.',
       },
       {
-        title: 'Content',
+        title: 'Billing & insurance processing',
         description:
-          "Dive into the meat and potatoes of a site; without it, you'd just be window shopping. Content is king.",
-        icon: 'flat-color-icons:document',
+          'Streamlined billing workflows that reduce errors and save hours of manual administrative work each week.',
       },
       {
-        title: 'Call-to-Action',
+        title: 'Compliance documentation',
         description:
-          'That enthusiastic friend who\'s always urging, "Do it! Do it!"? Yeah, that\'s this button nudging you towards adventure.',
-        icon: 'flat-color-icons:advertising',
-      },
-      {
-        title: 'Pricing',
-        description: 'Behold the dessert menu of the website world. Tempting choices await, can you resist?',
-        icon: 'flat-color-icons:currency-exchange',
-      },
-      {
-        title: 'Testimonial',
-        description: 'Step into the gossip corner! Here, other visitors spill the beans and share the juicy details.',
-        icon: 'flat-color-icons:voice-presentation',
-      },
-      {
-        title: 'Contact',
-        description:
-          'Like a digital mailbox, but faster! Drop a line, ask a question, or send a virtual high-five. Ding! Message in.',
-        icon: 'flat-color-icons:business-contact',
-      },
-      {
-        title: 'Footers',
-        description: "The footer's like the credits of a movie but sprinkled with easter eggs. Time to hunt!",
-        icon: 'flat-color-icons:database',
+          'Automated audit trails, data processing records, and compliance reports that keep you inspection-ready at all times.',
       },
     ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Modern dental clinic with technology',
+    }}
   >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Built for healthcare workflows</h3>
+      Every automation we build is architected with GDPR principles at its core — data minimization, purpose limitation, security controls, and audit trails from day one.
+    </Fragment>
+
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
     </Fragment>
-  </Features2>
+  </Content>
 
-  <!-- HighlightedPosts Widget ******* -->
-
-  <BlogLatestPosts
-    title="Find out more content in our Blog"
-    information={`The blog is used to display AstroWind documentation.
-                        Each new article will be an important step that you will need to know to be an expert in creating a website using Astro + Tailwind CSS.
-                        Astro is a very interesting technology. Thanks.
-                `}
-  />
-
-  <!-- FAQs Widget ******************* -->
-
-  <FAQs
-    title="Frequently Asked Questions"
-    subtitle="Dive into the following questions to gain insights into the powerful features that AstroWind offers and how it can elevate your web development journey."
-    tagline="FAQs"
-    classes={{ container: 'max-w-6xl' }}
-    items={[
-      {
-        title: 'Why AstroWind?',
-        description:
-          "Michael Knight a young loner on a crusade to champion the cause of the innocent. The helpless. The powerless in a world of criminals who operate above the law. Here he comes Here comes Speed Racer. He's a demon on wheels.",
-      },
-      {
-        title: 'What do I need to start?',
-        description:
-          'Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds. Many say exploration is part of our destiny, but it’s actually our duty to future generations.',
-      },
-      {
-        title: 'How to install the Astro + Tailwind CSS template?',
-        description:
-          "Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows.",
-      },
-      {
-        title: "What's something that you don't understand?",
-        description:
-          "A flower in my garden, a mystery in my panties. Heart attack never stopped old Big Bear. I didn't even know we were calling him Big Bear.",
-      },
-      {
-        title: 'What is something that you would like to try again?',
-        description:
-          "A business big enough that it could be listed on the NASDAQ goes belly up. Disappears! It ceases to exist without me. No, you clearly don't know who you're talking to, so let me clue you in.",
-      },
-      {
-        title: 'If you could only ask one question to each person you meet, what would that question be?',
-        description:
-          "This is not about revenge. This is about justice. A lot of things can change in twelve years, Admiral. Well, that's certainly good to know. About four years. I got tired of hearing how young I looked.",
-      },
-    ]}
-  />
-
-  <!-- Stats Widget ****************** -->
-
-  <Stats
-    stats={[
-      { title: 'Downloads', amount: '132K' },
-      { title: 'Stars', amount: '24.8K' },
-      { title: 'Forks', amount: '10.3K' },
-      { title: 'Users', amount: '48.4K' },
-    ]}
-  />
-
-  <!-- CallToAction Widget *********** -->
+  <!-- CTA Banner -->
 
   <CallToAction
     actions={[
       {
         variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/arthelokyo/astrowind',
-        target: '_blank',
-        icon: 'tabler:download',
+        text: 'Book Your Free Audit',
+        href: '/free-ai-audit',
+        icon: 'tabler:clipboard-check',
       },
     ]}
   >
-    <Fragment slot="title">
-      Astro&nbsp;+&nbsp;<br class="block sm:hidden" /><span class="sm:whitespace-nowrap">Tailwind CSS</span>
-    </Fragment>
+    <Fragment slot="title">Start with a Free 5-7 Day AI Compliance Audit</Fragment>
 
     <Fragment slot="subtitle">
-      Be very surprised by these huge fake numbers you are seeing on this page. <br class="hidden md:inline" />Don't
-      waste more time! :P
+      We assess your clinic's data flows, identify safe automation opportunities, and deliver a clear compliance roadmap — at no cost. Limited to 8 audits per month.
+    </Fragment>
+  </CallToAction>
+
+  <!-- FAQs -->
+
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Everything you need to know about compliance-first AI automation for your healthcare practice."
+    tagline="FAQs"
+    classes={{ container: 'max-w-6xl' }}
+    items={[
+      {
+        title: 'What is a compliance-first AI audit?',
+        description:
+          'Our free audit assesses your clinic\'s data handling, identifies where AI can safely automate tasks, and flags compliance gaps. It is a risk and process audit with an AI feasibility overlay — not a sales pitch. You receive a detailed report you can act on independently.',
+      },
+      {
+        title: 'Will patient data be sent to the cloud?',
+        description:
+          'No. We design hybrid and on-premise AI solutions that keep patient data within your clinic\'s infrastructure. Most cloud-based AI tools are unsuitable for healthcare data under GDPR. We use architectures that keep sensitive data local.',
+      },
+      {
+        title: 'How much does implementation cost?',
+        description:
+          'Our quick-win implementations start at around €1,500-3,000 for 1-2 automations. Comprehensive automation packages range from €5,000-15,000. Monthly support starts at €200/month. The free audit gives you a clear picture before any commitment.',
+      },
+      {
+        title: 'We\'re a small clinic — is this for us?',
+        description:
+          'Absolutely. We specialize in small healthcare businesses: dental clinics, pharmacies, and practices with 1-10 employees. Our solutions are designed to be affordable and impactful for practices that don\'t have dedicated IT teams.',
+      },
+      {
+        title: 'What GDPR and compliance frameworks do you follow?',
+        description:
+          'We work with GDPR, HIPAA, SOC2, and ISO 27001 frameworks. Every automation includes proper data processing agreements, audit trails, consent management, and documentation required by EU and Spanish (AEPD) regulations.',
+      },
+      {
+        title: 'How long does implementation take?',
+        description:
+          'The free audit takes 5-7 business days. Quick-win implementations can be completed in 2-4 weeks. Full automation transformations typically take 6-12 weeks, depending on complexity. You see results from week one.',
+      },
+      {
+        title: 'What if we already use a practice management system?',
+        description:
+          'We integrate with your existing tools. Our automations work alongside your current practice management software, EHR systems, and workflows — we enhance what you have rather than replacing it.',
+      },
+      {
+        title: 'Is the audit really free?',
+        description:
+          'Yes. The 5-7 day AI compliance audit is completely free with no obligations. You receive a full report with risk scores, automation recommendations, and a compliance roadmap. About 40-60% of audited clinics choose to proceed with implementation, but there is zero pressure.',
+      },
+    ]}
+  />
+
+  <!-- Latest Blog Posts -->
+
+  <BlogLatestPosts
+    title="Compliance & AI Insights"
+    information="Stay informed about healthcare compliance, AI automation best practices, and regulatory updates for small healthcare providers in Spain and the EU."
+  />
+
+  <!-- Final CTA -->
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Get Your Free AI Audit',
+        href: '/free-ai-audit',
+        icon: 'tabler:clipboard-check',
+      },
+    ]}
+  >
+    <Fragment slot="title">Ready to Automate Compliantly?</Fragment>
+
+    <Fragment slot="subtitle">
+      Join healthcare practices across Spain that are saving 10-15 hours per week with AI automation — without compromising patient data or compliance. Start with a free audit today.
     </Fragment>
   </CallToAction>
 </Layout>

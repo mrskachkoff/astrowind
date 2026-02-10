@@ -1,228 +1,239 @@
 ---
-import Features2 from '~/components/widgets/Features2.astro';
-import Features3 from '~/components/widgets/Features3.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Stats from '~/components/widgets/Stats.astro';
-import Steps2 from '~/components/widgets/Steps2.astro';
 import Layout from '~/layouts/PageLayout.astro';
 
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import Features from '~/components/widgets/Features.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
 const metadata = {
-  title: 'About us',
+  title: 'About Us',
+  description: 'Futurion Solutions is a compliance-first AI automation agency helping small healthcare providers in Spain and the EU automate safely. Founded by Ivan Skachkov, a compliance and business process expert.',
 };
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
+  <!-- Hero -->
 
   <Hero
-    tagline="About us"
+    tagline="About Futurion Solutions"
     image={{
-      src: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Caos Image',
+      src: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Professional team working together',
     }}
   >
     <Fragment slot="title">
-      Elevate your online presence with our <br />
-      <span class="text-accent dark:text-white"> Beautiful Website Templates</span>
+      Transforming Healthcare Operations<br />
+      <span class="text-accent dark:text-white">Through Intelligent, Compliant Automation</span>
     </Fragment>
 
     <Fragment slot="subtitle">
-      Donec efficitur, ipsum quis congue luctus, mauris magna convallis mauris, eu auctor nisi lectus non augue. Donec
-      quis lorem non massa vulputate efficitur ac at turpis. Sed tincidunt ex a nunc convallis, et lobortis nisi tempus.
-      Suspendisse vitae nisi eget tortor luctus maximus sed non lectus.
+      We're an AI automation agency that understands both the technology and the regulatory requirements. Founded by a compliance and business process optimization expert, Futurion Solutions brings enterprise-level expertise to small healthcare businesses.
     </Fragment>
   </Hero>
 
-  <!-- Stats Widget ****************** -->
+  <!-- Mission -->
 
-  <Stats
-    title="Statistics about us"
-    stats={[
-      { title: 'Offices', amount: '4' },
-      { title: 'Employees', amount: '248' },
-      { title: 'Templates', amount: '12' },
-      { title: 'Awards', amount: '24' },
-    ]}
-  />
-
-  <!-- Features3 Widget ************** -->
-
-  <Features3
-    title="Our templates"
-    subtitle="Etiam scelerisque, enim eget vestibulum luctus, nibh mauris blandit nulla, nec vestibulum risus justo ut enim. Praesent lacinia diam et ante imperdiet euismod."
-    columns={3}
-    isBeforeContent={true}
+  <Content
+    tagline="Our Mission"
+    title="AI automation should be compliant from day one"
     items={[
       {
-        title: 'Educational',
+        title: 'Who we are',
         description:
-          'Morbi faucibus luctus quam, sit amet aliquet felis tempor id. Cras augue massa, ornare quis dignissim a, molestie vel nulla.',
-        icon: 'tabler:template',
+          'Futurion Solutions is an AI automation agency specializing in helping small and medium-sized healthcare businesses reclaim their time, reduce operational costs, and focus on what matters most — serving their patients.',
       },
       {
-        title: 'Interior Design',
+        title: 'Our founder',
         description:
-          'Vivamus porttitor, tortor convallis aliquam pretium, turpis enim consectetur elit, vitae egestas purus erat ac nunc nulla.',
-        icon: 'tabler:template',
+          'Founded by Ivan Skachkov, a compliance and business process automation expert with deep expertise in SOC2, ISO 27001, HIPAA, and GDPR frameworks. We understand both the technology AND the regulatory requirements.',
       },
       {
-        title: 'Photography',
+        title: 'Our approach',
         description:
-          'Duis sed lectus in nisl vehicula porttitor eget quis odio. Aliquam erat volutpat. Nulla eleifend nulla id sem fermentum.',
-        icon: 'tabler:template',
-      },
-    ]}
-  />
-
-  <!-- Features3 Widget ************** -->
-
-  <Features3
-    columns={3}
-    isAfterContent={true}
-    items={[
-      {
-        title: 'E-commerce',
-        description:
-          'Rutrum non odio at vehicula. Proin ipsum justo, dignissim in vehicula sit amet, dignissim id quam. Sed ac tincidunt sapien.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Blog',
-        description:
-          'Nullam efficitur volutpat sem sed fringilla. Suspendisse et enim eu orci volutpat laoreet ac vitae libero.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Business',
-        description:
-          'Morbi et elit finibus, facilisis justo ut, pharetra ipsum. Donec efficitur, ipsum quis congue luctus, mauris magna.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Branding',
-        description:
-          'Suspendisse vitae nisi eget tortor luctus maximus sed non lectus. Cras malesuada pretium placerat. Nullam venenatis dolor a ante rhoncus.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Medical',
-        description:
-          'Vestibulum malesuada lacus id nibh posuere feugiat. Nam volutpat nulla a felis ultrices, id suscipit mauris congue. In hac habitasse platea dictumst.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Fashion Design',
-        description:
-          'Maecenas eu tellus eget est scelerisque lacinia et a diam. Aliquam velit lorem, vehicula id fermentum et, rhoncus et purus.',
-        icon: 'tabler:template',
+          'We don\'t just automate — we optimize first, then automate compliantly. With years of enterprise process optimization experience, we know how to design AI solutions that are efficient, secure, and built on a foundation of data privacy best practices.',
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
-      alt: 'Colorful Image',
+      src: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Innovation and compliance',
     }}
-  />
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Compliance meets innovation</h3>
+      In healthcare, patient data is sacred. We bridge the gap between AI innovation and regulatory requirements — so practices don't have to choose.
+    </Fragment>
+  </Content>
 
-  <!-- Steps2 Widget ****************** -->
+  <!-- The Gap We Fill -->
+
+  <Features2
+    title="The gap we fill"
+    subtitle="Why healthcare SMBs need a specialized AI automation partner."
+    tagline="The Problem"
+    items={[
+      {
+        title: 'AI agencies don\'t understand compliance',
+        description: 'Most AI agencies build fast and worry about regulations later. In healthcare, that approach creates GDPR liability and puts patient data at risk.',
+        icon: 'tabler:alert-triangle',
+      },
+      {
+        title: 'Compliance consultants don\'t understand AI',
+        description: 'Traditional compliance advisors can identify risks but can\'t build the automation solutions that address them. You end up with reports but no results.',
+        icon: 'tabler:file-alert',
+      },
+      {
+        title: 'Enterprise solutions are too expensive',
+        description: 'Large hospitals have dedicated IT teams and compliance officers. Small practices face the same regulations but without the resources to address them.',
+        icon: 'tabler:currency-euro',
+      },
+      {
+        title: 'Generic tools miss healthcare nuances',
+        description: 'Off-the-shelf AI tools aren\'t designed for healthcare data sensitivity. Patient records, imaging data, and health information require specialized handling.',
+        icon: 'tabler:puzzle',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  <!-- Values -->
 
   <Steps2
     title="Our values"
-    subtitle="Maecenas eu tellus eget est scelerisque lacinia et a diam. Aliquam velit lorem, vehicula id fermentum et, rhoncus et purus. Nulla facilisi. Vestibulum malesuada lacus."
+    subtitle="The principles that guide every engagement, every automation, and every recommendation we make."
     items={[
       {
-        title: 'Customer-centric approach',
+        title: 'Compliant from day one',
         description:
-          'Donec id nibh neque. Quisque et fermentum tortor. Fusce vitae dolor a mauris dignissim commodo. Ut eleifend luctus condimentum.',
+          'Data privacy isn\'t optional in healthcare. Every solution we build has GDPR, audit trails, and security controls baked in from the architecture level — never bolted on later.',
       },
       {
-        title: 'Constant Improvement',
+        title: 'Optimize before automating',
         description:
-          'Phasellus laoreet fermentum venenatis. Vivamus dapibus pulvinar arcu eget mattis. Fusce eget mauris leo.',
+          'We don\'t digitize broken workflows. We analyze and fix processes first, then automate them. This means you get efficiency gains that actually stick.',
       },
       {
-        title: 'Ethical Practices',
+        title: 'Transparency and trust',
         description:
-          'Vestibulum imperdiet libero et lectus molestie, et maximus augue porta. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
+          'You should understand exactly what your automations do with patient data. We explain everything in clear language and earn trust through results, not contracts.',
+      },
+      {
+        title: 'Start small, scale smart',
+        description:
+          'Begin with high-impact, low-risk automations and expand strategically. No big-bang implementations, no unnecessary risk.',
       },
     ]}
   />
 
-  <!-- Steps2 Widget ****************** -->
+  <!-- Expertise -->
 
-  <Steps2
-    title="Achievements"
-    subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sagittis, quam nec venenatis lobortis, mi risus tempus nulla, sed porttitor est nibh at nulla."
-    isReversed={true}
-    callToAction={{
-      text: 'See more',
-      href: '/',
+  <Features
+    title="Our expertise"
+    subtitle="A unique combination of compliance knowledge, process optimization experience, and AI implementation skills."
+    columns={3}
+    items={[
+      {
+        title: 'GDPR & Data Privacy',
+        description: 'Deep understanding of EU data protection regulations, Spanish AEPD requirements, and healthcare-specific data handling obligations.',
+        icon: 'tabler:shield-lock',
+      },
+      {
+        title: 'SOC2 & ISO 27001',
+        description: 'Enterprise security framework experience applied to small healthcare businesses — proper controls without enterprise complexity.',
+        icon: 'tabler:certificate',
+      },
+      {
+        title: 'HIPAA Compliance',
+        description: 'Understanding of Protected Health Information (PHI) requirements and how to handle sensitive healthcare data securely in automated systems.',
+        icon: 'tabler:stethoscope',
+      },
+      {
+        title: 'Business Process Optimization',
+        description: 'Years of analyzing and optimizing workflows in organizations of all sizes. We identify bottlenecks, eliminate waste, and redesign for efficiency.',
+        icon: 'tabler:arrows-sort',
+      },
+      {
+        title: 'AI & Automation Architecture',
+        description: 'Designing secure, scalable AI solutions with on-prem and hybrid architectures that keep sensitive data local while maximizing automation potential.',
+        icon: 'tabler:cpu',
+      },
+      {
+        title: 'Healthcare Operations',
+        description: 'Focused expertise in dental clinics, pharmacies, and small medical practices — we understand your workflows, regulations, and daily challenges.',
+        icon: 'tabler:building-hospital',
+      },
+    ]}
+  />
+
+  <!-- Who We Serve -->
+
+  <Content
+    isReversed
+    tagline="Who We Serve"
+    title="Small healthcare practices that deserve enterprise-level solutions"
+    items={[
+      {
+        title: 'Same compliance requirements, fewer resources',
+        description: 'Small practices face the same GDPR and data protection requirements as large hospitals — without dedicated IT teams or compliance officers.',
+      },
+      {
+        title: 'High administrative overhead',
+        description: 'Administrative staff are expensive and their time is valuable. Repetitive tasks like scheduling, billing, and follow-ups consume hours that could serve patients.',
+      },
+      {
+        title: 'Standardized, automatable workflows',
+        description: 'Healthcare practices have highly standardized processes that are ideal for automation — when done with proper compliance controls.',
+      },
+      {
+        title: 'Direct impact on patient care',
+        description: 'Small improvements in efficiency translate directly to better patient care and healthier bottom lines. Every hour saved goes back to what matters.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=2068&q=80',
+      alt: 'Healthcare clinic environment',
     }}
-    items={[
-      {
-        title: 'Global reach',
-        description: 'Nam malesuada urna in enim imperdiet tincidunt. Phasellus non tincidunt nisi, at elementum mi.',
-        icon: 'tabler:globe',
-      },
-      {
-        title: 'Positive customer feedback and reviews',
-        description:
-          'Cras semper nulla leo, eget laoreet erat cursus sed. Praesent faucibus massa in purus iaculis dictum.',
-        icon: 'tabler:message-star',
-      },
-      {
-        title: 'Awards and recognition as industry experts',
-        description:
-          'Phasellus lacinia cursus velit, eu malesuada magna pretium eu. Etiam aliquet tellus purus, blandit lobortis ex rhoncus vitae.',
-        icon: 'tabler:award',
-      },
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">An underserved market</h3>
+      While large hospital systems have compliance officers and IT departments, independent practices often struggle alone. We're here to change that.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Stats -->
+
+  <Stats
+    title="Our commitment in numbers"
+    stats={[
+      { title: 'Compliance Frameworks', amount: '4+', icon: 'tabler:shield-check' },
+      { title: 'Hours Saved / Week', amount: '10-15', icon: 'tabler:clock' },
+      { title: 'Audit Duration (Days)', amount: '5-7', icon: 'tabler:calendar' },
+      { title: 'Based in', amount: 'Valencia', icon: 'tabler:map-pin' },
     ]}
   />
 
-  <!-- Features2 Widget ************** -->
+  <!-- CTA -->
 
-  <Features2
-    title="Our locations"
-    tagline="Find us"
-    columns={4}
-    items={[
+  <CallToAction
+    actions={[
       {
-        title: 'EE.UU',
-        description: '1234 Lorem Ipsum St, 12345, Miami',
-      },
-      {
-        title: 'Spain',
-        description: '5678 Lorem Ipsum St, 56789, Madrid',
-      },
-      {
-        title: 'Australia',
-        description: '9012 Lorem Ipsum St, 90123, Sydney',
-      },
-      {
-        title: 'Brazil',
-        description: '3456 Lorem Ipsum St, 34567, São Paulo',
+        variant: 'primary',
+        text: 'Get Your Free AI Audit',
+        href: '/free-ai-audit',
+        icon: 'tabler:clipboard-check',
       },
     ]}
-  />
-
-  <!-- Features2 Widget ************** -->
-
-  <Features2
-    title="Technical Support"
-    tagline="Contact us"
-    columns={2}
-    items={[
-      {
-        title: 'Chat with us',
-        description:
-          'Integer luctus laoreet libero, auctor varius purus rutrum sit amet. Ut nec molestie nisi, quis eleifend mi.',
-        icon: 'tabler:messages',
-      },
-      {
-        title: 'Call us',
-        description:
-          'Mauris faucibus finibus orci, in posuere elit viverra non. In hac habitasse platea dictumst. Cras lobortis metus a hendrerit congue.',
-        icon: 'tabler:headset',
-      },
-    ]}
+    title="Ready to modernize your practice compliantly?"
+    subtitle="Every engagement begins with our free AI audit — a no-pressure assessment where we identify exactly where AI can help your practice while ensuring compliance. No obligations, just honest recommendations."
   />
 </Layout>

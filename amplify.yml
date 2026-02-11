@@ -6,6 +6,7 @@ frontend:
         - npm ci --cache .npm --prefer-offline
     build:
       commands:
+        - env | grep -e PUBLIC_ >> .env || true
         - npm run build
   artifacts:
     baseDirectory: dist

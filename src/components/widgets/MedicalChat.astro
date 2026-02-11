@@ -149,7 +149,7 @@ const chatApiUrl = import.meta.env.PUBLIC_CHAT_API_URL || '';
 
     if (!form || !input || !messages || !submitBtn || !btnText || !btnSpinner || !remainingEl) return;
 
-    const apiUrl = form.dataset.apiUrl || '/api/medical-chat';
+    const apiUrl = form.dataset.apiUrl || 'https://o5f3x5frhoaggxl7gmasxytlxq0eunav.lambda-url.eu-west-3.on.aws/';
 
     // Client-generated session ID stored in sessionStorage
     function getSessionId(): string {

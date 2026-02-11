@@ -12,6 +12,7 @@
  */
 
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+const chatApiUrl = import.meta.env.PUBLIC_CHAT_API_URL || '';
 ---
 
 <WidgetWrapper id="medical-chat-demo" containerClass="max-w-4xl">
@@ -94,7 +95,7 @@ import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 
     <!-- Input Area -->
     <div class="border-t border-gray-200 dark:border-gray-700 p-4 bg-gray-50 dark:bg-slate-800/80">
-      <form id="chat-form" class="flex gap-3">
+      <form id="chat-form" class="flex gap-3" data-api-url={chatApiUrl}>
         <label for="chat-input" class="sr-only">Type your medical question</label>
         <input
           id="chat-input"
@@ -147,6 +148,18 @@ import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
     const remainingEl = document.getElementById('queries-remaining') as HTMLSpanElement | null;
 
     if (!form || !input || !messages || !submitBtn || !btnText || !btnSpinner || !remainingEl) return;
+
+    const apiUrl = form.dataset.apiUrl || '/api/medical-chat';
+
+    // Client-generated session ID stored in sessionStorage
+    function getSessionId(): string {
+      let sid = sessionStorage.getItem('medchat_session');
+      if (!sid) {
+        sid = crypto.randomUUID();
+        sessionStorage.setItem('medchat_session', sid);
+      }
+      return sid;
+    }
 
     let queriesUsed = 0;
     const MAX_QUERIES = 5;
@@ -231,9 +244,12 @@ import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
       setLoading(true);
 
       try {
-        const response = await fetch('/api/medical-chat', {
+        const response = await fetch(apiUrl, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Session-ID': getSessionId(),
+          },
           body: JSON.stringify({ message }),
         });
 

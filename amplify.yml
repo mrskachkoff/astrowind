@@ -6,19 +6,9 @@ frontend:
         - npm ci --cache .npm --prefer-offline
     build:
       commands:
-        - env | grep -e MEDGEMMA_ >> .env || true
         - npm run build
-        # Restructure output for Amplify WEB_COMPUTE
-        - mkdir -p .amplify-hosting/static
-        - mkdir -p .amplify-hosting/compute/default
-        - cp -r dist/client/. .amplify-hosting/static/
-        - cp -r dist/server/. .amplify-hosting/compute/default/
-        # Install only production deps in compute (minimal footprint)
-        - cd .amplify-hosting/compute/default && npm init -y && npm install astro @astrojs/node --omit=dev --no-package-lock
-        # Generate deploy manifest inline
-        - echo '{"version":1,"routes":[{"path":"/_astro/*","target":{"kind":"Static"}},{"path":"/api/*","target":{"kind":"Compute","src":"default"}},{"path":"/*.*","target":{"kind":"Static"}},{"path":"/*","target":{"kind":"Static"},"fallback":{"kind":"Compute","src":"default"}}],"computeResources":[{"name":"default","entrypoint":"entry.mjs","runtime":"nodejs20.x"}],"framework":{"name":"astro","version":"5.0.0"}}' > .amplify-hosting/deploy-manifest.json
   artifacts:
-    baseDirectory: .amplify-hosting
+    baseDirectory: dist
     files:
       - '**/*'
   cache:

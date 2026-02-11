@@ -10,6 +10,7 @@ import Steps from '~/components/widgets/Steps.astro';
 import Note from '~/components/widgets/Note.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import MedicalChat from '~/components/widgets/MedicalChat.astro';
+import dataSecurityImg from '~/assets/images/data-security-healthcare.svg';
 
 const metadata = {
   title: 'MedCore Private AI — Medical-Grade On-Premise AI for Healthcare',
@@ -22,18 +23,6 @@ const metadata = {
   <!-- Section 1: Hero -->
 
   <Hero
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Free AI Audit',
-        href: '/contact',
-        icon: 'tabler:calendar-event',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Secure on-premise server infrastructure for healthcare AI',
-    }}
   >
     <Fragment slot="title">
       MedCore Private AI<br />
@@ -48,6 +37,10 @@ const metadata = {
       Full GDPR, HIPAA, and data sovereignty compliance by architecture — not by policy.
     </Fragment>
   </Hero>
+
+  <!-- Embedded Medical AI Demo Chat -->
+
+  <MedicalChat />
 
   <!-- Section 2: Trust Stats -->
 
@@ -89,7 +82,7 @@ const metadata = {
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1563986768609-322da13575f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      src: dataSecurityImg,
       alt: 'Data security concerns in healthcare',
     }}
   >
@@ -290,9 +283,6 @@ const metadata = {
     </Fragment>
   </Content>
 
-  <!-- Section 6: Embedded Medical AI Demo Chat -->
-
-  <MedicalChat />
 
   <!-- Section 7: Target Customers -->
 

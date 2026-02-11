@@ -69,24 +69,13 @@ function containsPotentialPHI(text) {
   return PHI_PATTERNS.some((pattern) => pattern.test(text));
 }
 
-// --- CORS helpers ---
-
-function corsHeaders() {
-  return {
-    'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, X-Session-ID',
-    'Access-Control-Max-Age': '86400',
-  };
-}
+// CORS is handled by the Lambda Function URL config.
+// Do NOT add CORS headers here — duplicates cause browsers to reject the response.
 
 function jsonResponse(statusCode, body) {
   return {
     statusCode,
-    headers: {
-      'Content-Type': 'application/json',
-      ...corsHeaders(),
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   };
 }
@@ -94,18 +83,22 @@ function jsonResponse(statusCode, body) {
 // --- Lambda handler ---
 
 export async function handler(event) {
-  // Handle CORS preflight
-  if (event.requestContext?.http?.method === 'OPTIONS') {
-    return {
-      statusCode: 204,
-      headers: corsHeaders(),
-      body: '',
-    };
-  }
+  // OPTIONS preflight is handled by Lambda Function URL CORS config
 
   // Only allow POST
   if (event.requestContext?.http?.method !== 'POST') {
     return jsonResponse(405, { error: 'Method not allowed' });
+  }
+
+  // Reject requests not originating from the allowed site
+  const origin = event.headers?.origin || '';
+  if (origin && origin !== ALLOWED_ORIGIN) {
+    return jsonResponse(403, { error: 'Forbidden' });
+  }
+  // Also reject if no Origin and no valid Referer (non-browser direct calls)
+  const referer = event.headers?.referer || '';
+  if (!origin && !referer.startsWith(ALLOWED_ORIGIN)) {
+    return jsonResponse(403, { error: 'Forbidden' });
   }
 
   // Verify API key is configured

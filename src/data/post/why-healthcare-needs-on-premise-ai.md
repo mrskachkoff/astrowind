@@ -2,7 +2,7 @@
 publishDate: 2026-02-22T00:00:00Z
 title: 'Why Healthcare Needs On-Premise AI: The Case Against Cloud for Patient Data'
 excerpt: Cloud AI services market "compliance" through contracts and certifications. But when healthcare data sovereignty is the requirement, contracts are not architecture. Here is why on-premise AI is the only defensible approach for healthcare organizations handling sensitive patient data.
-image: https://images.unsplash.com/photo-1563986768609-322da13575f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80
+image: ~/assets/images/medical-lab.jpg
 category: Healthcare Tech
 tags:
   - on-premise ai

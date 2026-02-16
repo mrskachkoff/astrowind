@@ -2,7 +2,7 @@
 publishDate: 2026-01-27T00:00:00Z
 title: 'Why Hybrid AI Solutions Matter in Healthcare'
 excerpt: Cloud AI is the default for most industries — but healthcare is different. Patient data sensitivity and GDPR requirements make hybrid and on-premise AI the safer choice for small practices.
-image: https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80
+image: ~/assets/images/server-room.jpg
 category: AI Automation
 tags:
   - ai

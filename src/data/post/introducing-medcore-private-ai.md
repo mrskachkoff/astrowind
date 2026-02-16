@@ -2,7 +2,7 @@
 publishDate: 2026-02-15T00:00:00Z
 title: 'Introducing MedCore Private AI: Enterprise Medical AI for Healthcare Organizations That Demand Data Privacy'
 excerpt: Healthcare organizations processing thousands of patient records need AI that runs entirely on their own infrastructure. Today we launch MedCore Private AI — medical-grade language models deployed fully on-premise with complete data sovereignty.
-image: https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80
+image: ~/assets/images/server-room.jpg
 category: AI Automation
 tags:
   - medcore

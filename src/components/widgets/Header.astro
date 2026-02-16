@@ -67,7 +67,7 @@ const homeHref = lang === 'es' ? '/es' : getHomePermalink();
         'md:flex md:justify-between': position !== 'center',
       },
       {
-        'md:grid md:grid-cols-3 md:items-center': position === 'center',
+        'md:grid md:grid-cols-[auto_1fr_auto] md:items-center md:gap-4': position === 'center',
       },
       {
         'max-w-7xl': !isFullWidth,

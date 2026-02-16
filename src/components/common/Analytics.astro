@@ -1,13 +1,47 @@
 ---
-import { GoogleAnalytics } from '@astrolib/analytics';
 import { ANALYTICS } from 'astrowind:config';
+
+const gaId = ANALYTICS?.vendors?.googleAnalytics?.id ? String(ANALYTICS.vendors.googleAnalytics.id) : '';
 ---
 
 {
-  ANALYTICS?.vendors?.googleAnalytics?.id ? (
-    <GoogleAnalytics
-      id={String(ANALYTICS.vendors.googleAnalytics.id)}
-      partytown={ANALYTICS?.vendors?.googleAnalytics?.partytown}
-    />
-  ) : null
+  gaId && (
+    <script is:inline define:vars={{ gaId }}>
+      (function () {
+        var loaded = false;
+
+        function loadGA() {
+          if (loaded) return;
+          try {
+            var consent = JSON.parse(localStorage.getItem('cookie-consent') || 'null');
+            if (!consent || !consent.analytics) return;
+          } catch (e) {
+            return;
+          }
+          loaded = true;
+          var script = document.createElement('script');
+          script.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+          script.async = true;
+          document.head.appendChild(script);
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            window.dataLayer.push(arguments);
+          }
+          window.gtag = gtag;
+          gtag('js', new Date());
+          gtag('config', gaId);
+        }
+
+        loadGA();
+        window.addEventListener('cookie-consent-updated', loadGA);
+        document.addEventListener('astro:after-swap', function () {
+          if (loaded && window.gtag) {
+            window.gtag('config', gaId, { page_path: window.location.pathname });
+          } else {
+            loadGA();
+          }
+        });
+      })();
+    </script>
+  )
 }

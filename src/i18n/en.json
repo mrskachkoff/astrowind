@@ -52,6 +52,21 @@
     "postsByTag": "Posts by tag",
     "viewAllPosts": "View all posts"
   },
+  "cookieConsent": {
+    "message": "We use cookies to analyze site traffic and optimize your experience. You can choose which cookies to allow.",
+    "acceptAll": "Accept All",
+    "rejectAll": "Reject All",
+    "customize": "Customize",
+    "settingsTitle": "Cookie Settings",
+    "necessaryTitle": "Necessary",
+    "necessaryDesc": "Essential for the website to function. Cannot be disabled.",
+    "analyticsTitle": "Analytics",
+    "analyticsDesc": "Help us understand how visitors use our site to improve the experience.",
+    "marketingTitle": "Marketing",
+    "marketingDesc": "Used to deliver relevant ads and track campaign performance.",
+    "savePreferences": "Save Preferences",
+    "alwaysOn": "Always on"
+  },
   "notFound": {
     "title": "Error 404",
     "heading": "404",

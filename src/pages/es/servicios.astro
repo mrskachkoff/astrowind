@@ -1,0 +1,312 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features from '~/components/widgets/Features.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Servicios',
+  description: 'Servicios de automatización IA centrados en cumplimiento para profesionales sanitarios. Auditoría IA Gratuita, implementación y soporte continuo para clínicas dentales, farmacias y pequeñas consultas médicas.',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero -->
+
+  <Hero
+    tagline="Nuestros Servicios"
+    title="Automatización IA Que Prioriza el Cumplimiento"
+    subtitle="Desde la auditoría inicial hasta el soporte continuo, entregamos soluciones IA diseñadas con privacidad de datos sanitarios en su núcleo. Pilares de servicio que trabajan juntos para transformar tu consulta de forma segura — con opciones de nivel empresarial para organizaciones más grandes."
+    actions={[
+      { variant: 'primary', text: 'Comienza con una Auditoría Gratuita', href: '/es/auditoria-ia-gratuita', icon: 'tabler:clipboard-check' },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Equipo profesional trabajando juntos',
+    }}
+  />
+
+  <!-- Resumen de Servicios: 3 Pilares -->
+
+  <Features2
+    title="Nuestros pilares de servicio"
+    subtitle="Cada servicio se basa en el anterior, creando un sistema completo de automatización centrado en cumplimiento para tu consulta — con opciones empresariales para organizaciones más grandes."
+    columns={2}
+    items={[
+      {
+        title: 'Auditoría Gratuita de Cumplimiento IA',
+        description: 'Una evaluación de 5-7 días de tus flujos de datos, postura de cumplimiento y oportunidades de automatización. Recibes un informe detallado con puntuaciones de riesgo y una hoja de ruta clara.',
+        icon: 'tabler:clipboard-check',
+      },
+      {
+        title: 'Implementación Conforme',
+        description: 'Construimos y desplegamos automatizaciones IA usando arquitecturas locales o híbridas. Cada solución está diseñada con principios RGPD desde el primer día.',
+        icon: 'tabler:settings-automation',
+      },
+      {
+        title: 'Soporte y Monitorización Continuos',
+        description: 'Optimización continua, actualizaciones de cumplimiento conforme evolucionan las regulaciones y monitorización del rendimiento. Tu socio de cumplimiento IA a largo plazo.',
+        icon: 'tabler:heart-handshake',
+      },
+      {
+        title: 'MedCore Private AI (Empresarial)',
+        description: 'Infraestructura IA de grado médico completamente local para organizaciones sanitarias medianas. LLMs especializados, ajuste fino y soberanía completa de datos.',
+        icon: 'tabler:server-2',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  <!-- Servicio 1: Auditoría IA (Detalle) -->
+
+  <Content
+    isReversed
+    tagline="Servicio 1"
+    title="Auditoría Gratuita de Cumplimiento IA"
+    items={[
+      {
+        title: 'Perfil de clínica y evaluación de riesgos',
+        description: 'Evaluamos el tamaño de tu clínica, volumen de pacientes, madurez digital y herramientas existentes para determinar tu nivel de riesgo.',
+      },
+      {
+        title: 'Mapeo completo de flujos de datos',
+        description: 'Admisión de pacientes, registros, imagen, facturación, comunicaciones — cada flujo de datos mapeado y clasificado por sensibilidad.',
+      },
+      {
+        title: 'Análisis de cuellos de botella de procesos',
+        description: 'Cada flujo de trabajo puntuado por esfuerzo manual, riesgo de error, sensibilidad de datos y potencial de automatización.',
+      },
+      {
+        title: 'Recomendaciones de arquitectura IA',
+        description: 'Nube, híbrida o local — determinamos el enfoque seguro para cada proceso con justificación RGPD.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Profesional analizando documentos',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Donde todo comienza</h3>
+      Una auditoría exhaustiva de riesgo y procesos con capa de viabilidad IA. No un argumento de ventas — una evaluación genuina sobre la que puedes actuar independientemente. Entregada en 5-7 días laborables.
+    </Fragment>
+  </Content>
+
+  <!-- Servicio 2: Implementación -->
+
+  <Content
+    isAfterContent
+    tagline="Servicio 2"
+    title="Implementación IA Conforme"
+    items={[
+      {
+        title: 'Automatizaciones de victoria rápida (€1.500-3.000)',
+        description: '1-2 automatizaciones de alto impacto desplegadas en 2-4 semanas. Recordatorios de citas, seguimientos de pacientes o flujos de facturación.',
+      },
+      {
+        title: 'Paquetes completos (€5.000-15.000)',
+        description: 'Transformación completa de la consulta durante 6-12 semanas. Múltiples automatizaciones de flujos con controles de cumplimiento integrados.',
+      },
+      {
+        title: 'Arquitectura local e híbrida',
+        description: 'Los datos de pacientes permanecen en tu clínica. Diseñamos soluciones que funcionan localmente, con IA externa solo para tareas no sensibles.',
+      },
+      {
+        title: 'Controles de cumplimiento integrados',
+        description: 'Pistas de auditoría, acuerdos de procesamiento de datos, gestión de consentimiento y documentación — todo incluido desde el primer día.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Implementación tecnológica y panel de control',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">De la hoja de ruta a los resultados</h3>
+      No solo digitalizamos flujos de trabajo rotos — los arreglamos primero, luego los automatizamos. Obtienes mejoras de eficiencia que realmente perduran, con cumplimiento incorporado desde el primer día.
+    </Fragment>
+  </Content>
+
+  <!-- Servicio 3: Soporte Continuo -->
+
+  <Content
+    isReversed
+    tagline="Servicio 3"
+    title="Soporte y Monitorización Continuos"
+    items={[
+      {
+        title: 'Soporte mensual (desde €200/mes)',
+        description: 'Soporte dedicado para tus automatizaciones — resolución de problemas, ajustes y optimización conforme evoluciona tu consulta.',
+      },
+      {
+        title: 'Actualizaciones de cumplimiento',
+        description: 'Las regulaciones cambian. Actualizamos tus controles de cumplimiento y documentación conforme evolucionan los requisitos de RGPD, AEPD y Ley de IA.',
+      },
+      {
+        title: 'Monitorización del rendimiento',
+        description: 'Revisiones regulares del rendimiento de automatización, métricas de ahorro de tiempo y oportunidades de mayor optimización.',
+      },
+      {
+        title: 'Nuevas oportunidades de automatización',
+        description: 'Conforme crece tu consulta, identificamos flujos de trabajo adicionales que pueden automatizarse de forma segura — construyendo sobre la base ya establecida.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Equipo proporcionando soporte continuo',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Tu socio IA a largo plazo</h3>
+      No estamos interesados en proyectos únicos. Construimos asociaciones a largo plazo con consultas sanitarias que quieren modernizar sus operaciones mientras mantienen el cumplimiento.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- MedCore Private AI — Opción Empresarial -->
+
+  <Content
+    tagline="Solución Empresarial"
+    title="MedCore Private AI — Para Organizaciones Sanitarias Medianas"
+    items={[
+      {
+        title: 'IA médica completamente local',
+        description: 'Despliega modelos de lenguaje de grado médico enteramente en tu infraestructura. Ningún dato de pacientes sale jamás de tus instalaciones.',
+      },
+      {
+        title: 'Específicamente construido para medicina',
+        description: 'Modelos entrenados en literatura médica y datos clínicos — no IA de propósito general con un prompt médico.',
+      },
+      {
+        title: 'Ajuste fino y RAG',
+        description: 'Personaliza la IA para tu especialidad, protocolos y conocimiento institucional usando tus propios datos verificados.',
+      },
+      {
+        title: 'Stack de cumplimiento completo',
+        description: 'Documentación de cumplimiento RGPD, HIPAA, SOC2 y Ley de IA de la UE incluida. Hardware, software y cumplimiento — un solo socio.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Infraestructura de servidor local para IA sanitaria',
+    }}
+    callToAction={{
+      text: 'Explora MedCore Private AI',
+      href: '/es/medcore-ia-privada',
+      icon: 'tabler:arrow-right',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Más allá de la automatización de pequeñas consultas</h3>
+      Para redes de clínicas, centros sanitarios especializados y organizaciones críticas en cumplimiento que necesitan IA de grado institucional con soberanía completa de datos.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Por Qué Elegir Futurion -->
+
+  <Features
+    title="Por qué las consultas sanitarias nos eligen"
+    subtitle="La combinación de experiencia en cumplimiento y conocimiento de automatización IA que nos distingue."
+    columns={3}
+    items={[
+      {
+        title: 'Experiencia en Cumplimiento + IA',
+        description: 'La mayoría de agencias de IA no entienden el RGPD. La mayoría de consultores de cumplimiento no entienden la IA. Cerramos ambos mundos.',
+        icon: 'tabler:shield-check',
+      },
+      {
+        title: 'Enfoque Centrado en Procesos',
+        description: 'Optimizamos antes de automatizar. Arreglamos flujos de trabajo rotos primero, luego los automatizamos — para que las mejoras de eficiencia realmente perduren.',
+        icon: 'tabler:arrows-sort',
+      },
+      {
+        title: 'Experiencia Empresarial, Precios PYME',
+        description: 'Años de optimización de procesos empresariales, ahora aplicados a pequeños negocios sanitarios a precios accesibles.',
+        icon: 'tabler:building',
+      },
+      {
+        title: 'Privacidad de Datos por Diseño',
+        description: 'Minimización de datos, limitación de finalidad, controles de seguridad y pistas de auditoría — construidos desde la arquitectura, no añadidos después.',
+        icon: 'tabler:lock',
+      },
+      {
+        title: 'Resultados Sin Rodeos',
+        description: 'Nos saltamos las palabras de moda de IA y nos centramos en resultados: 10-15 horas ahorradas por semana, riesgo de cumplimiento reducido, mejor atención al paciente.',
+        icon: 'tabler:target',
+      },
+      {
+        title: 'Implementación Consciente del Riesgo',
+        description: 'No solo preguntamos "¿Puede la IA hacer esto?" — preguntamos "¿Debería hacerlo, y cómo lo implementamos de forma segura?" Pensamiento SOC2 e ISO 27001 aplicado.',
+        icon: 'tabler:alert-triangle',
+      },
+    ]}
+  />
+
+  <!-- Resumen del Proceso -->
+
+  <Steps
+    title="Nuestro proceso de compromiso"
+    subtitle="Un camino claro desde el primer contacto hasta la asociación a largo plazo."
+    isReversed={true}
+    items={[
+      {
+        title: 'Consulta gratuita',
+        description: 'Discutimos tu consulta, entendemos tus puntos de dolor y determinamos si nuestra auditoría es adecuada.',
+        icon: 'tabler:phone',
+      },
+      {
+        title: 'Auditoría de cumplimiento IA (5-7 días)',
+        description: 'Evaluación exhaustiva de flujos de datos, postura de cumplimiento y oportunidades de automatización. Gratuita, sin obligaciones.',
+        icon: 'tabler:clipboard-check',
+      },
+      {
+        title: 'Propuesta de implementación',
+        description: 'Basándonos en los hallazgos de la auditoría, presentamos una propuesta a precio fijo para las automatizaciones que entregarán el mayor impacto.',
+        icon: 'tabler:file-invoice',
+      },
+      {
+        title: 'Construir y desplegar',
+        description: 'Implementamos automatizaciones con controles de cumplimiento integrados. Victorias rápidas en 2-4 semanas, transformaciones completas en 6-12 semanas.',
+        icon: 'tabler:rocket',
+      },
+      {
+        title: 'Asociación continua',
+        description: 'Soporte mensual, actualizaciones de cumplimiento, monitorización del rendimiento e identificación de nuevas oportunidades de automatización.',
+        icon: 'tabler:heart-handshake',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Compromiso empresarial profesional',
+    }}
+  />
+
+  <!-- CTA -->
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Reserva Tu Auditoría IA Gratuita',
+        href: '/es/auditoria-ia-gratuita',
+        icon: 'tabler:clipboard-check',
+      },
+    ]}
+    title="¿Listo para ver dónde puede ayudar la IA a tu consulta?"
+    subtitle="Comienza con una auditoría gratuita de cumplimiento de 5-7 días. Sin obligaciones, sin presión — solo recomendaciones honestas basadas en tu situación única."
+  />
+</Layout>

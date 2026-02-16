@@ -1,0 +1,192 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import Prices from '~/components/widgets/Pricing.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Precios',
+  description: 'Precios transparentes para automatización IA centrada en cumplimiento. Auditoría IA Gratuita, paquetes de implementación desde €1.500 y soporte continuo desde €200/mes.',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- HeroText -->
+
+  <HeroText
+    tagline="Precios"
+    title="Precios Transparentes, Sin Costes Ocultos"
+    subtitle="Cada compromiso comienza con una auditoría gratuita. Los precios de implementación y soporte se basan en las necesidades específicas de tu consulta — sin sorpresas."
+  />
+
+  <!-- Precios -->
+
+  <Prices
+    title="Nuestros niveles de servicio"
+    subtitle="Comienza gratis, escala según necesites"
+    prices={[
+      {
+        title: 'Auditoría de Cumplimiento IA',
+        subtitle: 'El mejor lugar para empezar',
+        price: 0,
+        period: 'única',
+        items: [
+          { description: 'Evaluación completa de 5-7 días' },
+          { description: 'Mapeo y clasificación de flujos de datos' },
+          { description: 'Análisis de brechas de cumplimiento' },
+          { description: 'Matriz de viabilidad de automatización' },
+          { description: 'Hoja de ruta de implementación' },
+        ],
+        callToAction: {
+          text: 'Reservar Auditoría Gratuita',
+          href: '/es/auditoria-ia-gratuita',
+        },
+      },
+      {
+        title: 'Implementación Victoria Rápida',
+        subtitle: '1-2 automatizaciones de alto impacto',
+        price: '1.500',
+        period: 'desde',
+        items: [
+          { description: '1-2 automatizaciones específicas' },
+          { description: 'Entrega en 2-4 semanas' },
+          { description: 'Arquitectura local o híbrida' },
+          { description: 'Controles de cumplimiento RGPD incluidos' },
+          { description: 'Pistas de auditoría y documentación' },
+          { description: '30 días de soporte post-lanzamiento' },
+        ],
+        callToAction: {
+          text: 'Comienza con Auditoría Gratuita',
+          href: '/es/auditoria-ia-gratuita',
+        },
+        hasRibbon: true,
+        ribbonTitle: 'más popular',
+      },
+      {
+        title: 'Paquete Completo',
+        subtitle: 'Transformación completa de la consulta',
+        price: '5.000',
+        period: 'desde',
+        items: [
+          { description: 'Múltiples automatizaciones de flujos' },
+          { description: 'Entrega en 6-12 semanas' },
+          { description: 'Marco de cumplimiento integrado' },
+          { description: 'Formación del personal incluida' },
+          { description: 'Documentación completa' },
+          { description: '90 días de soporte post-lanzamiento' },
+        ],
+        callToAction: {
+          text: 'Comienza con Auditoría Gratuita',
+          href: '/es/auditoria-ia-gratuita',
+        },
+      },
+      {
+        title: 'MedCore Private AI',
+        subtitle: 'Plataforma IA médica empresarial',
+        price: 'Personalizado',
+        period: 'Contacta para presupuesto',
+        items: [
+          { description: 'Despliegue IA local' },
+          { description: 'Modelos de lenguaje de grado médico' },
+          { description: 'Ajuste fino y pipelines RAG' },
+          { description: 'Hardware preparado para IA incluido' },
+          { description: 'Multicumplimiento (RGPD, HIPAA, SOC2)' },
+          { description: 'Soporte multilingüe UE' },
+          { description: 'Gestión de ciclo de vida completo' },
+        ],
+        callToAction: {
+          text: 'Programar Consulta',
+          href: '/es/contacto',
+        },
+      },
+    ]}
+  />
+
+  <!-- Soporte Continuo -->
+
+  <Features3
+    title="Planes de soporte continuo"
+    subtitle="Asociación a largo plazo para cumplimiento y optimización continuos"
+    columns={2}
+    items={[
+      {
+        title: 'Soporte IA Mensual (desde €200/mes)',
+        description: 'Soporte dedicado para tus automatizaciones, resolución de problemas, ajustes y optimización del rendimiento conforme crece tu consulta.',
+        icon: 'tabler:heart-handshake',
+      },
+      {
+        title: 'Actualizaciones de Cumplimiento',
+        description: 'Actualizamos tus controles de cumplimiento y documentación conforme evolucionan los requisitos de RGPD, AEPD y Ley de IA de la UE. Mantente actualizado sin la investigación.',
+        icon: 'tabler:refresh',
+      },
+      {
+        title: 'Monitorización del Rendimiento',
+        description: 'Revisiones regulares del rendimiento de automatización, métricas de ahorro de tiempo e identificación de nuevas oportunidades de optimización.',
+        icon: 'tabler:chart-line',
+      },
+      {
+        title: 'Soporte Prioritario',
+        description: 'Acceso directo a nuestro equipo para problemas urgentes. Respondemos en horario laboral para mantener tu consulta funcionando sin problemas.',
+        icon: 'tabler:headset',
+      },
+    ]}
+    classes={{ container: 'max-w-5xl' }}
+  />
+
+  <!-- FAQs de Precios -->
+
+  <FAQs
+    title="Preguntas sobre Precios"
+    subtitle="Preguntas comunes sobre nuestros precios y modelo de compromiso."
+    columns={1}
+    items={[
+      {
+        title: '¿Por qué la auditoría es gratuita?',
+        description:
+          'La auditoría construye confianza y demuestra nuestra experiencia. Cuando las consultas ven la profundidad del análisis, muchas eligen proceder con la implementación. Es nuestra forma de demostrar valor antes de pedir un compromiso. Alrededor del 40-60% de las clínicas auditadas proceden.',
+      },
+      {
+        title: '¿Cómo determinan los precios de implementación?',
+        description:
+          'Los precios se basan en los hallazgos de la auditoría — número de flujos a automatizar, complejidad y requisitos de cumplimiento. Proporcionamos una propuesta a precio fijo después de la auditoría para que no haya sorpresas. Las victorias rápidas comienzan en €1.500, los paquetes completos en €5.000.',
+      },
+      {
+        title: '¿Es obligatorio el plan de soporte mensual?',
+        description:
+          'No. El soporte mensual es opcional pero recomendado. Las regulaciones cambian, las automatizaciones necesitan ajustes y surgen nuevas oportunidades. El plan de soporte asegura que tus automatizaciones se mantengan conformes y optimizadas con el tiempo.',
+      },
+      {
+        title: '¿Qué métodos de pago aceptan?',
+        description:
+          'Aceptamos transferencias bancarias y métodos de pago principales comunes en España y la UE. Los términos de pago se discuten durante la fase de propuesta — típicamente 50% por adelantado y 50% en la entrega para proyectos de implementación.',
+      },
+      {
+        title: '¿Podemos empezar pequeño y expandir después?',
+        description:
+          'Absolutamente. Ese es nuestro enfoque recomendado. Comienza con la auditoría gratuita, implementa 1-2 victorias rápidas, ve los resultados y luego decide si un paquete completo tiene sentido. Sin presión para comprometerte con todo por adelantado.',
+      },
+      {
+        title: '¿Cuánto cuesta MedCore Private AI?',
+        description:
+          'MedCore Private AI tiene un precio por proyecto basado en el alcance de infraestructura, requisitos de modelos y tamaño de organización. Los despliegues típicos van de €25.000 a €150.000+, con planes de soporte mensual disponibles. Esto incluye especificación y adquisición de hardware, despliegue de software, personalización de modelos, documentación de cumplimiento y formación. Contáctanos para una evaluación detallada y presupuesto.',
+      },
+    ]}
+  />
+
+  <!-- CTA -->
+
+  <CallToAction
+    title="Cada compromiso comienza con una auditoría gratuita"
+    subtitle="No se requiere compromiso. Obtén una imagen clara de tus oportunidades de automatización y postura de cumplimiento antes de tomar cualquier decisión."
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Reserva Tu Auditoría Gratuita',
+        href: '/es/auditoria-ia-gratuita',
+        icon: 'tabler:clipboard-check',
+      },
+    ]}
+  />
+</Layout>

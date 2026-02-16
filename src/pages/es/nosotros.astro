@@ -1,0 +1,239 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import Features from '~/components/widgets/Features.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Nosotros',
+  description: 'Futurion Solutions es una agencia de automatización IA centrada en cumplimiento que ayuda a pequeños proveedores sanitarios en España y la UE a automatizar de forma segura. Fundada por Ivan Skachkov, experto en cumplimiento y procesos empresariales.',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero -->
+
+  <Hero
+    tagline="Sobre Futurion Solutions"
+    image={{
+      src: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Equipo profesional trabajando juntos',
+    }}
+  >
+    <Fragment slot="title">
+      Transformando las Operaciones Sanitarias<br />
+      <span class="text-accent dark:text-white">Mediante Automatización Inteligente y Conforme</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Somos una agencia de automatización IA que entiende tanto la tecnología como los requisitos regulatorios. Fundada por un experto en cumplimiento y optimización de procesos empresariales, Futurion Solutions aporta experiencia de nivel empresarial a pequeños negocios sanitarios.
+    </Fragment>
+  </Hero>
+
+  <!-- Misión -->
+
+  <Content
+    tagline="Nuestra Misión"
+    title="La automatización IA debe ser conforme desde el primer día"
+    items={[
+      {
+        title: 'Quiénes somos',
+        description:
+          'Futurion Solutions es una agencia de automatización IA especializada en ayudar a organizaciones sanitarias a recuperar su tiempo, reducir costes operativos y centrarse en la atención al paciente. Desde pequeñas consultas que necesitan automatización de flujos conformes hasta grupos sanitarios medianos que requieren infraestructura IA médica completamente local mediante MedCore Private AI.',
+      },
+      {
+        title: 'Nuestro fundador',
+        description:
+          'Fundada por Ivan Skachkov, experto en cumplimiento y automatización de procesos empresariales con profunda experiencia en marcos SOC2, ISO 27001, HIPAA y RGPD. Entendemos tanto la tecnología COMO los requisitos regulatorios.',
+      },
+      {
+        title: 'Nuestro enfoque',
+        description:
+          'No solo automatizamos — optimizamos primero, luego automatizamos de forma conforme. Con años de experiencia en optimización de procesos empresariales, sabemos cómo diseñar soluciones IA que son eficientes, seguras y construidas sobre una base de mejores prácticas de privacidad de datos.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Innovación y cumplimiento',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">El cumplimiento se encuentra con la innovación</h3>
+      En sanidad, los datos de pacientes son sagrados. Cerramos la brecha entre la innovación IA y los requisitos regulatorios — para que las consultas no tengan que elegir.
+    </Fragment>
+  </Content>
+
+  <!-- La Brecha Que Llenamos -->
+
+  <Features2
+    title="La brecha que llenamos"
+    subtitle="Por qué las PYMEs sanitarias necesitan un socio especializado en automatización IA."
+    tagline="El Problema"
+    items={[
+      {
+        title: 'Las agencias de IA no entienden el cumplimiento',
+        description: 'La mayoría de agencias de IA construyen rápido y se preocupan por las regulaciones después. En sanidad, ese enfoque crea responsabilidad RGPD y pone en riesgo los datos de pacientes.',
+        icon: 'tabler:alert-triangle',
+      },
+      {
+        title: 'Los consultores de cumplimiento no entienden la IA',
+        description: 'Los asesores tradicionales de cumplimiento pueden identificar riesgos pero no pueden construir las soluciones de automatización que los abordan. Terminas con informes pero sin resultados.',
+        icon: 'tabler:file-alert',
+      },
+      {
+        title: 'Las soluciones empresariales son demasiado caras',
+        description: 'Los grandes hospitales tienen equipos de TI dedicados y responsables de cumplimiento. Las pequeñas consultas enfrentan las mismas regulaciones pero sin los recursos para abordarlas.',
+        icon: 'tabler:currency-euro',
+      },
+      {
+        title: 'Las herramientas genéricas pierden matices sanitarios',
+        description: 'Las herramientas IA estándar no están diseñadas para la sensibilidad de datos sanitarios. Los registros de pacientes, datos de imagen e información de salud requieren manejo especializado.',
+        icon: 'tabler:puzzle',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  <!-- Valores -->
+
+  <Steps2
+    title="Nuestros valores"
+    subtitle="Los principios que guían cada compromiso, cada automatización y cada recomendación que hacemos."
+    items={[
+      {
+        title: 'Conforme desde el primer día',
+        description:
+          'La privacidad de datos no es opcional en sanidad. Cada solución que construimos tiene RGPD, pistas de auditoría y controles de seguridad incorporados desde el nivel de arquitectura — nunca añadidos después.',
+      },
+      {
+        title: 'Optimizar antes de automatizar',
+        description:
+          'No digitalizamos flujos de trabajo rotos. Analizamos y arreglamos procesos primero, luego los automatizamos. Esto significa que obtienes mejoras de eficiencia que realmente perduran.',
+      },
+      {
+        title: 'Transparencia y confianza',
+        description:
+          'Deberías entender exactamente qué hacen tus automatizaciones con los datos de pacientes. Explicamos todo en lenguaje claro y ganamos confianza mediante resultados, no contratos.',
+      },
+      {
+        title: 'Empezar pequeño, escalar inteligentemente',
+        description:
+          'Comienza con automatizaciones de alto impacto y bajo riesgo y expande estratégicamente. Sin implementaciones big-bang, sin riesgo innecesario.',
+      },
+    ]}
+  />
+
+  <!-- Experiencia -->
+
+  <Features
+    title="Nuestra experiencia"
+    subtitle="Una combinación única de conocimiento de cumplimiento, experiencia en optimización de procesos y habilidades de implementación IA."
+    columns={3}
+    items={[
+      {
+        title: 'RGPD y Privacidad de Datos',
+        description: 'Profundo conocimiento de las regulaciones de protección de datos de la UE, requisitos de la AEPD española y obligaciones específicas de manejo de datos sanitarios.',
+        icon: 'tabler:shield-lock',
+      },
+      {
+        title: 'SOC2 e ISO 27001',
+        description: 'Experiencia en marcos de seguridad empresarial aplicada a pequeños negocios sanitarios — controles adecuados sin complejidad empresarial.',
+        icon: 'tabler:certificate',
+      },
+      {
+        title: 'Cumplimiento HIPAA',
+        description: 'Comprensión de los requisitos de Información de Salud Protegida (PHI) y cómo manejar datos sanitarios sensibles de forma segura en sistemas automatizados.',
+        icon: 'tabler:stethoscope',
+      },
+      {
+        title: 'Optimización de Procesos Empresariales',
+        description: 'Años analizando y optimizando flujos de trabajo en organizaciones de todos los tamaños. Identificamos cuellos de botella, eliminamos desperdicios y rediseñamos para la eficiencia.',
+        icon: 'tabler:arrows-sort',
+      },
+      {
+        title: 'Arquitectura IA y Automatización',
+        description: 'Diseñando soluciones IA seguras y escalables desde configuraciones híbridas para pequeñas consultas hasta despliegues MedCore Private AI completamente locales con modelos de lenguaje de grado médico para organizaciones más grandes.',
+        icon: 'tabler:cpu',
+      },
+      {
+        title: 'Operaciones Sanitarias',
+        description: 'Experiencia enfocada en clínicas dentales, farmacias y pequeñas consultas médicas — entendemos tus flujos de trabajo, regulaciones y desafíos diarios.',
+        icon: 'tabler:building-hospital',
+      },
+    ]}
+  />
+
+  <!-- A Quién Servimos -->
+
+  <Content
+    isReversed
+    tagline="A Quién Servimos"
+    title="Pequeñas consultas sanitarias que merecen soluciones de nivel empresarial"
+    items={[
+      {
+        title: 'Mismos requisitos de cumplimiento, menos recursos',
+        description: 'Las pequeñas consultas enfrentan los mismos requisitos de RGPD y protección de datos que los grandes hospitales — sin equipos de TI dedicados ni responsables de cumplimiento.',
+      },
+      {
+        title: 'Alta sobrecarga administrativa',
+        description: 'El personal administrativo es costoso y su tiempo es valioso. Las tareas repetitivas como programación, facturación y seguimientos consumen horas que podrían servir a pacientes.',
+      },
+      {
+        title: 'Flujos de trabajo estandarizados y automatizables',
+        description: 'Las consultas sanitarias tienen procesos altamente estandarizados que son ideales para automatización — cuando se hace con controles de cumplimiento adecuados.',
+      },
+      {
+        title: 'Impacto directo en la atención al paciente',
+        description: 'Las pequeñas mejoras en eficiencia se traducen directamente en mejor atención al paciente y resultados financieros más saludables. Cada hora ahorrada vuelve a lo que importa.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=2068&q=80',
+      alt: 'Ambiente de clínica sanitaria',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Un mercado desatendido</h3>
+      Mientras que los grandes sistemas hospitalarios tienen responsables de cumplimiento y departamentos de TI, las consultas independientes a menudo luchan solas. Estamos aquí para cambiar eso.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Estadísticas -->
+
+  <Stats
+    title="Nuestro compromiso en números"
+    stats={[
+      { title: 'Marcos de Cumplimiento', amount: '4+', icon: 'tabler:shield-check' },
+      { title: 'Horas Ahorradas / Semana', amount: '10-15', icon: 'tabler:clock' },
+      { title: 'Duración Auditoría (Días)', amount: '5-7', icon: 'tabler:calendar' },
+      { title: 'Con sede en', amount: 'Valencia', icon: 'tabler:map-pin' },
+    ]}
+  />
+
+  <!-- CTA -->
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Solicita Tu Auditoría IA Gratuita',
+        href: '/es/auditoria-ia-gratuita',
+        icon: 'tabler:clipboard-check',
+      },
+    ]}
+    title="¿Listo para modernizar tu consulta de forma conforme?"
+    subtitle="Cada compromiso comienza con nuestra auditoría IA gratuita — una evaluación sin presión donde identificamos exactamente dónde puede ayudar la IA a tu consulta mientras aseguramos el cumplimiento. Sin obligaciones, solo recomendaciones honestas."
+  />
+</Layout>

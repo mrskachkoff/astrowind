@@ -54,6 +54,7 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     category: rawCategory,
     author,
     draft = false,
+    lang = 'en',
     metadata = {},
   } = data;
 
@@ -90,6 +91,8 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     author: author,
 
     draft: draft,
+
+    lang: lang,
 
     metadata,
 
@@ -129,9 +132,13 @@ export const blogTagRobots = APP_BLOG.tag.robots;
 export const blogPostsPerPage = APP_BLOG?.postsPerPage;
 
 /** */
-export const fetchPosts = async (): Promise<Array<Post>> => {
+export const fetchPosts = async (lang?: string): Promise<Array<Post>> => {
   if (!_posts) {
     _posts = await load();
+  }
+
+  if (lang) {
+    return _posts.filter((post) => (post as Post & { lang?: string }).lang === lang);
   }
 
   return _posts;
@@ -166,9 +173,9 @@ export const findPostsByIds = async (ids: Array<string>): Promise<Array<Post>> =
 };
 
 /** */
-export const findLatestPosts = async ({ count }: { count?: number }): Promise<Array<Post>> => {
+export const findLatestPosts = async ({ count, lang }: { count?: number; lang?: string }): Promise<Array<Post>> => {
   const _count = count || 4;
-  const posts = await fetchPosts();
+  const posts = await fetchPosts(lang);
 
   return posts ? posts.slice(0, _count) : [];
 };
@@ -176,7 +183,7 @@ export const findLatestPosts = async ({ count }: { count?: number }): Promise<Ar
 /** */
 export const getStaticPathsBlogList = async ({ paginate }: { paginate: PaginateFunction }) => {
   if (!isBlogEnabled || !isBlogListRouteEnabled) return [];
-  return paginate(await fetchPosts(), {
+  return paginate(await fetchPosts('en'), {
     params: { blog: BLOG_BASE || undefined },
     pageSize: blogPostsPerPage,
   });
@@ -185,7 +192,7 @@ export const getStaticPathsBlogList = async ({ paginate }: { paginate: PaginateF
 /** */
 export const getStaticPathsBlogPost = async () => {
   if (!isBlogEnabled || !isBlogPostRouteEnabled) return [];
-  return (await fetchPosts()).flatMap((post) => ({
+  return (await fetchPosts('en')).flatMap((post) => ({
     params: {
       blog: post.permalink,
     },
@@ -197,7 +204,7 @@ export const getStaticPathsBlogPost = async () => {
 export const getStaticPathsBlogCategory = async ({ paginate }: { paginate: PaginateFunction }) => {
   if (!isBlogEnabled || !isBlogCategoryRouteEnabled) return [];
 
-  const posts = await fetchPosts();
+  const posts = await fetchPosts('en');
   const categories = {};
   posts.map((post) => {
     if (post.category?.slug) {
@@ -221,8 +228,75 @@ export const getStaticPathsBlogCategory = async ({ paginate }: { paginate: Pagin
 export const getStaticPathsBlogTag = async ({ paginate }: { paginate: PaginateFunction }) => {
   if (!isBlogEnabled || !isBlogTagRouteEnabled) return [];
 
-  const posts = await fetchPosts();
+  const posts = await fetchPosts('en');
   const tags = {};
+  posts.map((post) => {
+    if (Array.isArray(post.tags)) {
+      post.tags.map((tag) => {
+        tags[tag?.slug] = tag;
+      });
+    }
+  });
+
+  return Array.from(Object.keys(tags)).flatMap((tagSlug) =>
+    paginate(
+      posts.filter((post) => Array.isArray(post.tags) && post.tags.find((elem) => elem.slug === tagSlug)),
+      {
+        params: { tag: tagSlug, blog: TAG_BASE || undefined },
+        pageSize: blogPostsPerPage,
+        props: { tag: tags[tagSlug] },
+      }
+    )
+  );
+};
+
+// Spanish blog route helpers
+export const getStaticPathsEsBlogList = async ({ paginate }: { paginate: PaginateFunction }) => {
+  if (!isBlogEnabled || !isBlogListRouteEnabled) return [];
+  return paginate(await fetchPosts('es'), {
+    params: { blog: BLOG_BASE || undefined },
+    pageSize: blogPostsPerPage,
+  });
+};
+
+export const getStaticPathsEsBlogPost = async () => {
+  if (!isBlogEnabled || !isBlogPostRouteEnabled) return [];
+  return (await fetchPosts('es')).flatMap((post) => ({
+    params: {
+      blog: post.permalink,
+    },
+    props: { post },
+  }));
+};
+
+export const getStaticPathsEsBlogCategory = async ({ paginate }: { paginate: PaginateFunction }) => {
+  if (!isBlogEnabled || !isBlogCategoryRouteEnabled) return [];
+
+  const posts = await fetchPosts('es');
+  const categories: Record<string, { slug: string; title: string }> = {};
+  posts.map((post) => {
+    if (post.category?.slug) {
+      categories[post.category.slug] = post.category;
+    }
+  });
+
+  return Array.from(Object.keys(categories)).flatMap((categorySlug) =>
+    paginate(
+      posts.filter((post) => post.category?.slug && categorySlug === post.category?.slug),
+      {
+        params: { category: categorySlug, blog: CATEGORY_BASE || undefined },
+        pageSize: blogPostsPerPage,
+        props: { category: categories[categorySlug] },
+      }
+    )
+  );
+};
+
+export const getStaticPathsEsBlogTag = async ({ paginate }: { paginate: PaginateFunction }) => {
+  if (!isBlogEnabled || !isBlogTagRouteEnabled) return [];
+
+  const posts = await fetchPosts('es');
+  const tags: Record<string, { slug: string; title: string }> = {};
   posts.map((post) => {
     if (Array.isArray(post.tags)) {
       post.tags.map((tag) => {
@@ -245,7 +319,8 @@ export const getStaticPathsBlogTag = async ({ paginate }: { paginate: PaginateFu
 
 /** */
 export async function getRelatedPosts(originalPost: Post, maxResults: number = 4): Promise<Post[]> {
-  const allPosts = await fetchPosts();
+  const postLang = (originalPost as Post & { lang?: string }).lang || 'en';
+  const allPosts = await fetchPosts(postLang);
   const originalTagsSet = new Set(originalPost.tags ? originalPost.tags.map((tag) => tag.slug) : []);
 
   const postsWithScores = allPosts.reduce((acc: { post: Post; score: number }[], iteratedPost: Post) => {

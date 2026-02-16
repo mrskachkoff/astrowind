@@ -1,0 +1,34 @@
+---
+import { getLangFromUrl, getAlternateLanguageUrl } from '~/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const alternateLang = lang === 'en' ? 'es' : 'en';
+const alternateUrl = getAlternateLanguageUrl(Astro.url, alternateLang);
+---
+
+<div class="inline-flex items-center rounded-lg border border-gray-200 dark:border-gray-600 text-sm overflow-hidden">
+  <a
+    href={lang === 'en' ? Astro.url.pathname : getAlternateLanguageUrl(Astro.url, 'en')}
+    class:list={[
+      'px-2.5 py-1.5 font-medium transition-colors',
+      lang === 'en'
+        ? 'bg-primary text-white dark:bg-primary'
+        : 'text-muted hover:text-gray-700 dark:text-gray-400 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700',
+    ]}
+    data-lang-switch="en"
+  >
+    EN
+  </a>
+  <a
+    href={lang === 'es' ? Astro.url.pathname : getAlternateLanguageUrl(Astro.url, 'es')}
+    class:list={[
+      'px-2.5 py-1.5 font-medium transition-colors',
+      lang === 'es'
+        ? 'bg-primary text-white dark:bg-primary'
+        : 'text-muted hover:text-gray-700 dark:text-gray-400 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700',
+    ]}
+    data-lang-switch="es"
+  >
+    ES
+  </a>
+</div>

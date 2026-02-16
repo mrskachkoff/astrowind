@@ -1,0 +1,62 @@
+{
+  "nav": {
+    "services": "Services",
+    "forSmallPractices": "For Small Practices",
+    "medcorePrivateAi": "MedCore Private AI",
+    "freeAiAudit": "Free AI Audit",
+    "pricing": "Pricing",
+    "blog": "Blog",
+    "about": "About",
+    "contact": "Contact",
+    "bookFreeAudit": "Book Free Audit"
+  },
+  "footer": {
+    "services": "Services",
+    "smallPracticeAutomation": "Small Practice Automation",
+    "medcorePrivateAi": "MedCore Private AI",
+    "freeAiAudit": "Free AI Audit",
+    "medicalAiDemo": "Medical AI Demo",
+    "pricing": "Pricing",
+    "company": "Company",
+    "about": "About",
+    "blog": "Blog",
+    "contact": "Contact",
+    "legal": "Legal",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "terms": "Terms",
+    "allRightsReserved": "All rights reserved"
+  },
+  "common": {
+    "getYourFreeAudit": "Get Your Free AI Audit",
+    "seeOurServices": "See Our Services",
+    "learnMore": "Learn More",
+    "readMore": "Read More",
+    "bookYourFreeAudit": "Book Your Free Audit",
+    "startWithFreeAudit": "Start with Free Audit",
+    "scheduleConsultation": "Schedule Consultation"
+  },
+  "languageSwitcher": {
+    "label": "Language",
+    "en": "EN",
+    "es": "ES"
+  },
+  "blog": {
+    "theBlog": "The Blog",
+    "subtitle": "Compliance & AI insights for healthcare providers in Spain and the EU.",
+    "backToBlog": "Back to Blog",
+    "relatedPosts": "Related Posts",
+    "page": "Page",
+    "category": "Category",
+    "tag": "Tag",
+    "postsByTag": "Posts by tag",
+    "viewAllPosts": "View all posts"
+  },
+  "notFound": {
+    "title": "Error 404",
+    "heading": "404",
+    "message": "Sorry, we couldn't find this page.",
+    "description": "But dont worry, you can find plenty of other things on our homepage.",
+    "backHome": "Back to homepage"
+  }
+}

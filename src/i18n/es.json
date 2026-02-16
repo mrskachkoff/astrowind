@@ -1,0 +1,62 @@
+{
+  "nav": {
+    "services": "Servicios",
+    "forSmallPractices": "Para Pequenas Clinicas",
+    "medcorePrivateAi": "MedCore IA Privada",
+    "freeAiAudit": "Auditoria IA Gratuita",
+    "pricing": "Precios",
+    "blog": "Blog",
+    "about": "Nosotros",
+    "contact": "Contacto",
+    "bookFreeAudit": "Reservar Auditoria"
+  },
+  "footer": {
+    "services": "Servicios",
+    "smallPracticeAutomation": "Automatizacion para Clinicas",
+    "medcorePrivateAi": "MedCore IA Privada",
+    "freeAiAudit": "Auditoria IA Gratuita",
+    "medicalAiDemo": "Demo IA Medica",
+    "pricing": "Precios",
+    "company": "Empresa",
+    "about": "Nosotros",
+    "blog": "Blog",
+    "contact": "Contacto",
+    "legal": "Legal",
+    "privacyPolicy": "Politica de Privacidad",
+    "termsOfService": "Terminos de Servicio",
+    "terms": "Terminos",
+    "allRightsReserved": "Todos los derechos reservados"
+  },
+  "common": {
+    "getYourFreeAudit": "Solicita Tu Auditoria IA Gratuita",
+    "seeOurServices": "Ver Nuestros Servicios",
+    "learnMore": "Saber Mas",
+    "readMore": "Leer Mas",
+    "bookYourFreeAudit": "Reserva Tu Auditoria Gratuita",
+    "startWithFreeAudit": "Empezar con Auditoria Gratuita",
+    "scheduleConsultation": "Programar Consulta"
+  },
+  "languageSwitcher": {
+    "label": "Idioma",
+    "en": "EN",
+    "es": "ES"
+  },
+  "blog": {
+    "theBlog": "El Blog",
+    "subtitle": "Compliance e IA para proveedores de salud en Espana y la UE.",
+    "backToBlog": "Volver al Blog",
+    "relatedPosts": "Articulos Relacionados",
+    "page": "Pagina",
+    "category": "Categoria",
+    "tag": "Etiqueta",
+    "postsByTag": "Articulos por etiqueta",
+    "viewAllPosts": "Ver todos los articulos"
+  },
+  "notFound": {
+    "title": "Error 404",
+    "heading": "404",
+    "message": "Lo sentimos, no pudimos encontrar esta pagina.",
+    "description": "Pero no te preocupes, puedes encontrar muchas otras cosas en nuestra pagina principal.",
+    "backHome": "Volver al inicio"
+  }
+}

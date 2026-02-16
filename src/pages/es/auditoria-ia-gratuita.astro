@@ -1,0 +1,305 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Features from '~/components/widgets/Features.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Content from '~/components/widgets/Content.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Auditoría de Cumplimiento de IA Gratuita',
+  description: 'Obtenga una auditoría gratuita de cumplimiento de IA de 5-7 días para su práctica sanitaria. Evaluamos flujos de datos, identificamos oportunidades de automatización segura y entregamos una hoja de ruta clara de cumplimiento RGPD.',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero -->
+
+  <Hero
+    tagline="Auditoría de IA Gratuita"
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Reserve Su Auditoría Gratuita',
+        href: 'https://outlook.office.com/book/FuturionSolutions@futurion.es/',
+        target: '_blank',
+        icon: 'tabler:clipboard-check',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Profesional revisando documentos de cumplimiento',
+    }}
+  >
+    <Fragment slot="title">
+      5-7 Días Gratuitos<br />
+      <span class="text-accent dark:text-white">Auditoría de Cumplimiento de IA</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Evaluamos el manejo de datos de su clínica, mapeamos brechas de cumplimiento e identificamos dónde la IA puede automatizar tareas de forma segura — completamente gratis. Recibe un informe detallado con puntuaciones de riesgo, recomendaciones de automatización segura y una hoja de ruta clara.
+    </Fragment>
+  </Hero>
+
+  <!-- Value Prop: What You'll Receive -->
+
+  <Features2
+    title="Qué recibirá"
+    subtitle="Una evaluación integral de cumplimiento y automatización entregada en 5-7 días laborables."
+    tagline="Entregables"
+    items={[
+      {
+        title: 'Puntuación de Riesgo de IA y Cumplimiento',
+        description: 'Una calificación clara de las prácticas de manejo de datos de su clínica y preparación para la automatización, con áreas de riesgo específicas identificadas.',
+        icon: 'tabler:report-analytics',
+      },
+      {
+        title: 'Diagrama de Flujo de Datos',
+        description: 'Un mapa visual de cómo se mueven los datos de pacientes a través de su clínica — dónde se almacenan, quién accede a ellos y dónde existen brechas.',
+        icon: 'tabler:hierarchy',
+      },
+      {
+        title: 'Matriz de Viabilidad de Automatización',
+        description: 'Un análisis puntuado de cada flujo de trabajo — qué tareas son seguras de automatizar, cuáles son arriesgadas y cuáles nunca deben automatizarse.',
+        icon: 'tabler:table',
+      },
+      {
+        title: 'Hoja de Ruta de Implementación',
+        description: 'Un plan por fases: primero corregir brechas de cumplimiento, luego implementar automatizaciones seguras, después establecer monitoreo continuo.',
+        icon: 'tabler:road',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  <!-- Audit Coverage: 5 Blocks -->
+
+  <Features
+    title="Qué evaluamos"
+    subtitle="Nuestra auditoría cubre cinco áreas críticas que la mayoría de agencias de IA ignoran por completo."
+    columns={3}
+    items={[
+      {
+        title: 'Perfil de Clínica y Contexto de Riesgo',
+        description: 'Evaluamos el tamaño de su clínica, volumen de pacientes, madurez digital y herramientas existentes para determinar su nivel de riesgo y preparación para la automatización.',
+        icon: 'tabler:building-hospital',
+      },
+      {
+        title: 'Mapeo de Datos y Cumplimiento RGPD',
+        description: 'Mapeamos cada flujo de datos de pacientes — admisión, registros, imágenes, facturación, comunicaciones — y clasificamos cada uno por sensibilidad y exposición al cumplimiento.',
+        icon: 'tabler:database',
+      },
+      {
+        title: 'Análisis de Cuellos de Botella en Procesos',
+        description: 'Identificamos flujos de trabajo con mucha carga administrativa, puntuamos cada uno por esfuerzo manual, riesgo de error y sensibilidad de datos, luego preseleccionamos candidatos seguros para automatización.',
+        icon: 'tabler:analyze',
+      },
+      {
+        title: 'Evaluación de Riesgo y Arquitectura de IA',
+        description: 'Para cada candidato a automatización, evaluamos si la IA en la nube, híbrida o local es apropiada — con referencias a artículos del RGPD para cada decisión.',
+        icon: 'tabler:cpu',
+      },
+      {
+        title: 'Brecha de Cumplimiento y Plan de Acción',
+        description: 'Identificamos documentación faltante, manejo inseguro de datos y brechas de gobernanza — luego convertimos los hallazgos en un plan de implementación claro y priorizado.',
+        icon: 'tabler:checklist',
+      },
+    ]}
+  />
+
+  <!-- Process Timeline -->
+
+  <Steps
+    title="Cómo funciona la auditoría"
+    subtitle="Un proceso estructurado que respeta su tiempo mientras entrega resultados exhaustivos."
+    items={[
+      {
+        title: 'Día 1: <span class="font-medium">Consulta Inicial</span>',
+        description: 'Una conversación guiada de 60-75 minutos sobre las operaciones, herramientas, manejo de datos y puntos débiles de su clínica. Sin jerga técnica — hacemos preguntas que puede responder.',
+        icon: 'tabler:messages',
+      },
+      {
+        title: 'Días 2-3: <span class="font-medium">Mapeo de Datos y Análisis</span>',
+        description: 'Mapeamos sus flujos de datos, clasificamos información sensible y analizamos cada flujo de trabajo para potencial de automatización y exposición al cumplimiento.',
+        icon: 'tabler:search',
+      },
+      {
+        title: 'Días 4-5: <span class="font-medium">Evaluación de Riesgo y Arquitectura</span>',
+        description: 'Evaluamos opciones de IA para cada proceso, determinamos arquitecturas seguras (local vs. híbrida) e identificamos brechas de cumplimiento.',
+        icon: 'tabler:shield-check',
+      },
+      {
+        title: 'Días 6-7: <span class="font-medium">Informe y Recomendaciones</span>',
+        description: 'Recibe un informe completo: puntuaciones de riesgo, diagramas de flujo de datos, matriz de automatización y una hoja de ruta clara de implementación sobre la que puede actuar — con o sin nosotros.',
+        icon: 'tabler:file-report',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Proceso de planificación estructurada',
+    }}
+  />
+
+  <!-- Who It's For -->
+
+  <Content
+    isReversed
+    tagline="¿Es esto para usted?"
+    title="Diseñado para pequeñas prácticas sanitarias"
+    items={[
+      {
+        title: 'Clínicas dentales con 1-10 empleados',
+        description: 'Desde profesionales individuales hasta pequeñas prácticas grupales que gestionan citas, comunicaciones con pacientes y facturación.',
+      },
+      {
+        title: 'Farmacias independientes',
+        description: 'Farmacias que manejan datos de pacientes, flujos de trabajo de prescripciones y comunicaciones con proveedores que necesitan automatización conforme al cumplimiento.',
+      },
+      {
+        title: 'Pequeñas clínicas médicas (2-5 profesionales)',
+        description: 'Clínicas multiprofesionales con alta carga administrativa, programación compleja y requisitos de cumplimiento de datos de pacientes.',
+      },
+      {
+        title: 'Propietarios de prácticas que están...',
+        description: 'Abrumados por tareas administrativas, preocupados por la privacidad de datos con nuevas tecnologías, o considerando contratar personal adicional para manejar la carga de trabajo.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=2068&q=80',
+      alt: 'Ambiente de clínica dental',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">No necesita un gran presupuesto de TI</h3>
+      Nuestra auditoría está diseñada para prácticas que no tienen equipos de TI dedicados u oficiales de cumplimiento — eso es exactamente por qué es valiosa.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Specific Deliverables -->
+
+  <Features2
+    title="Qué incluye el informe"
+    subtitle="Cada auditoría entrega estos resultados específicos y accionables."
+    items={[
+      {
+        title: 'Resumen Ejecutivo de Riesgo',
+        description: 'Una visión general de 2 páginas para propietarios de prácticas — lenguaje claro, sin jerga, enfocado en lo que importa para su negocio.',
+        icon: 'tabler:file-text',
+      },
+      {
+        title: 'Lista de Brechas de Cumplimiento',
+        description: 'Cada documento faltante, práctica insegura y brecha de gobernanza — priorizados por nivel de riesgo y esfuerzo para corregir.',
+        icon: 'tabler:list-check',
+      },
+      {
+        title: 'Lista de IA Segura / Insegura / Condicional',
+        description: 'Cada flujo de trabajo claramente calificado: qué es seguro automatizar, qué requiere condiciones y qué nunca debe automatizarse.',
+        icon: 'tabler:traffic-lights',
+      },
+      {
+        title: 'Plan de Arquitectura Aprobado',
+        description: 'Para cada automatización segura, el enfoque recomendado — local, híbrido o (raramente) nube — con justificación RGPD.',
+        icon: 'tabler:server',
+      },
+      {
+        title: 'Matriz de Automatización de Flujos de Trabajo',
+        description: 'Cada proceso administrativo puntuado por esfuerzo manual, riesgo de error, sensibilidad de datos, potencial de automatización y exposición al cumplimiento.',
+        icon: 'tabler:table',
+      },
+      {
+        title: 'Hoja de Ruta de Implementación por Fases',
+        description: 'Fase 1: Corregir riesgos de cumplimiento. Fase 2: Implementar automatizaciones seguras. Fase 3: Establecer monitoreo continuo y optimización.',
+        icon: 'tabler:road',
+      },
+    ]}
+  />
+
+  <!-- Audit FAQs -->
+
+  <FAQs
+    title="Preguntas sobre la Auditoría"
+    subtitle="Preguntas comunes sobre la auditoría gratuita de cumplimiento de IA."
+    classes={{ container: 'max-w-6xl' }}
+    items={[
+      {
+        title: '¿Cuánto tiempo requiere de mi parte?',
+        description: 'Aproximadamente 2-3 conversaciones breves totalizando 60-75 minutos. Nosotros hacemos el trabajo de análisis pesado. Su papel es responder preguntas sobre sus operaciones y herramientas actuales.',
+      },
+      {
+        title: '¿Realmente no hay ninguna obligación?',
+        description: 'Ninguna. Recibe un informe completo sobre el que puede actuar de forma independiente. Aproximadamente el 40-60% de las clínicas auditadas eligen proceder con la implementación, pero no hay presión ni compromiso requerido.',
+      },
+      {
+        title: '¿Qué pasa si encuentran problemas graves de cumplimiento?',
+        description: 'Los reportamos claramente y los priorizamos en su hoja de ruta. Esto sucede con frecuencia — la mayoría de las clínicas tienen brechas de las que no son conscientes. Nunca usamos los hallazgos para presionarle. Presentamos hechos y recomendaciones.',
+      },
+      {
+        title: '¿Podemos implementar las recomendaciones nosotros mismos?',
+        description: 'Sí. El informe está diseñado para ser accionable independientemente de si trabaja con nosotros. Incluimos pasos específicos, no sugerencias vagas. Muchas prácticas corrigen brechas simples de cumplimiento por su cuenta.',
+      },
+      {
+        title: '¿Por qué ofrecen esto gratis?',
+        description: 'La auditoría genera confianza y demuestra nuestra experiencia. Cuando las prácticas ven la profundidad del análisis y la calidad de las recomendaciones, muchas eligen trabajar con nosotros para la implementación. Es nuestra forma de demostrar valor antes de pedir un compromiso.',
+      },
+      {
+        title: '¿Qué sucede después de la auditoría?',
+        description: 'Presentamos el informe y le guiamos a través de los hallazgos. Si desea proceder con la implementación, proporcionamos una propuesta de precio fijo basada en los hallazgos de la auditoría. Si no, conserva el informe sin compromiso.',
+      },
+    ]}
+  />
+
+  <!-- Booking Widget -->
+
+  <div id="form" class="max-w-5xl mx-auto px-4 py-12 md:py-16 lg:py-20">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight dark:text-white mb-4">Reserve su auditoría de IA gratuita</h2>
+      <p class="text-lg text-gray-600 dark:text-slate-400 max-w-3xl mx-auto">
+        Seleccione un horario que le convenga. La auditoría completa toma 5-7 días laborables después de su consulta inicial.
+      </p>
+    </div>
+    <div class="rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden bg-white dark:bg-slate-900 shadow-lg">
+      <iframe
+        src="https://outlook.office.com/book/FuturionSolutions@futurion.es/"
+        width="100%"
+        height="700"
+        scrolling="yes"
+        style="border:0"
+        title="Reserve una Auditoría de IA Gratuita con Futurion Solutions"
+        loading="lazy"
+      ></iframe>
+    </div>
+    <p class="text-sm text-gray-500 dark:text-slate-500 text-center mt-4">
+      Su información se procesa de acuerdo con nuestra <a href="/es/privacidad" class="underline hover:text-primary">Política de Privacidad</a> y los requisitos del RGPD.
+    </p>
+  </div>
+
+  <!-- Urgency CTA -->
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Reserve Su Auditoría Gratuita Ahora',
+        href: 'https://outlook.office.com/book/FuturionSolutions@futurion.es/',
+        target: '_blank',
+        icon: 'tabler:clipboard-check',
+      },
+    ]}
+  >
+    <Fragment slot="title">Limitado a 8 Auditorías Por Mes</Fragment>
+
+    <Fragment slot="subtitle">
+      Cada auditoría recibe nuestra atención completa — análisis exhaustivo, informes detallados y recomendaciones personalizadas. Limitamos la capacidad para mantener la calidad. Asegure su lugar hoy.
+    </Fragment>
+  </CallToAction>
+</Layout>

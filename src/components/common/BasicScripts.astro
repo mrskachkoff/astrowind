@@ -2,6 +2,41 @@
 import { UI } from 'astrowind:config';
 ---
 
+<script is:inline>
+  // Language detection: redirect first-time visitors to /es/ if browser is Spanish
+  (function() {
+    if (window.__lang_detect_done) return;
+    window.__lang_detect_done = true;
+
+    // Skip if user already has a preference or is already on a Spanish page
+    if (localStorage.getItem('lang-preference')) return;
+    if (window.location.pathname.startsWith('/es')) return;
+
+    // Only auto-redirect from the homepage to avoid slug mismatch issues
+    // (e.g. /about would wrongly become /es/about instead of /es/nosotros)
+    if (window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
+      localStorage.setItem('lang-preference', 'en');
+      return;
+    }
+
+    var browserLang = navigator.language || navigator.userLanguage || '';
+    if (browserLang.startsWith('es')) {
+      localStorage.setItem('lang-preference', 'es');
+      window.location.replace('/es');
+      return;
+    }
+    localStorage.setItem('lang-preference', 'en');
+  })();
+
+  // Store language preference when clicking language switcher links
+  document.addEventListener('click', function(e) {
+    var target = e.target.closest('[data-lang-switch]');
+    if (target) {
+      localStorage.setItem('lang-preference', target.getAttribute('data-lang-switch'));
+    }
+  });
+</script>
+
 <script is:inline define:vars={{ defaultTheme: UI.theme }}>
   if (window.basic_script) {
     return;

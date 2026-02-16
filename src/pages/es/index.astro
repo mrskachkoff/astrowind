@@ -1,0 +1,330 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import Features from '~/components/widgets/Features.astro';
+import Content from '~/components/widgets/Content.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Note from '~/components/widgets/Note.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+
+const metadata = {
+  title: 'Futurion Solutions — Automatización IA con Cumplimiento Normativo para Sanidad',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero: Automatización IA con Cumplimiento Normativo Primero -->
+
+  <Hero
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Solicita Tu Auditoría IA Gratuita',
+        href: '/es/auditoria-ia-gratuita',
+        icon: 'tabler:clipboard-check',
+      },
+      { text: 'Ver Nuestros Servicios', href: '/es/servicios' },
+    ]}
+    image={{ src: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80', alt: 'Profesional sanitario usando tecnología en una clínica moderna' }}
+  >
+    <Fragment slot="title">
+      Automatización IA con Cumplimiento Normativo<br />
+      <span class="text-accent dark:text-white">para Profesionales Sanitarios</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      <span class="hidden sm:inline">
+        Ayudamos a clínicas dentales, farmacias y pequeñas consultas médicas a ahorrar 10-15 horas por semana mediante automatización IA — sin comprometer la seguridad de datos de pacientes ni el cumplimiento RGPD.
+      </span>
+      <span class="block mb-1 sm:hidden font-bold text-blue-600">Automatización IA que mantiene seguros los datos de pacientes.</span>
+      Experiencia en cumplimiento normativo de nivel empresarial, diseñada para PYMEs sanitarias en España y la UE.
+    </Fragment>
+  </Hero>
+
+  <!-- Estadísticas de Confianza -->
+
+  <Stats
+    stats={[
+      { title: 'Marcos de Cumplimiento', amount: '4+', icon: 'tabler:shield-check' },
+      { title: 'Horas Ahorradas Semanalmente', amount: '10-15', icon: 'tabler:clock' },
+      { title: 'Reducción de Riesgo de Datos', amount: '90%', icon: 'tabler:lock' },
+      { title: 'Conversión de Auditorías', amount: '40-60%', icon: 'tabler:chart-arrows' },
+    ]}
+  />
+
+  <!-- Problema / Puntos de Dolor -->
+
+  <Content
+    isReversed
+    tagline="El Desafío"
+    title="El Cumplimiento Sanitario Es Complejo — La IA Lo Hace Más Difícil"
+    items={[
+      {
+        title: 'Complejidad del RGPD para pequeñas consultas',
+        description:
+          'Te enfrentas a los mismos requisitos de protección de datos que los grandes hospitales, pero sin equipos de TI dedicados ni responsables de cumplimiento.',
+      },
+      {
+        title: 'Riesgos de la IA en la nube con datos de pacientes',
+        description:
+          'La mayoría de herramientas de IA envían datos de pacientes a servidores externos en la nube — una posible violación del RGPD que pone en riesgo tu consulta.',
+      },
+      {
+        title: 'Sobrecarga administrativa robando tiempo de atención',
+        description:
+          'La programación de citas, seguimientos, facturación y papeleo consumen horas que deberían dedicarse a la atención de pacientes.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Persona abrumada por trabajo administrativo',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">¿Te suena familiar?</h3>
+      La mayoría de agencias de IA no entienden las regulaciones sanitarias. La mayoría de consultores de cumplimiento no entienden la IA. Necesitas ambas.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Diferenciadores -->
+
+  <Features
+    id="features"
+    tagline="Por Qué Futurion Solutions"
+    title="Qué nos hace diferentes"
+    subtitle="Cerramos la brecha entre la automatización IA y el cumplimiento sanitario — para que no tengas que elegir entre eficiencia y protección de datos."
+    columns={3}
+    items={[
+      {
+        title: 'Enfoque Centrado en Cumplimiento',
+        description:
+          'Cada automatización se construye con el RGPD, HIPAA y requisitos de privacidad de datos en su núcleo — no añadidos como idea tardía.',
+        icon: 'tabler:shield-check',
+      },
+      {
+        title: 'IA Híbrida y Local',
+        description:
+          'Los datos de pacientes permanecen en tu clínica. Diseñamos soluciones que funcionan localmente o en configuraciones híbridas, sin enviar nunca datos sensibles a nubes externas. Para organizaciones más grandes, MedCore Private AI ofrece infraestructura IA médica completamente local.',
+        icon: 'tabler:server',
+      },
+      {
+        title: 'Especializado en Sanidad',
+        description:
+          'Nos enfocamos exclusivamente en clínicas dentales, farmacias y pequeñas consultas médicas. Entendemos tus flujos de trabajo y regulaciones.',
+        icon: 'tabler:stethoscope',
+      },
+      {
+        title: 'Seguridad Empresarial para PYMEs',
+        description:
+          'SOC2, ISO 27001 y prácticas de seguridad de nivel empresarial — escaladas y con precios para pequeños negocios sanitarios.',
+        icon: 'tabler:lock',
+      },
+      {
+        title: 'Soporte Integral',
+        description:
+          'Desde la auditoría inicial hasta la implementación y monitorización continua. Somos tu socio de cumplimiento IA a largo plazo, no un proveedor único.',
+        icon: 'tabler:lifebuoy',
+      },
+      {
+        title: 'Enfoque en España y la UE',
+        description:
+          'Con sede en Valencia, España. Profundo conocimiento de las regulaciones de la UE, requisitos de la AEPD y el panorama sanitario local.',
+        icon: 'tabler:map-pin',
+      },
+    ]}
+  />
+
+  <!-- Cómo Funciona -->
+
+  <Steps
+    title="Cómo funciona"
+    subtitle="Desde la auditoría inicial hasta el soporte continuo, hacemos que la adopción de IA sea segura y simple para tu consulta."
+    items={[
+      {
+        title: 'Paso 1: <span class="font-medium">Auditoría Gratuita de Cumplimiento IA</span>',
+        description:
+          'Evaluamos los flujos de datos de tu clínica, postura de cumplimiento y oportunidades de automatización en una auditoría gratuita de 5-7 días. Recibes un informe detallado con puntuaciones de riesgo y recomendaciones de automatización segura.',
+        icon: 'tabler:clipboard-check',
+      },
+      {
+        title: 'Paso 2: <span class="font-medium">Implementación Conforme</span>',
+        description:
+          'Construimos y desplegamos automatizaciones IA diseñadas con privacidad de datos en su núcleo. La arquitectura local o híbrida asegura que los datos de pacientes nunca salgan de tu control.',
+        icon: 'tabler:settings-automation',
+      },
+      {
+        title: 'Paso 3: <span class="font-medium">Soporte y Monitorización Continuos</span>',
+        description:
+          'Monitorizamos tus automatizaciones, actualizamos controles de cumplimiento conforme evolucionan las regulaciones y optimizamos el rendimiento. Tu socio IA de confianza, mes tras mes.',
+        icon: 'tabler:heart-handshake',
+      },
+      {
+        title: 'Resultados: Ahorra 10-15 horas por semana',
+        icon: 'tabler:check',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Equipo colaborando en un proyecto',
+    }}
+  />
+
+  <!-- Detalles del Servicio -->
+
+  <Content
+    isAfterContent
+    tagline="Nuestras Soluciones"
+    title="Qué incluye nuestra automatización con cumplimiento"
+    items={[
+      {
+        title: 'Automatización de citas',
+        description:
+          'Programación inteligente, recordatorios y seguimientos que reducen las ausencias hasta un 30% — todo conforme al RGPD.',
+      },
+      {
+        title: 'Flujos de comunicación con pacientes',
+        description:
+          'Comunicaciones automatizadas pero personales a través de canales conformes, reemplazando el uso arriesgado de WhatsApp y correo electrónico personal.',
+      },
+      {
+        title: 'Procesamiento de facturación y seguros',
+        description:
+          'Flujos de facturación optimizados que reducen errores y ahorran horas de trabajo administrativo manual cada semana.',
+      },
+      {
+        title: 'Documentación de cumplimiento',
+        description:
+          'Pistas de auditoría automatizadas, registros de procesamiento de datos e informes de cumplimiento que te mantienen siempre preparado para inspecciones.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Clínica dental moderna con tecnología',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Construido para flujos de trabajo sanitarios</h3>
+      Cada automatización que construimos está arquitecturada con los principios del RGPD en su núcleo — minimización de datos, limitación de finalidad, controles de seguridad y pistas de auditoría desde el primer día.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Banner CTA -->
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Reserva Tu Auditoría Gratuita',
+        href: '/es/auditoria-ia-gratuita',
+        icon: 'tabler:clipboard-check',
+      },
+    ]}
+  >
+    <Fragment slot="title">Comienza con una Auditoría Gratuita de Cumplimiento IA de 5-7 Días</Fragment>
+
+    <Fragment slot="subtitle">
+      Evaluamos los flujos de datos de tu clínica, identificamos oportunidades de automatización segura y entregamos una hoja de ruta clara de cumplimiento — sin coste. Limitado a 8 auditorías por mes.
+    </Fragment>
+  </CallToAction>
+
+  <!-- Nota MedCore -->
+
+  <Note
+    icon="tabler:server"
+    title="Para Organizaciones Sanitarias Medianas:"
+    description='Explora <a href="/es/medcore-ia-privada" class="underline font-bold">MedCore Private AI</a> — infraestructura IA de grado médico completamente local con soberanía completa de datos.'
+  />
+
+  <!-- FAQs -->
+
+  <FAQs
+    title="Preguntas Frecuentes"
+    subtitle="Todo lo que necesitas saber sobre automatización IA con cumplimiento normativo para tu consulta sanitaria."
+    tagline="FAQs"
+    classes={{ container: 'max-w-6xl' }}
+    items={[
+      {
+        title: '¿Qué es una auditoría IA centrada en cumplimiento?',
+        description:
+          'Nuestra auditoría gratuita evalúa el manejo de datos de tu clínica, identifica dónde la IA puede automatizar tareas de forma segura y señala brechas de cumplimiento. Es una auditoría de riesgo y procesos con una capa de viabilidad IA — no un argumento de ventas. Recibes un informe detallado sobre el que puedes actuar de forma independiente.',
+      },
+      {
+        title: '¿Se enviarán los datos de pacientes a la nube?',
+        description:
+          'No. Diseñamos soluciones IA híbridas y locales que mantienen los datos de pacientes dentro de la infraestructura de tu clínica. La mayoría de herramientas IA basadas en la nube no son adecuadas para datos sanitarios bajo el RGPD. Usamos arquitecturas que mantienen los datos sensibles localmente.',
+      },
+      {
+        title: '¿Cuánto cuesta la implementación?',
+        description:
+          'Nuestras implementaciones de victorias rápidas comienzan alrededor de €1.500-3.000 para 1-2 automatizaciones. Los paquetes de automatización completos van de €5.000-15.000. El soporte mensual comienza en €200/mes. La auditoría gratuita te da una imagen clara antes de cualquier compromiso.',
+      },
+      {
+        title: 'Somos una clínica pequeña — ¿es esto para nosotros?',
+        description:
+          'Absolutamente. Nos especializamos en pequeños negocios sanitarios: clínicas dentales, farmacias y consultas con 1-10 empleados. Nuestras soluciones están diseñadas para ser asequibles e impactantes para consultas que no tienen equipos de TI dedicados.',
+      },
+      {
+        title: '¿Qué marcos de RGPD y cumplimiento seguís?',
+        description:
+          'Trabajamos con marcos RGPD, HIPAA, SOC2 e ISO 27001. Cada automatización incluye acuerdos adecuados de procesamiento de datos, pistas de auditoría, gestión de consentimiento y documentación requerida por las regulaciones de la UE y España (AEPD).',
+      },
+      {
+        title: '¿Cuánto tarda la implementación?',
+        description:
+          'La auditoría gratuita tarda 5-7 días laborables. Las implementaciones de victorias rápidas pueden completarse en 2-4 semanas. Las transformaciones de automatización completas normalmente tardan 6-12 semanas, dependiendo de la complejidad. Ves resultados desde la primera semana.',
+      },
+      {
+        title: '¿Qué pasa si ya usamos un sistema de gestión de consultas?',
+        description:
+          'Nos integramos con tus herramientas existentes. Nuestras automatizaciones funcionan junto a tu software actual de gestión de consultas, sistemas EHR y flujos de trabajo — mejoramos lo que tienes en lugar de reemplazarlo.',
+      },
+      {
+        title: '¿Es realmente gratuita la auditoría?',
+        description:
+          'Sí. La auditoría de cumplimiento IA de 5-7 días es completamente gratuita sin obligaciones. Recibes un informe completo con puntuaciones de riesgo, recomendaciones de automatización y una hoja de ruta de cumplimiento. Alrededor del 40-60% de las clínicas auditadas eligen proceder con la implementación, pero no hay presión alguna.',
+      },
+    ]}
+  />
+
+  <!-- Últimas Entradas del Blog -->
+
+  <BlogLatestPosts
+    title="Información sobre Cumplimiento e IA"
+    linkText="Ver todos los articulos"
+    linkUrl="/es/blog"
+    lang="es"
+    information="Mantente informado sobre cumplimiento sanitario, mejores prácticas de automatización IA y actualizaciones regulatorias para pequeños proveedores sanitarios en España y la UE."
+  />
+
+  <!-- CTA Final -->
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Solicita Tu Auditoría IA Gratuita',
+        href: '/es/auditoria-ia-gratuita',
+        icon: 'tabler:clipboard-check',
+      },
+    ]}
+  >
+    <Fragment slot="title">¿Listo para Automatizar con Cumplimiento?</Fragment>
+
+    <Fragment slot="subtitle">
+      Únete a las consultas sanitarias de toda España que están ahorrando 10-15 horas por semana con automatización IA — sin comprometer los datos de pacientes ni el cumplimiento. Comienza hoy con una auditoría gratuita.
+    </Fragment>
+  </CallToAction>
+</Layout>

@@ -1,0 +1,493 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Features from '~/components/widgets/Features.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Note from '~/components/widgets/Note.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import MedicalChat from '~/components/widgets/MedicalChat.astro';
+import dataSecurityImg from '~/assets/images/data-security-healthcare.svg';
+
+const metadata = {
+  title: 'MedCore Private AI — Infraestructura de IA de Grado Médico Local para Sanidad',
+  description:
+    'MedCore Private AI ofrece infraestructura de IA completamente local y de grado médico para organizaciones sanitarias medianas. Cumplimiento con RGPD, HIPAA y soberanía de datos. Ajuste fino, RAG y soporte multilingüe.',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Section 1: Hero -->
+
+  <Hero
+  >
+    <Fragment slot="title">
+      MedCore Private AI<br />
+      <span class="text-accent dark:text-white">Infraestructura de IA de Grado Médico para Sanidad con Soberanía de Datos</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      <span class="hidden sm:inline">
+        Despliegue modelos de lenguaje grandes de grado médico completamente en su propia infraestructura. Ningún dato de pacientes sale de sus instalaciones. Diseñado específicamente para redes de clínicas, centros sanitarios especializados y organizaciones críticas en cumplimiento en toda la UE.
+      </span>
+      <span class="block mb-1 sm:hidden font-bold text-green-700">IA médica local. Sus datos nunca salen.</span>
+      Cumplimiento total con RGPD, HIPAA y soberanía de datos por arquitectura — no por política.
+    </Fragment>
+  </Hero>
+
+  <!-- Embedded Medical AI Demo Chat -->
+
+  <MedicalChat />
+
+  <!-- Section 2: Trust Stats -->
+
+  <Stats
+    stats={[
+      { title: '100% Local', amount: 'Cero Nube', icon: 'tabler:server' },
+      { title: 'LLMs de Grado Médico', amount: 'Específicos', icon: 'tabler:brain' },
+      { title: 'Multilingüe', amount: 'Toda la UE', icon: 'tabler:language' },
+      { title: 'Cumplimiento Primero', amount: 'Por Diseño', icon: 'tabler:shield-check' },
+    ]}
+  />
+
+  <!-- Section 3: Problem -->
+
+  <Content
+    isReversed
+    tagline="El Desafío"
+    title="La IA en la Nube No Cumple los Requisitos de Residencia de Datos Sanitarios"
+    items={[
+      {
+        title: 'Los datos de pacientes salen de su control',
+        description:
+          'La IA basada en la nube envía registros médicos sensibles a servidores externos en jurisdicciones que no puede controlar — violando el principio fundamental de soberanía de datos.',
+      },
+      {
+        title: 'La exposición regulatoria crece con la escala',
+        description:
+          'Las organizaciones sanitarias medianas procesan miles de registros de pacientes. Cada interacción con IA en la nube multiplica su riesgo de cumplimiento con RGPD y HIPAA.',
+      },
+      {
+        title: 'Los modelos genéricos carecen de precisión médica',
+        description:
+          'Los modelos de IA de propósito general producen alucinaciones y errores cuando se aplican a terminología médica, interacciones de medicamentos y flujos de trabajo clínicos.',
+      },
+      {
+        title: 'El bloqueo de proveedor limita sus opciones',
+        description:
+          'Las plataformas de IA en la nube propietarias le encierran en su ecosistema, modelos de precios y prácticas de manejo de datos — sin transparencia sobre cómo se usan los datos de pacientes.',
+      },
+    ]}
+    image={{
+      src: dataSecurityImg,
+      alt: 'Preocupaciones de seguridad de datos en sanidad',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        La sanidad necesita un enfoque diferente para la IA
+      </h3>
+      Cuando están involucrados datos de pacientes, "confiar en el proveedor de la nube" no es una estrategia de cumplimiento. Necesita infraestructura de IA que mantenga la soberanía de datos por diseño — no por promesa contractual.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Section 4: Solution Overview — 3 Core Pillars -->
+
+  <Features2
+    title="Tres pilares de MedCore Private AI"
+    subtitle="Una plataforma completa de IA médica local diseñada desde cero para la soberanía de datos sanitarios."
+    columns={3}
+    items={[
+      {
+        title: 'LLMs de Grado Médico',
+        description:
+          'Modelos de lenguaje específicamente diseñados entrenados en literatura médica, directrices clínicas y terminología sanitaria. No IA de propósito general reutilizada para medicina.',
+        icon: 'tabler:brain',
+      },
+      {
+        title: 'Despliegue Completamente Local',
+        description:
+          'Cada componente se ejecuta en su infraestructura. Los datos de pacientes nunca salen de sus instalaciones. Soberanía de datos completa sin dependencias externas.',
+        icon: 'tabler:server',
+      },
+      {
+        title: 'Ajuste Fino y RAG',
+        description:
+          'Personalice modelos con sus protocolos, formularios y conocimiento institucional. La Generación Aumentada por Recuperación fundamenta las respuestas en sus propios datos médicos verificados.',
+        icon: 'tabler:adjustments',
+      },
+    ]}
+  />
+
+  <!-- Section 5: Capabilities — Deep Dives -->
+
+  <Content
+    tagline="Capacidades"
+    title="Inteligencia Médica Que Entiende Su Dominio"
+    items={[
+      {
+        title: 'Asistencia en documentación clínica',
+        description:
+          'Genere, resuma y estructure notas clínicas, informes de alta y cartas de derivación — fundamentados en sus plantillas y terminología.',
+      },
+      {
+        title: 'Recuperación de conocimiento médico',
+        description:
+          'Consulte interacciones de medicamentos, protocolos de tratamiento y directrices clínicas usando la base de conocimiento verificada de su institución vía RAG.',
+      },
+      {
+        title: 'Comunicación multilingüe con pacientes',
+        description:
+          'Genere materiales orientados al paciente en español, inglés, francés, alemán y otros idiomas de la UE — culturalmente apropiados y médicamente precisos.',
+      },
+      {
+        title: 'Automatización administrativa',
+        description:
+          'Automatice codificación, preparación de facturación, clasificación de citas y enrutamiento de derivaciones con IA que entiende el contexto médico.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Profesional médico usando tecnología asistida por IA',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Inteligencia Médica
+      </h3>
+      IA que habla medicina — no una IA a la que le han dicho qué es la medicina. Todas las salidas son solo asistivas; la validación clínica sigue siendo responsabilidad de profesionales sanitarios cualificados.
+    </Fragment>
+  </Content>
+
+  <Content
+    isReversed
+    isAfterContent
+    items={[
+      {
+        title: 'Opción de despliegue aislado',
+        description:
+          'Para máxima seguridad, despliegue en entornos completamente aislados sin conectividad a internet. Aislamiento completo para las cargas de trabajo más sensibles.',
+      },
+      {
+        title: 'Cifrado de extremo a extremo',
+        description:
+          'Datos cifrados en reposo (AES-256) y en tránsito (TLS 1.3). Claves de cifrado gestionadas localmente — nunca compartidas con ninguna parte externa.',
+      },
+      {
+        title: 'Control de acceso basado en roles',
+        description:
+          'Permisos granulares alineados con roles sanitarios. Registros de auditoría para cada interacción de IA, consulta y evento de acceso a datos.',
+      },
+      {
+        title: 'Documentación de cumplimiento incluida',
+        description:
+          'Evaluaciones de Impacto de Protección de Datos RGPD preconstruidas, registros de procesamiento y documentación de cumplimiento para su despliegue específico.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1510511459019-5dda7724fd87?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Infraestructura de datos segura',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Arquitectura de Privacidad
+      </h3>
+      La seguridad no es una característica — es la arquitectura. Cada capa de MedCore está diseñada para garantizar la soberanía de datos de pacientes.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <Content
+    isAfterContent
+    items={[
+      {
+        title: 'Ajuste fino específico del dominio',
+        description:
+          'Entrene modelos en su especialidad — cardiología, oncología, odontología, farmacia — usando sus propios conjuntos de datos desidentificados y protocolos clínicos.',
+      },
+      {
+        title: 'Generación Aumentada por Recuperación (RAG)',
+        description:
+          'Conecte la IA a sus formularios, guías de tratamiento y bases de conocimiento institucionales. Las respuestas se fundamentan en sus datos verificados.',
+      },
+      {
+        title: 'Pipeline de aprendizaje continuo',
+        description:
+          'Los modelos mejoran con el tiempo a medida que su equipo valida salidas y proporciona retroalimentación — todo dentro de su entorno local seguro.',
+      },
+      {
+        title: 'Versionado y reversión de modelos',
+        description:
+          'Control de versión completo para todas las configuraciones de modelos. Pruebe nuevas versiones en pruebas antes del despliegue en producción. Revierta instantáneamente si es necesario.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Personalización y ajuste fino de modelos de IA',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Motor de Personalización
+      </h3>
+      Su IA, su especialidad, sus datos. MedCore se adapta a cómo su organización practica la medicina — no al revés.
+    </Fragment>
+  </Content>
+
+  <Content
+    isReversed
+    isAfterContent
+    items={[
+      {
+        title: 'Configuraciones de servidor optimizadas para GPU',
+        description:
+          'Especificamos, obtenemos y configuramos hardware preparado para IA adaptado a su carga de trabajo — desde configuraciones de un solo servidor hasta clústeres multinodo.',
+      },
+      {
+        title: 'Arquitectura escalable',
+        description:
+          'Comience con un único despliegue y escale horizontalmente a medida que crece el uso. Arquitectura diseñada para 10 a más de 10,000 usuarios concurrentes.',
+      },
+      {
+        title: 'Integración con infraestructura existente',
+        description:
+          'MedCore se integra con sus sistemas EMR/EHR, bases de datos existentes y flujos de trabajo clínicos a través de APIs estándar e interfaces HL7/FHIR.',
+      },
+      {
+        title: 'Redundancia y recuperación ante desastres',
+        description:
+          'Configuraciones de alta disponibilidad con conmutación por error automática. Respaldo local y planes de recuperación ante desastres incluidos en cada despliegue.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Infraestructura de hardware de servidores',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Hardware e Infraestructura
+      </h3>
+      Manejamos la pila completa — desde la especificación de hardware GPU hasta el despliegue en producción. Usted se enfoca en la atención al paciente.
+    </Fragment>
+  </Content>
+
+
+  <!-- Section 7: Target Customers -->
+
+  <Features
+    columns={3}
+    tagline="A Quién Sirve MedCore"
+    title="Diseñado para organizaciones sanitarias medianas"
+    subtitle="MedCore Private AI está diseñado para organizaciones que procesan volúmenes significativos de datos de pacientes y requieren capacidades de IA de grado institucional."
+    items={[
+      {
+        title: 'Redes de Clínicas',
+        description:
+          'Grupos de clínicas dentales, médicas o especializadas con múltiples ubicaciones que necesitan capacidades de IA consistentes en todos los sitios con gobernanza de datos centralizada.',
+        icon: 'tabler:building-hospital',
+      },
+      {
+        title: 'Centros Sanitarios Especializados',
+        description:
+          'Centros de oncología, prácticas de cardiología, clínicas de fertilidad y otros grupos especializados con requisitos de IA específicos del dominio.',
+        icon: 'tabler:heart-rate-monitor',
+      },
+      {
+        title: 'Grupos Sanitarios Internacionales',
+        description:
+          'Organizaciones que operan en estados miembros de la UE que necesitan IA multilingüe con cumplimiento consistente de soberanía de datos en cada jurisdicción.',
+        icon: 'tabler:world',
+      },
+      {
+        title: 'Hospitales Activos en Investigación',
+        description:
+          'Instituciones sanitarias que realizan investigación clínica y necesitan capacidades de IA sin exponer datos de investigación a plataformas externas.',
+        icon: 'tabler:microscope',
+      },
+      {
+        title: 'Proveedores de TI Sanitarias',
+        description:
+          'Proveedores de servicios gestionados y empresas de TI sanitarias que desean ofrecer capacidades de IA privada a sus clientes sanitarios.',
+        icon: 'tabler:device-desktop-analytics',
+      },
+      {
+        title: 'Organizaciones Críticas en Cumplimiento',
+        description:
+          'Cualquier entidad sanitaria donde los requisitos de residencia de datos, auditorías regulatorias o política institucional prohíben el uso de IA basada en la nube.',
+        icon: 'tabler:shield-lock',
+      },
+    ]}
+  />
+
+  <!-- Section 8: Differentiators -->
+
+  <Features2
+    tagline="Por Qué MedCore"
+    title="Qué distingue a MedCore Private AI"
+    subtitle="No es otro envoltorio de IA en la nube. MedCore es fundamentalmente diferente en arquitectura, propósito y filosofía."
+    columns={2}
+    items={[
+      {
+        title: 'Verdaderamente Local — Sin Excepciones',
+        description:
+          'Cada componente se ejecuta en su infraestructura. Sin soluciones alternativas de "nube híbrida", sin llamadas de telemetría a casa, sin dependencias de API externas. Sus datos son soberanos.',
+        icon: 'tabler:server',
+      },
+      {
+        title: 'Modelos de Lenguaje Específicos de Medicina',
+        description:
+          'Modelos entrenados en literatura médica y datos clínicos — no modelos de propósito general con un prompt médico. Mayor precisión para terminología médica, interacciones de medicamentos y flujos de trabajo clínicos.',
+        icon: 'tabler:brain',
+      },
+      {
+        title: 'Arquitectura Que Prioriza la Privacidad',
+        description:
+          'La seguridad es la arquitectura, no un complemento. Opciones de despliegue aislado, cifrado AES-256, acceso basado en roles y registros de auditoría completos desde el primer día.',
+        icon: 'tabler:lock',
+      },
+      {
+        title: 'Flexibilidad de Ajuste Fino',
+        description:
+          'Personalice modelos para su especialidad, sus protocolos y su conocimiento institucional. La integración RAG fundamenta la IA en sus datos médicos verificados.',
+        icon: 'tabler:adjustments',
+      },
+      {
+        title: 'Hardware + Software + Cumplimiento',
+        description:
+          'Entregamos la pila completa: hardware preparado para IA, software optimizado y documentación de cumplimiento. Un solo socio para todo el ciclo de vida.',
+        icon: 'tabler:stack-2',
+      },
+      {
+        title: 'Sin Bloqueo de Proveedor',
+        description:
+          'Estándares abiertos, APIs estándar y sus datos en su hardware. Si alguna vez desea cambiar de dirección, todo permanece con usted.',
+        icon: 'tabler:key',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  <!-- Section 9: Process -->
+
+  <Steps
+    title="Cómo desplegamos MedCore"
+    subtitle="Un proceso estructurado de 6 pasos desde la evaluación inicial hasta el despliegue en producción y la optimización continua."
+    items={[
+      {
+        title: 'Paso 1: <span class="font-medium">Evaluación de Infraestructura</span>',
+        description:
+          'Evaluamos su infraestructura existente, volúmenes de datos, requisitos de cumplimiento y casos de uso para diseñar la arquitectura de despliegue óptima de MedCore.',
+        icon: 'tabler:clipboard-check',
+      },
+      {
+        title: 'Paso 2: <span class="font-medium">Diseño de Arquitectura</span>',
+        description:
+          'Arquitectura personalizada adaptada a su organización — especificaciones de hardware, topología de red, controles de seguridad y puntos de integración con sistemas existentes.',
+        icon: 'tabler:layout-board',
+      },
+      {
+        title: 'Paso 3: <span class="font-medium">Selección y Personalización de Modelos</span>',
+        description:
+          'Seleccione y configure LLMs médicos para su especialidad. Ajuste fino con sus conjuntos de datos desidentificados. Construya pipelines RAG conectados a sus bases de conocimiento.',
+        icon: 'tabler:brain',
+      },
+      {
+        title: 'Paso 4: <span class="font-medium">Despliegue Local</span>',
+        description:
+          'Adquisición de hardware, instalación y despliegue completo de software en su infraestructura. Pruebas completas en su entorno antes de puesta en marcha.',
+        icon: 'tabler:rocket',
+      },
+      {
+        title: 'Paso 5: <span class="font-medium">Validación Clínica</span>',
+        description:
+          'Su equipo clínico valida las salidas de IA contra escenarios del mundo real. Iteramos en la configuración del modelo hasta que la precisión cumple sus estándares institucionales.',
+        icon: 'tabler:stethoscope',
+      },
+      {
+        title: 'Paso 6: <span class="font-medium">Soporte y Optimización Continuos</span>',
+        description:
+          'Soporte mensual, actualizaciones de modelos, monitoreo de cumplimiento y optimización continua. Su socio dedicado en operaciones de IA a largo plazo.',
+        icon: 'tabler:heart-handshake',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Equipo profesional planificando despliegue',
+    }}
+  />
+
+  <!-- Section 10: Pricing Note -->
+
+  <Note
+    icon="tabler:info-circle"
+    title="Precios Basados en Proyecto."
+    description='Los despliegues de MedCore Private AI se cotizan por proyecto según el alcance de infraestructura, requisitos de modelos y tamaño de organización. Los compromisos típicos van desde &euro;25,000 hasta más de &euro;150,000, con planes de soporte mensuales disponibles. <a href="/es/contacto" class="underline font-bold">Contáctenos para una evaluación detallada y presupuesto</a>.'
+  />
+
+  <!-- Section 11: FAQs -->
+
+  <FAQs
+    title="MedCore Private AI — Preguntas Frecuentes"
+    subtitle="Respuestas enfocadas en empresas para líderes de TI sanitarias, oficiales de cumplimiento y directores clínicos."
+    tagline="FAQs"
+    classes={{ container: 'max-w-6xl' }}
+    items={[
+      {
+        title: '¿Cómo se compara MedCore con Azure OpenAI o AWS Bedrock para sanidad?',
+        description:
+          'Los servicios de IA en la nube como Azure OpenAI y AWS Bedrock aún envían datos a infraestructura externa gestionada por el proveedor de la nube. Incluso con "endpoints privados", está confiando en un tercero con la residencia de datos de pacientes. MedCore se ejecuta completamente en su hardware — cero transferencia de datos externa, cero requisitos de confianza en terceros. Para organizaciones con mandatos estrictos de soberanía de datos, este es el único enfoque conforme.',
+      },
+      {
+        title: '¿Se integra MedCore con nuestro sistema EMR/EHR?',
+        description:
+          'Sí. MedCore se integra con los principales sistemas EMR/EHR a través de APIs estándar, HL7 e interfaces FHIR. Durante la fase de evaluación, mapeamos sus requisitos de integración específicos y diseñamos la arquitectura de conexión. Tenemos experiencia integrando con sistemas comúnmente usados en organizaciones sanitarias de la UE.',
+      },
+      {
+        title: '¿Qué hardware necesitamos?',
+        description:
+          'Los requisitos de hardware dependen de su caso de uso, número de usuarios y selección de modelos. Los despliegues típicos usan servidores acelerados por GPU (clase NVIDIA A100 o H100). Especificamos, obtenemos y configuramos todo el hardware como parte del despliegue — no necesita infraestructura de IA existente. También podemos trabajar con hardware que ya posea.',
+      },
+      {
+        title: '¿Cuánto tiempo toma el despliegue?',
+        description:
+          'Los despliegues típicos toman de 8 a 16 semanas desde la evaluación hasta la producción, dependiendo de la complejidad de la infraestructura, requisitos de ajuste fino personalizado y plazos de adquisición. Proporcionamos un cronograma detallado durante la fase de diseño de arquitectura. Los despliegues piloto para evaluación pueden estar operativos en 4-6 semanas.',
+      },
+      {
+        title: '¿Qué certificaciones de cumplimiento admite MedCore?',
+        description:
+          'Los despliegues de MedCore están diseñados para admitir RGPD (incluidas provisiones específicas de sanidad), HIPAA, SOC2, ISO 27001 y la Ley de IA de la UE. Proporcionamos Evaluaciones de Impacto de Protección de Datos preconstruidas, registros de procesamiento y documentación de cumplimiento específica para su despliegue. Su equipo de cumplimiento revisa y aprueba toda la documentación antes de la puesta en marcha.',
+      },
+      {
+        title: '¿Podemos ejecutar un piloto antes de comprometernos con el despliegue completo?',
+        description:
+          'Absolutamente. Recomendamos comenzar con un piloto acotado — típicamente un solo caso de uso o departamento — para validar la tecnología en su entorno. Los despliegues piloto incluyen todas las capacidades principales a menor escala, y pueden expandirse a producción completa cuando esté listo.',
+      },
+      {
+        title: '¿Qué sucede si queremos cambiar modelos de IA más adelante?',
+        description:
+          'MedCore usa una arquitectura abierta sin bloqueo de proveedor. Puede intercambiar modelos subyacentes, agregar nuevas capacidades o ajustar configuraciones en cualquier momento. Todos sus datos de ajuste fino, bases de conocimiento RAG y configuraciones personalizadas permanecen en su infraestructura y son completamente portables.',
+      },
+      {
+        title: '¿Quién es responsable de la validación clínica de las salidas de IA?',
+        description:
+          'MedCore Private AI es una tecnología asistiva. Todas las salidas de IA deben ser revisadas y validadas por profesionales sanitarios cualificados antes del uso clínico. Proporcionamos las herramientas e infraestructura para flujos de trabajo de validación clínica, pero la responsabilidad de las decisiones clínicas permanece con su personal médico licenciado. Esto es consistente con los requisitos de la Ley de IA de la UE para sistemas de IA de alto riesgo en sanidad.',
+      },
+    ]}
+  />
+
+</Layout>

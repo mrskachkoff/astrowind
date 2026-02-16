@@ -1,0 +1,89 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import ContactUs from '~/components/widgets/Contact.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+
+const metadata = {
+  title: 'Contacto',
+  description: 'Ponte en contacto con Futurion Solutions. ¿Preguntas sobre automatización IA centrada en cumplimiento para tu consulta sanitaria? Respondemos en 24 horas laborables.',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- HeroText -->
+
+  <HeroText
+    tagline="Contáctanos"
+    title="Hablemos Sobre Tu Consulta"
+    subtitle="¿Tienes preguntas sobre automatización IA centrada en cumplimiento? ¿Quieres saber cómo podemos ayudar a tu consulta sanitaria a ahorrar tiempo mientras se mantiene conforme? Nos encantaría escucharte."
+  />
+
+  <ContactUs
+    id="form"
+    title="Envíanos un mensaje"
+    subtitle="Ya sea que tengas una pregunta sobre nuestros servicios, quieras discutir las necesidades de tu consulta o estés listo para reservar una auditoría IA gratuita — déjanos un mensaje."
+    inputs={[
+      {
+        type: 'text',
+        name: 'name',
+        label: 'Tu Nombre',
+      },
+      {
+        type: 'email',
+        name: 'email',
+        label: 'Dirección de Correo Electrónico',
+      },
+      {
+        type: 'text',
+        name: 'practice_name',
+        label: 'Nombre de la Consulta (opcional)',
+      },
+      {
+        type: 'text',
+        name: 'inquiry_type',
+        label: 'Tipo de Consulta (ej., Auditoría IA Gratuita, Servicios, Pregunta General)',
+      },
+    ]}
+    textarea={{
+      label: 'Tu Mensaje',
+      name: 'message',
+      placeholder: 'Cuéntanos sobre tu consulta y cómo podemos ayudar...',
+    }}
+    disclaimer={{
+      label:
+        'Al enviar este formulario, aceptas la recopilación de tu información con el propósito de responder a tu consulta. Tus datos se procesan de acuerdo con nuestra Política de Privacidad y los requisitos del RGPD.',
+    }}
+    button="Enviar Mensaje"
+    description="Respondemos en 24 horas laborables."
+  />
+
+  <!-- Información de Contacto -->
+
+  <Features2
+    title="Otras formas de contactarnos"
+    items={[
+      {
+        title: 'Auditoría IA Gratuita',
+        description:
+          '¿Listo para comenzar? Reserva tu auditoría gratuita de cumplimiento IA de 5-7 días directamente en nuestra página dedicada.',
+        icon: 'tabler:clipboard-check',
+      },
+      {
+        title: 'Correo Electrónico',
+        description: 'blacklight.su@gmail.com',
+        icon: 'tabler:mail',
+      },
+      {
+        title: 'LinkedIn',
+        description: 'Conéctate con nosotros en LinkedIn para conocimientos sobre cumplimiento y actualizaciones.',
+        icon: 'tabler:brand-linkedin',
+      },
+      {
+        title: 'Ubicación',
+        description: 'Valencia, España — Sirviendo a consultas sanitarias en toda España y la UE.',
+        icon: 'tabler:map-pin',
+      },
+    ]}
+  />
+</Layout>

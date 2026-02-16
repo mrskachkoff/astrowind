@@ -1,6 +1,6 @@
 ---
 import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
-import { blogCategoryRobots, getStaticPathsBlogCategory } from '~/utils/blog';
+import { blogCategoryRobots, getStaticPathsEsBlogCategory } from '~/utils/blog';
 
 import Layout from '~/layouts/PageLayout.astro';
 import BlogList from '~/components/blog/List.astro';
@@ -11,7 +11,7 @@ import { useTranslations } from '~/i18n/utils';
 export const prerender = true;
 
 export const getStaticPaths = (async ({ paginate }) => {
-  return await getStaticPathsBlogCategory({ paginate });
+  return await getStaticPathsEsBlogCategory({ paginate });
 }) satisfies GetStaticPaths;
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths> & { category: Record<string, string> };
@@ -19,7 +19,7 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths> & { category: Record
 const { page, category } = Astro.props as Props;
 
 const currentPage = page.currentPage ?? 1;
-const t = useTranslations('en');
+const t = useTranslations('es');
 
 const metadata = {
   title: `${t('blog.category')} '${category.title}'${currentPage > 1 ? ` — ${t('blog.page')} ${currentPage}` : ''}`,

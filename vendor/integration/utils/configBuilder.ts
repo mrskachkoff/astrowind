@@ -29,6 +29,8 @@ export interface MetaDataConfig extends Omit<MetaData, 'title'> {
 export interface I18NConfig {
   language: string;
   textDirection: string;
+  defaultLocale: string;
+  locales: string[];
   dateFormatter?: Intl.DateTimeFormat;
 }
 export interface AppBlogConfig {
@@ -122,6 +124,8 @@ const getI18N = (config: Config) => {
   const _default = {
     language: 'en',
     textDirection: 'ltr',
+    defaultLocale: 'en',
+    locales: ['en'],
   };
 
   const value = merge({}, _default, config?.i18n ?? {});

@@ -70,7 +70,7 @@ apps:
 analytics:
   vendors:
     googleAnalytics:
-      id: null # or "G-XXXXXXXXXX"
+      id: "G-CWM1N7R89S"
 
 ui:
   theme: 'system'

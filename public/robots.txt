@@ -1,2 +1,7 @@
 User-agent: *
-Disallow:
+Allow: /
+
+User-agent: facebot
+Allow: /
+
+Sitemap: https://solutions.futurion.es/sitemap-index.xml

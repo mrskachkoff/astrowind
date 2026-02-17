@@ -15,6 +15,43 @@ const FROM_EMAIL = 'solutions@futurion.es';
 const TO_EMAIL = 'solutions@futurion.es';
 const ALLOWED_ORIGIN = 'https://solutions.futurion.es';
 
+// --- Rate limiting (in-memory, resets on cold start) ---
+
+const ipLimits = new Map();
+const MAX_SUBMISSIONS = 3;
+const WINDOW_MS = 60 * 60 * 1000; // 1 hour
+
+function checkRateLimit(ip) {
+  const now = Date.now();
+  const record = ipLimits.get(ip);
+
+  if (!record || now > record.resetAt) {
+    ipLimits.set(ip, { count: 1, resetAt: now + WINDOW_MS });
+    return true;
+  }
+
+  if (record.count >= MAX_SUBMISSIONS) {
+    return false;
+  }
+
+  record.count++;
+  return true;
+}
+
+// --- Timestamp verification ---
+// Form embeds Date.now() at page load. Lambda rejects if:
+//  - too fast (< 3s, likely bot)
+//  - too old (> 30 min, replay or stale)
+
+const MIN_ELAPSED_MS = 3 * 1000;
+const MAX_ELAPSED_MS = 30 * 60 * 1000;
+
+function isTimestampValid(ts) {
+  const now = Date.now();
+  const elapsed = now - ts;
+  return elapsed >= MIN_ELAPSED_MS && elapsed <= MAX_ELAPSED_MS;
+}
+
 // --- Validation constants ---
 
 const MAX_NAME_LENGTH = 100;
@@ -112,6 +149,12 @@ export async function handler(event) {
     return jsonResponse(403, { error: 'Forbidden' });
   }
 
+  // IP-based rate limiting
+  const ip = event.requestContext?.http?.sourceIp || 'unknown';
+  if (!checkRateLimit(ip)) {
+    return jsonResponse(429, { error: 'Too many submissions. Please try again later.' });
+  }
+
   // Parse request body
   let body;
   try {
@@ -124,6 +167,13 @@ export async function handler(event) {
   if (body.website) {
     console.log('Honeypot triggered, ignoring submission');
     return jsonResponse(200, { success: true });
+  }
+
+  // Timestamp verification — rejects bots that skip the page and replays
+  const ts = Number(body._t);
+  if (!ts || !isTimestampValid(ts)) {
+    console.log('Timestamp validation failed:', { ts, now: Date.now() });
+    return jsonResponse(403, { error: 'Submission expired or invalid. Please reload the page and try again.' });
   }
 
   // Required field validation

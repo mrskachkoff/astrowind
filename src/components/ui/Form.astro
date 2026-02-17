@@ -129,6 +129,9 @@ const lang = Astro.url.pathname.startsWith('/es') ? 'es' : 'en';
       if (form.dataset.bound === 'true') return;
       form.dataset.bound = 'true';
 
+      // Record page-load timestamp for server-side verification
+      const pageLoadedAt = Date.now();
+
       const lang = (form.dataset.lang || 'en') as 'en' | 'es';
       const t = i18n[lang] || i18n.en;
 
@@ -185,6 +188,7 @@ const lang = Astro.url.pathname.startsWith('/es') ? 'es' : 'en';
           utm_medium: params.get('utm_medium') || '',
           utm_campaign: params.get('utm_campaign') || '',
           language: lang,
+          _t: pageLoadedAt,
         };
 
         // Loading state

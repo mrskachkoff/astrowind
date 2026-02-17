@@ -204,6 +204,18 @@ const lang = Astro.url.pathname.startsWith('/es') ? 'es' : 'en';
           });
 
           if (response.ok) {
+            // Fire GA4 lead event (respects cookie consent — gtag only exists if analytics accepted)
+            if (typeof window.gtag === 'function') {
+              window.gtag('event', 'generate_lead', {
+                event_category: 'Contact',
+                event_label: payload.inquiry_type || 'General',
+                language: lang,
+                utm_source: payload.utm_source || undefined,
+                utm_medium: payload.utm_medium || undefined,
+                utm_campaign: payload.utm_campaign || undefined,
+              });
+            }
+
             // Replace form content with success message
             form.innerHTML = `
               <div class="text-center py-8">

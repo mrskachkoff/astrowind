@@ -2,10 +2,12 @@
 import type { Form as Props } from '~/types';
 import Button from '~/components/ui/Button.astro';
 
-const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } = Astro.props;
+const { inputs, textarea, disclaimer, button = 'Contact us', description = '', apiUrl = '' } = Astro.props;
+
+const lang = Astro.url.pathname.startsWith('/es') ? 'es' : 'en';
 ---
 
-<form>
+<form data-api-url={apiUrl || undefined} data-lang={lang}>
   {
     inputs &&
       inputs.map(
@@ -29,6 +31,11 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
           )
       )
   }
+
+  <!-- Honeypot field — hidden from real users, bots auto-fill it -->
+  <div class="hidden" aria-hidden="true">
+    <input type="text" name="website" tabindex="-1" autocomplete="off" />
+  </div>
 
   {
     textarea && (
@@ -77,6 +84,8 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
     )
   }
 
+  <div id="form-feedback" class="mt-4 hidden"></div>
+
   {
     description && (
       <div class="mt-3 text-center">
@@ -85,3 +94,144 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
     )
   }
 </form>
+
+<script>
+  const i18n = {
+    en: {
+      sending: 'Sending...',
+      nameRequired: 'Please enter your name.',
+      emailRequired: 'Please enter a valid email address.',
+      messageRequired: 'Please enter a message.',
+      disclaimerRequired: 'Please accept the privacy disclaimer.',
+      success: 'Thank you! Your message has been sent successfully. We will get back to you within 24 business hours.',
+      error: 'Something went wrong. Please try again later.',
+    },
+    es: {
+      sending: 'Enviando...',
+      nameRequired: 'Por favor, introduce tu nombre.',
+      emailRequired: 'Por favor, introduce una dirección de correo electrónico válida.',
+      messageRequired: 'Por favor, introduce un mensaje.',
+      disclaimerRequired: 'Debes aceptar la política de privacidad.',
+      success:
+        'Gracias! Tu mensaje ha sido enviado correctamente. Nos pondremos en contacto contigo en un plazo de 24 horas laborables.',
+      error: 'Algo salió mal. Por favor, inténtalo de nuevo más tarde.',
+    },
+  };
+
+  function initContactForm() {
+    const forms = document.querySelectorAll<HTMLFormElement>('form[data-api-url]');
+
+    forms.forEach((form) => {
+      const apiUrl = form.dataset.apiUrl;
+      if (!apiUrl) return;
+
+      // Prevent double-binding after View Transitions
+      if (form.dataset.bound === 'true') return;
+      form.dataset.bound = 'true';
+
+      const lang = (form.dataset.lang || 'en') as 'en' | 'es';
+      const t = i18n[lang] || i18n.en;
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const feedback = form.querySelector<HTMLDivElement>('#form-feedback');
+        const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+        if (!feedback || !submitBtn) return;
+
+        // Reset feedback
+        feedback.className = 'mt-4 hidden';
+        feedback.textContent = '';
+
+        // Gather values
+        const formData = new FormData(form);
+        const name = (formData.get('name') as string || '').trim();
+        const email = (formData.get('email') as string || '').trim();
+        const message = (formData.get('message') as string || '').trim();
+        const disclaimerChecked = form.querySelector<HTMLInputElement>('#disclaimer')?.checked ?? false;
+
+        // Client-side validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!name) {
+          showFeedback(feedback, t.nameRequired, 'error');
+          return;
+        }
+        if (!email || !emailRegex.test(email)) {
+          showFeedback(feedback, t.emailRequired, 'error');
+          return;
+        }
+        if (!message) {
+          showFeedback(feedback, t.messageRequired, 'error');
+          return;
+        }
+        if (!disclaimerChecked) {
+          showFeedback(feedback, t.disclaimerRequired, 'error');
+          return;
+        }
+
+        // Read UTM params from URL
+        const params = new URLSearchParams(window.location.search);
+
+        const payload = {
+          name,
+          email,
+          practice_name: (formData.get('practice_name') as string || '').trim(),
+          inquiry_type: (formData.get('inquiry_type') as string || '').trim(),
+          message,
+          disclaimer: disclaimerChecked,
+          website: (formData.get('website') as string || '').trim(),
+          utm_source: params.get('utm_source') || '',
+          utm_medium: params.get('utm_medium') || '',
+          utm_campaign: params.get('utm_campaign') || '',
+          language: lang,
+        };
+
+        // Loading state
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = t.sending;
+
+        try {
+          const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+
+          if (response.ok) {
+            // Replace form content with success message
+            form.innerHTML = `
+              <div class="text-center py-8">
+                <svg class="w-16 h-16 mx-auto text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <p class="text-lg font-medium text-gray-900 dark:text-white">${t.success}</p>
+              </div>
+            `;
+          } else {
+            const data = await response.json().catch(() => ({}));
+            showFeedback(feedback, data.error || t.error, 'error');
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+          }
+        } catch {
+          showFeedback(feedback, t.error, 'error');
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+        }
+      });
+    });
+  }
+
+  function showFeedback(el: HTMLDivElement, message: string, type: 'error' | 'success') {
+    el.className =
+      type === 'error'
+        ? 'mt-4 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 text-sm'
+        : 'mt-4 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 text-sm';
+    el.textContent = message;
+  }
+
+  // Initialize on first load and after View Transitions navigation
+  document.addEventListener('astro:page-load', initContactForm);
+</script>

@@ -4,6 +4,8 @@ import Headline from '~/components/ui/Headline.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import type { Contact as Props } from '~/types';
 
+const contactApiUrl = import.meta.env.PUBLIC_CONTACT_API_URL;
+
 const {
   title = await Astro.slots.render('title'),
   subtitle = await Astro.slots.render('subtitle'),
@@ -33,6 +35,7 @@ const {
           disclaimer={disclaimer}
           button={button}
           description={description}
+          apiUrl={contactApiUrl}
         />
       </div>
     )

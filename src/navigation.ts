@@ -58,7 +58,6 @@ export function getFooterData(lang: Locale = 'en') {
           { text: t('footer.smallPracticeAutomation'), href: getLocalizedPath('/services', lang) },
           { text: t('footer.medcorePrivateAi'), href: getLocalizedPath('/medcore-private-ai', lang) },
           { text: t('footer.freeAiAudit'), href: getLocalizedPath('/free-ai-audit', lang) },
-          { text: t('footer.medicalAiDemo'), href: getLocalizedPath('/medical-ai-demo', lang) },
           { text: t('footer.pricing'), href: getLocalizedPath('/pricing', lang) },
         ],
       },

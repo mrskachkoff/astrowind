@@ -66,9 +66,7 @@ MedCore Private AI is designed for organizations that process significant volume
 
 ## Try It Before You Commit
 
-We've built a [free medical AI demo](/medical-ai-demo) that lets you experience how purpose-built medical language models handle clinical queries, documentation, and multilingual communication. No signup required.
-
-For a deeper evaluation, we offer scoped pilot deployments — typically a single use case or department — that let you validate the technology in your environment before committing to full deployment.
+We offer scoped pilot deployments — typically a single use case or department — that let you validate the technology in your environment before committing to full deployment.
 
 ## Getting Started
 

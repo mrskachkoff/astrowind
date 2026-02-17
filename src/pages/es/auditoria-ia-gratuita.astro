@@ -258,31 +258,6 @@ const metadata = {
     ]}
   />
 
-  <!-- Booking Widget -->
-
-  <div id="form" class="max-w-5xl mx-auto px-4 py-12 md:py-16 lg:py-20">
-    <div class="text-center mb-8">
-      <h2 class="text-3xl md:text-4xl font-bold tracking-tight dark:text-white mb-4">Reserve su auditoría de IA gratuita</h2>
-      <p class="text-lg text-gray-600 dark:text-slate-400 max-w-3xl mx-auto">
-        Seleccione un horario que le convenga. La auditoría completa toma 5-7 días laborables después de su consulta inicial.
-      </p>
-    </div>
-    <div class="rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden bg-white dark:bg-slate-900 shadow-lg">
-      <iframe
-        src="https://outlook.office.com/book/FuturionSolutions@futurion.es/"
-        width="100%"
-        height="700"
-        scrolling="yes"
-        style="border:0"
-        title="Reserve una Auditoría de IA Gratuita con Futurion Solutions"
-        loading="lazy"
-      ></iframe>
-    </div>
-    <p class="text-sm text-gray-500 dark:text-slate-500 text-center mt-4">
-      Su información se procesa de acuerdo con nuestra <a href="/es/privacidad" class="underline hover:text-primary">Política de Privacidad</a> y los requisitos del RGPD.
-    </p>
-  </div>
-
   <!-- Urgency CTA -->
 
   <CallToAction
@@ -303,3 +278,17 @@ const metadata = {
     </Fragment>
   </CallToAction>
 </Layout>
+
+<script>
+  document.addEventListener('click', (e) => {
+    const link = (e.target as HTMLElement).closest('a[href*="outlook.office.com/book"]');
+    if (!link) return;
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'generate_lead', {
+        event_category: 'Audit',
+        event_label: 'Free AI Audit',
+        language: 'es',
+      });
+    }
+  });
+</script>

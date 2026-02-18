@@ -50,11 +50,13 @@ const lang = Astro.currentLocale || 'en';
             "@type": "ImageObject",
             "url": "https://solutions.futurion.es/favicon.svg"
           },
+          "description": "Compliance-first AI automation agency helping small healthcare providers in Spain and the EU automate safely under GDPR. Specialists in dental clinics, pharmacies, and medical practices with 1–10 employees.",
           "contactPoint": {
             "@type": "ContactPoint",
             "contactType": "customer service",
             "areaServed": ["ES", "EU"],
-            "availableLanguage": ["Spanish", "English"]
+            "availableLanguage": ["Spanish", "English"],
+            "email": "solutions@futurion.es"
           },
           "sameAs": [
             "https://www.linkedin.com/company/futurion-solutions"
@@ -76,6 +78,15 @@ const lang = Astro.currentLocale || 'en';
             { "@type": "Place", "name": "European Union" }
           ],
           "parentOrganization": { "@id": "https://solutions.futurion.es/#organization" }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://solutions.futurion.es/#website",
+          "url": "https://solutions.futurion.es",
+          "name": "Futurion Solutions",
+          "description": "Compliance-first AI automation for healthcare providers in Spain and the EU",
+          "inLanguage": ["en", "es"],
+          "publisher": { "@id": "https://solutions.futurion.es/#organization" }
         }
       ]
     }} />

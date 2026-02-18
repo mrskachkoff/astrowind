@@ -1,5 +1,6 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import JsonLd from '~/components/common/JsonLd.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
 import Stats from '~/components/widgets/Stats.astro';
@@ -15,9 +16,81 @@ const metadata = {
   title: 'Futurion Solutions — Automatización IA con Cumplimiento Normativo para Sanidad',
   ignoreTitleTemplate: true,
 };
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Qué es una auditoría IA centrada en cumplimiento?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nuestra auditoría gratuita evalúa el manejo de datos de tu clínica, identifica dónde la IA puede automatizar tareas de forma segura y señala brechas de cumplimiento. Es una auditoría de riesgo y procesos con una capa de viabilidad IA — no un argumento de ventas. Recibes un informe detallado sobre el que puedes actuar de forma independiente."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Se enviarán los datos de pacientes a la nube?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Diseñamos soluciones IA híbridas y locales que mantienen los datos de pacientes dentro de la infraestructura de tu clínica. La mayoría de herramientas IA basadas en la nube no son adecuadas para datos sanitarios bajo el RGPD. Usamos arquitecturas que mantienen los datos sensibles localmente."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto cuesta la implementación?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nuestras implementaciones de victorias rápidas comienzan alrededor de €1.500-3.000 para 1-2 automatizaciones. Los paquetes de automatización completos van de €5.000-15.000. El soporte mensual comienza en €200/mes. La auditoría gratuita te da una imagen clara antes de cualquier compromiso."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Somos una clínica pequeña — ¿es esto para nosotros?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutamente. Nos especializamos en pequeños negocios sanitarios: clínicas dentales, farmacias y consultas con 1-10 empleados. Nuestras soluciones están diseñadas para ser asequibles e impactantes para consultas que no tienen equipos de TI dedicados."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué marcos de RGPD y cumplimiento seguís?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Trabajamos con marcos RGPD, HIPAA, SOC2 e ISO 27001. Cada automatización incluye acuerdos adecuados de procesamiento de datos, pistas de auditoría, gestión de consentimiento y documentación requerida por las regulaciones de la UE y España (AEPD)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto tarda la implementación?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La auditoría gratuita tarda 5-7 días laborables. Las implementaciones de victorias rápidas pueden completarse en 2-4 semanas. Las transformaciones de automatización completas normalmente tardan 6-12 semanas, dependiendo de la complejidad. Ves resultados desde la primera semana."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué pasa si ya usamos un sistema de gestión de consultas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nos integramos con tus herramientas existentes. Nuestras automatizaciones funcionan junto a tu software actual de gestión de consultas, sistemas EHR y flujos de trabajo — mejoramos lo que tienes en lugar de reemplazarlo."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Es realmente gratuita la auditoría?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. La auditoría de cumplimiento IA de 5-7 días es completamente gratuita sin obligaciones. Recibes un informe completo con puntuaciones de riesgo, recomendaciones de automatización y una hoja de ruta de cumplimiento. Alrededor del 40-60% de las clínicas auditadas eligen proceder con la implementación, pero no hay presión alguna."
+      }
+    }
+  ]
+};
 ---
 
 <Layout metadata={metadata}>
+  <JsonLd schema={faqSchema} />
   <!-- Hero: Automatización IA con Cumplimiento Normativo Primero -->
 
   <Hero

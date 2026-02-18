@@ -12,6 +12,7 @@ import { getStaticPathsEsBlogPost, blogPostRobots } from '~/utils/blog';
 import { findImage } from '~/utils/images';
 import type { MetaData } from '~/types';
 import RelatedPosts from '~/components/blog/RelatedPosts.astro';
+import JsonLd from '~/components/common/JsonLd.astro';
 
 export const prerender = true;
 
@@ -43,9 +44,40 @@ const metadata = merge(
   },
   { ...(post?.metadata ? { ...post.metadata, canonical: post.metadata?.canonical || url } : {}) }
 ) as MetaData;
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": post.title,
+  "description": post.excerpt || '',
+  "inLanguage": "es",
+  "datePublished": post.publishDate ? new Date(post.publishDate).toISOString() : undefined,
+  "dateModified": post.updateDate ? new Date(post.updateDate).toISOString() : (post.publishDate ? new Date(post.publishDate).toISOString() : undefined),
+  "author": {
+    "@type": "Organization",
+    "name": "Futurion Solutions",
+    "url": "https://solutions.futurion.es"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Futurion Solutions",
+    "url": "https://solutions.futurion.es",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://solutions.futurion.es/favicon.svg"
+    }
+  },
+  "url": String(url),
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": String(url)
+  },
+  ...(image ? { "image": typeof image === 'string' ? image : (image as ImageMetadata).src } : {})
+};
 ---
 
 <Layout metadata={metadata}>
+  <JsonLd schema={articleSchema} />
   <SinglePost post={{ ...post, image: image }} url={url}>
     {post.Content ? <post.Content /> : <Fragment set:html={post.content || ''} />}
   </SinglePost>

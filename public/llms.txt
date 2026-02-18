@@ -1,0 +1,51 @@
+# Futurion Solutions
+
+> Futurion Solutions is a compliance-first AI automation agency helping small healthcare providers in Spain and the EU automate administrative tasks safely under GDPR. We serve dental clinics, pharmacies, and medical practices with 1–10 employees. We offer a free 5–7 day AI compliance audit, compliant automation implementation (€1,500–€15,000), and ongoing support (from €200/month). Patient data never leaves the clinic — we use on-premise and hybrid AI architectures. Based in Valencia, Spain.
+
+## Key pages
+
+- [Homepage (English)](https://solutions.futurion.es/): Overview of compliance-first AI automation for healthcare, free audit offer, how it works, FAQ
+- [Homepage (Spanish)](https://solutions.futurion.es/es/): Spanish-language overview — Automatización IA con cumplimiento normativo para sanidad
+- [Services](https://solutions.futurion.es/services): Full list of AI automation services — appointment scheduling, patient communications, billing, compliance documentation
+- [Servicios (ES)](https://solutions.futurion.es/es/servicios): Spanish services page
+- [Free AI Compliance Audit](https://solutions.futurion.es/free-ai-audit): Request the free 5–7 day GDPR + AI feasibility audit
+- [Auditoría IA Gratuita (ES)](https://solutions.futurion.es/es/auditoria-ia-gratuita): Spanish audit request page
+- [Pricing](https://solutions.futurion.es/pricing): Transparent pricing for audit, implementation packages, and monthly support
+- [Precios (ES)](https://solutions.futurion.es/es/precios): Spanish pricing page
+- [MedCore Private AI](https://solutions.futurion.es/medcore-private-ai): On-premise medical-grade AI infrastructure for medium healthcare organizations
+- [MedCore IA Privada (ES)](https://solutions.futurion.es/es/medcore-ia-privada): Spanish MedCore page
+- [About](https://solutions.futurion.es/about): About Futurion Solutions — team, mission, location (Valencia, Spain)
+- [Nosotros (ES)](https://solutions.futurion.es/es/nosotros): Spanish about page
+- [Blog](https://solutions.futurion.es/blog): Articles on healthcare AI compliance, GDPR, automation, and data privacy
+- [Blog (ES)](https://solutions.futurion.es/es/blog): Spanish-language blog
+- [Contact](https://solutions.futurion.es/contact): Contact form — solutions@futurion.es
+
+## Blog articles (English)
+
+- [GDPR Compliance for Growing Healthcare Providers: A Complete Guide](https://solutions.futurion.es/gdpr-compliance-small-healthcare-providers-guide): 7 key GDPR requirements for dental clinics, pharmacies, and growing medical practices in Spain
+- [5 Ways Dental Clinics Can Automate Workflows (While Staying Compliant)](https://solutions.futurion.es/dental-clinics-automate-workflows-compliance): Specific automation use cases for dental practices under GDPR
+- [Why Healthcare Needs On-Premise AI](https://solutions.futurion.es/why-healthcare-needs-on-premise-ai): Data sovereignty and GDPR arguments for local AI deployment in healthcare
+- [Why Hybrid AI Solutions Matter for Healthcare](https://solutions.futurion.es/why-hybrid-ai-solutions-matter-healthcare): Architecture trade-offs between cloud, on-premise, and hybrid AI for healthcare
+- [Introducing MedCore Private AI](https://solutions.futurion.es/introducing-medcore-private-ai): Product introduction for the on-premise medical-grade AI platform
+
+## Artículos del blog (Español)
+
+- [Cumplimiento RGPD para Consultas Sanitarias en Crecimiento: Guía Completa](https://solutions.futurion.es/es/es-guia-cumplimiento-rgpd-consultas-sanitarias): 7 requisitos clave del RGPD para clínicas dentales, farmacias y consultas médicas en España
+- [5 Formas de Automatizar Flujos de Trabajo en Clínicas Dentales (Con Cumplimiento)](https://solutions.futurion.es/es/es-clinicas-dentales-automatizar-flujos-conformidad): Casos de uso de automatización para clínicas dentales bajo el RGPD
+- [Por Qué la Sanidad Necesita IA Local](https://solutions.futurion.es/es/es-por-que-sanidad-necesita-ia-local): Argumentos de soberanía de datos y RGPD para el despliegue de IA local en sanidad
+- [Por Qué las Soluciones de IA Híbridas Son Clave en Sanidad](https://solutions.futurion.es/es/es-soluciones-ia-hibridas-sanidad): Comparativa de arquitecturas cloud, local e híbrida para sanidad
+- [Presentamos MedCore Private AI](https://solutions.futurion.es/es/es-presentando-medcore-private-ai): Introducción a la plataforma de IA médica de grado empresarial completamente local
+
+## Key facts
+
+- Location: Valencia, Spain
+- Languages: English, Spanish
+- Target clients: Dental clinics, pharmacies, small medical practices (1–10 employees) in Spain and the EU
+- Compliance frameworks: GDPR, HIPAA, SOC2, ISO 27001, AEPD (Spain)
+- Free audit: 5–7 business days, no obligation, includes risk scores and automation roadmap
+- Implementation pricing: €1,500–€3,000 (quick-win), €5,000–€15,000 (comprehensive)
+- Monthly support: from €200/month
+- Time savings: 10–15 hours per week per practice
+- Data architecture: on-premise and hybrid — patient data stays in the clinic
+- Contact: solutions@futurion.es
+- LinkedIn: https://www.linkedin.com/company/futurion-solutions

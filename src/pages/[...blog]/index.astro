@@ -50,6 +50,7 @@ const articleSchema = {
   "@type": "Article",
   "headline": post.title,
   "description": post.excerpt || '',
+  "inLanguage": "en",
   "datePublished": post.publishDate ? new Date(post.publishDate).toISOString() : undefined,
   "dateModified": post.updateDate ? new Date(post.updateDate).toISOString() : (post.publishDate ? new Date(post.publishDate).toISOString() : undefined),
   "author": {

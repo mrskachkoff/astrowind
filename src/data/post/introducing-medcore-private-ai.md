@@ -12,7 +12,7 @@ tags:
   - data sovereignty
 ---
 
-At Futurion Solutions, we've spent the past year helping small healthcare practices automate compliantly — dental clinics, pharmacies, and medical practices that need AI without compromising patient data security. That work has taught us something important: **the compliance challenges don't go away as organizations get bigger. They get harder.**
+At Futurion Solutions, we've spent the past year helping growing healthcare practices automate compliantly — dental clinics, pharmacies, and medical practices that need AI without compromising patient data security. That work has taught us something important: **the compliance challenges don't go away as organizations get bigger. They get harder.**
 
 Today, we're expanding our offering with **MedCore Private AI** — a fully on-premise medical AI platform designed for medium healthcare organizations that need institutional-grade AI capabilities with complete data sovereignty.
 

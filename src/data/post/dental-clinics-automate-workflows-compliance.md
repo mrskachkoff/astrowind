@@ -9,8 +9,6 @@ tags:
   - automation
   - compliance
   - workflow optimization
-metadata:
-  canonical: https://futurionsolutions.com/dental-clinics-automate-workflows-compliance
 ---
 
 Running a dental clinic means juggling patient care with a mountain of administrative work. Appointment scheduling, follow-up calls, insurance verification, patient reminders, billing — these tasks consume 10-15 hours per week that could be spent on what actually matters.

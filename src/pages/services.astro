@@ -1,5 +1,6 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import JsonLd from '~/components/common/JsonLd.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
 import Features2 from '~/components/widgets/Features2.astro';
@@ -9,12 +10,36 @@ import Steps from '~/components/widgets/Steps.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'Services',
+  title: 'AI Automation Services for Healthcare | Futurion Solutions',
   description: 'Compliance-first AI automation services for healthcare providers. Free AI Audit, implementation, and ongoing support for dental clinics, pharmacies, and small medical practices.',
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Compliance-First AI Automation for Healthcare",
+  "description": "Compliance-first AI automation services for dental clinics, pharmacies, and small medical practices in Spain and the EU. Includes free AI compliance audit, GDPR-safe implementation, and ongoing support.",
+  "provider": {
+    "@type": "Organization",
+    "name": "Futurion Solutions",
+    "url": "https://solutions.futurion.es"
+  },
+  "areaServed": [
+    { "@type": "Country", "name": "Spain" },
+    { "@type": "Place", "name": "European Union" }
+  ],
+  "serviceType": "AI Automation Consulting",
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Healthcare Providers"
+  },
+  "url": "https://solutions.futurion.es/services"
 };
 ---
 
 <Layout metadata={metadata}>
+  <JsonLd schema={serviceSchema} />
+
   <!-- Hero -->
 
   <Hero

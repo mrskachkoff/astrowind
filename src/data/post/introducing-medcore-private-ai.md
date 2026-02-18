@@ -10,8 +10,6 @@ tags:
   - on-premise
   - healthcare
   - data sovereignty
-metadata:
-  canonical: https://futurionsolutions.com/introducing-medcore-private-ai
 ---
 
 At Futurion Solutions, we've spent the past year helping small healthcare practices automate compliantly — dental clinics, pharmacies, and medical practices that need AI without compromising patient data security. That work has taught us something important: **the compliance challenges don't go away as organizations get bigger. They get harder.**

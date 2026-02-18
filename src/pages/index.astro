@@ -1,5 +1,6 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import JsonLd from '~/components/common/JsonLd.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
 import Stats from '~/components/widgets/Stats.astro';
@@ -15,9 +16,82 @@ const metadata = {
   title: 'Futurion Solutions — Compliance-First AI Automation for Healthcare',
   ignoreTitleTemplate: true,
 };
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a compliance-first AI audit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our free audit assesses your clinic's data handling, identifies where AI can safely automate tasks, and flags compliance gaps. It is a risk and process audit with an AI feasibility overlay — not a sales pitch. You receive a detailed report you can act on independently."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will patient data be sent to the cloud?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. We design hybrid and on-premise AI solutions that keep patient data within your clinic's infrastructure. Most cloud-based AI tools are unsuitable for healthcare data under GDPR. We use architectures that keep sensitive data local."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does implementation cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our quick-win implementations start at around €1,500-3,000 for 1-2 automations. Comprehensive automation packages range from €5,000-15,000. Monthly support starts at €200/month. The free audit gives you a clear picture before any commitment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "We're a small clinic — is this for us?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely. We specialize in small healthcare businesses: dental clinics, pharmacies, and practices with 1-10 employees. Our solutions are designed to be affordable and impactful for practices that don't have dedicated IT teams."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What GDPR and compliance frameworks do you follow?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We work with GDPR, HIPAA, SOC2, and ISO 27001 frameworks. Every automation includes proper data processing agreements, audit trails, consent management, and documentation required by EU and Spanish (AEPD) regulations."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does implementation take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The free audit takes 5-7 business days. Quick-win implementations can be completed in 2-4 weeks. Full automation transformations typically take 6-12 weeks, depending on complexity. You see results from week one."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if we already use a practice management system?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We integrate with your existing tools. Our automations work alongside your current practice management software, EHR systems, and workflows — we enhance what you have rather than replacing it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the audit really free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The 5-7 day AI compliance audit is completely free with no obligations. You receive a full report with risk scores, automation recommendations, and a compliance roadmap. About 40-60% of audited clinics choose to proceed with implementation, but there is zero pressure."
+      }
+    }
+  ]
+};
 ---
 
 <Layout metadata={metadata}>
+  <JsonLd schema={faqSchema} />
+
   <!-- Hero: Compliance-First AI Automation -->
 
   <Hero

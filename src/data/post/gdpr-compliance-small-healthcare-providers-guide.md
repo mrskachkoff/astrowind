@@ -9,8 +9,6 @@ tags:
   - healthcare
   - compliance
   - data privacy
-metadata:
-  canonical: https://futurionsolutions.com/gdpr-compliance-small-healthcare-providers-guide
 ---
 
 If you run a dental clinic, pharmacy, or small medical practice in Spain or the EU, you handle **special category data** — health information that receives the highest level of protection under GDPR. Yet most small practices lack the compliance infrastructure that large hospital systems have.

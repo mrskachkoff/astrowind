@@ -11,8 +11,6 @@ tags:
   - healthcare
   - compliance
   - private ai
-metadata:
-  canonical: https://futurionsolutions.com/why-healthcare-needs-on-premise-ai
 ---
 
 The promise of cloud AI is compelling: instant access to powerful language models, no infrastructure to manage, and pay-as-you-go pricing. For many industries, it works well. **Healthcare is not one of them.**

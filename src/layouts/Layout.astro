@@ -12,6 +12,7 @@ import SiteVerification from '~/components/common/SiteVerification.astro';
 import Analytics from '~/components/common/Analytics.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
 import CookieConsent from '~/components/common/CookieConsent.astro';
+import JsonLd from '~/components/common/JsonLd.astro';
 
 // Comment the line below to disable View Transitions
 import { ClientRouter } from 'astro:transitions';
@@ -37,6 +38,47 @@ const lang = Astro.currentLocale || 'en';
     <Metadata {...metadata} />
     <SiteVerification />
     <Analytics />
+    <JsonLd schema={{
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://solutions.futurion.es/#organization",
+          "name": "Futurion Solutions",
+          "url": "https://solutions.futurion.es",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://solutions.futurion.es/favicon.svg"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "areaServed": ["ES", "EU"],
+            "availableLanguage": ["Spanish", "English"]
+          },
+          "sameAs": [
+            "https://www.linkedin.com/company/futurion-solutions"
+          ]
+        },
+        {
+          "@type": "MedicalBusiness",
+          "@id": "https://solutions.futurion.es/#localbusiness",
+          "name": "Futurion Solutions",
+          "url": "https://solutions.futurion.es",
+          "description": "Compliance-first AI automation agency helping small healthcare providers in Spain and the EU automate safely under GDPR.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Valencia",
+            "addressCountry": "ES"
+          },
+          "areaServed": [
+            { "@type": "Country", "name": "Spain" },
+            { "@type": "Place", "name": "European Union" }
+          ],
+          "parentOrganization": { "@id": "https://solutions.futurion.es/#organization" }
+        }
+      ]
+    }} />
 
     <!-- Comment the line below to disable View Transitions -->
     <ClientRouter fallback="swap" />

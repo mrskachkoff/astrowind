@@ -1,7 +1,7 @@
 ---
 publishDate: 2026-01-20T00:00:00Z
 title: '5 Ways Dental Clinics Can Automate Workflows (While Staying Compliant)'
-excerpt: Growing dental clinics waste 10-15 hours per week on administrative tasks that can be automated. Here are 5 high-impact automations that save time without compromising patient data or GDPR compliance.
+excerpt: Independent dental clinics waste 10-15 hours per week on administrative tasks that can be automated. Here are 5 high-impact automations that save time without compromising patient data or GDPR compliance.
 image: ~/assets/images/dental-clinic.jpg
 category: Healthcare Tech
 tags:
@@ -87,7 +87,7 @@ Here are five high-impact automations that dental clinics can implement safely �
 
 ## 5. Compliance Documentation and Audit Readiness
 
-**The problem:** Maintaining GDPR compliance documentation is an ongoing burden. Records of processing activities, consent logs, data breach response plans, staff training records — most growing clinics either don't have these or they're outdated.
+**The problem:** Maintaining GDPR compliance documentation is an ongoing burden. Records of processing activities, consent logs, data breach response plans, staff training records — most practitioner-led clinics either don't have these or they're outdated.
 
 **The automation:** Automated compliance documentation that maintains itself. The system tracks data processing activities, logs consent actions, generates required reports, and alerts you when documentation needs updating.
 
@@ -122,7 +122,7 @@ You don't need to automate everything at once. In fact, we recommend starting wi
 - **Follow-up workflows** deliver immediate patient care improvements
 - **Billing automation** has the most direct impact on revenue
 
-The key is choosing the right starting point for your clinic's specific situation — which is exactly what our free AI compliance audit identifies for growing practices.
+The key is choosing the right starting point for your clinic's specific situation — which is exactly what our free AI compliance audit identifies for independent practices.
 
 ## How We Can Help
 

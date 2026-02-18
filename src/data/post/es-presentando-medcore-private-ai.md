@@ -14,7 +14,7 @@ lang: es
 translationOf: introducing-medcore-private-ai
 ---
 
-En Futurion Solutions, hemos pasado el último año ayudando a consultas sanitarias en crecimiento a automatizar de forma conforme — clínicas dentales, farmacias y consultas médicas que necesitan IA sin comprometer la seguridad de los datos de sus pacientes. Ese trabajo nos ha enseñado algo importante: **los desafíos de cumplimiento no desaparecen cuando las organizaciones crecen. Se vuelven más difíciles.**
+En Futurion Solutions, hemos pasado el último año ayudando a consultorios independientes de sanidad a automatizar de forma conforme — clínicas dentales, farmacias y consultorios de propiedad privada que necesitan IA sin comprometer la seguridad de los datos de sus pacientes. Ese trabajo nos ha enseñado algo importante: **los desafíos de cumplimiento no desaparecen cuando las organizaciones crecen. Se vuelven más difíciles.**
 
 Hoy ampliamos nuestra oferta con **MedCore Private AI** — una plataforma de IA médica completamente local diseñada para organizaciones sanitarias medianas que necesitan capacidades de IA de nivel institucional con soberanía total de datos.
 

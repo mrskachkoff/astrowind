@@ -1,7 +1,7 @@
 ---
 publishDate: 2026-02-03T00:00:00Z
 title: 'Cumplimiento RGPD para Consultas Sanitarias: Guía Completa'
-excerpt: Las consultas sanitarias en crecimiento se enfrentan a los mismos requisitos RGPD que los grandes hospitales — pero sin equipos de cumplimiento dedicados. Aquí tienes todo lo que necesitas saber para proteger los datos de tus pacientes y evitar sanciones costosas.
+excerpt: Los consultorios independientes se enfrentan a los mismos requisitos RGPD que los grandes hospitales — pero sin equipos de cumplimiento dedicados. Aquí tienes todo lo que necesitas saber para proteger los datos de tus pacientes y evitar sanciones costosas.
 image: ~/assets/images/medical-research.jpg
 category: RGPD y Cumplimiento
 tags:
@@ -13,7 +13,7 @@ lang: es
 translationOf: gdpr-compliance-small-healthcare-providers-guide
 ---
 
-Si gestionas una clínica dental, farmacia o consulta médica en España o la UE, manejas **datos de categoría especial** — información sanitaria que recibe el nivel más alto de protección bajo el RGPD. Sin embargo, la mayoría de las consultas en crecimiento carecen de la infraestructura de cumplimiento que tienen los grandes sistemas hospitalarios.
+Si gestionas una clínica dental, farmacia o consultorio independiente en España o la UE, manejas **datos de categoría especial** — información sanitaria que recibe el nivel más alto de protección bajo el RGPD. Sin embargo, la mayoría de los consultorios dirigidos por profesionales carecen de la infraestructura de cumplimiento que tienen los grandes sistemas hospitalarios.
 
 Esta guía cubre los pasos prácticos que necesitas dar.
 
@@ -26,7 +26,7 @@ Los datos sanitarios se clasifican como datos de «categoría especial» bajo el
 - **Sanciones más elevadas** por infracciones — hasta 20 millones de euros o el 4% del volumen de negocios anual
 - Requisitos de **notificación de brechas más estrictos** (72 horas ante la autoridad supervisora)
 
-Para una clínica dental en crecimiento que trata historiales de pacientes, datos de imagen y planes de tratamiento, esto no es teórico. La Agencia Española de Protección de Datos (AEPD) aplica activamente el RGPD a empresas de todos los tamaños.
+Para una clínica dental dirigida por su propietario que trata historiales de pacientes, datos de imagen y planes de tratamiento, esto no es teórico. La Agencia Española de Protección de Datos (AEPD) aplica activamente el RGPD a empresas de todos los tamaños.
 
 ## Los 7 Requisitos Clave del RGPD para Consultas Sanitarias
 
@@ -40,7 +40,7 @@ Antes de nada, necesitas tener una imagen clara de:
 - Cuánto tiempo los conservas
 - Dónde se mueven (entre sistemas, a compañías de seguros, a especialistas)
 
-Esto se llama **mapeo de datos**, y es la base del cumplimiento del RGPD. La mayoría de las consultas en crecimiento nunca han realizado este ejercicio — y se sorprenden con lo que encuentran.
+Esto se llama **mapeo de datos**, y es la base del cumplimiento del RGPD. La mayoría de los consultorios independientes nunca han realizado este ejercicio — y se sorprenden con lo que encuentran.
 
 ### 2. Establece una Base Jurídica para el Tratamiento
 
@@ -91,7 +91,7 @@ Necesitas un proceso para gestionar estas solicitudes. «Ya lo resolveremos cuan
 
 ### 6. Protege los Datos de los Pacientes
 
-El RGPD exige «medidas técnicas y organizativas adecuadas». Para una consulta en crecimiento, esto significa:
+El RGPD exige «medidas técnicas y organizativas adecuadas». Para un consultorio independiente, esto significa:
 
 - **Controles de acceso** — no todo el mundo necesita acceder a todo
 - **Cifrado** — para datos en reposo y en tránsito
@@ -99,7 +99,7 @@ El RGPD exige «medidas técnicas y organizativas adecuadas». Para una consulta
 - **Formación del personal** — sobre los procedimientos de manejo de datos
 - **Plan de respuesta a incidentes** — qué hacer si algo sale mal
 
-Las medidas de seguridad deben ser proporcionales al riesgo. Una clínica en crecimiento no necesita un centro SOC, pero sí necesita tener lo básico en su lugar.
+Las medidas de seguridad deben ser proporcionales al riesgo. Un consultorio independiente no necesita un centro SOC, pero sí necesita tener lo básico en su lugar.
 
 ### 7. Documenta Todo
 
@@ -113,7 +113,7 @@ El RGPD requiere pruebas documentadas del cumplimiento. Los documentos clave inc
 - Plan de respuesta a brechas de datos
 - Evaluaciones de impacto sobre la privacidad (cuando corresponda)
 
-## Brechas de Cumplimiento Habituales en Consultas en Crecimiento
+## Brechas de Cumplimiento Habituales en Consultorios Independientes
 
 Basándonos en nuestra experiencia en auditorías, los problemas más comunes que encontramos son:
 
@@ -133,7 +133,7 @@ La AEPD ha emitido sanciones significativas a organizaciones sanitarias en Espa�
 - No notificar brechas de datos
 - Compartir datos sin autorización
 
-Las sanciones para negocios en crecimiento suelen ser proporcionales, pero incluso una multa de 10.000-50.000 euros puede ser devastadora para una consulta. Más allá de las multas, está el daño reputacional — la confianza de los pacientes es difícil de recuperar.
+Las sanciones suelen ser proporcionales, pero incluso una multa de 10.000-50.000 euros puede ser devastadora para un consultorio dirigido por su propietario. Más allá de las multas, está el daño reputacional — la confianza de los pacientes es difícil de recuperar.
 
 ## Cómo Empezar: Próximos Pasos Prácticos
 

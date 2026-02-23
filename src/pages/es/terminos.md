@@ -109,7 +109,6 @@ Si se encuentra que alguna disposición de estos Términos es inaplicable, las d
 
 ## 14. Contáctenos
 
-Si tiene preguntas sobre estos Términos de Servicio:
+Si tiene preguntas sobre estos Términos de Servicio, utilice nuestro [formulario de contacto](/es/contacto).
 
-- **Email:** blacklight.su@gmail.com
 - **Ubicación:** Valencia, España

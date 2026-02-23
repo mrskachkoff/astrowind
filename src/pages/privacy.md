@@ -15,7 +15,7 @@ We process personal data in accordance with the General Data Protection Regulati
 
 **Futurion Solutions**
 Valencia, Spain
-Email: blacklight.su@gmail.com
+[Contact us via our contact form](/contact)
 
 ## What Data We Collect
 
@@ -103,7 +103,7 @@ Under the GDPR, you have the following rights regarding your personal data:
 - **Right to object (Art. 21):** Object to processing based on legitimate interest
 - **Right to withdraw consent:** Withdraw consent at any time without affecting the lawfulness of processing based on consent before withdrawal
 
-To exercise any of these rights, contact us at: blacklight.su@gmail.com
+To exercise any of these rights, please use our [contact form](/contact).
 
 We will respond to your request within 30 days.
 
@@ -135,7 +135,6 @@ We may update this Privacy Policy from time to time. We will notify you of mater
 
 ## Contact Us
 
-If you have questions about this Privacy Policy or want to exercise your data protection rights:
+If you have questions about this Privacy Policy or want to exercise your data protection rights, please use our [contact form](/contact). We will respond within 30 days.
 
-- **Email:** blacklight.su@gmail.com
 - **Location:** Valencia, Spain

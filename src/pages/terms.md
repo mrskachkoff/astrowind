@@ -109,7 +109,6 @@ If any provision of these Terms is found to be unenforceable, the remaining prov
 
 ## 14. Contact Us
 
-If you have questions about these Terms of Service:
+If you have questions about these Terms of Service, please use our [contact form](/contact).
 
-- **Email:** blacklight.su@gmail.com
 - **Location:** Valencia, Spain

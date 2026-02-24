@@ -55,6 +55,7 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     author,
     draft = false,
     lang = 'en',
+    translationOf,
     metadata = {},
   } = data;
 
@@ -93,6 +94,7 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     draft: draft,
 
     lang: lang,
+    translationOf: translationOf,
 
     metadata,
 

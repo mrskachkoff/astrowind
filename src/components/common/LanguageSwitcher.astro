@@ -2,13 +2,13 @@
 import { getLangFromUrl, getAlternateLanguageUrl } from '~/i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
-const alternateLang = lang === 'en' ? 'es' : 'en';
-const alternateUrl = getAlternateLanguageUrl(Astro.url, alternateLang);
+const enUrl = lang === 'en' ? Astro.url.pathname : await getAlternateLanguageUrl(Astro.url, 'en');
+const esUrl = lang === 'es' ? Astro.url.pathname : await getAlternateLanguageUrl(Astro.url, 'es');
 ---
 
 <div class="inline-flex items-center rounded-lg border border-gray-200 dark:border-gray-600 text-sm overflow-hidden">
   <a
-    href={lang === 'en' ? Astro.url.pathname : getAlternateLanguageUrl(Astro.url, 'en')}
+    href={enUrl}
     class:list={[
       'px-2.5 py-1.5 font-medium transition-colors',
       lang === 'en'
@@ -20,7 +20,7 @@ const alternateUrl = getAlternateLanguageUrl(Astro.url, alternateLang);
     EN
   </a>
   <a
-    href={lang === 'es' ? Astro.url.pathname : getAlternateLanguageUrl(Astro.url, 'es')}
+    href={esUrl}
     class:list={[
       'px-2.5 py-1.5 font-medium transition-colors',
       lang === 'es'

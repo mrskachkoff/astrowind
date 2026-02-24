@@ -45,6 +45,9 @@ export interface Post {
 
   /**  */
   lang?: string;
+
+  /** Slug of the translated counterpart (used for blog translation mapping) */
+  translationOf?: string;
 }
 
 export interface Taxonomy {

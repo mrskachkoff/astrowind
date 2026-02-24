@@ -1,6 +1,7 @@
 import en from './en.json';
 import es from './es.json';
-import { getCanonicalPath, getLocalizedSlug } from './slugs';
+import { getCanonicalPath, getLocalizedSlug, slugMap } from './slugs';
+import { getBlogTranslationMap } from './blogTranslations';
 
 const translations: Record<string, Record<string, unknown>> = { en, es };
 
@@ -52,11 +53,36 @@ export function getLocalizedPath(path: string, lang: Locale): string {
   return getLocalizedSlug(path, lang);
 }
 
+/** Set of canonical paths that have explicit entries in the static slug map */
+const knownStaticPages = new Set(Object.keys(slugMap.en));
+
 /**
  * Given the current URL and a target language, compute the equivalent URL in that language.
+ * Checks blog translation map first (for posts linked via translationOf), then falls back to static slug map.
+ * For blog posts without a translation, returns the blog index instead of a broken URL.
  */
-export function getAlternateLanguageUrl(currentUrl: URL, targetLang: Locale): string {
+export async function getAlternateLanguageUrl(currentUrl: URL, targetLang: Locale): Promise<string> {
   const pathname = currentUrl.pathname.replace(/\/$/, '') || '/';
+
+  // Check blog translation map for posts with translationOf links
+  const blogMap = await getBlogTranslationMap();
+  const blogTranslation = blogMap[pathname];
+  if (blogTranslation) {
+    const translationIsEs = blogTranslation.startsWith('/es/') || blogTranslation === '/es';
+    // Only use the blog translation if it matches the target language
+    if ((targetLang === 'es' && translationIsEs) || (targetLang === 'en' && !translationIsEs)) {
+      return blogTranslation;
+    }
+    // The current page IS in the target language — return the current path
+    return pathname;
+  }
+
+  // Use the static slug map for known pages
   const canonicalPath = getCanonicalPath(pathname);
-  return getLocalizedSlug(canonicalPath, targetLang);
+  if (knownStaticPages.has(canonicalPath)) {
+    return getLocalizedSlug(canonicalPath, targetLang);
+  }
+
+  // Unknown path (likely a blog post without a translation) — fall back to blog index
+  return targetLang === 'es' ? '/es/blog' : '/blog';
 }

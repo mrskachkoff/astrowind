@@ -69,8 +69,8 @@ const seoProps: AstroSeoProps = merge(
 );
 
 // Compute hreflang alternate URLs
-const enUrl = getAlternateLanguageUrl(Astro.url, 'en');
-const esUrl = getAlternateLanguageUrl(Astro.url, 'es');
+const enUrl = await getAlternateLanguageUrl(Astro.url, 'en');
+const esUrl = await getAlternateLanguageUrl(Astro.url, 'es');
 const siteBase = SITE?.site || '';
 const enFullUrl = siteBase + enUrl;
 const esFullUrl = siteBase + esUrl;

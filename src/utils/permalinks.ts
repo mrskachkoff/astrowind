@@ -42,14 +42,13 @@ export const getCanonical = (path = ''): string | URL => {
 export const getPermalink = (slug = '', type = 'page'): string => {
   let permalink: string;
 
-  if (
-    slug.startsWith('https://') ||
-    slug.startsWith('http://') ||
-    slug.startsWith('://') ||
-    slug.startsWith('#') ||
-    slug.startsWith('javascript:')
-  ) {
+  if (slug.startsWith('https://') || slug.startsWith('http://') || slug.startsWith('://') || slug.startsWith('#')) {
     return slug;
+  }
+
+  // Block dangerous URI schemes (javascript:, data:, vbscript:, blob:, etc.)
+  if (/^[a-z][a-z0-9+\-.]*:/i.test(slug)) {
+    return '';
   }
 
   switch (type) {

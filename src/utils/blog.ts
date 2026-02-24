@@ -138,7 +138,7 @@ export const fetchPosts = async (lang?: string): Promise<Array<Post>> => {
   }
 
   if (lang) {
-    return _posts.filter((post) => (post as Post & { lang?: string }).lang === lang);
+    return _posts.filter((post) => post.lang === lang);
   }
 
   return _posts;

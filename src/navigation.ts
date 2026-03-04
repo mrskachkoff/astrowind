@@ -83,7 +83,7 @@ export function getFooterData(lang: Locale = 'en') {
     ],
     socialLinks: [
       { ariaLabel: 'LinkedIn', icon: 'tabler:brand-linkedin', href: 'https://linkedin.com/in/ivan-skachkov' },
-      { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') },
+      { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset(lang === 'es' ? '/es/rss.xml' : '/rss.xml') },
     ],
     footNote: `
     &copy; ${new Date().getFullYear()} Futurion Solutions. ${t('footer.allRightsReserved')}.

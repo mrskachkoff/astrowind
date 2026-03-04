@@ -12,11 +12,11 @@ export const GET = async () => {
     });
   }
 
-  const posts = await fetchPosts('en');
+  const posts = await fetchPosts('es');
 
   const rss = await getRssString({
-    title: 'Futurion Solutions Blog',
-    description: 'Insights on GDPR-compliant AI automation for healthcare practices in Spain and the EU.',
+    title: 'Blog de Futurion Solutions',
+    description: 'Análisis sobre automatización IA conforme al RGPD para consultas sanitarias en España y la UE.',
     site: import.meta.env.SITE,
 
     items: posts.map((post) => ({

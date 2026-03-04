@@ -2,7 +2,7 @@
 publishDate: 2026-02-15T00:00:00Z
 title: 'Presentamos MedCore Private AI: IA Médica Empresarial para Organizaciones Sanitarias que Exigen Privacidad de Datos'
 excerpt: Las organizaciones sanitarias que procesan miles de registros de pacientes necesitan IA que se ejecute completamente en su propia infraestructura. Hoy lanzamos MedCore Private AI — modelos de lenguaje de grado médico desplegados completamente en local con soberanía total de datos.
-image: ~/assets/images/server-room.jpg
+image: ~/assets/images/server-network.jpg
 category: Automatización IA
 tags:
   - medcore

@@ -128,7 +128,7 @@ La clave es elegir el punto de partida adecuado para la situación específica d
 
 ## Cómo Podemos Ayudarte
 
-Nuestra [auditoría gratuita de cumplimiento IA de 5-7 días](/es/auditoria-ia-gratuita) evalúa los flujos de trabajo específicos de tu clínica, el manejo de datos y la postura de cumplimiento. Recibirás:
+Nuestra [auditoría gratuita de cumplimiento IA de 5-7 días](/es/hoja-de-ruta-de-automatizacion) evalúa los flujos de trabajo específicos de tu clínica, el manejo de datos y la postura de cumplimiento. Recibirás:
 
 - Un análisis puntuado del potencial de automatización de cada flujo de trabajo
 - Recomendaciones claras sobre qué es seguro automatizar y qué no
@@ -137,4 +137,4 @@ Nuestra [auditoría gratuita de cumplimiento IA de 5-7 días](/es/auditoria-ia-g
 
 Sin coste, sin compromisos. Aproximadamente 60-75 minutos de tu tiempo para una evaluación completa.
 
-[Reserva tu auditoría gratuita hoy](/es/auditoria-ia-gratuita) y descubre qué automatizaciones pueden ahorrarle más tiempo a tu clínica — de forma segura.
+[Reserva tu auditoría gratuita hoy](/es/hoja-de-ruta-de-automatizacion) y descubre qué automatizaciones pueden ahorrarle más tiempo a tu clínica — de forma segura.

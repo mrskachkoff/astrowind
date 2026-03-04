@@ -3,18 +3,18 @@
     "services": "Services",
     "forSmallPractices": "For Independent Practices",
     "medcorePrivateAi": "MedCore Private AI",
-    "freeAiAudit": "Free AI Audit",
+    "freeAiAudit": "Automation Roadmap",
     "pricing": "Pricing",
     "blog": "Blog",
     "about": "About",
     "contact": "Contact",
-    "bookFreeAudit": "Book Free Audit"
+    "bookFreeAudit": "Book Automation Roadmap"
   },
   "footer": {
     "services": "Services",
     "smallPracticeAutomation": "Small Practice Automation",
     "medcorePrivateAi": "MedCore Private AI",
-    "freeAiAudit": "Free AI Audit",
+    "freeAiAudit": "Free Automation Roadmap",
     "medicalAiDemo": "Medical AI Demo",
     "pricing": "Pricing",
     "company": "Company",
@@ -28,12 +28,12 @@
     "allRightsReserved": "All rights reserved"
   },
   "common": {
-    "getYourFreeAudit": "Get Your Free AI Audit",
+    "getYourFreeAudit": "Get Your Free Automation Roadmap",
     "seeOurServices": "See Our Services",
     "learnMore": "Learn More",
     "readMore": "Read More",
-    "bookYourFreeAudit": "Book Your Free Audit",
-    "startWithFreeAudit": "Start with Free Audit",
+    "bookYourFreeAudit": "Book Your Automation Roadmap",
+    "startWithFreeAudit": "Start with Automation Roadmap",
     "scheduleConsultation": "Schedule Consultation"
   },
   "languageSwitcher": {

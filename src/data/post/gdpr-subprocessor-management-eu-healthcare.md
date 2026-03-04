@@ -235,7 +235,7 @@ A strong review process should:
 
 If you cannot explain who processes your patient data, where it is stored, and under what legal basis it is transferred, then you do not control your compliance posture. In healthcare, that is unacceptable.
 
-Start with our [free Compliance Audit](/free-ai-audit) — we assess your clinic's data handling, map compliance gaps, and identify where AI can safely automate tasks, completely free.
+Start with our [free Compliance Audit](/automation-roadmap) — we assess your clinic's data handling, map compliance gaps, and identify where AI can safely automate tasks, completely free.
 
 ---
 

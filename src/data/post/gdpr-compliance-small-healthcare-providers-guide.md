@@ -144,6 +144,6 @@ Penalties are typically proportionate, but even a €10,000-50,000 fine can be d
 
 ## How We Can Help
 
-Our [free AI compliance audit](/free-ai-audit) includes a thorough GDPR assessment as part of the data mapping and compliance gap analysis. We identify exactly where your practice stands and provide a clear roadmap for addressing gaps — whether you work with us or handle it independently.
+Our [free AI compliance audit](/automation-roadmap) includes a thorough GDPR assessment as part of the data mapping and compliance gap analysis. We identify exactly where your practice stands and provide a clear roadmap for addressing gaps — whether you work with us or handle it independently.
 
-The audit takes 5-7 business days and requires about 60-75 minutes of your time. [Book your free audit today](/free-ai-audit).
+The audit takes 5-7 business days and requires about 60-75 minutes of your time. [Book your free audit today](/automation-roadmap).

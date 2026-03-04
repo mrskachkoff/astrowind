@@ -3,6 +3,18 @@
   command = "npm run build"
 [build.processing.html]
   pretty_urls = false
+[[redirects]]
+  from = "/free-ai-audit"
+  to = "/automation-roadmap"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/es/auditoria-ia-gratuita"
+  to = "/es/hoja-de-ruta-de-automatizacion"
+  status = 301
+  force = true
+
 [[headers]]
   for = "/_astro/*"
   [headers.values]

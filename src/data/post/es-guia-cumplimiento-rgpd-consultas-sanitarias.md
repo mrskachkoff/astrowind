@@ -146,6 +146,6 @@ Las sanciones suelen ser proporcionales, pero incluso una multa de 10.000-50.000
 
 ## Cómo Podemos Ayudarte
 
-Nuestra [auditoría de cumplimiento IA gratuita](/es/auditoria-ia-gratuita) incluye una evaluación exhaustiva del RGPD como parte del análisis de mapeo de datos y brechas de cumplimiento. Identificamos exactamente dónde se encuentra tu consulta y proporcionamos una hoja de ruta clara para abordar las brechas — ya sea que trabajes con nosotros o lo gestiones de forma independiente.
+Nuestra [auditoría de cumplimiento IA gratuita](/es/hoja-de-ruta-de-automatizacion) incluye una evaluación exhaustiva del RGPD como parte del análisis de mapeo de datos y brechas de cumplimiento. Identificamos exactamente dónde se encuentra tu consulta y proporcionamos una hoja de ruta clara para abordar las brechas — ya sea que trabajes con nosotros o lo gestiones de forma independiente.
 
-La auditoría dura entre 5 y 7 días laborables y requiere entre 60 y 75 minutos de tu tiempo. [Reserva tu auditoría gratuita hoy](/es/auditoria-ia-gratuita).
+La auditoría dura entre 5 y 7 días laborables y requiere entre 60 y 75 minutos de tu tiempo. [Reserva tu auditoría gratuita hoy](/es/hoja-de-ruta-de-automatizacion).

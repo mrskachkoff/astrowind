@@ -3,18 +3,18 @@
     "services": "Servicios",
     "forSmallPractices": "Para Consultorios Independientes",
     "medcorePrivateAi": "MedCore IA Privada",
-    "freeAiAudit": "Auditoría IA Gratuita",
+    "freeAiAudit": "Tu Ruta de Automatización",
     "pricing": "Precios",
     "blog": "Blog",
     "about": "Nosotros",
     "contact": "Contacto",
-    "bookFreeAudit": "Reservar Auditoría"
+    "bookFreeAudit": "Solicitar Hoja de Ruta"
   },
   "footer": {
     "services": "Servicios",
     "smallPracticeAutomation": "Automatización para Clínicas",
     "medcorePrivateAi": "MedCore IA Privada",
-    "freeAiAudit": "Auditoría IA Gratuita",
+    "freeAiAudit": "Ruta de Automatización Gratis",
     "medicalAiDemo": "Demo IA Médica",
     "pricing": "Precios",
     "company": "Empresa",
@@ -28,12 +28,12 @@
     "allRightsReserved": "Todos los derechos reservados"
   },
   "common": {
-    "getYourFreeAudit": "Solicita Tu Auditoría IA Gratuita",
+    "getYourFreeAudit": "Solicite Su Hoja de Ruta Gratuita",
     "seeOurServices": "Ver Nuestros Servicios",
     "learnMore": "Saber Más",
     "readMore": "Leer Más",
-    "bookYourFreeAudit": "Reserva Tu Auditoría Gratuita",
-    "startWithFreeAudit": "Empezar con Auditoría Gratuita",
+    "bookYourFreeAudit": "Reserve Su Hoja de Ruta Gratuita",
+    "startWithFreeAudit": "Comenzar con la Hoja de Ruta Gratuita",
     "scheduleConsultation": "Programar Consulta"
   },
   "languageSwitcher": {

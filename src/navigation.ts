@@ -19,7 +19,7 @@ export function getHeaderData(lang: Locale = 'en') {
           },
           {
             text: t('nav.freeAiAudit'),
-            href: getLocalizedPath('/free-ai-audit', lang),
+            href: getLocalizedPath('/automation-roadmap', lang),
           },
           {
             text: t('nav.pricing'),
@@ -29,7 +29,7 @@ export function getHeaderData(lang: Locale = 'en') {
       },
       {
         text: t('nav.freeAiAudit'),
-        href: getLocalizedPath('/free-ai-audit', lang),
+        href: getLocalizedPath('/automation-roadmap', lang),
       },
       {
         text: t('nav.blog'),
@@ -44,7 +44,7 @@ export function getHeaderData(lang: Locale = 'en') {
         href: getLocalizedPath('/contact', lang),
       },
     ],
-    actions: [{ text: t('nav.bookFreeAudit'), href: getLocalizedPath('/free-ai-audit', lang) }],
+    actions: [{ text: t('nav.bookFreeAudit'), href: getLocalizedPath('/automation-roadmap', lang) }],
   };
 }
 
@@ -57,7 +57,7 @@ export function getFooterData(lang: Locale = 'en') {
         links: [
           { text: t('footer.smallPracticeAutomation'), href: getLocalizedPath('/services', lang) },
           { text: t('footer.medcorePrivateAi'), href: getLocalizedPath('/medcore-private-ai', lang) },
-          { text: t('footer.freeAiAudit'), href: getLocalizedPath('/free-ai-audit', lang) },
+          { text: t('footer.freeAiAudit'), href: getLocalizedPath('/automation-roadmap', lang) },
           { text: t('footer.pricing'), href: getLocalizedPath('/pricing', lang) },
         ],
       },

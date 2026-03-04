@@ -1,6 +1,18 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/free-ai-audit",
+      "destination": "/automation-roadmap",
+      "permanent": true
+    },
+    {
+      "source": "/es/auditoria-ia-gratuita",
+      "destination": "/es/hoja-de-ruta-de-automatizacion",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/_astro/(.*)",

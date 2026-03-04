@@ -7,7 +7,7 @@ _Last updated_: February 10, 2026
 
 ## Introduction
 
-Futurion Solutions ("we", "us", or "our") is committed to protecting your personal data. This Privacy Policy explains how we collect, use, and protect your information when you visit our website (futurionsolutions.com) or use our services.
+Futurion Solutions NIF:Y5930031R ("we", "us", or "our") is committed to protecting your personal data. This Privacy Policy explains how we collect, use, and protect your information when you visit our website (futurionsolutions.com) or use our services.
 
 We process personal data in accordance with the General Data Protection Regulation (EU) 2016/679 (GDPR) and Spanish data protection law (LOPDGDD).
 

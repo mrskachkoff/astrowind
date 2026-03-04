@@ -7,7 +7,7 @@ _Última actualización_: 10 de febrero de 2026
 
 ## Introducción
 
-Futurion Solutions ("nosotros", "nuestro" o "nuestra empresa") está comprometida con la protección de sus datos personales. Esta Política de Privacidad explica cómo recopilamos, usamos y protegemos su información cuando visita nuestro sitio web (futurionsolutions.com) o utiliza nuestros servicios.
+Futurion Solutions NIF:Y5930031R ("nosotros", "nuestro" o "nuestra empresa") está comprometida con la protección de sus datos personales. Esta Política de Privacidad explica cómo recopilamos, usamos y protegemos su información cuando visita nuestro sitio web (futurionsolutions.com) o utiliza nuestros servicios.
 
 Procesamos datos personales de acuerdo con el Reglamento General de Protección de Datos (UE) 2016/679 (RGPD) y la ley española de protección de datos (LOPDGDD).
 

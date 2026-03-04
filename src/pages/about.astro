@@ -12,6 +12,9 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 const metadata = {
   title: 'About Futurion Solutions | Healthcare AI Compliance Agency Spain',
   description: 'Futurion Solutions is a compliance-first AI automation agency helping small healthcare providers in Spain and the EU automate safely. Founded by Ivan Skachkov, a compliance and business process expert.',
+  openGraph: {
+    images: [{ url: '~/assets/images/team-meeting.jpg' }],
+  },
 };
 ---
 
@@ -228,8 +231,8 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'Get Your Free AI Audit',
-        href: '/free-ai-audit',
+        text: 'Get Your Free Automation Roadmap',
+        href: '/automation-roadmap',
         icon: 'tabler:clipboard-check',
       },
     ]}

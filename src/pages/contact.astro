@@ -7,6 +7,9 @@ import Features2 from '~/components/widgets/Features2.astro';
 const metadata = {
   title: 'Contact',
   description: 'Get in touch with Futurion Solutions. Questions about compliance-first AI automation for your healthcare practice? We respond within 24 business hours.',
+  openGraph: {
+    images: [{ url: '~/assets/images/team-collaboration.jpg' }],
+  },
 };
 ---
 
@@ -42,7 +45,7 @@ const metadata = {
       {
         type: 'text',
         name: 'inquiry_type',
-        label: 'Inquiry Type (e.g., Free AI Audit, Services, General Question)',
+        label: 'Inquiry Type (e.g., Automation Roadmap, Services, General Question)',
       },
     ]}
     textarea={{
@@ -64,7 +67,7 @@ const metadata = {
     title="Other ways to reach us"
     items={[
       {
-        title: 'Free AI Audit',
+        title: 'Automation Roadmap',
         description:
           'Ready to get started? Book your free 5-7 day AI compliance audit directly on our dedicated page.',
         icon: 'tabler:clipboard-check',

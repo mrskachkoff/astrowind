@@ -11,7 +11,10 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
   title: 'AI Automation Services for Healthcare | Futurion Solutions',
-  description: 'Compliance-first AI automation services for healthcare providers. Free AI Audit, implementation, and ongoing support for dental clinics, pharmacies, and small medical practices.',
+  description: 'Compliance-first AI automation services for healthcare providers. Free Automation Roadmap, implementation, and ongoing support for dental clinics, pharmacies, and small medical practices.',
+  openGraph: {
+    images: [{ url: '~/assets/images/data-dashboard.jpg' }],
+  },
 };
 
 const serviceSchema = {
@@ -47,7 +50,7 @@ const serviceSchema = {
     title="AI Automation That Puts Compliance First"
     subtitle="From initial audit to ongoing support, we deliver AI solutions designed with healthcare data privacy at their core. Service pillars that work together to transform your practice safely — with enterprise-grade options for larger organizations."
     actions={[
-      { variant: 'primary', text: 'Start with a Free Audit', href: '/free-ai-audit', icon: 'tabler:clipboard-check' },
+      { variant: 'primary', text: 'Start with Automation Roadmap', href: '/automation-roadmap', icon: 'tabler:clipboard-check' },
     ]}
     image={{
       src: '~/assets/images/team-working.jpg',
@@ -222,7 +225,7 @@ const serviceSchema = {
       },
     ]}
     image={{
-      src: '~/assets/images/server-room.jpg',
+      src: '~/assets/images/server-network.jpg',
       alt: 'On-premise server infrastructure for healthcare AI',
     }}
     callToAction={{
@@ -326,8 +329,8 @@ const serviceSchema = {
     actions={[
       {
         variant: 'primary',
-        text: 'Book Your Free AI Audit',
-        href: '/free-ai-audit',
+        text: 'Book Your Automation Roadmap',
+        href: '/automation-roadmap',
         icon: 'tabler:clipboard-check',
       },
     ]}

@@ -10,8 +10,11 @@ import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'Auditoría de Cumplimiento de IA Gratuita',
-  description: 'Obtenga una auditoría gratuita de cumplimiento de IA de 5-7 días para su práctica sanitaria. Evaluamos flujos de datos, identificamos oportunidades de automatización segura y entregamos una hoja de ruta clara de cumplimiento RGPD.',
+  title: 'Hoja de Ruta de Automatización Sanitaria Gratuita',
+  description: 'Obtenga su hoja de ruta de automatización sanitaria de forma gratuita en 5-7 días. Evaluamos los flujos de datos de su consulta, identificamos oportunidades de automatización segura conforme al RGPD y entregamos un plan de acción claro y priorizado.',
+  openGraph: {
+    images: [{ url: '~/assets/images/ai-workflow-tablet.jpg' }],
+  },
 };
 ---
 
@@ -19,11 +22,11 @@ const metadata = {
   <!-- Hero -->
 
   <Hero
-    tagline="Auditoría de IA Gratuita"
+    tagline="Hoja de Ruta de Automatización"
     actions={[
       {
         variant: 'primary',
-        text: 'Reserve Su Auditoría Gratuita',
+        text: 'Solicite Su Hoja de Ruta Gratuita',
         href: 'https://outlook.office.com/book/FuturionSolutions@futurion.es/',
         target: '_blank',
         icon: 'tabler:clipboard-check',
@@ -227,7 +230,7 @@ const metadata = {
   <!-- Audit FAQs -->
 
   <FAQs
-    title="Preguntas sobre la Auditoría"
+    title="Preguntas sobre la Hoja de Ruta"
     subtitle="Preguntas comunes sobre la auditoría gratuita de cumplimiento de IA."
     classes={{ container: 'max-w-6xl' }}
     items={[
@@ -264,14 +267,14 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'Reserve Su Auditoría Gratuita Ahora',
+        text: 'Solicite Su Hoja de Ruta Gratuita Ahora',
         href: 'https://outlook.office.com/book/FuturionSolutions@futurion.es/',
         target: '_blank',
         icon: 'tabler:clipboard-check',
       },
     ]}
   >
-    <Fragment slot="title">Limitado a 8 Auditorías Por Mes</Fragment>
+    <Fragment slot="title">Limitado a 8 Hojas de Ruta Por Mes</Fragment>
 
     <Fragment slot="subtitle">
       Cada auditoría recibe nuestra atención completa — análisis exhaustivo, informes detallados y recomendaciones personalizadas. Limitamos la capacidad para mantener la calidad. Asegure su lugar hoy.
@@ -286,7 +289,7 @@ const metadata = {
     if (typeof window.gtag === 'function') {
       window.gtag('event', 'generate_lead', {
         event_category: 'Audit',
-        event_label: 'Free AI Audit',
+        event_label: 'Automation Roadmap',
         language: 'es',
       });
     }

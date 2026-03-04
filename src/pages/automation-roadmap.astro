@@ -10,8 +10,11 @@ import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'Free AI Compliance Audit',
-  description: 'Get a free 5-7 day AI compliance audit for your healthcare practice. We assess data flows, identify safe automation opportunities, and deliver a clear GDPR compliance roadmap.',
+  title: 'Free Automation Roadmap for Healthcare Clinics',
+  description: 'Get a free 5-7 day AI compliance assessment for your healthcare practice. We map data flows, identify safe automation opportunities, and deliver a phased GDPR roadmap — completely free.',
+  openGraph: {
+    images: [{ url: '~/assets/images/ai-workflow-tablet.jpg' }],
+  },
 };
 ---
 
@@ -19,11 +22,11 @@ const metadata = {
   <!-- Hero -->
 
   <Hero
-    tagline="Free AI Audit"
+    tagline="Automation Roadmap"
     actions={[
       {
         variant: 'primary',
-        text: 'Book Your Free Audit',
+        text: 'Book Your Free Roadmap',
         href: 'https://outlook.office.com/book/FuturionSolutions@futurion.es/',
         target: '_blank',
         icon: 'tabler:clipboard-check',
@@ -36,7 +39,7 @@ const metadata = {
   >
     <Fragment slot="title">
       Free 5-7 Day<br />
-      <span class="text-accent dark:text-white">AI Compliance Audit</span>
+      <span class="text-accent dark:text-white">Automation Roadmap</span>
     </Fragment>
 
     <Fragment slot="subtitle">
@@ -227,7 +230,7 @@ const metadata = {
   <!-- Audit FAQs -->
 
   <FAQs
-    title="Audit Questions"
+    title="Roadmap Questions"
     subtitle="Common questions about the free AI compliance audit."
     classes={{ container: 'max-w-6xl' }}
     items={[
@@ -264,7 +267,7 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'Book Your Free Audit Now',
+        text: 'Book Your Free Roadmap Now',
         href: 'https://outlook.office.com/book/FuturionSolutions@futurion.es/',
         target: '_blank',
         icon: 'tabler:clipboard-check',
@@ -286,7 +289,7 @@ const metadata = {
     if (typeof window.gtag === 'function') {
       window.gtag('event', 'generate_lead', {
         event_category: 'Audit',
-        event_label: 'Free AI Audit',
+        event_label: 'Automation Roadmap',
         language: 'en',
       });
     }

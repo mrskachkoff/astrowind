@@ -10,7 +10,10 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
   title: 'Servicios',
-  description: 'Servicios de automatización IA centrados en cumplimiento para profesionales sanitarios. Auditoría IA Gratuita, implementación y soporte continuo para clínicas dentales, farmacias y pequeñas consultas médicas.',
+  description: 'Servicios de automatización IA centrados en cumplimiento para profesionales sanitarios. Hoja de Ruta de Automatización Gratuita, implementación y soporte continuo para clínicas dentales, farmacias y pequeñas consultas médicas.',
+  openGraph: {
+    images: [{ url: '~/assets/images/data-dashboard.jpg' }],
+  },
 };
 ---
 
@@ -22,7 +25,7 @@ const metadata = {
     title="Automatización IA Que Prioriza el Cumplimiento"
     subtitle="Desde la auditoría inicial hasta el soporte continuo, entregamos soluciones IA diseñadas con privacidad de datos sanitarios en su núcleo. Pilares de servicio que trabajan juntos para transformar tu consulta de forma segura — con opciones de nivel empresarial para organizaciones más grandes."
     actions={[
-      { variant: 'primary', text: 'Comienza con una Auditoría Gratuita', href: '/es/auditoria-ia-gratuita', icon: 'tabler:clipboard-check' },
+      { variant: 'primary', text: 'Comenzar con la Hoja de Ruta Gratuita', href: '/es/hoja-de-ruta-de-automatizacion', icon: 'tabler:clipboard-check' },
     ]}
     image={{
       src: '~/assets/images/team-working.jpg',
@@ -197,7 +200,7 @@ const metadata = {
       },
     ]}
     image={{
-      src: '~/assets/images/server-room.jpg',
+      src: '~/assets/images/server-network.jpg',
       alt: 'Infraestructura de servidor local para IA sanitaria',
     }}
     callToAction={{
@@ -301,8 +304,8 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'Reserva Tu Auditoría IA Gratuita',
-        href: '/es/auditoria-ia-gratuita',
+        text: 'Reserve Su Hoja de Ruta Gratuita',
+        href: '/es/hoja-de-ruta-de-automatizacion',
         icon: 'tabler:clipboard-check',
       },
     ]}

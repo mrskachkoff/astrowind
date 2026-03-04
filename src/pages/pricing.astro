@@ -8,7 +8,10 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
   title: 'AI Automation Pricing for Clinics & Pharmacies | Futurion Solutions',
-  description: 'Transparent pricing for compliance-first AI automation. Free AI Audit, implementation packages from €1,500, and ongoing support from €200/month.',
+  description: 'Transparent pricing for compliance-first AI automation. Free Automation Roadmap, implementation packages from €1,500, and ongoing support from €200/month.',
+  openGraph: {
+    images: [{ url: '~/assets/images/business-planning.jpg' }],
+  },
 };
 ---
 
@@ -40,8 +43,8 @@ const metadata = {
           { description: 'Implementation roadmap' },
         ],
         callToAction: {
-          text: 'Book Free Audit',
-          href: '/free-ai-audit',
+          text: 'Book Automation Roadmap',
+          href: '/automation-roadmap',
         },
       },
       {
@@ -58,8 +61,8 @@ const metadata = {
           { description: '30 days post-launch support' },
         ],
         callToAction: {
-          text: 'Start with Free Audit',
-          href: '/free-ai-audit',
+          text: 'Start with Automation Roadmap',
+          href: '/automation-roadmap',
         },
         hasRibbon: true,
         ribbonTitle: 'most popular',
@@ -78,8 +81,8 @@ const metadata = {
           { description: '90 days post-launch support' },
         ],
         callToAction: {
-          text: 'Start with Free Audit',
-          href: '/free-ai-audit',
+          text: 'Start with Automation Roadmap',
+          href: '/automation-roadmap',
         },
       },
       {
@@ -183,8 +186,8 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'Book Your Free Audit',
-        href: '/free-ai-audit',
+        text: 'Book Your Automation Roadmap',
+        href: '/automation-roadmap',
         icon: 'tabler:clipboard-check',
       },
     ]}

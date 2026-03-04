@@ -12,6 +12,9 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 const metadata = {
   title: 'Nosotros',
   description: 'Futurion Solutions es una agencia de automatización IA centrada en cumplimiento que ayuda a pequeños proveedores sanitarios en España y la UE a automatizar de forma segura. Fundada por Ivan Skachkov, experto en cumplimiento y procesos empresariales.',
+  openGraph: {
+    images: [{ url: '~/assets/images/team-meeting.jpg' }],
+  },
 };
 ---
 
@@ -228,8 +231,8 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'Solicita Tu Auditoría IA Gratuita',
-        href: '/es/auditoria-ia-gratuita',
+        text: 'Solicite Su Hoja de Ruta Gratuita',
+        href: '/es/hoja-de-ruta-de-automatizacion',
         icon: 'tabler:clipboard-check',
       },
     ]}

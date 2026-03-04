@@ -8,7 +8,10 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
   title: 'Precios',
-  description: 'Precios transparentes para automatización IA centrada en cumplimiento. Auditoría IA Gratuita, paquetes de implementación desde €1.500 y soporte continuo desde €200/mes.',
+  description: 'Precios transparentes para automatización IA centrada en cumplimiento. Hoja de Ruta de Automatización Gratuita, paquetes de implementación desde €1.500 y soporte continuo desde €200/mes.',
+  openGraph: {
+    images: [{ url: '~/assets/images/business-planning.jpg' }],
+  },
 };
 ---
 
@@ -40,8 +43,8 @@ const metadata = {
           { description: 'Hoja de ruta de implementación' },
         ],
         callToAction: {
-          text: 'Reservar Auditoría Gratuita',
-          href: '/es/auditoria-ia-gratuita',
+          text: 'Solicitar Hoja de Ruta Gratuita',
+          href: '/es/hoja-de-ruta-de-automatizacion',
         },
       },
       {
@@ -58,8 +61,8 @@ const metadata = {
           { description: '30 días de soporte post-lanzamiento' },
         ],
         callToAction: {
-          text: 'Comienza con Auditoría Gratuita',
-          href: '/es/auditoria-ia-gratuita',
+          text: 'Comenzar con la Hoja de Ruta Gratuita',
+          href: '/es/hoja-de-ruta-de-automatizacion',
         },
         hasRibbon: true,
         ribbonTitle: 'más popular',
@@ -78,8 +81,8 @@ const metadata = {
           { description: '90 días de soporte post-lanzamiento' },
         ],
         callToAction: {
-          text: 'Comienza con Auditoría Gratuita',
-          href: '/es/auditoria-ia-gratuita',
+          text: 'Comenzar con la Hoja de Ruta Gratuita',
+          href: '/es/hoja-de-ruta-de-automatizacion',
         },
       },
       {
@@ -183,8 +186,8 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'Reserva Tu Auditoría Gratuita',
-        href: '/es/auditoria-ia-gratuita',
+        text: 'Reserve Su Hoja de Ruta Gratuita',
+        href: '/es/hoja-de-ruta-de-automatizacion',
         icon: 'tabler:clipboard-check',
       },
     ]}

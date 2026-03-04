@@ -7,6 +7,9 @@ import Features2 from '~/components/widgets/Features2.astro';
 const metadata = {
   title: 'Contacto',
   description: 'Ponte en contacto con Futurion Solutions. ¿Preguntas sobre automatización IA centrada en cumplimiento para tu consulta sanitaria? Respondemos en 24 horas laborables.',
+  openGraph: {
+    images: [{ url: '~/assets/images/team-collaboration.jpg' }],
+  },
 };
 ---
 
@@ -42,7 +45,7 @@ const metadata = {
       {
         type: 'text',
         name: 'inquiry_type',
-        label: 'Tipo de Consulta (ej., Auditoría IA Gratuita, Servicios, Pregunta General)',
+        label: 'Tipo de Consulta (ej., Hoja de Ruta de Automatización, Servicios, Pregunta General)',
       },
     ]}
     textarea={{
@@ -64,7 +67,7 @@ const metadata = {
     title="Otras formas de contactarnos"
     items={[
       {
-        title: 'Auditoría IA Gratuita',
+        title: 'Hoja de Ruta de Automatización',
         description:
           '¿Listo para comenzar? Reserva tu auditoría gratuita de cumplimiento IA de 5-7 días directamente en nuestra página dedicada.',
         icon: 'tabler:clipboard-check',

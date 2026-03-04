@@ -15,6 +15,9 @@ import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 const metadata = {
   title: 'Futurion Solutions — Compliance-First AI Automation for Healthcare',
   ignoreTitleTemplate: true,
+  openGraph: {
+    images: [{ url: '~/assets/images/healthcare-tech.jpg' }],
+  },
 };
 
 const faqSchema = {
@@ -98,8 +101,8 @@ const faqSchema = {
     actions={[
       {
         variant: 'primary',
-        text: 'Get Your Free AI Audit',
-        href: '/free-ai-audit',
+        text: 'Get Your Free Automation Roadmap',
+        href: '/automation-roadmap',
         icon: 'tabler:clipboard-check',
       },
       { text: 'See Our Services', href: '/services' },
@@ -301,8 +304,8 @@ const faqSchema = {
     actions={[
       {
         variant: 'primary',
-        text: 'Book Your Free Audit',
-        href: '/free-ai-audit',
+        text: 'Book Your Automation Roadmap',
+        href: '/automation-roadmap',
         icon: 'tabler:clipboard-check',
       },
     ]}
@@ -387,8 +390,8 @@ const faqSchema = {
     actions={[
       {
         variant: 'primary',
-        text: 'Get Your Free AI Audit',
-        href: '/free-ai-audit',
+        text: 'Get Your Free Automation Roadmap',
+        href: '/automation-roadmap',
         icon: 'tabler:clipboard-check',
       },
     ]}

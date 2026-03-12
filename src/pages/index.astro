@@ -2,7 +2,6 @@
 import Layout from '~/layouts/PageLayout.astro';
 import JsonLd from '~/components/common/JsonLd.astro';
 
-import Hero from '~/components/widgets/Hero.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import Features from '~/components/widgets/Features.astro';
 import Content from '~/components/widgets/Content.astro';
@@ -15,9 +14,6 @@ import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 const metadata = {
   title: 'Futurion Solutions — Compliance-First AI Automation for Healthcare',
   ignoreTitleTemplate: true,
-  openGraph: {
-    images: [{ url: '~/assets/images/healthcare-tech.jpg' }],
-  },
 };
 
 const faqSchema = {
@@ -127,33 +123,28 @@ const faqSchema = {
 <Layout metadata={metadata}>
   <JsonLd schema={faqSchema} />
 
-  <!-- Hero: Compliance-First AI Automation -->
+  <!-- Hero Banner -->
+  <div class="relative w-full overflow-hidden" style="height: 480px;">
+    <img
+      src="/images/2025/08/colab3_banner.jpg"
+      alt="Compliance-First AI Automation for Healthcare Providers"
+      class="absolute inset-0 w-full h-full object-cover"
+      loading="eager"
+      decoding="async"
+    />
+    <div class="absolute inset-0 bg-black/0 flex items-center justify-center">
+      <h1 class="font-bold font-heading text-4xl md:text-5xl leading-tighter tracking-tighter text-white text-center px-8">
+        Compliance-First AI Automation<br />for Healthcare Providers
+      </h1>
+    </div>
+  </div>
 
-  <Hero
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Get Your Free Automation Roadmap',
-        href: '/automation-roadmap',
-        icon: 'tabler:clipboard-check',
-      },
-      { text: 'See Our Services', href: '/services' },
-    ]}
-    image={{ src: '~/assets/images/healthcare-tech.jpg', alt: 'Healthcare professional using technology in a modern clinic' }}
-  >
-    <Fragment slot="title">
-      Compliance-First AI Automation<br />
-      <span class="text-accent dark:text-white">for Healthcare Providers</span>
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      <span class="hidden sm:inline">
-        We help dental clinics, pharmacies, and small medical practices save 10-15 hours per week through AI automation — without compromising patient data security or GDPR compliance.
-      </span>
-      <span class="block mb-1 sm:hidden font-bold text-blue-600">AI automation that keeps patient data safe.</span>
-      Enterprise-level compliance expertise, built for healthcare SMBs in Spain and the EU.
-    </Fragment>
-  </Hero>
+  <!-- Hero Subtitle -->
+  <div class="max-w-3xl mx-auto text-center px-6 py-6 text-muted">
+    <p class="text-xl">
+      We help medical practices, pharmacies, and dental clinics save 10-15 hours per week through AI automation — without compromising patient data security or GDPR compliance. Enterprise-level compliance expertise, built for healthcare SMBs in Spain and the EU.
+    </p>
+  </div>
 
   <!-- Trust Stats -->
 

@@ -2,7 +2,6 @@
 import Layout from '~/layouts/PageLayout.astro';
 import JsonLd from '~/components/common/JsonLd.astro';
 
-import Hero from '~/components/widgets/Hero.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import Features from '~/components/widgets/Features.astro';
 import Content from '~/components/widgets/Content.astro';
@@ -15,9 +14,6 @@ import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 const metadata = {
   title: 'Futurion Solutions — Automatización IA con Cumplimiento Normativo para Sanidad',
   ignoreTitleTemplate: true,
-  openGraph: {
-    images: [{ url: '~/assets/images/healthcare-tech.jpg' }],
-  },
 };
 
 const faqSchema = {
@@ -126,33 +122,28 @@ const faqSchema = {
 
 <Layout metadata={metadata}>
   <JsonLd schema={faqSchema} />
-  <!-- Hero: Automatización IA con Cumplimiento Normativo Primero -->
+  <!-- Hero Banner -->
+  <div class="relative w-full overflow-hidden" style="height: 480px;">
+    <img
+      src="/images/2025/08/colab3_banner.jpg"
+      alt="Automatización IA con Cumplimiento Normativo para Sanidad"
+      class="absolute inset-0 w-full h-full object-cover"
+      loading="eager"
+      decoding="async"
+    />
+    <div class="absolute inset-0 bg-black/0 flex items-center justify-center">
+      <h1 class="font-bold font-heading text-4xl md:text-5xl leading-tighter tracking-tighter text-white text-center px-8">
+        Automatización que Optimiza<br />tus Procesos Sanitarios
+      </h1>
+    </div>
+  </div>
 
-  <Hero
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Solicite Su Hoja de Ruta Gratuita',
-        href: '/es/hoja-de-ruta-de-automatizacion',
-        icon: 'tabler:clipboard-check',
-      },
-      { text: 'Ver Nuestros Servicios', href: '/es/servicios' },
-    ]}
-    image={{ src: '~/assets/images/healthcare-tech.jpg', alt: 'Profesional sanitario usando tecnología en una clínica moderna' }}
-  >
-    <Fragment slot="title">
-      Automatización que Optimiza<br />
-      <span class="text-accent dark:text-white">tus Procesos Sanitarios</span>
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      <span class="hidden sm:inline">
-        Automatizamos procesos en consultas médicas, farmacias y clínicas dentales para ahorrar 10–15 horas de trabajo por semana, sin poner en riesgo los datos de pacientes ni el cumplimiento del RGPD.
-      </span>
-      <span class="block mb-1 sm:hidden font-bold text-blue-600">Automatización IA que mantiene seguros los datos de pacientes.</span>
-      Automatización con estándares de seguridad de nivel empresarial, diseñada para PYMEs sanitarias en España y la UE.
-    </Fragment>
-  </Hero>
+  <!-- Hero Subtitle -->
+  <div class="max-w-3xl mx-auto text-center px-6 py-6 text-muted">
+    <p class="text-xl">
+      Automatizamos procesos en consultas médicas, farmacias y clínicas dentales para ahorrar 10–15 horas de trabajo por semana, sin poner en riesgo los datos de pacientes ni el cumplimiento del RGPD. Automatización con estándares de seguridad de nivel empresarial, diseñada para PYMEs sanitarias en España y la UE.
+    </p>
+  </div>
 
   <!-- Estadísticas de Confianza -->
 
@@ -221,7 +212,7 @@ const faqSchema = {
       {
         title: 'IA Híbrida y Local',
         description:
-          'Los datos de pacientes permanecen en tu clínica. Diseñamos soluciones que funcionan localmente o en configuraciones híbridas, sin enviar nunca datos sensibles a nubes externas. Para organizaciones más grandes, MedCore Private AI ofrece infraestructura IA médica completamente local.',
+          'Los datos de pacientes permanecen en tu clínica. Diseñamos soluciones que funcionan localmente o en entornos híbridos, sin enviar datos sensibles a nubes externas. Para organizaciones más grandes, MedCore Private AI ofrece infraestructura de IA médica completamente local.',
         icon: 'tabler:server',
       },
       {

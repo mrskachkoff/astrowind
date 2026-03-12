@@ -87,6 +87,38 @@ const faqSchema = {
         "@type": "Answer",
         "text": "Yes. The 5-7 day AI compliance audit is completely free with no obligations. You receive a full report with risk scores, automation recommendations, and a compliance roadmap. About 40-60% of audited clinics choose to proceed with implementation, but there is zero pressure."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "What does your appointment automation include?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Smart scheduling, reminders, and follow-ups that reduce no-shows by up to 30% — all GDPR compliant."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do you handle patient communications?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Automated but personal communications through compliant channels, replacing risky WhatsApp and personal email usage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you automate billing and insurance processing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Streamlined billing workflows that reduce errors and save hours of manual administrative work each week."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What compliance documentation do you provide?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Automated audit trails, data processing records, and compliance reports that keep you inspection-ready at all times. Every automation is architected with GDPR principles at its core — data minimisation, purpose limitation, security controls, and audit trails from day one."
+      }
     }
   ]
 };
@@ -194,28 +226,10 @@ const faqSchema = {
         icon: 'tabler:server',
       },
       {
-        title: 'Healthcare Specialized',
-        description:
-          'We focus exclusively on dental clinics, pharmacies, and small medical practices. We understand your workflows and regulations.',
-        icon: 'tabler:stethoscope',
-      },
-      {
         title: 'Enterprise Security for SMBs',
         description:
           'SOC2, ISO 27001, and enterprise-grade security practices — scaled and priced for small healthcare businesses.',
         icon: 'tabler:lock',
-      },
-      {
-        title: 'End-to-End Support',
-        description:
-          'From initial audit through implementation to ongoing monitoring. We are your long-term AI compliance partner, not a one-time vendor.',
-        icon: 'tabler:lifebuoy',
-      },
-      {
-        title: 'Spain & EU Focus',
-        description:
-          'Based in Valencia, Spain. Deep understanding of EU regulations, AEPD requirements, and the local healthcare landscape.',
-        icon: 'tabler:map-pin',
       },
     ]}
   />
@@ -254,49 +268,6 @@ const faqSchema = {
       alt: 'Team collaborating on a project',
     }}
   />
-
-  <!-- Service Details -->
-
-  <Content
-    isAfterContent
-    tagline="Our Solutions"
-    title="What's included in our compliance automation"
-    items={[
-      {
-        title: 'Appointment automation',
-        description:
-          'Smart scheduling, reminders, and follow-ups that reduce no-shows by up to 30% — all GDPR compliant.',
-      },
-      {
-        title: 'Patient communication workflows',
-        description:
-          'Automated but personal communications through compliant channels, replacing risky WhatsApp and personal email usage.',
-      },
-      {
-        title: 'Billing & insurance processing',
-        description:
-          'Streamlined billing workflows that reduce errors and save hours of manual administrative work each week.',
-      },
-      {
-        title: 'Compliance documentation',
-        description:
-          'Automated audit trails, data processing records, and compliance reports that keep you inspection-ready at all times.',
-      },
-    ]}
-    image={{
-      src: '~/assets/images/dental-clinic.jpg',
-      alt: 'Modern dental clinic with technology',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Built for healthcare workflows</h3>
-      Every automation we build is architected with GDPR principles at its core — data minimization, purpose limitation, security controls, and audit trails from day one.
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
 
   <!-- CTA Banner -->
 
@@ -372,6 +343,26 @@ const faqSchema = {
         title: 'Is the audit really free?',
         description:
           'Yes. The 5-7 day AI compliance audit is completely free with no obligations. You receive a full report with risk scores, automation recommendations, and a compliance roadmap. About 40-60% of audited clinics choose to proceed with implementation, but there is zero pressure.',
+      },
+      {
+        title: 'What does your appointment automation include?',
+        description:
+          'Smart scheduling, reminders, and follow-ups that reduce no-shows by up to 30% — all GDPR compliant.',
+      },
+      {
+        title: 'How do you handle patient communications?',
+        description:
+          'Automated but personal communications through compliant channels, replacing risky WhatsApp and personal email usage.',
+      },
+      {
+        title: 'Can you automate billing and insurance processing?',
+        description:
+          'Streamlined billing workflows that reduce errors and save hours of manual administrative work each week.',
+      },
+      {
+        title: 'What compliance documentation do you provide?',
+        description:
+          'Automated audit trails, data processing records, and compliance reports that keep you inspection-ready at all times. Every automation is architected with GDPR principles at its core — data minimisation, purpose limitation, security controls, and audit trails from day one.',
       },
     ]}
   />

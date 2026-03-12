@@ -1,6 +1,5 @@
 ---
 import Headline from '~/components/ui/Headline.astro';
-import ItemGrid from '~/components/ui/ItemGrid.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import type { Faqs as Props } from '~/types';
 
@@ -20,14 +19,30 @@ const {
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
   <Headline title={title} subtitle={subtitle} tagline={tagline} />
-  <ItemGrid
-    items={items}
-    columns={columns}
-    defaultIcon="tabler:chevron-right"
-    classes={{
-      container: `${columns === 1 ? 'max-w-4xl' : ''} gap-y-8 md:gap-y-12`,
-      panel: 'max-w-none',
-      icon: 'flex-shrink-0 mt-1 w-6 h-6 text-primary',
-    }}
-  />
+  <div
+    class={`grid mx-auto gap-4 ${
+      columns === 2 ? 'sm:grid-cols-2' : columns === 3 ? 'lg:grid-cols-3 sm:grid-cols-2' : ''
+    }`}
+  >
+    {
+      items.map(({ title: itemTitle, description }) => (
+        <details class="group border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+          <summary class="flex items-center justify-between gap-4 cursor-pointer select-none px-5 py-4 font-semibold text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors list-none">
+            <span>{itemTitle}</span>
+            <svg
+              class="w-5 h-5 flex-shrink-0 text-primary transition-transform duration-200 group-open:rotate-180"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-5 pb-5 pt-2 text-muted" set:html={description} />
+        </details>
+      ))
+    }
+  </div>
 </WidgetWrapper>

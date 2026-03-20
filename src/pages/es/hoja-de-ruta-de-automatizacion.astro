@@ -39,7 +39,7 @@ const metadata = {
   >
     <Fragment slot="title">
       5-7 Días Gratuitos<br />
-      <span class="text-accent dark:text-white">Auditoría de Cumplimiento de IA</span>
+      <span class="text-accent dark:text-white">Hoja de Ruta de Automatización</span>
     </Fragment>
 
     <Fragment slot="subtitle">
@@ -81,11 +81,11 @@ const metadata = {
     </Fragment>
   </Features2>
 
-  <!-- Audit Coverage: 5 Blocks -->
+  <!-- Roadmap Coverage: 5 Blocks -->
 
   <Features
     title="Qué evaluamos"
-    subtitle="Nuestra auditoría cubre cinco áreas críticas que la mayoría de agencias de IA ignoran por completo."
+    subtitle="Nuestra hoja de ruta cubre cinco áreas críticas que la mayoría de agencias de IA ignoran por completo."
     columns={3}
     items={[
       {
@@ -119,7 +119,7 @@ const metadata = {
   <!-- Process Timeline -->
 
   <Steps
-    title="Cómo funciona la auditoría"
+    title="Cómo funciona la hoja de ruta"
     subtitle="Un proceso estructurado que respeta su tiempo mientras entrega resultados exhaustivos."
     items={[
       {
@@ -180,7 +180,7 @@ const metadata = {
   >
     <Fragment slot="content">
       <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">No necesita un gran presupuesto de TI</h3>
-      Nuestra auditoría está diseñada para prácticas que no tienen equipos de TI dedicados u oficiales de cumplimiento — eso es exactamente por qué es valiosa.
+      Nuestra hoja de ruta está diseñada para prácticas que no tienen equipos de TI dedicados u oficiales de cumplimiento — eso es exactamente por qué es valiosa.
     </Fragment>
 
     <Fragment slot="bg">
@@ -192,7 +192,7 @@ const metadata = {
 
   <Features2
     title="Qué incluye el informe"
-    subtitle="Cada auditoría entrega estos resultados específicos y accionables."
+    subtitle="Cada hoja de ruta entrega estos resultados específicos y accionables."
     items={[
       {
         title: 'Resumen Ejecutivo de Riesgo',
@@ -227,11 +227,11 @@ const metadata = {
     ]}
   />
 
-  <!-- Audit FAQs -->
+  <!-- Roadmap FAQs -->
 
   <FAQs
     title="Preguntas sobre la Hoja de Ruta"
-    subtitle="Preguntas comunes sobre la auditoría gratuita de cumplimiento de IA."
+    subtitle="Preguntas comunes sobre la hoja de ruta gratuita de automatización."
     classes={{ container: 'max-w-6xl' }}
     items={[
       {
@@ -240,7 +240,7 @@ const metadata = {
       },
       {
         title: '¿Realmente no hay ninguna obligación?',
-        description: 'Ninguna. Recibe un informe completo sobre el que puede actuar de forma independiente. Aproximadamente el 40-60% de las clínicas auditadas eligen proceder con la implementación, pero no hay presión ni compromiso requerido.',
+        description: 'Ninguna. Recibe un informe completo sobre el que puede actuar de forma independiente. Aproximadamente el 40-60% de las clínicas que completan la hoja de ruta eligen proceder con la implementación, pero no hay presión ni compromiso requerido.',
       },
       {
         title: '¿Qué pasa si encuentran problemas graves de cumplimiento?',
@@ -252,11 +252,11 @@ const metadata = {
       },
       {
         title: '¿Por qué ofrecen esto gratis?',
-        description: 'La auditoría genera confianza y demuestra nuestra experiencia. Cuando las prácticas ven la profundidad del análisis y la calidad de las recomendaciones, muchas eligen trabajar con nosotros para la implementación. Es nuestra forma de demostrar valor antes de pedir un compromiso.',
+        description: 'La hoja de ruta genera confianza y demuestra nuestra experiencia. Cuando las prácticas ven la profundidad del análisis y la calidad de las recomendaciones, muchas eligen trabajar con nosotros para la implementación. Es nuestra forma de demostrar valor antes de pedir un compromiso.',
       },
       {
-        title: '¿Qué sucede después de la auditoría?',
-        description: 'Presentamos el informe y le guiamos a través de los hallazgos. Si desea proceder con la implementación, proporcionamos una propuesta de precio fijo basada en los hallazgos de la auditoría. Si no, conserva el informe sin compromiso.',
+        title: '¿Qué sucede después de la hoja de ruta?',
+        description: 'Presentamos el informe y le guiamos a través de los hallazgos. Si desea proceder con la implementación, proporcionamos una propuesta de precio fijo basada en los hallazgos de la hoja de ruta. Si no, conserva el informe sin compromiso.',
       },
     ]}
   />
@@ -277,7 +277,7 @@ const metadata = {
     <Fragment slot="title">Limitado a 8 Hojas de Ruta Por Mes</Fragment>
 
     <Fragment slot="subtitle">
-      Cada auditoría recibe nuestra atención completa — análisis exhaustivo, informes detallados y recomendaciones personalizadas. Limitamos la capacidad para mantener la calidad. Asegure su lugar hoy.
+      Cada hoja de ruta recibe nuestra atención completa — análisis exhaustivo, informes detallados y recomendaciones personalizadas. Limitamos la capacidad para mantener la calidad. Asegure su lugar hoy.
     </Fragment>
   </CallToAction>
 </Layout>
@@ -288,7 +288,7 @@ const metadata = {
     if (!link) return;
     if (typeof window.gtag === 'function') {
       window.gtag('event', 'generate_lead', {
-        event_category: 'Audit',
+        event_category: 'Roadmap',
         event_label: 'Automation Roadmap',
         language: 'es',
       });

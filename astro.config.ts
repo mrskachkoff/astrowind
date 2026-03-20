@@ -24,6 +24,22 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
 export default defineConfig({
   output: 'static',
 
+  redirects: {
+    '/es/auditoria-ia-gratuita': '/es/hoja-de-ruta-de-automatizacion',
+    '/es-clinicas-dentales-automatizar-flujos-conformidad': '/es/es-clinicas-dentales-automatizar-flujos-conformidad',
+    '/es-soluciones-ia-hibridas-sanidad': '/es/es-soluciones-ia-hibridas-sanidad',
+    '/es-guia-cumplimiento-rgpd-consultas-sanitarias': '/es/es-guia-cumplimiento-rgpd-consultas-sanitarias',
+    '/es-por-que-sanidad-necesita-ia-local': '/es/es-por-que-sanidad-necesita-ia-local',
+    '/es/clinicas-dentales-automatizar-flujos-conformidad': '/es/es-clinicas-dentales-automatizar-flujos-conformidad',
+    '/es/soluciones-ia-hibridas-sanidad': '/es/es-soluciones-ia-hibridas-sanidad',
+    '/tag/agentes-ia': '/es/tag/agentes-ia',
+    '/tag/sanidad': '/es/tag/sanidad',
+    '/tag/clinicas-dentales': '/es/tag/clinicas-dentales',
+    '/tag/privacidad-de-datos': '/es/tag/privacidad-de-datos',
+    '/tag/ia': '/es/tag/ia',
+    '/tag/ia-hibrida': '/es/tag/ia-hibrida',
+  },
+
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'es'],

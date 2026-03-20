@@ -10,7 +10,8 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Note from '~/components/widgets/Note.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
-import Image from '~/components/common/Image.astro';
+import { Image as AstroImage } from 'astro:assets';
+import colab3Banner from '~/assets/images/colab3_banner.jpg';
 
 const metadata = {
   title: 'Futurion Solutions — Compliance-First AI Automation for Healthcare',
@@ -126,12 +127,10 @@ const faqSchema = {
 
   <!-- Hero Banner -->
   <div class="relative w-full overflow-hidden" style="height: 480px;">
-    <Image
-      src="~/assets/images/colab3_banner.jpg"
+    <AstroImage
+      src={colab3Banner}
       alt="Compliance-First AI Automation for Healthcare Providers"
       class="absolute inset-0 w-full h-full object-cover"
-      width={1920}
-      height={480}
       widths={[768, 1024, 1920]}
       sizes="100vw"
       loading="eager"

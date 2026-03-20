@@ -10,6 +10,7 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Note from '~/components/widgets/Note.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import Image from '~/components/common/Image.astro';
 
 const metadata = {
   title: 'Futurion Solutions — Automatización IA con Cumplimiento Normativo para Sanidad',
@@ -124,10 +125,14 @@ const faqSchema = {
   <JsonLd schema={faqSchema} />
   <!-- Hero Banner -->
   <div class="relative w-full overflow-hidden" style="height: 480px;">
-    <img
-      src="/images/2025/08/colab3_banner.jpg"
+    <Image
+      src="~/assets/images/colab3_banner.jpg"
       alt="Automatización IA con Cumplimiento Normativo para Sanidad"
       class="absolute inset-0 w-full h-full object-cover"
+      width={1920}
+      height={480}
+      widths={[768, 1024, 1920]}
+      sizes="100vw"
       loading="eager"
       decoding="async"
     />

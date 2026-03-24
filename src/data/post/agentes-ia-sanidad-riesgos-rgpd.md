@@ -175,7 +175,7 @@ La Ley de IA de la UE clasifica los sistemas de IA utilizados en sanidad como de
 
 El Índice de Agentes IA MIT 2025 confirma lo que el RGPD anticipó: los sistemas autónomos que operan sobre datos sensibles sin una gobernanza adecuada generan un riesgo jurídico acumulativo que crece con cada acción automatizada que el agente ejecuta sin supervisión. Para las consultas sanitarias independientes en la UE, esto no es un problema futuro — los agentes de IA se venden y despliegan hoy, a menudo sin la infraestructura de cumplimiento que los haga legales para operar.
 
-Si tu consulta está evaluando o ya ha desplegado automatización con IA, el primer paso es entender exactamente a qué datos acceden tus sistemas, quién los trata y si puedes demostrar cumplimiento ante la AEPD o tu autoridad de control nacional. Comienza con nuestra [auditoría IA gratuita](/es/hoja-de-ruta-de-automatizacion) para identificar tus puntos de exposición, o explora [MedCore Private AI](/es/presentando-medcore-private-ai) — nuestra solución local diseñada para el cumplimiento RGPD sanitario desde la arquitectura.
+Si tu consulta está evaluando o ya ha desplegado automatización con IA, el primer paso es entender exactamente a qué datos acceden tus sistemas, quién los trata y si puedes demostrar cumplimiento ante la AEPD o tu autoridad de control nacional. Comienza con nuestra [Hoja de Ruta de Automatización gratuita](/es/hoja-de-ruta-de-automatizacion) para identificar tus puntos de exposición, o explora [MedCore Private AI](/es/presentando-medcore-private-ai) — nuestra solución local diseñada para el cumplimiento RGPD sanitario desde la arquitectura.
 
 ---
 

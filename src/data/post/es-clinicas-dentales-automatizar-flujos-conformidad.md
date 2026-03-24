@@ -124,11 +124,11 @@ No necesitas automatizarlo todo de una vez. De hecho, recomendamos empezar con u
 - Los **flujos de seguimiento** ofrecen mejoras inmediatas en la atención al paciente
 - La **automatización de facturación** tiene el impacto más directo en los ingresos
 
-La clave es elegir el punto de partida adecuado para la situación específica de tu clínica — que es exactamente lo que identifica nuestra auditoría gratuita de cumplimiento IA.
+La clave es elegir el punto de partida adecuado para la situación específica de tu clínica — que es exactamente lo que identifica nuestra Hoja de Ruta de Automatización gratuita.
 
 ## Cómo Podemos Ayudarte
 
-Nuestra [auditoría gratuita de cumplimiento IA de 5-7 días](/es/hoja-de-ruta-de-automatizacion) evalúa los flujos de trabajo específicos de tu clínica, el manejo de datos y la postura de cumplimiento. Recibirás:
+Nuestra [Hoja de Ruta de Automatización gratuita de 5-7 días](/es/hoja-de-ruta-de-automatizacion) evalúa los flujos de trabajo específicos de tu clínica, el manejo de datos y la postura de cumplimiento. Recibirás:
 
 - Un análisis puntuado del potencial de automatización de cada flujo de trabajo
 - Recomendaciones claras sobre qué es seguro automatizar y qué no
@@ -137,4 +137,4 @@ Nuestra [auditoría gratuita de cumplimiento IA de 5-7 días](/es/hoja-de-ruta-d
 
 Sin coste, sin compromisos. Aproximadamente 60-75 minutos de tu tiempo para una evaluación completa.
 
-[Reserva tu auditoría gratuita hoy](/es/hoja-de-ruta-de-automatizacion) y descubre qué automatizaciones pueden ahorrarle más tiempo a tu clínica — de forma segura.
+[Solicita tu Hoja de Ruta gratuita hoy](/es/hoja-de-ruta-de-automatizacion) y descubre qué automatizaciones pueden ahorrarle más tiempo a tu clínica — de forma segura.

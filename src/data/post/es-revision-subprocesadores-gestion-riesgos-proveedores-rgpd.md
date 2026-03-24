@@ -236,7 +236,7 @@ Un proceso de revisión sólido debe:
 
 Si no se puede explicar quién trata los datos de los pacientes, dónde se almacenan y bajo qué base jurídica se transfieren, no se controla la postura de cumplimiento. En el ámbito sanitario, eso es inaceptable.
 
-Comience con nuestra [Auditoría de Cumplimiento gratuita](/es/hoja-de-ruta-de-automatizacion) — evaluamos el tratamiento de datos de su centro, identificamos las brechas de cumplimiento y determinamos dónde la IA puede automatizar tareas de forma segura, sin coste alguno.
+Comience con nuestra [Hoja de Ruta de Automatización gratuita](/es/hoja-de-ruta-de-automatizacion) — evaluamos el tratamiento de datos de su centro, identificamos oportunidades de automatización segura y elaboramos una hoja de ruta de cumplimiento clara, sin coste alguno.
 
 ---
 

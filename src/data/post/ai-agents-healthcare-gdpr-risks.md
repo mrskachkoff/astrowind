@@ -173,7 +173,7 @@ The EU AI Act classifies AI systems used in healthcare as high-risk under Annex 
 
 The MIT AI Agent Index 2025 confirms what the GDPR anticipated: autonomous systems operating on sensitive data without adequate governance create compounding legal risk that grows with every automated action the agent takes unchecked. For independent healthcare practices in the EU, this is not a future problem — AI agents are being sold and deployed today, often without the compliance infrastructure that makes them legal to operate.
 
-If your practice is evaluating or has already deployed AI automation, the first step is understanding exactly what data your systems are accessing, who processes it, and whether you can demonstrate compliance to the AEPD or your national supervisory authority. Start with our [free AI audit](/automation-roadmap) to identify your exposure points, or explore [MedCore Private AI](/introducing-medcore-private-ai) — our on-premise solution built for healthcare GDPR compliance from the architecture up.
+If your practice is evaluating or has already deployed AI automation, the first step is understanding exactly what data your systems are accessing, who processes it, and whether you can demonstrate compliance to the AEPD or your national supervisory authority. Start with our [free Automation Roadmap](/automation-roadmap) to identify your exposure points, or explore [MedCore Private AI](/introducing-medcore-private-ai) — our on-premise solution built for healthcare GDPR compliance from the architecture up.
 
 ---
 

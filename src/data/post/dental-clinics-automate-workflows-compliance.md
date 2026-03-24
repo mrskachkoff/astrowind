@@ -122,11 +122,11 @@ You don't need to automate everything at once. In fact, we recommend starting wi
 - **Follow-up workflows** deliver immediate patient care improvements
 - **Billing automation** has the most direct impact on revenue
 
-The key is choosing the right starting point for your clinic's specific situation — which is exactly what our free AI compliance audit identifies for independent practices.
+The key is choosing the right starting point for your clinic's specific situation — which is exactly what our free Automation Roadmap identifies for independent practices.
 
 ## How We Can Help
 
-Our [free 5-7 day AI compliance audit](/automation-roadmap) assesses your clinic's specific workflows, data handling, and compliance posture. You receive:
+Our [free 5-7 day Automation Roadmap](/automation-roadmap) assesses your clinic's specific workflows, data handling, and compliance posture. You receive:
 
 - A scored analysis of every workflow's automation potential
 - Clear recommendations on what's safe to automate and what isn't
@@ -135,4 +135,4 @@ Our [free 5-7 day AI compliance audit](/automation-roadmap) assesses your clinic
 
 No cost, no obligations. About 60-75 minutes of your time for a comprehensive assessment.
 
-[Book your free audit today](/automation-roadmap) and find out which automations can save your clinic the most time — safely.
+[Book your free Automation Roadmap today](/automation-roadmap) and find out which automations can save your clinic the most time — safely.

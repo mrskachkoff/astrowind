@@ -50,6 +50,7 @@ export default defineConfig({
 
   integrations: [
     sitemap({
+      filter: (page) => !page.includes('/tag/'),
       i18n: {
         defaultLocale: 'en',
         locales: {

@@ -1,5 +1,6 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import JsonLd from '~/components/common/JsonLd.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
 import Stats from '~/components/widgets/Stats.astro';
@@ -23,6 +24,25 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
+  <JsonLd schema={{
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "MedCore Private AI",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "Linux, On-Premise",
+    "description": "Infraestructura de IA completamente local y de grado médico para organizaciones sanitarias medianas. Cumplimiento con RGPD, HIPAA y soberanía de datos. Ajuste fino, RAG y soporte multilingüe incluidos.",
+    "url": "https://solutions.futurion.es/es/medcore-ia-privada",
+    "inLanguage": "es",
+    "featureList": [
+      "Despliegue completamente local",
+      "Cumplimiento RGPD por arquitectura",
+      "Modelos de lenguaje de grado médico",
+      "Soporte para ajuste fino y RAG",
+      "Multilingüe — español e inglés",
+      "Cumplimiento HIPAA y soberanía de datos"
+    ],
+    "provider": { "@id": "https://solutions.futurion.es/#organization" }
+  }} />
   <!-- Section 1: Hero -->
 
   <Hero

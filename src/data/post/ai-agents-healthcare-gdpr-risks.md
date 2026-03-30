@@ -1,5 +1,6 @@
 ---
 publishDate: 2026-02-24T00:00:00Z
+updateDate: 2026-03-30T00:00:00Z
 title: 'AI Agents in Healthcare: GDPR Risks Every Practice Owner Must Understand'
 excerpt: The MIT AI Agent Index 2025 analyzed 30 AI agents and found rapid autonomy growth with weak safety controls. Here is what that means for GDPR compliance when your practice deploys AI automation.
 image: ~/assets/images/ai-security-padlock.jpg

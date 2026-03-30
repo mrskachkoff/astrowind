@@ -1,5 +1,6 @@
 ---
 publishDate: 2026-03-03T00:00:00Z
+updateDate: 2026-03-30T00:00:00Z
 title: 'Revisión de Subprocesadores y Gestión de Riesgos de Proveedores en Organizaciones Sanitarias de la UE: Guía Práctica'
 excerpt: Las organizaciones sanitarias de la UE deben identificar a cada proveedor que accede a datos de pacientes, incluidos los subencargados. Esta guía cubre el proceso completo para identificar, evaluar y gestionar encargados del tratamiento bajo el RGPD.
 image: ~/assets/images/gdpr-subprocessor-cover.jpg

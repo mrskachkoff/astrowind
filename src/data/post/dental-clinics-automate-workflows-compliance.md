@@ -1,5 +1,7 @@
 ---
 publishDate: 2026-01-20T00:00:00Z
+updateDate: 2026-03-30T00:00:00Z
+lang: en
 title: '5 Ways Dental Clinics Can Automate Workflows (While Staying Compliant)'
 excerpt: Independent dental clinics waste 10-15 hours per week on administrative tasks that can be automated. Here are 5 high-impact automations that save time without compromising patient data or GDPR compliance.
 image: ~/assets/images/dental-clinic.jpg

@@ -8,8 +8,8 @@
 - [Homepage (Spanish)](https://solutions.futurion.es/es/): Spanish-language overview — Automatización IA con cumplimiento normativo para sanidad
 - [Services](https://solutions.futurion.es/services): Full list of AI automation services — appointment scheduling, patient communications, billing, compliance documentation
 - [Servicios (ES)](https://solutions.futurion.es/es/servicios): Spanish services page
-- [Free AI Compliance Audit](https://solutions.futurion.es/free-ai-audit): Request the free 5–7 day GDPR + AI feasibility audit
-- [Auditoría IA Gratuita (ES)](https://solutions.futurion.es/es/auditoria-ia-gratuita): Spanish audit request page
+- [Free AI Compliance Audit](https://solutions.futurion.es/automation-roadmap): Request the free 5–7 day GDPR + AI feasibility audit
+- [Hoja de Ruta de Automatización (ES)](https://solutions.futurion.es/es/hoja-de-ruta-de-automatizacion): Spanish audit request page
 - [Pricing](https://solutions.futurion.es/pricing): Transparent pricing for audit, implementation packages, and monthly support
 - [Precios (ES)](https://solutions.futurion.es/es/precios): Spanish pricing page
 - [MedCore Private AI](https://solutions.futurion.es/medcore-private-ai): On-premise medical-grade AI infrastructure for medium healthcare organizations
@@ -27,6 +27,11 @@
 - [Why Healthcare Needs On-Premise AI](https://solutions.futurion.es/why-healthcare-needs-on-premise-ai): Data sovereignty and GDPR arguments for local AI deployment in healthcare
 - [Why Hybrid AI Solutions Matter for Healthcare](https://solutions.futurion.es/why-hybrid-ai-solutions-matter-healthcare): Architecture trade-offs between cloud, on-premise, and hybrid AI for healthcare
 - [Introducing MedCore Private AI](https://solutions.futurion.es/introducing-medcore-private-ai): Product introduction for the on-premise medical-grade AI platform
+- [AI Agents in Healthcare: GDPR Risks Every Practice Owner Must Understand](https://solutions.futurion.es/ai-agents-healthcare-gdpr-risks): MIT AI Agent Index 2025 analysis of GDPR risks from autonomous AI agents in healthcare
+- [Subprocessor Review and Vendor Risk Management in EU Healthcare Organizations](https://solutions.futurion.es/gdpr-subprocessor-management-eu-healthcare): Complete workflow for identifying, assessing, and managing third-party data processors under GDPR
+- [5 Tasks Your Clinic Can Stop Doing Manually](https://solutions.futurion.es/5-tasks-clinic-stop-doing-manually): Five highest-impact administrative workflows to automate first in independent healthcare practices
+- [Consultant or Decision-Maker? How AI's Role Defines Clinical Accountability](https://solutions.futurion.es/consultant-or-decision-maker-ai-clinical-accountability): 400-participant study on how AI system design shapes clinical accountability, safety, and regulatory compliance
+- [Data Protection Impact Assessment in Healthcare AI](https://solutions.futurion.es/data-protection-impact-assessment-healthcare-ai): Legal requirements and seven-step process for conducting DPIAs under GDPR Article 35 in healthcare
 
 ## Artículos del blog (Español)
 
@@ -35,6 +40,11 @@
 - [Por Qué la Sanidad Necesita IA Local](https://solutions.futurion.es/es/es-por-que-sanidad-necesita-ia-local): Argumentos de soberanía de datos y RGPD para el despliegue de IA local en sanidad
 - [Por Qué las Soluciones de IA Híbridas Son Clave en Sanidad](https://solutions.futurion.es/es/es-soluciones-ia-hibridas-sanidad): Comparativa de arquitecturas cloud, local e híbrida para sanidad
 - [Presentamos MedCore Private AI](https://solutions.futurion.es/es/es-presentando-medcore-private-ai): Introducción a la plataforma de IA médica de grado empresarial completamente local
+- [Agentes IA en Sanidad: Riesgos RGPD que Debes Conocer](https://solutions.futurion.es/es/agentes-ia-sanidad-riesgos-rgpd): Análisis del MIT AI Agent Index 2025 sobre riesgos RGPD de los agentes IA autónomos en sanidad
+- [Revisión de Subprocesadores y Gestión de Riesgos de Proveedores en Organizaciones Sanitarias de la UE](https://solutions.futurion.es/es/es-revision-subprocesadores-gestion-riesgos-proveedores-rgpd): Proceso completo para identificar, evaluar y gestionar subencargados del tratamiento bajo el RGPD
+- [5 Tareas que tu Clínica Puede Dejar de Hacer Manualmente](https://solutions.futurion.es/es/es-5-tareas-clinica-dejar-hacer-manualmente): Las cinco tareas administrativas de mayor impacto para automatizar primero en consultas sanitarias independientes
+- [¿Consultora o decisora? Cómo el papel de la IA define la responsabilidad clínica](https://solutions.futurion.es/es/es-consultora-o-decisora-ia-responsabilidad-clinica): Estudio con 400 participantes sobre cómo el diseño del sistema IA condiciona la seguridad, trazabilidad y cumplimiento normativo
+- [Evaluación de Impacto en la Protección de Datos en la IA Sanitaria](https://solutions.futurion.es/es/es-eipd-evaluacion-impacto-proteccion-datos-ia-sanitaria): Requisitos legales y proceso en siete pasos para realizar EIPDs bajo el Artículo 35 del RGPD en sanidad
 
 ## Key facts
 

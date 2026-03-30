@@ -1,5 +1,6 @@
 ---
 publishDate: 2026-03-03T00:00:00Z
+updateDate: 2026-03-30T00:00:00Z
 title: 'Subprocessor Review and Vendor Risk Management in EU Healthcare Organizations: A Practical Guide'
 excerpt: Healthcare organizations in the EU must track every vendor that touches patient data — including subprocessors. This guide covers the complete workflow for identifying, assessing, and managing third-party data processors under GDPR.
 image: ~/assets/images/gdpr-subprocessor-cover.jpg

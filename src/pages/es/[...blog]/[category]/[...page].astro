@@ -21,6 +21,14 @@ const { page, category } = Astro.props as Props;
 const currentPage = page.currentPage ?? 1;
 const t = useTranslations('es');
 
+const categoryDescriptions: Record<string, string> = {
+  'rgpd-y-cumplimiento': 'Guía práctica sobre cumplimiento RGPD para consultas sanitarias en España y la UE — tratamiento de datos, derechos del paciente, despliegue de IA bajo el Artículo 35 y gestión de subencargados.',
+  'tecnologia-sanitaria': 'Perspectivas tecnológicas para consultas independientes — automatización IA, optimización de flujos clínicos y transformación digital para clínicas dentales, farmacias y consultorios médicos.',
+  'automatizacion-ia': 'Estrategias de automatización IA para proveedores sanitarios bajo el RGPD — desde automatizaciones rápidas de alto impacto hasta despliegues completamente locales con MedCore Private AI.',
+};
+
+const categoryDescription = categoryDescriptions[category.slug] || '';
+
 const metadata = {
   title: `${t('blog.category')} '${category.title}'${currentPage > 1 ? ` — ${t('blog.page')} ${currentPage}` : ''}`,
   robots: {
@@ -33,6 +41,7 @@ const metadata = {
 <Layout metadata={metadata}>
   <section class="px-4 md:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
     <Headline>{category.title}</Headline>
+    {categoryDescription && <p class="text-muted text-lg mb-8 max-w-3xl">{categoryDescription}</p>}
     <BlogList posts={page.data} />
     <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
   </section>

@@ -1,5 +1,6 @@
 ---
 publishDate: 2026-02-22T00:00:00Z
+updateDate: 2026-03-30T00:00:00Z
 title: 'Por Qué la Sanidad Necesita IA Local: El Caso Contra la Nube para Datos de Pacientes'
 excerpt: Los servicios de IA en la nube comercializan el «cumplimiento» a través de contratos y certificaciones. Pero cuando la soberanía de los datos sanitarios es el requisito, los contratos no son arquitectura. Aquí explicamos por qué la IA local es el único enfoque defendible para las consultas sanitarias que gestionan datos sensibles de pacientes.
 image: ~/assets/images/medical-lab.jpg

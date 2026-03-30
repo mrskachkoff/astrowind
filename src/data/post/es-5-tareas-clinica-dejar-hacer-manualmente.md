@@ -1,5 +1,6 @@
 ---
 publishDate: 2026-03-24T10:00:00Z
+updateDate: 2026-03-30T00:00:00Z
 title: '5 Tareas que tu Clínica Puede Dejar de Hacer Manualmente'
 excerpt: La mayoría de las consultas sanitarias independientes siguen dedicando horas cada semana a tareas administrativas que la automatización IA resuelve en minutos. Estas son las cinco con mayor impacto para automatizar primero.
 image: ~/assets/images/multitasking-medic-16-9.png

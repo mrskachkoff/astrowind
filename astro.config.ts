@@ -38,6 +38,10 @@ export default defineConfig({
     '/tag/privacidad-de-datos': '/es/tag/privacidad-de-datos',
     '/tag/ia': '/es/tag/ia',
     '/tag/ia-hibrida': '/es/tag/ia-hibrida',
+    '/tag/acuerdos-de-tratamiento-de-datos': '/es/tag/acuerdos-de-tratamiento-de-datos',
+    '/es/presentando-medcore-private-ai': '/es/es-presentando-medcore-private-ai',
+    '/es-revision-subprocesadores-gestion-riesgos-proveedores-rgpd': '/es/es-revision-subprocesadores-gestion-riesgos-proveedores-rgpd',
+    '/agentes-ia-sanidad-riesgos-rgpd': '/es/agentes-ia-sanidad-riesgos-rgpd',
   },
 
   i18n: {

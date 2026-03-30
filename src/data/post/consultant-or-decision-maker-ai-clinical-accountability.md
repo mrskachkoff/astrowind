@@ -28,8 +28,6 @@ metadata:
     cardType: summary_large_image
 ---
 
-# Consultant or Decision-Maker? How AI's Role Defines Clinical Accountability
-
 ## Challenges in AI Implementation in Healthcare and the Importance of the "Human in the Loop" Approach: Theoretical, Empirical and Operational Analysis
 
 ## Abstract

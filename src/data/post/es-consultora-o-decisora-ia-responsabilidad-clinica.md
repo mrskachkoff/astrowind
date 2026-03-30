@@ -29,8 +29,6 @@ metadata:
     cardType: summary_large_image
 ---
 
-# ¿Consultora o decisora? Cómo el papel de la IA define la responsabilidad clínica
-
 ## Desafíos en la Implementación de IA en Salud y la Importancia del Enfoque "Human in the Loop": Análisis Teórico, Empírico y Operativo
 
 ## Resumen

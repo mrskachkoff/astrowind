@@ -42,6 +42,7 @@ export default defineConfig({
     '/es/presentando-medcore-private-ai': '/es/es-presentando-medcore-private-ai',
     '/es-revision-subprocesadores-gestion-riesgos-proveedores-rgpd': '/es/es-revision-subprocesadores-gestion-riesgos-proveedores-rgpd',
     '/agentes-ia-sanidad-riesgos-rgpd': '/es/agentes-ia-sanidad-riesgos-rgpd',
+    '/es/guia-cumplimiento-rgpd-consultas-sanitarias': '/es/es-guia-cumplimiento-rgpd-consultas-sanitarias',
   },
 
   i18n: {

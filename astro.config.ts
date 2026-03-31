@@ -43,6 +43,15 @@ export default defineConfig({
     '/es-revision-subprocesadores-gestion-riesgos-proveedores-rgpd': '/es/es-revision-subprocesadores-gestion-riesgos-proveedores-rgpd',
     '/agentes-ia-sanidad-riesgos-rgpd': '/es/agentes-ia-sanidad-riesgos-rgpd',
     '/es/guia-cumplimiento-rgpd-consultas-sanitarias': '/es/es-guia-cumplimiento-rgpd-consultas-sanitarias',
+    '/es-5-tareas-clinica-dejar-hacer-manualmente': '/es/es-5-tareas-clinica-dejar-hacer-manualmente',
+    '/es-consultora-o-decisora-ia-responsabilidad-clinica': '/es/es-consultora-o-decisora-ia-responsabilidad-clinica',
+    '/es-eipd-evaluacion-impacto-proteccion-datos-ia-sanitaria': '/es/es-eipd-evaluacion-impacto-proteccion-datos-ia-sanitaria',
+    '/es-presentando-medcore-private-ai': '/es/es-presentando-medcore-private-ai',
+    '/es/5-tareas-clinica-dejar-hacer-manualmente': '/es/es-5-tareas-clinica-dejar-hacer-manualmente',
+    '/es/consultora-o-decisora-ia-responsabilidad-clinica': '/es/es-consultora-o-decisora-ia-responsabilidad-clinica',
+    '/es/eipd-evaluacion-impacto-proteccion-datos-ia-sanitaria': '/es/es-eipd-evaluacion-impacto-proteccion-datos-ia-sanitaria',
+    '/es/por-que-sanidad-necesita-ia-local': '/es/es-por-que-sanidad-necesita-ia-local',
+    '/es/revision-subprocesadores-gestion-riesgos-proveedores-rgpd': '/es/es-revision-subprocesadores-gestion-riesgos-proveedores-rgpd',
   },
 
   i18n: {

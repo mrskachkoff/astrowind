@@ -32,6 +32,7 @@
 - [5 Tasks Your Clinic Can Stop Doing Manually](https://solutions.futurion.es/5-tasks-clinic-stop-doing-manually): Five highest-impact administrative workflows to automate first in independent healthcare practices
 - [Consultant or Decision-Maker? How AI's Role Defines Clinical Accountability](https://solutions.futurion.es/consultant-or-decision-maker-ai-clinical-accountability): 400-participant study on how AI system design shapes clinical accountability, safety, and regulatory compliance
 - [Data Protection Impact Assessment in Healthcare AI](https://solutions.futurion.es/data-protection-impact-assessment-healthcare-ai): Legal requirements and seven-step process for conducting DPIAs under GDPR Article 35 in healthcare
+- [Hybrid AI in Healthcare: Why Compliance Defines Architecture](https://solutions.futurion.es/european-sovereign-cloud-healthcare-ai): How AWS European Sovereign Cloud (EUSC) and on-premises GPU infrastructure enable GDPR-compliant hybrid AI for hospitals
 
 ## Artículos del blog (Español)
 
@@ -45,6 +46,7 @@
 - [5 Tareas que tu Clínica Puede Dejar de Hacer Manualmente](https://solutions.futurion.es/es/es-5-tareas-clinica-dejar-hacer-manualmente): Las cinco tareas administrativas de mayor impacto para automatizar primero en consultas sanitarias independientes
 - [¿Consultora o decisora? Cómo el papel de la IA define la responsabilidad clínica](https://solutions.futurion.es/es/es-consultora-o-decisora-ia-responsabilidad-clinica): Estudio con 400 participantes sobre cómo el diseño del sistema IA condiciona la seguridad, trazabilidad y cumplimiento normativo
 - [Evaluación de Impacto en la Protección de Datos en la IA Sanitaria](https://solutions.futurion.es/es/es-eipd-evaluacion-impacto-proteccion-datos-ia-sanitaria): Requisitos legales y proceso en siete pasos para realizar EIPDs bajo el Artículo 35 del RGPD en sanidad
+- [IA híbrida en sanidad: por qué el cumplimiento normativo define la arquitectura](https://solutions.futurion.es/es/es-european-sovereign-cloud-ia-sanitaria): Cómo AWS European Sovereign Cloud (EUSC) y la GPU local permiten IA híbrida conforme con el RGPD (LOPDGDD) para hospitales
 
 ## Key facts
 

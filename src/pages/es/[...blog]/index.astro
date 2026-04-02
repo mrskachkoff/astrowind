@@ -7,7 +7,7 @@ import Layout from '~/layouts/PageLayout.astro';
 import SinglePost from '~/components/blog/SinglePost.astro';
 import ToBlogLink from '~/components/blog/ToBlogLink.astro';
 
-import { getCanonical, getPermalink } from '~/utils/permalinks';
+import { getCanonical } from '~/utils/permalinks';
 import { getStaticPathsEsBlogPost, blogPostRobots } from '~/utils/blog';
 import { findImage } from '~/utils/images';
 import type { MetaData } from '~/types';
@@ -24,7 +24,7 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { post } = Astro.props as Props;
 
-const url = getCanonical(getPermalink(post.permalink, 'post'));
+const url = getCanonical(`/es/${post.permalink}`);
 const image = (await findImage(post.image)) as ImageMetadata | string | undefined;
 
 const metadata = merge(

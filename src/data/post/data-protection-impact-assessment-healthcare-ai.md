@@ -1,5 +1,6 @@
 ---
 publishDate: 2026-03-30T10:00:00Z
+updateDate: 2026-04-02T00:00:00Z
 draft: false
 title: "Data Protection Impact Assessment in Healthcare AI: What It Is, Why It Matters, and Where It Applies"
 excerpt: "Before deploying any AI in a clinic, GDPR mandates a DPIA. This guide explains what a Data Protection Impact Assessment is, when it is legally required in healthcare, and how to conduct one in seven structured steps."

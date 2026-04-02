@@ -1,6 +1,6 @@
 ---
 publishDate: 2026-01-27T00:00:00Z
-updateDate: 2026-03-30T00:00:00Z
+updateDate: 2026-04-02T00:00:00Z
 title: 'Por Qué las Soluciones de IA Híbridas Son Clave en Sanidad'
 excerpt: La IA en la nube es la opción predeterminada para la mayoría de los sectores — pero la sanidad es diferente. La sensibilidad de los datos de los pacientes y los requisitos del RGPD hacen que la IA híbrida y local sea la opción más segura para los consultorios independientes.
 image: ~/assets/images/server-room.jpg

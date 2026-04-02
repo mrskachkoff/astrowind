@@ -1,6 +1,6 @@
 ---
 publishDate: 2026-03-24T10:00:00Z
-updateDate: 2026-03-30T00:00:00Z
+updateDate: 2026-04-02T00:00:00Z
 title: '5 Tasks Your Clinic Can Stop Doing Manually'
 excerpt: Most independent healthcare practices are still spending hours every week on administrative tasks that AI automation handles in minutes. Here are the five highest-impact workflows to automate first.
 image: ~/assets/images/multitasking-medic-16-9.png

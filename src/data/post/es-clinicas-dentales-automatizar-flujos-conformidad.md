@@ -1,6 +1,6 @@
 ---
 publishDate: 2026-01-20T00:00:00Z
-updateDate: 2026-03-30T00:00:00Z
+updateDate: 2026-04-02T00:00:00Z
 title: '5 Formas en que las Clínicas Dentales Pueden Automatizar Flujos de Trabajo (Con Cumplimiento Normativo)'
 excerpt: Las clínicas dentales independientes pierden 10-15 horas semanales en tareas administrativas que pueden automatizarse. Aquí tienes 5 automatizaciones de alto impacto que ahorran tiempo sin comprometer los datos de los pacientes ni el cumplimiento del RGPD.
 image: ~/assets/images/dental-clinic.jpg

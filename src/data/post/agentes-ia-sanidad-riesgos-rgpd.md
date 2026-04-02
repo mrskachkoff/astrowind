@@ -1,6 +1,6 @@
 ---
 publishDate: 2026-02-24T00:00:00Z
-updateDate: 2026-03-30T00:00:00Z
+updateDate: 2026-04-02T00:00:00Z
 title: 'Agentes IA en Sanidad: Riesgos RGPD que Debes Conocer'
 excerpt: El Índice de Agentes IA MIT 2025 analizó 30 agentes y detectó autonomía creciente con controles de seguridad débiles. Esto es lo que significa para el cumplimiento RGPD cuando tu consulta despliega automatización con IA.
 image: ~/assets/images/ai-security-padlock.jpg

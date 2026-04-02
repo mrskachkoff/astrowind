@@ -1,6 +1,6 @@
 ---
 publishDate: 2026-02-03T00:00:00Z
-updateDate: 2026-03-30T00:00:00Z
+updateDate: 2026-04-02T00:00:00Z
 title: 'Cumplimiento RGPD para Consultas Sanitarias: Guía Completa'
 excerpt: Los consultorios independientes se enfrentan a los mismos requisitos RGPD que los grandes hospitales — pero sin equipos de cumplimiento dedicados. Aquí tienes todo lo que necesitas saber para proteger los datos de tus pacientes y evitar sanciones costosas.
 image: ~/assets/images/medical-research.jpg

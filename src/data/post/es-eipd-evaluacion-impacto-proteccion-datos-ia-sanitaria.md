@@ -1,5 +1,6 @@
 ---
 publishDate: 2026-03-30T10:00:00Z
+updateDate: 2026-04-02T00:00:00Z
 draft: false
 title: "Evaluación de Impacto en la Protección de Datos en la IA Sanitaria: Qué es, por qué importa y dónde se aplica"
 excerpt: "Antes de implantar cualquier IA en una clínica, el RGPD exige una EIPD. Esta guía explica qué es, cuándo es legalmente obligatoria en sanidad y cómo realizarla en siete pasos estructurados."

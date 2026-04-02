@@ -1,5 +1,6 @@
 ---
 publishDate: 2026-03-30T10:00:00Z
+updateDate: 2026-04-02T00:00:00Z
 draft: false
 title: "Consultant or Decision-Maker? How AI's Role Defines Clinical Accountability"
 excerpt: "When AI decides and the human supervises, clinical accountability diminishes. A 400-participant study examines how system design shapes safety, traceability, and regulatory compliance in healthcare."

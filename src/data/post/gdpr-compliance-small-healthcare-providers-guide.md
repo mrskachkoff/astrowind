@@ -1,6 +1,6 @@
 ---
 publishDate: 2026-02-03T00:00:00Z
-updateDate: 2026-03-30T00:00:00Z
+updateDate: 2026-04-02T00:00:00Z
 lang: en
 title: 'GDPR Compliance for Independent Healthcare Providers: A Complete Guide'
 excerpt: Independent healthcare practices face the same GDPR requirements as large hospitals — but without dedicated compliance teams. Here's what you need to know to protect patient data and avoid costly penalties.

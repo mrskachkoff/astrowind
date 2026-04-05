@@ -23,8 +23,15 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
 
 export default defineConfig({
   output: 'static',
+  site: 'https://solutions.futurion.es',
 
   redirects: {
+    '/free-ai-audit': '/automation-roadmap',
+    '/services/': '/services',
+    '/dental-clinics-automate-workflows-compliance/': '/dental-clinics-automate-workflows-compliance',
+    '/gdpr-subprocessor-management-eu-healthcare/': '/gdpr-subprocessor-management-eu-healthcare',
+    '/why-healthcare-needs-on-premise-ai/': '/why-healthcare-needs-on-premise-ai',
+    '/introducing-medcore-private-ai/': '/introducing-medcore-private-ai',
     '/es/auditoria-ia-gratuita': '/es/hoja-de-ruta-de-automatizacion',
     '/es-clinicas-dentales-automatizar-flujos-conformidad': '/es/es-clinicas-dentales-automatizar-flujos-conformidad',
     '/es-soluciones-ia-hibridas-sanidad': '/es/es-soluciones-ia-hibridas-sanidad',

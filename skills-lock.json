@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "google-search-browser-use": {
+      "source": "grasseed/google-search-browser-use",
+      "sourceType": "github",
+      "computedHash": "92197f0f345f8ab0baef1c65eb8c465c1001afe2fe7ea3b9e70d95e5be33ec28"
+    }
+  }
+}

@@ -96,7 +96,7 @@ La revisión no puede ser un ejercicio de verificación puntual. Debe ser contin
 
 Del mismo modo que HIPAA exige Acuerdos de Asociado de Negocios, el RGPD requiere acuerdos claros con los encargados del tratamiento. Las organizaciones deben supervisar el cumplimiento de los proveedores exigiendo derechos de auditoría o certificaciones, y garantizar que las mismas obligaciones se trasladen a los subencargados del tratamiento. Toda entidad que trate datos de pacientes en nombre de la organización debe cumplir los estándares del RGPD.
 
-Para un análisis detallado de las [obligaciones del Artículo 28 sobre subprocesadores en cadenas de herramientas de agentes IA](/es/agentes-ia-sanidad-riesgos-rgpd), consulte nuestro artículo monográfico.
+Para un análisis detallado de las [obligaciones del Artículo 28 sobre subprocesadores en cadenas de herramientas de agentes IA](/es/es-agentes-ia-sanidad-riesgos-rgpd/), consulte nuestro artículo monográfico.
 
 ---
 

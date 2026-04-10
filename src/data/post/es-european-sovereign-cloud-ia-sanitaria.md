@@ -113,7 +113,7 @@ Una Evaluación de Impacto relativa a la Protección de Datos es legalmente obli
 - **Pacientes extranjeros y comunicación en tiempo real** — Escrutinar las condiciones de tratamiento de cualquier proveedor externo de traducción, si los datos se retienen o se utilizan para entrenar modelos, y las obligaciones de información al paciente.
 - **Transcripción y codificación CIE-10** — La EIPD más exigente en IA clínica. Debe abordar la base legal para la grabación, el consentimiento explícito, la precisión de la transcripción y la codificación, las consecuencias de errores de codificación, las políticas de retención del audio y la revisión humana obligatoria antes de incorporar los códigos al historial médico.
 
-Para las obligaciones del RGPD y la LOPDGDD aplicables a todos estos escenarios —bases legales, derechos de los interesados, responsabilidades del responsable y del encargado del tratamiento— consulta nuestra [guía para IA sanitaria](/es/agentes-ia-sanidad-riesgos-rgpd)
+Para las obligaciones del RGPD y la LOPDGDD aplicables a todos estos escenarios —bases legales, derechos de los interesados, responsabilidades del responsable y del encargado del tratamiento— consulta nuestra [guía para IA sanitaria](/es/es-agentes-ia-sanidad-riesgos-rgpd/)
 
 ---
 

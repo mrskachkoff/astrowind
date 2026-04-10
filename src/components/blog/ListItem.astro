@@ -10,6 +10,7 @@ import type { Post } from '~/types';
 import { getPermalink } from '~/utils/permalinks';
 import { findImage } from '~/utils/images';
 import { getFormattedDate } from '~/utils/utils';
+import { getLangFromUrl } from '~/i18n/utils';
 
 export interface Props {
   post: Post;
@@ -20,6 +21,10 @@ const image = (await findImage(post.image)) as ImageMetadata | undefined;
 
 const postPermalink = post.lang === 'es' ? `es/${post.permalink}` : post.permalink;
 const link = APP_BLOG?.post?.isEnabled ? getPermalink(postPermalink, 'post') : '';
+
+const lang = getLangFromUrl(Astro.url);
+const localizeTaxonomyHref = (href: string) =>
+  lang === 'es' && (href.startsWith('/tag/') || href.startsWith('/category/')) ? `/es${href}` : href;
 ---
 
 <article
@@ -83,7 +88,7 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(postPermalink, 'post') : '
               <>
                 {' '}
                 ·{' '}
-                <a class="hover:underline" href={getPermalink(post.category.slug, 'category')}>
+                <a class="hover:underline" href={localizeTaxonomyHref(getPermalink(post.category.slug, 'category'))}>
                   {post.category.title}
                 </a>
               </>

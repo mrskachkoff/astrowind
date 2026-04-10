@@ -2,7 +2,7 @@ site:
   name: Futurion Solutions
   site: 'https://solutions.futurion.es'
   base: '/'
-  trailingSlash: false
+  trailingSlash: true
 
   googleSiteVerificationId: ''
 

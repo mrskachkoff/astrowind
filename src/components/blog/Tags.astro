@@ -1,5 +1,6 @@
 ---
 import { getPermalink } from '~/utils/permalinks';
+import { getLangFromUrl } from '~/i18n/utils';
 
 import { APP_BLOG } from 'astrowind:config';
 import type { Post } from '~/types';
@@ -12,6 +13,10 @@ export interface Props {
 }
 
 const { tags, class: className = 'text-sm', title = undefined, isCategory = false } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const localizeTaxonomyHref = (href: string) =>
+  lang === 'es' && (href.startsWith('/tag/') || href.startsWith('/category/')) ? `/es${href}` : href;
 ---
 
 {
@@ -29,7 +34,7 @@ const { tags, class: className = 'text-sm', title = undefined, isCategory = fals
               tag.title
             ) : (
               <a
-                href={getPermalink(tag.slug, isCategory ? 'category' : 'tag')}
+                href={localizeTaxonomyHref(getPermalink(tag.slug, isCategory ? 'category' : 'tag'))}
                 class="text-muted dark:text-slate-300 hover:text-primary dark:hover:text-gray-200"
               >
                 {tag.title}

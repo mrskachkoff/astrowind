@@ -8,6 +8,7 @@ frontend:
       commands:
         - env | grep -e PUBLIC_ >> .env || true
         - npm run build
+        - npm run verify:rss
   artifacts:
     baseDirectory: dist
     files:

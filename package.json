@@ -11,6 +11,8 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "verify:rss": "node scripts/verify-rss.mjs --mode=dist",
+    "verify:rss:live": "node scripts/verify-rss.mjs --mode=live --site=https://solutions.futurion.es",
     "preview": "astro preview",
     "astro": "astro",
     "check": "npm run check:astro && npm run check:eslint && npm run check:prettier",

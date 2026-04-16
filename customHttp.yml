@@ -1,0 +1,9 @@
+customHeaders:
+  - pattern: '/rss.xml'
+    headers:
+      - key: 'Cache-Control'
+        value: 'public, max-age=300, s-maxage=300, must-revalidate'
+  - pattern: '/es/rss.xml'
+    headers:
+      - key: 'Cache-Control'
+        value: 'public, max-age=300, s-maxage=300, must-revalidate'

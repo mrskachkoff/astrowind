@@ -33,6 +33,7 @@
 - [Consultant or Decision-Maker? How AI's Role Defines Clinical Accountability](https://solutions.futurion.es/consultant-or-decision-maker-ai-clinical-accountability/): 400-participant study on how AI system design shapes clinical accountability, safety, and regulatory compliance
 - [Data Protection Impact Assessment in Healthcare AI](https://solutions.futurion.es/data-protection-impact-assessment-healthcare-ai/): Legal requirements and seven-step process for conducting DPIAs under GDPR Article 35 in healthcare
 - [Hybrid AI in Healthcare: Why Compliance Defines Architecture](https://solutions.futurion.es/european-sovereign-cloud-healthcare-ai/): How AWS European Sovereign Cloud (EUSC) and on-premises GPU infrastructure enable GDPR-compliant hybrid AI for hospitals
+- [Personalized Patient Treatment (PPT) Workflows in Healthcare: From Research to Real-World Automation](https://solutions.futurion.es/personalized-patient-treatment-workflows-healthcare/): How FHIR, openEHR, and governance-first workflow design enable safe healthcare personalization at scale
 
 ## Artículos del blog (Español)
 
@@ -47,6 +48,7 @@
 - [¿Consultora o decisora? Cómo el papel de la IA define la responsabilidad clínica](https://solutions.futurion.es/es/es-consultora-o-decisora-ia-responsabilidad-clinica/): Estudio con 400 participantes sobre cómo el diseño del sistema IA condiciona la seguridad, trazabilidad y cumplimiento normativo
 - [Evaluación de Impacto en la Protección de Datos en la IA Sanitaria](https://solutions.futurion.es/es/es-eipd-evaluacion-impacto-proteccion-datos-ia-sanitaria/): Requisitos legales y proceso en siete pasos para realizar EIPDs bajo el Artículo 35 del RGPD en sanidad
 - [IA híbrida en sanidad: por qué el cumplimiento normativo define la arquitectura](https://solutions.futurion.es/es/es-european-sovereign-cloud-ia-sanitaria/): Cómo AWS European Sovereign Cloud (EUSC) y la GPU local permiten IA híbrida conforme con el RGPD (LOPDGDD) para hospitales
+- [Flujos de atención sanitaria personalizada: de la investigación a la automatización real](https://solutions.futurion.es/es/es-flujos-atencion-sanitaria-personalizada/): Cómo diseñar flujos personalizados con interoperabilidad FHIR, metodología openEHR y gobernanza orientada al cumplimiento
 
 ## Key facts
 

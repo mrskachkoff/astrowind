@@ -32,6 +32,7 @@ export const GET = async () => {
   return new Response(rss, {
     headers: {
       'Content-Type': 'application/xml',
+      'Cache-Control': 'public, max-age=300, s-maxage=300, must-revalidate',
     },
   });
 };

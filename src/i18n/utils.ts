@@ -84,5 +84,5 @@ export async function getAlternateLanguageUrl(currentUrl: URL, targetLang: Local
   }
 
   // Unknown path (likely a blog post without a translation) — fall back to blog index
-  return targetLang === 'es' ? '/es/blog' : '/blog';
+  return targetLang === 'es' ? '/es/blog/' : '/blog/';
 }

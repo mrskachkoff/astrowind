@@ -14,7 +14,7 @@ export const slugMap: Record<string, Record<string, string>> = {
     '/medcore-private-ai': '/medcore-private-ai',
     '/privacy': '/privacy',
     '/terms': '/terms',
-    '/blog': '/blog',
+    '/blog': '/blog/',
   },
   es: {
     '/': '/es',
@@ -26,7 +26,7 @@ export const slugMap: Record<string, Record<string, string>> = {
     '/medcore-private-ai': '/es/medcore-ia-privada',
     '/privacy': '/es/privacidad',
     '/terms': '/es/terminos',
-    '/blog': '/es/blog',
+    '/blog': '/es/blog/',
   },
 };
 

@@ -15,7 +15,7 @@ const { post } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const blogHref = lang === 'es' ? '/es/blog' : getBlogPermalink();
+const blogHref = lang === 'es' ? '/es/blog/' : getBlogPermalink();
 
 const relatedPosts = post.tags ? await getRelatedPosts(post, 4) : [];
 ---

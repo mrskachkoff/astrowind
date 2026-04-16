@@ -42,6 +42,8 @@ export default defineConfig({
     '/es/eipd-evaluacion-impacto-proteccion-datos-ia-sanitaria': '/es/es-eipd-evaluacion-impacto-proteccion-datos-ia-sanitaria/',
     '/es-european-sovereign-cloud-ia-sanitaria': '/es/es-european-sovereign-cloud-ia-sanitaria/',
     '/es/european-sovereign-cloud-ia-sanitaria': '/es/es-european-sovereign-cloud-ia-sanitaria/',
+    '/es-flujos-atencion-sanitaria-personalizada': '/es/es-flujos-atencion-sanitaria-personalizada/',
+    '/es/flujos-atencion-sanitaria-personalizada': '/es/es-flujos-atencion-sanitaria-personalizada/',
     '/es-guia-cumplimiento-rgpd-consultas-sanitarias': '/es/es-guia-cumplimiento-rgpd-consultas-sanitarias/',
     '/es/guia-cumplimiento-rgpd-consultas-sanitarias': '/es/es-guia-cumplimiento-rgpd-consultas-sanitarias/',
     '/es-por-que-sanidad-necesita-ia-local': '/es/es-por-que-sanidad-necesita-ia-local/',

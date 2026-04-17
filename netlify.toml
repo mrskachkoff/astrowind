@@ -15,6 +15,30 @@
   status = 301
   force = true
 
+[[redirects]]
+  from = "/es-flujos-atencion-sanitaria-personalizada"
+  to = "/es/es-flujos-atencion-sanitaria-personalizada/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/es-flujos-atencion-sanitaria-personalizada/"
+  to = "/es/es-flujos-atencion-sanitaria-personalizada/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/es/flujos-atencion-sanitaria-personalizada"
+  to = "/es/es-flujos-atencion-sanitaria-personalizada/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/es/flujos-atencion-sanitaria-personalizada/"
+  to = "/es/es-flujos-atencion-sanitaria-personalizada/"
+  status = 301
+  force = true
+
 [[headers]]
   for = "/_astro/*"
   [headers.values]

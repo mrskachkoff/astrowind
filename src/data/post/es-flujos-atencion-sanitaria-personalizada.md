@@ -14,7 +14,7 @@ tags:
 lang: es
 translationOf: personalized-patient-treatment-workflows-healthcare
 metadata:
-  title: 'Flujos de atención sanitaria personalizada en sanidad | Futurion Solutions'
+  title: 'Flujos de atención sanitaria personalizada'
   description: 'Cómo diseñar flujos de atención sanitaria personalizada con interoperabilidad FHIR, metodología openEHR y gobernanza centrada en privacidad y trazabilidad.'
   robots:
     index: true
@@ -29,7 +29,7 @@ metadata:
     cardType: summary_large_image
 ---
 
-# Flujos de atención sanitaria personalizada en el ámbito sanitario: de la investigación a la automatización en el mundo real
+## Flujos de atención sanitaria personalizada en el ámbito sanitario: de la investigación a la automatización en el mundo real
 
 La sanidad está dejando atrás los protocolos estáticos y los recorridos asistenciales generalizados.
 

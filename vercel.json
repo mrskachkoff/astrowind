@@ -11,6 +11,26 @@
       "source": "/es/auditoria-ia-gratuita",
       "destination": "/es/hoja-de-ruta-de-automatizacion",
       "permanent": true
+    },
+    {
+      "source": "/es-flujos-atencion-sanitaria-personalizada",
+      "destination": "/es/es-flujos-atencion-sanitaria-personalizada/",
+      "permanent": true
+    },
+    {
+      "source": "/es-flujos-atencion-sanitaria-personalizada/",
+      "destination": "/es/es-flujos-atencion-sanitaria-personalizada/",
+      "permanent": true
+    },
+    {
+      "source": "/es/flujos-atencion-sanitaria-personalizada",
+      "destination": "/es/es-flujos-atencion-sanitaria-personalizada/",
+      "permanent": true
+    },
+    {
+      "source": "/es/flujos-atencion-sanitaria-personalizada/",
+      "destination": "/es/es-flujos-atencion-sanitaria-personalizada/",
+      "permanent": true
     }
   ],
   "headers": [

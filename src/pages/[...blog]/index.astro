@@ -26,6 +26,9 @@ const { post } = Astro.props as Props;
 
 const url = getCanonical(getPermalink(post.permalink, 'post'));
 const image = (await findImage(post.image)) as ImageMetadata | string | undefined;
+const imageUrl = image
+  ? new URL(typeof image === 'string' ? image : (image as ImageMetadata).src, Astro.site).href
+  : undefined;
 
 const metadata = merge(
   {
@@ -46,39 +49,43 @@ const metadata = merge(
 ) as MetaData;
 
 const articleSchema = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": post.title,
-  "description": post.excerpt || '',
-  "inLanguage": "en",
-  "datePublished": post.publishDate ? new Date(post.publishDate).toISOString() : undefined,
-  "dateModified": post.updateDate ? new Date(post.updateDate).toISOString() : (post.publishDate ? new Date(post.publishDate).toISOString() : undefined),
-  "author": { "@id": "https://solutions.futurion.es/#author" },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Futurion Solutions",
-    "url": "https://solutions.futurion.es",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://solutions.futurion.es/favicon.svg"
-    }
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.title,
+  description: post.excerpt || '',
+  inLanguage: 'en',
+  datePublished: post.publishDate ? new Date(post.publishDate).toISOString() : undefined,
+  dateModified: post.updateDate
+    ? new Date(post.updateDate).toISOString()
+    : post.publishDate
+      ? new Date(post.publishDate).toISOString()
+      : undefined,
+  author: { '@id': 'https://solutions.futurion.es/#author' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Futurion Solutions',
+    url: 'https://solutions.futurion.es',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://solutions.futurion.es/favicon.svg',
+    },
   },
-  "url": String(url),
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": String(url)
+  url: String(url),
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': String(url),
   },
-  ...(image ? { "image": typeof image === 'string' ? image : (image as ImageMetadata).src } : {})
+  ...(imageUrl ? { image: imageUrl } : {}),
 };
 
 const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": String(getCanonical('/')) },
-    { "@type": "ListItem", "position": 2, "name": "Blog", "item": String(getCanonical('/blog/')) },
-    { "@type": "ListItem", "position": 3, "name": post.title, "item": String(url) }
-  ]
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: String(getCanonical('/')) },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: String(getCanonical('/blog/')) },
+    { '@type': 'ListItem', position: 3, name: post.title, item: String(url) },
+  ],
 };
 ---
 

@@ -4,7 +4,7 @@ import { AstroSeo } from '@astrolib/seo';
 
 import type { Props as AstroSeoProps } from '@astrolib/seo';
 
-import { SITE, METADATA, I18N } from 'astrowind:config';
+import { SITE, METADATA } from 'astrowind:config';
 import type { MetaData } from '~/types';
 import { getCanonical } from '~/utils/permalinks';
 
@@ -72,8 +72,9 @@ const seoProps: AstroSeoProps = merge(
 const enUrl = await getAlternateLanguageUrl(Astro.url, 'en');
 const esUrl = await getAlternateLanguageUrl(Astro.url, 'es');
 const siteBase = SITE?.site || '';
-const enFullUrl = siteBase + enUrl;
-const esFullUrl = siteBase + esUrl;
+const withTrailingSlash = (url: string) => (url.includes('.') || url.endsWith('/') ? url : `${url}/`);
+const enFullUrl = siteBase + withTrailingSlash(enUrl);
+const esFullUrl = siteBase + withTrailingSlash(esUrl);
 ---
 
 <AstroSeo {...{ ...seoProps, openGraph: await adaptOpenGraphImages(seoProps?.openGraph, Astro.site) }} />

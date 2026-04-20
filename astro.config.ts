@@ -60,14 +60,6 @@ export default defineConfig({
     '/es/agentes-ia-sanidad-riesgos-rgpd': '/es/es-agentes-ia-sanidad-riesgos-rgpd/',
     '/agentes-ia-sanidad-riesgos-rgpd': '/es/es-agentes-ia-sanidad-riesgos-rgpd/',
 
-    // Tags (ensure Spanish tag routes)
-    '/tag/agentes-ia': '/es/tag/agentes-ia/',
-    '/tag/sanidad': '/es/tag/sanidad/',
-    '/tag/clinicas-dentales': '/es/tag/clinicas-dentales/',
-    '/tag/privacidad-de-datos': '/es/tag/privacidad-de-datos/',
-    '/tag/ia': '/es/tag/ia/',
-    '/tag/ia-hibrida': '/es/tag/ia-hibrida/',
-    '/tag/acuerdos-de-tratamiento-de-datos': '/es/tag/acuerdos-de-tratamiento-de-datos/',
   },
 
   i18n: {

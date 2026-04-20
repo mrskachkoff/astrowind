@@ -103,7 +103,7 @@ No toda la IA sanitaria conlleva el mismo riesgo. El riesgo regulatorio y operat
 
 ## 4. Requisitos de EIPD para los flujos de trabajo de IA
 
-Una Evaluación de Impacto relativa a la Protección de Datos es legalmente obligatoria bajo el artículo 35 del RGPD —y reforzada en España por la LOPDGDD— cuando el tratamiento es probable que genere un alto riesgo para los derechos y libertades de las personas. Las siete categorías principales de flujos de trabajo de IA sanitaria superan este umbral. A continuación se resume las obligaciones específicas de EIPD para cada una — para el desglose completo de los siete escenarios, consulta nuestra [guía detallada de EIPD](/es/es-eipd-evaluacion-impacto-proteccion-datos-ia-sanitaria)
+Una Evaluación de Impacto relativa a la Protección de Datos es legalmente obligatoria bajo el artículo 35 del RGPD —y reforzada en España por la LOPDGDD— cuando el tratamiento es probable que genere un alto riesgo para los derechos y libertades de las personas. Las siete categorías principales de flujos de trabajo de IA sanitaria superan este umbral. A continuación se resume las obligaciones específicas de EIPD para cada una — para el desglose completo de los siete escenarios, consulta nuestra [guía detallada de EIPD](/es/es-eipd-evaluacion-impacto-proteccion-datos-ia-sanitaria/)
 
 - **Gestión de citas** — Documentar la lógica de priorización, los datos de entrada y los mecanismos para detectar y corregir resultados injustos o erróneos. Los controles de acceso y los registros de auditoría son el punto de partida.
 - **Admisión y documentación de pacientes** — Abordar los fines de la categorización por IA, la minimización de datos, los plazos de retención y las consecuencias de un preprocesamiento incorrecto. El consentimiento y el derecho a la revisión humana son esenciales.
@@ -168,4 +168,4 @@ Nuestro *Automation Roadmap* es una evaluación estructurada de los flujos de da
 
 Sin compromiso. Sin llamada comercial previa.
 
-**[Solicita tu hoja de ruta gratuita →](/es/hoja-de-ruta-de-automatizacion)**
+**[Solicita tu hoja de ruta gratuita →](/es/hoja-de-ruta-de-automatizacion/)**

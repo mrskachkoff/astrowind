@@ -44,7 +44,7 @@ When you submit information through our contact forms or audit booking forms:
 
 - You agree to provide accurate and current information
 - You consent to us contacting you regarding your inquiry
-- Your data is processed in accordance with our [Privacy Policy](/privacy)
+- Your data is processed in accordance with our [Privacy Policy](/privacy/)
 
 We are not obligated to respond to inquiries that are spam, abusive, or unrelated to our services.
 
@@ -109,6 +109,6 @@ If any provision of these Terms is found to be unenforceable, the remaining prov
 
 ## 14. Contact Us
 
-If you have questions about these Terms of Service, please use our [contact form](/contact).
+If you have questions about these Terms of Service, please use our [contact form](/contact/).
 
 - **Location:** Valencia, Spain

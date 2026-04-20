@@ -102,7 +102,7 @@ Not all healthcare AI carries equal risk. The regulatory and operational risk of
 
 ## 4. DPIA Requirements Across AI Workflows
 
-A Data Protection Impact Assessment is legally required under GDPR Article 35 when processing is likely to result in high risk to individuals' rights and freedoms. All seven main healthcare AI workflow categories meet this threshold. Below is a summary of the specific obligations for each — for the full breakdown of all seven scenarios, see our [detailed DPIA guide](/data-protection-impact-assessment-healthcare-ai).
+A Data Protection Impact Assessment is legally required under GDPR Article 35 when processing is likely to result in high risk to individuals' rights and freedoms. All seven main healthcare AI workflow categories meet this threshold. Below is a summary of the specific obligations for each — for the full breakdown of all seven scenarios, see our [detailed DPIA guide](/data-protection-impact-assessment-healthcare-ai/).
 
 1. **Appointment Management** — Document prioritisation logic, data inputs, and mechanisms for detecting and correcting unfair or erroneous outcomes. Access controls and audit trails are baseline.
 
@@ -118,7 +118,7 @@ A Data Protection Impact Assessment is legally required under GDPR Article 35 wh
 
 7. **Transcription and ICD-10 Coding** — The most demanding DPIA in clinical AI. Must address legal basis for recording, explicit consent, accuracy of transcription and coding, consequences of coding errors, audio retention policies, and mandatory human review before codes are committed to the medical record.
 
-For GDPR obligations that apply across all these scenarios — legal bases, data subject rights, controller and processor responsibilities — see our [GDPR guide for healthcare AI](/ai-agents-healthcare-gdpr-risks).
+For GDPR obligations that apply across all these scenarios — legal bases, data subject rights, controller and processor responsibilities — see our [GDPR guide for healthcare AI](/ai-agents-healthcare-gdpr-risks/).
 
 ---
 
@@ -168,7 +168,7 @@ Futurion Solutions designs, builds, and supports hybrid LLM infrastructure for h
 
 ## Not Sure Where Your Clinic Stands? We Assess That — For Free.
 
-Our [Automation Roadmap](/automation-roadmap) is a structured assessment of your clinic's data flows, compliance gaps, and AI readiness. You receive a detailed written report covering risk scores, safe automation recommendations, and a clear implementation plan across five areas:
+Our [Automation Roadmap](/automation-roadmap/) is a structured assessment of your clinic's data flows, compliance gaps, and AI readiness. You receive a detailed written report covering risk scores, safe automation recommendations, and a clear implementation plan across five areas:
 
 - **Clinic Profile & Risk Context** — We assess your size, patient volume, digital maturity, and existing tools to determine your risk tier and automation readiness.
 - **Data Mapping & GDPR Compliance** — We map every patient data flow — intake, records, imaging, billing, communications — and classify each by sensitivity and compliance exposure.
@@ -178,7 +178,7 @@ Our [Automation Roadmap](/automation-roadmap) is a structured assessment of your
 
 No commitment. No sales call required.
 
-**[Request your free Automation Roadmap →](/automation-roadmap)**
+**[Request your free Automation Roadmap →](/automation-roadmap/)**
 
 ---
 

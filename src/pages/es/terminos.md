@@ -44,7 +44,7 @@ Cuando envía información a través de nuestros formularios de contacto o formu
 
 - Acepta proporcionar información precisa y actual
 - Consiente que lo contactemos con respecto a su consulta
-- Sus datos se procesan de acuerdo con nuestra [Política de Privacidad](/es/privacidad)
+- Sus datos se procesan de acuerdo con nuestra [Política de Privacidad](/es/privacidad/)
 
 No estamos obligados a responder a consultas que sean spam, abusivas o no relacionadas con nuestros servicios.
 
@@ -109,6 +109,6 @@ Si se encuentra que alguna disposición de estos Términos es inaplicable, las d
 
 ## 14. Contáctenos
 
-Si tiene preguntas sobre estos Términos de Servicio, utilice nuestro [formulario de contacto](/es/contacto).
+Si tiene preguntas sobre estos Términos de Servicio, utilice nuestro [formulario de contacto](/es/contacto/).
 
 - **Ubicación:** Valencia, España

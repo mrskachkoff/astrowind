@@ -81,7 +81,7 @@ AI agents in a healthcare practice may autonomously access or process:
 
 > **Key GDPR exposure:** An AI agent that autonomously accesses and processes health data without a documented legal basis under Article 9(2), without a completed DPIA under Article 35, and without documented human oversight triggers simultaneous violations of Articles 5, 9, 22, and 35 — in a single automated workflow.
 
-This exposure is not hypothetical. It is the default state of most off-the-shelf AI automation tools sold to healthcare practices without compliance-first architecture. For a full breakdown of your baseline obligations, see our guide to [GDPR compliance requirements for independent healthcare providers](/gdpr-compliance-small-healthcare-providers-guide).
+This exposure is not hypothetical. It is the default state of most off-the-shelf AI automation tools sold to healthcare practices without compliance-first architecture. For a full breakdown of your baseline obligations, see our guide to [GDPR compliance requirements for independent healthcare providers](/gdpr-compliance-small-healthcare-providers-guide/).
 
 ---
 
@@ -139,13 +139,13 @@ The agent executes workflows, but no audit trail records which data was accessed
 Compliant AI agent deployment in healthcare is architecturally specific, not merely a matter of adding a privacy policy and ticking a consent box.
 
 - **Data mapping:** Every data point the agent accesses is catalogued, with legal basis documented for each data type before the agent is activated.
-- **Architecture decision (on-prem / hybrid / controlled cloud):** The processing location is a compliance decision, not just a cost decision — see our analysis of [on-premise AI architecture for healthcare data sovereignty](/why-healthcare-needs-on-premise-ai) and [hybrid AI architecture in healthcare](/why-hybrid-ai-solutions-matter-healthcare).
+- **Architecture decision (on-prem / hybrid / controlled cloud):** The processing location is a compliance decision, not just a cost decision — see our analysis of [on-premise AI architecture for healthcare data sovereignty](/why-healthcare-needs-on-premise-ai/) and [hybrid AI architecture in healthcare](/why-hybrid-ai-solutions-matter-healthcare/).
 - **Access scoping:** The agent's permissions are defined to the minimum necessary for its specific function — not the broadest access that is convenient for the vendor.
 - **Logging and auditability:** Every agent action is logged with sufficient detail to reconstruct what data was accessed, when, and what was produced — enabling data subject rights responses and breach investigations.
 - **Documented compliance reasoning:** The DPIA, legal basis assessments, and governance decisions are written, dated, and version-controlled — not implied or assumed.
 - **Subprocessor audit:** Every tool the agent calls is identified, assessed, and covered by a compliant Data Processing Agreement under Article 28.
 
-For dental and specialist practices specifically, see our guide to [compliant AI automation for dental clinics](/dental-clinics-automate-workflows-compliance), which covers these deployment patterns in a sector-specific context.
+For dental and specialist practices specifically, see our guide to [compliant AI automation for dental clinics](/dental-clinics-automate-workflows-compliance/), which covers these deployment patterns in a sector-specific context.
 
 ---
 
@@ -174,7 +174,7 @@ The EU AI Act classifies AI systems used in healthcare as high-risk under Annex 
 
 The MIT AI Agent Index 2025 confirms what the GDPR anticipated: autonomous systems operating on sensitive data without adequate governance create compounding legal risk that grows with every automated action the agent takes unchecked. For independent healthcare practices in the EU, this is not a future problem — AI agents are being sold and deployed today, often without the compliance infrastructure that makes them legal to operate.
 
-If your practice is evaluating or has already deployed AI automation, the first step is understanding exactly what data your systems are accessing, who processes it, and whether you can demonstrate compliance to the AEPD or your national supervisory authority. Start with our [free Automation Roadmap](/automation-roadmap) to identify your exposure points, or explore [MedCore Private AI](/introducing-medcore-private-ai) — our on-premise solution built for healthcare GDPR compliance from the architecture up.
+If your practice is evaluating or has already deployed AI automation, the first step is understanding exactly what data your systems are accessing, who processes it, and whether you can demonstrate compliance to the AEPD or your national supervisory authority. Start with our [free Automation Roadmap](/automation-roadmap/) to identify your exposure points, or explore [MedCore Private AI](/introducing-medcore-private-ai/) — our on-premise solution built for healthcare GDPR compliance from the architecture up.
 
 ---
 

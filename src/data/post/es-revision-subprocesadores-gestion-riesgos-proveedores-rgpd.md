@@ -84,7 +84,7 @@ Hacer un seguimiento de los subencargados del tratamiento no es burocracia. Es c
 
 **Seguimiento continuo.** Los riesgos evolucionan. El seguimiento continuo permite a las organizaciones mantenerse al corriente de los cambios en el perfil de riesgo de los proveedores una vez superada la revisión de seguridad inicial, generando alertas y hallazgos con el tiempo para que los equipos puedan evaluar el impacto y decidir cuándo es necesario actuar. Un proveedor que cumplía las exigencias en el momento de su incorporación puede haber modificado sus prácticas, infraestructura o titularidad empresarial desde entonces.
 
-Para una visión completa de las [obligaciones RGPD para proveedores sanitarios](/es/guia-cumplimiento-rgpd-consultas-sanitarias) aplicables a su organización, consulte nuestra guía de referencia.
+Para una visión completa de las [obligaciones RGPD para proveedores sanitarios](/es/es-guia-cumplimiento-rgpd-consultas-sanitarias/) aplicables a su organización, consulte nuestra guía de referencia.
 
 ---
 
@@ -168,7 +168,7 @@ Si un proveedor no puede revelar claramente dónde se almacenan los datos, qué 
 
 **Paso 6 — Realizar una EIPD.** Para transferencias de alto riesgo que impliquen datos sanitarios que crucen fronteras, se recomienda — o puede ser legalmente obligatoria — una Evaluación de Impacto en la Protección de Datos (EIPD) en virtud del Artículo 35 del RGPD.
 
-Para las organizaciones que estudian una arquitectura local como respuesta a los riesgos de transferencia, véase nuestro análisis del [enfoque arquitectónico para la soberanía de datos ante riesgos de transferencia desconocidos](/es/por-que-sanidad-necesita-ia-local).
+Para las organizaciones que estudian una arquitectura local como respuesta a los riesgos de transferencia, véase nuestro análisis del [enfoque arquitectónico para la soberanía de datos ante riesgos de transferencia desconocidos](/es/es-por-que-sanidad-necesita-ia-local/).
 
 ---
 
@@ -237,7 +237,7 @@ Un proceso de revisión sólido debe:
 
 Si no se puede explicar quién trata los datos de los pacientes, dónde se almacenan y bajo qué base jurídica se transfieren, no se controla la postura de cumplimiento. En el ámbito sanitario, eso es inaceptable.
 
-Comience con nuestra [Hoja de Ruta de Automatización gratuita](/es/hoja-de-ruta-de-automatizacion) — evaluamos el tratamiento de datos de su centro, identificamos oportunidades de automatización segura y elaboramos una hoja de ruta de cumplimiento clara, sin coste alguno.
+Comience con nuestra [Hoja de Ruta de Automatización gratuita](/es/hoja-de-ruta-de-automatizacion/) — evaluamos el tratamiento de datos de su centro, identificamos oportunidades de automatización segura y elaboramos una hoja de ruta de cumplimiento clara, sin coste alguno.
 
 ---
 

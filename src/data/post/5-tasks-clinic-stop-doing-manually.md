@@ -139,4 +139,4 @@ However, the real problem is usually not the lack of tools, but how they are imp
 
 The most effective approach is the opposite: automate on top of the processes that already work, eliminating repetitive tasks without disrupting daily operations or forcing unnecessary changes on the team.
 
-If you want to understand to what extent these processes remain manual in your clinic — and, more importantly, whether they are generating risks in data handling — you can start with a [free initial assessment](/automation-roadmap). We analyse how data is currently managed in your practice, identify potential compliance gaps, and highlight areas where automation can be applied safely, without needing to replace your existing systems.
+If you want to understand to what extent these processes remain manual in your clinic — and, more importantly, whether they are generating risks in data handling — you can start with a [free initial assessment](/automation-roadmap/). We analyse how data is currently managed in your practice, identify potential compliance gaps, and highlight areas where automation can be applied safely, without needing to replace your existing systems.

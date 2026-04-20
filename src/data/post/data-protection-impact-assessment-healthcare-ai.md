@@ -44,7 +44,7 @@ At its core, a DPIA must contain four essential elements: a systematic descripti
 
 The obligation to carry out a DPIA is triggered by the nature of the processing, not by the size of the organisation. Three situations make a DPIA mandatory.
 
-The first is when a system performs a systematic and extensive evaluation of personal aspects of individuals based on automated processing — including profiling — and the outputs of that evaluation produce legal effects or similarly significant effects on those individuals. The second is when processing involves [special categories of data, such as health data](/ai-agents-healthcare-gdpr-risks), on a large scale. The third is when there is systematic monitoring of a publicly accessible area on a large scale.
+The first is when a system performs a systematic and extensive evaluation of personal aspects of individuals based on automated processing — including profiling — and the outputs of that evaluation produce legal effects or similarly significant effects on those individuals. The second is when processing involves [special categories of data, such as health data](/ai-agents-healthcare-gdpr-risks/), on a large scale. The third is when there is systematic monitoring of a publicly accessible area on a large scale.
 
 In the healthcare context, these triggers are not hypothetical edge cases. They describe the everyday reality of modern clinical AI. Health data is explicitly a special category of data, warranting the highest level of protection. Any AI system that analyses patient information to support or inform clinical decisions is performing automated evaluation of personal aspects. And any system that continuously monitors patients — whether in hospital or remotely — is engaging in systematic monitoring. For this reason, AI deployment in healthcare will almost always trigger the obligation to conduct a DPIA, regardless of whether the deploying organisation is a large hospital network or a small private clinic.
 
@@ -70,11 +70,11 @@ Once the processing is fully described, the organisation must ask a hard questio
 
 ### Step 3 — Identify the risks
 
-This is the analytical core of the DPIA. The organisation must systematically identify threats to the rights and freedoms of the individuals whose data is being processed. In the healthcare context this includes risks such as diagnostic errors caused by model bias, unauthorised access to sensitive health records, re-identification of pseudonymised data, function creep towards insurance or commercial uses, and the erosion of patient autonomy through [opaque automated decision-making](/consultant-or-decision-maker-ai-clinical-accountability). Risks should be assessed both in terms of their likelihood and the severity of potential harm.
+This is the analytical core of the DPIA. The organisation must systematically identify threats to the rights and freedoms of the individuals whose data is being processed. In the healthcare context this includes risks such as diagnostic errors caused by model bias, unauthorised access to sensitive health records, re-identification of pseudonymised data, function creep towards insurance or commercial uses, and the erosion of patient autonomy through [opaque automated decision-making](/consultant-or-decision-maker-ai-clinical-accountability/). Risks should be assessed both in terms of their likelihood and the severity of potential harm.
 
 ### Step 4 — Identify controls
 
-For each risk identified in Step 3, the organisation must document the technical and organisational measures it will put in place to mitigate that risk. Technical controls might include encryption, access controls, pseudonymisation, audit logging, and model explainability mechanisms. Organisational controls include staff training, clear [data governance policies](/gdpr-compliance-small-healthcare-providers-guide), human oversight requirements for AI outputs, and defined procedures for responding to incidents. The controls must be specific and verifiable — not general assurances of good intent.
+For each risk identified in Step 3, the organisation must document the technical and organisational measures it will put in place to mitigate that risk. Technical controls might include encryption, access controls, pseudonymisation, audit logging, and model explainability mechanisms. Organisational controls include staff training, clear [data governance policies](/gdpr-compliance-small-healthcare-providers-guide/), human oversight requirements for AI outputs, and defined procedures for responding to incidents. The controls must be specific and verifiable — not general assurances of good intent.
 
 ### Step 5 — Consult stakeholders
 
@@ -104,7 +104,7 @@ AI tools that route clinical messages, flag urgent cases, or summarise patient i
 
 ### 4. Billing, Insurance, and Administration
 
-Administrative AI that automates billing, insurance claims, or coding based on clinical data sits at the intersection of health information and financial decision-making. The risks are significant: incorrect coding can lead to denied claims, incorrect charges, or — in jurisdictions where insurers have access to claims data — downstream effects on a patient's insurability. The DPIA must examine [data flows to third-party insurers](/gdpr-subprocessor-management-eu-healthcare), the legal basis for each category of sharing, and the safeguards preventing health data from being used for purposes beyond the original billing intent.
+Administrative AI that automates billing, insurance claims, or coding based on clinical data sits at the intersection of health information and financial decision-making. The risks are significant: incorrect coding can lead to denied claims, incorrect charges, or — in jurisdictions where insurers have access to claims data — downstream effects on a patient's insurability. The DPIA must examine [data flows to third-party insurers](/gdpr-subprocessor-management-eu-healthcare/), the legal basis for each category of sharing, and the safeguards preventing health data from being used for purposes beyond the original billing intent.
 
 ### 5. Patient Communication and Follow-up
 
@@ -122,6 +122,6 @@ This scenario represents one of the highest-risk applications of AI in clinical 
 
 The DPIA is not a burden imposed on healthcare organisations — it is a tool that helps them deploy AI responsibly. In a domain where data errors can translate directly into harm, and where the volume and sensitivity of personal data processed is uniquely high, the structured discipline of the DPIA framework is one of the most practical instruments available to ensure that automation serves patients rather than exposing them to new forms of risk. The seven-step process — from describing the processing through to ongoing review — provides a clear and actionable structure that any organisation, regardless of size, can follow. Those that approach the DPIA seriously, as a genuine exercise in risk identification and mitigation rather than a compliance formality, will be better positioned to deploy AI that is not only legally compliant, but clinically trustworthy.
 
-Not sure where to begin? At Futurion Solutions, we specialise in data privacy and AI compliance frameworks for healthcare. Our [Free Automation Roadmap](/automation-roadmap) assesses your data handling, maps your compliance gaps, and delivers a clear report with risk scores and safe automation recommendations — completely free, with no obligation.
+Not sure where to begin? At Futurion Solutions, we specialise in data privacy and AI compliance frameworks for healthcare. Our [Free Automation Roadmap](/automation-roadmap/) assesses your data handling, maps your compliance gaps, and delivers a clear report with risk scores and safe automation recommendations — completely free, with no obligation.
 
-[Get your Free Automation Roadmap from Futurion Solutions today.](/automation-roadmap)
+[Get your Free Automation Roadmap from Futurion Solutions today.](/automation-roadmap/)

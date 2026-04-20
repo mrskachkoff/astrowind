@@ -7,6 +7,8 @@ const translations: Record<string, Record<string, unknown>> = { en, es };
 
 export type Locale = 'en' | 'es';
 
+const withTrailingSlash = (path: string): string => (path === '/' || path.endsWith('/') ? path : `${path}/`);
+
 /**
  * Extract locale from a URL. Checks for /es/ prefix.
  */
@@ -50,7 +52,7 @@ export function useTranslations(lang: Locale) {
  * Convert an English canonical path to a localized path for the target locale.
  */
 export function getLocalizedPath(path: string, lang: Locale): string {
-  return getLocalizedSlug(path, lang);
+  return withTrailingSlash(getLocalizedSlug(path, lang));
 }
 
 /** Set of canonical paths that have explicit entries in the static slug map */
@@ -71,16 +73,16 @@ export async function getAlternateLanguageUrl(currentUrl: URL, targetLang: Local
     const translationIsEs = blogTranslation.startsWith('/es/') || blogTranslation === '/es';
     // Only use the blog translation if it matches the target language
     if ((targetLang === 'es' && translationIsEs) || (targetLang === 'en' && !translationIsEs)) {
-      return blogTranslation;
+      return withTrailingSlash(blogTranslation);
     }
     // The current page IS in the target language — return the current path
-    return pathname;
+    return withTrailingSlash(pathname);
   }
 
   // Use the static slug map for known pages
   const canonicalPath = getCanonicalPath(pathname);
   if (knownStaticPages.has(canonicalPath)) {
-    return getLocalizedSlug(canonicalPath, targetLang);
+    return withTrailingSlash(getLocalizedSlug(canonicalPath, targetLang));
   }
 
   // Unknown path (likely a blog post without a translation) — fall back to blog index

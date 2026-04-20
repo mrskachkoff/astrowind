@@ -102,7 +102,7 @@ El principio clave: **la sensibilidad de los datos determina la arquitectura ade
 
 ## Cómo Es la IA Local Hoy
 
-La IA local moderna no es el dolor de cabeza de sala de servidores de hace una década. Plataformas diseñadas específicamente como [MedCore Private AI](/es/medcore-ia-privada) ofrecen:
+La IA local moderna no es el dolor de cabeza de sala de servidores de hace una década. Plataformas diseñadas específicamente como [MedCore Private AI](/es/medcore-ia-privada/) ofrecen:
 
 - Modelos de lenguaje de grado médico optimizados para terminología sanitaria
 - Hardware con aceleración GPU especificado y configurado para tu carga de trabajo
@@ -118,7 +118,7 @@ Si tu consulta trata datos sensibles de pacientes y está considerando la IA, em
 
 Para muchas consultas sanitarias, la respuesta es no. Y esa respuesta conduce a un despliegue de IA mejor, más defendible y, en última instancia, más capaz.
 
-[Explora MedCore Private AI](/es/medcore-ia-privada) para descubrir cómo funciona en la práctica la IA médica local, o lee nuestra [guía de cumplimiento RGPD para consultas sanitarias](/es/guia-cumplimiento-rgpd-consultas-sanitarias) para una visión más amplia de los requisitos de protección de datos.
+[Explora MedCore Private AI](/es/medcore-ia-privada/) para descubrir cómo funciona en la práctica la IA médica local, o lee nuestra [guía de cumplimiento RGPD para consultas sanitarias](/es/es-guia-cumplimiento-rgpd-consultas-sanitarias/) para una visión más amplia de los requisitos de protección de datos.
 
 ---
 

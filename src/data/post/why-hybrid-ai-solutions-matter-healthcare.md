@@ -128,6 +128,6 @@ If you're considering AI automation for your healthcare practice, ask these ques
 
 At Futurion Solutions, hybrid and on-premise AI is our default for healthcare. We design every automation with this architecture because it's the right approach for sensitive data — not because it's the easiest to deploy.
 
-Our [free Automation Roadmap](/automation-roadmap) includes an architecture assessment for every automation candidate. We evaluate whether cloud, hybrid, or on-prem is appropriate — with GDPR article references for each decision.
+Our [free Automation Roadmap](/automation-roadmap/) includes an architecture assessment for every automation candidate. We evaluate whether cloud, hybrid, or on-prem is appropriate — with GDPR article references for each decision.
 
-Want to understand where AI can safely help your practice? [Book your free Automation Roadmap](/automation-roadmap) — 5-7 days, no obligations.
+Want to understand where AI can safely help your practice? [Book your free Automation Roadmap](/automation-roadmap/) — 5-7 days, no obligations.

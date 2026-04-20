@@ -219,4 +219,4 @@ This research ratifies the importance of implementing AI in healthcare under "hu
 
 ### Suggested Next Step
 
-It is recommended to evaluate the current AI integration processes in your organisation, identifying critical points where human-machine interaction could be optimised or adjusted to meet regulatory and clinical safety standards. Initiating an [operational diagnosis](/automation-roadmap) will allow the definition of a governance, integration and continuous improvement framework oriented towards outcomes.
+It is recommended to evaluate the current AI integration processes in your organisation, identifying critical points where human-machine interaction could be optimised or adjusted to meet regulatory and clinical safety standards. Initiating an [operational diagnosis](/automation-roadmap/) will allow the definition of a governance, integration and continuous improvement framework oriented towards outcomes.

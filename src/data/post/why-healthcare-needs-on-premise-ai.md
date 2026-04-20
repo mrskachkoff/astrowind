@@ -101,7 +101,7 @@ The key principle: **the sensitivity of the data determines the appropriate arch
 
 ## What On-Premise AI Looks Like Today
 
-Modern on-premise AI is not the server-room headache it was a decade ago. Purpose-built platforms like [MedCore Private AI](/medcore-private-ai) deliver:
+Modern on-premise AI is not the server-room headache it was a decade ago. Purpose-built platforms like [MedCore Private AI](/medcore-private-ai/) deliver:
 
 - Medical-grade language models optimized for healthcare terminology
 - GPU-accelerated hardware specified and configured for your workload
@@ -117,7 +117,7 @@ If your organization processes sensitive patient data and is considering AI, sta
 
 For many healthcare organizations, the answer is no. And that answer leads to a better, more defensible, and ultimately more capable AI deployment.
 
-[Explore MedCore Private AI](/medcore-private-ai) to learn how on-premise medical AI works in practice, or read our [GDPR compliance guide for healthcare providers](/gdpr-compliance-small-healthcare-providers-guide) for a broader overview of data protection requirements.
+[Explore MedCore Private AI](/medcore-private-ai/) to learn how on-premise medical AI works in practice, or read our [GDPR compliance guide for healthcare providers](/gdpr-compliance-small-healthcare-providers-guide/) for a broader overview of data protection requirements.
 
 ---
 

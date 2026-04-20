@@ -72,7 +72,7 @@ We offer scoped pilot deployments — typically a single use case or department 
 
 Every MedCore engagement begins with a free infrastructure assessment where we evaluate your existing systems, data volumes, compliance requirements, and use cases to design the optimal deployment architecture.
 
-[Schedule your assessment](/contact) or [explore MedCore Private AI in detail](/medcore-private-ai).
+[Schedule your assessment](/contact/) or [explore MedCore Private AI in detail](/medcore-private-ai/).
 
 ---
 

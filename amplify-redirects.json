@@ -1,0 +1,326 @@
+[
+  {
+    "source": "/free-ai-audit",
+    "target": "/automation-roadmap/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/free-ai-audit/",
+    "target": "/automation-roadmap/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/auditoria-ia-gratuita",
+    "target": "/es/hoja-de-ruta-de-automatizacion/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/auditoria-ia-gratuita/",
+    "target": "/es/hoja-de-ruta-de-automatizacion/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-5-tareas-clinica-dejar-hacer-manualmente",
+    "target": "/es/es-5-tareas-clinica-dejar-hacer-manualmente/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-5-tareas-clinica-dejar-hacer-manualmente/",
+    "target": "/es/es-5-tareas-clinica-dejar-hacer-manualmente/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/5-tareas-clinica-dejar-hacer-manualmente",
+    "target": "/es/es-5-tareas-clinica-dejar-hacer-manualmente/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/5-tareas-clinica-dejar-hacer-manualmente/",
+    "target": "/es/es-5-tareas-clinica-dejar-hacer-manualmente/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-agentes-ia-sanidad-riesgos-rgpd",
+    "target": "/es/es-agentes-ia-sanidad-riesgos-rgpd/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-agentes-ia-sanidad-riesgos-rgpd/",
+    "target": "/es/es-agentes-ia-sanidad-riesgos-rgpd/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/agentes-ia-sanidad-riesgos-rgpd",
+    "target": "/es/es-agentes-ia-sanidad-riesgos-rgpd/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/agentes-ia-sanidad-riesgos-rgpd/",
+    "target": "/es/es-agentes-ia-sanidad-riesgos-rgpd/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/agentes-ia-sanidad-riesgos-rgpd",
+    "target": "/es/es-agentes-ia-sanidad-riesgos-rgpd/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/agentes-ia-sanidad-riesgos-rgpd/",
+    "target": "/es/es-agentes-ia-sanidad-riesgos-rgpd/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-clinicas-dentales-automatizar-flujos-conformidad",
+    "target": "/es/es-clinicas-dentales-automatizar-flujos-conformidad/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-clinicas-dentales-automatizar-flujos-conformidad/",
+    "target": "/es/es-clinicas-dentales-automatizar-flujos-conformidad/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/clinicas-dentales-automatizar-flujos-conformidad",
+    "target": "/es/es-clinicas-dentales-automatizar-flujos-conformidad/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/clinicas-dentales-automatizar-flujos-conformidad/",
+    "target": "/es/es-clinicas-dentales-automatizar-flujos-conformidad/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-consultora-o-decisora-ia-responsabilidad-clinica",
+    "target": "/es/es-consultora-o-decisora-ia-responsabilidad-clinica/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-consultora-o-decisora-ia-responsabilidad-clinica/",
+    "target": "/es/es-consultora-o-decisora-ia-responsabilidad-clinica/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/consultora-o-decisora-ia-responsabilidad-clinica",
+    "target": "/es/es-consultora-o-decisora-ia-responsabilidad-clinica/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/consultora-o-decisora-ia-responsabilidad-clinica/",
+    "target": "/es/es-consultora-o-decisora-ia-responsabilidad-clinica/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-eipd-evaluacion-impacto-proteccion-datos-ia-sanitaria",
+    "target": "/es/es-eipd-evaluacion-impacto-proteccion-datos-ia-sanitaria/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-eipd-evaluacion-impacto-proteccion-datos-ia-sanitaria/",
+    "target": "/es/es-eipd-evaluacion-impacto-proteccion-datos-ia-sanitaria/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/eipd-evaluacion-impacto-proteccion-datos-ia-sanitaria",
+    "target": "/es/es-eipd-evaluacion-impacto-proteccion-datos-ia-sanitaria/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/eipd-evaluacion-impacto-proteccion-datos-ia-sanitaria/",
+    "target": "/es/es-eipd-evaluacion-impacto-proteccion-datos-ia-sanitaria/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-european-sovereign-cloud-ia-sanitaria",
+    "target": "/es/es-european-sovereign-cloud-ia-sanitaria/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-european-sovereign-cloud-ia-sanitaria/",
+    "target": "/es/es-european-sovereign-cloud-ia-sanitaria/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/european-sovereign-cloud-ia-sanitaria",
+    "target": "/es/es-european-sovereign-cloud-ia-sanitaria/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/european-sovereign-cloud-ia-sanitaria/",
+    "target": "/es/es-european-sovereign-cloud-ia-sanitaria/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-flujos-atencion-sanitaria-personalizada",
+    "target": "/es/es-flujos-atencion-sanitaria-personalizada/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-flujos-atencion-sanitaria-personalizada/",
+    "target": "/es/es-flujos-atencion-sanitaria-personalizada/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/flujos-atencion-sanitaria-personalizada",
+    "target": "/es/es-flujos-atencion-sanitaria-personalizada/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/flujos-atencion-sanitaria-personalizada/",
+    "target": "/es/es-flujos-atencion-sanitaria-personalizada/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-guia-cumplimiento-rgpd-consultas-sanitarias",
+    "target": "/es/es-guia-cumplimiento-rgpd-consultas-sanitarias/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-guia-cumplimiento-rgpd-consultas-sanitarias/",
+    "target": "/es/es-guia-cumplimiento-rgpd-consultas-sanitarias/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/guia-cumplimiento-rgpd-consultas-sanitarias",
+    "target": "/es/es-guia-cumplimiento-rgpd-consultas-sanitarias/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/guia-cumplimiento-rgpd-consultas-sanitarias/",
+    "target": "/es/es-guia-cumplimiento-rgpd-consultas-sanitarias/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-por-que-sanidad-necesita-ia-local",
+    "target": "/es/es-por-que-sanidad-necesita-ia-local/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-por-que-sanidad-necesita-ia-local/",
+    "target": "/es/es-por-que-sanidad-necesita-ia-local/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/por-que-sanidad-necesita-ia-local",
+    "target": "/es/es-por-que-sanidad-necesita-ia-local/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/por-que-sanidad-necesita-ia-local/",
+    "target": "/es/es-por-que-sanidad-necesita-ia-local/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-presentando-medcore-private-ai",
+    "target": "/es/es-presentando-medcore-private-ai/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-presentando-medcore-private-ai/",
+    "target": "/es/es-presentando-medcore-private-ai/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/presentando-medcore-private-ai",
+    "target": "/es/es-presentando-medcore-private-ai/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/presentando-medcore-private-ai/",
+    "target": "/es/es-presentando-medcore-private-ai/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-revision-subprocesadores-gestion-riesgos-proveedores-rgpd",
+    "target": "/es/es-revision-subprocesadores-gestion-riesgos-proveedores-rgpd/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-revision-subprocesadores-gestion-riesgos-proveedores-rgpd/",
+    "target": "/es/es-revision-subprocesadores-gestion-riesgos-proveedores-rgpd/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/revision-subprocesadores-gestion-riesgos-proveedores-rgpd",
+    "target": "/es/es-revision-subprocesadores-gestion-riesgos-proveedores-rgpd/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/revision-subprocesadores-gestion-riesgos-proveedores-rgpd/",
+    "target": "/es/es-revision-subprocesadores-gestion-riesgos-proveedores-rgpd/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-soluciones-ia-hibridas-sanidad",
+    "target": "/es/es-soluciones-ia-hibridas-sanidad/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-soluciones-ia-hibridas-sanidad/",
+    "target": "/es/es-soluciones-ia-hibridas-sanidad/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/soluciones-ia-hibridas-sanidad",
+    "target": "/es/es-soluciones-ia-hibridas-sanidad/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/soluciones-ia-hibridas-sanidad/",
+    "target": "/es/es-soluciones-ia-hibridas-sanidad/",
+    "status": "301",
+    "condition": null
+  }
+]

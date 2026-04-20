@@ -15,7 +15,7 @@ Procesamos datos personales de acuerdo con el Reglamento General de Protección 
 
 **Futurion Solutions**
 Valencia, España
-[Contáctenos a través de nuestro formulario de contacto](/es/contacto)
+[Contáctenos a través de nuestro formulario de contacto](/es/contacto/)
 
 ## Qué Datos Recopilamos
 
@@ -103,7 +103,7 @@ Bajo el RGPD, tiene los siguientes derechos con respecto a sus datos personales:
 - **Derecho de oposición (Art. 21):** Oponerse al procesamiento basado en interés legítimo
 - **Derecho a retirar el consentimiento:** Retirar el consentimiento en cualquier momento sin afectar la legalidad del procesamiento basado en el consentimiento antes de su retirada
 
-Para ejercer cualquiera de estos derechos, utilice nuestro [formulario de contacto](/es/contacto).
+Para ejercer cualquiera de estos derechos, utilice nuestro [formulario de contacto](/es/contacto/).
 
 Responderemos a su solicitud dentro de 30 días.
 
@@ -135,6 +135,6 @@ Podemos actualizar esta Política de Privacidad de vez en cuando. Le notificarem
 
 ## Contáctenos
 
-Si tiene preguntas sobre esta Política de Privacidad o desea ejercer sus derechos de protección de datos, utilice nuestro [formulario de contacto](/es/contacto). Responderemos en un plazo de 30 días.
+Si tiene preguntas sobre esta Política de Privacidad o desea ejercer sus derechos de protección de datos, utilice nuestro [formulario de contacto](/es/contacto/). Responderemos en un plazo de 30 días.
 
 - **Ubicación:** Valencia, España

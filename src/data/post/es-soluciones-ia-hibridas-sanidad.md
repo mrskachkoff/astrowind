@@ -129,6 +129,6 @@ Si estás considerando la automatización IA para tu consulta sanitaria, hazte e
 
 En Futurion Solutions, la IA híbrida y local es nuestra opción predeterminada para la sanidad. Diseñamos cada automatización con esta arquitectura porque es el enfoque correcto para los datos sensibles — no porque sea el más fácil de desplegar.
 
-Nuestra [Hoja de Ruta de Automatización gratuita](/es/hoja-de-ruta-de-automatizacion) incluye una evaluación de arquitectura para cada candidato de automatización. Evaluamos si la nube, el enfoque híbrido o local es apropiado — con referencias al artículo RGPD para cada decisión.
+Nuestra [Hoja de Ruta de Automatización gratuita](/es/hoja-de-ruta-de-automatizacion/) incluye una evaluación de arquitectura para cada candidato de automatización. Evaluamos si la nube, el enfoque híbrido o local es apropiado — con referencias al artículo RGPD para cada decisión.
 
-¿Quieres entender dónde puede ayudar de forma segura la IA a tu consulta? [Solicita tu Hoja de Ruta gratuita](/es/hoja-de-ruta-de-automatizacion) — 5-7 días, sin compromisos.
+¿Quieres entender dónde puede ayudar de forma segura la IA a tu consulta? [Solicita tu Hoja de Ruta gratuita](/es/hoja-de-ruta-de-automatizacion/) — 5-7 días, sin compromisos.

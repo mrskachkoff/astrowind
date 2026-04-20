@@ -73,7 +73,7 @@ Ofrecemos despliegues piloto de alcance limitado — normalmente un único caso 
 
 Cada compromiso con MedCore comienza con una evaluación gratuita de infraestructura donde analizamos tus sistemas existentes, volúmenes de datos, requisitos de cumplimiento y casos de uso para diseñar la arquitectura de despliegue óptima.
 
-[Programa tu evaluación](/es/contacto) o [explora MedCore Private AI en detalle](/es/medcore-ia-privada).
+[Programa tu evaluación](/es/contacto/) o [explora MedCore Private AI en detalle](/es/medcore-ia-privada/).
 
 ---
 

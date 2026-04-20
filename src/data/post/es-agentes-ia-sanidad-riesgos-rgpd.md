@@ -83,7 +83,7 @@ Los agentes de IA en una consulta sanitaria pueden acceder o tratar de forma aut
 
 > **Exposición clave al RGPD:** Un agente de IA que accede y trata datos de salud de forma autónoma sin una base jurídica documentada conforme al Artículo 9(2), sin una EIPD completada bajo el Artículo 35 y sin supervisión humana documentada genera violaciones simultáneas de los Artículos 5, 9, 22 y 35 — en un único flujo de trabajo automatizado.
 
-Esta exposición no es hipotética. Es el estado predeterminado de la mayoría de las herramientas de automatización IA comerciales que se venden a consultas sanitarias sin una arquitectura orientada al cumplimiento. Para un desglose completo de tus obligaciones básicas, consulta nuestra guía sobre [requisitos RGPD para consultas sanitarias independientes](/es/guia-cumplimiento-rgpd-consultas-sanitarias).
+Esta exposición no es hipotética. Es el estado predeterminado de la mayoría de las herramientas de automatización IA comerciales que se venden a consultas sanitarias sin una arquitectura orientada al cumplimiento. Para un desglose completo de tus obligaciones básicas, consulta nuestra guía sobre [requisitos RGPD para consultas sanitarias independientes](/es/es-guia-cumplimiento-rgpd-consultas-sanitarias/).
 
 ---
 
@@ -141,13 +141,13 @@ El agente ejecuta flujos de trabajo, pero no existe un registro de auditoría qu
 El despliegue conforme de agentes de IA en sanidad es arquitectónicamente específico, no se resuelve simplemente añadiendo una política de privacidad y marcando una casilla de consentimiento.
 
 - **Mapeo de datos:** Cada dato al que accede el agente se cataloga, con la base jurídica documentada para cada tipo de dato antes de que el agente se active.
-- **Decisión arquitectónica (local / híbrida / nube controlada):** La ubicación del tratamiento es una decisión de cumplimiento, no solo de costes — consulta nuestro análisis sobre [arquitectura IA local para la soberanía de datos sanitarios](/es/por-que-sanidad-necesita-ia-local) y [soluciones de IA híbrida en sanidad](/es/soluciones-ia-hibridas-sanidad).
+- **Decisión arquitectónica (local / híbrida / nube controlada):** La ubicación del tratamiento es una decisión de cumplimiento, no solo de costes — consulta nuestro análisis sobre [arquitectura IA local para la soberanía de datos sanitarios](/es/es-por-que-sanidad-necesita-ia-local/) y [soluciones de IA híbrida en sanidad](/es/es-soluciones-ia-hibridas-sanidad/).
 - **Alcance de acceso:** Los permisos del agente se definen al mínimo necesario para su función específica — no al acceso más amplio que resulte cómodo para el proveedor.
 - **Registro y auditabilidad:** Cada acción del agente se registra con detalle suficiente para reconstruir qué datos se accedieron, cuándo y qué se produjo — permitiendo responder a solicitudes de derechos de los interesados e investigar brechas.
 - **Razonamiento de cumplimiento documentado:** La EIPD, las evaluaciones de base jurídica y las decisiones de gobernanza están escritas, fechadas y versionadas — no implícitas ni asumidas.
 - **Auditoría de subencargados:** Cada herramienta que el agente invoca está identificada, evaluada y cubierta por un Acuerdo de Tratamiento de Datos conforme al Artículo 28.
 
-Para clínicas dentales y consultas especializadas en particular, consulta nuestra guía sobre [automatización IA conforme para clínicas dentales](/es/clinicas-dentales-automatizar-flujos-conformidad), que cubre estos patrones de despliegue en un contexto sectorial específico.
+Para clínicas dentales y consultas especializadas en particular, consulta nuestra guía sobre [automatización IA conforme para clínicas dentales](/es/es-clinicas-dentales-automatizar-flujos-conformidad/), que cubre estos patrones de despliegue en un contexto sectorial específico.
 
 ---
 
@@ -176,7 +176,7 @@ La Ley de IA de la UE clasifica los sistemas de IA utilizados en sanidad como de
 
 El Índice de Agentes IA MIT 2025 confirma lo que el RGPD anticipó: los sistemas autónomos que operan sobre datos sensibles sin una gobernanza adecuada generan un riesgo jurídico acumulativo que crece con cada acción automatizada que el agente ejecuta sin supervisión. Para las consultas sanitarias independientes en la UE, esto no es un problema futuro — los agentes de IA se venden y despliegan hoy, a menudo sin la infraestructura de cumplimiento que los haga legales para operar.
 
-Si tu consulta está evaluando o ya ha desplegado automatización con IA, el primer paso es entender exactamente a qué datos acceden tus sistemas, quién los trata y si puedes demostrar cumplimiento ante la AEPD o tu autoridad de control nacional. Comienza con nuestra [Hoja de Ruta de Automatización gratuita](/es/hoja-de-ruta-de-automatizacion) para identificar tus puntos de exposición, o explora [MedCore Private AI](/es/presentando-medcore-private-ai) — nuestra solución local diseñada para el cumplimiento RGPD sanitario desde la arquitectura.
+Si tu consulta está evaluando o ya ha desplegado automatización con IA, el primer paso es entender exactamente a qué datos acceden tus sistemas, quién los trata y si puedes demostrar cumplimiento ante la AEPD o tu autoridad de control nacional. Comienza con nuestra [Hoja de Ruta de Automatización gratuita](/es/hoja-de-ruta-de-automatizacion/) para identificar tus puntos de exposición, o explora [MedCore Private AI](/es/es-presentando-medcore-private-ai/) — nuestra solución local diseñada para el cumplimiento RGPD sanitario desde la arquitectura.
 
 ---
 

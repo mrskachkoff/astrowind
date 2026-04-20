@@ -83,7 +83,7 @@ Tracking subprocessors is not bureaucracy. It is risk control, and in healthcare
 
 **Ongoing Monitoring.** Risks evolve. Continuous monitoring helps organizations stay aware of changes in vendor risk after a security review is complete, surfacing alerts and findings over time so teams can assess impact and decide when follow-up is needed. A vendor compliant at onboarding may have changed its practices, infrastructure, or corporate ownership since then.
 
-For a full overview of baseline GDPR obligations applicable to your organization, see our guide to [GDPR baseline obligations for healthcare providers](/gdpr-compliance-small-healthcare-providers-guide).
+For a full overview of baseline GDPR obligations applicable to your organization, see our guide to [GDPR baseline obligations for healthcare providers](/gdpr-compliance-small-healthcare-providers-guide/).
 
 ---
 
@@ -95,7 +95,7 @@ The review cannot be a one-time checkbox exercise. It must be continuous. Govern
 
 Just as HIPAA requires Business Associate Agreements, GDPR requires clear processor agreements. Organizations should monitor vendor compliance by requiring audit rights or certifications, and ensure the same obligations cover subprocessors. Any entity handling patient data on the organization's behalf must be held to GDPR standards.
 
-For a detailed analysis of Article 28 obligations in the context of AI-driven workflows, see our article on [Article 28 subprocessor obligations in AI agent tool chains](/ai-agents-healthcare-gdpr-risks).
+For a detailed analysis of Article 28 obligations in the context of AI-driven workflows, see our article on [Article 28 subprocessor obligations in AI agent tool chains](/ai-agents-healthcare-gdpr-risks/).
 
 ---
 
@@ -167,7 +167,7 @@ If a vendor cannot clearly disclose where data is stored, which subprocessors ar
 
 **Step 6 — Conduct a DPIA.** For high-risk transfers involving health data crossing borders, a Data Protection Impact Assessment under GDPR Article 35 is recommended or may be legally required.
 
-For organizations considering an on-premise architecture as a response to transfer risk, see our analysis of the [architectural approach to data sovereignty for unknown transfer risks](/why-healthcare-needs-on-premise-ai).
+For organizations considering an on-premise architecture as a response to transfer risk, see our analysis of the [architectural approach to data sovereignty for unknown transfer risks](/why-healthcare-needs-on-premise-ai/).
 
 ---
 
@@ -236,7 +236,7 @@ A strong review process should:
 
 If you cannot explain who processes your patient data, where it is stored, and under what legal basis it is transferred, then you do not control your compliance posture. In healthcare, that is unacceptable.
 
-Start with our [free Automation Roadmap](/automation-roadmap) — we assess your clinic's data handling, identify safe automation opportunities, and deliver a clear compliance roadmap, completely free.
+Start with our [free Automation Roadmap](/automation-roadmap/) — we assess your clinic's data handling, identify safe automation opportunities, and deliver a clear compliance roadmap, completely free.
 
 ---
 

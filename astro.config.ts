@@ -42,6 +42,8 @@ export default defineConfig({
     '/es/eipd-evaluacion-impacto-proteccion-datos-ia-sanitaria': '/es/es-eipd-evaluacion-impacto-proteccion-datos-ia-sanitaria/',
     '/es-european-sovereign-cloud-ia-sanitaria': '/es/es-european-sovereign-cloud-ia-sanitaria/',
     '/es/european-sovereign-cloud-ia-sanitaria': '/es/es-european-sovereign-cloud-ia-sanitaria/',
+    '/es-automatizacion-responsable': '/es/es-automatizacion-responsable/',
+    '/es/automatizacion-responsable': '/es/es-automatizacion-responsable/',
     '/es-flujos-atencion-sanitaria-personalizada': '/es/es-flujos-atencion-sanitaria-personalizada/',
     '/es/flujos-atencion-sanitaria-personalizada': '/es/es-flujos-atencion-sanitaria-personalizada/',
     '/es-guia-cumplimiento-rgpd-consultas-sanitarias': '/es/es-guia-cumplimiento-rgpd-consultas-sanitarias/',

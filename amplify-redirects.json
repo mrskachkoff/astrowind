@@ -24,6 +24,114 @@
     "condition": null
   },
   {
+    "source": "/tag/agentes-ia",
+    "target": "/es/tag/agentes-ia/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/tag/agentes-ia/",
+    "target": "/es/tag/agentes-ia/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/tag/sanidad",
+    "target": "/es/tag/sanidad/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/tag/sanidad/",
+    "target": "/es/tag/sanidad/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/tag/clinicas-dentales",
+    "target": "/es/tag/clinicas-dentales/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/tag/clinicas-dentales/",
+    "target": "/es/tag/clinicas-dentales/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/tag/privacidad-de-datos",
+    "target": "/es/tag/privacidad-de-datos/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/tag/privacidad-de-datos/",
+    "target": "/es/tag/privacidad-de-datos/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/tag/ia",
+    "target": "/es/tag/ia/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/tag/ia/",
+    "target": "/es/tag/ia/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/tag/ia-hibrida",
+    "target": "/es/tag/ia-hibrida/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/tag/ia-hibrida/",
+    "target": "/es/tag/ia-hibrida/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/tag/acuerdos-de-tratamiento-de-datos",
+    "target": "/es/tag/acuerdos-de-tratamiento-de-datos/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/tag/acuerdos-de-tratamiento-de-datos/",
+    "target": "/es/tag/acuerdos-de-tratamiento-de-datos/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/tag/proteccion-de-datos",
+    "target": "/es/tag/proteccion-de-datos/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/tag/proteccion-de-datos/",
+    "target": "/es/tag/proteccion-de-datos/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/tag/transferencias-internacionales-de-datos",
+    "target": "/es/tag/transferencias-internacionales-de-datos/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/tag/transferencias-internacionales-de-datos/",
+    "target": "/es/tag/transferencias-internacionales-de-datos/",
+    "status": "301",
+    "condition": null
+  },
+  {
     "source": "/es-5-tareas-clinica-dejar-hacer-manualmente",
     "target": "/es/es-5-tareas-clinica-dejar-hacer-manualmente/",
     "status": "301",
@@ -80,6 +188,30 @@
   {
     "source": "/agentes-ia-sanidad-riesgos-rgpd/",
     "target": "/es/es-agentes-ia-sanidad-riesgos-rgpd/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-automatizacion-responsable",
+    "target": "/es/es-automatizacion-responsable/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-automatizacion-responsable/",
+    "target": "/es/es-automatizacion-responsable/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/automatizacion-responsable",
+    "target": "/es/es-automatizacion-responsable/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/automatizacion-responsable/",
+    "target": "/es/es-automatizacion-responsable/",
     "status": "301",
     "condition": null
   },

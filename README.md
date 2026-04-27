@@ -257,6 +257,11 @@ You can create an optimized production build with:
 npm run build
 ```
 
+Before starting Google Search Console validation, confirm that the AWS Amplify
+console redirect JSON exactly matches `amplify-redirects.json`. The production
+build runs `npm run verify:seo`, which fails when the generated redirect file is
+stale.
+
 Now, your website is ready to be deployed. All generated files are located at
 `dist` folder, which you can deploy the folder to any hosting service you
 prefer.

@@ -10,6 +10,18 @@ const staticRedirects = [
   ['/es/auditoria-ia-gratuita', '/es/hoja-de-ruta-de-automatizacion/'],
 ];
 
+const legacySpanishTagRedirects = [
+  ['agentes-ia', '/es/tag/agentes-ia/'],
+  ['sanidad', '/es/tag/sanidad/'],
+  ['clinicas-dentales', '/es/tag/clinicas-dentales/'],
+  ['privacidad-de-datos', '/es/tag/privacidad-de-datos/'],
+  ['ia', '/es/tag/ia/'],
+  ['ia-hibrida', '/es/tag/ia-hibrida/'],
+  ['acuerdos-de-tratamiento-de-datos', '/es/tag/acuerdos-de-tratamiento-de-datos/'],
+  ['proteccion-de-datos', '/es/tag/proteccion-de-datos/'],
+  ['transferencias-internacionales-de-datos', '/es/tag/transferencias-internacionales-de-datos/'],
+];
+
 // Historical URL that was published before the Spanish es- slug policy was enforced.
 const rootSpanishAliases = new Set(['agentes-ia-sanidad-riesgos-rgpd']);
 
@@ -33,6 +45,10 @@ async function buildRules() {
 
   for (const [source, target] of staticRedirects) {
     addSlashVariants(rules, source, target);
+  }
+
+  for (const [tagSlug, target] of legacySpanishTagRedirects) {
+    addSlashVariants(rules, `/tag/${tagSlug}`, target);
   }
 
   for (const file of files) {

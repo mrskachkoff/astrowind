@@ -30,6 +30,8 @@ Considera el panorama de cumplimiento:
 - Los **requisitos nacionales de residencia de datos** en varios estados miembros de la UE exigen que los datos sanitarios permanezcan dentro del país
 - Las **políticas institucionales** de muchos grupos sanitarios prohíben explícitamente enviar datos de pacientes a plataformas de IA externas
 
+La [retirada de OpenEvidence de la UE y Reino Unido](/es/es-retirada-openevidence-ue-reino-unido-sanidad-on-premise-nube-soberana/) ilustra la misma presión en la capa de IA clínica: los sistemas de evidencia médica necesitan límites controlables de inferencia, recuperación, registros y subencargados.
+
 MedCore Private AI resuelve esto ejecutándose **completamente en tu infraestructura**. Ningún dato de paciente sale de tus instalaciones. Sin llamadas a API externas. Sin telemetría. Soberanía total de datos por arquitectura — no por promesa contractual.
 
 ## Qué Ofrece MedCore

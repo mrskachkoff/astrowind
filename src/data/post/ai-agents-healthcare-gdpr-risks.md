@@ -127,6 +127,8 @@ The agent has been given broad database access to avoid configuration complexity
 **Failure Mode 4: Cloud processing without architecture review**
 Patient data is flowing through a cloud-based AI service without the practice having assessed where data is processed, under which jurisdiction, and whether Standard Contractual Clauses or other transfer mechanisms are in place. If data flows outside the EEA, GDPR Chapter V applies — and most practices cannot demonstrate compliance with this for their AI tool chains.
 
+For a concrete clinical AI example, see our breakdown of [OpenEvidence's EU/UK withdrawal](/openevidence-eu-uk-withdrawal-private-on-prem-sovereign-cloud/) and the subprocessor questions it raises.
+
 **Failure Mode 5: No logging of AI-triggered actions**
 The agent executes workflows, but no audit trail records which data was accessed, what decisions were made, and what outputs were produced. Without logs, you cannot respond to a data subject access request, investigate a breach, or demonstrate accountability to a supervisory authority.
 

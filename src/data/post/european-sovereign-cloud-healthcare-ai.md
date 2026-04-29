@@ -36,6 +36,8 @@ Deploying AI in healthcare isn't constrained by model capability — it's constr
 
 Patient data is among the most sensitive categories under GDPR. Compliance obligations extend beyond storage: they govern how, where, and by whom data is processed. For AI workloads, this distinction has direct consequences for infrastructure design.
 
+The [OpenEvidence EU/UK withdrawal](/openevidence-eu-uk-withdrawal-private-on-prem-sovereign-cloud/) is a current example of why clinical AI teams need this architecture conversation before procurement, not after a vendor becomes unavailable.
+
 ---
 
 ## 1. Why Data Residency Defines Architecture

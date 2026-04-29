@@ -408,6 +408,30 @@
     "condition": null
   },
   {
+    "source": "/es-retirada-openevidence-ue-reino-unido-sanidad-on-premise-nube-soberana",
+    "target": "/es/es-retirada-openevidence-ue-reino-unido-sanidad-on-premise-nube-soberana/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-retirada-openevidence-ue-reino-unido-sanidad-on-premise-nube-soberana/",
+    "target": "/es/es-retirada-openevidence-ue-reino-unido-sanidad-on-premise-nube-soberana/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/retirada-openevidence-ue-reino-unido-sanidad-on-premise-nube-soberana",
+    "target": "/es/es-retirada-openevidence-ue-reino-unido-sanidad-on-premise-nube-soberana/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/retirada-openevidence-ue-reino-unido-sanidad-on-premise-nube-soberana/",
+    "target": "/es/es-retirada-openevidence-ue-reino-unido-sanidad-on-premise-nube-soberana/",
+    "status": "301",
+    "condition": null
+  },
+  {
     "source": "/es-revision-subprocesadores-gestion-riesgos-proveedores-rgpd",
     "target": "/es/es-revision-subprocesadores-gestion-riesgos-proveedores-rgpd/",
     "status": "301",

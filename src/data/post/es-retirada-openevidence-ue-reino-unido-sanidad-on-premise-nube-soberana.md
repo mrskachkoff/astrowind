@@ -69,6 +69,8 @@ La pregunta más importante no es solo si OpenEvidence tiene un marco de cumplim
 
 **En sanidad, la cadena de subencargados del tratamiento suele ser donde vive el verdadero riesgo regulatorio.**
 
+Para el proceso práctico de revisión, consulta nuestra guía sobre [gestión de subencargados del tratamiento en sanidad bajo el RGPD](/es/es-revision-subprocesadores-gestion-riesgos-proveedores-rgpd/).
+
 Eso me llevó a Baseten Labs, cuyo Trust Center público, https://trust.baseten.co, enumera áreas de cumplimiento como GDPR, HIPAA, SOC 2 Type 2 y SOC 3.
 
 También lista públicamente a OpenEvidence entre las empresas que revisan o confían en Baseten.
@@ -99,6 +101,8 @@ Ahora añadamos el Reglamento de IA.
 
 Si un sistema de IA médica apoya flujos de trabajo clínicos, diagnóstico, tratamiento o funciones reguladas de producto sanitario, puede activar obligaciones de alto riesgo relacionadas con documentación, supervisión, monitorización y gestión del riesgo.
 
+Por eso los despliegues de IA clínica suelen requerir una [Evaluación de Impacto relativa a la Protección de Datos antes del despliegue](/es/es-eipd-evaluacion-impacto-proteccion-datos-ia-sanitaria/), no después de haber fijado ya la arquitectura.
+
 Eso crea una posición difícil para cualquier proveedor de IA clínica alojado en Estados Unidos que atienda a clientes sanitarios de la UE.
 
 - No basta con decir: "Estamos certificados en SOC 2".
@@ -126,6 +130,8 @@ Pero sí ofrece una explicación plausible de por qué una empresa sofisticada, 
 La retirada de OpenEvidence de la UE/Reino Unido no debería leerse como "la IA médica no puede funcionar en Europa".
 
 Debería leerse así: la IA médica debe desplegarse con soberanía, auditabilidad y arquitectura regulatoria desde el primer día.
+
+Hemos desarrollado el mismo principio arquitectónico en nuestro análisis sobre [por qué la sanidad necesita IA local](/es/es-por-que-sanidad-necesita-ia-local/) y en la guía sobre [IA híbrida con nube europea soberana](/es/es-european-sovereign-cloud-ia-sanitaria/).
 
 La IA sanitaria está pasando de la experimentación a la infraestructura. En esa fase, los ganadores no serán solo los equipos con las mejores demostraciones de modelos. Los ganadores serán los equipos capaces de responder a preguntas de compras, legales, seguridad clínica, protección de datos e infraestructura con evidencia.
 
@@ -157,7 +163,7 @@ Si la versión SaaS en nube pública de un asistente de IA clínica se vuelve di
 
 ## Un sistema tipo OpenEvidence *on-premise* y soberano es viable.
 
-Futurion Solutions calcula, proporciona e instala hardware de servidor con GPU NVIDIA de alta gama en vuestra clínica y despliega sobre él un sistema de IA médica tipo OpenEvidence, completamente *on-premise* o híbrido con AWS European Sovereign Cloud.
+Futurion Solutions calcula, proporciona e instala hardware de servidor con GPU NVIDIA de alta gama en vuestra clínica y despliega sobre él un sistema de IA médica tipo OpenEvidence, completamente *on-premise* o híbrido con AWS European Sovereign Cloud. Para organizaciones que necesitan una pila privada de IA médica empaquetada, esa es la dirección de [MedCore Private AI](/es/medcore-ia-privada/).
 
 La arquitectura es sencilla en principio:
 

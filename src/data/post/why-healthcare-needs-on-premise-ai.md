@@ -89,6 +89,8 @@ Cloud AI pricing scales with usage, creating unpredictable costs as adoption gro
 
 On-premise deployments eliminate dependency on external providers' pricing decisions, service changes, or discontinuation. Your AI infrastructure remains operational regardless of what any cloud provider decides to do.
 
+This is no longer theoretical: [OpenEvidence's EU/UK withdrawal](/openevidence-eu-uk-withdrawal-private-on-prem-sovereign-cloud/) shows how quickly clinical AI availability can become an architecture and jurisdiction problem.
+
 ## When Cloud AI Is Acceptable in Healthcare
 
 To be clear: not every healthcare AI use case requires on-premise deployment. Cloud AI can be appropriate for:

@@ -129,6 +129,8 @@ Al agente se le ha dado acceso amplio a la base de datos para evitar la compleji
 **Modo de fallo 4: Tratamiento en la nube sin revisión arquitectónica**
 Los datos de pacientes fluyen a través de un servicio de IA en la nube sin que la consulta haya evaluado dónde se tratan los datos, bajo qué jurisdicción y si existen Cláusulas Contractuales Tipo u otros mecanismos de transferencia. Si los datos salen del EEE, se aplica el Capítulo V del RGPD — y la mayoría de las consultas no pueden demostrar cumplimiento en este aspecto para sus cadenas de herramientas IA.
 
+Para un ejemplo concreto de IA clínica, consulta nuestro análisis de la [retirada de OpenEvidence de la UE y Reino Unido](/es/es-retirada-openevidence-ue-reino-unido-sanidad-on-premise-nube-soberana/) y las preguntas de subencargados que plantea.
+
 **Modo de fallo 5: Sin registro de las acciones ejecutadas por IA**
 El agente ejecuta flujos de trabajo, pero no existe un registro de auditoría que documente qué datos se accedieron, qué decisiones se tomaron y qué resultados se produjeron. Sin registros, no puedes responder a una solicitud de acceso de un interesado, investigar una brecha ni demostrar responsabilidad proactiva ante una autoridad de control.
 

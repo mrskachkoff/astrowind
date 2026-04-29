@@ -69,6 +69,8 @@ Esto se ejecuta en hardware dentro de tu clínica o en un servidor local dedicad
 
 Los servicios cloud solo se usan para tareas donde los datos de los pacientes no están implicados o han sido correctamente anonimizados.
 
+La misma lógica de ubicación se aplica a los asistentes de IA clínica: la [retirada de OpenEvidence de la UE y Reino Unido](/es/es-retirada-openevidence-ue-reino-unido-sanidad-on-premise-nube-soberana/) es un caso útil para entender por qué la inferencia, la recuperación y los registros sensibles necesitan controles de residencia más sólidos.
+
 ### El Marco de Decisión
 
 Para cada automatización que consideramos, evaluamos:

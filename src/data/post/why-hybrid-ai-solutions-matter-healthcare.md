@@ -68,6 +68,8 @@ This runs on hardware within your clinic or on a dedicated local server. Patient
 
 Cloud services are only used for tasks where patient data is not involved or has been properly anonymized.
 
+The same placement logic applies to clinical AI assistants: [OpenEvidence's EU/UK withdrawal](/openevidence-eu-uk-withdrawal-private-on-prem-sovereign-cloud/) is a useful case study in why sensitive inference, retrieval, and logs need stronger residency controls.
+
 ### The Decision Framework
 
 For each automation we consider, we evaluate:

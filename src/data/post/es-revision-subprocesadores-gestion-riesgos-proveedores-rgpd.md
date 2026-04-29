@@ -146,6 +146,8 @@ Para adherirse al Marco de Privacidad de Datos, una empresa debe autocertificars
 
 Este es un ejemplo práctico de por qué resulta imprescindible consultar la lista del DPF para cada proveedor estadounidense específico — la decisión de adecuación no es una autorización general para todas las empresas americanas, y las organizaciones sanitarias deben verificar el mecanismo de transferencia aplicable a cada proveedor de forma individual.
 
+El mismo problema aparece en las pilas de IA clínica: nuestro análisis de la [retirada de OpenEvidence de la UE y Reino Unido](/es/es-retirada-openevidence-ue-reino-unido-sanidad-on-premise-nube-soberana/) muestra cómo los subencargados de infraestructura y servicio de modelos pueden volverse centrales en la evaluación de riesgos.
+
 **Referencias clave:**
 - [Lista del Marco de Privacidad de Datos](https://www.dataprivacyframework.gov/list)
 - [Decisión de adecuación del Marco de Privacidad de Datos UE-EE.UU.](https://eur-lex.europa.eu/eli/dec_impl/2023/1795/oj)

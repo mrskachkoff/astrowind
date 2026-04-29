@@ -37,6 +37,8 @@ Desplegar IA en el ámbito sanitario no está limitado por la capacidad de los m
 
 Los datos de los pacientes se encuentran entre las categorías más sensibles bajo el RGPD y su transposición española, la **Ley Orgánica de Protección de Datos y Garantía de los Derechos Digitales (LOPDGDD)**. Las obligaciones de cumplimiento van más allá del almacenamiento: regulan cómo, dónde y por quién se procesan los datos. Para las cargas de trabajo de IA, esta distinción tiene consecuencias directas sobre el diseño de la infraestructura.
 
+La [retirada de OpenEvidence de la UE y Reino Unido](/es/es-retirada-openevidence-ue-reino-unido-sanidad-on-premise-nube-soberana/) es un ejemplo actual de por qué los equipos de IA clínica deben resolver esta conversación arquitectónica antes de contratar, no después de que un proveedor deje de estar disponible.
+
 ---
 
 ## 1. Por qué la residencia de datos define la arquitectura

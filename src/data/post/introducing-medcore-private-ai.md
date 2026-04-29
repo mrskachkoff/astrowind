@@ -29,6 +29,8 @@ Consider the compliance landscape:
 - **National data residency requirements** in multiple EU member states mandate that health data remain within the country
 - **Institutional policies** at many healthcare groups explicitly prohibit sending patient data to external AI platforms
 
+The [OpenEvidence EU/UK withdrawal](/openevidence-eu-uk-withdrawal-private-on-prem-sovereign-cloud/) illustrates the same pressure at the clinical AI layer: medical evidence systems need controllable inference, retrieval, logging, and subprocessor boundaries.
+
 MedCore Private AI solves this by running **entirely on your infrastructure**. No patient data leaves your premises. No external API calls. No telemetry. Complete data sovereignty by architecture — not by contractual promise.
 
 ## What MedCore Delivers

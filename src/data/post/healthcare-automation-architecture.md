@@ -75,6 +75,8 @@ In many cases, they want you to move your clinical processes onto their platform
 
 From there, the data is often routed to OpenAI, Google Cloud, or other third-party platforms, because in reality very few providers operate private any infrastructure of their own.
 
+The [OpenEvidence EU/UK withdrawal](/openevidence-eu-uk-withdrawal-private-on-prem-sovereign-cloud/) is a useful reminder that clinical AI risk often sits in the infrastructure and subprocessor chain, not only in the application UI.
+
 And saying that a system runs on AWS or Google Cloud **does not, by itself, guarantee** effective security controls, a compliant architecture, or appropriate data residency.
 
 In the worst-case scenario, patient data and documents are processed through tools like Google Docs, Supabase, or n8n, emails containing personal data are sent through public email services, or sensitive information is transmitted through apps like Telegram.

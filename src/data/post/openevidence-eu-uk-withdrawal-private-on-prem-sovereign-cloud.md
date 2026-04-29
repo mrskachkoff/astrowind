@@ -62,6 +62,8 @@ The more important question is not only whether OpenEvidence itself has a strong
 
 **In healthcare the subprocessor chain is often where the real regulatory risk lives.**
 
+For the practical review workflow behind this risk, see our guide to [GDPR subprocessor management in EU healthcare](/gdpr-subprocessor-management-eu-healthcare/).
+
 That led me to Baseten Labs who's public Trust Center https://trust.baseten.co lists compliance areas including GDPR, HIPAA, SOC 2 Type 2, and SOC 3.
 
 It also publicly lists OpenEvidence among companies that review or trust Baseten.
@@ -89,6 +91,8 @@ If a healthcare provider uses an external AI vendor, GDPR Article 28 also requir
 And if data is transferred outside the EU, GDPR Chapter V requires a valid transfer mechanism, such as DPF for certified U.S. companies or SCCs with appropriate safeguards.
 
 Now add the AI Act. If a medical AI system supports clinical workflows, diagnosis, treatment, or regulated medical-device functions, it may trigger high-risk obligations around documentation, oversight, monitoring, and risk management.
+
+That is also why clinical AI deployments usually need a [Data Protection Impact Assessment before deployment](/data-protection-impact-assessment-healthcare-ai/), not after the architecture is already locked in.
 
 That creates a difficult position for any U.S.-hosted clinical AI provider serving EU healthcare customers.
 
@@ -118,6 +122,8 @@ OpenEvidence's EU/UK withdrawal should not be read as "medical AI cannot work in
 
 It should be read as: medical AI must be deployed with sovereignty, auditability, and regulatory architecture from day one.
 
+We have covered the same architectural principle in our analysis of [why healthcare needs on-premise AI](/why-healthcare-needs-on-premise-ai/) and in our guide to [hybrid AI with European sovereign cloud infrastructure](/european-sovereign-cloud-healthcare-ai/).
+
 Healthcare AI is moving from experimentation to infrastructure. In that phase, the winners will not only be the teams with the best model demos. The winners will be the teams that can answer procurement, legal, clinical safety, data protection, and infrastructure questions with evidence.
 
 ## OpenEvidence is not magic — it is architecture
@@ -146,7 +152,7 @@ For European hospitals, clinics, insurers, pharma teams, and healthcare technolo
 
 ## On-prem, sovereign OpenEvidence-like system is feasible.
 
-Futurion Solutions calculate, provide, Server Hardware with Hight end NVIDIA GPUs, Install it in your clinic and deploy on top of it OpenEvidence-like medical AI system fully on-premises or Hybrid with in AWS European Sovereign Cloud.
+Futurion Solutions calculate, provide, Server Hardware with Hight end NVIDIA GPUs, Install it in your clinic and deploy on top of it OpenEvidence-like medical AI system fully on-premises or Hybrid with in AWS European Sovereign Cloud. For organizations that need a packaged private medical AI stack, this is the direction behind [MedCore Private AI](/medcore-private-ai/).
 
 The architecture is straightforward in principle:
 

@@ -76,6 +76,8 @@ En muchos casos, quieren que trasladéis vuestros procesos clínicos a su plataf
 
 A partir de ahí, los datos suelen enviarse a OpenAI, Google Cloud u otras plataformas de terceros, porque, en realidad, muy pocos proveedores operan una infraestructura privada propia.
 
+La [retirada de OpenEvidence de la UE y Reino Unido](/es/es-retirada-openevidence-ue-reino-unido-sanidad-on-premise-nube-soberana/) recuerda que el riesgo de la IA clínica suele estar en la infraestructura y en la cadena de subencargados, no solo en la interfaz de la aplicación.
+
 Y decir que un sistema se ejecuta en AWS o Google Cloud **no garantiza, por sí solo**, controles de seguridad eficaces, una arquitectura conforme a la normativa ni una residencia adecuada de los datos.
 
 En el peor de los casos, los datos y documentos de pacientes se procesan mediante herramientas como Google Docs, Supabase o n8n; se envían correos electrónicos con datos personales a través de servicios públicos de correo; o se transmite información sensible mediante aplicaciones como Telegram.

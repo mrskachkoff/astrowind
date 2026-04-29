@@ -145,6 +145,8 @@ To join the Data Privacy Framework, a company must self-certify to the U.S. Depa
 
 This is a practical example of why checking the DPF List for each specific U.S. vendor matters — the adequacy decision is not a blanket authorization for all American companies, and healthcare organizations must verify the transfer mechanism on a vendor-by-vendor basis.
 
+The same issue appears in clinical AI stacks: our analysis of [OpenEvidence's EU/UK withdrawal](/openevidence-eu-uk-withdrawal-private-on-prem-sovereign-cloud/) shows how model-serving and infrastructure subprocessors can become central to the risk assessment.
+
 **Key References:**
 - [Data Privacy Framework List](https://www.dataprivacyframework.gov/list)
 - [EU-U.S. Data Privacy Framework adequacy decision](https://eur-lex.europa.eu/eli/dec_impl/2023/1795/oj)

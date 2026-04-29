@@ -90,6 +90,8 @@ Los precios de la IA en la nube escalan con el uso, generando costes impredecibl
 
 Los despliegues locales eliminan la dependencia de las decisiones de precios, cambios de servicio o discontinuación de los proveedores externos. Tu infraestructura de IA permanece operativa independientemente de lo que decida cualquier proveedor cloud.
 
+Esto ya no es teórico: la [retirada de OpenEvidence de la UE y Reino Unido](/es/es-retirada-openevidence-ue-reino-unido-sanidad-on-premise-nube-soberana/) muestra cómo la disponibilidad de IA clínica puede convertirse rápidamente en un problema de arquitectura y jurisdicción.
+
 ## Cuándo la IA en la Nube Es Aceptable en Sanidad
 
 Para ser claros: no todos los casos de uso de IA sanitaria requieren despliegue local. La IA en la nube puede ser apropiada para:

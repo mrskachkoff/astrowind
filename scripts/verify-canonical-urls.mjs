@@ -17,6 +17,7 @@ const assetExtensions = new Set([
   '.js',
   '.json',
   '.map',
+  '.mp4',
   '.pdf',
   '.png',
   '.svg',

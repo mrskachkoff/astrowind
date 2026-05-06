@@ -216,6 +216,30 @@
     "condition": null
   },
   {
+    "source": "/es-barreras-control-privacidad-ia-sanitaria-presidio-openai-privacy-filter",
+    "target": "/es/es-barreras-control-privacidad-ia-sanitaria-presidio-openai-privacy-filter/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-barreras-control-privacidad-ia-sanitaria-presidio-openai-privacy-filter/",
+    "target": "/es/es-barreras-control-privacidad-ia-sanitaria-presidio-openai-privacy-filter/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/barreras-control-privacidad-ia-sanitaria-presidio-openai-privacy-filter",
+    "target": "/es/es-barreras-control-privacidad-ia-sanitaria-presidio-openai-privacy-filter/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/barreras-control-privacidad-ia-sanitaria-presidio-openai-privacy-filter/",
+    "target": "/es/es-barreras-control-privacidad-ia-sanitaria-presidio-openai-privacy-filter/",
+    "status": "301",
+    "condition": null
+  },
+  {
     "source": "/es-clinicas-dentales-automatizar-flujos-conformidad",
     "target": "/es/es-clinicas-dentales-automatizar-flujos-conformidad/",
     "status": "301",

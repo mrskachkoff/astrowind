@@ -36,6 +36,7 @@
 - [Personalized Patient Treatment (PPT) Workflows in Healthcare: From Research to Real-World Automation](https://solutions.futurion.es/personalized-patient-treatment-workflows-healthcare/): How FHIR, openEHR, and governance-first workflow design enable safe healthcare personalization at scale
 - [Healthcare Automation Must Be Built Differently](https://solutions.futurion.es/healthcare-automation-architecture/): Why responsible healthcare automation requires privacy-first architecture, role-based access, auditability, interoperability, and human accountability
 - [Why OpenEvidence's EU/UK Withdrawal push Healthcare Toward Private On-prem or sovereign cloud](https://solutions.futurion.es/openevidence-eu-uk-withdrawal-private-on-prem-sovereign-cloud/): Why OpenEvidence's EU/UK withdrawal points clinical AI toward private on-premises and sovereign cloud architecture
+- [Stop Pretending People Will Not Use AI](https://solutions.futurion.es/healthcare-ai-privacy-guardrails-presidio-openai-privacy-filter/): A guardrail is a privacy checkpoint that helps control what happens before data passes from one system to another
 
 ## Artículos del blog (Español)
 
@@ -53,6 +54,7 @@
 - [Flujos de atención sanitaria personalizada: de la investigación a la automatización real](https://solutions.futurion.es/es/es-flujos-atencion-sanitaria-personalizada/): Cómo diseñar flujos personalizados con interoperabilidad FHIR, metodología openEHR y gobernanza orientada al cumplimiento
 - [La automatización sanitaria debe construirse de otra manera](https://solutions.futurion.es/es/es-automatizacion-responsable/): Por qué la automatización sanitaria responsable requiere privacidad, permisos por rol, auditabilidad, interoperabilidad y responsabilidad humana
 - [Por qué la retirada de OpenEvidence de la UE/Reino Unido empuja a la sanidad hacia soluciones on-premise o nube EU soberana](https://solutions.futurion.es/es/es-retirada-openevidence-ue-reino-unido-sanidad-on-premise-nube-soberana/): Por qué la retirada de OpenEvidence apunta a IA sanitaria on-premise, nube soberana y control de subencargados
+- [Dejad de fingir que la gente no va a usar la IA](https://solutions.futurion.es/es/es-barreras-control-privacidad-ia-sanitaria-presidio-openai-privacy-filter/): La finalidad práctica de una barrera de control es sencilla: reducir la exposición innecesaria
 
 ## Key facts
 

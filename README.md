@@ -262,6 +262,16 @@ console redirect JSON exactly matches `amplify-redirects.json`. The production
 build runs `npm run verify:seo`, which fails when the generated redirect file is
 stale.
 
+After updating the Amplify console redirect JSON, run the live acceptance check:
+
+```shell
+npm run verify:seo:live
+```
+
+This verifies production `robots.txt`, sitemap pages, RSS, `llms.txt`, and every
+source in `amplify-redirects.json`. Redirect sources must return a direct HTTP
+`301` to their intended canonical target.
+
 Now, your website is ready to be deployed. All generated files are located at
 `dist` folder, which you can deploy the folder to any hosting service you
 prefer.

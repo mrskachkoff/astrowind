@@ -1,4 +1,16 @@
 customHeaders:
+  - pattern: '/sitemap*.xml'
+    headers:
+      - key: 'Cache-Control'
+        value: 'public, max-age=300, s-maxage=300, must-revalidate'
+  - pattern: '/robots.txt'
+    headers:
+      - key: 'Cache-Control'
+        value: 'public, max-age=300, s-maxage=300, must-revalidate'
+  - pattern: '/llms.txt'
+    headers:
+      - key: 'Cache-Control'
+        value: 'public, max-age=300, s-maxage=300, must-revalidate'
   - pattern: '/rss.xml'
     headers:
       - key: 'Cache-Control'

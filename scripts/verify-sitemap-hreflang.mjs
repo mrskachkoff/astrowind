@@ -43,6 +43,42 @@ function normalizeSiteUrl(rawUrl) {
   return url.href;
 }
 
+function getAttr(tag, name) {
+  const match = tag.match(new RegExp(`\\b${name}\\s*=\\s*(["'])(.*?)\\1`, 'i'));
+  return match?.[2] ?? '';
+}
+
+function relTokens(tag) {
+  return getAttr(tag, 'rel')
+    .toLowerCase()
+    .split(/\s+/)
+    .filter(Boolean);
+}
+
+function findCanonicalHrefs(html) {
+  return (html.match(/<link\b[^>]*>/gi) ?? [])
+    .filter((tag) => relTokens(tag).includes('canonical'))
+    .map((tag) => getAttr(tag, 'href'));
+}
+
+function sitemapUrlToHtmlPath(rawUrl) {
+  const url = new URL(rawUrl);
+  if (url.origin !== new URL(site).origin) {
+    throw new Error(`Sitemap URL is outside site origin: ${rawUrl}`);
+  }
+
+  const pathname = decodeURIComponent(withTrailingSlash(url.pathname));
+  const relativePath = pathname === '/' ? 'index.html' : path.join(pathname.replace(/^\/+/, ''), 'index.html');
+  const htmlPath = path.resolve(distDir, relativePath);
+  const distRoot = `${distDir}${path.sep}`;
+
+  if (htmlPath !== distDir && !htmlPath.startsWith(distRoot)) {
+    throw new Error(`Sitemap URL resolves outside dist: ${rawUrl}`);
+  }
+
+  return htmlPath;
+}
+
 function parseFrontmatter(raw, file) {
   const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
   if (!match) throw new Error(`${file}: missing frontmatter`);
@@ -317,6 +353,34 @@ function verifyLastmod(itemsByUrl, expectedLastmodByUrl, postUrls, errors) {
   }
 }
 
+async function verifyPageCanonicals(itemsByUrl, errors) {
+  for (const url of itemsByUrl.keys()) {
+    let htmlPath;
+    let html;
+
+    try {
+      htmlPath = sitemapUrlToHtmlPath(url);
+      html = await readFile(htmlPath, 'utf8');
+    } catch (err) {
+      errors.push(`${url}: could not read generated HTML (${err.message})`);
+      continue;
+    }
+
+    const label = path.relative(process.cwd(), htmlPath);
+    const canonicalHrefs = findCanonicalHrefs(html);
+
+    if (canonicalHrefs.length !== 1) {
+      errors.push(`${label}: expected exactly one canonical link for ${url}, found ${canonicalHrefs.length}`);
+      continue;
+    }
+
+    const canonical = canonicalHrefs[0] ? normalizeSiteUrl(canonicalHrefs[0]) : '';
+    if (canonical !== url) {
+      errors.push(`${label}: expected self-canonical ${url}, got ${canonical || 'none'}`);
+    }
+  }
+}
+
 async function main() {
   const errors = [];
   const { expectedAlternatesByUrl, expectedLastmodByUrl, groups, postUrls, spanishPostAliases } =
@@ -326,12 +390,15 @@ async function main() {
   verifyAlternates(itemsByUrl, expectedAlternatesByUrl, groups, errors);
   verifyAliases(rawItems, spanishPostAliases, errors);
   verifyLastmod(itemsByUrl, expectedLastmodByUrl, postUrls, errors);
+  await verifyPageCanonicals(itemsByUrl, errors);
 
   if (errors.length) {
-    throw new Error(`Found ${errors.length} sitemap hreflang issue(s):\n${errors.map((err) => `- ${err}`).join('\n')}`);
+    throw new Error(`Found ${errors.length} sitemap SEO issue(s):\n${errors.map((err) => `- ${err}`).join('\n')}`);
   }
 
-  console.log(`[verify-sitemap-hreflang] OK (${itemsByUrl.size} URLs, ${groups.length} alternate groups)`);
+  console.log(
+    `[verify-sitemap-hreflang] OK (${itemsByUrl.size} URLs, ${groups.length} alternate groups, ${itemsByUrl.size} self-canonicals)`
+  );
 }
 
 main().catch((err) => {

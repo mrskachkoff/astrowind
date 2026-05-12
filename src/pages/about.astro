@@ -1,5 +1,6 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import JsonLd from '~/components/common/JsonLd.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
 import Content from '~/components/widgets/Content.astro';
@@ -16,9 +17,34 @@ const metadata = {
     images: [{ url: '~/assets/images/team-meeting.jpg' }],
   },
 };
+
+const aboutSchema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    '@id': 'https://solutions.futurion.es/about/#webpage',
+    url: 'https://solutions.futurion.es/about/',
+    name: 'About Futurion Solutions',
+    description: 'Futurion Solutions is a compliance-first AI automation agency helping small healthcare providers in Spain and the EU automate safely under GDPR.',
+    inLanguage: 'en',
+    publisher: { '@id': 'https://solutions.futurion.es/#organization' },
+    mainEntity: { '@id': 'https://solutions.futurion.es/#organization' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Ivan Skachkov',
+    jobTitle: 'Founder',
+    worksFor: { '@id': 'https://solutions.futurion.es/#organization' },
+    knowsAbout: ['GDPR', 'Healthcare AI', 'Business Process Optimization', 'EU AI Act', 'Data Protection'],
+    url: 'https://solutions.futurion.es/about/',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
+  {aboutSchema.map((s) => <JsonLd schema={s} />)}
+
   <!-- Hero -->
 
   <Hero

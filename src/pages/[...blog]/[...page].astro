@@ -5,6 +5,7 @@ import Layout from '~/layouts/PageLayout.astro';
 import BlogList from '~/components/blog/List.astro';
 import Headline from '~/components/blog/Headline.astro';
 import Pagination from '~/components/blog/Pagination.astro';
+import JsonLd from '~/components/common/JsonLd.astro';
 
 import { blogListRobots, getStaticPathsBlogList } from '~/utils/blog';
 import { useTranslations } from '~/i18n/utils';
@@ -33,9 +34,27 @@ const metadata = {
     type: 'blog',
   },
 };
+const blogSchema = currentPage === 1 ? {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  '@id': 'https://solutions.futurion.es/blog/#webpage',
+  url: 'https://solutions.futurion.es/blog/',
+  name: 'Futurion Solutions Blog',
+  description: 'Articles on GDPR-compliant AI automation for healthcare providers in Spain and the EU.',
+  inLanguage: 'en',
+  publisher: { '@id': 'https://solutions.futurion.es/#organization' },
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://solutions.futurion.es/' },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://solutions.futurion.es/blog/' },
+    ],
+  },
+} : null;
 ---
 
 <Layout metadata={metadata}>
+  {blogSchema && <JsonLd schema={blogSchema} />}
   <section class="px-6 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
     <Headline subtitle={t('blog.subtitle')}>
       {t('blog.theBlog')}

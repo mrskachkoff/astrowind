@@ -1,5 +1,6 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import JsonLd from '~/components/common/JsonLd.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
 import Content from '~/components/widgets/Content.astro';
@@ -16,9 +17,34 @@ const metadata = {
     images: [{ url: '~/assets/images/team-meeting.jpg' }],
   },
 };
+
+const aboutSchema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    '@id': 'https://solutions.futurion.es/es/nosotros/#webpage',
+    url: 'https://solutions.futurion.es/es/nosotros/',
+    name: 'Sobre Futurion Solutions',
+    description: 'Futurion Solutions es una agencia de automatización IA centrada en cumplimiento que ayuda a pequeños proveedores sanitarios en España y la UE a automatizar de forma segura bajo el RGPD.',
+    inLanguage: 'es',
+    publisher: { '@id': 'https://solutions.futurion.es/#organization' },
+    mainEntity: { '@id': 'https://solutions.futurion.es/#organization' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Ivan Skachkov',
+    jobTitle: 'Fundador',
+    worksFor: { '@id': 'https://solutions.futurion.es/#organization' },
+    knowsAbout: ['RGPD', 'IA Sanitaria', 'Optimización de Procesos Empresariales', 'Ley de IA de la UE', 'Protección de Datos'],
+    url: 'https://solutions.futurion.es/es/nosotros/',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
+  {aboutSchema.map((s) => <JsonLd schema={s} />)}
+
   <!-- Hero -->
 
   <Hero

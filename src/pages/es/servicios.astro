@@ -1,5 +1,6 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import JsonLd from '~/components/common/JsonLd.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
 import Features2 from '~/components/widgets/Features2.astro';
@@ -15,9 +16,30 @@ const metadata = {
     images: [{ url: '~/assets/images/data-dashboard.jpg' }],
   },
 };
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Automatización IA centrada en cumplimiento para sanidad',
+  description: 'Servicios de automatización IA centrados en cumplimiento para clínicas dentales, farmacias y pequeñas consultas médicas en España y la UE. Incluye Hoja de Ruta de Automatización Gratuita, implementación conforme al RGPD y soporte continuo.',
+  inLanguage: 'es',
+  provider: { '@id': 'https://solutions.futurion.es/#organization' },
+  areaServed: [
+    { '@type': 'Country', name: 'Spain' },
+    { '@type': 'Place', name: 'European Union' },
+  ],
+  serviceType: 'Consultoría de Automatización IA',
+  audience: {
+    '@type': 'Audience',
+    audienceType: 'Proveedores Sanitarios',
+  },
+  url: 'https://solutions.futurion.es/es/servicios/',
+};
 ---
 
 <Layout metadata={metadata}>
+  <JsonLd schema={serviceSchema} />
+
   <!-- Hero -->
 
   <Hero

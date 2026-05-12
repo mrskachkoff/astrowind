@@ -35,4 +35,4 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-Sitemap: https://solutions.futurion.es/sitemap-index.xml
+Sitemap: https://solutions.futurion.es/sitemap-0.xml

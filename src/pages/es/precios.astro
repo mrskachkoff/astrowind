@@ -1,5 +1,6 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import JsonLd from '~/components/common/JsonLd.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
 import Prices from '~/components/widgets/Pricing.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
@@ -13,9 +14,48 @@ const metadata = {
     images: [{ url: '~/assets/images/business-planning.jpg' }],
   },
 };
+
+const pricingSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'OfferCatalog',
+  name: 'Precios de Servicios de Automatización IA — Futurion Solutions',
+  description: 'Precios transparentes para automatización IA centrada en cumplimiento para proveedores sanitarios en España y la UE.',
+  inLanguage: 'es',
+  provider: { '@id': 'https://solutions.futurion.es/#organization' },
+  url: 'https://solutions.futurion.es/es/precios/',
+  itemListElement: [
+    {
+      '@type': 'Offer',
+      name: 'Hoja de Ruta de Automatización',
+      description: 'Evaluación gratuita de automatización IA en 5-7 días con mapeo de flujos de datos, análisis de brechas y hoja de ruta priorizada.',
+      price: '0',
+      priceCurrency: 'EUR',
+      availability: 'https://schema.org/InStock',
+      url: 'https://solutions.futurion.es/es/hoja-de-ruta-de-automatizacion/',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Implementación Quick-Win',
+      description: '1-2 automatizaciones de alto impacto entregadas en 2-4 semanas. Arquitectura local o híbrida con controles de cumplimiento RGPD.',
+      price: '1500',
+      priceCurrency: 'EUR',
+      availability: 'https://schema.org/InStock',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Paquete Integral',
+      description: 'Transformación completa de la consulta en 6-12 semanas. Múltiples automatizaciones con marco de cumplimiento integrado y formación del personal.',
+      price: '5000',
+      priceCurrency: 'EUR',
+      availability: 'https://schema.org/InStock',
+    },
+  ],
+};
 ---
 
 <Layout metadata={metadata}>
+  <JsonLd schema={pricingSchema} />
+
   <!-- HeroText -->
 
   <HeroText

@@ -1,5 +1,6 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import JsonLd from '~/components/common/JsonLd.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
 import Features2 from '~/components/widgets/Features2.astro';
@@ -16,9 +17,33 @@ const metadata = {
     images: [{ url: '~/assets/images/ai-workflow-tablet.jpg' }],
   },
 };
+
+const roadmapSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Free Automation Roadmap for Healthcare Clinics',
+  description: 'A free 5-7 day AI compliance assessment for healthcare practices. Includes data flow mapping, GDPR compliance gap analysis, and a prioritised automation roadmap delivered at no cost.',
+  inLanguage: 'en',
+  provider: { '@id': 'https://solutions.futurion.es/#organization' },
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'EUR',
+    availability: 'https://schema.org/InStock',
+    description: 'Free 5-7 day AI compliance assessment',
+  },
+  areaServed: [
+    { '@type': 'Country', name: 'Spain' },
+    { '@type': 'Place', name: 'European Union' },
+  ],
+  serviceType: 'AI Compliance Assessment',
+  url: 'https://solutions.futurion.es/automation-roadmap/',
+};
 ---
 
 <Layout metadata={metadata}>
+  <JsonLd schema={roadmapSchema} />
+
   <!-- Hero -->
 
   <Hero

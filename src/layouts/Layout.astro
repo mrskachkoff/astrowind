@@ -49,7 +49,7 @@ const lang = Astro.currentLocale || 'en';
             url: 'https://solutions.futurion.es',
             logo: {
               '@type': 'ImageObject',
-              url: 'https://solutions.futurion.es/favicon.svg',
+              url: 'https://solutions.futurion.es/web-app-manifest-512x512.png',
             },
             description:
               'Compliance-first AI automation agency helping small healthcare providers in Spain and the EU automate safely under GDPR. Specialists in dental clinics, pharmacies, and medical practices with 1–10 employees.',
@@ -63,7 +63,7 @@ const lang = Astro.currentLocale || 'en';
             sameAs: ['https://www.linkedin.com/company/futurion-solutions'],
           },
           {
-            '@type': 'MedicalBusiness',
+            '@type': 'ProfessionalService',
             '@id': 'https://solutions.futurion.es/#localbusiness',
             name: 'Futurion Solutions',
             url: 'https://solutions.futurion.es',
@@ -92,8 +92,9 @@ const lang = Astro.currentLocale || 'en';
           {
             '@type': 'Person',
             '@id': 'https://solutions.futurion.es/#author',
-            name: 'Futurion Solutions Editorial Team',
+            name: 'Ivan Skachkov',
             url: 'https://solutions.futurion.es/about/',
+            jobTitle: 'Founder',
             worksFor: { '@id': 'https://solutions.futurion.es/#organization' },
             knowsAbout: ['GDPR', 'Healthcare AI', 'EU AI Act', 'Data Protection', 'HIPAA', 'AEPD'],
           },

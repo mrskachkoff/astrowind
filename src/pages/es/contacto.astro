@@ -1,5 +1,6 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import JsonLd from '~/components/common/JsonLd.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
 import ContactUs from '~/components/widgets/Contact.astro';
 import Features2 from '~/components/widgets/Features2.astro';
@@ -14,6 +15,17 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
+  <JsonLd schema={{
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "@id": "https://solutions.futurion.es/es/contacto/",
+    "url": "https://solutions.futurion.es/es/contacto/",
+    "name": "Contacto — Futurion Solutions",
+    "description": "Ponte en contacto con Futurion Solutions para automatización IA centrada en cumplimiento para tu consulta sanitaria.",
+    "inLanguage": "es",
+    "publisher": { "@id": "https://solutions.futurion.es/#organization" }
+  }} />
+
   <!-- HeroText -->
 
   <HeroText

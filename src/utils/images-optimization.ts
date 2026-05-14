@@ -217,7 +217,7 @@ export const astroAssetsOptimizer: ImagesOptimizer = async (
   breakpoints,
   _width,
   _height,
-  format = undefined
+  format = 'webp'
 ) => {
   if (!image) {
     return [];
@@ -327,12 +327,16 @@ export async function getImagesOptimized(
   let breakpoints = getBreakpoints({ width: width, breakpoints: widths, layout: layout });
   breakpoints = [...new Set(breakpoints)].sort((a, b) => a - b);
 
-  const srcset = (await transform(image, breakpoints, Number(width) || undefined, Number(height) || undefined, format))
-    .map(({ src, width }) => `${src} ${width}w`)
-    .join(', ');
+  const optimizedVariants = await transform(image, breakpoints, Number(width) || undefined, Number(height) || undefined, format);
+  const srcset = optimizedVariants.map(({ src, width }) => `${src} ${width}w`).join(', ');
+
+  const fallbackWidth = typeof width === 'number' ? width : undefined;
+  const fallbackSrc = fallbackWidth
+    ? (optimizedVariants.find((v) => v.width >= fallbackWidth) ?? optimizedVariants.at(-1))?.src
+    : optimizedVariants.at(-1)?.src;
 
   return {
-    src: typeof image === 'string' ? image : image.src,
+    src: fallbackSrc ?? (typeof image === 'string' ? image : image.src),
     attributes: {
       width: width,
       height: height,

@@ -19,6 +19,7 @@
 - [Blog](https://solutions.futurion.es/blog/): Articles on healthcare AI compliance, GDPR, automation, and data privacy
 - [Blog (ES)](https://solutions.futurion.es/es/blog/): Spanish-language blog
 - [Contact](https://solutions.futurion.es/contact/): Contact form — solutions@futurion.es
+- [Contacto (ES)](https://solutions.futurion.es/es/contacto/): Formulario de contacto — solutions@futurion.es
 
 ## Blog articles (English)
 

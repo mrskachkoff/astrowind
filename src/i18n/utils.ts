@@ -88,3 +88,17 @@ export async function getAlternateLanguageUrl(currentUrl: URL, targetLang: Local
   // Unknown path (likely a blog post without a translation) — fall back to blog index
   return targetLang === 'es' ? '/es/blog/' : '/blog/';
 }
+
+/**
+ * Returns true when the current URL has a real paired translation:
+ * - Always true for known static pages (they all have EN + ES slugs).
+ * - True for blog posts only when a translationOf link exists in the map.
+ * Use this to gate hreflang tags so orphaned posts emit no alternates.
+ */
+export async function hasBlogTranslation(currentUrl: URL): Promise<boolean> {
+  const pathname = currentUrl.pathname.replace(/\/$/, '') || '/';
+  const canonicalPath = getCanonicalPath(pathname);
+  if (knownStaticPages.has(canonicalPath)) return true;
+  const blogMap = await getBlogTranslationMap();
+  return pathname in blogMap;
+}

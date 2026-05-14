@@ -9,7 +9,7 @@ import type { MetaData } from '~/types';
 import { getCanonical } from '~/utils/permalinks';
 
 import { adaptOpenGraphImages } from '~/utils/images';
-import { getLangFromUrl, getAlternateLanguageUrl } from '~/i18n/utils';
+import { getLangFromUrl, getAlternateLanguageUrl, hasBlogTranslation } from '~/i18n/utils';
 
 export interface Props extends MetaData {
   dontUseTitleTemplate?: boolean;
@@ -68,7 +68,8 @@ const seoProps: AstroSeoProps = merge(
   }
 );
 
-// Compute hreflang alternate URLs
+// Only emit hreflang when a real paired translation exists
+const hasTranslation = await hasBlogTranslation(Astro.url);
 const enUrl = await getAlternateLanguageUrl(Astro.url, 'en');
 const esUrl = await getAlternateLanguageUrl(Astro.url, 'es');
 const siteBase = SITE?.site || '';
@@ -78,6 +79,6 @@ const esFullUrl = siteBase + withTrailingSlash(esUrl);
 ---
 
 <AstroSeo {...{ ...seoProps, openGraph: await adaptOpenGraphImages(seoProps?.openGraph, Astro.site) }} />
-<link rel="alternate" hreflang="en" href={enFullUrl} />
-<link rel="alternate" hreflang="es" href={esFullUrl} />
-<link rel="alternate" hreflang="x-default" href={enFullUrl} />
+{hasTranslation && <link rel="alternate" hreflang="en" href={enFullUrl} />}
+{hasTranslation && <link rel="alternate" hreflang="es" href={esFullUrl} />}
+{hasTranslation && <link rel="alternate" hreflang="x-default" href={enFullUrl} />}

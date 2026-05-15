@@ -10,6 +10,31 @@ const staticRedirects = [
   ['/es/auditoria-ia-gratuita', '/es/hoja-de-ruta-de-automatizacion/'],
 ];
 
+// Trailing-slash enforcement for all indexable static pages.
+// Amplify may serve both /about and /about/ without redirect; these rules ensure
+// the canonical (trailing-slash) URL is always the one Google lands on.
+const trailingSlashPages = [
+  '/about',
+  '/services',
+  '/pricing',
+  '/contact',
+  '/automation-roadmap',
+  '/medcore-private-ai',
+  '/privacy',
+  '/terms',
+  '/blog',
+  '/es',
+  '/es/nosotros',
+  '/es/servicios',
+  '/es/precios',
+  '/es/contacto',
+  '/es/hoja-de-ruta-de-automatizacion',
+  '/es/medcore-ia-privada',
+  '/es/privacidad',
+  '/es/terminos',
+  '/es/blog',
+];
+
 const legacySpanishTagRedirects = [
   ['agentes-ia', '/es/tag/agentes-ia/'],
   ['sanidad', '/es/tag/sanidad/'],
@@ -40,8 +65,27 @@ function addSlashVariants(rules, source, target) {
 }
 
 async function buildRules() {
-  const files = (await readdir(postsDir)).filter((file) => /^es-.+\.(md|mdx)$/i.test(file)).sort();
+  const allFiles = (await readdir(postsDir)).filter((file) => /\.(md|mdx)$/i.test(file)).sort();
+  const esFiles = allFiles.filter((file) => /^es-.+\.(md|mdx)$/i.test(file));
+  const enFiles = allFiles.filter((file) => !/^es-/i.test(file));
   const rules = [];
+
+  // Trailing-slash enforcement for static pages
+  for (const page of trailingSlashPages) {
+    addRule(rules, page, `${page}/`);
+  }
+
+  // Trailing-slash enforcement for EN blog post canonical URLs
+  for (const file of enFiles) {
+    const slug = stripExt(file);
+    addRule(rules, `/${slug}`, `/${slug}/`);
+  }
+
+  // Trailing-slash enforcement for ES blog post canonical URLs
+  for (const file of esFiles) {
+    const slug = stripExt(file);
+    addRule(rules, `/es/${slug}`, `/es/${slug}/`);
+  }
 
   for (const [source, target] of staticRedirects) {
     addSlashVariants(rules, source, target);
@@ -51,7 +95,7 @@ async function buildRules() {
     addSlashVariants(rules, `/tag/${tagSlug}`, target);
   }
 
-  for (const file of files) {
+  for (const file of esFiles) {
     const slug = stripExt(file);
     const unprefixedSlug = slug.replace(/^es-/, '');
     const target = `/es/${slug}/`;

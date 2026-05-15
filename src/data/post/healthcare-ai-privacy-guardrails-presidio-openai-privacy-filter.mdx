@@ -32,6 +32,9 @@ metadata:
     cardType: summary_large_image
 ---
 
+import { Image } from 'astro:assets';
+import ovfPresidioEn from '../../assets/images/OVF-Presidio_en.png';
+
 [Healthcare automation](/healthcare-automation-architecture/) does not fail privacy only when someone “shares the wrong file.” It fails privacy every time [patient data](/why-healthcare-needs-on-premise-ai/) moves into systems that do not need it: analytics exports, vendor queues, AI prompts, support tickets, logs, and reporting pipelines.
 
 A guardrail is the checkpoint that asks a blunt question before the data moves: **does the next system really need to see this?**
@@ -117,7 +120,9 @@ This table is a practical screening aid for the three pipeline examples above. I
 
 This is a feature map from the local OpenAI Privacy Filter and Microsoft Presidio.
 
-![Full Presidio vs OPF feature comparison](../../assets/images/OVF-Presidio_en.png)
+<a href={ovfPresidioEn.src} target="_blank" rel="noopener noreferrer">
+  <Image src={ovfPresidioEn} width={1200} alt="Full Presidio vs OPF feature comparison" />
+</a>
 
 * [Spanish PII & De-Identification](https://huggingface.co/collections/OpenMed/spanish-pii-and-de-identification)
 

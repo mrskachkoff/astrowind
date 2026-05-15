@@ -33,6 +33,9 @@ metadata:
     cardType: summary_large_image
 ---
 
+import { Image } from 'astro:assets';
+import ovfPresidioEs from '../../assets/images/OVF-Presidio_es.png';
+
 [La automatización sanitaria](/es/es-automatizacion-responsable/) no falla en materia de privacidad solo cuando alguien “comparte el archivo equivocado”. Falla en materia de privacidad cada vez que los [datos de pacientes](/es/es-por-que-sanidad-necesita-ia-local/) pasan a sistemas que no los necesitan: exportaciones analíticas, colas de proveedores, prompts de IA, incidencias de soporte, registros y canalizaciones de informes.
 
 Una barrera de control es el punto de comprobación que plantea una pregunta directa antes de que los datos se muevan: **¿realmente necesita ver esto el siguiente sistema?**
@@ -118,7 +121,9 @@ Esta tabla es una ayuda práctica de cribado para los tres ejemplos de canalizac
 
 Este es un mapa de características del OpenAI Privacy Filter local y de Microsoft Presidio.
 
-![Tabla de comparación de características entre Presidio y OpenAI Privacy Filter](../../assets/images/OVF-Presidio_es.png)
+<a href={ovfPresidioEs.src} target="_blank" rel="noopener noreferrer">
+  <Image src={ovfPresidioEs} width={1200} alt="Tabla de comparación de características entre Presidio y OpenAI Privacy Filter" />
+</a>
 
 * [Spanish PII & De-Identification](https://huggingface.co/collections/OpenMed/spanish-pii-and-de-identification)
 

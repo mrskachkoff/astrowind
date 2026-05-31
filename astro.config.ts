@@ -320,6 +320,21 @@ export default defineConfig({
     astrowind({
       config: './src/config.yaml',
     }),
+
+    // Dev-only: AstroWind sets trailingSlash:'always', which makes Astro's dev
+    // server 404 the `/_image` optimizer endpoint (no trailing slash) so images
+    // don't render in `npm run dev`. Relax it to 'ignore' in dev only; production
+    // keeps 'always' for canonical trailing-slash URLs.
+    {
+      name: 'dev-image-endpoint-trailingslash-fix',
+      hooks: {
+        'astro:config:setup': ({ command, updateConfig }) => {
+          if (command === 'dev') {
+            updateConfig({ trailingSlash: 'ignore' });
+          }
+        },
+      },
+    },
   ],
 
   image: {

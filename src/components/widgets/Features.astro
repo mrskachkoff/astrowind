@@ -26,10 +26,12 @@ const {
     items={items}
     columns={columns}
     defaultIcon={defaultIcon}
+    cardsStyle={true}
     classes={{
       container: '',
-      title: 'md:text-[1.3rem]',
-      icon: 'text-white bg-primary rounded-full w-10 h-10 p-2 md:w-12 md:h-12 md:p-3 mr-4 rtl:ml-4 rtl:mr-0',
+      title: 'md:text-[1.3rem] font-heading font-bold dark:text-white',
+      icon: 'text-white rounded-chip w-10 h-10 p-2 md:w-12 md:h-12 md:p-3 mr-4 rtl:ml-4 rtl:mr-0 flex-shrink-0'
+            + ' bg-primary',
       ...((classes?.items as Record<string, never>) ?? {}),
     }}
   />

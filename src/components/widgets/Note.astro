@@ -14,10 +14,21 @@ const {
 } = Astro.props;
 ---
 
-<section class="bg-blue-50 dark:bg-slate-800 not-prose">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 text-md text-center font-medium">
-    <Icon name={icon} class="w-5 h-5 inline-block align-text-bottom font-bold" />
-    <span class="font-bold" set:html={title} />
-    <Fragment set:html={description} />
+<!-- Aurora accent note band — lilac wash with blue accent icon -->
+<section
+  class="not-prose"
+  style="background-image: var(--grad-lilac); border-top: 1px solid var(--fds-line, #e6e8f2); border-bottom: 1px solid var(--fds-line, #e6e8f2);"
+>
+  <div
+    class="max-w-6xl mx-auto px-4 sm:px-6 py-5 text-sm text-center font-medium flex items-center justify-center gap-3 flex-wrap"
+  >
+    <span
+      class="flex-shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-chip"
+      style="background: linear-gradient(150deg, #eef1ff, #e7e3fb); color: var(--fds-acc-blue, #2d7bf2);"
+    >
+      <Icon name={icon} class="w-5 h-5" />
+    </span>
+    <span class="font-heading font-bold text-heading dark:text-white" set:html={title} />
+    <span class="text-muted" set:html={description} />
   </div>
 </section>

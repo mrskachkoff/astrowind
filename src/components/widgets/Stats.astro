@@ -1,7 +1,5 @@
 ---
 import type { Stats as Props } from '~/types';
-import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
-import Headline from '~/components/ui/Headline.astro';
 import { Icon } from 'astro-icon/components';
 
 const {
@@ -9,38 +7,68 @@ const {
   subtitle = await Astro.slots.render('subtitle'),
   tagline,
   stats = [],
-
   id,
-  isDark = false,
-  classes = {},
-  bg = await Astro.slots.render('bg'),
 } = Astro.props;
 ---
 
-<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
-  <Headline title={title} subtitle={subtitle} tagline={tagline} />
-  <div class="flex flex-wrap justify-center -m-4 text-center">
-    {
-      stats &&
-        stats.map(({ amount, title, icon }) => (
-          <div class="p-4 md:w-1/4 sm:w-1/2 w-full min-w-[220px] text-center md:border-r md:last:border-none dark:md:border-slate-500 intersect-once motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade intersect-quarter">
-            {icon && (
-              <div class="flex items-center justify-center mx-auto mb-4 text-primary">
-                <Icon name={icon} class="w-10 h-10" />
-              </div>
-            )}
-            {amount && (
-              <div class="font-heading text-primary text-2xl font-bold dark:text-white sm:text-3xl lg:text-4xl xl:text-5xl whitespace-nowrap">
-                {amount}
-              </div>
-            )}
-            {title && (
-              <div class="text-sm font-medium uppercase tracking-widest text-gray-800 dark:text-slate-400 lg:text-base">
-                {title}
-              </div>
-            )}
-          </div>
-        ))
-    }
+<!-- Aurora "numbers band" — dark gradient, oversized white Poppins stat figures -->
+<section
+  class="relative overflow-hidden not-prose scroll-mt-[72px] intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+  style="background-image: var(--grad-numbers); padding: 70px 0 76px;"
+  {...id ? { id } : {}}
+>
+  <!-- dot-texture overlay -->
+  <div
+    class="absolute inset-0 pointer-events-none opacity-30"
+    style="background-image: var(--dot-texture); background-size: 30px 30px;"
+    aria-hidden="true"
+  ></div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-4 md:px-6 text-center">
+    {(title || subtitle || tagline) && (
+      <div class="mb-10">
+        {tagline && (
+          <p class="font-heading font-bold uppercase tracking-[0.12em] text-[11.5px] mb-3 text-white/70">
+            {tagline}
+          </p>
+        )}
+        {title && (
+          <h2
+            class="font-heading font-bold text-white text-2xl md:text-3xl leading-tight max-w-2xl mx-auto"
+            style="letter-spacing: var(--fds-track-tight, -0.02em);"
+            set:html={title}
+          />
+        )}
+        {subtitle && <p class="mt-3 text-white/70 text-lg" set:html={subtitle} />}
+      </div>
+    )}
+
+    <div class="flex flex-wrap justify-center gap-x-16 gap-y-10">
+      {
+        stats &&
+          stats.map(({ amount, title: label, icon }) => (
+            <div class="text-center min-w-[180px]">
+              {icon && (
+                <div class="flex items-center justify-center mx-auto mb-3 text-white/60">
+                  <Icon name={icon} class="w-8 h-8" />
+                </div>
+              )}
+              {amount && (
+                <div
+                  class="font-heading font-extrabold text-white leading-none whitespace-nowrap"
+                  style="font-size: clamp(3.25rem, 2rem + 3.4vw, 4.75rem); letter-spacing: -0.03em;"
+                >
+                  {amount}
+                </div>
+              )}
+              {label && (
+                <div class="text-white/80 font-semibold text-base mt-3 leading-snug max-w-[14rem] mx-auto">
+                  {label}
+                </div>
+              )}
+            </div>
+          ))
+      }
+    </div>
   </div>
-</WidgetWrapper>
+</section>

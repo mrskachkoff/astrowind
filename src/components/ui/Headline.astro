@@ -20,11 +20,18 @@ const {
   (title || subtitle || tagline) && (
     <div class={twMerge('mb-8 md:mx-auto md:mb-12 text-center', containerClass)}>
       {tagline && (
-        <p class="text-base text-secondary dark:text-blue-200 font-bold tracking-wide uppercase" set:html={tagline} />
+        <p
+          class="font-heading font-bold text-accent dark:text-accent uppercase tracking-[0.12em] text-[11.5px] mb-3"
+          set:html={tagline}
+        />
       )}
       {title && (
         <h2
-          class={twMerge('font-bold leading-tighter tracking-tighter font-heading text-heading text-3xl', titleClass)}
+          class={twMerge(
+            'font-bold leading-tighter font-heading text-heading dark:text-white',
+            titleClass
+          )}
+          style="letter-spacing: var(--fds-track-tight, -0.02em);"
           set:html={title}
         />
       )}

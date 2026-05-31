@@ -9,9 +9,10 @@ import { getPermalink } from '~/utils/permalinks';
 
 export interface Props {
   post: Post;
+  accent?: string;
 }
 
-const { post } = Astro.props;
+const { post, accent = 'var(--fds-acc-blue, #2d7bf2)' } = Astro.props;
 const image = await findImage(post.image);
 
 const postPermalink = post.lang === 'es' ? `es/${post.permalink}` : post.permalink;
@@ -19,16 +20,17 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(postPermalink, 'post') : '
 ---
 
 <article
-  class="mb-6 transition intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+  class="aurora-card mb-6 flex flex-col overflow-hidden transition intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+  style={`--card-accent: ${accent}`}
 >
-  <div class="relative md:h-64 bg-gray-400 dark:bg-slate-700 rounded shadow-lg mb-6">
-    {
-      image &&
-        (link ? (
-          <a href={link}>
+  {
+    image && (
+      <div class="relative h-52 overflow-hidden">
+        {link ? (
+          <a href={link} class="block w-full h-full">
             <Image
               src={image}
-              class="w-full md:h-full rounded shadow-lg bg-gray-400 dark:bg-slate-700"
+              class="w-full h-full object-cover"
               widths={[400, 900]}
               width={400}
               sizes="(max-width: 900px) 400px, 900px"
@@ -42,7 +44,7 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(postPermalink, 'post') : '
         ) : (
           <Image
             src={image}
-            class="w-full md:h-full rounded shadow-lg bg-gray-400 dark:bg-slate-700"
+            class="w-full h-full object-cover"
             widths={[400, 900]}
             width={400}
             sizes="(max-width: 900px) 400px, 900px"
@@ -52,21 +54,50 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(postPermalink, 'post') : '
             loading="lazy"
             decoding="async"
           />
-        ))
-    }
-  </div>
+        )}
+      </div>
+    )
+  }
 
-  <h3 class="text-xl sm:text-2xl font-bold leading-tight mb-2 font-heading dark:text-slate-300">
-    {
-      link ? (
-        <a class="inline-block hover:text-primary dark:hover:text-blue-700 transition ease-in duration-200" href={link}>
-          {post.title}
+  <div class="flex flex-col flex-1 p-5">
+    <!-- Accent eyebrow -->
+    <div
+      class="font-heading font-bold uppercase tracking-[0.12em] text-[11px] mb-3"
+      style={`color: ${accent}`}
+    >
+      {post.category || 'Article'}
+    </div>
+
+    <h3 class="text-xl sm:text-2xl font-bold leading-tight mb-2 font-heading dark:text-white">
+      {
+        link ? (
+          <a
+            class="inline-block hover:text-primary transition ease-in duration-200"
+            href={link}
+          >
+            {post.title}
+          </a>
+        ) : (
+          post.title
+        )
+      }
+    </h3>
+
+    <p class="text-muted text-base flex-1">{post.excerpt}</p>
+
+    {link && (
+      <div class="mt-4">
+        <a
+          href={link}
+          class="inline-flex items-center gap-2 font-heading font-semibold text-sm"
+          style={`color: ${accent}`}
+        >
+          Read more
+          <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
         </a>
-      ) : (
-        post.title
-      )
-    }
-  </h3>
-
-  <p class="text-muted dark:text-slate-400 text-lg">{post.excerpt}</p>
+      </div>
+    )}
+  </div>
 </article>

@@ -54,15 +54,16 @@ const homeHref = lang === 'es' ? '/es/' : getHomePermalink();
 <header
   class:list={[
     { sticky: isSticky, relative: !isSticky, dark: isDark },
-    'top-0 z-40 flex-none mx-auto w-full border-b border-gray-50/0 transition-[opacity] ease-in-out',
+    'top-0 z-40 flex-none mx-auto w-full border-b border-white/10 transition-[opacity] ease-in-out',
   ]}
+  style="background-image: var(--grad-chrome);"
   {...isSticky ? { 'data-aw-sticky-header': true } : {}}
   {...id ? { id } : {}}
 >
-  <div class="absolute inset-0"></div>
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true"></div>
   <div
     class:list={[
-      'relative text-default py-3 px-3 md:px-6 mx-auto w-full',
+      'relative text-white py-3 px-3 md:px-6 mx-auto w-full',
       {
         'md:flex md:justify-between': position !== 'center',
       },
@@ -84,7 +85,7 @@ const homeHref = lang === 'es' ? '/es/' : getHomePermalink();
       </div>
     </div>
     <nav
-      class="items-center w-full md:w-auto hidden md:flex md:mx-5 text-default overflow-y-auto overflow-x-hidden md:overflow-y-visible md:overflow-x-auto md:justify-self-center"
+      class="items-center w-full md:w-auto hidden md:flex md:mx-5 text-white/90 overflow-y-auto overflow-x-hidden md:overflow-y-visible md:overflow-x-auto md:justify-self-center"
       aria-label="Main navigation"
     >
       <ul
@@ -97,18 +98,19 @@ const homeHref = lang === 'es' ? '/es/' : getHomePermalink();
                 <>
                   <button
                     type="button"
-                    class="hover:text-link dark:hover:text-white px-4 py-3 flex items-center whitespace-nowrap"
+                    class="hover:text-white text-white/85 px-4 py-3 flex items-center whitespace-nowrap transition-colors duration-150"
                   >
                     {text}{' '}
-                    <Icon name="tabler:chevron-down" class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline" />
+                    <Icon name="tabler:chevron-down" class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline opacity-70" />
                   </button>
-                  <ul class="dropdown-menu md:backdrop-blur-md dark:md:bg-dark rounded md:absolute pl-4 md:pl-0 md:hidden font-medium md:bg-white/90 md:min-w-[200px] drop-shadow-xl">
+                  <ul class="dropdown-menu md:backdrop-blur-md rounded-card md:absolute pl-4 md:pl-0 md:hidden font-medium md:min-w-[200px] drop-shadow-xl"
+                      style="background-image: var(--grad-chrome); border: 1px solid rgba(255,255,255,.10);">
                     {links.map(({ text: text2, href: href2 }) => (
                       <li>
                         <a
                           class:list={[
-                            'first:rounded-t last:rounded-b md:hover:bg-gray-100 hover:text-link dark:hover:text-white dark:hover:bg-gray-700 py-2 px-5 block whitespace-no-wrap',
-                            { 'aw-link-active': href2 === currentPath },
+                            'first:rounded-t last:rounded-b hover:bg-white/10 text-white/85 hover:text-white py-2 px-5 block whitespace-no-wrap transition-colors duration-150',
+                            { 'aw-link-active text-white': href2 === currentPath },
                           ]}
                           href={href2}
                         >
@@ -121,8 +123,8 @@ const homeHref = lang === 'es' ? '/es/' : getHomePermalink();
               ) : (
                 <a
                   class:list={[
-                    'hover:text-link dark:hover:text-white px-4 py-3 flex items-center whitespace-nowrap',
-                    { 'aw-link-active': href === currentPath },
+                    'hover:text-white text-white/85 px-4 py-3 flex items-center whitespace-nowrap transition-colors duration-150',
+                    { 'aw-link-active text-white': href === currentPath },
                   ]}
                   href={href}
                 >
@@ -142,11 +144,11 @@ const homeHref = lang === 'es' ? '/es/' : getHomePermalink();
     >
       <div class="items-center flex justify-between w-full md:w-auto">
         <div class="flex items-center gap-1">
-          {showToggleTheme && <ToggleTheme iconClass="w-6 h-6 md:w-5 md:h-5 md:inline-block" />}
+          {showToggleTheme && <ToggleTheme iconClass="w-6 h-6 md:w-5 md:h-5 md:inline-block text-white/80 hover:text-white" />}
           {
             showRssFeed && (
               <a
-                class="text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center"
+                class="text-white/70 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/30 rounded-lg text-sm p-2.5 inline-flex items-center transition-colors duration-150"
                 aria-label="RSS Feed"
                 href={getAsset(lang === 'es' ? '/es/rss.xml' : '/rss.xml')}
               >

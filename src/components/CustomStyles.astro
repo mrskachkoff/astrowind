@@ -1,46 +1,183 @@
 ---
 import '@fontsource-variable/inter';
+import '@fontsource/poppins/500.css';
+import '@fontsource/poppins/600.css';
+import '@fontsource/poppins/700.css';
+import '@fontsource/poppins/800.css';
 ---
 
 <style is:inline>
   :root {
-    --aw-font-sans: 'Inter Variable';
-    --aw-font-serif: 'Inter Variable';
-    --aw-font-heading: 'Inter Variable';
+    --aw-font-sans:    'Inter Variable';
+    --aw-font-serif:   'Inter Variable';
+    --aw-font-heading: 'Poppins';
 
-    --aw-color-primary: rgb(37 99 235);
-    --aw-color-secondary: rgb(16 185 129);
-    --aw-color-accent: rgb(59 130 246);
+    /* === Aurora brand palette mapped to AstroWind tokens === */
+    --aw-color-primary:      #f5325b;   /* coral CTA                  */
+    --aw-color-secondary:    #0065fe;   /* royal blue                 */
+    --aw-color-accent:       #2d7bf2;   /* acc-blue                   */
 
-    --aw-color-text-heading: rgb(0 0 0);
-    --aw-color-text-default: rgb(16 16 16);
-    --aw-color-text-muted: rgb(16 16 16 / 66%);
-    --aw-color-bg-page: rgb(255 255 255);
+    --aw-color-text-heading: #0e1b46;
+    --aw-color-text-default: #1b2347;
+    --aw-color-text-muted:   #5a6286;
+    --aw-color-bg-page:      #ffffff;
+    --aw-color-bg-page-dark: #0a1130;
 
-    --aw-color-bg-page-dark: rgb(3 6 32);
+    ::selection { background-color: #eceaf7; }
 
-    ::selection {
-      background-color: lavender;
-    }
+    /* ============================================================
+       AURORA DESIGN TOKENS  (v2 · "Aurora")
+       ============================================================ */
+
+    /* Brand colors */
+    --fds-navy:        #0a1130;
+    --fds-navy-2:      #11173e;
+    --fds-navy-3:      #161d54;
+    --fds-ink:         #1b2347;
+    --fds-heading:     #0e1b46;
+    --fds-muted:       #5a6286;
+
+    /* Hero indigo→violet stops */
+    --fds-hero-1: #272163;
+    --fds-hero-2: #3a2a78;
+    --fds-hero-3: #4b2b86;
+
+    /* Coral CTA stops */
+    --fds-coral-1:     #ff2f70;
+    --fds-coral-2:     #ff3b3b;
+    --fds-coral-3:     #ff6a3d;
+    --fds-coral-solid: #f5325b;
+
+    /* Purple "Power" band stops */
+    --fds-power-1: #221049;
+    --fds-power-2: #5a1c63;
+    --fds-power-3: #7a2350;
+
+    /* Category accents — rotate on cards */
+    --fds-acc-blue:   #2d7bf2;
+    --fds-acc-pink:   #ff2f70;
+    --fds-acc-purple: #a459ff;
+    --fds-acc-lime:   #83e31e;
+    --fds-acc-royal:  #0065fe;
+
+    /* Light surfaces */
+    --fds-lav:   #eceaf7;
+    --fds-line:  #e6e8f2;
+    --fds-paper: #ffffff;
+
+    /* ---- Gradient tokens ---- */
+    --grad-page:    linear-gradient(180deg, #ffffff 0%, #f8f7fe 100%);
+    --grad-section: linear-gradient(180deg, #ffffff 0%, #f7f6fd 100%);
+    --grad-lilac:
+      radial-gradient(60% 85% at 100% 8%,  #f3efff, transparent 55%),
+      radial-gradient(55% 80% at 0% 100%,  #eaf0ff, transparent 55%),
+      linear-gradient(180deg, #ffffff 0%, #f8f7fe 100%);
+
+    --grad-chrome:  linear-gradient(100deg, #0a1130 0%, #10173d 55%, #161d54 100%);
+    --grad-util:    linear-gradient(90deg,  #0a1130 0%, #11173e 100%);
+
+    --grad-hero:
+      radial-gradient(120% 130% at 85% 10%, rgba(120,70,200,.5), transparent 55%),
+      linear-gradient(115deg, var(--fds-hero-1), var(--fds-hero-2) 55%, var(--fds-hero-3));
+
+    --grad-numbers:
+      radial-gradient(75% 130% at 6%  95%,  #7d3ff0 0%, transparent 55%),
+      radial-gradient(65% 120% at 100% 55%, #2a5bd7 0%, transparent 58%),
+      radial-gradient(45% 80%  at 90% 0%,   #3168e0 0%, transparent 55%),
+      linear-gradient(120deg, #17124c 0%, #0c1340 55%, #0a1338 100%);
+
+    --grad-solutions:
+      radial-gradient(110% 120% at 80% 0%, rgba(90,60,170,.45), transparent 55%),
+      linear-gradient(160deg, var(--fds-navy), #141a52);
+
+    --grad-power:
+      radial-gradient(100% 120% at 50% -10%, rgba(180,60,140,.5), transparent 60%),
+      linear-gradient(160deg, var(--fds-power-1), var(--fds-power-2) 60%, var(--fds-power-3));
+
+    /* footer uses bare hex stop — wrapped so background-image works */
+    --grad-footer:
+      radial-gradient(113% 208% at 0%  100%, rgba(0,9,222,.16),      transparent 50%),
+      radial-gradient(78%  147% at 7%  35%,  #142266,                 transparent 50%),
+      radial-gradient(89%  130% at 78% 82%,  rgba(164,89,255,.28),    transparent 50%),
+      linear-gradient(0deg, #0a1130, #0a1130);
+
+    --grad-card-light: linear-gradient(160deg, #ffffff 0%, #f5f4fd 100%);
+    --grad-card-dark:
+      linear-gradient(148deg, rgba(255,255,255,.12) 0%, rgba(255,255,255,0) 58%),
+      linear-gradient(160deg, #101740 0%, #0a0f2e 100%);
+
+    --grad-coral:  linear-gradient(90deg, #ff2f70 0%, #ff3b3b 60%, #ff6a3d 100%);
+    --grad-ribbon: linear-gradient(90deg, #ff3b5c, #ff6a3d);
+
+    --aurora: linear-gradient(122deg,
+      transparent            24%,
+      rgba(0,190,255,.45)    40%,
+      rgba(40,210,255,.85)   50%,
+      rgba(90,130,255,.80)   60%,
+      rgba(165,70,240,.78)   71%,
+      rgba(130,35,170,.40)   84%,
+      transparent            95%);
+
+    --dot-texture: radial-gradient(rgba(255,255,255,.10) 1px, transparent 1px);
+
+    /* ---- Typography tokens ---- */
+    --fds-font-head: 'Poppins', system-ui, sans-serif;
+    --fds-font-body: 'Inter Variable', system-ui, sans-serif;
+    --fds-w-medium:   500;
+    --fds-w-semibold: 600;
+    --fds-w-bold:     700;
+    --fds-w-extra:    800;
+    --fds-track-tight:   -0.02em;
+    --fds-track-eyebrow:  0.12em;
+
+    /* ---- Radius ---- */
+    --fds-r-pill:   9999px;
+    --fds-r-card:   16px;
+    --fds-r-figure: 14px;
+    --fds-r-hero:   22px;
+    --fds-r-chip:   10px;
+
+    /* ---- Shadows ---- */
+    --fds-shadow-card:   0 26px 50px -22px rgba(13,22,64,.40);
+    --fds-shadow-figure: 0 40px 80px -30px rgba(0,0,0,.60);
+    --fds-shadow-coral:  0 10px 24px -8px  rgba(245,50,91,.60);
+    --fds-shadow-pop:    0 50px 90px -34px rgba(0,0,0,.70);
+
+    /* ---- Motion ---- */
+    --fds-ease: cubic-bezier(.4, 0, .2, 1);
+    --fds-dur:  .18s;
+    --fds-lift: translateY(-5px);
   }
 
   .dark {
-    --aw-font-sans: 'Inter Variable';
-    --aw-font-serif: 'Inter Variable';
-    --aw-font-heading: 'Inter Variable';
+    --aw-font-sans:    'Inter Variable';
+    --aw-font-serif:   'Inter Variable';
+    --aw-font-heading: 'Poppins';
 
-    --aw-color-primary: rgb(59 130 246);
-    --aw-color-secondary: rgb(52 211 153);
-    --aw-color-accent: rgb(96 165 250);
+    --aw-color-primary:      #f5325b;
+    --aw-color-secondary:    #0065fe;
+    --aw-color-accent:       #5a82ff;
 
     --aw-color-text-heading: rgb(247, 248, 248);
-    --aw-color-text-default: rgb(229 236 246);
-    --aw-color-text-muted: rgb(229 236 246 / 66%);
-    --aw-color-bg-page: rgb(3 6 32);
+    --aw-color-text-default: rgb(229, 236, 246);
+    --aw-color-text-muted:   rgba(229, 236, 246, 0.66);
+    --aw-color-bg-page:      #0a1130;
 
     ::selection {
-      background-color: black;
-      color: snow;
+      background-color: #272163;
+      color: #ffffff;
     }
+
+    /* Dark-mode gradient overrides */
+    --fds-line:     rgba(255,255,255,.10);
+    --grad-page:    linear-gradient(180deg, #0a1130 0%, #0c1040 100%);
+    --grad-section: linear-gradient(180deg, #0e1438 0%, #0a1130 100%);
+    --grad-lilac:
+      radial-gradient(60% 85% at 100% 8%,  rgba(90,60,170,.25),  transparent 55%),
+      radial-gradient(55% 80% at 0%  100%, rgba(60,80,200,.20),  transparent 55%),
+      linear-gradient(180deg, #0a1130 0%, #0c1040 100%);
+    --grad-card-light:
+      linear-gradient(148deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 58%),
+      linear-gradient(160deg, #101740 0%, #0a0f2e 100%);
   }
 </style>

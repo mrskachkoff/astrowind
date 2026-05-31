@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge';
 import Button from './Button.astro';
 import { Icon } from 'astro-icon/components';
 
-const { items = [], columns, defaultIcon = '', classes = {} } = Astro.props;
+const { items = [], columns, defaultIcon = '', classes = {}, cardsStyle = false } = Astro.props;
 
 const {
   container: containerClass = '',
@@ -14,6 +14,15 @@ const {
   icon: defaultIconClass = 'text-primary',
   action: actionClass = '',
 } = classes;
+
+// Aurora accent rotation — 5 brand colours cycling across cards
+const ACCENTS = [
+  'var(--fds-acc-blue,   #2d7bf2)',
+  'var(--fds-acc-pink,   #ff2f70)',
+  'var(--fds-acc-purple, #a459ff)',
+  'var(--fds-acc-lime,   #83e31e)',
+  'var(--fds-acc-royal,  #0065fe)',
+];
 ---
 
 {
@@ -32,10 +41,16 @@ const {
         containerClass
       )}
     >
-      {items.map(({ title, description, icon, callToAction, classes: itemClasses = {} }) => (
-        <div class="intersect-once motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <div class={twMerge('flex flex-row max-w-md', panelClass, itemClasses?.panel)}>
-            <div class="flex justify-center">
+      {items.map(({ title, description, icon, callToAction, classes: itemClasses = {} }, i) => (
+        <div
+          class={twMerge(
+            'intersect-once motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
+            cardsStyle ? 'aurora-card p-6' : ''
+          )}
+          style={cardsStyle ? `--card-accent: ${ACCENTS[i % ACCENTS.length]}` : undefined}
+        >
+          <div class={twMerge('flex flex-row', cardsStyle ? 'w-full' : 'max-w-md', panelClass, itemClasses?.panel)}>
+            <div class="flex justify-center flex-shrink-0">
               {(icon || defaultIcon) && (
                 <Icon
                   name={icon || defaultIcon}
@@ -43,7 +58,7 @@ const {
                 />
               )}
             </div>
-            <div class="mt-0.5">
+            <div class="mt-0.5 min-w-0">
               {title && <h3 class={twMerge('text-xl font-bold', titleClass, itemClasses?.title)}>{title}</h3>}
               {description && (
                 <p

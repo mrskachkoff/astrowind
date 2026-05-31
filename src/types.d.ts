@@ -200,6 +200,8 @@ export interface ItemGrid {
   columns?: number;
   defaultIcon?: string;
   classes?: Record<string, string>;
+  /** Enable Aurora accent-border card treatment — rotates accent colors per item */
+  cardsStyle?: boolean;
 }
 
 export interface Collapse {

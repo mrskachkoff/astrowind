@@ -4,16 +4,24 @@ import { Icon } from 'astro-icon/components';
 import { twMerge } from 'tailwind-merge';
 import Button from './Button.astro';
 
-const { items = [], columns, defaultIcon = '', classes = {} } = Astro.props;
+const { items = [], columns, defaultIcon = '', classes = {}, cardsStyle = false } = Astro.props;
 
 const {
   container: containerClass = '',
-  // container: containerClass = "sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
   panel: panelClass = '',
   title: titleClass = '',
   description: descriptionClass = '',
   icon: defaultIconClass = 'text-primary',
 } = classes;
+
+// Aurora accent rotation — 5 brand colours cycling across cards
+const ACCENTS = [
+  'var(--fds-acc-blue,   #2d7bf2)',
+  'var(--fds-acc-pink,   #ff2f70)',
+  'var(--fds-acc-purple, #a459ff)',
+  'var(--fds-acc-lime,   #83e31e)',
+  'var(--fds-acc-royal,  #0065fe)',
+];
 ---
 
 {
@@ -32,18 +40,20 @@ const {
         containerClass
       )}
     >
-      {items.map(({ title, description, icon, callToAction, classes: itemClasses = {} }) => (
+      {items.map(({ title, description, icon, callToAction, classes: itemClasses = {} }, i) => (
         <div
           class={twMerge(
             'relative flex flex-col intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
-            panelClass,
+            cardsStyle ? 'aurora-card p-6' : '',
+            !cardsStyle ? panelClass : '',
             itemClasses?.panel
           )}
+          style={cardsStyle ? `--card-accent: ${ACCENTS[i % ACCENTS.length]}` : undefined}
         >
           {(icon || defaultIcon) && (
             <Icon name={icon || defaultIcon} class={twMerge('mb-2 w-10 h-10', defaultIconClass, itemClasses?.icon)} />
           )}
-          <div class={twMerge('text-xl font-bold', titleClass, itemClasses?.title)}>{title}</div>
+          <div class={twMerge('text-xl font-bold font-heading', titleClass, itemClasses?.title)}>{title}</div>
           {description && (
             <p class={twMerge('text-muted mt-2', descriptionClass, itemClasses?.description)} set:html={description} />
           )}

@@ -26,11 +26,18 @@ const {
   >
     {
       items.map(({ title: itemTitle, description }) => (
-        <details class="group border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
-          <summary class="flex items-center justify-between gap-4 cursor-pointer select-none px-5 py-4 font-semibold text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors list-none">
+        <details
+          class="group overflow-hidden"
+          style="border: 1px solid var(--fds-line, #e6e8f2); border-radius: var(--fds-r-card, 16px); transition: box-shadow .2s var(--fds-ease);"
+        >
+          <summary
+            class="flex items-center justify-between gap-4 cursor-pointer select-none px-5 py-4 font-heading font-semibold text-heading dark:text-white transition-colors list-none"
+            style="background-image: var(--grad-card-light);"
+          >
             <span>{itemTitle}</span>
             <svg
-              class="w-5 h-5 flex-shrink-0 text-primary transition-transform duration-200 group-open:rotate-180"
+              class="w-5 h-5 flex-shrink-0 transition-transform duration-200 group-open:rotate-180"
+              style="color: var(--aw-color-primary);"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -40,7 +47,11 @@ const {
               <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
           </summary>
-          <div class="px-5 pb-5 pt-2 text-muted" set:html={description} />
+          <div
+            class="px-5 pb-5 pt-3 text-muted leading-relaxed"
+            style="background-image: var(--grad-section); border-top: 1px solid var(--fds-line, #e6e8f2);"
+            set:html={description}
+          />
         </details>
       ))
     }

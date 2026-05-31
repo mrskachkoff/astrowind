@@ -21,35 +21,119 @@
 }
 
 @layer components {
+  /* ---- Aurora pill buttons ---- */
   .btn {
-    @apply inline-flex items-center justify-center rounded-full border-gray-400 border bg-transparent font-medium text-center text-base text-page leading-snug transition py-3.5 px-6 md:px-8 ease-in duration-200 focus:ring-blue-500 focus:ring-offset-blue-200 focus:ring-2 focus:ring-offset-2 hover:bg-gray-100 hover:border-gray-600 dark:text-slate-300 dark:border-slate-500 dark:hover:bg-slate-800 dark:hover:border-slate-800 cursor-pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    font-family: var(--fds-font-head, 'Poppins', ui-sans-serif);
+    font-weight: var(--fds-w-semibold, 600);
+    font-size: 15px;
+    line-height: 1.2;
+    border-radius: var(--fds-r-pill, 9999px);
+    padding: 13px 26px;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      transform .15s var(--fds-ease, cubic-bezier(.4,0,.2,1)),
+      box-shadow .2s var(--fds-ease, cubic-bezier(.4,0,.2,1)),
+      background .2s,
+      color .2s,
+      border-color .2s;
+  }
+  .btn:focus-visible {
+    outline: 2px solid var(--aw-color-accent);
+    outline-offset: 2px;
   }
 
+  /* Coral gradient — primary CTA */
   .btn-primary {
-    @apply btn font-semibold bg-primary text-white border-primary hover:bg-secondary hover:border-secondary hover:text-white dark:text-white dark:bg-primary dark:border-primary dark:hover:border-secondary dark:hover:bg-secondary;
+    background-image: var(--grad-coral);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: var(--fds-shadow-coral, 0 10px 24px -8px rgba(245,50,91,.60));
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 30px -8px rgba(245,50,91,.70);
+    color: #fff;
   }
 
+  /* Ghost navy — secondary */
   .btn-secondary {
-    @apply btn;
+    background: transparent;
+    color: var(--aw-color-text-heading, #0e1b46);
+    border-color: #c7cbe0;
+  }
+  .btn-secondary:hover {
+    border-color: var(--aw-color-text-heading, #0e1b46);
+    transform: translateY(-1px);
+  }
+  .dark .btn-secondary {
+    color: #fff;
+    border-color: rgba(255,255,255,.4);
+  }
+  .dark .btn-secondary:hover {
+    background: rgba(255,255,255,.08);
+    border-color: rgba(255,255,255,.7);
   }
 
+  /* Text link — tertiary */
   .btn-tertiary {
-    @apply btn border-none shadow-none text-muted hover:text-gray-900 dark:text-gray-400 dark:hover:text-white;
+    background: transparent;
+    color: var(--aw-color-text-muted, #5a6286);
+    border-color: transparent;
+    box-shadow: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .btn-tertiary:hover {
+    color: var(--aw-color-text-heading, #0e1b46);
+  }
+  .dark .btn-tertiary {
+    color: rgba(229, 236, 246, 0.66);
+  }
+  .dark .btn-tertiary:hover {
+    color: #fff;
   }
 }
 
+/* ---- Aurora accent-border cards ---- */
+.aurora-card {
+  background-image: var(--grad-card-light);
+  border: 1.5px solid var(--card-accent, var(--fds-acc-blue, #2d7bf2));
+  border-radius: var(--fds-r-card, 16px);
+  box-shadow: var(--fds-shadow-card, 0 26px 50px -22px rgba(13,22,64,.40));
+  transition:
+    transform var(--fds-dur, .18s) var(--fds-ease, cubic-bezier(.4,0,.2,1)),
+    box-shadow .25s var(--fds-ease, cubic-bezier(.4,0,.2,1));
+}
+.aurora-card:hover {
+  transform: var(--fds-lift, translateY(-5px));
+  box-shadow: 0 26px 50px -22px var(--card-accent, rgba(13,22,64,.4));
+}
+.dark .aurora-card {
+  background-image: var(--grad-card-dark);
+  border-color: var(--card-accent, var(--fds-acc-blue, #2d7bf2));
+}
+
+/* ---- Scrolled header: keep chrome gradient (both modes) ---- */
 #header.scroll > div:first-child {
-  @apply bg-page md:bg-white/90 md:backdrop-blur-md;
-  box-shadow: 0 0.375rem 1.5rem 0 rgb(140 152 164 / 13%);
+  background-image: var(--grad-chrome);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 24px -8px rgba(10,17,48,.40);
 }
 .dark #header.scroll > div:first-child,
 #header.scroll.dark > div:first-child {
-  @apply bg-page md:bg-[#030621e6] border-b border-gray-500/20;
-  box-shadow: none;
+  background-image: var(--grad-chrome);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 24px -8px rgba(10,17,48,.60);
 }
-/* #header.scroll > div:last-child {
-  @apply py-3;
-} */
 
 #header.expanded nav {
   position: fixed;
@@ -86,7 +170,6 @@
 }
 
 /* To deprecated */
-
 .dd *:first-child {
   margin-top: 0;
 }

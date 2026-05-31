@@ -7,8 +7,17 @@ export interface Props {
 }
 
 const { posts } = Astro.props;
+
+// Aurora accent rotation across blog post cards
+const ACCENTS = [
+  'var(--fds-acc-blue,   #2d7bf2)',
+  'var(--fds-acc-pink,   #ff2f70)',
+  'var(--fds-acc-purple, #a459ff)',
+  'var(--fds-acc-lime,   #83e31e)',
+  'var(--fds-acc-royal,  #0065fe)',
+];
 ---
 
 <div class="grid gap-6 row-gap-5 md:grid-cols-2 lg:grid-cols-4 -mb-6">
-  {posts.map((post) => <Item post={post} />)}
+  {posts.map((post, i) => <Item post={post} accent={ACCENTS[i % ACCENTS.length]} />)}
 </div>

@@ -1,0 +1,593 @@
+---
+/**
+ * ComplianceAutomationMap.astro
+ * Faithful port of tmp/new-module.html.
+ * vw units → clamp() for responsiveness; original dark-navy design preserved.
+ * Logos injected via astro:assets where available; text badges kept otherwise.
+ */
+
+import { Image } from 'astro:assets';
+
+import imgTrustPrompt from '~/assets/images/trustprompt.png';
+import imgTrustCore   from '~/assets/images/trustcore.png';
+import imgTrustAuto   from '~/assets/images/trustauto.png';
+import imgRag         from '~/assets/images/rag.png';
+import imgOpenWebUI   from '~/assets/images/openwebui.png';
+import imgOpenEHR     from '~/assets/images/openehr_logo.png';
+import imgHapiFHIR    from '~/assets/images/hapi_fhir.png';
+import imgGemma       from '~/assets/images/gemma.png';
+import imgMistral     from '~/assets/images/mistral.png';
+import imgDeepSeek    from '~/assets/images/deepseek.png';
+import imgOnPrem      from '~/assets/images/on-prem.png';
+import imgCloud       from '~/assets/images/sovereign-cloud.png';
+
+const logoMap = {
+  trustprompt: imgTrustPrompt,
+  trustcore:   imgTrustCore,
+  trustauto:   imgTrustAuto,
+  rag:         imgRag,
+  openwebui:   imgOpenWebUI,
+  openehr:     imgOpenEHR,
+  hapifhir:    imgHapiFHIR,
+  gemma:       imgGemma,
+  mistral:     imgMistral,
+  deepseek:    imgDeepSeek,
+  onprem:      imgOnPrem,
+  cloud:       imgCloud,
+} as const;
+
+type LogoKey = keyof typeof logoMap;
+
+export interface FrameworkItem { text: string; tip: string; }
+export interface Framework     { badge: string; name: string; accent: string; items: FrameworkItem[]; }
+export interface Pill          { mini: string; label: string; sub?: string; logo?: LogoKey; }
+export interface MatrixRow     { label: string; pills: Pill[]; }
+export interface ServiceEntry  { name: string; logo: LogoKey; }
+
+export interface Props {
+  id?:            string;
+  heroTitle?:     string;
+  servicesLabel?: string;
+  frameworks?:    Framework[];
+  services?:      ServiceEntry[];
+  rows?:          MatrixRow[];
+}
+
+const {
+  id,
+  heroTitle     = 'Your Compliance Automation Services',
+  servicesLabel = 'Our Services',
+  frameworks    = [],
+  services      = [],
+  rows          = [],
+} = Astro.props;
+---
+
+<div class="cam-wrap" {...id ? { id } : {}}>
+  <div class="page" aria-label={heroTitle}>
+
+    <!-- Orbital rings decoration -->
+    <div class="orbits" aria-hidden="true">
+      <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <path id="o1" d="M500 390a110 110 0 1 0 0 220a110 110 0 1 0 0-220"/>
+          <path id="o2" d="M500 355a145 145 0 1 0 0 290a145 145 0 1 0 0-290"/>
+          <path id="o3" d="M500 315a185 185 0 1 0 0 370a185 185 0 1 0 0-370"/>
+          <path id="o4" d="M500 270a230 230 0 1 0 0 460a230 230 0 1 0 0-460"/>
+          <path id="o5" d="M500 220a280 280 0 1 0 0 560a280 280 0 1 0 0-560"/>
+          <path id="o6" d="M500 165a335 335 0 1 0 0 670a335 335 0 1 0 0-670"/>
+          <path id="o7" d="M500 105a395 395 0 1 0 0 790a395 395 0 1 0 0-790"/>
+        </defs>
+        <g>
+          <use href="#o1" class="ring"/><use href="#o2" class="ring"/>
+          <use href="#o3" class="ring"/><use href="#o4" class="ring"/>
+          <use href="#o5" class="ring"/><use href="#o6" class="ring"/>
+          <use href="#o7" class="ring"/>
+        </g>
+        <circle class="dot" r="4"><animateMotion dur="7s" repeatCount="indefinite"><mpath href="#o2"/></animateMotion></circle>
+        <circle class="dot" r="4"><animateMotion dur="11s" begin="-3s" repeatCount="indefinite"><mpath href="#o5"/></animateMotion></circle>
+        <circle class="dot" r="4"><animateMotion dur="14s" begin="-6s" repeatCount="indefinite"><mpath href="#o7"/></animateMotion></circle>
+      </svg>
+    </div>
+
+    <!-- Framework cards -->
+    {frameworks.length > 0 && (
+      <section class="cards" aria-label="Compliance frameworks">
+        {frameworks.map((fw) => (
+          <article class="card">
+            <div class="icon">{fw.badge}</div>
+            <h3>{fw.name}</h3>
+            <ul>
+              {fw.items.map((item) => (
+                <li tabindex="0" data-tip={item.tip}>{item.text}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </section>
+    )}
+
+    <!-- Central sphere -->
+    <section class="center">
+      <div class="sphere">
+        <div class="logo-mark">Futurion<br/>Solutions</div>
+      </div>
+    </section>
+
+    <!-- Hero title pill -->
+    <section class="hero"><h2>{heroTitle}</h2></section>
+
+    <!-- Services strip -->
+    {services.length > 0 && (
+      <section class="services" aria-label="Our Services">
+        <div class="service-row">
+          {services.map((svc) => (
+            <div class="service-logo">
+              <Image
+                src={logoMap[svc.logo]}
+                alt={svc.name}
+                class="svc-img"
+                width={140}
+                height={44}
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
+        <div class="service-title">{servicesLabel}</div>
+      </section>
+    )}
+
+    <!-- Tech matrix -->
+    {rows.length > 0 && (
+      <section class="matrix">
+        {rows.map((row) => (
+          <div class="row">
+            <div class="label">{row.label}</div>
+            <div class="links">
+              {row.pills.map((pill) => (
+                <span class={`pill${!pill.label && !pill.sub ? ' compliance' : ''}`}>
+                  {pill.logo ? (
+                    <span class="mini mini--logo">
+                      <Image
+                        src={logoMap[pill.logo]}
+                        alt={pill.label}
+                        class="pill-logo"
+                        width={56}
+                        height={20}
+                        loading="lazy"
+                      />
+                    </span>
+                  ) : (
+                    <span class="mini">{pill.mini}</span>
+                  )}
+                  {pill.sub ? (
+                    <><strong>{pill.label}</strong><small>{pill.sub}</small></>
+                  ) : (
+                    pill.label
+                  )}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </section>
+    )}
+
+    <div class="connectors" aria-hidden="true"></div>
+  </div>
+</div>
+
+<style>
+  /* ── Outer wrapper: constrains the section to page width on ultrawide ── */
+  .cam-wrap {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* ── Root color vars (scoped to this component) ── */
+  .page {
+    --bg0:   #07123e;
+    --bg1:   #071b58;
+    --line:  #2e66ca;
+    --line2: #6ba5ff;
+    --text:  #f4f7ff;
+    --muted: #d8e4ff;
+    --card:  #09216d;
+    --card2: #0c3fa4;
+    --accent:#0d7cff;
+  }
+
+  /* ── Page wrapper ── */
+  .page {
+    padding: clamp(40px, 5.4vw, 80px) clamp(20px, 4.2vw, 60px) clamp(24px, 3vw, 44px);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 79%  2%,  rgba(28,112,255,.72), transparent 22%),
+      radial-gradient(circle at 30% 100%, rgba(11,104,210,.74), transparent 28%),
+      linear-gradient(120deg, #071244 0%, #071b58 46%, #08205c 100%);
+    color: var(--text);
+    font-family: Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+  .page::before {
+    content: '';
+    position: absolute;
+    inset: -10%;
+    z-index: -2;
+    background: radial-gradient(circle at 50% 46%, rgba(42,96,190,.18), transparent 39%);
+  }
+
+  /* ── Orbits ── */
+  .orbits {
+    position: absolute;
+    inset: -12vh 12vw auto 18vw;
+    height: 108vh;
+    z-index: -1;
+    opacity: .45;
+    pointer-events: none;
+  }
+  .orbits svg { width: 100%; height: 100%; }
+  .ring { fill: none; stroke: #3d6ecf; stroke-width: 2; opacity: .38; }
+  .dot  { fill: #087bff; filter: drop-shadow(0 0 5px #087bff); }
+
+  /* ── Framework cards ── */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: clamp(8px, 1.2vw, 18px);
+    align-items: start;
+    position: relative;
+    z-index: 4;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+  .card {
+    min-height: clamp(160px, 19.5vw, 290px);
+    border: 1px solid rgba(110,166,255,.5);
+    border-radius: clamp(12px, 1.2vw, 20px);
+    background: linear-gradient(180deg, #0f45b6 0 27%, #07185e 28% 100%);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.04), 0 0 30px rgba(26,112,255,.17);
+    position: relative;
+    padding-top: clamp(36px, 3.5vw, 56px);
+    overflow: visible;
+  }
+  .icon {
+    position: absolute;
+    top: clamp(-40px, -2.35vw, -22px);
+    left: 50%;
+    transform: translateX(-50%);
+    width:  clamp(44px, 4.1vw, 64px);
+    height: clamp(44px, 4.1vw, 64px);
+    border-radius: 50%;
+    background: linear-gradient(180deg, #eff5ff, #bdd5ff);
+    color: #0b3993;
+    display: grid;
+    place-items: center;
+    font-weight: 950;
+    font-size: clamp(10px, 1.05vw, 14px);
+    letter-spacing: .04em;
+    filter: drop-shadow(0 0 13px rgba(117,174,255,.72));
+  }
+  .card h3 {
+    font-size: clamp(11px, 1.04vw, 15px);
+    line-height: 1.08;
+    text-align: center;
+    margin: clamp(4px,.5vw,8px) clamp(8px,1vw,14px) clamp(10px,1.35vw,18px);
+    font-weight: 900;
+    color: #eef4ff;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+  }
+  .card ul {
+    list-style: none;
+    margin: 0;
+    padding: 0 clamp(8px,1vw,14px) clamp(8px,1vw,14px);
+  }
+  .card li {
+    font-size: clamp(10px, .75vw, 12px);
+    line-height: 1.3;
+    font-weight: 650;
+    color: #e9f0ff;
+    margin: 0 0 clamp(6px,.78vw,10px);
+    padding-left: clamp(8px,.62vw,11px);
+    position: relative;
+    cursor: help;
+  }
+  .card li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: .14em;
+    width: 2px;
+    height: .64em;
+    background: #c9dcff;
+    border-radius: 1px;
+  }
+  /* Tooltip on hover / focus */
+  .card li::after {
+    content: attr(data-tip);
+    position: absolute;
+    left: 0;
+    top: clamp(16px, 1.35vw, 22px);
+    width: clamp(160px, 17vw, 240px);
+    z-index: 30;
+    background: #061246;
+    border: 1px solid rgba(117,174,255,.75);
+    border-radius: clamp(8px,.8vw,13px);
+    padding: clamp(8px,.8vw,12px);
+    color: #fff;
+    font-size: clamp(11px,.72vw,13px);
+    line-height: 1.35;
+    font-weight: 500;
+    box-shadow: 0 clamp(6px,.8vw,12px) clamp(16px,2vw,28px) rgba(0,0,0,.45), 0 0 24px rgba(36,122,255,.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .15s ease;
+    white-space: normal;
+  }
+  .card li:hover::after,
+  .card li:focus::after { opacity: 1; }
+
+  /* ── Central sphere ── */
+  .center {
+    position: relative;
+    margin-top: clamp(-32px, -2.4vw, -15px);
+    z-index: 2;
+    display: grid;
+    place-items: center;
+  }
+  .sphere {
+    width:  clamp(90px, 12.2vw, 180px);
+    height: clamp(90px, 12.2vw, 180px);
+    border-radius: 50%;
+    background: radial-gradient(circle at 45% 35%, #d6e6ff 0 24%, #4d89ff 53%, #0677ff 100%);
+    border: clamp(8px, 1.2vw, 18px) solid #07114a;
+    box-shadow: 0 0 0 1px #3b79e3, 0 clamp(12px,1.6vw,24px) clamp(16px,2vw,28px) rgba(0,0,0,.42), 0 0 clamp(16px,2vw,28px) rgba(31,132,255,.55);
+    display: grid;
+    place-items: center;
+    text-align: center;
+  }
+  .logo-mark {
+    font-size: clamp(10px, 1.05vw, 15px);
+    line-height: 1.08;
+    font-weight: 950;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: white;
+    text-shadow: 0 .12em .2em rgba(0,0,0,.35);
+  }
+
+  /* ── Hero pill ── */
+  .hero {
+    width: clamp(300px, 61%, 900px);
+    margin: clamp(-16px,-2.2vw,-10px) auto 0;
+    min-height: clamp(60px, 7.8vw, 112px);
+    border: 1px solid rgba(103,165,255,.72);
+    border-radius: clamp(18px, 2.2vw, 32px);
+    background: linear-gradient(180deg, rgba(72,135,228,.82), rgba(17,50,131,.88));
+    box-shadow: inset 0 clamp(8px,1vw,14px) clamp(20px,3vw,42px) rgba(113,170,255,.46), 0 clamp(6px,.8vw,12px) clamp(16px,2.2vw,30px) rgba(0,0,0,.22);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 3;
+  }
+  .hero h2 {
+    margin: 0 clamp(16px, 2vw, 30px);
+    text-align: center;
+    font-size: clamp(20px, 2.42vw, 38px);
+    letter-spacing: .02em;
+    line-height: 1.05;
+    font-weight: 950;
+    text-shadow: 0 .16em .22em rgba(0,0,0,.55);
+    color: #f4f7ff;
+  }
+
+  /* ── Services strip ── */
+  .services {
+    width: clamp(280px, 47%, 680px);
+    margin: 0 auto clamp(12px, 1.35vw, 20px);
+    border-radius: 0 0 clamp(12px,1.6vw,22px) clamp(12px,1.6vw,22px);
+    overflow: hidden;
+    background: #071654;
+    border: 1px solid rgba(62,112,210,.5);
+    border-top: none;
+    position: relative;
+    z-index: 2;
+  }
+  .service-title {
+    height: clamp(28px, 2.4vw, 38px);
+    display: grid;
+    place-items: center;
+    background: linear-gradient(90deg, #0d3e98, #0372da, #0d3e98);
+    font-weight: 950;
+    font-size: clamp(11px, 1.12vw, 16px);
+    letter-spacing: .18em;
+    color: #dceaff;
+    text-transform: uppercase;
+  }
+  .service-row {
+    height: clamp(48px, 4vw, 64px);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+  }
+  .service-logo {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    position: relative;
+  }
+  .service-logo:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: clamp(16px, 2vw, 30px);
+    background: #6ba6ff;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  /* Logo images inside service-logo */
+  .svc-img {
+    max-height: clamp(28px, 2.4vw, 38px);
+    width: auto;
+    max-width: 80%;
+    object-fit: contain;
+  }
+
+  /* ── Matrix ── */
+  .matrix {
+    width: clamp(280px, 88%, 1200px);
+    margin: clamp(8px,1.1vw,16px) auto 0;
+    position: relative;
+    z-index: 1;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: clamp(110px, 17vw, 220px) 1fr;
+    align-items: center;
+    min-height: clamp(46px, 4.55vw, 68px);
+  }
+  .label {
+    font-weight: 900;
+    font-size: clamp(11px, 1.02vw, 15px);
+    color: #eef4ff;
+    position: relative;
+    padding-left: clamp(8px, 1vw, 14px);
+  }
+  .label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: .1em;
+    width: 2px;
+    height: 1em;
+    background: #dbe7ff;
+  }
+  .links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(5px, .55vw, 8px);
+    position: relative;
+    flex-wrap: wrap;
+  }
+  .links::before {
+    content: '';
+    height: 1px;
+    background: #557bcc;
+    position: absolute;
+    left: 0; right: 0; top: 50%;
+    z-index: -1;
+    opacity: .75;
+  }
+  .pill {
+    min-height: clamp(26px, 2.2vw, 34px);
+    padding: clamp(4px,.34vw,6px) clamp(9px,.9vw,13px);
+    border: 1px solid rgba(105,156,255,.6);
+    border-radius: clamp(16px,2vw,30px);
+    background: rgba(12,29,93,.84);
+    display: inline-flex;
+    align-items: center;
+    gap: clamp(5px,.48vw,8px);
+    white-space: nowrap;
+    font-size: clamp(11px,.88vw,13px);
+    font-weight: 850;
+    color: #f3f6ff;
+    text-decoration: none;
+    box-shadow: 0 0 18px rgba(28,92,210,.18);
+  }
+  .mini {
+    width:  clamp(18px, 1.35vw, 22px);
+    height: clamp(18px, 1.35vw, 22px);
+    border: 1px solid rgba(205,225,255,.65);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: clamp(8px,.58vw,10px);
+    font-weight: 950;
+    color: #dfeaff;
+    flex-shrink: 0;
+  }
+  /* Logo mini: no border circle, just the image */
+  .mini--logo {
+    border: none;
+    background: none;
+    width: auto;
+    height: auto;
+  }
+  .pill-logo {
+    height: clamp(14px, 1.35vw, 20px);
+    width: auto;
+    max-width: 56px;
+    object-fit: contain;
+    display: block;
+  }
+  .pill strong { font-size: clamp(11px,.92vw,14px); }
+  .pill small  { font-size: clamp(10px,.69vw,11.5px); color: #c7d9ff; font-weight: 750; }
+  .compliance  {
+    font-size: clamp(11px,.92vw,14px);
+    letter-spacing: .01em;
+    padding: clamp(5px,.52vw,8px) clamp(12px,1.3vw,18px);
+  }
+
+  /* ── Connectors (perspective grid) ── */
+  .connectors {
+    position: absolute;
+    left: 19%;
+    right: 20%;
+    bottom: clamp(12px, 1.8vw, 26px);
+    top: clamp(480px, 54vw, 800px);
+    z-index: -1;
+    opacity: .55;
+    background: repeating-radial-gradient(ellipse at 50% 0%, transparent 0 5.6vw, rgba(0,114,255,.25) 5.7vw 5.8vw);
+    transform: perspective(800px) rotateX(58deg);
+    transform-origin: top center;
+  }
+
+  /* ── Mobile breakpoint (≤ 980px) — single-column stack ── */
+  @media (max-width: 980px) {
+    .page        { padding: 48px 18px; }
+    .cards       { grid-template-columns: 1fr; gap: 20px; max-width: 100%; }
+    .card        { min-height: auto; border-radius: 18px; padding: 58px 0 8px; }
+    .icon        { top: -28px; width: 58px; height: 58px; font-size: 15px; }
+    .card h3     { font-size: 18px; }
+    .card li     { font-size: 14px; padding-left: 12px; }
+    .card li::before { width: 3px; height: 12px; top: 2px; }
+    .card li::after {
+      position: static;
+      display: none;
+      width: auto;
+      margin-top: 8px;
+      font-size: 13px;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .card li:focus::after { display: block; }
+    .center       { margin: 28px 0; }
+    .sphere       { width: 150px; height: 150px; border-width: 14px; }
+    .logo-mark    { font-size: 14px; }
+    .hero         { width: 100%; min-height: 100px; border-radius: 24px; margin: 0; }
+    .hero h2      { font-size: 32px; }
+    .services     { width: 94%; }
+    .service-title{ height: 38px; font-size: 14px; }
+    .service-row  { height: auto; grid-template-columns: 1fr; }
+    .service-logo { font-size: 18px; padding: 16px; }
+    .service-logo:not(:last-child)::after { display: none; }
+    .svc-img      { max-height: 36px; }
+    .matrix       { width: 100%; }
+    .row          { grid-template-columns: 1fr; gap: 10px; margin: 22px 0; }
+    .label        { font-size: 16px; }
+    .links        { justify-content: flex-start; }
+    .pill         { font-size: 14px; min-height: 36px; padding: 8px 12px; }
+    .pill strong  { font-size: 14px; }
+    .pill small   { font-size: 12px; }
+    .mini         { width: 22px; height: 22px; font-size: 9px; }
+    .pill-logo    { height: 16px; }
+    .orbits       { inset: 0; }
+    .connectors   { display: none; }
+  }
+</style>

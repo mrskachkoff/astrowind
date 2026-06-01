@@ -53,10 +53,6 @@ export function getHeaderData(lang: Locale = 'en') {
         ],
       },
       {
-        text: t('nav.freeAiAudit'),
-        href: getLocalizedPath('/automation-roadmap', lang),
-      },
-      {
         text: t('nav.blog'),
         href: getLocalizedPath('/blog', lang),
       },
@@ -69,7 +65,7 @@ export function getHeaderData(lang: Locale = 'en') {
         href: getLocalizedPath('/contact', lang),
       },
     ],
-    actions: [{ text: t('nav.bookFreeAudit'), href: getLocalizedPath('/automation-roadmap', lang) }],
+    actions: [],
   };
 }
 

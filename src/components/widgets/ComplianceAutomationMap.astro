@@ -16,6 +16,7 @@ import imgOpenWebUI   from '~/assets/images/openwebui.png';
 import imgOpenEHR     from '~/assets/images/openehr_logo.png';
 import imgHapiFHIR    from '~/assets/images/hapi_fhir.png';
 import imgGemma       from '~/assets/images/gemma.png';
+import imgOllama      from '~/assets/images/ollama.png';
 import imgMistral     from '~/assets/images/mistral.png';
 import imgDeepSeek    from '~/assets/images/deepseek.png';
 import imgOcr         from '~/assets/images/ocr.svg';
@@ -32,6 +33,7 @@ const logoMap = {
   openehr:     imgOpenEHR,
   hapifhir:    imgHapiFHIR,
   gemma:       imgGemma,
+  ollama:      imgOllama,
   mistral:     imgMistral,
   deepseek:    imgDeepSeek,
   ocr:         imgOcr,
@@ -43,7 +45,7 @@ type LogoKey = keyof typeof logoMap;
 
 export interface FrameworkItem { text: string; tip: string; }
 export interface Framework     { badge: string; name: string; accent: string; items: FrameworkItem[]; }
-export interface Pill          { mini: string; label: string; sub?: string; logo?: LogoKey; }
+export interface Pill          { mini: string; label: string; sub?: string; logo?: LogoKey; break?: boolean; }
 export interface MatrixRow     { label: string; pills: Pill[]; }
 export interface ServiceEntry  { name: string; logo: LogoKey; }
 
@@ -147,6 +149,8 @@ const {
             <div class="label">{row.label}</div>
             <div class="links">
               {row.pills.map((pill) => (
+                <>
+                  {pill.break && <span class="row-break" aria-hidden="true"></span>}
                 <span class={`pill${!pill.label && !pill.sub ? ' compliance' : ''}`}>
                   {pill.logo ? (
                     <span class="mini mini--logo">
@@ -167,6 +171,7 @@ const {
                     pill.label !== pill.mini ? pill.label : null
                   )}
                 </span>
+                </>
               ))}
             </div>
           </div>
@@ -248,13 +253,14 @@ const {
     margin: 0 auto;
   }
   .card {
-    min-height: clamp(160px, 19.5vw, 290px);
+    min-height: clamp(120px, 13vw, 190px);
     border: 1px solid rgba(110,166,255,.5);
     border-radius: clamp(12px, 1.2vw, 20px);
-    background: linear-gradient(180deg, #0f45b6 0 27%, #07185e 28% 100%);
+    background: linear-gradient(180deg, #0f45b6 0 clamp(56px,7vw,92px), #07185e clamp(56px,7vw,92px) 100%);
     box-shadow: inset 0 0 0 1px rgba(255,255,255,.04), 0 0 30px rgba(26,112,255,.17);
     position: relative;
     padding-top: clamp(36px, 3.5vw, 56px);
+    padding-bottom: clamp(12px, 1.2vw, 18px);
     overflow: visible;
   }
   .icon {
@@ -287,14 +293,15 @@ const {
   .card ul {
     list-style: none;
     margin: 0;
-    padding: 0 clamp(8px,1vw,14px) clamp(8px,1vw,14px);
+    padding: clamp(4px,.5vw,8px) clamp(8px,1vw,14px) clamp(8px,1vw,14px);
   }
   .card li {
-    font-size: clamp(10px, .75vw, 12px);
+    font-size: clamp(13px, 1vw, 16px);
     line-height: 1.3;
     font-weight: 650;
     color: #e9f0ff;
-    margin: 0 0 clamp(6px,.78vw,10px);
+    overflow-wrap: anywhere;
+    margin: 0 0 clamp(5px,.7vw,9px);
     padding-left: clamp(8px,.62vw,11px);
     position: relative;
     cursor: help;
@@ -475,7 +482,7 @@ const {
   }
   .label {
     font-weight: 900;
-    font-size: clamp(11px, 1.02vw, 15px);
+    font-size: clamp(15px, 1.5vw, 45px);
     color: #eef4ff;
     text-align: center;
   }
@@ -487,6 +494,8 @@ const {
     position: relative;
     flex-wrap: wrap;
   }
+  /* Full-width invisible flex item that forces a line wrap */
+  .row-break { flex-basis: 100%; width: 100%; height: 0; }
   .links::before {
     content: '';
     height: 1px;
@@ -569,7 +578,7 @@ const {
     .card        { min-height: auto; border-radius: 18px; padding: 58px 0 8px; }
     .icon        { top: -28px; width: 58px; height: 58px; font-size: 15px; }
     .card h3     { font-size: 18px; }
-    .card li     { font-size: 14px; padding-left: 12px; }
+    .card li     { font-size: 16px; padding-left: 12px; }
     .card li::before { width: 3px; height: 12px; top: 2px; }
     .card li::after {
       position: static;
@@ -595,7 +604,7 @@ const {
     .svc-img      { max-height: 80px; }
     .matrix       { width: 100%; }
     .row          { gap: 10px; margin: 22px 0; }
-    .label        { font-size: 16px; }
+    .label        { font-size: 20px; }
     .links        { justify-content: center; }
     .pill         { font-size: 15px; min-height: 42px; padding: 10px 16px; gap: 8px; }
     .pill strong  { font-size: 15px; }

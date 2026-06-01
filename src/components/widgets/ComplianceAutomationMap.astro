@@ -18,9 +18,10 @@ import imgHapiFHIR    from '~/assets/images/hapi_fhir.png';
 import imgGemma       from '~/assets/images/gemma.png';
 import imgMistral     from '~/assets/images/mistral.png';
 import imgDeepSeek    from '~/assets/images/deepseek.png';
+import imgOcr         from '~/assets/images/ocr.svg';
 import imgOnPrem      from '~/assets/images/on-prem.png';
 import imgCloud       from '~/assets/images/sovereign-cloud.png';
-import imgFavicon     from '~/assets/favicons/favicon.svg';
+import imgFavicon     from '~/assets/favicons/futurion-192x192.png';
 
 const logoMap = {
   trustprompt: imgTrustPrompt,
@@ -33,6 +34,7 @@ const logoMap = {
   gemma:       imgGemma,
   mistral:     imgMistral,
   deepseek:    imgDeepSeek,
+  ocr:         imgOcr,
   onprem:      imgOnPrem,
   cloud:       imgCloud,
 } as const;
@@ -67,30 +69,6 @@ const {
 <div class="cam-wrap" {...id ? { id } : {}}>
   <div class="page" aria-label={heroTitle}>
 
-    <!-- Orbital rings decoration -->
-    <div class="orbits" aria-hidden="true">
-      <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet">
-        <defs>
-          <path id="o1" d="M500 390a110 110 0 1 0 0 220a110 110 0 1 0 0-220"/>
-          <path id="o2" d="M500 355a145 145 0 1 0 0 290a145 145 0 1 0 0-290"/>
-          <path id="o3" d="M500 315a185 185 0 1 0 0 370a185 185 0 1 0 0-370"/>
-          <path id="o4" d="M500 270a230 230 0 1 0 0 460a230 230 0 1 0 0-460"/>
-          <path id="o5" d="M500 220a280 280 0 1 0 0 560a280 280 0 1 0 0-560"/>
-          <path id="o6" d="M500 165a335 335 0 1 0 0 670a335 335 0 1 0 0-670"/>
-          <path id="o7" d="M500 105a395 395 0 1 0 0 790a395 395 0 1 0 0-790"/>
-        </defs>
-        <g>
-          <use href="#o1" class="ring"/><use href="#o2" class="ring"/>
-          <use href="#o3" class="ring"/><use href="#o4" class="ring"/>
-          <use href="#o5" class="ring"/><use href="#o6" class="ring"/>
-          <use href="#o7" class="ring"/>
-        </g>
-        <circle class="dot" r="4"><animateMotion dur="7s" repeatCount="indefinite"><mpath href="#o2"/></animateMotion></circle>
-        <circle class="dot" r="4"><animateMotion dur="11s" begin="-3s" repeatCount="indefinite"><mpath href="#o5"/></animateMotion></circle>
-        <circle class="dot" r="4"><animateMotion dur="14s" begin="-6s" repeatCount="indefinite"><mpath href="#o7"/></animateMotion></circle>
-      </svg>
-    </div>
-
     <!-- Framework cards -->
     {frameworks.length > 0 && (
       <section class="cards" aria-label="Compliance frameworks">
@@ -110,9 +88,31 @@ const {
 
     <!-- Central sphere -->
     <section class="center">
+      <!-- Orbital rings decoration — centered on the sphere -->
+      <div class="orbits" aria-hidden="true">
+        <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <path id="o1" d="M500 390a110 110 0 1 0 0 220a110 110 0 1 0 0-220"/>
+            <path id="o2" d="M500 355a145 145 0 1 0 0 290a145 145 0 1 0 0-290"/>
+            <path id="o3" d="M500 315a185 185 0 1 0 0 370a185 185 0 1 0 0-370"/>
+            <path id="o4" d="M500 270a230 230 0 1 0 0 460a230 230 0 1 0 0-460"/>
+            <path id="o5" d="M500 220a280 280 0 1 0 0 560a280 280 0 1 0 0-560"/>
+            <path id="o6" d="M500 165a335 335 0 1 0 0 670a335 335 0 1 0 0-670"/>
+            <path id="o7" d="M500 105a395 395 0 1 0 0 790a395 395 0 1 0 0-790"/>
+          </defs>
+          <g>
+            <use href="#o1" class="ring"/><use href="#o2" class="ring"/>
+            <use href="#o3" class="ring"/><use href="#o4" class="ring"/>
+            <use href="#o5" class="ring"/><use href="#o6" class="ring"/>
+            <use href="#o7" class="ring"/>
+          </g>
+          <circle class="dot" r="4"><animateMotion dur="7s" repeatCount="indefinite"><mpath href="#o2"/></animateMotion></circle>
+          <circle class="dot" r="4"><animateMotion dur="11s" begin="-3s" repeatCount="indefinite"><mpath href="#o5"/></animateMotion></circle>
+          <circle class="dot" r="4"><animateMotion dur="14s" begin="-6s" repeatCount="indefinite"><mpath href="#o7"/></animateMotion></circle>
+        </svg>
+      </div>
       <div class="sphere">
-        <Image class="sphere-logo" src={imgFavicon} alt="Futurion Solutions" width={56} height={56} loading="eager" />
-        <div class="logo-mark">Futurion<br/>Solutions</div>
+        <img class="sphere-logo" src={imgFavicon.src} alt="Futurion Solutions" width={96} height={96} loading="eager" />
       </div>
     </section>
 
@@ -129,8 +129,7 @@ const {
                 src={logoMap[svc.logo]}
                 alt={svc.name}
                 class="svc-img"
-                width={140}
-                height={44}
+                width={180}
                 loading="lazy"
               />
             </div>
@@ -155,8 +154,7 @@ const {
                         src={logoMap[pill.logo]}
                         alt={pill.label}
                         class="pill-logo"
-                        width={56}
-                        height={20}
+                        width={200}
                         loading="lazy"
                       />
                     </span>
@@ -225,9 +223,9 @@ const {
   .orbits {
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
-    top: clamp(-80px, -6%, -20px);
-    width: min(840px, 90%);
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(840px, 90vw);
     height: auto;
     aspect-ratio: 1;
     z-index: -1;
@@ -361,8 +359,8 @@ const {
     overflow: hidden;
   }
   .sphere-logo {
-    width:  clamp(36px, 4.2vw, 62px);
-    height: clamp(36px, 4.2vw, 62px);
+    width:  clamp(72px, 9vw, 130px);
+    height: clamp(72px, 9vw, 130px);
     object-fit: contain;
     border-radius: 50%;
     flex-shrink: 0;
@@ -382,7 +380,7 @@ const {
   /* ── Hero pill ── */
   .hero {
     width: clamp(300px, 61%, 900px);
-    margin: clamp(-16px,-2.2vw,-10px) auto 0;
+    margin: clamp(25px, 2.5vw, 40px) auto 0;
     min-height: clamp(60px, 7.8vw, 112px);
     border: 1px solid rgba(103,165,255,.72);
     border-radius: clamp(18px, 2.2vw, 32px);
@@ -408,12 +406,11 @@ const {
   /* ── Services strip ── */
   .services {
     width: clamp(280px, 47%, 680px);
-    margin: 0 auto clamp(12px, 1.35vw, 20px);
-    border-radius: 0 0 clamp(12px,1.6vw,22px) clamp(12px,1.6vw,22px);
+    margin: clamp(25px, 2.5vw, 40px) auto clamp(12px, 1.35vw, 20px);
+    border-radius: clamp(12px,1.6vw,22px);
     overflow: hidden;
     background: #071654;
     border: 1px solid rgba(62,112,210,.5);
-    border-top: none;
     position: relative;
     z-index: 2;
   }
@@ -429,7 +426,7 @@ const {
     text-transform: uppercase;
   }
   .service-row {
-    height: clamp(48px, 4vw, 64px);
+    height: clamp(104px, 9vw, 140px);
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
@@ -452,41 +449,35 @@ const {
   }
   /* Logo images inside service-logo */
   .svc-img {
-    height: clamp(28px, 2.8vw, 40px);
+    height: clamp(56px, 6.5vw, 92px);
     width: auto;
-    max-width: 78%;
+    max-width: 90%;
     object-fit: contain;
     display: block;
+    margin: 0 auto;
   }
 
   /* ── Matrix ── */
   .matrix {
     width: clamp(280px, 88%, 1200px);
-    margin: clamp(8px,1.1vw,16px) auto 0;
+    margin: clamp(50px, 5vw, 80px) auto 0;
     position: relative;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 2.4vw, 36px);
   }
   .row {
-    display: grid;
-    grid-template-columns: clamp(110px, 17vw, 220px) 1fr;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    min-height: clamp(46px, 4.55vw, 68px);
+    gap: clamp(8px, 1vw, 14px);
   }
   .label {
     font-weight: 900;
     font-size: clamp(11px, 1.02vw, 15px);
     color: #eef4ff;
-    position: relative;
-    padding-left: clamp(8px, 1vw, 14px);
-  }
-  .label::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: .1em;
-    width: 2px;
-    height: 1em;
-    background: #dbe7ff;
+    text-align: center;
   }
   .links {
     display: flex;
@@ -506,29 +497,29 @@ const {
     opacity: .75;
   }
   .pill {
-    min-height: clamp(26px, 2.2vw, 34px);
-    padding: clamp(4px,.34vw,6px) clamp(9px,.9vw,13px);
+    min-height: clamp(34px, 3vw, 46px);
+    padding: clamp(6px,.55vw,10px) clamp(12px,1.15vw,18px);
     border: 1px solid rgba(105,156,255,.6);
-    border-radius: clamp(16px,2vw,30px);
+    border-radius: clamp(18px,2.2vw,34px);
     background: rgba(12,29,93,.84);
     display: inline-flex;
     align-items: center;
-    gap: clamp(5px,.48vw,8px);
+    gap: clamp(6px,.6vw,10px);
     white-space: nowrap;
-    font-size: clamp(11px,.88vw,13px);
+    font-size: clamp(12px,.98vw,15px);
     font-weight: 850;
     color: #f3f6ff;
     text-decoration: none;
     box-shadow: 0 0 18px rgba(28,92,210,.18);
   }
   .mini {
-    width:  clamp(18px, 1.35vw, 22px);
-    height: clamp(18px, 1.35vw, 22px);
+    width:  clamp(24px, 1.8vw, 30px);
+    height: clamp(24px, 1.8vw, 30px);
     border: 1px solid rgba(205,225,255,.65);
     border-radius: 50%;
     display: grid;
     place-items: center;
-    font-size: clamp(8px,.58vw,10px);
+    font-size: clamp(9px,.7vw,12px);
     font-weight: 950;
     color: #dfeaff;
     flex-shrink: 0;
@@ -541,14 +532,15 @@ const {
     height: auto;
   }
   .pill-logo {
-    height: clamp(16px, 1.5vw, 22px);
+    height: clamp(22px, 2vw, 30px);
     width: auto;
-    max-width: 60px;
+    max-width: 88px;
     object-fit: contain;
     display: block;
+    margin: 0 auto;
   }
-  .pill strong { font-size: clamp(11px,.92vw,14px); }
-  .pill small  { font-size: clamp(10px,.69vw,11.5px); color: #c7d9ff; font-weight: 750; }
+  .pill strong { font-size: clamp(12px,1vw,15px); }
+  .pill small  { font-size: clamp(11px,.78vw,13px); color: #c7d9ff; font-weight: 750; }
   .compliance  {
     font-size: clamp(11px,.92vw,14px);
     letter-spacing: .01em;
@@ -591,26 +583,26 @@ const {
     .card li:focus::after { display: block; }
     .center       { margin: 28px 0; }
     .sphere       { width: 150px; height: 150px; border-width: 14px; gap: 4px; }
-    .sphere-logo  { width: 56px; height: 56px; }
+    .sphere-logo  { width: 110px; height: 110px; }
     .logo-mark    { font-size: 12px; }
-    .hero         { width: 100%; min-height: 100px; border-radius: 24px; margin: 0; }
+    .hero         { width: 100%; min-height: 100px; border-radius: 24px; margin: clamp(25px, 4vw, 40px) 0 0; }
     .hero h2      { font-size: 32px; }
-    .services     { width: 94%; }
+    .services     { width: 94%; margin-top: clamp(25px, 4vw, 40px); }
     .service-title{ height: 38px; font-size: 14px; }
     .service-row  { height: auto; grid-template-columns: 1fr; }
     .service-logo { font-size: 18px; padding: 16px; }
     .service-logo:not(:last-child)::after { display: none; }
-    .svc-img      { max-height: 36px; }
+    .svc-img      { max-height: 80px; }
     .matrix       { width: 100%; }
-    .row          { grid-template-columns: 1fr; gap: 10px; margin: 22px 0; }
+    .row          { gap: 10px; margin: 22px 0; }
     .label        { font-size: 16px; }
-    .links        { justify-content: flex-start; }
-    .pill         { font-size: 14px; min-height: 36px; padding: 8px 12px; }
-    .pill strong  { font-size: 14px; }
-    .pill small   { font-size: 12px; }
-    .mini         { width: 22px; height: 22px; font-size: 9px; }
-    .pill-logo    { height: 16px; }
-    .orbits       { top: 0; width: min(560px, 100%); }
+    .links        { justify-content: center; }
+    .pill         { font-size: 15px; min-height: 42px; padding: 10px 16px; gap: 8px; }
+    .pill strong  { font-size: 15px; }
+    .pill small   { font-size: 13px; }
+    .mini         { width: 28px; height: 28px; font-size: 11px; }
+    .pill-logo    { height: 26px; max-width: 80px; }
+    .orbits       { width: min(560px, 100%); }
     .connectors   { display: none; }
   }
 </style>

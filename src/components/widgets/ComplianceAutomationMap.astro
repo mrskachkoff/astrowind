@@ -20,6 +20,7 @@ import imgMistral     from '~/assets/images/mistral.png';
 import imgDeepSeek    from '~/assets/images/deepseek.png';
 import imgOnPrem      from '~/assets/images/on-prem.png';
 import imgCloud       from '~/assets/images/sovereign-cloud.png';
+import imgFavicon     from '~/assets/favicons/favicon.svg';
 
 const logoMap = {
   trustprompt: imgTrustPrompt,
@@ -110,6 +111,7 @@ const {
     <!-- Central sphere -->
     <section class="center">
       <div class="sphere">
+        <Image class="sphere-logo" src={imgFavicon} alt="Futurion Solutions" width={56} height={56} loading="eager" />
         <div class="logo-mark">Futurion<br/>Solutions</div>
       </div>
     </section>
@@ -162,9 +164,9 @@ const {
                     <span class="mini">{pill.mini}</span>
                   )}
                   {pill.sub ? (
-                    <><strong>{pill.label}</strong><small>{pill.sub}</small></>
+                    <>{pill.label !== pill.mini && <strong>{pill.label}</strong>}<small>{pill.sub}</small></>
                   ) : (
-                    pill.label
+                    pill.label !== pill.mini ? pill.label : null
                   )}
                 </span>
               ))}
@@ -219,11 +221,15 @@ const {
     background: radial-gradient(circle at 50% 46%, rgba(42,96,190,.18), transparent 39%);
   }
 
-  /* ── Orbits ── */
+  /* ── Orbits — centered behind the cards+sphere band ── */
   .orbits {
     position: absolute;
-    inset: -12vh 12vw auto 18vw;
-    height: 108vh;
+    left: 50%;
+    transform: translateX(-50%);
+    top: clamp(-80px, -6%, -20px);
+    width: min(840px, 90%);
+    height: auto;
+    aspect-ratio: 1;
     z-index: -1;
     opacity: .45;
     pointer-events: none;
@@ -345,12 +351,26 @@ const {
     background: radial-gradient(circle at 45% 35%, #d6e6ff 0 24%, #4d89ff 53%, #0677ff 100%);
     border: clamp(8px, 1.2vw, 18px) solid #07114a;
     box-shadow: 0 0 0 1px #3b79e3, 0 clamp(12px,1.6vw,24px) clamp(16px,2vw,28px) rgba(0,0,0,.42), 0 0 clamp(16px,2vw,28px) rgba(31,132,255,.55);
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(2px, 0.3vw, 4px);
     text-align: center;
+    padding: clamp(4px, 0.5vw, 8px);
+    overflow: hidden;
+  }
+  .sphere-logo {
+    width:  clamp(36px, 4.2vw, 62px);
+    height: clamp(36px, 4.2vw, 62px);
+    object-fit: contain;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: block;
+    filter: drop-shadow(0 0 6px rgba(0,200,255,.5));
   }
   .logo-mark {
-    font-size: clamp(10px, 1.05vw, 15px);
+    font-size: clamp(9px, 0.9vw, 13px);
     line-height: 1.08;
     font-weight: 950;
     letter-spacing: .08em;
@@ -432,10 +452,11 @@ const {
   }
   /* Logo images inside service-logo */
   .svc-img {
-    max-height: clamp(28px, 2.4vw, 38px);
+    height: clamp(28px, 2.8vw, 40px);
     width: auto;
-    max-width: 80%;
+    max-width: 78%;
     object-fit: contain;
+    display: block;
   }
 
   /* ── Matrix ── */
@@ -520,9 +541,9 @@ const {
     height: auto;
   }
   .pill-logo {
-    height: clamp(14px, 1.35vw, 20px);
+    height: clamp(16px, 1.5vw, 22px);
     width: auto;
-    max-width: 56px;
+    max-width: 60px;
     object-fit: contain;
     display: block;
   }
@@ -534,13 +555,14 @@ const {
     padding: clamp(5px,.52vw,8px) clamp(12px,1.3vw,18px);
   }
 
-  /* ── Connectors (perspective grid) ── */
+  /* ── Connectors (perspective grid) — anchored to bottom of section ── */
   .connectors {
     position: absolute;
     left: 19%;
     right: 20%;
-    bottom: clamp(12px, 1.8vw, 26px);
-    top: clamp(480px, 54vw, 800px);
+    bottom: 0;
+    top: auto;
+    height: clamp(100px, 16%, 180px);
     z-index: -1;
     opacity: .55;
     background: repeating-radial-gradient(ellipse at 50% 0%, transparent 0 5.6vw, rgba(0,114,255,.25) 5.7vw 5.8vw);
@@ -568,8 +590,9 @@ const {
     }
     .card li:focus::after { display: block; }
     .center       { margin: 28px 0; }
-    .sphere       { width: 150px; height: 150px; border-width: 14px; }
-    .logo-mark    { font-size: 14px; }
+    .sphere       { width: 150px; height: 150px; border-width: 14px; gap: 4px; }
+    .sphere-logo  { width: 56px; height: 56px; }
+    .logo-mark    { font-size: 12px; }
     .hero         { width: 100%; min-height: 100px; border-radius: 24px; margin: 0; }
     .hero h2      { font-size: 32px; }
     .services     { width: 94%; }
@@ -587,7 +610,7 @@ const {
     .pill small   { font-size: 12px; }
     .mini         { width: 22px; height: 22px; font-size: 9px; }
     .pill-logo    { height: 16px; }
-    .orbits       { inset: 0; }
+    .orbits       { top: 0; width: min(560px, 100%); }
     .connectors   { display: none; }
   }
 </style>

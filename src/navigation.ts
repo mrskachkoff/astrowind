@@ -46,10 +46,6 @@ export function getHeaderData(lang: Locale = 'en') {
             text: t('nav.freeAiAudit'),
             href: getLocalizedPath('/automation-roadmap', lang),
           },
-          {
-            text: t('nav.pricing'),
-            href: getLocalizedPath('/pricing', lang),
-          },
         ],
       },
       {
@@ -99,7 +95,6 @@ export function getFooterData(lang: Locale = 'en') {
           { text: t('footer.smallPracticeAutomation'), href: getLocalizedPath('/services', lang) },
           { text: t('footer.medcorePrivateAi'), href: getLocalizedPath('/medcore-private-ai', lang) },
           { text: t('footer.freeAiAudit'), href: getLocalizedPath('/automation-roadmap', lang) },
-          { text: t('footer.pricing'), href: getLocalizedPath('/pricing', lang) },
         ],
       },
       {

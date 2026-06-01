@@ -195,6 +195,9 @@ export default defineConfig({
   site: 'https://solutions.futurion.es',
 
   redirects: {
+    '/pricing': '/automation-roadmap/',
+    '/es/precios': '/es/hoja-de-ruta-de-automatizacion/',
+
     '/free-ai-audit': '/automation-roadmap/',
 
     // Spanish utility pages

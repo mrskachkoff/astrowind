@@ -198,6 +198,9 @@ export default defineConfig({
     '/pricing': '/automation-roadmap/',
     '/es/precios': '/es/hoja-de-ruta-de-automatizacion/',
 
+    '/services': '/medcore-private-ai/',
+    '/es/servicios': '/es/medcore-ia-privada/',
+
     '/free-ai-audit': '/automation-roadmap/',
 
     // Spanish utility pages

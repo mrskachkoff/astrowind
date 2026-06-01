@@ -1,7 +1,6 @@
 {
   "nav": {
     "services": "Services",
-    "forSmallPractices": "For Independent Practices",
     "medcorePrivateAi": "MedCore Private AI",
     "freeAiAudit": "Automation Roadmap",
     "blog": "Blog",
@@ -12,7 +11,6 @@
   },
   "footer": {
     "services": "Services",
-    "smallPracticeAutomation": "Small Practice Automation",
     "medcorePrivateAi": "MedCore Private AI",
     "freeAiAudit": "Free Automation Roadmap",
     "medicalAiDemo": "Medical AI Demo",

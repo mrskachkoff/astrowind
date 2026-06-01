@@ -35,10 +35,6 @@ export function getHeaderData(lang: Locale = 'en') {
         text: t('nav.services'),
         links: [
           {
-            text: t('nav.forSmallPractices'),
-            href: getLocalizedPath('/services', lang),
-          },
-          {
             text: t('nav.medcorePrivateAi'),
             href: getLocalizedPath('/medcore-private-ai', lang),
           },
@@ -92,7 +88,6 @@ export function getFooterData(lang: Locale = 'en') {
       {
         title: t('footer.services'),
         links: [
-          { text: t('footer.smallPracticeAutomation'), href: getLocalizedPath('/services', lang) },
           { text: t('footer.medcorePrivateAi'), href: getLocalizedPath('/medcore-private-ai', lang) },
           { text: t('footer.freeAiAudit'), href: getLocalizedPath('/automation-roadmap', lang) },
         ],

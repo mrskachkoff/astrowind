@@ -1,7 +1,6 @@
 {
   "nav": {
     "services": "Servicios",
-    "forSmallPractices": "Para Consultorios Independientes",
     "medcorePrivateAi": "MedCore IA Privada",
     "freeAiAudit": "Tu Ruta de Automatización",
     "blog": "Blog",
@@ -12,7 +11,6 @@
   },
   "footer": {
     "services": "Servicios",
-    "smallPracticeAutomation": "Automatización para Clínicas",
     "medcorePrivateAi": "MedCore IA Privada",
     "freeAiAudit": "Ruta de Automatización Gratis",
     "medicalAiDemo": "Demo IA Médica",

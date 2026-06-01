@@ -3,7 +3,6 @@ import Layout from '~/layouts/PageLayout.astro';
 import JsonLd from '~/components/common/JsonLd.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
-import Stats from '~/components/widgets/Stats.astro';
 import Content from '~/components/widgets/Content.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 import Features from '~/components/widgets/Features.astro';
@@ -12,7 +11,6 @@ import Note from '~/components/widgets/Note.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import MedicalChat from '~/components/widgets/MedicalChat.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
-import dataSecurityImg from '~/assets/images/data-security-healthcare.svg';
 
 const metadata = {
   title: 'MedCore: IA Médica Local para Sanidad',
@@ -82,91 +80,6 @@ const metadata = {
   <!-- Embedded Medical AI Demo Chat -->
 
   <MedicalChat />
-
-  <!-- Section 2: Trust Stats -->
-
-  <Stats
-    stats={[
-      { title: '100% Local', amount: 'Cero Nube', icon: 'tabler:server' },
-      { title: 'LLMs de Grado Médico', amount: 'Específicos', icon: 'tabler:brain' },
-      { title: 'Multilingüe', amount: 'Toda la UE', icon: 'tabler:language' },
-      { title: 'Cumplimiento Primero', amount: 'Por Diseño', icon: 'tabler:shield-check' },
-    ]}
-  />
-
-  <!-- Section 3: Problem -->
-
-  <Content
-    isReversed
-    tagline="El Desafío"
-    title="La IA en la Nube No Cumple los Requisitos de Residencia de Datos Sanitarios"
-    items={[
-      {
-        title: 'Los datos de pacientes salen de tu control',
-        description:
-          'La IA basada en la nube envía registros médicos sensibles a servidores externos en jurisdicciones que no puedes controlar — violando el principio fundamental de soberanía de datos.',
-      },
-      {
-        title: 'La exposición regulatoria crece con la escala',
-        description:
-          'Las organizaciones sanitarias medianas procesan miles de registros de pacientes. Cada interacción con IA en la nube multiplica tu riesgo de cumplimiento con el RGPD y la HIPAA.',
-      },
-      {
-        title: 'Los modelos genéricos carecen de precisión médica',
-        description:
-          'Los modelos de IA de propósito general producen alucinaciones y errores cuando se aplican a terminología médica, interacciones de medicamentos y flujos de trabajo clínicos.',
-      },
-      {
-        title: 'El bloqueo de proveedor limita tus opciones',
-        description:
-          'Las plataformas de IA en la nube propietarias te encierran en su ecosistema, en sus modelos de precios y en sus prácticas de gestión de datos — sin transparencia sobre cómo se usan los datos de pacientes.',
-      },
-    ]}
-    image={{
-      src: dataSecurityImg,
-      alt: 'Preocupaciones de seguridad de datos en sanidad',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        La sanidad necesita un enfoque diferente para la IA
-      </h3>
-      Cuando están involucrados datos de pacientes, "confiar en el proveedor de la nube" no es una estrategia de cumplimiento. Necesitas infraestructura de IA que mantenga la soberanía de datos por diseño — no por promesa contractual.
-      La <a href="/es/es-retirada-openevidence-ue-reino-unido-sanidad-on-premise-nube-soberana/" class="underline font-bold">retirada de OpenEvidence de la UE y Reino Unido</a> muestra por qué las plataformas de IA clínica necesitan límites controlables de inferencia, recuperación, registros y subencargados.
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <!-- Section 4: Solution Overview — 3 Core Pillars -->
-
-  <Features2
-    title="Tres pilares de MedCore Private AI"
-    subtitle="Una plataforma completa de IA médica local diseñada desde cero para la soberanía de datos sanitarios."
-    columns={3}
-    items={[
-      {
-        title: 'LLMs de Grado Médico',
-        description:
-          'Modelos de lenguaje específicamente diseñados entrenados en literatura médica, directrices clínicas y terminología sanitaria. Ninguna IA de propósito general reutilizada para la medicina.',
-        icon: 'tabler:brain',
-      },
-      {
-        title: 'Despliegue Completamente Local',
-        description:
-          'Cada componente se ejecuta en tu infraestructura. Los datos de pacientes nunca salen de tus instalaciones. Soberanía de datos completa sin dependencias externas.',
-        icon: 'tabler:server',
-      },
-      {
-        title: 'Ajuste Fino y RAG',
-        description:
-          'Personaliza modelos con tus protocolos, formularios y conocimiento institucional. La Generación Aumentada por Recuperación fundamenta las respuestas en tus propios datos médicos verificados.',
-        icon: 'tabler:adjustments',
-      },
-    ]}
-  />
 
   <!-- Section 5: Capabilities — Deep Dives -->
 
@@ -774,45 +687,6 @@ const metadata = {
         icon: 'tabler:alert-triangle',
       },
     ]}
-  />
-
-  <!-- Resumen del Proceso -->
-
-  <Steps
-    title="Nuestro proceso de colaboración"
-    subtitle="Un camino claro desde el primer contacto hasta la asociación a largo plazo."
-    isReversed={true}
-    items={[
-      {
-        title: 'Consulta gratuita',
-        description: 'Discutimos tu consulta, entendemos tus problemas y determinamos si una Hoja de Ruta de Automatización es la solución adecuada para ti.',
-        icon: 'tabler:phone',
-      },
-      {
-        title: 'Hoja de ruta de automatización (5-7 días)',
-        description: 'Evaluación exhaustiva de flujos de datos, postura de cumplimiento y oportunidades de automatización. Gratuita, sin obligaciones.',
-        icon: 'tabler:clipboard-check',
-      },
-      {
-        title: 'Propuesta de implementación',
-        description: 'Basándonos en los resultados de tu hoja de ruta, presentamos una propuesta a precio fijo para las automatizaciones que entregarán el mayor impacto.',
-        icon: 'tabler:file-invoice',
-      },
-      {
-        title: 'Construir y desplegar',
-        description: 'Implementamos automatizaciones con controles de cumplimiento integrados. Mejoras inmediatas en 2-4 semanas, transformaciones completas en 6-12 semanas.',
-        icon: 'tabler:rocket',
-      },
-      {
-        title: 'Asociación continua',
-        description: 'Soporte mensual, actualizaciones de cumplimiento, monitorización del rendimiento e identificación de nuevas oportunidades de automatización.',
-        icon: 'tabler:heart-handshake',
-      },
-    ]}
-    image={{
-      src: '~/assets/images/business-meeting.jpg',
-      alt: 'Compromiso empresarial profesional',
-    }}
   />
 
   <!-- CTA -->

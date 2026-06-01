@@ -3,7 +3,6 @@ import Layout from '~/layouts/PageLayout.astro';
 import JsonLd from '~/components/common/JsonLd.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
-import Stats from '~/components/widgets/Stats.astro';
 import Content from '~/components/widgets/Content.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 import Features from '~/components/widgets/Features.astro';
@@ -12,7 +11,6 @@ import Note from '~/components/widgets/Note.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import MedicalChat from '~/components/widgets/MedicalChat.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
-import dataSecurityImg from '~/assets/images/data-security-healthcare.svg';
 
 const metadata = {
   title: 'MedCore: Medical-Grade On-Premise AI',
@@ -82,91 +80,6 @@ const metadata = {
   <!-- Embedded Medical AI Demo Chat -->
 
   <MedicalChat />
-
-  <!-- Section 2: Trust Stats -->
-
-  <Stats
-    stats={[
-      { title: '100% On-Premise', amount: 'Zero Cloud', icon: 'tabler:server' },
-      { title: 'Medical-Grade LLMs', amount: 'Purpose-Built', icon: 'tabler:brain' },
-      { title: 'Multi-Language', amount: 'EU-Wide', icon: 'tabler:language' },
-      { title: 'Compliance-First', amount: 'By Design', icon: 'tabler:shield-check' },
-    ]}
-  />
-
-  <!-- Section 3: Problem -->
-
-  <Content
-    isReversed
-    tagline="The Challenge"
-    title="Cloud AI Does Not Meet Healthcare Data Residency Requirements"
-    items={[
-      {
-        title: 'Patient data leaves your control',
-        description:
-          'Cloud-based AI sends sensitive medical records to external servers in jurisdictions you cannot control — violating the fundamental principle of data sovereignty.',
-      },
-      {
-        title: 'Regulatory exposure grows with scale',
-        description:
-          'Medium healthcare organizations process thousands of patient records. Each cloud AI interaction multiplies your GDPR and HIPAA compliance risk.',
-      },
-      {
-        title: 'Generic models lack medical accuracy',
-        description:
-          'General-purpose AI models produce hallucinations and errors when applied to medical terminology, drug interactions, and clinical workflows.',
-      },
-      {
-        title: 'Vendor lock-in limits your options',
-        description:
-          'Proprietary cloud AI platforms lock you into their ecosystem, pricing models, and data handling practices — with no transparency into how patient data is used.',
-      },
-    ]}
-    image={{
-      src: dataSecurityImg,
-      alt: 'Data security concerns in healthcare',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        Healthcare needs a different approach to AI
-      </h3>
-      When patient data is involved, "trust the cloud provider" is not a compliance strategy. You need AI infrastructure that keeps data sovereign by design — not by contractual promise.
-      The <a href="/openevidence-eu-uk-withdrawal-private-on-prem-sovereign-cloud/" class="underline font-bold">OpenEvidence EU/UK withdrawal</a> shows why clinical AI platforms need controllable inference, retrieval, logging, and subprocessor boundaries.
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <!-- Section 4: Solution Overview — 3 Core Pillars -->
-
-  <Features2
-    title="Three pillars of MedCore Private AI"
-    subtitle="A complete on-premise medical AI platform designed from the ground up for healthcare data sovereignty."
-    columns={3}
-    items={[
-      {
-        title: 'Medical-Grade LLMs',
-        description:
-          'Purpose-built language models trained on medical literature, clinical guidelines, and healthcare terminology. Not general-purpose AI repurposed for medicine.',
-        icon: 'tabler:brain',
-      },
-      {
-        title: 'Full On-Premise Deployment',
-        description:
-          'Every component runs on your infrastructure. Patient data never leaves your premises. Complete data sovereignty with zero external dependencies.',
-        icon: 'tabler:server',
-      },
-      {
-        title: 'Fine-Tuning & RAG',
-        description:
-          'Customize models with your protocols, formularies, and institutional knowledge. Retrieval-Augmented Generation grounds responses in your own verified medical data.',
-        icon: 'tabler:adjustments',
-      },
-    ]}
-  />
 
   <!-- Section 5: Capabilities — Deep Dives -->
 
@@ -614,45 +527,6 @@ const metadata = {
         icon: 'tabler:alert-triangle',
       },
     ]}
-  />
-
-  <!-- Our Engagement Process -->
-
-  <Steps
-    title="Our engagement process"
-    subtitle="A clear path from first contact to long-term partnership."
-    isReversed={true}
-    items={[
-      {
-        title: 'Free consultation',
-        description: 'We discuss your practice, understand your pain points, and determine if an Automation Roadmap is right for you.',
-        icon: 'tabler:phone',
-      },
-      {
-        title: 'Automation Roadmap (5-7 days)',
-        description: 'Thorough assessment of data flows, compliance posture, and automation opportunities. Free, no obligations.',
-        icon: 'tabler:clipboard-check',
-      },
-      {
-        title: 'Implementation proposal',
-        description: 'Based on your Roadmap findings, we present a fixed-price proposal for the automations that will deliver the most impact.',
-        icon: 'tabler:file-invoice',
-      },
-      {
-        title: 'Build & deploy',
-        description: 'We implement automations with compliance controls built in. Quick wins in 2-4 weeks, full transformations in 6-12 weeks.',
-        icon: 'tabler:rocket',
-      },
-      {
-        title: 'Ongoing partnership',
-        description: 'Monthly support, compliance updates, performance monitoring, and identification of new automation opportunities.',
-        icon: 'tabler:heart-handshake',
-      },
-    ]}
-    image={{
-      src: '~/assets/images/business-meeting.jpg',
-      alt: 'Professional business engagement',
-    }}
   />
 
   <!-- CTA -->

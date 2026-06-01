@@ -1,0 +1,149 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+import imgTrustAuto from '~/assets/images/trustauto.png';
+
+const metadata = {
+  title: 'TrustAuto — GDPR-Safe AI Automation for Healthcare Practices',
+  description:
+    'TrustAuto automates clinical admin workflows — referrals, discharge summaries, follow-up scheduling — with built-in GDPR and HIPAA compliance, saving 10–15 hours per week.',
+  openGraph: {
+    images: [{ url: '~/assets/images/trustauto.png' }],
+  },
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero -->
+  <Hero
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Book Automation Roadmap',
+        href: '/automation-roadmap',
+        icon: 'tabler:clipboard-check',
+      },
+      {
+        variant: 'secondary',
+        text: 'See All Products',
+        href: '#products',
+      },
+    ]}
+  >
+    <Fragment slot="title">
+      <img
+        src={imgTrustAuto.src}
+        alt="TrustAuto logo"
+        width="72"
+        height="72"
+        class="mx-auto mb-4 object-contain"
+      />
+      TrustAuto<br />
+      <span class="text-accent dark:text-white highlight">GDPR-Safe AI Automation for Healthcare</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Reclaim 10–15 hours per week of clinical admin time. TrustAuto handles referral letters,
+      discharge summaries, follow-up scheduling, and insurance documentation — automatically,
+      accurately, and with full GDPR and HIPAA compliance built in so you never have to choose
+      between efficiency and patient data protection.
+    </Fragment>
+  </Hero>
+
+  <!-- Key Features -->
+  <Features
+    id="features"
+    tagline="What TrustAuto does"
+    title="Clinical Admin on Autopilot — Compliantly"
+    subtitle="Purpose-built for independent practices, clinics, and dental offices in Spain and the EU that need to automate without compromising patient data."
+    items={[
+      {
+        title: 'Referral Letter Automation',
+        description:
+          'Generates structured referral letters from clinical notes in seconds — reviewed by the clinician, sent automatically.',
+        icon: 'tabler:send',
+      },
+      {
+        title: 'Discharge Summary Generation',
+        description:
+          'Drafts discharge summaries from consultation notes, aligned to your practice template and ready for clinician sign-off.',
+        icon: 'tabler:file-text',
+      },
+      {
+        title: 'Follow-Up Scheduling',
+        description:
+          'Intelligently schedules follow-up appointments based on clinical protocols, patient history, and calendar availability.',
+        icon: 'tabler:calendar-check',
+      },
+      {
+        title: 'Insurance & Billing Prep',
+        description:
+          'Pre-populates insurance claim forms and billing codes from structured clinical data, reducing manual entry errors.',
+        icon: 'tabler:receipt',
+      },
+      {
+        title: 'On-Premise or Hybrid Deployment',
+        description:
+          'Runs fully on your own infrastructure via MedCore, or in a GDPR-compliant EU cloud — your choice, your data.',
+        icon: 'tabler:server',
+      },
+      {
+        title: 'Workflow Integrations',
+        description:
+          'Connects to your existing EHR, calendar, and messaging systems via standard APIs — no rip-and-replace required.',
+        icon: 'tabler:plug',
+      },
+    ]}
+  />
+
+  <!-- Detail Content -->
+  <Content
+    isReversed
+    tagline="The Problem"
+    title="Manual Admin Is Costing Your Practice More Than Time"
+    items={[
+      {
+        title: '10–15 hours per week on paperwork',
+        description:
+          'The average independent practice in Spain spends over 12 hours weekly on administrative tasks that AI can handle.',
+      },
+      {
+        title: 'Compliance risk from manual processes',
+        description:
+          'Manual copy-paste workflows are the leading source of GDPR breaches in healthcare — TrustAuto eliminates them.',
+      },
+      {
+        title: 'Delayed patient follow-up',
+        description:
+          'Scheduling backlogs lead to missed follow-ups and poorer patient outcomes. Automation closes the gap.',
+      },
+    ]}
+    image={{ src: imgTrustAuto, alt: 'TrustAuto — AI automation for healthcare' }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Automate the routine. Focus on the patient.
+      </h3>
+      TrustAuto handles the paperwork so your clinical team can spend more time on what matters —
+      with every automation step compliant, auditable, and under your control.
+    </Fragment>
+  </Content>
+
+  <!-- CTA -->
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Book Automation Roadmap',
+        href: '/automation-roadmap',
+        icon: 'tabler:clipboard-check',
+      },
+    ]}
+    title="Ready to automate your clinical admin?"
+    subtitle="Book a free Automation Roadmap session and we'll identify the 3 highest-impact workflows to automate in your practice."
+  />
+</Layout>

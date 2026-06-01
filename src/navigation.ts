@@ -1,11 +1,36 @@
 import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
 import { useTranslations, getLocalizedPath } from './i18n/utils';
 import type { Locale } from './i18n/utils';
+import type { ImageMetadata } from 'astro';
+
+import imgTrustPrompt from '~/assets/images/trustprompt.png';
+import imgTrustCore from '~/assets/images/trustcore.png';
+import imgTrustAuto from '~/assets/images/trustauto.png';
 
 export function getHeaderData(lang: Locale = 'en') {
   const t = useTranslations(lang);
   return {
     links: [
+      {
+        text: t('nav.products'),
+        links: [
+          {
+            text: 'TrustPrompt',
+            href: getLocalizedPath('/products/trustprompt', lang),
+            logo: imgTrustPrompt as ImageMetadata,
+          },
+          {
+            text: 'TrustCore',
+            href: getLocalizedPath('/products/trustcore', lang),
+            logo: imgTrustCore as ImageMetadata,
+          },
+          {
+            text: 'TrustAuto',
+            href: getLocalizedPath('/products/trustauto', lang),
+            logo: imgTrustAuto as ImageMetadata,
+          },
+        ],
+      },
       {
         text: t('nav.services'),
         links: [
@@ -52,6 +77,26 @@ export function getFooterData(lang: Locale = 'en') {
   const t = useTranslations(lang);
   return {
     links: [
+      {
+        title: t('footer.products'),
+        links: [
+          {
+            text: 'TrustPrompt',
+            href: getLocalizedPath('/products/trustprompt', lang),
+            logo: imgTrustPrompt as ImageMetadata,
+          },
+          {
+            text: 'TrustCore',
+            href: getLocalizedPath('/products/trustcore', lang),
+            logo: imgTrustCore as ImageMetadata,
+          },
+          {
+            text: 'TrustAuto',
+            href: getLocalizedPath('/products/trustauto', lang),
+            logo: imgTrustAuto as ImageMetadata,
+          },
+        ],
+      },
       {
         title: t('footer.services'),
         links: [

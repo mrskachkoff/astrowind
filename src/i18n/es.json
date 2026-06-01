@@ -8,7 +8,8 @@
     "blog": "Blog",
     "about": "Nosotros",
     "contact": "Contacto",
-    "bookFreeAudit": "Solicitar Hoja de Ruta"
+    "bookFreeAudit": "Solicitar Hoja de Ruta",
+    "products": "Productos"
   },
   "footer": {
     "services": "Servicios",
@@ -25,7 +26,8 @@
     "privacyPolicy": "Política de Privacidad",
     "termsOfService": "Términos de Servicio",
     "terms": "Términos",
-    "allRightsReserved": "Todos los derechos reservados"
+    "allRightsReserved": "Todos los derechos reservados",
+    "products": "Productos"
   },
   "common": {
     "getYourFreeAudit": "Solicite Su Hoja de Ruta Gratuita",

@@ -1,0 +1,150 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+import imgTrustCore from '~/assets/images/trustcore.png';
+
+const metadata = {
+  title: 'TrustCore — Infraestructura de Cumplimiento de IA para Sanidad',
+  description:
+    'TrustCore es el motor de cumplimiento que impulsa los productos Futurion. Controles RGPD, HIPAA y Reglamento de IA integrados en la capa de plataforma — cada flujo de trabajo es conforme por arquitectura.',
+  openGraph: {
+    images: [{ url: '~/assets/images/trustcore.png' }],
+  },
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero -->
+  <Hero
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Solicitar Hoja de Ruta',
+        href: '/es/hoja-de-ruta-de-automatizacion',
+        icon: 'tabler:clipboard-check',
+      },
+      {
+        variant: 'secondary',
+        text: 'Ver Todos los Productos',
+        href: '#productos',
+      },
+    ]}
+  >
+    <Fragment slot="title">
+      <img
+        src={imgTrustCore.src}
+        alt="Logo TrustCore"
+        width="72"
+        height="72"
+        class="mx-auto mb-4 object-contain"
+      />
+      TrustCore<br />
+      <span class="text-accent dark:text-white highlight">Infraestructura de Cumplimiento de IA para Sanidad</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      TrustCore es la capa de cumplimiento y gobernanza que sustenta todos los productos Futurion.
+      Codifica los controles del RGPD, HIPAA y el Reglamento de IA de la UE a nivel de plataforma
+      — garantizando que cada flujo de datos, inferencia de modelo y paso de automatización en tu
+      consulta sea conforme por arquitectura, no solo por política.
+    </Fragment>
+  </Hero>
+
+  <!-- Características clave -->
+  <Features
+    id="caracteristicas"
+    tagline="Qué hace TrustCore"
+    title="Cumplimiento Integrado en la Plataforma"
+    subtitle="No es una casilla a marcar. Es una base. TrustCore proporciona a las organizaciones sanitarias la capa de gobernanza necesaria para desplegar IA de forma responsable a escala."
+    items={[
+      {
+        title: 'Controles de Residencia de Datos',
+        description:
+          'Aplica estrictos límites de residencia de datos — los datos del paciente nunca salen de las regiones designadas o de la infraestructura on-premise.',
+        icon: 'tabler:map-pin',
+      },
+      {
+        title: 'Control de Acceso Basado en Roles',
+        description:
+          'RBAC granular alineado con los roles sanitarios: médicos, administrativos e IT tienen acceso con alcance preciso — nada más.',
+        icon: 'tabler:users',
+      },
+      {
+        title: 'Seguimiento del Consentimiento',
+        description:
+          'Vincula automáticamente cada actividad de tratamiento de datos a su base jurídica del RGPD y realiza un seguimiento completo del ciclo de vida del consentimiento.',
+        icon: 'tabler:checkup-list',
+      },
+      {
+        title: 'Clasificación de Riesgo del Reglamento de IA',
+        description:
+          'Clasifica cada caso de uso de IA según el Reglamento de IA de la UE y aplica los controles apropiados para sistemas de IA médica de alto riesgo.',
+        icon: 'tabler:certificate',
+      },
+      {
+        title: 'Motor de Políticas en Tiempo Real',
+        description:
+          'Las políticas se evalúan en tiempo de ejecución — bloquea, redirige o alerta sobre cualquier acción que incumpla una norma antes de que se ejecute.',
+        icon: 'tabler:radar',
+      },
+      {
+        title: 'Evidencias e Informes',
+        description:
+          'Genera automáticamente paquetes de evidencias para EIPD, registros de actividades de tratamiento del Artículo 30 y paneles de cumplimiento.',
+        icon: 'tabler:report',
+      },
+    ]}
+  />
+
+  <!-- Contenido detallado -->
+  <Content
+    isReversed
+    tagline="El Problema"
+    title="El Cumplimiento de la IA Sanitaria No Puede Ser un Añadido"
+    items={[
+      {
+        title: 'Cumplimiento añadido tras el despliegue',
+        description:
+          'Añadir controles RGPD a los sistemas de IA después del lanzamiento es caro, frágil y a menudo incompleto — los reguladores lo detectan.',
+      },
+      {
+        title: 'Aplicación de políticas fragmentada',
+        description:
+          'Distintas herramientas, distintas normas, distintas pistas de auditoría. TrustCore unifica la gobernanza en todo tu stack de IA.',
+      },
+      {
+        title: 'Toma de decisiones de IA opaca',
+        description:
+          'Los reguladores sanitarios exigen explicabilidad. TrustCore captura el contexto de decisión en cada paso.',
+      },
+    ]}
+    image={{ src: imgTrustCore, alt: 'TrustCore — infraestructura de cumplimiento de IA' }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Cumplimiento por arquitectura, no por política
+      </h3>
+      TrustCore integra los controles del RGPD, HIPAA y el Reglamento de IA en la capa de
+      infraestructura para que tu equipo pueda lanzar funcionalidades de IA sin cuellos de botella
+      de revisión de cumplimiento.
+    </Fragment>
+  </Content>
+
+  <!-- CTA -->
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Solicitar Hoja de Ruta',
+        href: '/es/hoja-de-ruta-de-automatizacion',
+        icon: 'tabler:clipboard-check',
+      },
+    ]}
+    title="¿Listo para construir sobre una base conforme?"
+    subtitle="Reserva una sesión gratuita de Hoja de Ruta de Automatización y te mostraremos cómo TrustCore se adapta a tus obligaciones regulatorias."
+  />
+</Layout>

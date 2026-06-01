@@ -1,0 +1,149 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+import imgTrustAuto from '~/assets/images/trustauto.png';
+
+const metadata = {
+  title: 'TrustAuto — Automatización de IA Conforme con el RGPD para Consultorios',
+  description:
+    'TrustAuto automatiza los flujos de trabajo administrativos clínicos — derivaciones, informes de alta, programación de seguimientos — con cumplimiento RGPD e HIPAA integrado, ahorrando 10-15 horas semanales.',
+  openGraph: {
+    images: [{ url: '~/assets/images/trustauto.png' }],
+  },
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero -->
+  <Hero
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Solicitar Hoja de Ruta',
+        href: '/es/hoja-de-ruta-de-automatizacion',
+        icon: 'tabler:clipboard-check',
+      },
+      {
+        variant: 'secondary',
+        text: 'Ver Todos los Productos',
+        href: '#productos',
+      },
+    ]}
+  >
+    <Fragment slot="title">
+      <img
+        src={imgTrustAuto.src}
+        alt="Logo TrustAuto"
+        width="72"
+        height="72"
+        class="mx-auto mb-4 object-contain"
+      />
+      TrustAuto<br />
+      <span class="text-accent dark:text-white highlight">Automatización de IA Conforme con el RGPD para Sanidad</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Recupera 10–15 horas semanales de administración clínica. TrustAuto gestiona cartas de
+      derivación, informes de alta, programación de seguimientos y documentación de seguros — de
+      forma automática, precisa y con cumplimiento RGPD e HIPAA integrado para que nunca tengas
+      que elegir entre eficiencia y protección de datos del paciente.
+    </Fragment>
+  </Hero>
+
+  <!-- Características clave -->
+  <Features
+    id="caracteristicas"
+    tagline="Qué hace TrustAuto"
+    title="Administración Clínica en Piloto Automático — De Forma Conforme"
+    subtitle="Creado específicamente para consultorios independientes, clínicas y clínicas dentales en España y la UE que necesitan automatizar sin comprometer los datos del paciente."
+    items={[
+      {
+        title: 'Automatización de Cartas de Derivación',
+        description:
+          'Genera cartas de derivación estructuradas a partir de notas clínicas en segundos — revisadas por el médico, enviadas automáticamente.',
+        icon: 'tabler:send',
+      },
+      {
+        title: 'Generación de Informes de Alta',
+        description:
+          'Redacta informes de alta a partir de notas de consulta, alineados con la plantilla de tu consulta y listos para la firma del facultativo.',
+        icon: 'tabler:file-text',
+      },
+      {
+        title: 'Programación de Seguimientos',
+        description:
+          'Programa citas de seguimiento de forma inteligente basándose en protocolos clínicos, historial del paciente y disponibilidad de agenda.',
+        icon: 'tabler:calendar-check',
+      },
+      {
+        title: 'Preparación de Seguros y Facturación',
+        description:
+          'Rellena previamente formularios de reclamaciones de seguros y códigos de facturación a partir de datos clínicos estructurados, reduciendo errores de entrada manual.',
+        icon: 'tabler:receipt',
+      },
+      {
+        title: 'Despliegue On-Premise o Híbrido',
+        description:
+          'Funciona completamente en tu propia infraestructura mediante MedCore, o en la nube europea conforme con el RGPD — tú eliges, tus datos.',
+        icon: 'tabler:server',
+      },
+      {
+        title: 'Integraciones de Flujo de Trabajo',
+        description:
+          'Se conecta a tus sistemas existentes de HCE, calendario y mensajería mediante APIs estándar — sin necesidad de reemplazar lo que ya tienes.',
+        icon: 'tabler:plug',
+      },
+    ]}
+  />
+
+  <!-- Contenido detallado -->
+  <Content
+    isReversed
+    tagline="El Problema"
+    title="La Administración Manual le Cuesta a Tu Consulta Más que Tiempo"
+    items={[
+      {
+        title: '10–15 horas semanales en papeleo',
+        description:
+          'El consultorio independiente medio en España dedica más de 12 horas semanales a tareas administrativas que la IA puede gestionar.',
+      },
+      {
+        title: 'Riesgo de cumplimiento por procesos manuales',
+        description:
+          'Los flujos de trabajo de copiar y pegar manualmente son la principal fuente de brechas del RGPD en sanidad — TrustAuto los elimina.',
+      },
+      {
+        title: 'Retrasos en el seguimiento del paciente',
+        description:
+          'Los retrasos en la programación provocan seguimientos perdidos y peores resultados clínicos. La automatización cierra esa brecha.',
+      },
+    ]}
+    image={{ src: imgTrustAuto, alt: 'TrustAuto — automatización de IA para sanidad' }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Automatiza lo rutinario. Céntrate en el paciente.
+      </h3>
+      TrustAuto se encarga del papeleo para que tu equipo clínico pueda dedicar más tiempo a lo que
+      importa — con cada paso de automatización conforme, auditable y bajo tu control.
+    </Fragment>
+  </Content>
+
+  <!-- CTA -->
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Solicitar Hoja de Ruta',
+        href: '/es/hoja-de-ruta-de-automatizacion',
+        icon: 'tabler:clipboard-check',
+      },
+    ]}
+    title="¿Listo para automatizar tu administración clínica?"
+    subtitle="Reserva una sesión gratuita de Hoja de Ruta de Automatización e identificaremos los 3 flujos de trabajo de mayor impacto para automatizar en tu consulta."
+  />
+</Layout>

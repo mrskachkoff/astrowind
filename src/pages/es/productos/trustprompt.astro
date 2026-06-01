@@ -1,0 +1,149 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+import imgTrustPrompt from '~/assets/images/trustprompt.png';
+
+const metadata = {
+  title: 'TrustPrompt — Seguridad de Prompts de IA para Sanidad',
+  description:
+    'TrustPrompt protege cada interacción de IA en tu consulta. Previene la inyección de prompts, aplica guardrails conformes con el RGPD y audita automáticamente cada intercambio con el LLM.',
+  openGraph: {
+    images: [{ url: '~/assets/images/trustprompt.png' }],
+  },
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero -->
+  <Hero
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Solicitar Hoja de Ruta',
+        href: '/es/hoja-de-ruta-de-automatizacion',
+        icon: 'tabler:clipboard-check',
+      },
+      {
+        variant: 'secondary',
+        text: 'Ver Todos los Productos',
+        href: '#productos',
+      },
+    ]}
+  >
+    <Fragment slot="title">
+      <img
+        src={imgTrustPrompt.src}
+        alt="Logo TrustPrompt"
+        width="72"
+        height="72"
+        class="mx-auto mb-4 object-contain"
+      />
+      TrustPrompt<br />
+      <span class="text-accent dark:text-white highlight">Seguridad de Prompts de IA para Sanidad</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Protege cada interacción de IA en tu consulta contra inyecciones de prompts, fuga de datos y
+      violaciones de cumplimiento. TrustPrompt aplica guardrails conformes con el RGPD en la capa
+      del LLM — auditando, filtrando y registrando automáticamente cada intercambio para que tu
+      equipo clínico confíe en la IA sin poner en riesgo los datos de los pacientes.
+    </Fragment>
+  </Hero>
+
+  <!-- Características clave -->
+  <Features
+    id="caracteristicas"
+    tagline="Qué hace TrustPrompt"
+    title="Interacciones de IA Seguras por Diseño"
+    subtitle="Creado específicamente para organizaciones sanitarias que dependen de los LLM pero no pueden comprometer el cumplimiento normativo ni la privacidad del paciente."
+    items={[
+      {
+        title: 'Escudo contra Inyección de Prompts',
+        description:
+          'Detecta y bloquea los intentos de inyección de prompts antes de que lleguen al LLM, protegiendo los datos del paciente y los flujos de trabajo clínicos.',
+        icon: 'tabler:shield-lock',
+      },
+      {
+        title: 'Guardrails Conformes con el RGPD',
+        description:
+          'Enmascara automáticamente datos personales y datos especiales de salud en prompts y respuestas — conforme por defecto, no por política.',
+        icon: 'tabler:lock',
+      },
+      {
+        title: 'Registro de Auditoría Inmutable',
+        description:
+          'Cada prompt y respuesta queda registrado con una pista de auditoría a prueba de manipulaciones, lista para revisiones de EIPD e inspecciones regulatorias.',
+        icon: 'tabler:file-certificate',
+      },
+      {
+        title: 'Proxy de Baja Latencia',
+        description:
+          'Se sitúa de forma transparente entre tu aplicación y la API del LLM — sin cambios en tu flujo de trabajo actual, con menos de 5 ms de sobrecarga.',
+        icon: 'tabler:bolt',
+      },
+      {
+        title: 'Reglas como Código',
+        description:
+          'Define reglas personalizadas en YAML sencillo: bloquea temas, impone formatos de respuesta o enruta consultas sensibles a un modelo on-premise.',
+        icon: 'tabler:code',
+      },
+      {
+        title: 'Soporte Multi-Modelo',
+        description:
+          'Compatible con OpenAI, Anthropic Claude, Mistral y LLMs locales mediante MedCore — una única capa de políticas para todo tu stack de IA.',
+        icon: 'tabler:topology-star',
+      },
+    ]}
+  />
+
+  <!-- Contenido detallado -->
+  <Content
+    isReversed
+    tagline="El Problema"
+    title="La IA Sanitaria sin Guardrails es un Riesgo de Cumplimiento"
+    items={[
+      {
+        title: 'Exposición de datos no controlada',
+        description:
+          'El personal pega habitualmente notas clínicas en asistentes de IA de uso general, generando violaciones del RGPD no documentadas.',
+      },
+      {
+        title: 'Pista de auditoría invisible',
+        description:
+          'Los reguladores esperan un registro completo de las decisiones clínicas asistidas por IA — la mayoría de las herramientas no lo proporcionan.',
+      },
+      {
+        title: 'Riesgo de manipulación de prompts',
+        description:
+          'Los prompts adversariales pueden engañar a los LLM para que ignoren las instrucciones del sistema y expongan contexto sensible.',
+      },
+    ]}
+    image={{ src: imgTrustPrompt, alt: 'TrustPrompt — seguridad de prompts de IA' }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Del riesgo de cumplimiento a la prueba de cumplimiento
+      </h3>
+      TrustPrompt convierte cada interacción de IA en un evento documentado, auditable y conforme
+      con el RGPD — sin ralentizar a tu equipo clínico.
+    </Fragment>
+  </Content>
+
+  <!-- CTA -->
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Solicitar Hoja de Ruta',
+        href: '/es/hoja-de-ruta-de-automatizacion',
+        icon: 'tabler:clipboard-check',
+      },
+    ]}
+    title="¿Listo para asegurar tus interacciones de IA?"
+    subtitle="Reserva una sesión gratuita de Hoja de Ruta de Automatización y mapearemos TrustPrompt a tus requisitos de cumplimiento específicos."
+  />
+</Layout>

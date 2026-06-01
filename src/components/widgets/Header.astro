@@ -10,12 +10,14 @@ import { getHomePermalink } from '~/utils/permalinks';
 import { trimSlash, getAsset } from '~/utils/permalinks';
 import { getLangFromUrl } from '~/i18n/utils';
 import type { CallToAction } from '~/types';
+import type { ImageMetadata } from 'astro';
 
 interface Link {
   text?: string;
   href?: string;
   ariaLabel?: string;
   icon?: string;
+  logo?: ImageMetadata;
 }
 
 interface MenuLink extends Link {
@@ -105,15 +107,16 @@ const homeHref = lang === 'es' ? '/es/' : getHomePermalink();
                   </button>
                   <ul class="dropdown-menu md:backdrop-blur-md rounded-card md:absolute pl-4 md:pl-0 md:hidden font-medium md:min-w-[200px] drop-shadow-xl"
                       style="background-image: var(--grad-chrome); border: 1px solid rgba(255,255,255,.10);">
-                    {links.map(({ text: text2, href: href2 }) => (
+                    {links.map(({ text: text2, href: href2, logo: logo2 }) => (
                       <li>
                         <a
                           class:list={[
-                            'first:rounded-t last:rounded-b hover:bg-white/10 text-white/85 hover:text-white py-2 px-5 block whitespace-no-wrap transition-colors duration-150',
+                            'first:rounded-t last:rounded-b hover:bg-white/10 text-white/85 hover:text-white py-2 px-5 flex items-center gap-2 whitespace-no-wrap transition-colors duration-150',
                             { 'aw-link-active text-white': href2 === currentPath },
                           ]}
                           href={href2}
                         >
+                          {logo2 && <img src={logo2.src} width="20" height="20" class="object-contain flex-shrink-0" alt="" />}
                           {text2}
                         </a>
                       </li>

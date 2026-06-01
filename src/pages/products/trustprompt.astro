@@ -1,0 +1,149 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+import imgTrustPrompt from '~/assets/images/trustprompt.png';
+
+const metadata = {
+  title: 'TrustPrompt — AI Prompt Security for Healthcare',
+  description:
+    'TrustPrompt guards every AI interaction in your healthcare practice. Prevent prompt injection, enforce GDPR-compliant guardrails, and audit every LLM exchange automatically.',
+  openGraph: {
+    images: [{ url: '~/assets/images/trustprompt.png' }],
+  },
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero -->
+  <Hero
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Book Automation Roadmap',
+        href: '/automation-roadmap',
+        icon: 'tabler:clipboard-check',
+      },
+      {
+        variant: 'secondary',
+        text: 'See All Products',
+        href: '#products',
+      },
+    ]}
+  >
+    <Fragment slot="title">
+      <img
+        src={imgTrustPrompt.src}
+        alt="TrustPrompt logo"
+        width="72"
+        height="72"
+        class="mx-auto mb-4 object-contain"
+      />
+      TrustPrompt<br />
+      <span class="text-accent dark:text-white highlight">AI Prompt Security for Healthcare</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Guard every AI interaction in your practice against prompt injection, data leakage, and
+      compliance violations. TrustPrompt enforces GDPR-aware guardrails at the LLM layer —
+      automatically auditing, filtering, and logging every exchange so your clinical team can trust
+      AI outputs without risking patient data.
+    </Fragment>
+  </Hero>
+
+  <!-- Key Features -->
+  <Features
+    id="features"
+    tagline="What TrustPrompt does"
+    title="Secure AI Interactions by Design"
+    subtitle="Purpose-built for healthcare organisations that rely on LLMs but cannot compromise on compliance or patient privacy."
+    items={[
+      {
+        title: 'Prompt Injection Shield',
+        description:
+          'Detects and blocks prompt injection attempts before they reach your LLM, protecting patient data and clinical workflows.',
+        icon: 'tabler:shield-lock',
+      },
+      {
+        title: 'GDPR-Aware Guardrails',
+        description:
+          'Automatically masks PII and special-category health data in prompts and completions — compliant by default, not by policy.',
+        icon: 'tabler:lock',
+      },
+      {
+        title: 'Immutable Audit Log',
+        description:
+          'Every prompt and response is logged with a tamper-proof audit trail, ready for DPIA reviews and regulatory inspection.',
+        icon: 'tabler:file-certificate',
+      },
+      {
+        title: 'Low-Latency Proxy',
+        description:
+          'Sits transparently between your application and the LLM API — zero changes to your existing workflow, under 5 ms overhead.',
+        icon: 'tabler:bolt',
+      },
+      {
+        title: 'Policy-as-Code Rules',
+        description:
+          'Define custom rules in plain YAML: block topics, enforce response formats, or route sensitive queries to an on-premise model.',
+        icon: 'tabler:code',
+      },
+      {
+        title: 'Multi-Model Support',
+        description:
+          'Works with OpenAI, Anthropic Claude, Mistral, and local LLMs running via MedCore — one policy layer for your entire AI stack.',
+        icon: 'tabler:topology-star',
+      },
+    ]}
+  />
+
+  <!-- Detail Content -->
+  <Content
+    isReversed
+    tagline="The Problem"
+    title="Healthcare AI Without Guardrails Is a Compliance Liability"
+    items={[
+      {
+        title: 'Uncontrolled data exposure',
+        description:
+          'Staff routinely paste patient notes into general-purpose AI assistants, creating undocumented GDPR violations.',
+      },
+      {
+        title: 'Invisible audit trail',
+        description:
+          'Regulators expect a full record of AI-assisted clinical decisions — most tools provide none.',
+      },
+      {
+        title: 'Prompt manipulation risk',
+        description:
+          'Adversarial prompts can trick LLMs into ignoring system instructions and exposing sensitive context.',
+      },
+    ]}
+    image={{ src: imgTrustPrompt, alt: 'TrustPrompt — AI prompt security' }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        From compliance risk to compliance proof
+      </h3>
+      TrustPrompt turns every AI interaction into a documented, auditable, GDPR-compliant event —
+      without slowing down your clinical team.
+    </Fragment>
+  </Content>
+
+  <!-- CTA -->
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Book Automation Roadmap',
+        href: '/automation-roadmap',
+        icon: 'tabler:clipboard-check',
+      },
+    ]}
+    title="Ready to secure your AI interactions?"
+    subtitle="Book a free Automation Roadmap session and we'll map TrustPrompt to your specific compliance requirements."
+  />
+</Layout>

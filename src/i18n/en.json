@@ -8,7 +8,8 @@
     "blog": "Blog",
     "about": "About",
     "contact": "Contact",
-    "bookFreeAudit": "Book Automation Roadmap"
+    "bookFreeAudit": "Book Automation Roadmap",
+    "products": "Products"
   },
   "footer": {
     "services": "Services",
@@ -25,7 +26,8 @@
     "privacyPolicy": "Privacy Policy",
     "termsOfService": "Terms of Service",
     "terms": "Terms",
-    "allRightsReserved": "All rights reserved"
+    "allRightsReserved": "All rights reserved",
+    "products": "Products"
   },
   "common": {
     "getYourFreeAudit": "Get Your Free Automation Roadmap",

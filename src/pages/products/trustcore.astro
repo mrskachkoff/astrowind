@@ -1,0 +1,149 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+import imgTrustCore from '~/assets/images/trustcore.png';
+
+const metadata = {
+  title: 'TrustCore — AI Compliance Infrastructure for Healthcare',
+  description:
+    'TrustCore is the compliance engine powering Futurion products. GDPR, HIPAA, and AI Act controls built into the platform layer — so every workflow is compliant by architecture.',
+  openGraph: {
+    images: [{ url: '~/assets/images/trustcore.png' }],
+  },
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero -->
+  <Hero
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Book Automation Roadmap',
+        href: '/automation-roadmap',
+        icon: 'tabler:clipboard-check',
+      },
+      {
+        variant: 'secondary',
+        text: 'See All Products',
+        href: '#products',
+      },
+    ]}
+  >
+    <Fragment slot="title">
+      <img
+        src={imgTrustCore.src}
+        alt="TrustCore logo"
+        width="72"
+        height="72"
+        class="mx-auto mb-4 object-contain"
+      />
+      TrustCore<br />
+      <span class="text-accent dark:text-white highlight">AI Compliance Infrastructure for Healthcare</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      TrustCore is the compliance and governance layer that underpins every Futurion product. It
+      encodes GDPR, HIPAA, and EU AI Act controls at the platform level — ensuring that every data
+      flow, model inference, and automation step in your practice is compliant by architecture, not
+      just by policy.
+    </Fragment>
+  </Hero>
+
+  <!-- Key Features -->
+  <Features
+    id="features"
+    tagline="What TrustCore does"
+    title="Compliance Engineered into the Platform"
+    subtitle="Not a checkbox. A foundation. TrustCore gives healthcare organisations the governance layer they need to deploy AI responsibly at scale."
+    items={[
+      {
+        title: 'Data Residency Controls',
+        description:
+          'Enforce strict data residency boundaries — patient data never leaves designated regions or on-premise infrastructure.',
+        icon: 'tabler:map-pin',
+      },
+      {
+        title: 'Role-Based Access Enforcement',
+        description:
+          'Granular RBAC aligned to healthcare roles: clinicians, administrators, and IT have precisely scoped access — nothing more.',
+        icon: 'tabler:users',
+      },
+      {
+        title: 'Consent & Lawful Basis Tracking',
+        description:
+          'Automatically links every data processing activity to its GDPR lawful basis and tracks consent lifecycle end-to-end.',
+        icon: 'tabler:checkup-list',
+      },
+      {
+        title: 'AI Act Risk Classification',
+        description:
+          'Classifies each AI use case under the EU AI Act framework and enforces the appropriate controls for high-risk medical AI systems.',
+        icon: 'tabler:certificate',
+      },
+      {
+        title: 'Real-Time Policy Engine',
+        description:
+          'Policies are evaluated at runtime — block, redirect, or alert on any action that would breach a compliance rule before it executes.',
+        icon: 'tabler:radar',
+      },
+      {
+        title: 'Evidence & Reporting',
+        description:
+          'Auto-generates DPIA evidence packs, Article 30 records of processing, and board-ready compliance dashboards.',
+        icon: 'tabler:report',
+      },
+    ]}
+  />
+
+  <!-- Detail Content -->
+  <Content
+    isReversed
+    tagline="The Problem"
+    title="Healthcare AI Compliance Cannot Be an Afterthought"
+    items={[
+      {
+        title: 'Compliance bolted on after deployment',
+        description:
+          'Adding GDPR controls to AI systems after go-live is expensive, fragile, and often incomplete — regulators can tell.',
+      },
+      {
+        title: 'Fragmented policy enforcement',
+        description:
+          'Different tools, different rules, different audit trails. TrustCore unifies governance across your entire AI stack.',
+      },
+      {
+        title: 'Opaque AI decision-making',
+        description:
+          'Healthcare regulators require explainability. TrustCore captures decision context at every step.',
+      },
+    ]}
+    image={{ src: imgTrustCore, alt: 'TrustCore — AI compliance infrastructure' }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Compliance by architecture, not policy
+      </h3>
+      TrustCore bakes GDPR, HIPAA, and AI Act controls into the infrastructure layer so your team
+      ships AI features without a compliance review bottleneck.
+    </Fragment>
+  </Content>
+
+  <!-- CTA -->
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Book Automation Roadmap',
+        href: '/automation-roadmap',
+        icon: 'tabler:clipboard-check',
+      },
+    ]}
+    title="Ready to build on a compliant foundation?"
+    subtitle="Book a free Automation Roadmap session and we'll show you how TrustCore maps to your regulatory obligations."
+  />
+</Layout>

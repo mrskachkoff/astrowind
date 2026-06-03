@@ -1,6 +1,6 @@
 {
   "nav": {
-    "services": "Services",
+    "services": "Solutions",
     "medcorePrivateAi": "MedCore Private AI",
     "freeAiAudit": "Automation Roadmap",
     "blog": "Blog",
@@ -10,7 +10,7 @@
     "products": "Products"
   },
   "footer": {
-    "services": "Services",
+    "services": "Solutions",
     "medcorePrivateAi": "MedCore Private AI",
     "freeAiAudit": "Free Automation Roadmap",
     "medicalAiDemo": "Medical AI Demo",

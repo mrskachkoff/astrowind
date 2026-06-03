@@ -1,6 +1,6 @@
 {
   "nav": {
-    "services": "Servicios",
+    "services": "Soluciones",
     "medcorePrivateAi": "MedCore IA Privada",
     "freeAiAudit": "Tu Ruta de Automatización",
     "blog": "Blog",
@@ -10,7 +10,7 @@
     "products": "Productos"
   },
   "footer": {
-    "services": "Servicios",
+    "services": "Soluciones",
     "medcorePrivateAi": "MedCore IA Privada",
     "freeAiAudit": "Ruta de Automatización Gratis",
     "medicalAiDemo": "Demo IA Médica",

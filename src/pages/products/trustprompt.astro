@@ -1,16 +1,25 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import JsonLd from '~/components/common/JsonLd.astro';
+
 import Hero from '~/components/widgets/Hero.astro';
+import Brands from '~/components/widgets/Brands.astro';
 import Content from '~/components/widgets/Content.astro';
 import Features from '~/components/widgets/Features.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Prices from '~/components/widgets/Pricing.astro';
+import Note from '~/components/widgets/Note.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 import imgTrustPrompt from '~/assets/images/trustprompt.png';
+import imgPreview from '~/assets/images/ai-security-padlock.jpg';
 
 const metadata = {
-  title: 'TrustPrompt — AI Prompt Security for Healthcare',
+  title: 'TrustPrompt — Redact Personal Data in the Browser, Before a Prompt Is Sent',
   description:
-    'TrustPrompt guards every AI interaction in your healthcare practice. Prevent prompt injection, enforce GDPR-compliant guardrails, and audit every LLM exchange automatically.',
+    'TrustPrompt is a Chrome and Edge extension that detects and redacts personal data inside the browser, before a prompt reaches a public LLM. Detection runs on your own machine — the model ships in the extension and remote model loads are disabled, so there is no detection server.',
   openGraph: {
     images: [{ url: '~/assets/images/trustprompt.png' }],
   },
@@ -18,19 +27,51 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
+  <JsonLd schema={{
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "TrustPrompt",
+    "applicationCategory": "SecurityApplication",
+    "operatingSystem": "Chrome/Edge (Chromium) 124+",
+    "description": "Chrome and Edge browser extension that detects and redacts personal data inside the browser, before a prompt is sent to a public LLM. Detection runs on the user's own machine: the model ships in the extension and remote model loads are disabled, so there is no detection server. Works on nine LLM web apps, combines 40 checksum-validated regex rules with a 560M-parameter on-device NER model, and is fail-closed by default.",
+    "url": "https://solutions.futurion.es/products/trustprompt/",
+    "inLanguage": "en",
+    "featureList": [
+      "Detection runs on your own machine; there is no detection server",
+      "Redacts personal data before the prompt is sent to the LLM",
+      "Works on nine LLM web apps (ChatGPT, Claude, Gemini, Perplexity, Mistral, Grok, DeepSeek, OpenEvidence)",
+      "40 checksum-validated regex rules plus a 560M-parameter on-device NER model (54 entity types)",
+      "Fail-closed by default: if any stage errors, the send stays blocked",
+      "No telemetry; the only outbound call is an optional metadata-only audit webhook",
+      "Minimal permissions (offscreen, storage, activeTab); placeholder map kept in memory only",
+      "Centrally managed by policy via Group Policy, Microsoft Intune, or Jamf — no license server"
+    ],
+    "author": { "@id": "https://solutions.futurion.es/#organization" },
+    "offers": {
+      "@type": "Offer",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "minPrice": "0",
+        "priceCurrency": "EUR"
+      },
+      "availability": "https://schema.org/InStock"
+    }
+  }} />
+
   <!-- Hero -->
+
   <Hero
     actions={[
       {
         variant: 'primary',
-        text: 'Book Automation Roadmap',
-        href: '/automation-roadmap',
-        icon: 'tabler:clipboard-check',
+        text: 'Contact Us',
+        href: '/contact/',
+        icon: 'tabler:mail',
       },
       {
         variant: 'secondary',
-        text: 'See All Products',
-        href: '#products',
+        text: 'See Pricing',
+        href: '#pricing',
       },
     ]}
   >
@@ -38,112 +79,515 @@ const metadata = {
       <img
         src={imgTrustPrompt.src}
         alt="TrustPrompt logo"
-        width="72"
-        height="72"
-        class="mx-auto mb-4 object-contain"
+        width="80"
+        height="80"
+        class="mx-auto mb-4 object-contain drop-shadow-lg"
       />
       TrustPrompt<br />
-      <span class="text-accent dark:text-white highlight">AI Prompt Security for Healthcare</span>
+      <span class="text-accent dark:text-white highlight">Redact Personal Data in the Browser, Before a Prompt Is Sent</span>
     </Fragment>
 
     <Fragment slot="subtitle">
-      Guard every AI interaction in your practice against prompt injection, data leakage, and
-      compliance violations. TrustPrompt enforces GDPR-aware guardrails at the LLM layer —
-      automatically auditing, filtering, and logging every exchange so your clinical team can trust
-      AI outputs without risking patient data.
+      <span class="hidden sm:inline">
+        TrustPrompt is a Chrome and Edge extension that detects and redacts personal data inside the
+        browser, before a prompt is sent to a public LLM. It runs on nine LLM web apps and replaces
+        each detected value with a typed placeholder — <span class="font-mono text-sm">[FIRST_NAME_1]</span>,
+        <span class="font-mono text-sm">[IBAN_2]</span> — in the composer, then lets the message
+        send. The text you type is analyzed on your own machine and is never transmitted anywhere for
+        detection: the model ships in the extension and remote model loads are disabled, so there is
+        no detection server.
+      </span>
+      <span class="block mb-1 sm:hidden font-bold text-green-700">Detection runs on your machine. Personal data is redacted before the prompt is sent.</span>
+      Built for the clinics and law firms where a pasted prompt can carry patient or client data
+      under the GDPR.
     </Fragment>
   </Hero>
 
-  <!-- Key Features -->
+  <!-- Static preview -->
+
+  <section class="px-4 sm:px-6 pt-0 pb-10 md:pb-14 -mt-6 md:-mt-10">
+    <div class="max-w-4xl mx-auto">
+      <img
+        src={imgPreview.src}
+        alt="Personal data redacted in the browser before a prompt is sent"
+        class="w-full rounded-2xl shadow-2xl object-cover"
+        loading="lazy"
+      />
+    </div>
+  </section>
+
+  <!-- Supported sites -->
+
+  <Brands
+    title="Works on the LLM Sites You Already Use"
+    subtitle="TrustPrompt runs on nine LLM web apps. Alongside the logos shown, it also covers Perplexity, Grok on X, and OpenEvidence — redaction happens in each site's composer before the message is sent."
+    images={[
+      { src: '~/assets/images/openai.png', alt: 'ChatGPT' },
+      { src: '~/assets/images/claude-color.png', alt: 'Claude' },
+      { src: '~/assets/images/gemini-color.png', alt: 'Gemini' },
+      { src: '~/assets/images/mistral.png', alt: 'Mistral' },
+      { src: '~/assets/images/deepseek.png', alt: 'DeepSeek' },
+      { src: '~/assets/images/grok.png', alt: 'Grok' },
+    ]}
+  />
+
+  <!-- What TrustPrompt does -->
+
   <Features
     id="features"
-    tagline="What TrustPrompt does"
-    title="Secure AI Interactions by Design"
-    subtitle="Purpose-built for healthcare organisations that rely on LLMs but cannot compromise on compliance or patient privacy."
+    columns={3}
+    tagline="What TrustPrompt Does"
+    title="Personal Data Is Removed Before It Can Leave the Browser"
+    subtitle="Two things are always true: your prompt text is analyzed on your own machine, and detected values are replaced with placeholders before the message is sent."
     items={[
       {
-        title: 'Prompt Injection Shield',
+        title: 'Detection Runs on Your Machine',
         description:
-          'Detects and blocks prompt injection attempts before they reach your LLM, protecting patient data and clinical workflows.',
+          'The detection model and its weights ship inside the extension, the runtime refuses remote model loads, and there is no external cache. There is no detection server to send text to — by construction, not by policy.',
+        icon: 'tabler:cpu',
+      },
+      {
+        title: 'Redacts Before the Send',
+        description:
+          'Each detected value is replaced with a typed placeholder such as [FIRST_NAME_1] or [IBAN_2] in the composer, and the same value maps to the same placeholder within a session. The remote model receives placeholders, not the real values.',
+        icon: 'tabler:eye-off',
+      },
+      {
+        title: 'Two Detector Families',
+        description:
+          '40 checksum-validated regex rules catch structured data such as IBANs, payment cards, and Spanish DNI/NIE, while a 560M-parameter on-device NER model catches names, addresses, and clinical attributes no regex can reliably find.',
+        icon: 'tabler:topology-star',
+      },
+      {
+        title: 'Fail-Closed by Default',
+        description:
+          'The interceptor blocks the native send first, then detects and redacts. If any stage throws, the send stays blocked rather than leaking unredacted text. The safe state is the default state.',
         icon: 'tabler:shield-lock',
       },
       {
-        title: 'GDPR-Aware Guardrails',
+        title: 'No Telemetry',
         description:
-          'Automatically masks PII and special-category health data in prompts and completions — compliant by default, not by policy.',
+          'There is no analytics or error reporting. The only outbound network call anywhere is the optional enterprise audit webhook, and it carries metadata only — never prompt text or detected values.',
+        icon: 'tabler:antenna-bars-off',
+      },
+      {
+        title: 'Minimal Permissions',
+        description:
+          'The extension requests offscreen, storage, and activeTab only — no tabs, no webRequest, no all-URLs access. It can act only on the nine declared LLM origins, and the placeholder map lives in memory and is discarded when the tab closes.',
         icon: 'tabler:lock',
-      },
-      {
-        title: 'Immutable Audit Log',
-        description:
-          'Every prompt and response is logged with a tamper-proof audit trail, ready for DPIA reviews and regulatory inspection.',
-        icon: 'tabler:file-certificate',
-      },
-      {
-        title: 'Low-Latency Proxy',
-        description:
-          'Sits transparently between your application and the LLM API — zero changes to your existing workflow, under 5 ms overhead.',
-        icon: 'tabler:bolt',
-      },
-      {
-        title: 'Policy-as-Code Rules',
-        description:
-          'Define custom rules in plain YAML: block topics, enforce response formats, or route sensitive queries to an on-premise model.',
-        icon: 'tabler:code',
-      },
-      {
-        title: 'Multi-Model Support',
-        description:
-          'Works with OpenAI, Anthropic Claude, Mistral, and local LLMs running via MedCore — one policy layer for your entire AI stack.',
-        icon: 'tabler:topology-star',
       },
     ]}
   />
 
-  <!-- Detail Content -->
+  <!-- Why there is no server -->
+
   <Content
     isReversed
-    tagline="The Problem"
-    title="Healthcare AI Without Guardrails Is a Compliance Liability"
+    tagline="Where Detection Happens"
+    title="There Is No Detection Server to Send Text To"
     items={[
       {
-        title: 'Uncontrolled data exposure',
+        title: 'No detection backend exists',
         description:
-          'Staff routinely paste patient notes into general-purpose AI assistants, creating undocumented GDPR violations.',
+          'The model runs in the browser and remote loads are disabled, so there is nothing to send text to for inspection. Hosted AI gateways and proxies, by contrast, must receive the text in order to inspect it.',
       },
       {
-        title: 'Invisible audit trail',
+        title: 'Nothing crosses a border',
         description:
-          'Regulators expect a full record of AI-assisted clinical decisions — most tools provide none.',
+          'There is nothing to host and nothing that leaves the device. After install, detection works fully offline — which removes an entire class of data-processor and cross-border-transfer questions for regulated and public-sector buyers.',
       },
       {
-        title: 'Prompt manipulation risk',
+        title: 'The third party never sees the real values',
         description:
-          'Adversarial prompts can trick LLMs into ignoring system instructions and exposing sensitive context.',
+          'Redaction happens before the LLM receives the prompt, so the values are replaced before they leave the browser. There is no copy of the original text to log, retain, or train on downstream.',
       },
     ]}
-    image={{ src: imgTrustPrompt, alt: 'TrustPrompt — AI prompt security' }}
+    image={{ src: '~/assets/images/on-prem.png', alt: 'Detection runs locally; no detection server' }}
   >
     <Fragment slot="content">
       <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        From compliance risk to compliance proof
+        A Privacy Property That Comes From the Architecture
       </h3>
-      TrustPrompt turns every AI interaction into a documented, auditable, GDPR-compliant event —
-      without slowing down your clinical team.
+      For a clinic or a law firm, the fact that the text never leaves the machine for detection is
+      not an operational promise that depends on configuration — it is how the extension is built.
     </Fragment>
   </Content>
 
+  <!-- Two detector families -->
+
+  <Content
+    isAfterContent
+    tagline="Detection"
+    title="Two Detectors That Cover Each Other's Blind Spots"
+    items={[
+      {
+        title: 'Deterministic regex with checksums',
+        description:
+          'Structured data is matched by 40 built-in rules with checksum validation — IBAN (per-country length plus MOD-97-10), payment cards (Luhn), Spanish DNI/NIE/NIF/NUSS, passports, and secrets such as API keys, bearer tokens, and PEM private keys. These are exact and fast.',
+      },
+      {
+        title: 'Transformer NER for the rest',
+        description:
+          'An XLM-RoBERTa model finds the unstructured data no regex can catch reliably — names, addresses, organizations, and demographic and clinical attributes. The active English model exposes 54 entity types across seven categories.',
+      },
+      {
+        title: 'One value, counted once',
+        description:
+          'When both detectors fire on the same value — a regex DNI and a model identifier over the same digits — a cross-source dedupe step collapses them, so a value is never double-counted and the preview stays readable.',
+      },
+    ]}
+    image={{ src: '~/assets/images/guardrails.png', alt: 'Regex and NER detection working together' }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Exact Rules Where They Fit, a Model Where They Do Not
+      </h3>
+      Structured identifiers have a shape a checksum can confirm; a patient name or a clause naming a
+      counterparty does not. TrustPrompt uses each method where it is strongest.
+    </Fragment>
+  </Content>
+
+  <!-- Multilingual -->
+
+  <Content
+    isReversed
+    isAfterContent
+    tagline="Languages"
+    title="Multilingual by Data, Not by Code"
+    items={[
+      {
+        title: 'Seven categories that do not change',
+        description:
+          'Each model maps its raw labels onto seven stable categories — identifiers, personal info, contact info, location, organization, financial, and temporal. A user setting or an organization policy stays valid when the model is swapped, because only the entity list inside each category changes.',
+      },
+      {
+        title: 'Adding a language is a data operation',
+        description:
+          'Shipping support for a language means shipping a fine-tuned model and its category map — not changing code. The regex layer already understands EU multi-country identifiers and date formats across ten languages.',
+      },
+      {
+        title: 'Twelve languages targeted',
+        description:
+          'The architecture targets twelve languages. Built today: an active English model (a 560M-parameter NER with 54 entity types) and three Spanish model variants.',
+      },
+    ]}
+    image={{ src: '~/assets/images/ai-architecture-planning.jpg', alt: 'Data-driven multilingual detection pipeline' }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Entity Behavior Defined by Data, Kept Stable Across Models
+      </h3>
+      The seven category keys never change between models, so settings configured by a clinic or a
+      firm keep working as the underlying detection model improves.
+    </Fragment>
+  </Content>
+
+  <!-- WebGPU -->
+
+  <Content
+    isAfterContent
+    tagline="Local at Interactive Speed"
+    title="A 560M-Parameter Model Running in the Browser, on Your GPU"
+    items={[
+      {
+        title: 'WebGPU first, with a fallback',
+        description:
+          'The runtime tries WebGPU with fp16, then WebGPU with q8, then WASM with q8. Backend selection is validated up front, so an incompatible GPU produces an explicit error rather than silently returning zero detections.',
+      },
+      {
+        title: 'Why local is even possible here',
+        description:
+          'Running a 560M-parameter transformer locally, at interactive latency, inside a browser extension is what WebGPU makes practical. Tools that offload detection to a server often do so because they cannot run a model of this class on the client.',
+      },
+      {
+        title: 'Works without a qualifying GPU',
+        description:
+          'The fast path needs a GPU exposing shader-f16 with around 512 MB of max buffer size. On machines without one, the WASM path keeps detection fully local at lower speed — it does not fall back to a server.',
+      },
+    ]}
+    image={{ src: '~/assets/images/server-network.jpg', alt: 'On-device model inference via WebGPU' }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        The "No Server" Property Is Achievable Because the Model Runs on Your Hardware
+      </h3>
+      Requirements are concrete: a Chromium browser version 124 or newer, and budget for a model on
+      the order of 1 GB resident. The privacy choice and the performance choice are the same choice.
+    </Fragment>
+  </Content>
+
+  <!-- How it works on Send -->
+
+  <Steps
+    title="What Happens When You Press Send"
+    subtitle="Each prompt moves through the same sequence in the page, on your machine, before any text reaches the LLM."
+    items={[
+      {
+        title: 'Step 1: <span class="font-medium">Block the Native Send</span>',
+        description:
+          'The site\'s own send is intercepted in the capture phase and held, so nothing leaves the page until detection and redaction have run.',
+        icon: 'tabler:hand-stop',
+      },
+      {
+        title: 'Step 2: <span class="font-medium">Built-In Rules and Your Watchlist</span>',
+        description:
+          'Deterministic, checksum-validated regex patterns run first, gated by the categories you or your administrator enabled, followed by your own custom watchlist terms.',
+        icon: 'tabler:list-check',
+      },
+      {
+        title: 'Step 3: <span class="font-medium">On-Device Model Detection</span>',
+        description:
+          'Each chunk of text is classified by the on-device NER model; overlapping detections are merged, aliases collapsed, and each entity is kept only if its score clears the configured threshold.',
+        icon: 'tabler:cpu',
+      },
+      {
+        title: 'Step 4: <span class="font-medium">False-Positive Suppression</span>',
+        description:
+          'A tiny on-device classifier, trained only from your own previous preview decisions, suppresses learned false positives. It stays on your machine.',
+        icon: 'tabler:filter',
+      },
+      {
+        title: 'Step 5: <span class="font-medium">Preview</span>',
+        description:
+          'A panel lists what was found. You can dismiss an individual false positive or cancel the send entirely before anything leaves the page.',
+        icon: 'tabler:eye-check',
+      },
+      {
+        title: 'Step 6: <span class="font-medium">Redact and Re-Send</span>',
+        description:
+          'Detected spans are replaced with typed placeholders, organization regex rules run last in an isolated worker with a timeout, and the redacted text is written back and sent.',
+        icon: 'tabler:send',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/data-analytics.jpg',
+      alt: 'The detect-and-redact sequence that runs on every send',
+    }}
+  />
+
+  <!-- What it deliberately does not do -->
+
+  <Features2
+    tagline="By Design"
+    title="What TrustPrompt Deliberately Does Not Do"
+    subtitle="These are part of the position, not limitations to apologize for."
+    columns={2}
+    items={[
+      {
+        title: 'It Does Not Run a Detection Server',
+        description:
+          'There is no backend that inspects your text. The model runs in the browser and remote model loads are disabled, so detection cannot depend on a server that could see, log, or retain the prompt.',
+        icon: 'tabler:server-off',
+      },
+      {
+        title: 'It Does Not Send Telemetry',
+        description:
+          'There is no analytics or error reporting. The only outbound call anywhere is the optional enterprise audit webhook, which carries metadata only — entity-type counts, latency, host, outcome — never prompt text or detected values.',
+        icon: 'tabler:antenna-bars-off',
+      },
+      {
+        title: 'It Does Not Keep the Placeholder Map',
+        description:
+          'The map from a placeholder back to the real value lives in the tab\'s memory and is discarded when the tab closes. It is never written to disk or storage.',
+        icon: 'tabler:eraser',
+      },
+      {
+        title: 'It Does Not Ask for Broad Access',
+        description:
+          'No tabs, no webRequest, no all-URLs permission. The extension can act only on the nine declared LLM origins, under a locked content-security policy with cross-origin isolation.',
+        icon: 'tabler:lock',
+      },
+      {
+        title: 'It Does Not Rely on People Remembering',
+        description:
+          'A policy that says "do not paste sensitive data" depends on every person, every time, under time pressure. TrustPrompt enforces redaction before the send instead, and leaves a record that it happened.',
+        icon: 'tabler:shield-check',
+      },
+      {
+        title: 'It Does Not Take Away Your Control',
+        description:
+          'The master on/off toggle stays user-owned at every tier and cannot be forced on remotely. You keep a personal watchlist and can reset the learned false-positive model at any time.',
+        icon: 'tabler:adjustments',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  <!-- Pricing -->
+
+  <Prices
+    id="pricing"
+    tagline="Pricing"
+    title="From a Free Single User to a Centrally Managed Estate"
+    subtitle="The free tier gives one person local redaction on all nine sites at no cost. Paid plans add shared configuration and your own detection rules for a team; the managed tier adds central policy. SMB prices are per organization, ex-VAT, billed annually."
+    prices={[
+      {
+        title: 'Individual',
+        subtitle: 'One user, fully local',
+        price: 0,
+        period: 'free',
+        items: [
+          { description: 'Local redaction on all nine LLM sites' },
+          { description: 'User-owned on/off toggle' },
+          { description: 'Personal watchlist of custom terms' },
+          { description: 'On-device false-positive learning' },
+          { description: 'All seven categories on, fail-closed' },
+        ],
+        callToAction: {
+          text: 'Contact Us',
+          href: '/contact/',
+        },
+      },
+      {
+        title: 'Small Team',
+        subtitle: 'Up to 25 users',
+        price: 990,
+        period: 'per year',
+        items: [
+          { description: 'Everything in Individual' },
+          { description: 'Shared sensitivity settings' },
+          { description: 'Custom regex for your own identifiers' },
+          { description: 'Employee, ticket, and patient ID rules' },
+          { description: 'Simpler rollout than full MDM' },
+        ],
+        callToAction: {
+          text: 'Contact Us',
+          href: '/contact/',
+        },
+        hasRibbon: true,
+        ribbonTitle: 'most popular',
+      },
+      {
+        title: 'Business',
+        subtitle: 'Up to 100 users',
+        price: 2900,
+        period: 'per year',
+        items: [
+          { description: 'Everything in Small Team' },
+          { description: 'Shared configuration across the team' },
+          { description: 'Custom organization regex rules' },
+          { description: 'Priority support' },
+        ],
+        callToAction: {
+          text: 'Contact Us',
+          href: '/contact/',
+        },
+      },
+      {
+        title: 'Growth',
+        subtitle: 'Up to 250 users',
+        price: 5900,
+        period: 'per year',
+        items: [
+          { description: 'Everything in Business' },
+          { description: 'Larger team rollout' },
+          { description: 'Onboarding assistance' },
+          { description: 'A path to centrally managed policy' },
+        ],
+        callToAction: {
+          text: 'Contact Us',
+          href: '/contact/',
+        },
+      },
+      {
+        title: 'Enterprise',
+        subtitle: 'Centrally managed (MDM)',
+        price: 'Custom',
+        period: 'annual contract',
+        items: [
+          { description: 'Managed policy via Group Policy, Intune, or Jamf' },
+          { description: 'The policy is the entitlement — no license server' },
+          { description: 'Per-entity confidence thresholds and fail mode' },
+          { description: 'Organization regex, read-only to users' },
+          { description: 'Metadata-only audit logging webhook' },
+        ],
+        callToAction: {
+          text: 'Contact Us',
+          href: '/contact/',
+        },
+      },
+    ]}
+  />
+
+  <!-- Pricing note -->
+
+  <Note
+    icon="tabler:info-circle"
+    title="About These Prices."
+    description='SMB plans are priced per organization and billed annually, ex-VAT, with the user counts shown. The Enterprise tier is centrally managed: a valid managed policy is itself the entitlement, so there is no license server and no activation call. <a href="/contact/" class="underline font-bold">Contact us for a quote scoped to your organization</a>.'
+  />
+
+  <!-- FAQs -->
+
+  <FAQs
+    title="TrustPrompt — Frequently Asked Questions"
+    subtitle="Straight answers for the clinics, firms, and teams deciding where their prompt text goes."
+    tagline="FAQs"
+    classes={{ container: 'max-w-6xl' }}
+    items={[
+      {
+        title: 'Is my prompt text sent anywhere for detection?',
+        description:
+          'No. The detection model and its weights ship inside the extension, the runtime refuses remote model loads, and there is no external cache. Your text is analyzed on your own machine; there is no detection server. After install, detection works fully offline.',
+      },
+      {
+        title: 'Which sites does TrustPrompt work on?',
+        description:
+          'Nine LLM web apps: ChatGPT, Claude, Gemini, Perplexity, Mistral, Grok on grok.com, Grok on X, DeepSeek, and OpenEvidence. The extension can act only on those declared origins.',
+      },
+      {
+        title: 'What does it detect?',
+        description:
+          'Two families together. 40 checksum-validated regex rules catch structured data — IBANs, payment cards, Spanish DNI/NIE/NIF/NUSS, passports, API keys, bearer and JWT tokens, and PEM private keys. A 560M-parameter on-device NER model with 54 entity types catches names, addresses, organizations, and demographic and clinical attributes.',
+      },
+      {
+        title: 'What are the hardware requirements?',
+        description:
+          'A Chromium-based browser (Chrome or Edge) version 124 or newer. The fast path uses a GPU exposing shader-f16 with around 512 MB of max buffer size; without one, the WASM path runs detection locally at lower speed. Budget for a model on the order of 1 GB resident.',
+      },
+      {
+        title: 'Which languages are supported?',
+        description:
+          'The pipeline is multilingual by data and targets twelve languages. Built today: an active English model and three Spanish model variants. Adding a language means shipping a model and its category map, not changing code.',
+      },
+      {
+        title: 'How is it managed across an organization?',
+        description:
+          'IT pushes a managed policy through Windows Group Policy, Microsoft Intune, or Jamf. A valid policy object is itself the entitlement — there is no license server and no activation call. The policy can set which categories are on, per-entity thresholds, fail mode, organization regex rules, an audit webhook, and the model backend.',
+      },
+      {
+        title: 'Does anything get logged?',
+        description:
+          'There is no telemetry, analytics, or error reporting. When an organization enables audit logging, the payload is restricted to metadata — entity-type counts, latency, host, outcome, model id — and never includes prompt text or detected values. The placeholder map stays in memory and is discarded when the tab closes.',
+      },
+      {
+        title: 'What happens if detection fails?',
+        description:
+          'The extension is fail-closed by default. The native send is blocked first; if any stage of detection or redaction throws, the send stays blocked rather than leaking unredacted text. The safe state is the default state.',
+      },
+      {
+        title: 'How much control does the user keep?',
+        description:
+          'The master on/off toggle is user-owned at every tier and cannot be forced on remotely. Users keep a personal watchlist, can dismiss individual false positives in the preview before a send, and can reset the on-device false-positive model at any time.',
+      },
+    ]}
+  />
+
   <!-- CTA -->
+
   <CallToAction
     actions={[
       {
         variant: 'primary',
-        text: 'Book Automation Roadmap',
-        href: '/automation-roadmap',
-        icon: 'tabler:clipboard-check',
+        text: 'Contact Us',
+        href: '/contact/',
+        icon: 'tabler:mail',
       },
     ]}
-    title="Ready to secure your AI interactions?"
-    subtitle="Book a free Automation Roadmap session and we'll map TrustPrompt to your specific compliance requirements."
+    title="Keep Personal Data Out of Public LLMs"
+    subtitle="Tell us about the sites your team uses and the identifiers you need to protect. We will show you how TrustPrompt fits, with detection running on your own machines."
   />
 </Layout>

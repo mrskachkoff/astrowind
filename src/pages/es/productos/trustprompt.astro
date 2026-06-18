@@ -1,16 +1,25 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import JsonLd from '~/components/common/JsonLd.astro';
+
 import Hero from '~/components/widgets/Hero.astro';
+import Brands from '~/components/widgets/Brands.astro';
 import Content from '~/components/widgets/Content.astro';
 import Features from '~/components/widgets/Features.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Prices from '~/components/widgets/Pricing.astro';
+import Note from '~/components/widgets/Note.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 import imgTrustPrompt from '~/assets/images/trustprompt.png';
+import imgPreview from '~/assets/images/ai-security-padlock.jpg';
 
 const metadata = {
-  title: 'TrustPrompt — Seguridad de Prompts de IA para Sanidad',
+  title: 'TrustPrompt — Redacta datos personales en el navegador, antes de enviar el prompt',
   description:
-    'TrustPrompt protege cada interacción de IA en tu consulta. Previene la inyección de prompts, aplica guardrails conformes con el RGPD y audita automáticamente cada intercambio con el LLM.',
+    'TrustPrompt es una extensión para Chrome y Edge que detecta y redacta datos personales dentro del navegador, antes de que el prompt llegue a un LLM público. La detección se ejecuta en tu propia máquina: el modelo viaja en la extensión y las cargas remotas de modelo están deshabilitadas, por lo que no existe ningún servidor de detección.',
   openGraph: {
     images: [{ url: '~/assets/images/trustprompt.png' }],
   },
@@ -18,132 +27,572 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
+  <JsonLd schema={{
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "TrustPrompt",
+    "applicationCategory": "SecurityApplication",
+    "operatingSystem": "Chrome/Edge (Chromium) 124+",
+    "description": "Extensión para Chrome y Edge que detecta y redacta datos personales dentro del navegador, antes de que el prompt se envíe a un LLM público. La detección se ejecuta en la propia máquina del usuario: el modelo viaja en la extensión y las cargas remotas de modelo están deshabilitadas, por lo que no existe ningún servidor de detección. Funciona en nueve aplicaciones web de LLM, combina 40 reglas regex validadas por suma de comprobación con un modelo NER en el dispositivo de 560M de parámetros y, por defecto, falla en seguro.",
+    "url": "https://solutions.futurion.es/es/productos/trustprompt/",
+    "inLanguage": "es",
+    "featureList": [
+      "La detección se ejecuta en tu propia máquina; no existe servidor de detección",
+      "Redacta los datos personales antes de enviar el prompt al LLM",
+      "Funciona en nueve aplicaciones web de LLM (ChatGPT, Claude, Gemini, Perplexity, Mistral, Grok, DeepSeek, OpenEvidence)",
+      "40 reglas regex validadas por suma de comprobación más un modelo NER en el dispositivo de 560M de parámetros (54 tipos de entidad)",
+      "Falla en seguro por defecto: si una fase da error, el envío permanece bloqueado",
+      "Sin telemetría; la única llamada saliente es un webhook de auditoría opcional, solo con metadatos",
+      "Permisos mínimos (offscreen, storage, activeTab); el mapa de marcadores se mantiene solo en memoria",
+      "Gestión centralizada por política mediante directiva de grupo, Microsoft Intune o Jamf — sin servidor de licencias"
+    ],
+    "author": { "@id": "https://solutions.futurion.es/#organization" },
+    "offers": {
+      "@type": "Offer",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "minPrice": "0",
+        "priceCurrency": "EUR"
+      },
+      "availability": "https://schema.org/InStock"
+    }
+  }} />
+
   <!-- Hero -->
+
   <Hero
     actions={[
       {
         variant: 'primary',
-        text: 'Solicitar Hoja de Ruta',
-        href: '/es/hoja-de-ruta-de-automatizacion',
-        icon: 'tabler:clipboard-check',
+        text: 'Contactar',
+        href: '/es/contacto/',
+        icon: 'tabler:mail',
       },
       {
         variant: 'secondary',
-        text: 'Ver Todos los Productos',
-        href: '#productos',
+        text: 'Ver precios',
+        href: '#precios',
       },
     ]}
   >
     <Fragment slot="title">
       <img
         src={imgTrustPrompt.src}
-        alt="Logo TrustPrompt"
-        width="72"
-        height="72"
-        class="mx-auto mb-4 object-contain"
+        alt="Logo de TrustPrompt"
+        width="80"
+        height="80"
+        class="mx-auto mb-4 object-contain drop-shadow-lg"
       />
       TrustPrompt<br />
-      <span class="text-accent dark:text-white highlight">Seguridad de Prompts de IA para Sanidad</span>
+      <span class="text-accent dark:text-white highlight">Redacta datos personales en el navegador, antes de enviar el prompt</span>
     </Fragment>
 
     <Fragment slot="subtitle">
-      Protege cada interacción de IA en tu consulta contra inyecciones de prompts, fuga de datos y
-      violaciones de cumplimiento. TrustPrompt aplica guardrails conformes con el RGPD en la capa
-      del LLM — auditando, filtrando y registrando automáticamente cada intercambio para que tu
-      equipo clínico confíe en la IA sin poner en riesgo los datos de los pacientes.
+      <span class="hidden sm:inline">
+        TrustPrompt es una extensión para Chrome y Edge que detecta y redacta datos personales dentro
+        del navegador, antes de que el prompt se envíe a un LLM público. Funciona en nueve
+        aplicaciones web de LLM y sustituye cada valor detectado por un marcador con tipo —
+        <span class="font-mono text-sm">[FIRST_NAME_1]</span>, <span class="font-mono text-sm">[IBAN_2]</span> —
+        en el cuadro de redacción, y luego deja que el mensaje se envíe. El texto que escribes se
+        analiza en tu propia máquina y nunca se transmite a ningún sitio para detectarlo: el modelo
+        viaja en la extensión y las cargas remotas de modelo están deshabilitadas, por lo que no
+        existe ningún servidor de detección.
+      </span>
+      <span class="block mb-1 sm:hidden font-bold text-green-700">La detección se ejecuta en tu máquina. Los datos personales se redactan antes de enviar el prompt.</span>
+      Diseñada para las clínicas y los despachos donde un prompt pegado puede contener datos del
+      paciente o del cliente sujetos al RGPD.
     </Fragment>
   </Hero>
 
-  <!-- Características clave -->
+  <!-- Vista previa estática -->
+
+  <section class="px-4 sm:px-6 pt-0 pb-10 md:pb-14 -mt-6 md:-mt-10">
+    <div class="max-w-4xl mx-auto">
+      <img
+        src={imgPreview.src}
+        alt="Datos personales redactados en el navegador antes de enviar el prompt"
+        class="w-full rounded-2xl shadow-2xl object-cover"
+        loading="lazy"
+      />
+    </div>
+  </section>
+
+  <!-- Sitios compatibles -->
+
+  <Brands
+    title="Funciona en los sitios de LLM que ya usas"
+    subtitle="TrustPrompt funciona en nueve aplicaciones web de LLM. Además de los logotipos mostrados, también cubre Perplexity, Grok en X y OpenEvidence — la redacción ocurre en el cuadro de redacción de cada sitio antes de enviar el mensaje."
+    images={[
+      { src: '~/assets/images/openai.png', alt: 'ChatGPT' },
+      { src: '~/assets/images/claude-color.png', alt: 'Claude' },
+      { src: '~/assets/images/gemini-color.png', alt: 'Gemini' },
+      { src: '~/assets/images/mistral.png', alt: 'Mistral' },
+      { src: '~/assets/images/deepseek.png', alt: 'DeepSeek' },
+      { src: '~/assets/images/grok.png', alt: 'Grok' },
+    ]}
+  />
+
+  <!-- Qué hace TrustPrompt -->
+
   <Features
     id="caracteristicas"
+    columns={3}
     tagline="Qué hace TrustPrompt"
-    title="Interacciones de IA Seguras por Diseño"
-    subtitle="Creado específicamente para organizaciones sanitarias que dependen de los LLM pero no pueden comprometer el cumplimiento normativo ni la privacidad del paciente."
+    title="Los datos personales se eliminan antes de que puedan salir del navegador"
+    subtitle="Dos cosas son siempre ciertas: el texto de tu prompt se analiza en tu propia máquina y los valores detectados se sustituyen por marcadores antes de enviar el mensaje."
     items={[
       {
-        title: 'Escudo contra Inyección de Prompts',
+        title: 'La detección se ejecuta en tu máquina',
         description:
-          'Detecta y bloquea los intentos de inyección de prompts antes de que lleguen al LLM, protegiendo los datos del paciente y los flujos de trabajo clínicos.',
+          'El modelo de detección y sus pesos viajan dentro de la extensión, el entorno de ejecución rechaza las cargas remotas de modelo y no hay caché externa. No existe ningún servidor de detección al que enviar texto — por construcción, no por política.',
+        icon: 'tabler:cpu',
+      },
+      {
+        title: 'Redacta antes del envío',
+        description:
+          'Cada valor detectado se sustituye por un marcador con tipo, como [FIRST_NAME_1] o [IBAN_2], en el cuadro de redacción, y el mismo valor se asigna al mismo marcador dentro de una sesión. El modelo remoto recibe marcadores, no los valores reales.',
+        icon: 'tabler:eye-off',
+      },
+      {
+        title: 'Dos familias de detectores',
+        description:
+          '40 reglas regex validadas por suma de comprobación capturan datos estructurados como IBAN, tarjetas de pago y DNI/NIE españoles, mientras que un modelo NER en el dispositivo de 560M de parámetros captura nombres, direcciones y atributos clínicos que ningún regex puede encontrar de forma fiable.',
+        icon: 'tabler:topology-star',
+      },
+      {
+        title: 'Falla en seguro por defecto',
+        description:
+          'El interceptor bloquea primero el envío nativo y luego detecta y redacta. Si una fase da error, el envío permanece bloqueado en lugar de filtrar texto sin redactar. El estado seguro es el estado por defecto.',
         icon: 'tabler:shield-lock',
       },
       {
-        title: 'Guardrails Conformes con el RGPD',
+        title: 'Sin telemetría',
         description:
-          'Enmascara automáticamente datos personales y datos especiales de salud en prompts y respuestas — conforme por defecto, no por política.',
+          'No hay analítica ni informes de errores. La única llamada de red saliente en todo el sistema es el webhook de auditoría opcional, y solo transporta metadatos — nunca el texto del prompt ni los valores detectados.',
+        icon: 'tabler:antenna-bars-off',
+      },
+      {
+        title: 'Permisos mínimos',
+        description:
+          'La extensión solicita solo offscreen, storage y activeTab — sin tabs, sin webRequest, sin acceso a todas las URL. Solo puede actuar sobre los nueve orígenes de LLM declarados, y el mapa de marcadores reside en memoria y se descarta al cerrar la pestaña.',
         icon: 'tabler:lock',
-      },
-      {
-        title: 'Registro de Auditoría Inmutable',
-        description:
-          'Cada prompt y respuesta queda registrado con una pista de auditoría a prueba de manipulaciones, lista para revisiones de EIPD e inspecciones regulatorias.',
-        icon: 'tabler:file-certificate',
-      },
-      {
-        title: 'Proxy de Baja Latencia',
-        description:
-          'Se sitúa de forma transparente entre tu aplicación y la API del LLM — sin cambios en tu flujo de trabajo actual, con menos de 5 ms de sobrecarga.',
-        icon: 'tabler:bolt',
-      },
-      {
-        title: 'Reglas como Código',
-        description:
-          'Define reglas personalizadas en YAML sencillo: bloquea temas, impone formatos de respuesta o enruta consultas sensibles a un modelo on-premise.',
-        icon: 'tabler:code',
-      },
-      {
-        title: 'Soporte Multi-Modelo',
-        description:
-          'Compatible con OpenAI, Anthropic Claude, Mistral y LLMs locales mediante MedCore — una única capa de políticas para todo tu stack de IA.',
-        icon: 'tabler:topology-star',
       },
     ]}
   />
 
-  <!-- Contenido detallado -->
+  <!-- Por qué no hay servidor -->
+
   <Content
     isReversed
-    tagline="El Problema"
-    title="La IA Sanitaria sin Guardrails es un Riesgo de Cumplimiento"
+    tagline="Dónde ocurre la detección"
+    title="No hay ningún servidor de detección al que enviar texto"
     items={[
       {
-        title: 'Exposición de datos no controlada',
+        title: 'No existe backend de detección',
         description:
-          'El personal pega habitualmente notas clínicas en asistentes de IA de uso general, generando violaciones del RGPD no documentadas.',
+          'El modelo se ejecuta en el navegador y las cargas remotas están deshabilitadas, así que no hay nada a lo que enviar texto para inspeccionarlo. Las pasarelas y los proxies de IA alojados, en cambio, tienen que recibir el texto para poder inspeccionarlo.',
       },
       {
-        title: 'Pista de auditoría invisible',
+        title: 'Nada cruza una frontera',
         description:
-          'Los reguladores esperan un registro completo de las decisiones clínicas asistidas por IA — la mayoría de las herramientas no lo proporcionan.',
+          'No hay nada que alojar y nada que salga del dispositivo. Tras la instalación, la detección funciona totalmente sin conexión — lo que elimina toda una categoría de preguntas sobre encargados del tratamiento y transferencias internacionales para clientes regulados y del sector público.',
       },
       {
-        title: 'Riesgo de manipulación de prompts',
+        title: 'El tercero nunca ve los valores reales',
         description:
-          'Los prompts adversariales pueden engañar a los LLM para que ignoren las instrucciones del sistema y expongan contexto sensible.',
+          'La redacción ocurre antes de que el LLM reciba el prompt, así que los valores se sustituyen antes de salir del navegador. No queda ninguna copia del texto original que registrar, conservar o usar para entrenar aguas abajo.',
       },
     ]}
-    image={{ src: imgTrustPrompt, alt: 'TrustPrompt — seguridad de prompts de IA' }}
+    image={{ src: '~/assets/images/on-prem.png', alt: 'La detección se ejecuta localmente; sin servidor de detección' }}
   >
     <Fragment slot="content">
       <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        Del riesgo de cumplimiento a la prueba de cumplimiento
+        Una propiedad de privacidad que proviene de la arquitectura
       </h3>
-      TrustPrompt convierte cada interacción de IA en un evento documentado, auditable y conforme
-      con el RGPD — sin ralentizar a tu equipo clínico.
+      Para una clínica o un despacho, el hecho de que el texto nunca salga de la máquina para la
+      detección no es una promesa operativa que dependa de la configuración — es cómo está construida
+      la extensión.
     </Fragment>
   </Content>
 
+  <!-- Dos familias de detectores -->
+
+  <Content
+    isAfterContent
+    tagline="Detección"
+    title="Dos detectores que cubren los puntos ciegos del otro"
+    items={[
+      {
+        title: 'Regex determinista con sumas de comprobación',
+        description:
+          'Los datos estructurados se reconocen con 40 reglas integradas con validación por suma de comprobación — IBAN (longitud por país más MOD-97-10), tarjetas de pago (Luhn), DNI/NIE/NIF/NUSS españoles, pasaportes y secretos como claves de API, tokens bearer y claves privadas PEM. Son exactas y rápidas.',
+      },
+      {
+        title: 'NER con transformador para el resto',
+        description:
+          'Un modelo XLM-RoBERTa encuentra los datos no estructurados que ningún regex captura de forma fiable — nombres, direcciones, organizaciones y atributos demográficos y clínicos. El modelo inglés activo expone 54 tipos de entidad en siete categorías.',
+      },
+      {
+        title: 'Un valor, contado una sola vez',
+        description:
+          'Cuando ambos detectores se activan sobre el mismo valor — un DNI por regex y un identificador por modelo sobre los mismos dígitos — un paso de deduplicación entre fuentes los fusiona, así un valor nunca se cuenta dos veces y la vista previa se mantiene legible.',
+      },
+    ]}
+    image={{ src: '~/assets/images/guardrails.png', alt: 'Regex y NER trabajando juntos' }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Reglas exactas donde encajan, un modelo donde no
+      </h3>
+      Los identificadores estructurados tienen una forma que una suma de comprobación puede confirmar;
+      el nombre de un paciente o una cláusula que nombra a una contraparte, no. TrustPrompt usa cada
+      método donde es más fuerte.
+    </Fragment>
+  </Content>
+
+  <!-- Multilingüe -->
+
+  <Content
+    isReversed
+    isAfterContent
+    tagline="Idiomas"
+    title="Multilingüe por datos, no por código"
+    items={[
+      {
+        title: 'Siete categorías que no cambian',
+        description:
+          'Cada modelo asigna sus etiquetas internas a siete categorías estables — identificadores, información personal, información de contacto, ubicación, organización, financiera y temporal. Un ajuste de usuario o una política de organización siguen siendo válidos al cambiar de modelo, porque solo cambia la lista de entidades dentro de cada categoría.',
+      },
+      {
+        title: 'Añadir un idioma es una operación de datos',
+        description:
+          'Dar soporte a un idioma significa enviar un modelo ajustado y su mapa de categorías — no cambiar código. La capa de regex ya entiende identificadores de varios países de la UE y formatos de fecha en diez idiomas.',
+      },
+      {
+        title: 'Doce idiomas como objetivo',
+        description:
+          'La arquitectura tiene como objetivo doce idiomas. Disponibles hoy: un modelo inglés activo (un NER de 560M de parámetros con 54 tipos de entidad) y tres variantes de modelo en español.',
+      },
+    ]}
+    image={{ src: '~/assets/images/ai-architecture-planning.jpg', alt: 'Flujo de detección multilingüe basado en datos' }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Comportamiento de entidades definido por datos, estable entre modelos
+      </h3>
+      Las siete claves de categoría nunca cambian entre modelos, así que los ajustes configurados por
+      una clínica o un despacho siguen funcionando a medida que mejora el modelo de detección
+      subyacente.
+    </Fragment>
+  </Content>
+
+  <!-- WebGPU -->
+
+  <Content
+    isAfterContent
+    tagline="Local a velocidad interactiva"
+    title="Un modelo de 560M de parámetros ejecutándose en el navegador, en tu GPU"
+    items={[
+      {
+        title: 'WebGPU primero, con reserva',
+        description:
+          'El entorno de ejecución prueba WebGPU con fp16, luego WebGPU con q8 y luego WASM con q8. La selección de backend se valida de antemano, así que una GPU incompatible produce un error explícito en lugar de devolver silenciosamente cero detecciones.',
+      },
+      {
+        title: 'Por qué lo local es siquiera posible aquí',
+        description:
+          'Ejecutar un transformador de 560M de parámetros localmente, a latencia interactiva, dentro de una extensión de navegador es lo que WebGPU hace viable. Las herramientas que delegan la detección a un servidor a menudo lo hacen porque no pueden ejecutar un modelo de esta clase en el cliente.',
+      },
+      {
+        title: 'Funciona sin una GPU compatible',
+        description:
+          'La vía rápida necesita una GPU que exponga shader-f16 con alrededor de 512 MB de tamaño máximo de búfer. En máquinas sin ella, la vía WASM mantiene la detección totalmente local a menor velocidad — no recurre a un servidor.',
+      },
+    ]}
+    image={{ src: '~/assets/images/server-network.jpg', alt: 'Inferencia del modelo en el dispositivo mediante WebGPU' }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        La propiedad de «sin servidor» es posible porque el modelo se ejecuta en tu hardware
+      </h3>
+      Los requisitos son concretos: un navegador Chromium versión 124 o posterior y margen para un
+      modelo del orden de 1 GB residente. La decisión de privacidad y la de rendimiento son la misma
+      decisión.
+    </Fragment>
+  </Content>
+
+  <!-- Cómo funciona al enviar -->
+
+  <Steps
+    title="Qué ocurre cuando pulsas Enviar"
+    subtitle="Cada prompt recorre la misma secuencia en la página, en tu máquina, antes de que ningún texto llegue al LLM."
+    items={[
+      {
+        title: 'Paso 1: <span class="font-medium">Bloquear el envío nativo</span>',
+        description:
+          'El envío propio del sitio se intercepta en la fase de captura y se retiene, así que nada sale de la página hasta que se han ejecutado la detección y la redacción.',
+        icon: 'tabler:hand-stop',
+      },
+      {
+        title: 'Paso 2: <span class="font-medium">Reglas integradas y tu lista de vigilancia</span>',
+        description:
+          'Primero se ejecutan patrones regex deterministas y validados por suma de comprobación, condicionados por las categorías que tú o tu administrador habéis habilitado, seguidos de tus propios términos personalizados.',
+        icon: 'tabler:list-check',
+      },
+      {
+        title: 'Paso 3: <span class="font-medium">Detección por modelo en el dispositivo</span>',
+        description:
+          'Cada fragmento de texto se clasifica con el modelo NER en el dispositivo; las detecciones solapadas se fusionan, los alias se colapsan y cada entidad se conserva solo si su puntuación supera el umbral configurado.',
+        icon: 'tabler:cpu',
+      },
+      {
+        title: 'Paso 4: <span class="font-medium">Supresión de falsos positivos</span>',
+        description:
+          'Un pequeño clasificador en el dispositivo, entrenado solo a partir de tus decisiones previas en la vista previa, suprime los falsos positivos aprendidos. Permanece en tu máquina.',
+        icon: 'tabler:filter',
+      },
+      {
+        title: 'Paso 5: <span class="font-medium">Vista previa</span>',
+        description:
+          'Un panel muestra lo que se ha encontrado. Puedes descartar un falso positivo concreto o cancelar el envío por completo antes de que nada salga de la página.',
+        icon: 'tabler:eye-check',
+      },
+      {
+        title: 'Paso 6: <span class="font-medium">Redactar y reenviar</span>',
+        description:
+          'Los fragmentos detectados se sustituyen por marcadores con tipo, las reglas regex de la organización se ejecutan en último lugar en un worker aislado con tiempo límite, y el texto redactado se reescribe y se envía.',
+        icon: 'tabler:send',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/data-analytics.jpg',
+      alt: 'La secuencia de detección y redacción que se ejecuta en cada envío',
+    }}
+  />
+
+  <!-- Lo que deliberadamente no hace -->
+
+  <Features2
+    tagline="Por diseño"
+    title="Lo que TrustPrompt deliberadamente no hace"
+    subtitle="Esto forma parte de la postura, no son limitaciones de las que disculparse."
+    columns={2}
+    items={[
+      {
+        title: 'No ejecuta un servidor de detección',
+        description:
+          'No hay backend que inspeccione tu texto. El modelo se ejecuta en el navegador y las cargas remotas de modelo están deshabilitadas, así que la detección no puede depender de un servidor que pudiera ver, registrar o conservar el prompt.',
+        icon: 'tabler:server-off',
+      },
+      {
+        title: 'No envía telemetría',
+        description:
+          'No hay analítica ni informes de errores. La única llamada saliente en todo el sistema es el webhook de auditoría opcional, que transporta solo metadatos — recuentos de tipos de entidad, latencia, host, resultado — nunca el texto del prompt ni los valores detectados.',
+        icon: 'tabler:antenna-bars-off',
+      },
+      {
+        title: 'No conserva el mapa de marcadores',
+        description:
+          'El mapa que vincula un marcador con su valor real reside en la memoria de la pestaña y se descarta al cerrarla. Nunca se escribe en disco ni en almacenamiento.',
+        icon: 'tabler:eraser',
+      },
+      {
+        title: 'No pide acceso amplio',
+        description:
+          'Sin tabs, sin webRequest, sin permiso a todas las URL. La extensión solo puede actuar sobre los nueve orígenes de LLM declarados, bajo una política de seguridad de contenido bloqueada con aislamiento entre orígenes.',
+        icon: 'tabler:lock',
+      },
+      {
+        title: 'No depende de que las personas se acuerden',
+        description:
+          'Una política que dice «no pegues datos sensibles» depende de cada persona, cada vez, bajo presión de tiempo. TrustPrompt aplica la redacción antes del envío en su lugar, y deja un registro de que ocurrió.',
+        icon: 'tabler:shield-check',
+      },
+      {
+        title: 'No te quita el control',
+        description:
+          'El interruptor general de encendido/apagado pertenece al usuario en todos los niveles y no puede activarse de forma remota. Mantienes una lista de vigilancia personal y puedes reiniciar el modelo de falsos positivos aprendidos cuando quieras.',
+        icon: 'tabler:adjustments',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  <!-- Precios -->
+
+  <Prices
+    id="precios"
+    tagline="Precios"
+    title="Desde un usuario individual gratuito hasta un parque gestionado de forma centralizada"
+    subtitle="El nivel gratuito da a una persona redacción local en los nueve sitios sin coste. Los planes de pago añaden configuración compartida y tus propias reglas de detección para un equipo; el nivel gestionado añade política central. Los precios para pymes son por organización, sin IVA, con facturación anual."
+    prices={[
+      {
+        title: 'Individual',
+        subtitle: 'Un usuario, totalmente local',
+        price: 0,
+        period: 'gratis',
+        items: [
+          { description: 'Redacción local en los nueve sitios de LLM' },
+          { description: 'Interruptor de encendido/apagado del usuario' },
+          { description: 'Lista de vigilancia personal de términos' },
+          { description: 'Aprendizaje de falsos positivos en el dispositivo' },
+          { description: 'Las siete categorías activas, falla en seguro' },
+        ],
+        callToAction: {
+          text: 'Contactar',
+          href: '/es/contacto/',
+        },
+      },
+      {
+        title: 'Equipo pequeño',
+        subtitle: 'Hasta 25 usuarios',
+        price: 990,
+        period: 'al año',
+        items: [
+          { description: 'Todo lo de Individual' },
+          { description: 'Ajustes de sensibilidad compartidos' },
+          { description: 'Regex personalizado para tus identificadores' },
+          { description: 'Reglas de ID de empleado, ticket y paciente' },
+          { description: 'Despliegue más simple que un MDM completo' },
+        ],
+        callToAction: {
+          text: 'Contactar',
+          href: '/es/contacto/',
+        },
+        hasRibbon: true,
+        ribbonTitle: 'más popular',
+      },
+      {
+        title: 'Empresa',
+        subtitle: 'Hasta 100 usuarios',
+        price: 2900,
+        period: 'al año',
+        items: [
+          { description: 'Todo lo de Equipo pequeño' },
+          { description: 'Configuración compartida en todo el equipo' },
+          { description: 'Reglas regex personalizadas de la organización' },
+          { description: 'Soporte prioritario' },
+        ],
+        callToAction: {
+          text: 'Contactar',
+          href: '/es/contacto/',
+        },
+      },
+      {
+        title: 'Crecimiento',
+        subtitle: 'Hasta 250 usuarios',
+        price: 5900,
+        period: 'al año',
+        items: [
+          { description: 'Todo lo de Empresa' },
+          { description: 'Despliegue para equipos mayores' },
+          { description: 'Asistencia en la puesta en marcha' },
+          { description: 'Una vía hacia la política gestionada de forma centralizada' },
+        ],
+        callToAction: {
+          text: 'Contactar',
+          href: '/es/contacto/',
+        },
+      },
+      {
+        title: 'Corporativo',
+        subtitle: 'Gestionado de forma centralizada (MDM)',
+        price: 'A medida',
+        period: 'contrato anual',
+        items: [
+          { description: 'Política gestionada mediante directiva de grupo, Intune o Jamf' },
+          { description: 'La política es la habilitación — sin servidor de licencias' },
+          { description: 'Umbrales de confianza por entidad y modo de fallo' },
+          { description: 'Regex de organización, de solo lectura para los usuarios' },
+          { description: 'Webhook de registro de auditoría solo con metadatos' },
+        ],
+        callToAction: {
+          text: 'Contactar',
+          href: '/es/contacto/',
+        },
+      },
+    ]}
+  />
+
+  <!-- Nota de precios -->
+
+  <Note
+    icon="tabler:info-circle"
+    title="Sobre estos precios."
+    description='Los planes para pymes tienen un precio por organización y se facturan anualmente, sin IVA, con los recuentos de usuarios indicados. El nivel Corporativo se gestiona de forma centralizada: una política gestionada válida es en sí misma la habilitación, por lo que no hay servidor de licencias ni llamada de activación. <a href="/es/contacto/" class="underline font-bold">Contáctanos para una propuesta ajustada a tu organización</a>.'
+  />
+
+  <!-- Preguntas frecuentes -->
+
+  <FAQs
+    title="TrustPrompt — Preguntas frecuentes"
+    subtitle="Respuestas directas para las clínicas, los despachos y los equipos que deciden adónde va el texto de sus prompts."
+    tagline="Preguntas frecuentes"
+    classes={{ container: 'max-w-6xl' }}
+    items={[
+      {
+        title: '¿Se envía a algún sitio el texto de mi prompt para detectarlo?',
+        description:
+          'No. El modelo de detección y sus pesos viajan dentro de la extensión, el entorno de ejecución rechaza las cargas remotas de modelo y no hay caché externa. Tu texto se analiza en tu propia máquina; no existe servidor de detección. Tras la instalación, la detección funciona totalmente sin conexión.',
+      },
+      {
+        title: '¿En qué sitios funciona TrustPrompt?',
+        description:
+          'En nueve aplicaciones web de LLM: ChatGPT, Claude, Gemini, Perplexity, Mistral, Grok en grok.com, Grok en X, DeepSeek y OpenEvidence. La extensión solo puede actuar sobre esos orígenes declarados.',
+      },
+      {
+        title: '¿Qué detecta?',
+        description:
+          'Dos familias juntas. 40 reglas regex validadas por suma de comprobación capturan datos estructurados — IBAN, tarjetas de pago, DNI/NIE/NIF/NUSS españoles, pasaportes, claves de API, tokens bearer y JWT, y claves privadas PEM. Un modelo NER en el dispositivo de 560M de parámetros con 54 tipos de entidad captura nombres, direcciones, organizaciones y atributos demográficos y clínicos.',
+      },
+      {
+        title: '¿Cuáles son los requisitos de hardware?',
+        description:
+          'Un navegador basado en Chromium (Chrome o Edge) versión 124 o posterior. La vía rápida usa una GPU que exponga shader-f16 con alrededor de 512 MB de tamaño máximo de búfer; sin ella, la vía WASM ejecuta la detección localmente a menor velocidad. Prevé un modelo del orden de 1 GB residente.',
+      },
+      {
+        title: '¿Qué idiomas son compatibles?',
+        description:
+          'El flujo es multilingüe por datos y tiene como objetivo doce idiomas. Disponibles hoy: un modelo inglés activo y tres variantes de modelo en español. Añadir un idioma significa enviar un modelo y su mapa de categorías, no cambiar código.',
+      },
+      {
+        title: '¿Cómo se gestiona en una organización?',
+        description:
+          'TI distribuye una política gestionada mediante directiva de grupo de Windows, Microsoft Intune o Jamf. Un objeto de política válido es en sí mismo la habilitación — no hay servidor de licencias ni llamada de activación. La política puede fijar qué categorías están activas, los umbrales por entidad, el modo de fallo, las reglas regex de la organización, un webhook de auditoría y el backend del modelo.',
+      },
+      {
+        title: '¿Se registra algo?',
+        description:
+          'No hay telemetría, analítica ni informes de errores. Cuando una organización habilita el registro de auditoría, la carga se limita a metadatos — recuentos de tipos de entidad, latencia, host, resultado, id del modelo — y nunca incluye el texto del prompt ni los valores detectados. El mapa de marcadores permanece en memoria y se descarta al cerrar la pestaña.',
+      },
+      {
+        title: '¿Qué ocurre si la detección falla?',
+        description:
+          'La extensión falla en seguro por defecto. El envío nativo se bloquea primero; si alguna fase de la detección o la redacción da error, el envío permanece bloqueado en lugar de filtrar texto sin redactar. El estado seguro es el estado por defecto.',
+      },
+      {
+        title: '¿Cuánto control conserva el usuario?',
+        description:
+          'El interruptor general de encendido/apagado pertenece al usuario en todos los niveles y no puede activarse de forma remota. Los usuarios mantienen una lista de vigilancia personal, pueden descartar falsos positivos concretos en la vista previa antes de un envío y pueden reiniciar el modelo de falsos positivos en el dispositivo cuando quieran.',
+      },
+    ]}
+  />
+
   <!-- CTA -->
+
   <CallToAction
     actions={[
       {
         variant: 'primary',
-        text: 'Solicitar Hoja de Ruta',
-        href: '/es/hoja-de-ruta-de-automatizacion',
-        icon: 'tabler:clipboard-check',
+        text: 'Contactar',
+        href: '/es/contacto/',
+        icon: 'tabler:mail',
       },
     ]}
-    title="¿Listo para asegurar tus interacciones de IA?"
-    subtitle="Reserva una sesión gratuita de Hoja de Ruta de Automatización y mapearemos TrustPrompt a tus requisitos de cumplimiento específicos."
+    title="Mantén los datos personales fuera de los LLM públicos"
+    subtitle="Cuéntanos qué sitios usa tu equipo y qué identificadores necesitas proteger. Te mostraremos cómo encaja TrustPrompt, con la detección ejecutándose en tus propias máquinas."
   />
 </Layout>

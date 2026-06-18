@@ -3,6 +3,8 @@ import Layout from '~/layouts/PageLayout.astro';
 import JsonLd from '~/components/common/JsonLd.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
+import TrustCoreInterface from '~/components/widgets/TrustCoreInterface.astro';
+import TrustCoreGraph from '~/components/widgets/TrustCoreGraph.astro';
 import Brands from '~/components/widgets/Brands.astro';
 import Content from '~/components/widgets/Content.astro';
 import Features from '~/components/widgets/Features.astro';
@@ -42,7 +44,9 @@ const metadata = {
       "Every answer tied to a checked source passage",
       "Cross-document conflict detection and proof paths",
       "Local embeddings (bge-m3) via WebGPU, with CPU fallback",
-      "Connect your own on-prem or cloud compute (OpenAI-compatible)"
+      "Connect your own on-prem or cloud compute (OpenAI-compatible)",
+      "See and audit the entity graph as an interactive 3D map (WebGPU)",
+      "Export the graph to an Obsidian-compatible vault"
     ],
     "author": { "@id": "https://solutions.futurion.es/#organization" },
     "offers": {
@@ -98,6 +102,14 @@ const metadata = {
       confidential, or personal data under the GDPR.
     </Fragment>
   </Hero>
+
+  <!-- Interface preview -->
+
+  <section class="px-4 sm:px-6 pt-0 pb-10 md:pb-14 -mt-6 md:-mt-10">
+    <div class="max-w-5xl mx-auto">
+      <TrustCoreInterface />
+    </div>
+  </section>
 
   <!-- Supported chat sites -->
 
@@ -266,9 +278,47 @@ const metadata = {
     </Fragment>
   </Content>
 
+  <!-- 3D knowledge map -->
+
+  <Content
+    isAfterContent
+    tagline="The Graph You Can See"
+    title="See, Check, and Correct the Graph Your Answers Are Built From"
+    items={[
+      {
+        title: 'See why an answer holds',
+        description:
+          'The map shows the same entities and relationships an answer is built from. Selecting any node opens the exact source passage and its page, so a reviewer audits the evidence by eye — opened per project from the ⬡ 3D Map button in the panel.',
+      },
+      {
+        title: 'Connections no single document states',
+        description:
+          'When entities are linked only through a third file, a similarity search returns nothing; the graph records the link and the map shows it. Focusing a node lights up its neighbours across files, community detection colours related clusters, and the most-connected entities are drawn larger.',
+      },
+      {
+        title: 'Correct it, then export it',
+        description:
+          'Mark a clause superseded by another by hand; that link is treated as confirmed, survives re-indexing, and feeds the point-in-time reasoning. The whole map exports as an Obsidian-compatible vault — a ZIP of linked notes — for a case file.',
+      },
+    ]}
+  >
+    <Fragment slot="image">
+      <TrustCoreGraph />
+    </Fragment>
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Built Read-Only From On-Device Data, Drawn on Your GPU
+      </h3>
+      The map renders through WebGPU, with WebGL and a 2D view as fallbacks. Nothing is sent anywhere
+      and building it makes no model or companion call. Very large graphs are capped at the
+      most-connected nodes, and the map states when it has done so.
+    </Fragment>
+  </Content>
+
   <!-- External compute -->
 
   <Content
+    isReversed
     isAfterContent
     tagline="Your Compute, Your Rules"
     title="Connect Your Own On-Prem or Cloud Endpoints"
@@ -303,7 +353,6 @@ const metadata = {
   <!-- OCR -->
 
   <Content
-    isReversed
     isAfterContent
     tagline="Scanned Documents"
     title="OCR That Locates a Quote Down to Its Place on the Page"
@@ -572,6 +621,11 @@ const metadata = {
         title: 'How do I know an answer is correct?',
         description:
           'Every answer is tied to the exact passage it came from, and each cited quote is checked against the source text and page before the answer is shown. Where two documents disagree, the conflict is flagged with both sources and pages. A proof path shows the chain of relationships behind the answer, so you can see why it follows rather than trusting that a model produced it.',
+      },
+      {
+        title: 'Can I see and check the graph behind an answer?',
+        description:
+          'Yes. The project\'s entity graph opens as an interactive 3D map from the panel. Selecting a node opens the exact passage and page it came from, so you audit the evidence by eye. The map renders on your own GPU through WebGPU with nothing sent out. You can mark a clause superseded by hand — that correction survives re-indexing — and export the whole graph as an Obsidian-compatible vault.',
       },
       {
         title: 'What is the difference between Free and the paid tiers?',

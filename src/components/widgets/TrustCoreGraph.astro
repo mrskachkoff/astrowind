@@ -1,0 +1,838 @@
+---
+/**
+ * TrustCoreGraph.astro
+ * Faithful reproduction of the TrustCore "3D Map" (the snapshot used three.js r169 +
+ * a CSS2D label overlay). Built from scratch as a self-contained, dependency-free
+ * pseudo-3D force graph on <canvas> with an HTML label layer — the project has no
+ * three.js / framework island, so the real engine can't run as-is.
+ *
+ * The dataset is SYNTHETIC and PII-free (a legal/compliance matter that matches the
+ * TrustCoreInterface panel) — the snapshot's real personal data is deliberately not used.
+ *
+ * Pointer-only interactivity (drag to spin, hover to highlight, click for detail,
+ * export to Obsidian markdown). Controls are tabindex=-1 because the host Content
+ * widget marks the image column aria-hidden.
+ */
+
+import imgPoster from '~/assets/images/trustcore-3d-map.jpg';
+
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = 'en' } = Astro.props;
+
+const STRINGS = {
+  en: {
+    aria: 'Interactive 3D knowledge map: documents, parties, clauses, dates and amounts linked across a legal matter.',
+    nodes: 'nodes',
+    edges: 'edges',
+    exportLabel: '⬇ Export Obsidian',
+    connected: 'Connected',
+    source: 'Source',
+    passage: 'Passage',
+    close: 'Close',
+    hint: 'Drag to rotate · click a node',
+  },
+  es: {
+    aria: 'Mapa de conocimiento 3D interactivo: documentos, partes, cláusulas, fechas e importes vinculados en un asunto jurídico.',
+    nodes: 'nodos',
+    edges: 'aristas',
+    exportLabel: '⬇ Exportar a Obsidian',
+    connected: 'Conexiones',
+    source: 'Fuente',
+    passage: 'Fragmento',
+    close: 'Cerrar',
+    hint: 'Arrastra para rotar · haz clic en un nodo',
+  },
+};
+
+const t = STRINGS[lang] ?? STRINGS.en;
+
+// Accent palette (mirrors --fds-acc-* tokens)
+const C = {
+  doc: '#2d7bf2',
+  party: '#0065fe',
+  clause: '#a459ff',
+  value: '#83e31e',
+  date: '#ff2f70',
+  concept: '#96bdf9',
+};
+
+// Synthetic, PII-free legal/compliance graph (EN + ES label sets).
+const DATA = {
+  en: {
+    nodes: [
+      { id: 'M', label: 'Acme–Globex Matter', group: 'party', src: 'Matter file · 4 documents', q: 'Matter file grouping the agreements between Acme Corp and Globex S.L.' },
+      { id: 'P1', label: 'Acme Corp', group: 'party', src: 'Master Agreement.pdf · p. 1', q: 'Acme Corp, a company incorporated in Ireland (the “Customer”).' },
+      { id: 'P2', label: 'Globex S.L.', group: 'party', src: 'Master Agreement.pdf · p. 1', q: 'Globex S.L., a company incorporated in Spain (the “Supplier”).' },
+      { id: 'D1', label: 'Master Agreement.pdf', group: 'doc', src: 'Master Agreement.pdf · p. 1', q: 'Master Services Agreement between Acme Corp and Globex S.L., dated 12 January 2024.' },
+      { id: 'D2', label: 'Amendment No. 2.pdf', group: 'doc', src: 'Amendment No. 2.pdf · p. 1', q: 'Amendment No. 2 to the Master Agreement, effective 1 March 2026.' },
+      { id: 'D3', label: 'Schedule 3 — SLA.pdf', group: 'doc', src: 'Schedule 3 — SLA.pdf · p. 1', q: 'Schedule 3 — Service Level Agreement to the Master Agreement.' },
+      { id: 'D4', label: 'NDA.pdf', group: 'doc', src: 'NDA.pdf · p. 1', q: 'Mutual Non-Disclosure Agreement between the parties.' },
+      { id: 'C1', label: 'Clause 12.1 — Notice', group: 'clause', src: 'Master Agreement.pdf · p. 12', q: 'Either party may terminate this Agreement on sixty (60) days’ written notice to the other party.' },
+      { id: 'C2', label: 'Clause 4 — Term', group: 'clause', src: 'Master Agreement.pdf · p. 4', q: 'This Agreement commences on the Effective Date and continues for an initial term of three (3) years.' },
+      { id: 'C3', label: 'Clause 9 — Confidentiality', group: 'clause', src: 'Master Agreement.pdf · p. 9', q: 'Each party shall keep the other’s Confidential Information secret and use it solely for the purposes of this Agreement.' },
+      { id: 'C4', label: 'Clause 7 — Liability cap', group: 'clause', src: 'Master Agreement.pdf · p. 7', q: 'Each party’s aggregate liability under this Agreement shall not exceed €500,000.' },
+      { id: 'V1', label: '60 days', group: 'value', src: 'Master Agreement.pdf · p. 12', q: '“…on sixty (60) days’ written notice to the other party.”' },
+      { id: 'V2', label: '90 days', group: 'value', src: 'Amendment No. 2.pdf · p. 3', q: 'Clause 12.1 is amended to require ninety (90) days’ written notice.' },
+      { id: 'V3', label: '€500,000 cap', group: 'value', src: 'Master Agreement.pdf · p. 7', q: '“…aggregate liability under this Agreement shall not exceed €500,000.”' },
+      { id: 'V4', label: '99.9% uptime', group: 'value', src: 'Schedule 3 — SLA.pdf · p. 2', q: 'Supplier shall maintain Service availability of at least 99.9% measured monthly.' },
+      { id: 'T1', label: 'Signed 12 Jan 2024', group: 'date', src: 'Master Agreement.pdf · p. 1', q: '“…dated 12 January 2024.”' },
+      { id: 'T2', label: 'Effective 1 Mar 2026', group: 'date', src: 'Amendment No. 2.pdf · p. 1', q: '“…effective 1 March 2026.”' },
+      { id: 'K1', label: 'Termination', group: 'concept', src: 'Master Agreement.pdf · p. 12', q: 'Termination for convenience and for cause are addressed in Clauses 12.1–12.4.' },
+      { id: 'K2', label: 'Auto-renewal', group: 'concept', src: 'Master Agreement.pdf · p. 4', q: 'Thereafter it renews automatically for successive one-year terms unless either party gives notice.' },
+      { id: 'K3', label: 'Governing law: Spain', group: 'concept', src: 'Master Agreement.pdf · p. 18', q: 'This Agreement is governed by and construed in accordance with the laws of Spain.' },
+      { id: 'K4', label: 'Jurisdiction: Madrid', group: 'concept', src: 'Master Agreement.pdf · p. 18', q: 'The courts of the city of Madrid shall have exclusive jurisdiction.' },
+      { id: 'K5', label: 'Confidential information', group: 'concept', src: 'Master Agreement.pdf · p. 9', q: '“Confidential Information” means any non-public information disclosed by either party.' },
+    ],
+    edges: [
+      { s: 'M', t: 'D1', r: 'contains' },
+      { s: 'M', t: 'D2', r: 'contains' },
+      { s: 'M', t: 'D3', r: 'contains' },
+      { s: 'M', t: 'D4', r: 'contains' },
+      { s: 'P1', t: 'D1', r: 'party to' },
+      { s: 'P2', t: 'D1', r: 'party to' },
+      { s: 'D1', t: 'C1', r: 'contains' },
+      { s: 'D1', t: 'C2', r: 'contains' },
+      { s: 'D1', t: 'C3', r: 'contains' },
+      { s: 'D1', t: 'C4', r: 'contains' },
+      { s: 'C1', t: 'V1', r: 'sets notice' },
+      { s: 'D2', t: 'C1', r: 'amends' },
+      { s: 'D2', t: 'V2', r: 'sets notice' },
+      { s: 'V1', t: 'V2', r: 'superseded by', kind: 'sup' },
+      { s: 'D2', t: 'T2', r: 'effective from' },
+      { s: 'D1', t: 'T1', r: 'signed' },
+      { s: 'C1', t: 'K1', r: 'about' },
+      { s: 'C2', t: 'K1', r: 'about' },
+      { s: 'C2', t: 'K2', r: 'about' },
+      { s: 'C4', t: 'V3', r: 'sets cap' },
+      { s: 'D3', t: 'V4', r: 'sets' },
+      { s: 'C3', t: 'K5', r: 'about' },
+      { s: 'D4', t: 'K5', r: 'covers' },
+      { s: 'D1', t: 'K3', r: 'governed by' },
+      { s: 'K3', t: 'K4', r: 'forum' },
+    ],
+  },
+  es: {
+    nodes: [
+      { id: 'M', label: 'Asunto Acme–Globex', group: 'party', src: 'Expediente · 4 documentos', q: 'Expediente que agrupa los contratos entre Acme Corp y Globex S.L.' },
+      { id: 'P1', label: 'Acme Corp', group: 'party', src: 'Contrato marco.pdf · pág. 1', q: 'Acme Corp, sociedad constituida en Irlanda (el «Cliente»).' },
+      { id: 'P2', label: 'Globex S.L.', group: 'party', src: 'Contrato marco.pdf · pág. 1', q: 'Globex S.L., sociedad constituida en España (el «Proveedor»).' },
+      { id: 'D1', label: 'Contrato marco.pdf', group: 'doc', src: 'Contrato marco.pdf · pág. 1', q: 'Contrato marco de servicios entre Acme Corp y Globex S.L., de fecha 12 de enero de 2024.' },
+      { id: 'D2', label: 'Modificación n.º 2.pdf', group: 'doc', src: 'Modificación n.º 2.pdf · pág. 1', q: 'Modificación n.º 2 del Contrato marco, en vigor desde el 1 de marzo de 2026.' },
+      { id: 'D3', label: 'Anexo 3 — ANS.pdf', group: 'doc', src: 'Anexo 3 — ANS.pdf · pág. 1', q: 'Anexo 3 — Acuerdo de nivel de servicio del Contrato marco.' },
+      { id: 'D4', label: 'NDA.pdf', group: 'doc', src: 'NDA.pdf · pág. 1', q: 'Acuerdo mutuo de confidencialidad entre las partes.' },
+      { id: 'C1', label: 'Cláusula 12.1 — Preaviso', group: 'clause', src: 'Contrato marco.pdf · pág. 12', q: 'Cualquiera de las partes podrá resolver el contrato con sesenta (60) días de preaviso por escrito a la otra parte.' },
+      { id: 'C2', label: 'Cláusula 4 — Plazo', group: 'clause', src: 'Contrato marco.pdf · pág. 4', q: 'El presente contrato entra en vigor en la Fecha de Efecto y tiene una duración inicial de tres (3) años.' },
+      { id: 'C3', label: 'Cláusula 9 — Confidencialidad', group: 'clause', src: 'Contrato marco.pdf · pág. 9', q: 'Cada parte mantendrá en secreto la Información Confidencial de la otra y la usará solo a los fines del contrato.' },
+      { id: 'C4', label: 'Cláusula 7 — Límite de responsabilidad', group: 'clause', src: 'Contrato marco.pdf · pág. 7', q: 'La responsabilidad agregada de cada parte en virtud del contrato no excederá de 500.000 €.' },
+      { id: 'V1', label: '60 días', group: 'value', src: 'Contrato marco.pdf · pág. 12', q: '«…con sesenta (60) días de preaviso por escrito a la otra parte.»' },
+      { id: 'V2', label: '90 días', group: 'value', src: 'Modificación n.º 2.pdf · pág. 3', q: 'La cláusula 12.1 se modifica para exigir noventa (90) días de preaviso por escrito.' },
+      { id: 'V3', label: 'Límite 500.000 €', group: 'value', src: 'Contrato marco.pdf · pág. 7', q: '«…la responsabilidad agregada de cada parte no excederá de 500.000 €.»' },
+      { id: 'V4', label: '99,9% de disponibilidad', group: 'value', src: 'Anexo 3 — ANS.pdf · pág. 2', q: 'El Proveedor mantendrá una disponibilidad del Servicio de al menos el 99,9% medida mensualmente.' },
+      { id: 'T1', label: 'Firmado 12 ene 2024', group: 'date', src: 'Contrato marco.pdf · pág. 1', q: '«…de fecha 12 de enero de 2024.»' },
+      { id: 'T2', label: 'En vigor 1 mar 2026', group: 'date', src: 'Modificación n.º 2.pdf · pág. 1', q: '«…en vigor desde el 1 de marzo de 2026.»' },
+      { id: 'K1', label: 'Resolución', group: 'concept', src: 'Contrato marco.pdf · pág. 12', q: 'La resolución por conveniencia y por incumplimiento se regula en las cláusulas 12.1 a 12.4.' },
+      { id: 'K2', label: 'Renovación automática', group: 'concept', src: 'Contrato marco.pdf · pág. 4', q: 'A partir de entonces se renueva automáticamente por periodos sucesivos de un año salvo preaviso de cualquiera de las partes.' },
+      { id: 'K3', label: 'Ley aplicable: España', group: 'concept', src: 'Contrato marco.pdf · pág. 18', q: 'El presente contrato se rige e interpreta conforme a la legislación española.' },
+      { id: 'K4', label: 'Jurisdicción: Madrid', group: 'concept', src: 'Contrato marco.pdf · pág. 18', q: 'Los juzgados y tribunales de la ciudad de Madrid tendrán jurisdicción exclusiva.' },
+      { id: 'K5', label: 'Información confidencial', group: 'concept', src: 'Contrato marco.pdf · pág. 9', q: 'Por «Información Confidencial» se entiende toda información no pública divulgada por cualquiera de las partes.' },
+    ],
+    edges: [
+      { s: 'M', t: 'D1', r: 'contiene' },
+      { s: 'M', t: 'D2', r: 'contiene' },
+      { s: 'M', t: 'D3', r: 'contiene' },
+      { s: 'M', t: 'D4', r: 'contiene' },
+      { s: 'P1', t: 'D1', r: 'parte de' },
+      { s: 'P2', t: 'D1', r: 'parte de' },
+      { s: 'D1', t: 'C1', r: 'contiene' },
+      { s: 'D1', t: 'C2', r: 'contiene' },
+      { s: 'D1', t: 'C3', r: 'contiene' },
+      { s: 'D1', t: 'C4', r: 'contiene' },
+      { s: 'C1', t: 'V1', r: 'fija preaviso' },
+      { s: 'D2', t: 'C1', r: 'modifica' },
+      { s: 'D2', t: 'V2', r: 'fija preaviso' },
+      { s: 'V1', t: 'V2', r: 'derogada por', kind: 'sup' },
+      { s: 'D2', t: 'T2', r: 'en vigor desde' },
+      { s: 'D1', t: 'T1', r: 'firmado' },
+      { s: 'C1', t: 'K1', r: 'sobre' },
+      { s: 'C2', t: 'K1', r: 'sobre' },
+      { s: 'C2', t: 'K2', r: 'sobre' },
+      { s: 'C4', t: 'V3', r: 'fija límite' },
+      { s: 'D3', t: 'V4', r: 'fija' },
+      { s: 'C3', t: 'K5', r: 'sobre' },
+      { s: 'D4', t: 'K5', r: 'cubre' },
+      { s: 'D1', t: 'K3', r: 'regido por' },
+      { s: 'K3', t: 'K4', r: 'foro' },
+    ],
+  },
+};
+
+const dataset = DATA[lang] ?? DATA.en;
+// Attach colors server-side so the script needs no palette logic.
+const payload = {
+  nodes: dataset.nodes.map((n) => ({ ...n, color: C[n.group] })),
+  edges: dataset.edges,
+  i18n: { nodes: t.nodes, edges: t.edges, connected: t.connected, source: t.source, passage: t.passage },
+};
+const payloadJson = JSON.stringify(payload);
+---
+
+<figure class="tcg" data-tcg aria-label={t.aria}>
+  <img class="tcg-poster" src={imgPoster.src} alt="" aria-hidden="true" />
+  <canvas class="tcg-canvas" aria-hidden="true"></canvas>
+  <div class="tcg-labels" aria-hidden="true"></div>
+
+  <div class="tcg-status fds-card"><span class="tcg-dot"></span><span class="tcg-count"></span></div>
+  <div class="tcg-hint">{t.hint}</div>
+  <button class="tcg-export fds-card" type="button" tabindex="-1">{t.exportLabel}</button>
+
+  <aside class="tcg-detail fds-card" hidden aria-hidden="true">
+    <div class="tcg-detail-head">
+      <span class="tcg-detail-title"></span>
+      <button class="tcg-detail-close" type="button" tabindex="-1" aria-label={t.close}>×</button>
+    </div>
+    <div class="tcg-detail-body"></div>
+  </aside>
+
+  <script type="application/json" data-tcg-data set:html={payloadJson} />
+</figure>
+
+<style>
+  .tcg {
+    --acc: #2d7bf2;
+    position: relative;
+    margin: 0;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--fds-r-card, 16px);
+    overflow: hidden;
+    background: radial-gradient(120% 120% at 50% 18%, #131a44 0%, #0a0f2e 62%, #070b22 100%);
+    border: 1px solid rgba(45, 123, 242, 0.4);
+    box-shadow: var(--fds-shadow-figure, 0 40px 80px -30px rgba(0, 0, 0, 0.6));
+    font-family: 'Inter Variable', system-ui, sans-serif;
+    user-select: none;
+    touch-action: pan-y;
+  }
+
+  .tcg-poster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+    transition: opacity 0.4s ease;
+  }
+  .tcg.is-ready .tcg-poster { opacity: 0; pointer-events: none; }
+
+  .tcg-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: grab;
+  }
+  .tcg-canvas.is-grabbing { cursor: grabbing; }
+
+  .tcg-labels {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .fds-node-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    padding: 2px 7px;
+    border-radius: 9999px;
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    color: #eaf0ff;
+    background: rgba(8, 12, 34, 0.62);
+    border: 1px solid var(--acc);
+    box-shadow: 0 0 10px -2px var(--acc);
+    will-change: transform, opacity;
+  }
+
+  /* Shared surface for status / export / detail (the snapshot's .fds-card) */
+  .fds-card {
+    background: rgba(10, 15, 46, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 8px 28px -10px rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .tcg-status {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 11px;
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: #aab2e0;
+  }
+  .tcg-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 9999px;
+    background: #83e31e;
+    box-shadow: 0 0 8px #83e31e;
+  }
+
+  .tcg-hint {
+    position: absolute;
+    left: 50%;
+    bottom: 12px;
+    transform: translateX(-50%);
+    font-size: 10.5px;
+    color: #5a6286;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .tcg-export {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    padding: 6px 12px;
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #6fb0ff;
+    cursor: pointer;
+  }
+  .tcg-export:hover { color: #a0d0ff; border-color: rgba(45, 123, 242, 0.55); }
+
+  .tcg-detail {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: min(240px, 64%);
+    padding: 10px 12px 12px;
+    z-index: 5;
+  }
+  .tcg-detail[hidden] { display: none; }
+  .tcg-detail-head { display: flex; align-items: center; gap: 8px; }
+  .tcg-detail-title {
+    flex: 1;
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #eaf0ff;
+    line-height: 1.3;
+  }
+  .tcg-detail-close {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border: none;
+    background: transparent;
+    color: #aab2e0;
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .tcg-detail-close:hover { color: #fff; }
+  .tcg-detail-body { margin-top: 7px; font-size: 11px; color: #9aa2c4; line-height: 1.5; }
+  .tcg-quote {
+    font-size: 11.5px;
+    font-style: italic;
+    color: #c8d8ff;
+    line-height: 1.5;
+    border-left: 2px solid var(--acc, #2d7bf2);
+    padding-left: 8px;
+    margin-bottom: 7px;
+  }
+  .tcg-detail-kv { margin-top: 6px; }
+  .tcg-detail-kv b {
+    display: block;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: #3d4468;
+    margin-bottom: 2px;
+  }
+  .tcg-detail-chip {
+    display: inline-block;
+    margin: 0 3px 3px 0;
+    padding: 1px 7px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #c4c9e4;
+    font-size: 10px;
+  }
+
+  @media (max-width: 600px) {
+    .tcg { aspect-ratio: 1 / 1; }
+    .tcg-hint { display: none; }
+    .fds-node-label { font-size: 9px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tcg-poster { transition: none; }
+  }
+</style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll<HTMLElement>('[data-tcg]').forEach((root) => {
+      if (root.dataset.tcgInit) return;
+      root.dataset.tcgInit = '1';
+      initTrustCoreGraph(root);
+    });
+  });
+
+  type GNode = {
+    id: string;
+    label: string;
+    group: string;
+    color: string;
+    src?: string;
+    q?: string;
+    x: number;
+    y: number;
+    z: number;
+    vx: number;
+    vy: number;
+    vz: number;
+    sx: number;
+    sy: number;
+    sz: number;
+    r: number;
+    el: HTMLDivElement;
+  };
+  type GEdge = { s: string; t: string; r: string; kind?: string };
+
+  function initTrustCoreGraph(root: HTMLElement) {
+    const canvas = root.querySelector<HTMLCanvasElement>('.tcg-canvas');
+    const labelLayer = root.querySelector<HTMLElement>('.tcg-labels');
+    const dataEl = root.querySelector<HTMLElement>('[data-tcg-data]');
+    const countEl = root.querySelector<HTMLElement>('.tcg-count');
+    const exportBtn = root.querySelector<HTMLButtonElement>('.tcg-export');
+    const detail = root.querySelector<HTMLElement>('.tcg-detail');
+    const detailTitle = root.querySelector<HTMLElement>('.tcg-detail-title');
+    const detailBody = root.querySelector<HTMLElement>('.tcg-detail-body');
+    const detailClose = root.querySelector<HTMLButtonElement>('.tcg-detail-close');
+    if (!canvas || !labelLayer || !dataEl || !countEl) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let data: { nodes: GNode[]; edges: GEdge[]; i18n: Record<string, string> };
+    try {
+      data = JSON.parse(dataEl.textContent || '{}');
+    } catch {
+      return;
+    }
+    if (!data.nodes || !data.nodes.length) return;
+
+    const i18n = data.i18n || { nodes: 'nodes', edges: 'edges', connected: 'Connected', source: 'Source', passage: 'Passage' };
+    const esc = (s: string) =>
+      s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c] || c);
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Deterministic Fibonacci-sphere seeding (no Math.random → stable across builds).
+    const nodes: GNode[] = data.nodes as unknown as GNode[];
+    const N = nodes.length;
+    const golden = Math.PI * (3 - Math.sqrt(5));
+    nodes.forEach((n, i) => {
+      const yy = 1 - (i / (N - 1)) * 2;
+      const rad = Math.sqrt(Math.max(0, 1 - yy * yy));
+      const th = golden * i;
+      n.x = Math.cos(th) * rad;
+      n.y = yy;
+      n.z = Math.sin(th) * rad;
+      n.vx = n.vy = n.vz = 0;
+      n.r = n.group === 'doc' || n.group === 'party' ? 6 : 4.2;
+    });
+
+    const byId: Record<string, GNode> = {};
+    nodes.forEach((n) => (byId[n.id] = n));
+    const edges = (data.edges || []).filter((e) => byId[e.s] && byId[e.t]);
+
+    // Adjacency for highlight + detail.
+    const adj: Record<string, Set<string>> = {};
+    nodes.forEach((n) => (adj[n.id] = new Set()));
+    edges.forEach((e) => {
+      adj[e.s].add(e.t);
+      adj[e.t].add(e.s);
+    });
+
+    countEl.textContent = `WEBGPU · ${N} ${i18n.nodes} · ${edges.length} ${i18n.edges}`;
+
+    // Label divs (CSS2D overlay, like the snapshot).
+    nodes.forEach((n) => {
+      const el = document.createElement('div');
+      el.className = 'fds-node-label';
+      el.style.setProperty('--acc', n.color);
+      el.style.visibility = 'hidden'; // hidden by default; revealed on hover/click
+      el.style.opacity = '0';
+      el.textContent = n.label;
+      labelLayer.appendChild(el);
+      n.el = el;
+    });
+
+    // ── 3D spring layout (warmup then settle) ──────────────────────────
+    function tick(dt: number) {
+      const kRep = 0.9;
+      const kSpring = 0.04;
+      const rest = 1.7;
+      const center = 0.012;
+      for (let i = 0; i < N; i++) {
+        const a = nodes[i];
+        for (let j = i + 1; j < N; j++) {
+          const b = nodes[j];
+          let dx = a.x - b.x,
+            dy = a.y - b.y,
+            dz = a.z - b.z;
+          let d2 = dx * dx + dy * dy + dz * dz + 0.01;
+          const f = (kRep / d2) * dt;
+          const d = Math.sqrt(d2);
+          dx /= d;
+          dy /= d;
+          dz /= d;
+          a.vx += dx * f;
+          a.vy += dy * f;
+          a.vz += dz * f;
+          b.vx -= dx * f;
+          b.vy -= dy * f;
+          b.vz -= dz * f;
+        }
+      }
+      edges.forEach((e) => {
+        const a = byId[e.s],
+          b = byId[e.t];
+        let dx = b.x - a.x,
+          dy = b.y - a.y,
+          dz = b.z - a.z;
+        const d = Math.sqrt(dx * dx + dy * dy + dz * dz) + 0.001;
+        const f = kSpring * (d - rest) * dt;
+        dx /= d;
+        dy /= d;
+        dz /= d;
+        a.vx += dx * f;
+        a.vy += dy * f;
+        a.vz += dz * f;
+        b.vx -= dx * f;
+        b.vy -= dy * f;
+        b.vz -= dz * f;
+      });
+      nodes.forEach((n) => {
+        n.vx -= n.x * center;
+        n.vy -= n.y * center;
+        n.vz -= n.z * center;
+        n.x += n.vx;
+        n.y += n.vy;
+        n.z += n.vz;
+        n.vx *= 0.82;
+        n.vy *= 0.82;
+        n.vz *= 0.82;
+      });
+    }
+    for (let i = 0; i < 260; i++) tick(1);
+    // Normalise to unit-ish radius.
+    let maxR = 0.0001;
+    nodes.forEach((n) => (maxR = Math.max(maxR, Math.hypot(n.x, n.y, n.z))));
+    const norm = 1 / maxR;
+    nodes.forEach((n) => {
+      n.x *= norm;
+      n.y *= norm;
+      n.z *= norm;
+    });
+
+    // ── Render state ───────────────────────────────────────────────────
+    let W = 0,
+      H = 0,
+      cx = 0,
+      cy = 0,
+      spread = 0,
+      dpr = 1;
+    let rotY = 0.6;
+    const tiltX = -0.42;
+    let autoSpin = !reduceMotion;
+    let hoverId: string | null = null;
+    let selectedId: string | null = null;
+    // Labels are hidden by default; this holds the ids whose labels are revealed
+    // (a clicked node + its related entities). null = nothing revealed.
+    let activeSet: Set<string> | null = null;
+
+    function resize() {
+      const w = root.clientWidth || 1;
+      const h = root.clientHeight || 1;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = w;
+      H = h;
+      cx = w / 2;
+      cy = h / 2;
+      spread = Math.min(w, h) * 0.34;
+      canvas!.width = Math.round(w * dpr);
+      canvas!.height = Math.round(h * dpr);
+      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function project(n: GNode) {
+      // rotate about Y then tilt about X
+      const cosY = Math.cos(rotY),
+        sinY = Math.sin(rotY);
+      let x = n.x * cosY - n.z * sinY;
+      let z = n.x * sinY + n.z * cosY;
+      const cosX = Math.cos(tiltX),
+        sinX = Math.sin(tiltX);
+      let y = n.y * cosX - z * sinX;
+      z = n.y * sinX + z * cosX;
+      const persp = 2.4 / (2.4 - z); // z in [-1,1]
+      n.sx = cx + x * spread * persp;
+      n.sy = cy + y * spread * persp;
+      n.sz = z;
+    }
+
+    function render() {
+      ctx!.clearRect(0, 0, W, H);
+      nodes.forEach(project);
+      const order = [...nodes].sort((a, b) => a.sz - b.sz);
+
+      const hi = hoverId || selectedId;
+      const lit = (id: string) => !hi || id === hi || adj[hi].has(id);
+
+      // edges
+      edges.forEach((e) => {
+        const a = byId[e.s],
+          b = byId[e.t];
+        const on = !hi || e.s === hi || e.t === hi;
+        const sup = e.kind === 'sup';
+        ctx!.beginPath();
+        ctx!.moveTo(a.sx, a.sy);
+        ctx!.lineTo(b.sx, b.sy);
+        ctx!.lineWidth = sup ? 2 : 1;
+        ctx!.strokeStyle = sup
+          ? `rgba(255, 99, 150, ${on ? 0.95 : 0.18})`
+          : `rgba(120, 150, 230, ${on ? 0.5 : 0.08})`;
+        ctx!.stroke();
+      });
+
+      // nodes
+      order.forEach((n) => {
+        const persp = 2.4 / (2.4 - n.sz);
+        const rr = n.r * persp;
+        const on = lit(n.id);
+        ctx!.globalAlpha = on ? 1 : 0.22;
+        ctx!.beginPath();
+        ctx!.arc(n.sx, n.sy, rr, 0, Math.PI * 2);
+        ctx!.fillStyle = n.color;
+        ctx!.shadowBlur = on ? 12 : 0;
+        ctx!.shadowColor = n.color;
+        ctx!.fill();
+        ctx!.shadowBlur = 0;
+        if (n.id === hi) {
+          ctx!.lineWidth = 2;
+          ctx!.strokeStyle = '#fff';
+          ctx!.stroke();
+        }
+
+        // label — hidden by default; shown only for the active set or the hovered node
+        const depth = (n.sz + 1) / 2; // 0 back .. 1 front
+        const el = n.el;
+        el.style.transform = `translate(-50%,-50%) translate(${n.sx.toFixed(1)}px, ${(n.sy - rr - 8).toFixed(1)}px)`;
+        el.style.zIndex = String(Math.round(depth * 100));
+        const labelShown = (activeSet !== null && activeSet.has(n.id)) || n.id === hoverId;
+        if (labelShown) {
+          el.style.visibility = 'visible';
+          el.style.opacity = on ? String(0.55 + depth * 0.45) : '0.4';
+        } else {
+          el.style.visibility = 'hidden';
+          el.style.opacity = '0';
+        }
+      });
+      ctx!.globalAlpha = 1;
+    }
+
+    // ── Animation loop ─────────────────────────────────────────────────
+    let raf = 0;
+    let running = false;
+    function frame() {
+      if (autoSpin) rotY += 0.0028;
+      render();
+      raf = requestAnimationFrame(frame);
+    }
+    function start() {
+      if (running) return;
+      running = true;
+      if (reduceMotion) {
+        render();
+      } else {
+        raf = requestAnimationFrame(frame);
+      }
+    }
+    function stop() {
+      running = false;
+      cancelAnimationFrame(raf);
+    }
+
+    // ── Interaction ────────────────────────────────────────────────────
+    function pick(px: number, py: number): GNode | null {
+      let best: GNode | null = null;
+      let bd = 18 * 18;
+      nodes.forEach((n) => {
+        const dx = n.sx - px,
+          dy = n.sy - py;
+        const d = dx * dx + dy * dy;
+        if (d < bd) {
+          bd = d;
+          best = n;
+        }
+      });
+      return best;
+    }
+
+    let dragging = false;
+    let moved = false;
+    let lastX = 0,
+      lastY = 0;
+
+    canvas.addEventListener('pointerdown', (ev) => {
+      dragging = true;
+      moved = false;
+      lastX = ev.clientX;
+      lastY = ev.clientY;
+      autoSpin = false;
+      canvas.classList.add('is-grabbing');
+      canvas.setPointerCapture(ev.pointerId);
+    });
+    canvas.addEventListener('pointermove', (ev) => {
+      const rect = canvas.getBoundingClientRect();
+      const px = ev.clientX - rect.left;
+      const py = ev.clientY - rect.top;
+      if (dragging) {
+        const dx = ev.clientX - lastX;
+        if (Math.abs(ev.clientX - lastX) + Math.abs(ev.clientY - lastY) > 3) moved = true;
+        rotY += dx * 0.006;
+        lastX = ev.clientX;
+        lastY = ev.clientY;
+        if (reduceMotion) render();
+        return;
+      }
+      const hit = pick(px, py);
+      const id = hit ? hit.id : null;
+      if (id !== hoverId) {
+        hoverId = id;
+        canvas.style.cursor = id ? 'pointer' : 'grab';
+        if (reduceMotion) render();
+      }
+    });
+    function endDrag(ev: PointerEvent) {
+      if (!dragging) return;
+      dragging = false;
+      canvas.classList.remove('is-grabbing');
+      if (!moved) {
+        const rect = canvas.getBoundingClientRect();
+        const hit = pick(ev.clientX - rect.left, ev.clientY - rect.top);
+        if (hit) showDetail(hit);
+        else hideDetail();
+      }
+      if (!reduceMotion && !selectedId) autoSpin = true;
+    }
+    canvas.addEventListener('pointerup', endDrag);
+    canvas.addEventListener('pointercancel', endDrag);
+    canvas.addEventListener('pointerleave', () => {
+      if (!dragging && hoverId) {
+        hoverId = null;
+        if (reduceMotion) render();
+      }
+    });
+
+    function showDetail(n: GNode) {
+      selectedId = n.id;
+      // Reveal this node + its related entities/documents in the graph.
+      activeSet = new Set<string>([n.id, ...adj[n.id]]);
+      autoSpin = false;
+      if (detail && detailTitle && detailBody) {
+        detailTitle.textContent = n.label;
+        detail.style.setProperty('--acc', n.color);
+        const neighbours = [...adj[n.id]].map((id) => byId[id].label);
+        let html = '';
+        // Lead with the GraphRAG passage text + the document/page it sits on.
+        if (n.q) html += `<div class="tcg-detail-kv"><b>${i18n.passage}</b></div><div class="tcg-quote">${esc(n.q)}</div>`;
+        if (n.src) html += `<div class="tcg-detail-kv"><b>${i18n.source}</b>${esc(n.src)}</div>`;
+        if (neighbours.length)
+          html +=
+            `<div class="tcg-detail-kv"><b>${i18n.connected}</b>` +
+            neighbours.map((l) => `<span class="tcg-detail-chip">${esc(l)}</span>`).join('') +
+            `</div>`;
+        detailBody.innerHTML = html;
+        detail.hidden = false;
+      }
+      if (reduceMotion) render();
+    }
+    function hideDetail() {
+      selectedId = null;
+      activeSet = null;
+      if (detail) detail.hidden = true;
+      if (!reduceMotion) autoSpin = true;
+      if (reduceMotion) render();
+    }
+    detailClose?.addEventListener('click', hideDetail);
+
+    // Export a small synthetic Obsidian markdown vault (one file, [[wikilinks]]).
+    exportBtn?.addEventListener('click', () => {
+      const lines: string[] = ['# TrustCore — knowledge map export', ''];
+      nodes.forEach((n) => {
+        const links = [...adj[n.id]].map((id) => `[[${byId[id].label}]]`).join(', ');
+        lines.push(`## ${n.label}`);
+        if (n.q) lines.push(`> ${n.q}`);
+        if (n.src) lines.push(`- ${i18n.source}: ${n.src}`);
+        if (links) lines.push(`- ${i18n.connected}: ${links}`);
+        lines.push('');
+      });
+      const blob = new Blob([lines.join('\n')], { type: 'text/markdown' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'trustcore-knowledge-map.md';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // ── Boot ───────────────────────────────────────────────────────────
+    resize();
+    root.classList.add('is-ready');
+    if ('ResizeObserver' in window) {
+      const ro = new ResizeObserver(() => {
+        resize();
+        if (reduceMotion || !running) render();
+      });
+      ro.observe(root);
+    }
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) start();
+            else stop();
+          });
+        },
+        { threshold: 0.05 }
+      );
+      io.observe(root);
+    } else {
+      start();
+    }
+  }
+</script>

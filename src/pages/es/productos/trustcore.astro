@@ -3,6 +3,8 @@ import Layout from '~/layouts/PageLayout.astro';
 import JsonLd from '~/components/common/JsonLd.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
+import TrustCoreInterface from '~/components/widgets/TrustCoreInterface.astro';
+import TrustCoreGraph from '~/components/widgets/TrustCoreGraph.astro';
 import Brands from '~/components/widgets/Brands.astro';
 import Content from '~/components/widgets/Content.astro';
 import Features from '~/components/widgets/Features.astro';
@@ -42,7 +44,9 @@ const metadata = {
       "Cada respuesta vinculada a un fragmento fuente verificado",
       "Detección de conflictos entre documentos y cadenas de razonamiento",
       "Incrustaciones locales (bge-m3) mediante WebGPU, con reserva por CPU",
-      "Conecta tu propio cómputo on-premise o en la nube (formato compatible con OpenAI)"
+      "Conecta tu propio cómputo on-premise o en la nube (formato compatible con OpenAI)",
+      "Ve y audita el grafo de entidades como un mapa 3D interactivo (WebGPU)",
+      "Exporta el grafo a una bóveda compatible con Obsidian"
     ],
     "author": { "@id": "https://solutions.futurion.es/#organization" },
     "offers": {
@@ -99,6 +103,14 @@ const metadata = {
       con frecuencia privilegiados, confidenciales o datos personales sujetos al RGPD.
     </Fragment>
   </Hero>
+
+  <!-- Vista previa de la interfaz -->
+
+  <section class="px-4 sm:px-6 pt-0 pb-10 md:pb-14 -mt-6 md:-mt-10">
+    <div class="max-w-5xl mx-auto">
+      <TrustCoreInterface lang="es" />
+    </div>
+  </section>
 
   <!-- Sitios de chat compatibles -->
 
@@ -268,9 +280,47 @@ const metadata = {
     </Fragment>
   </Content>
 
+  <!-- Mapa de conocimiento 3D -->
+
+  <Content
+    isAfterContent
+    tagline="El grafo que puedes ver"
+    title="Ve, comprueba y corrige el grafo sobre el que se construyen tus respuestas"
+    items={[
+      {
+        title: 'Ve por qué se sostiene una respuesta',
+        description:
+          'El mapa muestra las mismas entidades y relaciones a partir de las que se construye una respuesta. Al seleccionar cualquier nodo se abre el fragmento fuente exacto y su página, de modo que un revisor audita la evidencia a simple vista — se abre por proyecto desde el botón ⬡ 3D Map del panel.',
+      },
+      {
+        title: 'Conexiones que ningún documento individual declara',
+        description:
+          'Cuando las entidades solo están vinculadas a través de un tercer archivo, una búsqueda por similitud no devuelve nada; el grafo registra el vínculo y el mapa lo muestra. Al enfocar un nodo se iluminan sus vecinos entre archivos, la detección de comunidades colorea los grupos relacionados y las entidades más conectadas se dibujan más grandes.',
+      },
+      {
+        title: 'Corrígelo y luego expórtalo',
+        description:
+          'Marca una cláusula como derogada por otra manualmente; ese vínculo se trata como confirmado, sobrevive a la reindexación y alimenta el razonamiento a una fecha determinada. Todo el mapa se exporta como una bóveda compatible con Obsidian — un ZIP de notas enlazadas — para un expediente.',
+      },
+    ]}
+  >
+    <Fragment slot="image">
+      <TrustCoreGraph lang="es" />
+    </Fragment>
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Construido en solo lectura a partir de datos del dispositivo, dibujado en tu GPU
+      </h3>
+      El mapa se renderiza mediante WebGPU, con WebGL y una vista 2D como reservas. Nada se envía a
+      ningún sitio y construirlo no realiza ninguna llamada a un modelo ni al acompañante. Los grafos
+      muy grandes se limitan a los nodos más conectados, y el mapa indica cuándo lo ha hecho.
+    </Fragment>
+  </Content>
+
   <!-- Cómputo externo -->
 
   <Content
+    isReversed
     isAfterContent
     tagline="Tu cómputo, tus reglas"
     title="Conecta tus propios endpoints on-premise o en la nube"
@@ -305,7 +355,6 @@ const metadata = {
   <!-- OCR -->
 
   <Content
-    isReversed
     isAfterContent
     tagline="Documentos escaneados"
     title="OCR que localiza una cita hasta su lugar exacto en la página"
@@ -574,6 +623,11 @@ const metadata = {
         title: '¿Cómo sé que una respuesta es correcta?',
         description:
           'Cada respuesta está vinculada al fragmento exacto del que procede, y cada cita se contrasta con el texto fuente y la página antes de mostrarla. Cuando dos documentos no coinciden, el conflicto se señala con ambas fuentes y páginas. Una cadena de razonamiento muestra la secuencia de relaciones que sustenta la respuesta, de modo que puedes ver por qué se sigue en lugar de confiar en que un modelo la produjo.',
+      },
+      {
+        title: '¿Puedo ver y comprobar el grafo detrás de una respuesta?',
+        description:
+          'Sí. El grafo de entidades del proyecto se abre como un mapa 3D interactivo desde el panel. Al seleccionar un nodo se abre el fragmento y la página exactos de los que procede, de modo que auditas la evidencia a simple vista. El mapa se renderiza en tu propia GPU mediante WebGPU sin enviar nada al exterior. Puedes marcar una cláusula como derogada manualmente — esa corrección sobrevive a la reindexación — y exportar todo el grafo como una bóveda compatible con Obsidian.',
       },
       {
         title: '¿Cuál es la diferencia entre Free y los planes de pago?',

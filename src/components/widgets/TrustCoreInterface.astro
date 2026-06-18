@@ -1,0 +1,814 @@
+---
+/**
+ * TrustCoreInterface.astro
+ * Faithful port of the TrustCore extension workspace panel (closed-shadow-DOM snapshot)
+ * into a self-contained, scoped Astro component — rendered from code, not a screenshot.
+ * Follows the ComplianceAutomationMap.astro precedent: one scoped <style> block,
+ * markup namespaced under the original .ws-* classes, fonts from the global tokens
+ * (Poppins / Inter Variable). The panel is a STATIC visual demo: no client JS, controls
+ * are non-interactive (tabindex=-1) and the whole figure is exposed to AT as one image.
+ *
+ * Sample content is a neutral legal/compliance example — no real personal data.
+ */
+
+import imgTrustCore from '~/assets/images/trustcore.png';
+
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = 'en' } = Astro.props;
+
+const CONTENT = {
+  en: {
+    aria:
+      'The TrustCore panel: a contract question answered from indexed documents, with a Faithful badge, checked citations and a superseded-clause card.',
+    title: 'TrustCore · Contracts',
+    badge: 'ON',
+    projects: ['Acme–Globex Matter', 'Default', 'NDA Review'],
+    newBtn: '+ New',
+    filesTitle: 'Project Files',
+    refreshTitle: 'Refresh file list',
+    files: [
+      { name: 'Master Agreement.pdf', meta: '18 pages · 1.2 MB' },
+      { name: 'Amendment No. 2.pdf', meta: '3 pages · 240 KB' },
+    ],
+    indexed: 'indexed',
+    dropStrong: 'Upload files',
+    dropRest: '— click or drag & drop',
+    dropNote: 'PDF · TXT · MD',
+    progressFile: 'Amendment No. 2.pdf',
+    progressPhase: 'done · 100%',
+    userMsg: 'What is the termination notice period?',
+    answer: '90 days, per the amended clause.',
+    faithful: '✓ Faithful',
+    citations: '2 citations',
+    cite1: {
+      doc: 'Master Agreement.pdf',
+      page: 'p. 12',
+      quote: '“Either party may terminate this Agreement on sixty (60) days’ written notice.”',
+    },
+    cite2: {
+      doc: 'Amendment No. 2.pdf',
+      page: 'p. 3',
+      quote: '“Clause 12.1 is amended to require ninety (90) days’ written notice.”',
+    },
+    supBadge: 'Superseded · confirmed',
+    supSubject: 'Clause 12.1 — notice period',
+    supOld: '60 days',
+    supNew: '90 days',
+    supTimeline: 'Effective 1 Mar 2026 · Amendment No. 2 supersedes Master Agreement',
+    supOldHead: 'Superseded',
+    supNewHead: 'In force',
+    supOldBody: 'Master Agreement.pdf · p.12 — “…sixty (60) days’ written notice.”',
+    supNewBody: 'Amendment No. 2.pdf · p.3 — “…ninety (90) days’ written notice.”',
+    passagesTitle: 'Source passages · 3 retrieved',
+    passages: [
+      {
+        doc: 'Master Agreement.pdf',
+        page: 'p. 12',
+        pre: '12.1 Termination. Either party may terminate this Agreement on ',
+        hl: 'sixty (60) days’',
+        post: ' written notice to the other party.',
+        viewFull: true,
+      },
+      {
+        doc: 'Amendment No. 2.pdf',
+        page: 'p. 3',
+        pre: 'Clause 12.1 of the Master Agreement is amended to require ',
+        hl: 'ninety (90) days’',
+        post: ' written notice, effective 1 March 2026.',
+        viewFull: true,
+      },
+      {
+        doc: 'Master Agreement.pdf',
+        page: 'p. 14',
+        pre: '12.4 Notices. Any notice under this clause shall be in writing and delivered to the registered office of the receiving party.',
+        hl: '',
+        post: '',
+        viewFull: false,
+      },
+    ],
+    viewFull: 'View full passage ›',
+    inputPlaceholder: 'Ask TrustCore…',
+    send: 'Send',
+    map3d: '⬡ 3D Map',
+    deactivate: 'Deactivate',
+  },
+  es: {
+    aria:
+      'El panel de TrustCore: una pregunta contractual respondida desde documentos indexados, con distintivo Fiel, citas comprobadas y una tarjeta de cláusula derogada.',
+    title: 'TrustCore · Contratos',
+    badge: 'ON',
+    projects: ['Asunto Acme–Globex', 'Predeterminado', 'Revisión de NDA'],
+    newBtn: '+ Nuevo',
+    filesTitle: 'Archivos del proyecto',
+    refreshTitle: 'Actualizar lista de archivos',
+    files: [
+      { name: 'Contrato marco.pdf', meta: '18 páginas · 1,2 MB' },
+      { name: 'Modificación n.º 2.pdf', meta: '3 páginas · 240 KB' },
+    ],
+    indexed: 'indexado',
+    dropStrong: 'Subir archivos',
+    dropRest: '— haz clic o arrastra y suelta',
+    dropNote: 'PDF · TXT · MD',
+    progressFile: 'Modificación n.º 2.pdf',
+    progressPhase: 'hecho · 100%',
+    userMsg: '¿Cuál es el plazo de preaviso de resolución?',
+    answer: '90 días, según la cláusula modificada.',
+    faithful: '✓ Fiel',
+    citations: '2 citas',
+    cite1: {
+      doc: 'Contrato marco.pdf',
+      page: 'pág. 12',
+      quote:
+        '«Cualquiera de las partes podrá resolver el contrato con sesenta (60) días de preaviso por escrito.»',
+    },
+    cite2: {
+      doc: 'Modificación n.º 2.pdf',
+      page: 'pág. 3',
+      quote:
+        '«La cláusula 12.1 se modifica para exigir noventa (90) días de preaviso por escrito.»',
+    },
+    supBadge: 'Derogada · confirmado',
+    supSubject: 'Cláusula 12.1 — plazo de preaviso',
+    supOld: '60 días',
+    supNew: '90 días',
+    supTimeline: 'En vigor desde el 1 mar 2026 · la Modificación n.º 2 deroga el Contrato marco',
+    supOldHead: 'Derogada',
+    supNewHead: 'En vigor',
+    supOldBody: 'Contrato marco.pdf · pág. 12 — «…sesenta (60) días de preaviso por escrito.»',
+    supNewBody: 'Modificación n.º 2.pdf · pág. 3 — «…noventa (90) días de preaviso por escrito.»',
+    passagesTitle: 'Fragmentos fuente · 3 recuperados',
+    passages: [
+      {
+        doc: 'Contrato marco.pdf',
+        page: 'pág. 12',
+        pre: '12.1 Resolución. Cualquiera de las partes podrá resolver el contrato con ',
+        hl: 'sesenta (60) días',
+        post: ' de preaviso por escrito a la otra parte.',
+        viewFull: true,
+      },
+      {
+        doc: 'Modificación n.º 2.pdf',
+        page: 'pág. 3',
+        pre: 'La cláusula 12.1 del Contrato marco se modifica para exigir ',
+        hl: 'noventa (90) días',
+        post: ' de preaviso por escrito, en vigor desde el 1 de marzo de 2026.',
+        viewFull: true,
+      },
+      {
+        doc: 'Contrato marco.pdf',
+        page: 'pág. 14',
+        pre: '12.4 Notificaciones. Toda notificación con arreglo a esta cláusula se hará por escrito y se entregará en el domicilio social de la parte receptora.',
+        hl: '',
+        post: '',
+        viewFull: false,
+      },
+    ],
+    viewFull: 'Ver fragmento completo ›',
+    inputPlaceholder: 'Pregunta a TrustCore…',
+    send: 'Enviar',
+    map3d: '⬡ Mapa 3D',
+    deactivate: 'Desactivar',
+  },
+};
+
+const t = CONTENT[lang] ?? CONTENT.en;
+---
+
+<figure class="tc-ui" role="img" aria-label={t.aria}>
+  <div class="ws-scrim" aria-hidden="true">
+    <div class="ws-panel">
+      <!-- Header -->
+      <div class="ws-header">
+        <div class="ws-logo">
+          <img src={imgTrustCore.src} width="22" height="22" alt="" style="display:block;border-radius:4px" />
+        </div>
+        <div class="ws-title">{t.title}</div>
+        <span class="ws-badge">{t.badge}</span>
+        <div class="ws-spacer"></div>
+        <button type="button" class="ws-close" tabindex="-1">×</button>
+      </div>
+
+      <div class="ws-body">
+        <!-- Left pane -->
+        <div class="ws-left">
+          <div class="ws-proj-row">
+            <select class="ws-proj-select" tabindex="-1">
+              {t.projects.map((p) => <option>{p}</option>)}
+            </select>
+            <button type="button" class="wbtn wbtn-coral wbtn-sm" tabindex="-1">{t.newBtn}</button>
+          </div>
+
+          <div class="ws-sec-header">
+            <h2 class="ws-sec-title">{t.filesTitle}</h2>
+            <button type="button" class="ws-icon-btn" title={t.refreshTitle} tabindex="-1">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M20 11A8 8 0 0 0 4.93 6.93M4 4v4h4" stroke="#5a6286" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M4 13a8 8 0 0 0 15.07 4.07M20 20v-4h-4" stroke="#5a6286" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
+          </div>
+
+          <div class="ws-file-list">
+            {
+              t.files.map((f) => (
+                <div class="ws-file-row">
+                  <div class="ws-file-icon" aria-hidden="true">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" stroke="#5a6286" stroke-width="1.5" stroke-linejoin="round"></path>
+                      <path d="M14 2v6h6" stroke="#5a6286" stroke-width="1.5" stroke-linejoin="round"></path>
+                      <path d="M9 13h6M9 17h4" stroke="#5a6286" stroke-width="1.5" stroke-linecap="round"></path>
+                    </svg>
+                  </div>
+                  <div class="ws-file-info">
+                    <div class="ws-file-name">{f.name}</div>
+                    <div class="ws-file-meta">{f.meta}</div>
+                  </div>
+                  <div class="ws-file-status ws-status-indexed">{t.indexed}</div>
+                </div>
+              ))
+            }
+          </div>
+
+          <div class="ws-drop-zone">
+            <span class="ws-drop-label">
+              <strong>{t.dropStrong}</strong> {t.dropRest}
+              <span class="ws-drop-note">{t.dropNote}</span>
+            </span>
+          </div>
+
+          <div class="ws-progress-list">
+            <div class="ws-progress-entry">
+              <div class="ws-progress-head">
+                <span class="ws-progress-file">{t.progressFile}</span>
+                <span class="ws-progress-phase done">{t.progressPhase}</span>
+              </div>
+              <div class="ws-bar-track"><div class="ws-bar-fill done" style="width:100%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right pane -->
+        <div class="ws-right">
+          <div class="ws-chat-log">
+            <div class="ws-bubble ws-bubble-user">{t.userMsg}</div>
+            <div class="ws-bubble ws-bubble-assistant">
+              <div class="ws-chat-answer">{t.answer}</div>
+              <span class="ws-faith-badge ws-faith-ok">{t.faithful}</span>
+
+              <p class="ws-citations-title">{t.citations}</p>
+              <div class="ws-source-card">
+                <div class="ws-source-meta"><span>{t.cite1.doc}</span><span>{t.cite1.page}</span></div>
+                <div class="ws-quote-text">{t.cite1.quote}</div>
+              </div>
+              <div class="ws-source-card">
+                <div class="ws-source-meta"><span>{t.cite2.doc}</span><span>{t.cite2.page}</span></div>
+                <div class="ws-quote-text">{t.cite2.quote}</div>
+              </div>
+
+              <!-- Superseded-clause card -->
+              <div class="ws-sup-card">
+                <span class="ws-sup-badge ws-sup-confirmed">{t.supBadge}</span>
+                <div class="ws-sup-line">
+                  {t.supSubject}: <span class="ws-sup-old">{t.supOld}</span> →
+                  <span class="ws-sup-tag">{t.supNew}</span>
+                </div>
+                <div class="ws-sup-timeline">{t.supTimeline}</div>
+                <div class="ws-sup-compare">
+                  <div class="ws-sup-col ws-sup-col-old">
+                    <div class="ws-sup-col-head">{t.supOldHead}</div>
+                    <div class="ws-sup-col-body">{t.supOldBody}</div>
+                  </div>
+                  <div class="ws-sup-col ws-sup-col-new">
+                    <div class="ws-sup-col-head">{t.supNewHead}</div>
+                    <div class="ws-sup-col-body">{t.supNewBody}</div>
+                  </div>
+                </div>
+              </div>
+
+              <p class="ws-citations-title">{t.passagesTitle}</p>
+              {
+                t.passages.map((p) => (
+                  <div class="ws-source-card">
+                    <div class="ws-source-meta"><span>{p.doc}</span><span>{p.page}</span></div>
+                    <div class="ws-source-text">
+                      {p.pre}
+                      {p.hl && <span class="ws-highlight">{p.hl}</span>}
+                      {p.post}
+                    </div>
+                    {p.viewFull && (
+                      <button type="button" class="ws-view-full" tabindex="-1">
+                        {t.viewFull}
+                      </button>
+                    )}
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+
+          <div class="ws-chat-input-row">
+            <textarea class="ws-chat-input" placeholder={t.inputPlaceholder} rows="1" tabindex="-1" readonly></textarea>
+            <button type="button" class="wbtn wbtn-coral wbtn-sm" tabindex="-1">{t.send}</button>
+          </div>
+          <div class="ws-chat-footer">
+            <button type="button" class="wbtn wbtn-blue wbtn-sm" tabindex="-1">{t.map3d}</button>
+            <button type="button" class="wbtn wbtn-pink wbtn-sm" tabindex="-1">{t.deactivate}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</figure>
+
+<style>
+  .tc-ui {
+    display: block;
+    margin: 0;
+    font-family: 'Poppins', 'Inter Variable', system-ui, -apple-system, sans-serif;
+  }
+
+  /* ── Scrim → inline container (overlay neutralized) ─────────────────── */
+  .ws-scrim {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* ── Panel ──────────────────────────────────────────────────────────── */
+  .ws-panel {
+    position: relative;
+    width: 100%;
+    max-width: 1040px;
+    height: clamp(520px, 68vh, 660px);
+    background: linear-gradient(160deg, #101740 0%, #0a0f2e 100%);
+    border: 1px solid rgba(45, 123, 242, 0.55);
+    border-radius: 22px;
+    box-shadow: 0 50px 90px -34px rgba(0, 0, 0, 0.75), 0 0 28px rgba(45, 123, 242, 0.08);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    opacity: 1;
+    transform: none;
+  }
+  .ws-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 22px;
+    background: linear-gradient(155deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0) 44%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .ws-panel::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    border-radius: 22px 22px 0 0;
+    background: linear-gradient(
+      90deg,
+      transparent 4%,
+      rgba(0, 190, 255, 0.65) 28%,
+      rgba(40, 210, 255, 0.9) 44%,
+      rgba(90, 130, 255, 0.82) 56%,
+      rgba(165, 70, 240, 0.72) 72%,
+      transparent 96%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ── Header ─────────────────────────────────────────────────────────── */
+  .ws-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 24px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+  }
+  .ws-logo { display: flex; align-items: center; flex-shrink: 0; }
+  .ws-logo img { width: 22px; height: 22px; display: block; }
+  .ws-title {
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 15.5px;
+    font-weight: 700;
+    color: #eaf0ff;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 520px;
+  }
+  .ws-badge {
+    flex-shrink: 0;
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 9999px;
+    background: rgba(131, 227, 30, 0.13);
+    color: #83e31e;
+    border: 1px solid rgba(131, 227, 30, 0.38);
+  }
+  .ws-spacer { flex: 1; }
+  .ws-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: transparent;
+    color: #aab2e0;
+    font-size: 20px;
+    line-height: 1;
+    cursor: default;
+    flex-shrink: 0;
+    font-family: system-ui, sans-serif;
+  }
+
+  /* ── Body (two-pane) ────────────────────────────────────────────────── */
+  .ws-body { display: flex; flex: 1; min-height: 0; overflow: hidden; }
+
+  /* ── Left pane ──────────────────────────────────────────────────────── */
+  .ws-left {
+    width: 340px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    border-right: 1px solid rgba(255, 255, 255, 0.055);
+    padding: 14px 16px 20px;
+    position: relative;
+    z-index: 2;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+  }
+  .ws-left::-webkit-scrollbar { width: 4px; }
+  .ws-left::-webkit-scrollbar-track { background: transparent; }
+  .ws-left::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 2px; }
+
+  /* ── Right pane ─────────────────────────────────────────────────────── */
+  .ws-right {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ── Project selector row ───────────────────────────────────────────── */
+  .ws-proj-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .ws-proj-select {
+    flex: 1;
+    min-width: 0;
+    padding: 7px 12px;
+    border-radius: 9999px;
+    border: 1px solid rgba(45, 123, 242, 0.42);
+    background: rgba(16, 23, 64, 0.75);
+    color: #eaf0ff;
+    font-family: 'Inter Variable', system-ui, sans-serif;
+    font-size: 13px;
+    outline: none;
+    cursor: default;
+  }
+  .ws-proj-select option { background: #101740; color: #eaf0ff; }
+
+  /* ── Buttons ────────────────────────────────────────────────────────── */
+  .wbtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 20px;
+    border-radius: 9999px;
+    border: 1.5px solid transparent;
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    cursor: default;
+    white-space: nowrap;
+  }
+  .wbtn-coral {
+    background: linear-gradient(90deg, #ff2f70, #ff3b3b 60%, #ff6a3d);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 6px 18px -6px rgba(245, 50, 91, 0.5);
+  }
+  .wbtn-blue {
+    background: rgba(45, 123, 242, 0.1);
+    color: #6fb0ff;
+    border-color: rgba(45, 123, 242, 0.42);
+  }
+  .wbtn-pink {
+    background: transparent;
+    color: #ff6699;
+    border-color: rgba(255, 47, 112, 0.42);
+  }
+  .wbtn-sm { padding: 6px 14px; font-size: 12px; }
+
+  .ws-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    background: transparent;
+    cursor: default;
+    flex-shrink: 0;
+  }
+
+  /* ── File section ───────────────────────────────────────────────────── */
+  .ws-sec-header { display: flex; align-items: center; padding: 8px 0 6px; flex-shrink: 0; }
+  .ws-sec-title {
+    flex: 1;
+    margin: 0;
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #3d4468;
+  }
+  .ws-file-list { flex-shrink: 0; min-height: 40px; }
+
+  /* ── File rows ──────────────────────────────────────────────────────── */
+  .ws-file-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    background: rgba(255, 255, 255, 0.022);
+    margin-bottom: 4px;
+  }
+  .ws-file-icon { display: flex; align-items: center; flex-shrink: 0; }
+  .ws-file-info { flex: 1; min-width: 0; }
+  .ws-file-name {
+    font-family: 'Inter Variable', system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #dde4ff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ws-file-meta {
+    font-family: 'Inter Variable', system-ui, sans-serif;
+    font-size: 11px;
+    color: #3d4468;
+    margin-top: 1px;
+  }
+
+  /* ── Status chips ───────────────────────────────────────────────────── */
+  .ws-file-status {
+    flex-shrink: 0;
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 9999px;
+    border: 1px solid currentColor;
+  }
+  .ws-status-indexed { color: #83e31e; background: rgba(131, 227, 30, 0.1); }
+
+  /* ── Drop zone ──────────────────────────────────────────────────────── */
+  .ws-drop-zone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed rgba(45, 123, 242, 0.28);
+    border-radius: 12px;
+    padding: 14px 12px;
+    margin-top: 10px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .ws-drop-label {
+    font-family: 'Inter Variable', system-ui, sans-serif;
+    font-size: 12px;
+    color: #5a6286;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+  }
+  .ws-drop-label strong { color: #6fb0ff; font-weight: 600; }
+  .ws-drop-note { font-size: 10.5px; color: #3d4468; letter-spacing: 0.04em; }
+
+  /* ── Progress list ──────────────────────────────────────────────────── */
+  .ws-progress-list { display: flex; flex-direction: column; gap: 5px; margin-top: 8px; }
+  .ws-progress-entry {
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 7px 10px;
+    background: rgba(255, 255, 255, 0.018);
+  }
+  .ws-progress-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 5px;
+  }
+  .ws-progress-file {
+    font-family: 'Inter Variable', system-ui, sans-serif;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #dde4ff;
+    overflow-wrap: anywhere;
+  }
+  .ws-progress-phase { font-family: 'Inter Variable', system-ui, sans-serif; font-size: 11px; color: #5a6286; white-space: nowrap; }
+  .ws-progress-phase.done { color: #83e31e; }
+  .ws-bar-track { height: 3px; border-radius: 999px; background: rgba(255, 255, 255, 0.07); overflow: hidden; }
+  .ws-bar-fill { height: 100%; width: 0%; border-radius: 999px; background: rgba(45, 123, 242, 0.8); }
+  .ws-bar-fill.done { background: #83e31e; }
+
+  /* ── Chat log ───────────────────────────────────────────────────────── */
+  .ws-chat-log {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 16px 20px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+  }
+  .ws-chat-log::-webkit-scrollbar { width: 4px; }
+  .ws-chat-log::-webkit-scrollbar-track { background: transparent; }
+  .ws-chat-log::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 2px; }
+
+  /* ── Bubbles ────────────────────────────────────────────────────────── */
+  .ws-bubble {
+    font-family: 'Inter Variable', system-ui, sans-serif;
+    font-size: 13px;
+    line-height: 1.55;
+    border-radius: 12px;
+    padding: 10px 14px;
+    max-width: 86%;
+    word-break: break-word;
+  }
+  .ws-bubble-user {
+    align-self: flex-end;
+    background: linear-gradient(135deg, rgba(45, 123, 242, 0.28), rgba(45, 123, 242, 0.16));
+    border: 1px solid rgba(45, 123, 242, 0.35);
+    color: #c8d8ff;
+    border-bottom-right-radius: 4px;
+  }
+  .ws-bubble-assistant {
+    align-self: flex-start;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    color: #dde4ff;
+    border-bottom-left-radius: 4px;
+    max-width: 100%;
+  }
+
+  /* ── Chat answer internals ──────────────────────────────────────────── */
+  .ws-chat-answer { white-space: pre-wrap; color: #dde4ff; margin-bottom: 8px; }
+  .ws-faith-badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin-bottom: 8px;
+  }
+  .ws-faith-ok { background: rgba(131, 227, 30, 0.15); color: #83e31e; }
+  .ws-citations-title {
+    font-size: 10px;
+    color: #3d4468;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    margin: 8px 0 4px;
+  }
+  .ws-source-card {
+    background: rgba(10, 15, 46, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 7px 10px;
+    margin-bottom: 4px;
+  }
+  .ws-source-meta { font-size: 10px; color: #3d4468; display: flex; justify-content: space-between; margin-bottom: 3px; }
+  .ws-source-text { font-size: 11.5px; color: #7880a0; line-height: 1.5; }
+  .ws-view-full {
+    margin-top: 6px;
+    background: none;
+    border: none;
+    padding: 0;
+    color: #6aa6ff;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: default;
+  }
+  .ws-quote-text {
+    font-size: 11.5px;
+    font-style: italic;
+    color: #6fb0ff;
+    border-left: 2px solid rgba(45, 123, 242, 0.3);
+    padding-left: 7px;
+  }
+  .ws-highlight { color: #c9a6ff; font-weight: 600; }
+
+  /* ── Superseded-clause card ─────────────────────────────────────────── */
+  .ws-sup-card {
+    background: rgba(10, 15, 46, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-left: 3px solid #fab387;
+    border-radius: 8px;
+    padding: 8px 10px;
+    margin-bottom: 6px;
+  }
+  .ws-sup-badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin-bottom: 6px;
+  }
+  .ws-sup-confirmed { background: rgba(243, 139, 168, 0.16); color: #f38ba8; }
+  .ws-sup-line { font-size: 11.5px; line-height: 1.5; color: #9aa2c4; }
+  .ws-sup-tag { color: #83e31e; font-weight: 700; }
+  .ws-sup-old { color: #7880a0; text-decoration: line-through; }
+  .ws-sup-timeline { font-size: 10.5px; color: #6aa6ff; margin: 5px 0 2px; font-variant-numeric: tabular-nums; }
+  .ws-sup-compare { display: flex; gap: 8px; margin-top: 6px; }
+  .ws-sup-col {
+    flex: 1 1 0;
+    min-width: 0;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
+    padding: 6px 8px;
+    background: rgba(0, 0, 0, 0.18);
+  }
+  .ws-sup-col-old { opacity: 0.72; }
+  .ws-sup-col-new { border-color: rgba(131, 227, 30, 0.3); }
+  .ws-sup-col-head { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.06em; color: #3d4468; margin-bottom: 3px; }
+  .ws-sup-col-body { font-size: 11px; color: #7880a0; line-height: 1.45; }
+
+  /* ── Chat input row ─────────────────────────────────────────────────── */
+  .ws-chat-input-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    padding: 10px 16px 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    flex-shrink: 0;
+  }
+  .ws-chat-input {
+    flex: 1;
+    padding: 8px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(45, 123, 242, 0.38);
+    background: rgba(16, 23, 64, 0.75);
+    color: #eaf0ff;
+    font-family: 'Inter Variable', system-ui, sans-serif;
+    font-size: 13px;
+    resize: none;
+    outline: none;
+    min-height: 36px;
+    line-height: 1.45;
+  }
+  .ws-chat-input::placeholder { color: #3d4468; }
+
+  /* ── Chat footer ────────────────────────────────────────────────────── */
+  .ws-chat-footer { display: flex; align-items: center; gap: 8px; padding: 6px 16px 14px; flex-shrink: 0; }
+
+  /* ── Responsive ─────────────────────────────────────────────────────── */
+  @media (max-width: 760px) {
+    .ws-panel { height: clamp(560px, 86vh, 720px); }
+    .ws-body { flex-direction: column; }
+    .ws-left {
+      width: auto;
+      max-height: 190px;
+      border-right: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+    }
+  }
+</style>

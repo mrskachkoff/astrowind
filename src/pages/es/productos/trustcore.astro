@@ -1,16 +1,24 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import JsonLd from '~/components/common/JsonLd.astro';
+
 import Hero from '~/components/widgets/Hero.astro';
+import Brands from '~/components/widgets/Brands.astro';
 import Content from '~/components/widgets/Content.astro';
 import Features from '~/components/widgets/Features.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Prices from '~/components/widgets/Pricing.astro';
+import Note from '~/components/widgets/Note.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 import imgTrustCore from '~/assets/images/trustcore.png';
 
 const metadata = {
-  title: 'TrustCore — Infraestructura de Cumplimiento de IA para Sanidad',
+  title: 'TrustCore — Responde preguntas sobre tus propios documentos, en tu propio hardware',
   description:
-    'TrustCore es el motor de cumplimiento que impulsa los productos Futurion. Controles RGPD, HIPAA y Reglamento de IA integrados en la capa de plataforma — cada flujo de trabajo es conforme por arquitectura.',
+    'TrustCore es una extensión de navegador que responde preguntas sobre tus propios documentos en tu propio hardware. Recuperación Graph RAG, citas verificadas, sin SaaS, sin salida de datos — diseñada para trabajo jurídico, de cumplimiento y de investigación.',
   openGraph: {
     images: [{ url: '~/assets/images/trustcore.png' }],
   },
@@ -18,133 +26,585 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
+  <JsonLd schema={{
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "TrustCore",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Chromium browser (Chrome, Edge, Brave) 124+",
+    "description": "Extensión de navegador, con un acompañante local opcional, que responde preguntas sobre tus propios documentos en tu propio hardware. Recuperación Graph RAG, citas verificadas, detección de conflictos entre documentos e incrustaciones locales — sin servidor alojado y sin salida de documentos. Diseñada para trabajo jurídico, de cumplimiento y de investigación.",
+    "url": "https://solutions.futurion.es/es/productos/trustcore/",
+    "inLanguage": "es",
+    "featureList": [
+      "Se ejecuta en tu navegador; sin servidor alojado",
+      "Los documentos y las preguntas permanecen en tu máquina",
+      "Recuperación Graph RAG (vectores + BM25 + expansión de grafo)",
+      "Cada respuesta vinculada a un fragmento fuente verificado",
+      "Detección de conflictos entre documentos y cadenas de razonamiento",
+      "Incrustaciones locales (bge-m3) mediante WebGPU, con reserva por CPU",
+      "Conecta tu propio cómputo on-premise o en la nube (formato compatible con OpenAI)"
+    ],
+    "author": { "@id": "https://solutions.futurion.es/#organization" },
+    "offers": {
+      "@type": "Offer",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "minPrice": "0",
+        "priceCurrency": "EUR"
+      },
+      "availability": "https://schema.org/InStock"
+    }
+  }} />
+
   <!-- Hero -->
+
   <Hero
     actions={[
       {
         variant: 'primary',
-        text: 'Solicitar Hoja de Ruta',
-        href: '/es/hoja-de-ruta-de-automatizacion',
-        icon: 'tabler:clipboard-check',
+        text: 'Contactar',
+        href: '/es/contacto/',
+        icon: 'tabler:mail',
       },
       {
         variant: 'secondary',
-        text: 'Ver Todos los Productos',
-        href: '#productos',
+        text: 'Ver precios',
+        href: '#precios',
       },
     ]}
   >
     <Fragment slot="title">
       <img
         src={imgTrustCore.src}
-        alt="Logo TrustCore"
-        width="72"
-        height="72"
-        class="mx-auto mb-4 object-contain"
+        alt="Logo de TrustCore"
+        width="84"
+        height="84"
+        class="mx-auto mb-4 object-contain drop-shadow-lg"
       />
       TrustCore<br />
-      <span class="text-accent dark:text-white highlight">Infraestructura de Cumplimiento de IA para Sanidad</span>
+      <span class="text-accent dark:text-white highlight">Responde preguntas sobre tus propios documentos, en tu propio hardware</span>
     </Fragment>
 
     <Fragment slot="subtitle">
-      TrustCore es la capa de cumplimiento y gobernanza que sustenta todos los productos Futurion.
-      Codifica los controles del RGPD, HIPAA y el Reglamento de IA de la UE a nivel de plataforma
-      — garantizando que cada flujo de datos, inferencia de modelo y paso de automatización en tu
-      consulta sea conforme por arquitectura, no solo por política.
+      <span class="hidden sm:inline">
+        TrustCore es una extensión de navegador, con un acompañante local opcional, que responde
+        preguntas sobre los documentos que le añades. Preguntas desde el propio panel de TrustCore
+        en la página de chat que ya usas — ChatGPT, Gemini, Claude, DeepSeek, Perplexity o un
+        OpenWebUI local — y la respuesta proviene de tus documentos indexados, calculada en tu
+        máquina. La pregunta y los documentos nunca se envían al proveedor de chat, y no existe
+        ningún servidor de TrustCore detrás.
+      </span>
+      <span class="block mb-1 sm:hidden font-bold text-green-700">Tus documentos permanecen en tu máquina. Cada respuesta cita su fuente.</span>
+      Diseñada para trabajo jurídico, de cumplimiento y de investigación, donde los documentos son
+      con frecuencia privilegiados, confidenciales o datos personales sujetos al RGPD.
     </Fragment>
   </Hero>
 
-  <!-- Características clave -->
+  <!-- Sitios de chat compatibles -->
+
+  <Brands
+    title="Funciona dentro del sitio de chat que ya usas"
+    subtitle="TrustCore abre su propio panel en la página y responde desde tus documentos. El cuadro de entrada del sitio de chat sigue funcionando con normalidad — TrustCore no lo intercepta ni redirige. Perplexity también es compatible, además de los logos mostrados."
+    images={[
+      { src: '~/assets/images/openai.png', alt: 'ChatGPT' },
+      { src: '~/assets/images/gemini-color.png', alt: 'Gemini' },
+      { src: '~/assets/images/claude-color.png', alt: 'Claude' },
+      { src: '~/assets/images/deepseek.png', alt: 'DeepSeek' },
+      { src: '~/assets/images/openwebui.png', alt: 'OpenWebUI' },
+    ]}
+  />
+
+  <!-- Qué hace TrustCore -->
+
   <Features
-    id="caracteristicas"
+    id="features"
+    columns={3}
     tagline="Qué hace TrustCore"
-    title="Cumplimiento Integrado en la Plataforma"
-    subtitle="No es una casilla a marcar. Es una base. TrustCore proporciona a las organizaciones sanitarias la capa de gobernanza necesaria para desplegar IA de forma responsable a escala."
+    title="Respuestas que puedes rastrear, sin enviar tus documentos a ningún sitio"
+    subtitle="Dos cosas se cumplen siempre: tus documentos y preguntas permanecen en tu máquina, y cada respuesta está vinculada al fragmento exacto del que procede."
     items={[
       {
-        title: 'Controles de Residencia de Datos',
+        title: 'Funciona donde ya trabajas',
         description:
-          'Aplica estrictos límites de residencia de datos — los datos del paciente nunca salen de las regiones designadas o de la infraestructura on-premise.',
-        icon: 'tabler:map-pin',
+          'Un panel sobre ChatGPT, Gemini, Claude, DeepSeek, Perplexity o un OpenWebUI local. El sitio de chat sigue funcionando con normalidad; TrustCore no redirige el cuadro de entrada de la página.',
+        icon: 'tabler:browser',
       },
       {
-        title: 'Control de Acceso Basado en Roles',
+        title: 'Sin SaaS, sin servidor',
         description:
-          'RBAC granular alineado con los roles sanitarios: médicos, administrativos e IT tienen acceso con alcance preciso — nada más.',
-        icon: 'tabler:users',
+          'No hay ningún servicio alojado en el que iniciar sesión. La extensión se ejecuta en tu navegador; el acompañante opcional corre en un contenedor en tu propia máquina o servidor. Nada se sube a un servidor de TrustCore.',
+        icon: 'tabler:server-off',
       },
       {
-        title: 'Seguimiento del Consentimiento',
+        title: 'Graph RAG, no solo similitud',
         description:
-          'Vincula automáticamente cada actividad de tratamiento de datos a su base jurídica del RGPD y realiza un seguimiento completo del ciclo de vida del consentimiento.',
-        icon: 'tabler:checkup-list',
+          'La recuperación combina búsqueda vectorial, BM25 de texto completo y fusión de rangos, y luego recorre un grafo de las entidades de tus documentos para incorporar hechos conectados que una búsqueda por similitud pasaría por alto.',
+        icon: 'tabler:topology-star-3',
       },
       {
-        title: 'Clasificación de Riesgo del Reglamento de IA',
+        title: 'Cada respuesta cita su fuente',
         description:
-          'Clasifica cada caso de uso de IA según el Reglamento de IA de la UE y aplica los controles apropiados para sistemas de IA médica de alto riesgo.',
-        icon: 'tabler:certificate',
+          'Cada cita se contrasta con el texto fuente y la página antes de mostrar la respuesta. En el modo estricto, una respuesta cuyas citas no superan la verificación se retiene.',
+        icon: 'tabler:quote',
       },
       {
-        title: 'Motor de Políticas en Tiempo Real',
+        title: 'Detección de conflictos entre documentos',
         description:
-          'Las políticas se evalúan en tiempo de ejecución — bloquea, redirige o alerta sobre cualquier acción que incumpla una norma antes de que se ejecute.',
-        icon: 'tabler:radar',
+          'Cuando dos documentos fuente establecen valores incompatibles — dos plazos de preaviso, dos importes para el mismo concepto — TrustCore nombra ambas fuentes y páginas en lugar de elegir una en silencio.',
+        icon: 'tabler:git-compare',
       },
       {
-        title: 'Evidencias e Informes',
+        title: 'Incrustaciones locales en tu GPU',
         description:
-          'Genera automáticamente paquetes de evidencias para EIPD, registros de actividades de tratamiento del Artículo 30 y paneles de cumplimiento.',
-        icon: 'tabler:report',
+          'El modelo bge-m3 incluido convierte tu texto en vectores en tu GPU mediante WebGPU, con reserva por CPU cuando no hay GPU disponible. En la ruta local, ninguna llamada de incrustación sale de la máquina.',
+        icon: 'tabler:cpu',
       },
     ]}
   />
 
-  <!-- Contenido detallado -->
+  <!-- Soberanía -->
+
   <Content
     isReversed
-    tagline="El Problema"
-    title="El Cumplimiento de la IA Sanitaria No Puede Ser un Añadido"
+    tagline="Dónde viven tus datos"
+    title="Soberano por defecto, sin subprocesadores en la ruta local"
     items={[
       {
-        title: 'Cumplimiento añadido tras el despliegue',
+        title: 'Ningún tercero en la ruta de datos',
         description:
-          'Añadir controles RGPD a los sistemas de IA después del lanzamiento es caro, frágil y a menudo incompleto — los reguladores lo detectan.',
+          'En la ruta local no hay ningún servicio en la nube, herramienta de analítica ni API de modelos que procese tus datos. Un tercero que no está en la ruta no puede filtrar un documento ni datos personales.',
       },
       {
-        title: 'Aplicación de políticas fragmentada',
+        title: 'Almacenamiento en el dispositivo',
         description:
-          'Distintas herramientas, distintas normas, distintas pistas de auditoría. TrustCore unifica la gobernanza en todo tu stack de IA.',
+          'Los documentos, fragmentos de texto, incrustaciones, el índice de texto completo y el grafo de entidades se guardan en una base de datos SQLite dentro del navegador, persistida en el Origin Private File System. No hay ningún servicio de sincronización detrás.',
       },
       {
-        title: 'Toma de decisiones de IA opaca',
+        title: 'Tú decides qué permanece en local',
         description:
-          'Los reguladores sanitarios exigen explicabilidad. TrustCore captura el contexto de decisión en cada paso.',
+          'Las preguntas formuladas en el panel de TrustCore se responden en tu máquina. Lo que escribas en el cuadro de entrada del sitio de chat sigue yendo a ese sitio como de costumbre. El límite es explícito y está bajo tu control.',
       },
     ]}
-    image={{ src: imgTrustCore, alt: 'TrustCore — infraestructura de cumplimiento de IA' }}
+    image={{ src: '~/assets/images/on-prem.png', alt: 'Límite soberano de datos on-premise' }}
   >
     <Fragment slot="content">
       <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        Cumplimiento por arquitectura, no por política
+        Usarlo no crea un nuevo lugar donde vivan los documentos
       </h3>
-      TrustCore integra los controles del RGPD, HIPAA y el Reglamento de IA en la capa de
-      infraestructura para que tu equipo pueda lanzar funcionalidades de IA sin cuellos de botella
-      de revisión de cumplimiento.
+      Para material privilegiado, confidencial o regulado por el RGPD — y para el trabajo bajo secreto
+      profesional, como el <span class="italic">secreto profesional</span> en España o el secreto
+      profesional abogado-cliente en Irlanda — subir documentos a un servicio compartido de terceros
+      puede ser en sí mismo el problema.
     </Fragment>
   </Content>
 
+  <!-- Graph RAG -->
+
+  <Content
+    isAfterContent
+    tagline="Recuperación"
+    title="Un grafo, no solo similitud"
+    items={[
+      {
+        title: 'Recuperación híbrida',
+        description:
+          'La búsqueda vectorial encuentra fragmentos cercanos en significado; BM25 localiza las palabras exactas que importan para términos definidos, números de cláusula y nombres; la fusión de rangos combina ambos en un conjunto ordenado.',
+      },
+      {
+        title: 'Expansión de grafo',
+        description:
+          'A partir de las entidades de los fragmentos principales, TrustCore recorre el grafo de relaciones hasta varios saltos para incorporar hechos conectados entre documentos.',
+      },
+      {
+        title: 'Por qué importa aquí',
+        description:
+          'En documentos jurídicos y de cumplimiento, una redacción similar aparece en un contrato marco, una modificación posterior y un anexo. La similitud por sí sola puede responder con alta confianza desde el documento equivocado.',
+      },
+    ]}
+    image={{ src: '~/assets/images/rag.png', alt: 'Recuperación Graph RAG sobre entidades de documentos' }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Construido para hacer explícitas las relaciones entre documentos
+      </h3>
+      TrustCore construye un grafo de las personas, organizaciones, fechas, importes y referencias de
+      tus documentos y razona sobre él, de modo que las conexiones invisibles en cualquier archivo
+      individual se vuelven consultables.
+    </Fragment>
+  </Content>
+
+  <!-- Razonamiento verificable -->
+
+  <Content
+    isReversed
+    isAfterContent
+    tagline="Razonamiento verificable"
+    title="Respuestas que llegan con su evidencia ya comprobada"
+    items={[
+      {
+        title: 'Cadenas de razonamiento',
+        description:
+          'Un razonador simbólico produce una cadena explícita de relaciones desde el sujeto de la pregunta hasta los hechos de apoyo, de modo que una persona puede ver por qué se sigue la respuesta.',
+      },
+      {
+        title: 'Verificación de admisibilidad de citas',
+        description:
+          'Antes de mostrar una respuesta, se confirma que cada cita aparece en la página a la que se atribuye. En el modo estricto, las respuestas que no superan la verificación se retienen en lugar de mostrarse.',
+      },
+      {
+        title: 'Razonamiento temporal y de cláusulas derogadas',
+        description:
+          'Para una fecha "a partir de" elegida, el razonador resuelve qué disposición está en vigor, etiqueta las cláusulas derogadas con sus fechas de vigencia y muestra ambas — nunca descarta la antigua en silencio. Disponible en el plan Team y superiores.',
+      },
+    ]}
+    image={{ src: '~/assets/images/guardrails.png', alt: 'Razonamiento verificable y citas comprobadas' }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        La diferencia entre una respuesta que vuelves a verificar y una que puedes leer
+      </h3>
+      Para el trabajo en el que una afirmación incorrecta o no respaldada tiene consecuencias, que la
+      evidencia llegue adjunta y comprobada es el objetivo del producto.
+    </Fragment>
+  </Content>
+
+  <!-- Cómputo externo -->
+
+  <Content
+    isAfterContent
+    tagline="Tu cómputo, tus reglas"
+    title="Conecta tus propios endpoints on-premise o en la nube"
+    items={[
+      {
+        title: 'Interfaz en formato compatible con OpenAI',
+        description:
+          'Todas las llamadas de chat e incrustación utilizan el formato de solicitud compatible con OpenAI, de modo que TrustCore puede comunicarse con OpenAI, OpenRouter, un servidor Ollama o llama.cpp local, o cualquier endpoint on-premise que use el mismo formato.',
+      },
+      {
+        title: 'Apunta a la infraestructura que controlas',
+        description:
+          'Los planes de pago permiten apuntar TrustCore a tus propios endpoints de incrustación, OCR y chat — on-premise o en tu propia cuenta en la nube — para que los modelos más pesados corran en infraestructura bajo tu control.',
+      },
+      {
+        title: 'El límite de datos sigue siendo tuyo',
+        description:
+          'Con la ruta de pago, el único procesador involucrado es el endpoint que tú seleccionas y controlas. Es tu subprocesador bajo tu contrato, no uno que introduce TrustCore.',
+      },
+    ]}
+    image={{ src: '~/assets/images/ollama.png', alt: 'Conecta tu propio cómputo on-premise o en la nube' }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Modelos más pesados, mismo límite de datos
+      </h3>
+      El comportamiento del resto del sistema no cambia cuando conectas cómputo externo — solo cambia
+      dónde se ejecuta el trabajo numérico.
+    </Fragment>
+  </Content>
+
+  <!-- OCR -->
+
+  <Content
+    isReversed
+    isAfterContent
+    tagline="Documentos escaneados"
+    title="OCR que localiza una cita hasta su lugar exacto en la página"
+    items={[
+      {
+        title: 'Procedencia a nivel de bloque',
+        description:
+          'Los PDF escaneados los procesa MinerU en el acompañante local, que devuelve texto más número de página y cuadro delimitador por bloque — lo que permite a TrustCore validar una cita hasta su ubicación exacta en la página.',
+      },
+      {
+        title: 'Reserva por visión',
+        description:
+          'Cuando el acompañante no está disponible, TrustCore recurre a un modelo de visión por página, que proporciona ubicación a nivel de página en lugar de a nivel de bloque.',
+      },
+      {
+        title: 'Nada se lee en silencio',
+        description:
+          'Un archivo en un formato que TrustCore no reconoce se rechaza en lugar de indexarse parcialmente, de modo que un proyecto nunca contiene un documento que solo se leyó a medias.',
+      },
+    ]}
+    image={{ src: '~/assets/images/ocr.svg', alt: 'OCR con procedencia de página a nivel de bloque' }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        PDF de texto, PDF escaneados, texto plano y Markdown
+      </h3>
+      Los PDF de texto se leen directamente; los PDF escaneados se recuperan mediante OCR; el texto
+      plano y el Markdown se leen tal cual.
+    </Fragment>
+  </Content>
+
+  <!-- Cómo funciona la indexación -->
+
+  <Steps
+    title="Cómo se indexa un documento"
+    subtitle="Cada archivo pasa por los mismos seis pasos en tu máquina, desde la captura hasta un grafo de entidades consultable."
+    items={[
+      {
+        title: 'Paso 1: <span class="font-medium">Captura y desduplicación</span>',
+        description:
+          'Cada archivo se hashea; un documento que ya está en el proyecto se omite, de modo que el mismo archivo nunca se indexa dos veces.',
+        icon: 'tabler:file-import',
+      },
+      {
+        title: 'Paso 2: <span class="font-medium">Extracción de texto</span>',
+        description:
+          'Los PDF de texto se leen directamente, los PDF escaneados pasan por OCR, y el texto plano y el Markdown se leen tal cual.',
+        icon: 'tabler:file-text',
+      },
+      {
+        title: 'Paso 3: <span class="font-medium">Fragmentación</span>',
+        description:
+          'El texto se divide en fragmentos. Cuando el OCR proporciona maquetación, cada fragmento conserva su número de página y cuadro delimitador, lo que permite localizar una cita en la página más adelante.',
+        icon: 'tabler:layout-rows',
+      },
+      {
+        title: 'Paso 4: <span class="font-medium">Incrustación</span>',
+        description:
+          'Cada fragmento se convierte en un vector mediante el modelo bge-m3 incluido, en tu GPU a través de WebGPU o en la CPU cuando no hay GPU disponible.',
+        icon: 'tabler:cpu',
+      },
+      {
+        title: 'Paso 5: <span class="font-medium">Almacenamiento</span>',
+        description:
+          'Los fragmentos, vectores y el índice de texto completo se escriben conjuntamente en la base de datos SQLite del dispositivo.',
+        icon: 'tabler:database',
+      },
+      {
+        title: 'Paso 6: <span class="font-medium">Construcción del grafo</span>',
+        description:
+          'Las entidades y las relaciones entre ellas — incluidos los vínculos de derogación y fecha de vigencia — se extraen de los fragmentos y se escriben en las tablas del grafo.',
+        icon: 'tabler:topology-star-3',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/data-analytics.jpg',
+      alt: 'Flujo de indexación de documentos',
+    }}
+  />
+
+  <!-- Lo que TrustCore no hace deliberadamente -->
+
+  <Features2
+    tagline="Por diseño"
+    title="Lo que TrustCore no hace deliberadamente"
+    subtitle="Estas son decisiones de posicionamiento, no limitaciones por las que disculparse."
+    columns={2}
+    items={[
+      {
+        title: 'No aloja tus documentos',
+        description:
+          'No hay ningún servidor que los almacene. La extensión corre en tu navegador y el acompañante opcional en tu propia máquina o servidor.',
+        icon: 'tabler:cloud-off',
+      },
+      {
+        title: 'No envía contenido al proveedor',
+        description:
+          'El contenido de los documentos no se sube a TrustCore ni se incluye en telemetría. No existe telemetría del producto que transporte contenido de documentos.',
+        icon: 'tabler:ban',
+      },
+      {
+        title: 'No añade un subprocesador en la ruta local',
+        description:
+          'No hay ningún tercero en la ruta de datos que pudiera filtrar un documento o datos personales. En la ruta de pago, el único procesador es el endpoint que tú eliges y controlas.',
+        icon: 'tabler:shield-lock',
+      },
+      {
+        title: 'No requiere una cuenta de IA de terceros',
+        description:
+          'La ruta local no necesita ningún servicio externo para funcionar — se ejecuta íntegramente sobre el modelo local incluido y tu propio hardware.',
+        icon: 'tabler:plug-off',
+      },
+      {
+        title: 'No responde sin mostrar su fuente',
+        description:
+          'Cada respuesta llega con las citas de apoyo, sus números de página y, cuando procede, la cadena de razonamiento y cualquier conflicto detectado.',
+        icon: 'tabler:eye-check',
+      },
+      {
+        title: 'No se apodera del cuadro de chat',
+        description:
+          'TrustCore responde en su propio panel. El cuadro de entrada del sitio de chat sigue funcionando con normalidad; TrustCore no lo intercepta ni redirige.',
+        icon: 'tabler:messages',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  <!-- Precios -->
+
+  <Prices
+    id="precios"
+    tagline="Precios"
+    title="Planes por puesto para equipos de cualquier tamaño"
+    subtitle="Empieza completamente en local sin coste. Los planes de pago añaden la capacidad que una organización con su propia infraestructura no puede obtener gratis: conectar tu propio cómputo. Precios sin IVA, por puesto, con facturación anual."
+    prices={[
+      {
+        title: 'Free',
+        subtitle: 'Completamente local, usuario único',
+        price: 0,
+        period: 'por usuario',
+        items: [
+          { description: '100% local — incrustaciones, OCR y modelo incluidos' },
+          { description: 'Integración con sitios de chat y citas validadas' },
+          { description: 'Recuperación híbrida (vectores + BM25 + fusión de rangos)' },
+          { description: 'Proyectos y documentos con límite' },
+          { description: 'Sin cómputo externo, sin subprocesador' },
+        ],
+        callToAction: {
+          text: 'Contactar',
+          href: '/es/contacto/',
+        },
+      },
+      {
+        title: 'Starter',
+        subtitle: 'Microorganizaciones (1-9 puestos)',
+        price: 29,
+        period: 'por puesto / mes',
+        items: [
+          { description: 'Todo lo del plan Free' },
+          { description: 'Conecta cómputo externo — on-premise o en la nube' },
+          { description: 'Detección de conflictos entre documentos y cadenas de razonamiento' },
+          { description: 'Verificación completa de citas' },
+          { description: 'Proyectos locales ilimitados' },
+        ],
+        callToAction: {
+          text: 'Contactar',
+          href: '/es/contacto/',
+        },
+        hasRibbon: true,
+        ribbonTitle: 'más popular',
+      },
+      {
+        title: 'Team',
+        subtitle: 'Organizaciones pequeñas (10-49 puestos)',
+        price: 24,
+        period: 'por puesto / mes',
+        items: [
+          { description: 'Todo lo del plan Starter' },
+          { description: 'System Prompt por proyecto' },
+          { description: 'Razonamiento temporal y de cláusulas derogadas' },
+          { description: 'Configuración centralizada y compartida de proveedores' },
+          { description: 'Soporte prioritario' },
+        ],
+        callToAction: {
+          text: 'Contactar',
+          href: '/es/contacto/',
+        },
+      },
+      {
+        title: 'Business',
+        subtitle: 'Organizaciones medianas (50-249 puestos)',
+        price: 19,
+        period: 'por puesto / mes',
+        items: [
+          { description: 'Todo lo del plan Team' },
+          { description: 'Controles de política de administrador — forzar endpoints, bloquear modelo' },
+          { description: 'Incorporación guiada' },
+          { description: 'Soporte con SLA' },
+        ],
+        callToAction: {
+          text: 'Contactar',
+          href: '/es/contacto/',
+        },
+      },
+      {
+        title: 'Enterprise',
+        subtitle: 'Organizaciones grandes (250+ puestos)',
+        price: 'Custom',
+        period: 'contrato anual',
+        items: [
+          { description: 'Todo lo del plan Business' },
+          { description: 'Asistencia para despliegue on-premise' },
+          { description: 'Integración de conectores a medida' },
+          { description: 'Revisión de seguridad' },
+          { description: 'Soporte dedicado, mínimo de puestos' },
+        ],
+        callToAction: {
+          text: 'Contactar',
+          href: '/es/contacto/',
+        },
+      },
+    ]}
+  />
+
+  <!-- Nota sobre precios -->
+
+  <Note
+    icon="tabler:info-circle"
+    title="Sobre estos precios."
+    description='Los precios se indican sin IVA y con facturación anual; la facturación mensual es aproximadamente un 20% más cara. Los tramos corresponden a las bandas de tamaño de pymes de la UE. <a href="/es/contacto/" class="underline font-bold">Contáctanos para un presupuesto adaptado a tu equipo</a>.'
+  />
+
+  <!-- Preguntas frecuentes -->
+
+  <FAQs
+    title="TrustCore — Preguntas frecuentes"
+    subtitle="Respuestas directas para equipos jurídicos, de cumplimiento y de investigación que evalúan dónde van sus documentos."
+    tagline="FAQs"
+    classes={{ container: 'max-w-6xl' }}
+    items={[
+      {
+        title: '¿Mis documentos se suben a algún sitio?',
+        description:
+          'No. En la ruta local, tus documentos, el texto extraído, las incrustaciones, el grafo de entidades y tus preguntas permanecen en tu máquina. No existe ningún servidor de TrustCore, y el contenido de los documentos no se incluye en telemetría. Si eliges la ruta de cómputo externo de pago, el único lugar al que van los datos es el endpoint que tú seleccionas y controlas.',
+      },
+      {
+        title: '¿Con qué sitios de chat es compatible TrustCore?',
+        description:
+          'TrustCore abre su propio panel en ChatGPT, Gemini, Claude, DeepSeek, Perplexity y un OpenWebUI local. Responde desde tus documentos indexados en ese panel. El cuadro de entrada del sitio de chat sigue funcionando con normalidad — TrustCore no lo intercepta ni redirige.',
+      },
+      {
+        title: '¿Necesito una GPU?',
+        description:
+          'No, aunque ayuda. TrustCore se ejecuta en un navegador basado en Chromium (Chrome, Edge o Brave) versión 124 o posterior, en Windows, macOS o Linux, con 8 GB de memoria (16 GB recomendados para proyectos más grandes). Cualquier GPU que exponga WebGPU acelera la incrustación y la vista del grafo; sin ella, la incrustación corre en la CPU y es más lenta.',
+      },
+      {
+        title: '¿Qué tipos de documentos admite?',
+        description:
+          'Los PDF de texto se leen directamente. Los PDF escaneados, solo de imagen, se recuperan mediante OCR. El texto plano (.txt) y el Markdown (.md) se leen tal cual. Un archivo en un formato que TrustCore no reconoce se rechaza en lugar de indexarse parcialmente, de modo que un proyecto nunca contiene un documento leído a medias.',
+      },
+      {
+        title: '¿Cómo sé que una respuesta es correcta?',
+        description:
+          'Cada respuesta está vinculada al fragmento exacto del que procede, y cada cita se contrasta con el texto fuente y la página antes de mostrarla. Cuando dos documentos no coinciden, el conflicto se señala con ambas fuentes y páginas. Una cadena de razonamiento muestra la secuencia de relaciones que sustenta la respuesta, de modo que puedes ver por qué se sigue en lugar de confiar en que un modelo la produjo.',
+      },
+      {
+        title: '¿Cuál es la diferencia entre Free y los planes de pago?',
+        description:
+          'Free se ejecuta íntegramente en tu máquina con el modelo local incluido, con proyectos y documentos limitados. La principal ventaja de los planes de pago es conectar tu propio cómputo externo — incrustaciones, OCR y endpoints de chat on-premise o en la nube — junto con detección de conflictos entre documentos, cadenas de razonamiento y proyectos locales ilimitados.',
+      },
+      {
+        title: '¿Qué es el razonamiento temporal y de cláusulas derogadas?',
+        description:
+          'Disponible en el plan Team y superiores, responde "a partir de" una fecha elegida resolviendo qué disposición está en vigor según las relaciones de modificación y fecha de vigencia registradas. La decisión la calcula el razonador, no el modelo de lenguaje. Las cláusulas derogadas se etiquetan con sus fechas de vigencia y se muestran en lugar de descartarse en silencio, y un revisor puede establecer una derogación manualmente.',
+      },
+      {
+        title: '¿Necesito el acompañante local?',
+        description:
+          'Solo para algunas tareas. El acompañante es una pequeña pila de contenedores que gestiona el OCR de documentos escaneados con procedencia a nivel de bloque, la reordenación por codificador cruzado y el servicio de un modelo local. Todo lo demás — indexación, recuperación híbrida, incrustaciones locales, citas validadas — funciona en el navegador sin él.',
+      },
+    ]}
+  />
+
   <!-- CTA -->
+
   <CallToAction
     actions={[
       {
         variant: 'primary',
-        text: 'Solicitar Hoja de Ruta',
-        href: '/es/hoja-de-ruta-de-automatizacion',
-        icon: 'tabler:clipboard-check',
+        text: 'Contactar',
+        href: '/es/contacto/',
+        icon: 'tabler:mail',
       },
     ]}
-    title="¿Listo para construir sobre una base conforme?"
-    subtitle="Reserva una sesión gratuita de Hoja de Ruta de Automatización y te mostraremos cómo TrustCore se adapta a tus obligaciones regulatorias."
+    title="Mantén tus documentos donde están"
+    subtitle="Cuéntanos sobre los documentos con los que trabaja tu equipo y la infraestructura que controlas. Te mostraremos cómo encaja TrustCore, en tu hardware y en tus términos."
   />
 </Layout>

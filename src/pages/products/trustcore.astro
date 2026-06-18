@@ -1,16 +1,24 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import JsonLd from '~/components/common/JsonLd.astro';
+
 import Hero from '~/components/widgets/Hero.astro';
+import Brands from '~/components/widgets/Brands.astro';
 import Content from '~/components/widgets/Content.astro';
 import Features from '~/components/widgets/Features.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Prices from '~/components/widgets/Pricing.astro';
+import Note from '~/components/widgets/Note.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 import imgTrustCore from '~/assets/images/trustcore.png';
 
 const metadata = {
-  title: 'TrustCore — AI Compliance Infrastructure for Healthcare',
+  title: 'TrustCore — Answer Questions About Your Own Documents, On Your Own Hardware',
   description:
-    'TrustCore is the compliance engine powering Futurion products. GDPR, HIPAA, and AI Act controls built into the platform layer — so every workflow is compliant by architecture.',
+    'TrustCore is a browser extension that answers questions about your own documents on your own hardware. Graph RAG retrieval, verified citations, no SaaS, no data egress — built for legal, compliance, and investigation work.',
   openGraph: {
     images: [{ url: '~/assets/images/trustcore.png' }],
   },
@@ -18,19 +26,50 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
+  <JsonLd schema={{
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "TrustCore",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Chromium browser (Chrome, Edge, Brave) 124+",
+    "description": "Browser extension, with an optional local companion, that answers questions about your own documents on your own hardware. Graph RAG retrieval, verified citations, cross-document conflict detection, and local embeddings — with no hosted backend and no document egress. Built for legal, compliance, and investigation work.",
+    "url": "https://solutions.futurion.es/products/trustcore/",
+    "inLanguage": "en",
+    "featureList": [
+      "Runs in your browser; no hosted backend",
+      "Documents and questions stay on your machine",
+      "Graph RAG retrieval (vector + BM25 + graph expansion)",
+      "Every answer tied to a checked source passage",
+      "Cross-document conflict detection and proof paths",
+      "Local embeddings (bge-m3) via WebGPU, with CPU fallback",
+      "Connect your own on-prem or cloud compute (OpenAI-compatible)"
+    ],
+    "author": { "@id": "https://solutions.futurion.es/#organization" },
+    "offers": {
+      "@type": "Offer",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "minPrice": "0",
+        "priceCurrency": "EUR"
+      },
+      "availability": "https://schema.org/InStock"
+    }
+  }} />
+
   <!-- Hero -->
+
   <Hero
     actions={[
       {
         variant: 'primary',
-        text: 'Book Automation Roadmap',
-        href: '/automation-roadmap',
-        icon: 'tabler:clipboard-check',
+        text: 'Contact Us',
+        href: '/contact/',
+        icon: 'tabler:mail',
       },
       {
         variant: 'secondary',
-        text: 'See All Products',
-        href: '#products',
+        text: 'See Pricing',
+        href: '#pricing',
       },
     ]}
   >
@@ -38,112 +77,532 @@ const metadata = {
       <img
         src={imgTrustCore.src}
         alt="TrustCore logo"
-        width="72"
-        height="72"
-        class="mx-auto mb-4 object-contain"
+        width="84"
+        height="84"
+        class="mx-auto mb-4 object-contain drop-shadow-lg"
       />
       TrustCore<br />
-      <span class="text-accent dark:text-white highlight">AI Compliance Infrastructure for Healthcare</span>
+      <span class="text-accent dark:text-white highlight">Answer Questions About Your Own Documents, On Your Own Hardware</span>
     </Fragment>
 
     <Fragment slot="subtitle">
-      TrustCore is the compliance and governance layer that underpins every Futurion product. It
-      encodes GDPR, HIPAA, and EU AI Act controls at the platform level — ensuring that every data
-      flow, model inference, and automation step in your practice is compliant by architecture, not
-      just by policy.
+      <span class="hidden sm:inline">
+        TrustCore is a browser extension, with an optional local companion, that answers questions
+        about the documents you add to it. You ask in TrustCore's own panel on the chat page you
+        already use — ChatGPT, Gemini, Claude, DeepSeek, Perplexity, or a local OpenWebUI — and the
+        answer comes from your indexed documents, computed on your machine. The question and the
+        documents are never sent to the chat provider, and there is no TrustCore server behind it.
+      </span>
+      <span class="block mb-1 sm:hidden font-bold text-green-700">Your documents stay on your machine. Every answer cites its source.</span>
+      Built for legal, compliance, and investigation work, where the documents are often privileged,
+      confidential, or personal data under the GDPR.
     </Fragment>
   </Hero>
 
-  <!-- Key Features -->
+  <!-- Supported chat sites -->
+
+  <Brands
+    title="Works Inside the Chat Site You Already Use"
+    subtitle="TrustCore opens its own panel on the page and answers from your documents. The chat site's own input box keeps working as normal — TrustCore does not take it over or reroute it. Perplexity is supported alongside the logos shown."
+    images={[
+      { src: '~/assets/images/openai.png', alt: 'ChatGPT' },
+      { src: '~/assets/images/gemini-color.png', alt: 'Gemini' },
+      { src: '~/assets/images/claude-color.png', alt: 'Claude' },
+      { src: '~/assets/images/deepseek.png', alt: 'DeepSeek' },
+      { src: '~/assets/images/openwebui.png', alt: 'OpenWebUI' },
+    ]}
+  />
+
+  <!-- What TrustCore does -->
+
   <Features
     id="features"
-    tagline="What TrustCore does"
-    title="Compliance Engineered into the Platform"
-    subtitle="Not a checkbox. A foundation. TrustCore gives healthcare organisations the governance layer they need to deploy AI responsibly at scale."
+    columns={3}
+    tagline="What TrustCore Does"
+    title="Answers You Can Trace, Without Sending Your Documents Anywhere"
+    subtitle="Two things are always true: your documents and questions stay on your machine, and every answer is tied to the exact passage it came from."
     items={[
       {
-        title: 'Data Residency Controls',
+        title: 'Runs Where You Already Work',
         description:
-          'Enforce strict data residency boundaries — patient data never leaves designated regions or on-premise infrastructure.',
-        icon: 'tabler:map-pin',
+          'A panel on ChatGPT, Gemini, Claude, DeepSeek, Perplexity, or a local OpenWebUI. The chat site keeps working as normal; TrustCore does not reroute the page\'s own input box.',
+        icon: 'tabler:browser',
       },
       {
-        title: 'Role-Based Access Enforcement',
+        title: 'No SaaS, No Backend',
         description:
-          'Granular RBAC aligned to healthcare roles: clinicians, administrators, and IT have precisely scoped access — nothing more.',
-        icon: 'tabler:users',
+          'There is no hosted service to sign in to. The extension runs in your browser; the optional companion runs in a container on your own machine or server. Nothing is uploaded to a TrustCore server.',
+        icon: 'tabler:server-off',
       },
       {
-        title: 'Consent & Lawful Basis Tracking',
+        title: 'Graph RAG, Not Similarity Alone',
         description:
-          'Automatically links every data processing activity to its GDPR lawful basis and tracks consent lifecycle end-to-end.',
-        icon: 'tabler:checkup-list',
+          'Retrieval combines vector search, full-text BM25, and rank fusion, then walks a graph of the entities in your documents to pull in connected facts a similarity search would miss.',
+        icon: 'tabler:topology-star-3',
       },
       {
-        title: 'AI Act Risk Classification',
+        title: 'Every Answer Cites Its Source',
         description:
-          'Classifies each AI use case under the EU AI Act framework and enforces the appropriate controls for high-risk medical AI systems.',
-        icon: 'tabler:certificate',
+          'Each cited quote is checked against the source text and page before the answer is shown. In the strict setting, an answer whose citations fail the check is withheld.',
+        icon: 'tabler:quote',
       },
       {
-        title: 'Real-Time Policy Engine',
+        title: 'Cross-Document Conflict Detection',
         description:
-          'Policies are evaluated at runtime — block, redirect, or alert on any action that would breach a compliance rule before it executes.',
-        icon: 'tabler:radar',
+          'When two source documents state incompatible values — two termination notice periods, two amounts for the same item — TrustCore names both sources and pages instead of silently picking one.',
+        icon: 'tabler:git-compare',
       },
       {
-        title: 'Evidence & Reporting',
+        title: 'Local Embeddings on Your GPU',
         description:
-          'Auto-generates DPIA evidence packs, Article 30 records of processing, and board-ready compliance dashboards.',
-        icon: 'tabler:report',
+          'The bundled bge-m3 model turns your text into vectors on your GPU through WebGPU, with a CPU fallback when there is no usable GPU. On the local path, no embedding call leaves the machine.',
+        icon: 'tabler:cpu',
       },
     ]}
   />
 
-  <!-- Detail Content -->
+  <!-- Sovereignty -->
+
   <Content
     isReversed
-    tagline="The Problem"
-    title="Healthcare AI Compliance Cannot Be an Afterthought"
+    tagline="Where Your Data Lives"
+    title="Sovereign by Default, With Zero Subprocessors on the Local Path"
     items={[
       {
-        title: 'Compliance bolted on after deployment',
+        title: 'No third party in the data path',
         description:
-          'Adding GDPR controls to AI systems after go-live is expensive, fragile, and often incomplete — regulators can tell.',
+          'On the local path there is no cloud host, analytics service, or model API processing your data. A party that is not in the path cannot leak a document or personal data.',
       },
       {
-        title: 'Fragmented policy enforcement',
+        title: 'On-device storage',
         description:
-          'Different tools, different rules, different audit trails. TrustCore unifies governance across your entire AI stack.',
+          'Documents, text chunks, embeddings, the full-text index, and the entity graph are kept in a SQLite database inside the browser, persisted to the Origin Private File System. There is no sync service behind it.',
       },
       {
-        title: 'Opaque AI decision-making',
+        title: 'You choose what stays local',
         description:
-          'Healthcare regulators require explainability. TrustCore captures decision context at every step.',
+          'Questions asked in TrustCore\'s panel are answered on your machine. Anything you type into the chat site\'s own box still goes to that site as usual. The boundary is explicit and under your control.',
       },
     ]}
-    image={{ src: imgTrustCore, alt: 'TrustCore — AI compliance infrastructure' }}
+    image={{ src: '~/assets/images/on-prem.png', alt: 'On-premise, sovereign data boundary' }}
   >
     <Fragment slot="content">
       <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        Compliance by architecture, not policy
+        Using It Does Not Create a New Place Where the Documents Live
       </h3>
-      TrustCore bakes GDPR, HIPAA, and AI Act controls into the infrastructure layer so your team
-      ships AI features without a compliance review bottleneck.
+      For privileged, confidential, or GDPR-regulated material — and work under professional secrecy
+      such as <span class="italic">secreto profesional</span> in Spain or solicitor–client privilege
+      in Ireland — uploading documents to a shared third-party service can itself be the problem.
     </Fragment>
   </Content>
 
+  <!-- Graph RAG -->
+
+  <Content
+    isAfterContent
+    tagline="Retrieval"
+    title="A Graph, Not Just Similarity"
+    items={[
+      {
+        title: 'Hybrid retrieval',
+        description:
+          'Vector search finds passages close in meaning; BM25 finds exact words that matter for defined terms, clause numbers, and names; rank fusion merges the two into one ranked set.',
+      },
+      {
+        title: 'Graph expansion',
+        description:
+          'Starting from the entities in the top passages, TrustCore walks the relationship graph up to several hops to bring in connected facts across documents.',
+      },
+      {
+        title: 'Why it matters here',
+        description:
+          'In legal and compliance documents, similar wording appears in a master agreement, a superseding amendment, and a schedule. Similarity alone can answer with high confidence from the wrong one.',
+      },
+    ]}
+    image={{ src: '~/assets/images/rag.png', alt: 'Graph RAG retrieval over document entities' }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Built to Make Cross-Document Relationships Explicit
+      </h3>
+      TrustCore builds a graph of the people, organizations, dates, amounts, and references in your
+      documents and reasons over it, so connections that are invisible in any single file become
+      queryable.
+    </Fragment>
+  </Content>
+
+  <!-- Verifiable reasoning -->
+
+  <Content
+    isReversed
+    isAfterContent
+    tagline="Verifiable Reasoning"
+    title="Answers That Arrive With Their Evidence Already Checked"
+    items={[
+      {
+        title: 'Proof paths',
+        description:
+          'A symbolic reasoner produces an explicit chain of relationships from the question\'s subject to the supporting facts, so a person can see why the answer follows.',
+      },
+      {
+        title: 'Citation admissibility check',
+        description:
+          'Before an answer is shown, each cited quote is confirmed to appear on the page it is attributed to. In the strict setting, answers that fail are withheld rather than shown.',
+      },
+      {
+        title: 'Temporal and superseded-clause reasoning',
+        description:
+          'For a chosen "as of" date, the reasoner resolves which provision is in force, labels superseded clauses with their effective dates, and shows both — never silently dropping the old one. Available on the Team plan and above.',
+      },
+    ]}
+    image={{ src: '~/assets/images/guardrails.png', alt: 'Verifiable reasoning and checked citations' }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        The Difference Between an Answer You Re-Verify and One You Can Read
+      </h3>
+      For work where a wrong or unsupported statement has consequences, the evidence arriving
+      attached and checked is the point of the product.
+    </Fragment>
+  </Content>
+
+  <!-- External compute -->
+
+  <Content
+    isAfterContent
+    tagline="Your Compute, Your Rules"
+    title="Connect Your Own On-Prem or Cloud Endpoints"
+    items={[
+      {
+        title: 'OpenAI-compatible interface',
+        description:
+          'All chat and embedding calls use the OpenAI-compatible request format, so TrustCore can talk to OpenAI, OpenRouter, a local Ollama or llama.cpp server, or any on-prem endpoint that speaks the same format.',
+      },
+      {
+        title: 'Point at infrastructure you control',
+        description:
+          'The paid tiers unlock pointing TrustCore at your own embedding, OCR, and chat endpoints — on-prem or in your own cloud account — so heavier models run on infrastructure you control.',
+      },
+      {
+        title: 'The data boundary stays yours',
+        description:
+          'With the paid path the only processor involved is the endpoint you select and control. It is your subprocessor under your contract, not one TrustCore introduces.',
+      },
+    ]}
+    image={{ src: '~/assets/images/ollama.png', alt: 'Connect your own on-prem or cloud compute' }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Heavier Models, Same Data Boundary
+      </h3>
+      The way the rest of the system behaves does not change when you connect external compute — only
+      where the numeric work runs.
+    </Fragment>
+  </Content>
+
+  <!-- OCR -->
+
+  <Content
+    isReversed
+    isAfterContent
+    tagline="Scanned Documents"
+    title="OCR That Locates a Quote Down to Its Place on the Page"
+    items={[
+      {
+        title: 'Block-level provenance',
+        description:
+          'Scanned PDFs are parsed by MinerU in the local companion, which returns text plus page and bounding box per block — what lets TrustCore validate a quote to its exact location on the page.',
+      },
+      {
+        title: 'Vision fallback',
+        description:
+          'When the companion is not available, TrustCore falls back to a per-page vision model, which gives page-level location instead of block-level.',
+      },
+      {
+        title: 'Nothing read silently',
+        description:
+          'A file in a format TrustCore does not recognize is rejected rather than indexed partially, so a project never contains a document that was only half read.',
+      },
+    ]}
+    image={{ src: '~/assets/images/ocr.svg', alt: 'OCR with block-level page provenance' }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Text-Based and Scanned PDFs, Plain Text, and Markdown
+      </h3>
+      Text-based PDFs are read directly; scanned PDFs are recovered by OCR; plain text and Markdown
+      are read as-is.
+    </Fragment>
+  </Content>
+
+  <!-- How indexing works -->
+
+  <Steps
+    title="How a Document Is Indexed"
+    subtitle="Each file moves through the same six steps on your machine, from capture to a queryable entity graph."
+    items={[
+      {
+        title: 'Step 1: <span class="font-medium">Capture and De-Duplicate</span>',
+        description:
+          'Each file is hashed; a document already in the project is skipped, so the same file is never indexed twice.',
+        icon: 'tabler:file-import',
+      },
+      {
+        title: 'Step 2: <span class="font-medium">Extract Text</span>',
+        description:
+          'Text-based PDFs are read directly, scanned PDFs go to OCR, and plain text and Markdown are read as-is.',
+        icon: 'tabler:file-text',
+      },
+      {
+        title: 'Step 3: <span class="font-medium">Chunk</span>',
+        description:
+          'Text is split into passages. When OCR provides layout, each chunk keeps its page number and bounding box, so a quote can later be located on the page.',
+        icon: 'tabler:layout-rows',
+      },
+      {
+        title: 'Step 4: <span class="font-medium">Embed</span>',
+        description:
+          'Each chunk is turned into a vector by the bundled bge-m3 model, on your GPU through WebGPU or on the CPU when no usable GPU is present.',
+        icon: 'tabler:cpu',
+      },
+      {
+        title: 'Step 5: <span class="font-medium">Store</span>',
+        description:
+          'Chunks, vectors, and the full-text index are written together into the on-device SQLite database.',
+        icon: 'tabler:database',
+      },
+      {
+        title: 'Step 6: <span class="font-medium">Build the Graph</span>',
+        description:
+          'Entities and the relationships between them — including supersession and effective-date links — are extracted from the chunks and written to the graph tables.',
+        icon: 'tabler:topology-star-3',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/data-analytics.jpg',
+      alt: 'Document indexing pipeline',
+    }}
+  />
+
+  <!-- What TrustCore deliberately does not do -->
+
+  <Features2
+    tagline="By Design"
+    title="What TrustCore Deliberately Does Not Do"
+    subtitle="These are part of the position, not limitations to apologize for."
+    columns={2}
+    items={[
+      {
+        title: 'It Does Not Host Your Documents',
+        description:
+          'There is no backend that holds them. The extension runs in your browser and the optional companion runs on your own machine or server.',
+        icon: 'tabler:cloud-off',
+      },
+      {
+        title: 'It Does Not Send Content to the Vendor',
+        description:
+          'Document content is not uploaded to TrustCore and is not shipped in telemetry. There is no product telemetry that carries document content.',
+        icon: 'tabler:ban',
+      },
+      {
+        title: 'It Does Not Add a Subprocessor on the Local Path',
+        description:
+          'There is no third party in the data path that could leak a document or personal data. On the paid path, the only processor is the endpoint you choose and control.',
+        icon: 'tabler:shield-lock',
+      },
+      {
+        title: 'It Does Not Require a Third-Party AI Account',
+        description:
+          'The local path needs no external service to function — it runs entirely on the bundled local model and your own hardware.',
+        icon: 'tabler:plug-off',
+      },
+      {
+        title: 'It Does Not Answer Without Showing Its Source',
+        description:
+          'Every answer arrives with the supporting quotes, their page numbers, and, where relevant, the reasoning path and any detected conflict.',
+        icon: 'tabler:eye-check',
+      },
+      {
+        title: 'It Does Not Take Over the Chat Box',
+        description:
+          'TrustCore answers in its own panel. The chat site\'s own input box keeps working as usual; TrustCore neither intercepts nor reroutes it.',
+        icon: 'tabler:messages',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  <!-- Pricing -->
+
+  <Prices
+    id="pricing"
+    tagline="Pricing"
+    title="Per-Seat Plans for Teams of Every Size"
+    subtitle="Start fully local at no cost. Paid tiers add the capability an organization with its own infrastructure cannot get for free: connecting your own compute. Prices are ex-VAT, per seat, billed annually."
+    prices={[
+      {
+        title: 'Free',
+        subtitle: 'Fully local, single user',
+        price: 0,
+        period: 'per user',
+        items: [
+          { description: '100% local — bundled embeddings, OCR, and model' },
+          { description: 'Chat-site integration and validated citations' },
+          { description: 'Hybrid retrieval (vector + BM25 + rank fusion)' },
+          { description: 'Capped projects and documents' },
+          { description: 'No external compute, no subprocessor' },
+        ],
+        callToAction: {
+          text: 'Contact Us',
+          href: '/contact/',
+        },
+      },
+      {
+        title: 'Starter',
+        subtitle: 'Micro organizations (1–9 seats)',
+        price: 29,
+        period: 'per seat / month',
+        items: [
+          { description: 'Everything in Free' },
+          { description: 'Connect external compute — on-prem or cloud' },
+          { description: 'Cross-document conflict detection and proof paths' },
+          { description: 'Full citation verification' },
+          { description: 'Unlimited local projects' },
+        ],
+        callToAction: {
+          text: 'Contact Us',
+          href: '/contact/',
+        },
+        hasRibbon: true,
+        ribbonTitle: 'most popular',
+      },
+      {
+        title: 'Team',
+        subtitle: 'Small organizations (10–49 seats)',
+        price: 24,
+        period: 'per seat / month',
+        items: [
+          { description: 'Everything in Starter' },
+          { description: 'System Prompt per project' },
+          { description: 'Temporal / superseded-clause reasoning' },
+          { description: 'Shared, centralized provider configuration' },
+          { description: 'Priority support' },
+        ],
+        callToAction: {
+          text: 'Contact Us',
+          href: '/contact/',
+        },
+      },
+      {
+        title: 'Business',
+        subtitle: 'Medium organizations (50–249 seats)',
+        price: 19,
+        period: 'per seat / month',
+        items: [
+          { description: 'Everything in Team' },
+          { description: 'Admin policy controls — force endpoints, lock model' },
+          { description: 'Onboarding' },
+          { description: 'SLA support' },
+        ],
+        callToAction: {
+          text: 'Contact Us',
+          href: '/contact/',
+        },
+      },
+      {
+        title: 'Enterprise',
+        subtitle: 'Large organizations (250+ seats)',
+        price: 'Custom',
+        period: 'annual contract',
+        items: [
+          { description: 'Everything in Business' },
+          { description: 'On-prem deployment assistance' },
+          { description: 'Custom connector integration' },
+          { description: 'Security review' },
+          { description: 'Dedicated support, seat minimum' },
+        ],
+        callToAction: {
+          text: 'Contact Us',
+          href: '/contact/',
+        },
+      },
+    ]}
+  />
+
+  <!-- Pricing note -->
+
+  <Note
+    icon="tabler:info-circle"
+    title="About These Prices."
+    description='Prices are quoted ex-VAT and billed annually; monthly billing is about 20% higher. Tiers follow the official EU SME size bands. <a href="/contact/" class="underline font-bold">Contact us for a quote scoped to your team</a>.'
+  />
+
+  <!-- FAQs -->
+
+  <FAQs
+    title="TrustCore — Frequently Asked Questions"
+    subtitle="Straight answers for legal, compliance, and investigation teams evaluating where their documents go."
+    tagline="FAQs"
+    classes={{ container: 'max-w-6xl' }}
+    items={[
+      {
+        title: 'Do my documents get uploaded anywhere?',
+        description:
+          'No. On the local path your documents, the extracted text, embeddings, the entity graph, and your questions stay on your machine. There is no TrustCore server, and document content is not shipped in telemetry. If you choose the paid external-compute path, the only place data goes is the endpoint you select and control.',
+      },
+      {
+        title: 'Which chat sites does TrustCore work with?',
+        description:
+          'TrustCore opens its own panel on ChatGPT, Gemini, Claude, DeepSeek, Perplexity, and a local OpenWebUI. It answers from your indexed documents in that panel. The chat site\'s own input box keeps working as normal — TrustCore does not intercept or reroute it.',
+      },
+      {
+        title: 'Do I need a GPU?',
+        description:
+          'No, but one helps. TrustCore runs on a Chromium-based browser (Chrome, Edge, or Brave) version 124 or later, on Windows, macOS, or Linux, with 8 GB of memory (16 GB recommended for larger projects). Any GPU that exposes WebGPU accelerates embedding and the graph view; without one, embedding runs on the CPU and is slower.',
+      },
+      {
+        title: 'What document types are supported?',
+        description:
+          'Text-based PDFs are read directly. Scanned, image-only PDFs are recovered by OCR. Plain text (.txt) and Markdown (.md) are read as-is. A file in a format TrustCore does not recognize is rejected rather than indexed partially, so a project never contains a half-read document.',
+      },
+      {
+        title: 'How do I know an answer is correct?',
+        description:
+          'Every answer is tied to the exact passage it came from, and each cited quote is checked against the source text and page before the answer is shown. Where two documents disagree, the conflict is flagged with both sources and pages. A proof path shows the chain of relationships behind the answer, so you can see why it follows rather than trusting that a model produced it.',
+      },
+      {
+        title: 'What is the difference between Free and the paid tiers?',
+        description:
+          'Free runs entirely on your machine with the bundled local model, with capped projects and documents. The core paid unlock across every paid tier is connecting your own external compute — on-prem or cloud embeddings, OCR, and chat endpoints — together with cross-document conflict detection and proof paths, and unlimited local projects.',
+      },
+      {
+        title: 'What is temporal / superseded-clause reasoning?',
+        description:
+          'Available on the Team plan and above, it answers "as of" a chosen date by resolving which provision is in force from the recorded amendment and effective-date relationships. The decision is computed by the reasoner, not the language model. Superseded clauses are labelled with their effective dates and shown rather than silently dropped, and a reviewer can set a supersession by hand.',
+      },
+      {
+        title: 'Do I need the local companion?',
+        description:
+          'Only for some tasks. The companion is a small container stack that handles scanned-document OCR with block-level provenance, cross-encoder re-ranking, and serving a local model. Everything else — indexing, hybrid retrieval, local embeddings, validated citations — works in the browser without it.',
+      },
+    ]}
+  />
+
   <!-- CTA -->
+
   <CallToAction
     actions={[
       {
         variant: 'primary',
-        text: 'Book Automation Roadmap',
-        href: '/automation-roadmap',
-        icon: 'tabler:clipboard-check',
+        text: 'Contact Us',
+        href: '/contact/',
+        icon: 'tabler:mail',
       },
     ]}
-    title="Ready to build on a compliant foundation?"
-    subtitle="Book a free Automation Roadmap session and we'll show you how TrustCore maps to your regulatory obligations."
+    title="Keep Your Documents Where They Are"
+    subtitle="Tell us about the documents your team works with and the infrastructure you control. We will show you how TrustCore fits, on your hardware and your terms."
   />
 </Layout>

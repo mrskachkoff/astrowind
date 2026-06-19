@@ -154,15 +154,33 @@ const metadata = {
           'El modelo bge-m3 incluido convierte tu texto en vectores en tu GPU mediante WebGPU, con reserva por CPU cuando no hay GPU disponible. En la ruta local, ninguna llamada de incrustación sale de la máquina.',
         icon: 'tabler:cpu',
       },
+      {
+        title: 'Localizado hasta la página',
+        description:
+          'Los PDF de texto se leen directamente; los PDF escaneados se recuperan mediante OCR; el texto plano y el Markdown se leen tal cual. Los PDF escaneados los procesa MinerU en el acompañante local, que devuelve texto más número de página y cuadro delimitador por bloque — lo que permite a TrustCore validar una cita hasta su ubicación exacta en la página.',
+        icon: 'tabler:scan',
+      },
+      {
+        title: 'Reserva por visión',
+        description:
+          'Cuando el acompañante no está disponible, TrustCore recurre a un modelo de visión por página, que proporciona ubicación a nivel de página en lugar de a nivel de bloque.',
+        icon: 'tabler:eye',
+      },
+      {
+        title: 'Nada se lee en silencio',
+        description:
+          'Un archivo en un formato que TrustCore no reconoce se rechaza en lugar de indexarse parcialmente, de modo que un proyecto nunca contiene un documento que solo se leyó a medias.',
+        icon: 'tabler:file-alert',
+      },
     ]}
   />
 
-  <!-- Soberanía -->
+  <!-- Soberanía y cómputo -->
 
   <Content
-    isReversed
-    tagline="Dónde viven tus datos"
-    title="Soberano por defecto, sin subprocesadores en la ruta local"
+    columns={2}
+    tagline="Soberanía y cómputo"
+    title="Soberano por defecto, flexible cuando lo necesitas"
     items={[
       {
         title: 'Ningún tercero en la ruta de datos',
@@ -179,8 +197,22 @@ const metadata = {
         description:
           'Las preguntas formuladas en el panel de TrustCore se responden en tu máquina. Lo que escribas en el cuadro de entrada del sitio de chat sigue yendo a ese sitio como de costumbre. El límite es explícito y está bajo tu control.',
       },
+      {
+        title: 'Interfaz en formato compatible con OpenAI',
+        description:
+          'Todas las llamadas de chat e incrustación utilizan el formato de solicitud compatible con OpenAI, de modo que TrustCore puede comunicarse con OpenAI, OpenRouter, un servidor Ollama o llama.cpp local, o cualquier endpoint on-premise que use el mismo formato.',
+      },
+      {
+        title: 'Apunta a la infraestructura que controlas',
+        description:
+          'Los planes de pago permiten apuntar TrustCore a tus propios endpoints de incrustación, OCR y chat — on-premise o en tu propia cuenta en la nube — para que los modelos más pesados corran en infraestructura bajo tu control.',
+      },
+      {
+        title: 'El límite de datos sigue siendo tuyo',
+        description:
+          'Con la ruta de pago, el único procesador involucrado es el endpoint que tú seleccionas y controlas. Es tu subprocesador bajo tu contrato, no uno que introduce TrustCore.',
+      },
     ]}
-    image={{ src: '~/assets/images/on-prem.png', alt: 'Límite soberano de datos on-premise' }}
   >
     <Fragment slot="content">
       <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
@@ -189,7 +221,9 @@ const metadata = {
       Para material privilegiado, confidencial o regulado por el RGPD — y para el trabajo bajo secreto
       profesional, como el <span class="italic">secreto profesional</span> en España o el secreto
       profesional abogado-cliente en Irlanda — subir documentos a un servicio compartido de terceros
-      puede ser en sí mismo el problema.
+      puede ser en sí mismo el problema. Y cuando conectas cómputo externo para modelos más pesados, el
+      resto del sistema se comporta igual — solo cambia dónde se ejecuta el trabajo numérico; el único
+      procesador involucrado es el endpoint que tú controlas.
     </Fragment>
   </Content>
 
@@ -280,75 +314,6 @@ const metadata = {
       El mapa se renderiza mediante WebGPU, con WebGL y una vista 2D como reservas. Nada se envía a
       ningún sitio y construirlo no realiza ninguna llamada a un modelo ni al acompañante. Los grafos
       muy grandes se limitan a los nodos más conectados, y el mapa indica cuándo lo ha hecho.
-    </Fragment>
-  </Content>
-
-  <!-- Cómputo externo -->
-
-  <Content
-    isReversed
-    isAfterContent
-    tagline="Tu cómputo, tus reglas"
-    title="Conecta tus propios endpoints on-premise o en la nube"
-    items={[
-      {
-        title: 'Interfaz en formato compatible con OpenAI',
-        description:
-          'Todas las llamadas de chat e incrustación utilizan el formato de solicitud compatible con OpenAI, de modo que TrustCore puede comunicarse con OpenAI, OpenRouter, un servidor Ollama o llama.cpp local, o cualquier endpoint on-premise que use el mismo formato.',
-      },
-      {
-        title: 'Apunta a la infraestructura que controlas',
-        description:
-          'Los planes de pago permiten apuntar TrustCore a tus propios endpoints de incrustación, OCR y chat — on-premise o en tu propia cuenta en la nube — para que los modelos más pesados corran en infraestructura bajo tu control.',
-      },
-      {
-        title: 'El límite de datos sigue siendo tuyo',
-        description:
-          'Con la ruta de pago, el único procesador involucrado es el endpoint que tú seleccionas y controlas. Es tu subprocesador bajo tu contrato, no uno que introduce TrustCore.',
-      },
-    ]}
-    image={{ src: '~/assets/images/ollama.png', alt: 'Conecta tu propio cómputo on-premise o en la nube' }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        Modelos más pesados, mismo límite de datos
-      </h3>
-      El comportamiento del resto del sistema no cambia cuando conectas cómputo externo — solo cambia
-      dónde se ejecuta el trabajo numérico.
-    </Fragment>
-  </Content>
-
-  <!-- OCR -->
-
-  <Content
-    isAfterContent
-    tagline="Documentos escaneados"
-    title="OCR que localiza una cita hasta su lugar exacto en la página"
-    items={[
-      {
-        title: 'Procedencia a nivel de bloque',
-        description:
-          'Los PDF escaneados los procesa MinerU en el acompañante local, que devuelve texto más número de página y cuadro delimitador por bloque — lo que permite a TrustCore validar una cita hasta su ubicación exacta en la página.',
-      },
-      {
-        title: 'Reserva por visión',
-        description:
-          'Cuando el acompañante no está disponible, TrustCore recurre a un modelo de visión por página, que proporciona ubicación a nivel de página en lugar de a nivel de bloque.',
-      },
-      {
-        title: 'Nada se lee en silencio',
-        description:
-          'Un archivo en un formato que TrustCore no reconoce se rechaza en lugar de indexarse parcialmente, de modo que un proyecto nunca contiene un documento que solo se leyó a medias.',
-      },
-    ]}
-    image={{ src: '~/assets/images/ocr.svg', alt: 'OCR con procedencia de página a nivel de bloque' }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        PDF de texto, PDF escaneados, texto plano y Markdown
-      </h3>
-      Los PDF de texto se leen directamente; los PDF escaneados se recuperan mediante OCR; el texto
-      plano y el Markdown se leen tal cual.
     </Fragment>
   </Content>
 

@@ -9,6 +9,7 @@ import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import { Image as AstroImage } from 'astro:assets';
 import colab3Banner from '~/assets/images/colab3_banner.jpg';
 import ComplianceAutomationMap from '~/components/widgets/ComplianceAutomationMap.astro';
+import TrustCoreGraph from '~/components/widgets/TrustCoreGraph.astro';
 
 const metadata = {
   title: 'Futurion Solutions — Private AI for Regulated Organisations',
@@ -242,9 +243,9 @@ const faqSchema = {
           'A 560-million-parameter NER model and 40 checksum-validated rules run in the browser. Detection works offline after install — there is no detection server to send text to.',
       },
       {
-        title: 'Fail-closed by design',
+        title: 'Custom rules for your own identifiers',
         description:
-          'If any step fails, the send stays blocked rather than letting the original text through.',
+          'Add regex rules for the identifiers only your organisation uses — employee IDs, internal ticket numbers, patient IDs. Organisation rules run in an isolated worker with a timeout, so a bad pattern can never hang the page.',
       },
       {
         title: 'Central control for teams',
@@ -295,18 +296,17 @@ const faqSchema = {
           'Documents, the index and the graph stay on your device or on infrastructure you control. No SaaS, and no subprocessor on the local path.',
       },
     ]}
-    image={{
-      src: '~/assets/images/trustcore-3d-map.jpg',
-      alt: 'TrustCore interactive 3D knowledge map',
-    }}
     callToAction={{
       text: 'Explore TrustCore',
       href: '/products/trustcore/',
       icon: 'tabler:chevron-right',
     }}
   >
+    <Fragment slot="image">
+      <TrustCoreGraph />
+    </Fragment>
     <Fragment slot="content">
-      A browser extension with an optional local companion that indexes your documents and answers questions about them on your machine. Questions are answered from your indexed documents, not sent to the chat provider — there is no TrustCore server.
+      A browser extension with an optional local companion that indexes your documents and answers questions about them on your machine. Questions are answered from your indexed documents, and stay on your machine — there is no TrustCore cloud they pass through.
     </Fragment>
   </Content>
 
@@ -442,7 +442,6 @@ const faqSchema = {
 
   <BlogLatestPosts
     title="Compliance & AI Insights"
-    information="Notes on private AI, data sovereignty and compliance for regulated organisations in Spain and the EU."
     lang="en"
   />
 

@@ -9,6 +9,7 @@ import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import { Image as AstroImage } from 'astro:assets';
 import colab3Banner from '~/assets/images/colab3_banner.jpg';
 import ComplianceAutomationMap from '~/components/widgets/ComplianceAutomationMap.astro';
+import TrustCoreGraph from '~/components/widgets/TrustCoreGraph.astro';
 
 const metadata = {
   title: 'Futurion Solutions — IA Privada para Organizaciones Reguladas',
@@ -242,9 +243,9 @@ const faqSchema = {
           'Un modelo NER de 560 millones de parámetros y 40 reglas validadas por suma de verificación se ejecutan en el navegador. La detección funciona sin conexión tras la instalación — no hay ningún servidor de detección al que enviar el texto.',
       },
       {
-        title: 'Diseño de fallo cerrado',
+        title: 'Reglas propias para sus identificadores',
         description:
-          'Si algún paso falla, el envío queda bloqueado en lugar de dejar pasar el texto original.',
+          'Añada reglas regex para los identificadores que solo usa su organización — números de empleado, números de ticket internos, identificadores de paciente. Las reglas de la organización se ejecutan en un worker aislado con tiempo límite, de modo que un patrón defectuoso nunca puede bloquear la página.',
       },
       {
         title: 'Control centralizado para equipos',
@@ -295,18 +296,17 @@ const faqSchema = {
           'Los documentos, el índice y el grafo permanecen en su dispositivo o en infraestructura bajo su control. Sin SaaS ni subprocesador en la ruta local.',
       },
     ]}
-    image={{
-      src: '~/assets/images/trustcore-3d-map.jpg',
-      alt: 'Mapa de conocimiento 3D interactivo de TrustCore',
-    }}
     callToAction={{
       text: 'Conocer TrustCore',
       href: '/es/productos/trustcore/',
       icon: 'tabler:chevron-right',
     }}
   >
+    <Fragment slot="image">
+      <TrustCoreGraph lang="es" />
+    </Fragment>
     <Fragment slot="content">
-      Una extensión de navegador con un acompañante local opcional que indexa sus documentos y responde preguntas sobre ellos en su máquina. Las preguntas se responden a partir de sus documentos indexados, no se envían al proveedor de chat — no existe ningún servidor de TrustCore.
+      Una extensión de navegador con un acompañante local opcional que indexa sus documentos y responde preguntas sobre ellos en su máquina. Las preguntas se responden a partir de sus documentos indexados y no salen de su máquina — no existe ninguna nube de TrustCore por la que pasen.
     </Fragment>
   </Content>
 
@@ -442,7 +442,6 @@ const faqSchema = {
 
   <BlogLatestPosts
     title="Cumplimiento e IA: notas de trabajo"
-    information="Notas sobre IA privada, soberanía de datos y cumplimiento normativo para organizaciones reguladas en España y la UE."
     lang="es"
   />
 

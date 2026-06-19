@@ -47,7 +47,7 @@ export interface FrameworkItem { text: string; tip: string; }
 export interface Framework     { badge: string; name: string; accent: string; items: FrameworkItem[]; }
 export interface Pill          { mini: string; label: string; sub?: string; logo?: LogoKey; break?: boolean; }
 export interface MatrixRow     { label: string; pills: Pill[]; }
-export interface ServiceEntry  { name: string; logo: LogoKey; }
+export interface ServiceEntry  { name: string; logo: LogoKey; href?: string; }
 
 export interface Props {
   id?:            string;
@@ -127,13 +127,25 @@ const {
         <div class="service-row">
           {services.map((svc) => (
             <div class="service-logo">
-              <Image
-                src={logoMap[svc.logo]}
-                alt={svc.name}
-                class="svc-img"
-                width={180}
-                loading="lazy"
-              />
+              {svc.href ? (
+                <a href={svc.href} class="service-link" aria-label={svc.name}>
+                  <Image
+                    src={logoMap[svc.logo]}
+                    alt={svc.name}
+                    class="svc-img"
+                    width={180}
+                    loading="lazy"
+                  />
+                </a>
+              ) : (
+                <Image
+                  src={logoMap[svc.logo]}
+                  alt={svc.name}
+                  class="svc-img"
+                  width={180}
+                  loading="lazy"
+                />
+              )}
             </div>
           ))}
         </div>
@@ -453,6 +465,19 @@ const {
     right: 0;
     top: 50%;
     transform: translateY(-50%);
+  }
+  /* Clickable logo wrapper */
+  .service-link {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    width: 100%;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  .service-link:hover,
+  .service-link:focus-visible {
+    opacity: 0.85;
+    transform: translateY(-2px);
   }
   /* Logo images inside service-logo */
   .svc-img {

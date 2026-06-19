@@ -2,21 +2,17 @@
 import Layout from '~/layouts/PageLayout.astro';
 import JsonLd from '~/components/common/JsonLd.astro';
 
-import Stats from '~/components/widgets/Stats.astro';
-import Features from '~/components/widgets/Features.astro';
 import Content from '~/components/widgets/Content.astro';
-import Steps from '~/components/widgets/Steps.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
-import Note from '~/components/widgets/Note.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import { Image as AstroImage } from 'astro:assets';
 import colab3Banner from '~/assets/images/colab3_banner.jpg';
 import ComplianceAutomationMap from '~/components/widgets/ComplianceAutomationMap.astro';
 
 const metadata = {
-  title: 'Futurion Solutions — Compliance-First AI Automation for Healthcare',
-  description: 'Compliance-first AI automation for small healthcare practices in Spain and the EU. Free GDPR Automation Roadmap for dental clinics and pharmacies.',
+  title: 'Futurion Solutions — Private AI for Regulated Organisations',
+  description: 'Private AI tools and automation that keep sensitive data inside your own boundary — on your hardware or your cloud account. Mapped to GDPR, the EU AI Act, ISO 27001 and SOC 2.',
   ignoreTitleTemplate: true,
 };
 
@@ -26,98 +22,66 @@ const faqSchema = {
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is a compliance-first automation roadmap?",
+      "name": "What does Futurion Solutions do?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Our free roadmap assesses your clinic's data handling, identifies where AI can safely automate tasks, and flags compliance gaps. It is a risk and process roadmap with an AI feasibility overlay — not a sales pitch. You receive a detailed report you can act on independently."
+        "text": "We build private AI tools — TrustPrompt and TrustCore — and run an automation practice, TrustAuto, for organisations that work with sensitive or regulated data. Everything is designed to run on infrastructure you control rather than a shared cloud service."
       }
     },
     {
       "@type": "Question",
-      "name": "Will patient data be sent to the cloud?",
+      "name": "Does our data leave our own infrastructure?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. We design hybrid and on-premise AI solutions that keep patient data within your clinic's infrastructure. Most cloud-based AI tools are unsuitable for healthcare data under GDPR. We use architectures that keep sensitive data local."
+        "text": "No. TrustPrompt analyses text in the browser, TrustCore answers from documents on your own machine, and TrustAuto automations run on-premise or in a hybrid setup. Sensitive data stays inside your boundary."
       }
     },
     {
       "@type": "Question",
-      "name": "How much does implementation cost?",
+      "name": "Which compliance frameworks do you map to?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Our quick-win implementations start at around €1,500-3,000 for 1-2 automations. Comprehensive automation packages range from €5,000-15,000. Monthly support starts at €200/month. The free roadmap gives you a clear picture before any commitment."
+        "text": "GDPR, the EU AI Act, ISO 27001 and SOC 2, plus HIPAA and Spanish AEPD requirements for healthcare. Each deployment is documented against the obligations you answer to."
       }
     },
     {
       "@type": "Question",
-      "name": "We're a small clinic — is this for us?",
+      "name": "Can the products run fully on-premise?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. We specialize in small healthcare businesses: dental clinics, pharmacies, and practices with 1-10 employees. Our solutions are designed to be affordable and impactful for practices that don't have dedicated IT teams."
+        "text": "Yes. TrustPrompt and TrustCore work locally by default; for heavier workloads you point them at endpoints you already run. MedCore runs entirely on your premises."
       }
     },
     {
       "@type": "Question",
-      "name": "What GDPR and compliance frameworks do you follow?",
+      "name": "How is TrustPrompt different from a network DLP proxy?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "We work with GDPR, HIPAA, SOC2, and ISO 27001 frameworks. Every automation includes proper data processing agreements, audit trails, consent management, and documentation required by EU and Spanish (AEPD) regulations."
+        "text": "A proxy has to receive your text to inspect it, which adds a party that now holds the data and breaks on encrypted or personal-device traffic. TrustPrompt removes personal data in the browser before the prompt is sent, so nothing new in the path ever sees the original text."
       }
     },
     {
       "@type": "Question",
-      "name": "How long does implementation take?",
+      "name": "What is the free automation roadmap?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The free roadmap takes 5-7 business days. Quick-win implementations can be completed in 2-4 weeks. Full automation transformations typically take 6-12 weeks, depending on complexity. You see results from week one."
+        "text": "A short assessment of your data flows and compliance posture. You receive a written report with risk scores and the automations worth doing first. It is a roadmap you can act on independently, with no obligation."
       }
     },
     {
       "@type": "Question",
-      "name": "What if we already use a practice management system?",
+      "name": "What does this cost?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "We integrate with your existing tools. Our automations work alongside your current practice management software, EHR systems, and workflows — we enhance what you have rather than replacing it."
+        "text": "The roadmap is free. TrustPrompt and TrustCore are offered as per-seat plans with a free local tier; automation engagements are scoped from the roadmap. Plans follow the EU SME size bands."
       }
     },
     {
       "@type": "Question",
-      "name": "Is the roadmap really free?",
+      "name": "Do you integrate with our existing systems?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. The 5-7 day automation roadmap is completely free with no obligations. You receive a full report with risk scores, automation recommendations, and a compliance roadmap. About 40-60% of clinics that complete a roadmap choose to proceed with implementation, but there is zero pressure."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What does your appointment automation include?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Smart scheduling, reminders, and follow-ups that reduce no-shows by up to 30% — all GDPR compliant."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do you handle patient communications?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Automated but personal communications through compliant channels, replacing risky WhatsApp and personal email usage."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can you automate billing and insurance processing?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Streamlined billing workflows that reduce errors and save hours of manual administrative work each week."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What compliance documentation do you provide?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Automated audit trails, data processing records, and compliance reports that keep you inspection-ready at all times. Every automation is architected with GDPR principles at its core — data minimisation, purpose limitation, security controls, and audit trails from day one."
+        "text": "Yes. Automations and tools work alongside your current software and records — including FHIR and OpenEHR in healthcare — rather than replacing them."
       }
     }
   ]
@@ -131,7 +95,7 @@ const faqSchema = {
   <div class="relative w-full overflow-hidden" style="height: 480px;">
     <AstroImage
       src={colab3Banner}
-      alt="Compliance-First AI Automation for Healthcare Providers"
+      alt="Private AI for regulated organisations"
       class="absolute inset-0 w-full h-full object-cover"
       widths={[768, 1024, 1920]}
       sizes="100vw"
@@ -140,7 +104,7 @@ const faqSchema = {
     />
     <div class="absolute inset-0 bg-black/0 flex items-center justify-center">
       <h1 class="font-bold font-heading text-4xl md:text-5xl leading-tighter tracking-tighter text-white text-center px-8">
-        Compliance-First AI Automation<br />for Healthcare Providers
+        Private AI for<br />Regulated Organisations
       </h1>
     </div>
   </div>
@@ -148,7 +112,7 @@ const faqSchema = {
   <!-- Hero Subtitle -->
   <div class="max-w-3xl mx-auto text-center px-6 py-6 text-muted">
     <p class="text-xl">
-      We help medical practices, pharmacies, and dental clinics save 10-15 hours per week through AI automation — without compromising patient data security or GDPR compliance. Enterprise-level compliance expertise, built for healthcare SMBs in Spain and the EU.
+      Futurion Solutions builds AI tools and automation that keep sensitive data inside your own boundary — on your hardware or your cloud account. We work with legal, compliance, finance and healthcare teams across Spain and the EU, mapping every deployment to GDPR, the EU AI Act, ISO 27001 and SOC&nbsp;2.
     </p>
   </div>
 
@@ -265,48 +229,41 @@ const faqSchema = {
     ]}
   />
 
-  <!-- Trust Stats -->
-
-  <Stats
-    stats={[
-      { title: 'Compliance Frameworks', amount: '4+', icon: 'tabler:shield-check' },
-      { title: 'Hours Saved Weekly', amount: '10-15', icon: 'tabler:clock' },
-      { title: 'Data Risk Reduction', amount: '90%', icon: 'tabler:lock' },
-      { title: 'Roadmap Conversion', amount: '40-60%', icon: 'tabler:chart-arrows' },
-    ]}
-  />
-
-  <!-- Problem / Pain Points -->
+  <!-- TrustPrompt -->
 
   <Content
-    isReversed
-    tagline="The Challenge"
-    title="Incorrect Automation: A Fast Track to Compliance Failures and Costly Penalties"
+    id="trustprompt"
+    tagline="TrustPrompt"
+    title="Redact Personal Data Before It Reaches a Public LLM"
     items={[
       {
-        title: 'GDPR complexity for small practices',
+        title: 'On-device detection',
         description:
-          'You face the same data protection requirements as large hospitals, but without dedicated IT teams or compliance officers.',
+          'A 560-million-parameter NER model and 40 checksum-validated rules run in the browser. Detection works offline after install — there is no detection server to send text to.',
       },
       {
-        title: 'Cloud AI risks with patient data',
+        title: 'Fail-closed by design',
         description:
-          'Most AI tools send patient data to external cloud servers — a potential GDPR violation that puts your practice at risk.',
+          'If any step fails, the send stays blocked rather than letting the original text through.',
       },
       {
-        title: 'Administrative overload stealing patient time',
+        title: 'Central control for teams',
         description:
-          'Appointment scheduling, follow-ups, billing, and paperwork consume hours that should be spent on patient care.',
+          'Push policy through Group Policy, Intune or Jamf, with audit logging that records metadata only — never the prompt text.',
       },
     ]}
     image={{
-      src: '~/assets/images/data-dashboard.jpg',
-      alt: 'Person overwhelmed by administrative work',
+      src: '~/assets/images/trustprompt.png',
+      alt: 'TrustPrompt browser extension',
+    }}
+    callToAction={{
+      text: 'Explore TrustPrompt',
+      href: '/products/trustprompt/',
+      icon: 'tabler:chevron-right',
     }}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Sound familiar?</h3>
-      Most AI agencies don't understand healthcare regulations. Most compliance consultants don't understand AI. You need both.
+      A Chrome and Edge extension that detects and removes personal data in the browser, before a prompt is sent to ChatGPT, Claude, Gemini and six other services. The text you type is analysed on your own machine; the detection model ships inside the extension.
     </Fragment>
 
     <Fragment slot="bg">
@@ -314,165 +271,169 @@ const faqSchema = {
     </Fragment>
   </Content>
 
-  <!-- Differentiators -->
+  <!-- TrustCore -->
 
-  <Features
-    id="features"
-    tagline="Why Futurion Solutions"
-    title="What makes us different"
-    subtitle="We bridge the gap between AI automation and healthcare compliance — so you don't have to choose between efficiency and data protection."
-    columns={3}
+  <Content
+    id="trustcore"
+    isReversed
+    tagline="TrustCore"
+    title="Answer Questions About Your Own Documents, On Your Own Hardware"
     items={[
       {
-        title: 'Compliance-First Approach',
+        title: 'Graph RAG, not similarity alone',
         description:
-          'Every automation is built with GDPR, HIPAA, and data privacy requirements at its core — not added as an afterthought.',
-        icon: 'tabler:shield-check',
+          'TrustCore builds a graph of the entities and relationships in your documents and reasons over it, surfacing connections that no single document states on its own.',
       },
       {
-        title: 'Hybrid & On-Prem AI',
+        title: 'Answers you can trace',
         description:
-          'Patient data stays in your clinic. We design solutions that work locally or in hybrid setups, never sending sensitive data to external clouds. For larger organizations, MedCore Private AI delivers fully on-premise medical-grade AI infrastructure.',
-        icon: 'tabler:server',
+          'Every answer is tied to the exact passage and page it came from, and clauses that conflict across documents are flagged with both sources.',
       },
       {
-        title: 'Enterprise Security for SMBs',
+        title: 'Sovereign by default',
         description:
-          'SOC2, ISO 27001, and enterprise-grade security practices — scaled and priced for small healthcare businesses.',
-        icon: 'tabler:lock',
-      },
-    ]}
-  />
-
-  <!-- How It Works -->
-
-  <Steps
-    title="How it works"
-    subtitle="From initial roadmap to ongoing support, we make AI adoption safe and simple for your practice."
-    items={[
-      {
-        title: 'Step 1: <span class="font-medium">Free Automation Roadmap</span>',
-        description:
-          'We assess your clinic\'s data flows, compliance posture, and automation opportunities in a free 5-7 day roadmap. You receive a detailed report with risk scores and safe automation recommendations.',
-        icon: 'tabler:clipboard-check',
-      },
-      {
-        title: 'Step 2: <span class="font-medium">Compliant Implementation</span>',
-        description:
-          'We build and deploy AI automations designed with data privacy at their core. On-prem or hybrid architecture ensures patient data never leaves your control.',
-        icon: 'tabler:settings-automation',
-      },
-      {
-        title: 'Step 3: <span class="font-medium">Ongoing Support & Monitoring</span>',
-        description:
-          'We monitor your automations, update compliance controls as regulations evolve, and optimize performance. Your trusted AI partner, month after month.',
-        icon: 'tabler:heart-handshake',
-      },
-      {
-        title: 'Results: Save 10-15 hours per week',
-        icon: 'tabler:check',
+          'Documents, the index and the graph stay on your device or on infrastructure you control. No SaaS, and no subprocessor on the local path.',
       },
     ]}
     image={{
-      src: '~/assets/images/team-working.jpg',
-      alt: 'Team collaborating on a project',
+      src: '~/assets/images/trustcore-3d-map.jpg',
+      alt: 'TrustCore interactive 3D knowledge map',
     }}
-  />
+    callToAction={{
+      text: 'Explore TrustCore',
+      href: '/products/trustcore/',
+      icon: 'tabler:chevron-right',
+    }}
+  >
+    <Fragment slot="content">
+      A browser extension with an optional local companion that indexes your documents and answers questions about them on your machine. Questions are answered from your indexed documents, not sent to the chat provider — there is no TrustCore server.
+    </Fragment>
+  </Content>
 
-  <!-- CTA Banner -->
+  <!-- TrustAuto -->
 
-  <CallToAction
-    actions={[
+  <Content
+    id="trustauto"
+    tagline="TrustAuto"
+    title="Compliance Automation, Built on Infrastructure You Control"
+    items={[
       {
-        variant: 'primary',
-        text: 'Book Your Automation Roadmap',
-        href: '/automation-roadmap/',
-        icon: 'tabler:clipboard-check',
+        title: 'Start with a roadmap',
+        description:
+          'A short assessment of your data flows and compliance posture, returning a written report with risk scores and the automations worth doing first.',
+      },
+      {
+        title: 'Compliant implementation',
+        description:
+          'Document handling, scheduling, communications and billing workflows, designed around data minimisation and audit trails rather than added afterwards. On-premise or hybrid, so sensitive data stays within your boundary.',
+      },
+      {
+        title: 'Ongoing monitoring',
+        description:
+          'We maintain the automations and update controls as GDPR, the EU AI Act and sector rules change.',
       },
     ]}
+    image={{
+      src: '~/assets/images/team-collaboration.jpg',
+      alt: 'Team reviewing automated compliance workflows',
+    }}
+    callToAction={{
+      text: 'Explore TrustAuto',
+      href: '/products/trustauto/',
+      icon: 'tabler:chevron-right',
+    }}
   >
-    <Fragment slot="title">Start with a Free 5-7 Day Automation Roadmap</Fragment>
-
-    <Fragment slot="subtitle">
-      We assess your clinic's data flows, identify safe automation opportunities, and deliver a clear compliance roadmap — at no cost. Limited to 8 roadmaps per month.
+    <Fragment slot="content">
+      TrustAuto is our automation practice. We map your data flows, identify where AI can safely take over repetitive work, and build automations that run on-premise or in a hybrid setup — so sensitive data never leaves your control.
     </Fragment>
-  </CallToAction>
+  </Content>
 
-  <!-- MedCore Note -->
+  <!-- MedCore (TrustAuto for healthcare) -->
 
-  <Note
-    icon="tabler:server"
-    title="For Medium Healthcare Organizations:"
-    description='Explore <a href="/medcore-private-ai/" class="underline font-bold">MedCore Private AI</a> — fully on-premise, medical-grade AI infrastructure with complete data sovereignty. For context, read our analysis of <a href="/openevidence-eu-uk-withdrawal-private-on-prem-sovereign-cloud/" class="underline font-bold">OpenEvidence&apos;s EU/UK withdrawal</a> and what it means for clinical AI architecture.'
-  />
+  <Content
+    id="medcore"
+    isReversed
+    tagline="TrustAuto for Healthcare"
+    title="MedCore — Private AI for Medical Organisations"
+    items={[
+      {
+        title: 'On-premise by default',
+        description:
+          'Patient data stays within your organisation; nothing is sent to an external cloud.',
+      },
+      {
+        title: 'Standards-based integration',
+        description:
+          'Works with FHIR and OpenEHR records and the systems your teams already use.',
+      },
+      {
+        title: 'Mapped to healthcare obligations',
+        description:
+          'GDPR, the EU AI Act and AEPD requirements, with documentation kept inspection-ready.',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/medcore-private-ai.jpg',
+      alt: 'MedCore on-premise medical AI infrastructure',
+    }}
+    callToAction={{
+      text: 'Explore MedCore',
+      href: '/medcore-private-ai/',
+      icon: 'tabler:chevron-right',
+    }}
+  >
+    <Fragment slot="content">
+      MedCore is the TrustAuto offering for hospitals, clinics and medical groups: medical-grade AI infrastructure that runs entirely on your premises, built on HAPI FHIR and OpenEHR with clinical models that run locally. For context, read our analysis of <a href="/openevidence-eu-uk-withdrawal-private-on-prem-sovereign-cloud/" class="underline">OpenEvidence&apos;s EU/UK withdrawal</a> and what it means for clinical AI architecture.
+    </Fragment>
+  </Content>
 
   <!-- FAQs -->
 
   <FAQs
     title="Frequently Asked Questions"
-    subtitle="Everything you need to know about compliance-first AI automation for your healthcare practice."
+    subtitle="How our tools and automation keep sensitive data inside your own boundary."
     tagline="FAQs"
     classes={{ container: 'max-w-6xl' }}
     items={[
       {
-        title: 'What is a compliance-first automation roadmap?',
+        title: 'What does Futurion Solutions do?',
         description:
-          'Our free roadmap assesses your clinic\'s data handling, identifies where AI can safely automate tasks, and flags compliance gaps. It is a risk and process roadmap with an AI feasibility overlay — not a sales pitch. You receive a detailed report you can act on independently.',
+          'We build private AI tools — TrustPrompt and TrustCore — and run an automation practice, TrustAuto, for organisations that work with sensitive or regulated data. Everything is designed to run on infrastructure you control rather than a shared cloud service.',
       },
       {
-        title: 'Will patient data be sent to the cloud?',
+        title: 'Does our data leave our own infrastructure?',
         description:
-          'No. We design hybrid and on-premise AI solutions that keep patient data within your clinic\'s infrastructure. Most cloud-based AI tools are unsuitable for healthcare data under GDPR. We use architectures that keep sensitive data local.',
+          'No. TrustPrompt analyses text in the browser, TrustCore answers from documents on your own machine, and TrustAuto automations run on-premise or in a hybrid setup. Sensitive data stays inside your boundary.',
       },
       {
-        title: 'How much does implementation cost?',
+        title: 'Which compliance frameworks do you map to?',
         description:
-          'Our quick-win implementations start at around €1,500-3,000 for 1-2 automations. Comprehensive automation packages range from €5,000-15,000. Monthly support starts at €200/month. The free roadmap gives you a clear picture before any commitment.',
+          'GDPR, the EU AI Act, ISO 27001 and SOC 2, plus HIPAA and Spanish AEPD requirements for healthcare. Each deployment is documented against the obligations you answer to.',
       },
       {
-        title: 'We\'re a small clinic — is this for us?',
+        title: 'Can the products run fully on-premise?',
         description:
-          'Absolutely. We specialize in small healthcare businesses: dental clinics, pharmacies, and practices with 1-10 employees. Our solutions are designed to be affordable and impactful for practices that don\'t have dedicated IT teams.',
+          'Yes. TrustPrompt and TrustCore work locally by default; for heavier workloads you point them at endpoints you already run. MedCore runs entirely on your premises.',
       },
       {
-        title: 'What GDPR and compliance frameworks do you follow?',
+        title: 'How is TrustPrompt different from a network DLP proxy?',
         description:
-          'We work with GDPR, HIPAA, SOC2, and ISO 27001 frameworks. Every automation includes proper data processing agreements, audit trails, consent management, and documentation required by EU and Spanish (AEPD) regulations.',
+          'A proxy has to receive your text to inspect it, which adds a party that now holds the data and breaks on encrypted or personal-device traffic. TrustPrompt removes personal data in the browser before the prompt is sent, so nothing new in the path ever sees the original text.',
       },
       {
-        title: 'How long does implementation take?',
+        title: 'What is the free automation roadmap?',
         description:
-          'The free roadmap takes 5-7 business days. Quick-win implementations can be completed in 2-4 weeks. Full automation transformations typically take 6-12 weeks, depending on complexity. You see results from week one.',
+          'A short assessment of your data flows and compliance posture. You receive a written report with risk scores and the automations worth doing first. It is a roadmap you can act on independently, with no obligation.',
       },
       {
-        title: 'What if we already use a practice management system?',
+        title: 'What does this cost?',
         description:
-          'We integrate with your existing tools. Our automations work alongside your current practice management software, EHR systems, and workflows — we enhance what you have rather than replacing it.',
+          'The roadmap is free. TrustPrompt and TrustCore are offered as per-seat plans with a free local tier; automation engagements are scoped from the roadmap. Plans follow the EU SME size bands.',
       },
       {
-        title: 'Is the roadmap really free?',
+        title: 'Do you integrate with our existing systems?',
         description:
-          'Yes. The 5-7 day automation roadmap is completely free with no obligations. You receive a full report with risk scores, automation recommendations, and a compliance roadmap. About 40-60% of clinics that complete a roadmap choose to proceed with implementation, but there is zero pressure.',
-      },
-      {
-        title: 'What does your appointment automation include?',
-        description:
-          'Smart scheduling, reminders, and follow-ups that reduce no-shows by up to 30% — all GDPR compliant.',
-      },
-      {
-        title: 'How do you handle patient communications?',
-        description:
-          'Automated but personal communications through compliant channels, replacing risky WhatsApp and personal email usage.',
-      },
-      {
-        title: 'Can you automate billing and insurance processing?',
-        description:
-          'Streamlined billing workflows that reduce errors and save hours of manual administrative work each week.',
-      },
-      {
-        title: 'What compliance documentation do you provide?',
-        description:
-          'Automated audit trails, data processing records, and compliance reports that keep you inspection-ready at all times. Every automation is architected with GDPR principles at its core — data minimisation, purpose limitation, security controls, and audit trails from day one.',
+          'Yes. Automations and tools work alongside your current software and records — including FHIR and OpenEHR in healthcare — rather than replacing them.',
       },
     ]}
   />
@@ -481,7 +442,7 @@ const faqSchema = {
 
   <BlogLatestPosts
     title="Compliance & AI Insights"
-    information="Stay informed about healthcare compliance, AI automation best practices, and regulatory updates for small healthcare providers in Spain and the EU."
+    information="Notes on private AI, data sovereignty and compliance for regulated organisations in Spain and the EU."
     lang="en"
   />
 
@@ -491,16 +452,16 @@ const faqSchema = {
     actions={[
       {
         variant: 'primary',
-        text: 'Get Your Free Automation Roadmap',
+        text: 'Get Your Free Roadmap',
         href: '/automation-roadmap/',
         icon: 'tabler:clipboard-check',
       },
     ]}
   >
-    <Fragment slot="title">Ready to Automate Compliantly?</Fragment>
+    <Fragment slot="title">See Where AI Fits — Without Moving Your Data</Fragment>
 
     <Fragment slot="subtitle">
-      Join healthcare practices across Spain that are saving 10-15 hours per week with AI automation — without compromising patient data or compliance. Start with a free roadmap today.
+      Start with a free roadmap of your data flows and automation opportunities, mapped to the regulations you answer to. No obligation.
     </Fragment>
   </CallToAction>
 </Layout>

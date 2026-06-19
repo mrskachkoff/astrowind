@@ -29,14 +29,14 @@ const {
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
   <Headline title={title} subtitle={subtitle} tagline={tagline} />
-  <div class="flex flex-wrap items-stretch justify-center gap-4 dark:text-white">
+  <div class="flex flex-wrap items-stretch justify-center gap-6 dark:text-white">
       {
         prices &&
           prices.map(({ title, subtitle, price, period, items, callToAction, hasRibbon = false, ribbonTitle }, i) => (
-            <div class="flex w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(20%-0.8rem)] mx-auto intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter">
+            <div class="flex w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)] mx-auto intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter">
               {(price || price === 0) && period && (
                 <div
-                  class="aurora-card relative flex w-full mx-auto flex-col justify-between px-4 py-6"
+                  class="aurora-card relative flex w-full mx-auto flex-col justify-between px-6 py-8"
                   style={`--card-accent: ${ACCENTS[i % ACCENTS.length]}`}
                 >
                   {hasRibbon && ribbonTitle && (
@@ -62,14 +62,14 @@ const {
                     <div class="my-8">
                       <div class="flex items-center justify-center text-center mb-1">
                         {price === 0 || price === '0' ? (
-                          <span class="text-5xl font-extrabold font-heading dark:text-white">Free</span>
+                          <span class="text-6xl font-extrabold font-heading dark:text-white">Free</span>
                         ) : typeof price === 'number' || !isNaN(Number(String(price).replace(/,/g, ''))) ? (
                           <>
-                            <span class="text-4xl font-heading dark:text-white">€</span>
-                            <span class="text-5xl font-extrabold font-heading dark:text-white">{price}</span>
+                            <span class="text-5xl font-heading dark:text-white">€</span>
+                            <span class="text-6xl font-extrabold font-heading dark:text-white">{price}</span>
                           </>
                         ) : (
-                          <span class="text-5xl font-extrabold font-heading dark:text-white">{price}</span>
+                          <span class="text-6xl font-extrabold font-heading dark:text-white">{price}</span>
                         )}
                       </div>
                       <span class="text-base leading-6 lowercase text-muted">{period}</span>

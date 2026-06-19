@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { twMerge } from 'tailwind-merge';
 import type { Brands as Props } from '~/types';
 
 import Image from '~/components/common/Image.astro';
@@ -21,7 +22,7 @@ const {
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
   <Headline title={title} subtitle={subtitle} tagline={tagline} />
 
-  <div class="flex flex-wrap justify-center gap-x-6 sm:gap-x-12 lg:gap-x-24">
+  <div class={twMerge('flex flex-wrap justify-center gap-x-6 sm:gap-x-12 lg:gap-x-24', classes?.items as string)}>
     {icons && icons.map((icon) => <Icon name={icon} class="py-3 lg:py-5 w-12 h-auto mx-auto sm:mx-0 text-gray-500" />)}
     {
       images &&

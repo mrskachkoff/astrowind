@@ -5,16 +5,13 @@ import JsonLd from '~/components/common/JsonLd.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Brands from '~/components/widgets/Brands.astro';
 import Content from '~/components/widgets/Content.astro';
-import Features from '~/components/widgets/Features.astro';
-import Features2 from '~/components/widgets/Features2.astro';
+import FeaturesCarousel from '~/components/widgets/FeaturesCarousel.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import Prices from '~/components/widgets/Pricing.astro';
-import Note from '~/components/widgets/Note.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 import imgTrustPrompt from '~/assets/images/trustprompt.png';
-import imgPreview from '~/assets/images/ai-security-padlock.jpg';
 
 const metadata = {
   title: 'TrustPrompt — Redact Personal Data in the Browser, Before a Prompt Is Sent',
@@ -103,24 +100,12 @@ const metadata = {
     </Fragment>
   </Hero>
 
-  <!-- Static preview -->
-
-  <section class="px-4 sm:px-6 pt-0 pb-10 md:pb-14 -mt-6 md:-mt-10">
-    <div class="max-w-4xl mx-auto">
-      <img
-        src={imgPreview.src}
-        alt="Personal data redacted in the browser before a prompt is sent"
-        class="w-full rounded-2xl shadow-2xl object-cover"
-        loading="lazy"
-      />
-    </div>
-  </section>
-
   <!-- Supported sites -->
 
   <Brands
     title="Works on the LLM Sites You Already Use"
     subtitle="TrustPrompt runs on nine LLM web apps. Alongside the logos shown, it also covers Perplexity, Grok on X, and OpenEvidence — redaction happens in each site's composer before the message is sent."
+    classes={{ items: 'flex-nowrap overflow-x-auto gap-x-6 sm:gap-x-8 lg:gap-x-10 [&_img]:!h-12 [&_img]:!w-auto [&_img]:!object-contain' }}
     images={[
       { src: '~/assets/images/openai.png', alt: 'ChatGPT' },
       { src: '~/assets/images/claude-color.png', alt: 'Claude' },
@@ -133,9 +118,8 @@ const metadata = {
 
   <!-- What TrustPrompt does -->
 
-  <Features
+  <FeaturesCarousel
     id="features"
-    columns={3}
     tagline="What TrustPrompt Does"
     title="Personal Data Is Removed Before It Can Leave the Browser"
     subtitle="Two things are always true: your prompt text is analyzed on your own machine, and detected values are replaced with placeholders before the message is sent."
@@ -159,12 +143,6 @@ const metadata = {
         icon: 'tabler:topology-star',
       },
       {
-        title: 'Fail-Closed by Default',
-        description:
-          'The interceptor blocks the native send first, then detects and redacts. If any stage throws, the send stays blocked rather than leaking unredacted text. The safe state is the default state.',
-        icon: 'tabler:shield-lock',
-      },
-      {
         title: 'No Telemetry',
         description:
           'There is no analytics or error reporting. The only outbound network call anywhere is the optional enterprise audit webhook, and it carries metadata only — never prompt text or detected values.',
@@ -179,12 +157,12 @@ const metadata = {
     ]}
   />
 
-  <!-- Why there is no server -->
+  <!-- Where and how detection happens -->
 
   <Content
-    isReversed
-    tagline="Where Detection Happens"
-    title="There Is No Detection Server to Send Text To"
+    tagline="Detection"
+    title="No Detection Server, and Two Detectors That Cover Each Other's Blind Spots"
+    columns={2}
     items={[
       {
         title: 'No detection backend exists',
@@ -201,25 +179,6 @@ const metadata = {
         description:
           'Redaction happens before the LLM receives the prompt, so the values are replaced before they leave the browser. There is no copy of the original text to log, retain, or train on downstream.',
       },
-    ]}
-    image={{ src: '~/assets/images/on-prem.png', alt: 'Detection runs locally; no detection server' }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        A Privacy Property That Comes From the Architecture
-      </h3>
-      For a clinic or a law firm, the fact that the text never leaves the machine for detection is
-      not an operational promise that depends on configuration — it is how the extension is built.
-    </Fragment>
-  </Content>
-
-  <!-- Two detector families -->
-
-  <Content
-    isAfterContent
-    tagline="Detection"
-    title="Two Detectors That Cover Each Other's Blind Spots"
-    items={[
       {
         title: 'Deterministic regex with checksums',
         description:
@@ -236,49 +195,16 @@ const metadata = {
           'When both detectors fire on the same value — a regex DNI and a model identifier over the same digits — a cross-source dedupe step collapses them, so a value is never double-counted and the preview stays readable.',
       },
     ]}
-    image={{ src: '~/assets/images/guardrails.png', alt: 'Regex and NER detection working together' }}
   >
     <Fragment slot="content">
       <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        Exact Rules Where They Fit, a Model Where They Do Not
+        A Privacy Property That Comes From the Architecture
       </h3>
-      Structured identifiers have a shape a checksum can confirm; a patient name or a clause naming a
-      counterparty does not. TrustPrompt uses each method where it is strongest.
-    </Fragment>
-  </Content>
-
-  <!-- Multilingual -->
-
-  <Content
-    isReversed
-    isAfterContent
-    tagline="Languages"
-    title="Multilingual by Data, Not by Code"
-    items={[
-      {
-        title: 'Seven categories that do not change',
-        description:
-          'Each model maps its raw labels onto seven stable categories — identifiers, personal info, contact info, location, organization, financial, and temporal. A user setting or an organization policy stays valid when the model is swapped, because only the entity list inside each category changes.',
-      },
-      {
-        title: 'Adding a language is a data operation',
-        description:
-          'Shipping support for a language means shipping a fine-tuned model and its category map — not changing code. The regex layer already understands EU multi-country identifiers and date formats across ten languages.',
-      },
-      {
-        title: 'Twelve languages targeted',
-        description:
-          'The architecture targets twelve languages. Built today: an active English model (a 560M-parameter NER with 54 entity types) and three Spanish model variants.',
-      },
-    ]}
-    image={{ src: '~/assets/images/ai-architecture-planning.jpg', alt: 'Data-driven multilingual detection pipeline' }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        Entity Behavior Defined by Data, Kept Stable Across Models
-      </h3>
-      The seven category keys never change between models, so settings configured by a clinic or a
-      firm keep working as the underlying detection model improves.
+      For a clinic or a law firm, the fact that the text never leaves the machine for detection is
+      not an operational promise that depends on configuration — it is how the extension is built.
+      Where detection does run, two detectors work together: structured identifiers have a shape a
+      checksum can confirm, while a patient name or a clause naming a counterparty does not — so
+      TrustPrompt uses each method where it is strongest.
     </Fragment>
   </Content>
 
@@ -303,6 +229,11 @@ const metadata = {
         title: 'Works without a qualifying GPU',
         description:
           'The fast path needs a GPU exposing shader-f16 with around 512 MB of max buffer size. On machines without one, the WASM path keeps detection fully local at lower speed — it does not fall back to a server.',
+      },
+      {
+        title: 'Twelve languages targeted',
+        description:
+          'The architecture targets twelve languages. Built today: an active English model (a 560M-parameter NER with 54 entity types) and three Spanish model variants.',
       },
     ]}
     image={{ src: '~/assets/images/server-network.jpg', alt: 'On-device model inference via WebGPU' }}
@@ -364,57 +295,6 @@ const metadata = {
       alt: 'The detect-and-redact sequence that runs on every send',
     }}
   />
-
-  <!-- What it deliberately does not do -->
-
-  <Features2
-    tagline="By Design"
-    title="What TrustPrompt Deliberately Does Not Do"
-    subtitle="These are part of the position, not limitations to apologize for."
-    columns={2}
-    items={[
-      {
-        title: 'It Does Not Run a Detection Server',
-        description:
-          'There is no backend that inspects your text. The model runs in the browser and remote model loads are disabled, so detection cannot depend on a server that could see, log, or retain the prompt.',
-        icon: 'tabler:server-off',
-      },
-      {
-        title: 'It Does Not Send Telemetry',
-        description:
-          'There is no analytics or error reporting. The only outbound call anywhere is the optional enterprise audit webhook, which carries metadata only — entity-type counts, latency, host, outcome — never prompt text or detected values.',
-        icon: 'tabler:antenna-bars-off',
-      },
-      {
-        title: 'It Does Not Keep the Placeholder Map',
-        description:
-          'The map from a placeholder back to the real value lives in the tab\'s memory and is discarded when the tab closes. It is never written to disk or storage.',
-        icon: 'tabler:eraser',
-      },
-      {
-        title: 'It Does Not Ask for Broad Access',
-        description:
-          'No tabs, no webRequest, no all-URLs permission. The extension can act only on the nine declared LLM origins, under a locked content-security policy with cross-origin isolation.',
-        icon: 'tabler:lock',
-      },
-      {
-        title: 'It Does Not Rely on People Remembering',
-        description:
-          'A policy that says "do not paste sensitive data" depends on every person, every time, under time pressure. TrustPrompt enforces redaction before the send instead, and leaves a record that it happened.',
-        icon: 'tabler:shield-check',
-      },
-      {
-        title: 'It Does Not Take Away Your Control',
-        description:
-          'The master on/off toggle stays user-owned at every tier and cannot be forced on remotely. You keep a personal watchlist and can reset the learned false-positive model at any time.',
-        icon: 'tabler:adjustments',
-      },
-    ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Features2>
 
   <!-- Pricing -->
 
@@ -510,14 +390,6 @@ const metadata = {
         },
       },
     ]}
-  />
-
-  <!-- Pricing note -->
-
-  <Note
-    icon="tabler:info-circle"
-    title="About These Prices."
-    description='SMB plans are priced per organization and billed annually, ex-VAT, with the user counts shown. The Enterprise tier is centrally managed: a valid managed policy is itself the entitlement, so there is no license server and no activation call. <a href="/contact/" class="underline font-bold">Contact us for a quote scoped to your organization</a>.'
   />
 
   <!-- FAQs -->

@@ -1,0 +1,107 @@
+---
+import { Icon } from 'astro-icon/components';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import type { Features as Props } from '~/types';
+
+const {
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  tagline = await Astro.slots.render('tagline'),
+  items = [],
+
+  defaultIcon = '',
+
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+
+// Aurora accent rotation — 5 brand colours cycling across cards (matches ui/ItemGrid.astro)
+const ACCENTS = [
+  'var(--fds-acc-blue,   #2d7bf2)',
+  'var(--fds-acc-pink,   #ff2f70)',
+  'var(--fds-acc-purple, #a459ff)',
+  'var(--fds-acc-lime,   #83e31e)',
+  'var(--fds-acc-royal,  #0065fe)',
+];
+
+// Unique ids so multiple instances (e.g. EN + ES, or several on one page) never collide.
+const base = id ?? `features-carousel-${Math.random().toString(36).slice(2, 9)}`;
+const trackId = `${base}-track`;
+const prevId = `${base}-prev`;
+const nextId = `${base}-next`;
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl ${classes?.container ?? ''}`} bg={bg}>
+  <Headline title={title} subtitle={subtitle} tagline={tagline} classes={classes?.headline as Record<string, string>} />
+
+  {
+    items && items.length > 0 && (
+      <>
+        <ul
+          id={trackId}
+          class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {items.map(({ title: itemTitle, description, icon }, i) => (
+            <li
+              class="flex-none snap-start w-[300px] sm:w-[340px] aurora-card p-6"
+              style={`--card-accent: ${ACCENTS[i % ACCENTS.length]}`}
+            >
+              <div class="flex flex-row w-full">
+                <div class="flex justify-center flex-shrink-0">
+                  {(icon || defaultIcon) && (
+                    <Icon
+                      name={icon || defaultIcon}
+                      class="text-white rounded-chip w-10 h-10 p-2 md:w-12 md:h-12 md:p-3 mr-4 rtl:ml-4 rtl:mr-0 flex-shrink-0 bg-primary"
+                    />
+                  )}
+                </div>
+                <div class="mt-0.5 min-w-0">
+                  {itemTitle && (
+                    <h3 class="text-xl md:text-[1.3rem] font-heading font-bold dark:text-white">{itemTitle}</h3>
+                  )}
+                  {description && <p class="mt-3 text-muted" set:html={description} />}
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <div class="flex justify-center gap-4 mt-6">
+          <button
+            id={prevId}
+            type="button"
+            aria-label="Previous"
+            aria-controls={trackId}
+            class="flex items-center justify-center w-12 h-12 rounded-full border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 transition-colors hover:bg-primary hover:border-primary hover:text-white"
+          >
+            <Icon name="tabler:arrow-left" class="w-5 h-5" />
+          </button>
+          <button
+            id={nextId}
+            type="button"
+            aria-label="Next"
+            aria-controls={trackId}
+            class="flex items-center justify-center w-12 h-12 rounded-full border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 transition-colors hover:bg-primary hover:border-primary hover:text-white"
+          >
+            <Icon name="tabler:arrow-right" class="w-5 h-5" />
+          </button>
+        </div>
+      </>
+    )
+  }
+</WidgetWrapper>
+
+<script define:vars={{ trackId, prevId, nextId }}>
+  const track = document.getElementById(trackId);
+  const prev = document.getElementById(prevId);
+  const next = document.getElementById(nextId);
+
+  if (track && prev && next) {
+    const step = () => Math.min(track.clientWidth * 0.85, 352);
+    prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+    next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+  }
+</script>

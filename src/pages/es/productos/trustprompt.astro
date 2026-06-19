@@ -5,16 +5,13 @@ import JsonLd from '~/components/common/JsonLd.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Brands from '~/components/widgets/Brands.astro';
 import Content from '~/components/widgets/Content.astro';
-import Features from '~/components/widgets/Features.astro';
-import Features2 from '~/components/widgets/Features2.astro';
+import FeaturesCarousel from '~/components/widgets/FeaturesCarousel.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import Prices from '~/components/widgets/Pricing.astro';
-import Note from '~/components/widgets/Note.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 import imgTrustPrompt from '~/assets/images/trustprompt.png';
-import imgPreview from '~/assets/images/ai-security-padlock.jpg';
 
 const metadata = {
   title: 'TrustPrompt — Redacta datos personales en el navegador, antes de enviar el prompt',
@@ -104,24 +101,12 @@ const metadata = {
     </Fragment>
   </Hero>
 
-  <!-- Vista previa estática -->
-
-  <section class="px-4 sm:px-6 pt-0 pb-10 md:pb-14 -mt-6 md:-mt-10">
-    <div class="max-w-4xl mx-auto">
-      <img
-        src={imgPreview.src}
-        alt="Datos personales redactados en el navegador antes de enviar el prompt"
-        class="w-full rounded-2xl shadow-2xl object-cover"
-        loading="lazy"
-      />
-    </div>
-  </section>
-
   <!-- Sitios compatibles -->
 
   <Brands
     title="Funciona en los sitios de LLM que ya usas"
     subtitle="TrustPrompt funciona en nueve aplicaciones web de LLM. Además de los logotipos mostrados, también cubre Perplexity, Grok en X y OpenEvidence — la redacción ocurre en el cuadro de redacción de cada sitio antes de enviar el mensaje."
+    classes={{ items: 'flex-nowrap overflow-x-auto gap-x-6 sm:gap-x-8 lg:gap-x-10 [&_img]:!h-12 [&_img]:!w-auto [&_img]:!object-contain' }}
     images={[
       { src: '~/assets/images/openai.png', alt: 'ChatGPT' },
       { src: '~/assets/images/claude-color.png', alt: 'Claude' },
@@ -134,9 +119,8 @@ const metadata = {
 
   <!-- Qué hace TrustPrompt -->
 
-  <Features
+  <FeaturesCarousel
     id="caracteristicas"
-    columns={3}
     tagline="Qué hace TrustPrompt"
     title="Los datos personales se eliminan antes de que puedan salir del navegador"
     subtitle="Dos cosas son siempre ciertas: el texto de tu prompt se analiza en tu propia máquina y los valores detectados se sustituyen por marcadores antes de enviar el mensaje."
@@ -160,12 +144,6 @@ const metadata = {
         icon: 'tabler:topology-star',
       },
       {
-        title: 'Falla en seguro por defecto',
-        description:
-          'El interceptor bloquea primero el envío nativo y luego detecta y redacta. Si una fase da error, el envío permanece bloqueado en lugar de filtrar texto sin redactar. El estado seguro es el estado por defecto.',
-        icon: 'tabler:shield-lock',
-      },
-      {
         title: 'Sin telemetría',
         description:
           'No hay analítica ni informes de errores. La única llamada de red saliente en todo el sistema es el webhook de auditoría opcional, y solo transporta metadatos — nunca el texto del prompt ni los valores detectados.',
@@ -180,12 +158,12 @@ const metadata = {
     ]}
   />
 
-  <!-- Por qué no hay servidor -->
+  <!-- Dónde y cómo ocurre la detección -->
 
   <Content
-    isReversed
-    tagline="Dónde ocurre la detección"
-    title="No hay ningún servidor de detección al que enviar texto"
+    tagline="Detección"
+    title="Sin servidor de detección, y dos detectores que cubren los puntos ciegos del otro"
+    columns={2}
     items={[
       {
         title: 'No existe backend de detección',
@@ -202,26 +180,6 @@ const metadata = {
         description:
           'La redacción ocurre antes de que el LLM reciba el prompt, así que los valores se sustituyen antes de salir del navegador. No queda ninguna copia del texto original que registrar, conservar o usar para entrenar aguas abajo.',
       },
-    ]}
-    image={{ src: '~/assets/images/on-prem.png', alt: 'La detección se ejecuta localmente; sin servidor de detección' }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        Una propiedad de privacidad que proviene de la arquitectura
-      </h3>
-      Para una clínica o un despacho, el hecho de que el texto nunca salga de la máquina para la
-      detección no es una promesa operativa que dependa de la configuración — es cómo está construida
-      la extensión.
-    </Fragment>
-  </Content>
-
-  <!-- Dos familias de detectores -->
-
-  <Content
-    isAfterContent
-    tagline="Detección"
-    title="Dos detectores que cubren los puntos ciegos del otro"
-    items={[
       {
         title: 'Regex determinista con sumas de comprobación',
         description:
@@ -238,51 +196,17 @@ const metadata = {
           'Cuando ambos detectores se activan sobre el mismo valor — un DNI por regex y un identificador por modelo sobre los mismos dígitos — un paso de deduplicación entre fuentes los fusiona, así un valor nunca se cuenta dos veces y la vista previa se mantiene legible.',
       },
     ]}
-    image={{ src: '~/assets/images/guardrails.png', alt: 'Regex y NER trabajando juntos' }}
   >
     <Fragment slot="content">
       <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        Reglas exactas donde encajan, un modelo donde no
+        Una propiedad de privacidad que proviene de la arquitectura
       </h3>
-      Los identificadores estructurados tienen una forma que una suma de comprobación puede confirmar;
-      el nombre de un paciente o una cláusula que nombra a una contraparte, no. TrustPrompt usa cada
-      método donde es más fuerte.
-    </Fragment>
-  </Content>
-
-  <!-- Multilingüe -->
-
-  <Content
-    isReversed
-    isAfterContent
-    tagline="Idiomas"
-    title="Multilingüe por datos, no por código"
-    items={[
-      {
-        title: 'Siete categorías que no cambian',
-        description:
-          'Cada modelo asigna sus etiquetas internas a siete categorías estables — identificadores, información personal, información de contacto, ubicación, organización, financiera y temporal. Un ajuste de usuario o una política de organización siguen siendo válidos al cambiar de modelo, porque solo cambia la lista de entidades dentro de cada categoría.',
-      },
-      {
-        title: 'Añadir un idioma es una operación de datos',
-        description:
-          'Dar soporte a un idioma significa enviar un modelo ajustado y su mapa de categorías — no cambiar código. La capa de regex ya entiende identificadores de varios países de la UE y formatos de fecha en diez idiomas.',
-      },
-      {
-        title: 'Doce idiomas como objetivo',
-        description:
-          'La arquitectura tiene como objetivo doce idiomas. Disponibles hoy: un modelo inglés activo (un NER de 560M de parámetros con 54 tipos de entidad) y tres variantes de modelo en español.',
-      },
-    ]}
-    image={{ src: '~/assets/images/ai-architecture-planning.jpg', alt: 'Flujo de detección multilingüe basado en datos' }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        Comportamiento de entidades definido por datos, estable entre modelos
-      </h3>
-      Las siete claves de categoría nunca cambian entre modelos, así que los ajustes configurados por
-      una clínica o un despacho siguen funcionando a medida que mejora el modelo de detección
-      subyacente.
+      Para una clínica o un despacho, el hecho de que el texto nunca salga de la máquina para la
+      detección no es una promesa operativa que dependa de la configuración — es cómo está construida
+      la extensión. Donde sí se ejecuta la detección, dos detectores trabajan juntos: los
+      identificadores estructurados tienen una forma que una suma de comprobación puede confirmar,
+      mientras que el nombre de un paciente o una cláusula que nombra a una contraparte, no — así que
+      TrustPrompt usa cada método donde es más fuerte.
     </Fragment>
   </Content>
 
@@ -307,6 +231,11 @@ const metadata = {
         title: 'Funciona sin una GPU compatible',
         description:
           'La vía rápida necesita una GPU que exponga shader-f16 con alrededor de 512 MB de tamaño máximo de búfer. En máquinas sin ella, la vía WASM mantiene la detección totalmente local a menor velocidad — no recurre a un servidor.',
+      },
+      {
+        title: 'Doce idiomas como objetivo',
+        description:
+          'La arquitectura tiene como objetivo doce idiomas. Disponibles hoy: un modelo inglés activo (un NER de 560M de parámetros con 54 tipos de entidad) y tres variantes de modelo en español.',
       },
     ]}
     image={{ src: '~/assets/images/server-network.jpg', alt: 'Inferencia del modelo en el dispositivo mediante WebGPU' }}
@@ -369,57 +298,6 @@ const metadata = {
       alt: 'La secuencia de detección y redacción que se ejecuta en cada envío',
     }}
   />
-
-  <!-- Lo que deliberadamente no hace -->
-
-  <Features2
-    tagline="Por diseño"
-    title="Lo que TrustPrompt deliberadamente no hace"
-    subtitle="Esto forma parte de la postura, no son limitaciones de las que disculparse."
-    columns={2}
-    items={[
-      {
-        title: 'No ejecuta un servidor de detección',
-        description:
-          'No hay backend que inspeccione tu texto. El modelo se ejecuta en el navegador y las cargas remotas de modelo están deshabilitadas, así que la detección no puede depender de un servidor que pudiera ver, registrar o conservar el prompt.',
-        icon: 'tabler:server-off',
-      },
-      {
-        title: 'No envía telemetría',
-        description:
-          'No hay analítica ni informes de errores. La única llamada saliente en todo el sistema es el webhook de auditoría opcional, que transporta solo metadatos — recuentos de tipos de entidad, latencia, host, resultado — nunca el texto del prompt ni los valores detectados.',
-        icon: 'tabler:antenna-bars-off',
-      },
-      {
-        title: 'No conserva el mapa de marcadores',
-        description:
-          'El mapa que vincula un marcador con su valor real reside en la memoria de la pestaña y se descarta al cerrarla. Nunca se escribe en disco ni en almacenamiento.',
-        icon: 'tabler:eraser',
-      },
-      {
-        title: 'No pide acceso amplio',
-        description:
-          'Sin tabs, sin webRequest, sin permiso a todas las URL. La extensión solo puede actuar sobre los nueve orígenes de LLM declarados, bajo una política de seguridad de contenido bloqueada con aislamiento entre orígenes.',
-        icon: 'tabler:lock',
-      },
-      {
-        title: 'No depende de que las personas se acuerden',
-        description:
-          'Una política que dice «no pegues datos sensibles» depende de cada persona, cada vez, bajo presión de tiempo. TrustPrompt aplica la redacción antes del envío en su lugar, y deja un registro de que ocurrió.',
-        icon: 'tabler:shield-check',
-      },
-      {
-        title: 'No te quita el control',
-        description:
-          'El interruptor general de encendido/apagado pertenece al usuario en todos los niveles y no puede activarse de forma remota. Mantienes una lista de vigilancia personal y puedes reiniciar el modelo de falsos positivos aprendidos cuando quieras.',
-        icon: 'tabler:adjustments',
-      },
-    ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Features2>
 
   <!-- Precios -->
 
@@ -515,14 +393,6 @@ const metadata = {
         },
       },
     ]}
-  />
-
-  <!-- Nota de precios -->
-
-  <Note
-    icon="tabler:info-circle"
-    title="Sobre estos precios."
-    description='Los planes para pymes tienen un precio por organización y se facturan anualmente, sin IVA, con los recuentos de usuarios indicados. El nivel Corporativo se gestiona de forma centralizada: una política gestionada válida es en sí misma la habilitación, por lo que no hay servidor de licencias ni llamada de activación. <a href="/es/contacto/" class="underline font-bold">Contáctanos para una propuesta ajustada a tu organización</a>.'
   />
 
   <!-- Preguntas frecuentes -->

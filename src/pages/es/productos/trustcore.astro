@@ -5,17 +5,15 @@ import JsonLd from '~/components/common/JsonLd.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import TrustCoreInterface from '~/components/widgets/TrustCoreInterface.astro';
 import TrustCoreGraph from '~/components/widgets/TrustCoreGraph.astro';
-import Brands from '~/components/widgets/Brands.astro';
 import Content from '~/components/widgets/Content.astro';
-import Features from '~/components/widgets/Features.astro';
-import Features2 from '~/components/widgets/Features2.astro';
+import FeaturesCarousel from '~/components/widgets/FeaturesCarousel.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import Prices from '~/components/widgets/Pricing.astro';
-import Note from '~/components/widgets/Note.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 import imgTrustCore from '~/assets/images/trustcore.png';
+import imgRag from '~/assets/images/rag.png';
 
 const metadata = {
   title: 'TrustCore — Responde preguntas sobre tus propios documentos, en tu propio hardware',
@@ -112,25 +110,10 @@ const metadata = {
     </div>
   </section>
 
-  <!-- Sitios de chat compatibles -->
-
-  <Brands
-    title="Funciona dentro del sitio de chat que ya usas"
-    subtitle="TrustCore abre su propio panel en la página y responde desde tus documentos. El cuadro de entrada del sitio de chat sigue funcionando con normalidad — TrustCore no lo intercepta ni redirige. Perplexity también es compatible, además de los logos mostrados."
-    images={[
-      { src: '~/assets/images/openai.png', alt: 'ChatGPT' },
-      { src: '~/assets/images/gemini-color.png', alt: 'Gemini' },
-      { src: '~/assets/images/claude-color.png', alt: 'Claude' },
-      { src: '~/assets/images/deepseek.png', alt: 'DeepSeek' },
-      { src: '~/assets/images/openwebui.png', alt: 'OpenWebUI' },
-    ]}
-  />
-
   <!-- Qué hace TrustCore -->
 
-  <Features
+  <FeaturesCarousel
     id="features"
-    columns={3}
     tagline="Qué hace TrustCore"
     title="Respuestas que puedes rastrear, sin enviar tus documentos a ningún sitio"
     subtitle="Dos cosas se cumplen siempre: tus documentos y preguntas permanecen en tu máquina, y cada respuesta está vinculada al fragmento exacto del que procede."
@@ -214,8 +197,9 @@ const metadata = {
 
   <Content
     isAfterContent
-    tagline="Recuperación"
-    title="Un grafo, no solo similitud"
+    columns={2}
+    tagline="Recuperación y razonamiento"
+    title="Graph RAG, no solo similitud"
     items={[
       {
         title: 'Recuperación híbrida',
@@ -232,27 +216,6 @@ const metadata = {
         description:
           'En documentos jurídicos y de cumplimiento, una redacción similar aparece en un contrato marco, una modificación posterior y un anexo. La similitud por sí sola puede responder con alta confianza desde el documento equivocado.',
       },
-    ]}
-    image={{ src: '~/assets/images/rag.png', alt: 'Recuperación Graph RAG sobre entidades de documentos' }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        Construido para hacer explícitas las relaciones entre documentos
-      </h3>
-      TrustCore construye un grafo de las personas, organizaciones, fechas, importes y referencias de
-      tus documentos y razona sobre él, de modo que las conexiones invisibles en cualquier archivo
-      individual se vuelven consultables.
-    </Fragment>
-  </Content>
-
-  <!-- Razonamiento verificable -->
-
-  <Content
-    isReversed
-    isAfterContent
-    tagline="Razonamiento verificable"
-    title="Respuestas que llegan con su evidencia ya comprobada"
-    items={[
       {
         title: 'Cadenas de razonamiento',
         description:
@@ -269,14 +232,17 @@ const metadata = {
           'Para una fecha "a partir de" elegida, el razonador resuelve qué disposición está en vigor, etiqueta las cláusulas derogadas con sus fechas de vigencia y muestra ambas — nunca descarta la antigua en silencio. Disponible en el plan Team y superiores.',
       },
     ]}
-    image={{ src: '~/assets/images/guardrails.png', alt: 'Razonamiento verificable y citas comprobadas' }}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        La diferencia entre una respuesta que vuelves a verificar y una que puedes leer
-      </h3>
-      Para el trabajo en el que una afirmación incorrecta o no respaldada tiene consecuencias, que la
-      evidencia llegue adjunta y comprobada es el objetivo del producto.
+      <img
+        src={imgRag.src}
+        alt="Recuperación Graph RAG sobre entidades de documentos"
+        class="mx-auto mb-6 h-20 w-auto object-contain"
+      />
+      TrustCore construye un grafo de las personas, organizaciones, fechas, importes y referencias de
+      tus documentos y razona sobre él, de modo que las conexiones invisibles en cualquier archivo
+      individual se vuelven consultables — y para el trabajo en el que una afirmación incorrecta o no
+      respaldada tiene consecuencias, la evidencia llega adjunta y ya comprobada.
     </Fragment>
   </Content>
 
@@ -435,57 +401,6 @@ const metadata = {
     }}
   />
 
-  <!-- Lo que TrustCore no hace deliberadamente -->
-
-  <Features2
-    tagline="Por diseño"
-    title="Lo que TrustCore no hace deliberadamente"
-    subtitle="Estas son decisiones de posicionamiento, no limitaciones por las que disculparse."
-    columns={2}
-    items={[
-      {
-        title: 'No aloja tus documentos',
-        description:
-          'No hay ningún servidor que los almacene. La extensión corre en tu navegador y el acompañante opcional en tu propia máquina o servidor.',
-        icon: 'tabler:cloud-off',
-      },
-      {
-        title: 'No envía contenido al proveedor',
-        description:
-          'El contenido de los documentos no se sube a TrustCore ni se incluye en telemetría. No existe telemetría del producto que transporte contenido de documentos.',
-        icon: 'tabler:ban',
-      },
-      {
-        title: 'No añade un subprocesador en la ruta local',
-        description:
-          'No hay ningún tercero en la ruta de datos que pudiera filtrar un documento o datos personales. En la ruta de pago, el único procesador es el endpoint que tú eliges y controlas.',
-        icon: 'tabler:shield-lock',
-      },
-      {
-        title: 'No requiere una cuenta de IA de terceros',
-        description:
-          'La ruta local no necesita ningún servicio externo para funcionar — se ejecuta íntegramente sobre el modelo local incluido y tu propio hardware.',
-        icon: 'tabler:plug-off',
-      },
-      {
-        title: 'No responde sin mostrar su fuente',
-        description:
-          'Cada respuesta llega con las citas de apoyo, sus números de página y, cuando procede, la cadena de razonamiento y cualquier conflicto detectado.',
-        icon: 'tabler:eye-check',
-      },
-      {
-        title: 'No se apodera del cuadro de chat',
-        description:
-          'TrustCore responde en su propio panel. El cuadro de entrada del sitio de chat sigue funcionando con normalidad; TrustCore no lo intercepta ni redirige.',
-        icon: 'tabler:messages',
-      },
-    ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Features2>
-
   <!-- Precios -->
 
   <Prices
@@ -564,14 +479,6 @@ const metadata = {
         },
       },
     ]}
-  />
-
-  <!-- Nota sobre precios -->
-
-  <Note
-    icon="tabler:info-circle"
-    title="Sobre estos precios."
-    description='Los precios se indican sin IVA y con facturación anual; la facturación mensual es aproximadamente un 20% más cara. Los tramos corresponden a las bandas de tamaño de pymes de la UE. <a href="/es/contacto/" class="underline font-bold">Contáctanos para un presupuesto adaptado a tu equipo</a>.'
   />
 
   <!-- Preguntas frecuentes -->

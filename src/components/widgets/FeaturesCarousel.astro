@@ -32,6 +32,7 @@ const base = id ?? `features-carousel-${Math.random().toString(36).slice(2, 9)}`
 const trackId = `${base}-track`;
 const prevId = `${base}-prev`;
 const nextId = `${base}-next`;
+const dotsId = `${base}-dots`;
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl ${classes?.container ?? ''}`} bg={bg}>
@@ -40,42 +41,42 @@ const nextId = `${base}-next`;
   {
     items && items.length > 0 && (
       <>
-        <ul
-          id={trackId}
-          class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        >
-          {items.map(({ title: itemTitle, description, icon }, i) => (
-            <li
-              class="flex-none snap-start w-[300px] sm:w-[340px] aurora-card p-6"
-              style={`--card-accent: ${ACCENTS[i % ACCENTS.length]}`}
-            >
-              <div class="flex flex-col items-center text-center w-full">
-                <div class="flex justify-center flex-shrink-0">
-                  {(icon || defaultIcon) && (
-                    <Icon
-                      name={icon || defaultIcon}
-                      class="text-white rounded-chip w-10 h-10 p-2 md:w-12 md:h-12 md:p-3 mb-4 flex-shrink-0 bg-primary"
-                    />
-                  )}
+        <div class="relative">
+          <ul
+            id={trackId}
+            class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {items.map(({ title: itemTitle, description, icon }, i) => (
+              <li
+                class="flex-none snap-start w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] aurora-card p-6"
+                style={`--card-accent: ${ACCENTS[i % ACCENTS.length]}`}
+              >
+                <div class="flex flex-col items-center text-center w-full">
+                  <div class="flex justify-center flex-shrink-0">
+                    {(icon || defaultIcon) && (
+                      <Icon
+                        name={icon || defaultIcon}
+                        class="text-white rounded-chip w-10 h-10 p-2 md:w-12 md:h-12 md:p-3 mb-4 flex-shrink-0 bg-primary"
+                      />
+                    )}
+                  </div>
+                  <div class="min-w-0">
+                    {itemTitle && (
+                      <h3 class="text-xl md:text-[1.3rem] font-heading font-bold dark:text-white">{itemTitle}</h3>
+                    )}
+                    {description && <p class="mt-3 text-muted" set:html={description} />}
+                  </div>
                 </div>
-                <div class="min-w-0">
-                  {itemTitle && (
-                    <h3 class="text-xl md:text-[1.3rem] font-heading font-bold dark:text-white">{itemTitle}</h3>
-                  )}
-                  {description && <p class="mt-3 text-muted" set:html={description} />}
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+              </li>
+            ))}
+          </ul>
 
-        <div class="flex justify-center gap-4 mt-6">
           <button
             id={prevId}
             type="button"
             aria-label="Previous"
             aria-controls={trackId}
-            class="flex items-center justify-center w-12 h-12 rounded-full border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 transition-colors hover:bg-primary hover:border-primary hover:text-white"
+            class="absolute left-0 -translate-x-1/2 lg:-translate-x-3/4 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center w-12 h-12 rounded-full border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-200 shadow-md transition-colors hover:bg-primary hover:border-primary hover:text-white"
           >
             <Icon name="tabler:arrow-left" class="w-5 h-5" />
           </button>
@@ -84,24 +85,82 @@ const nextId = `${base}-next`;
             type="button"
             aria-label="Next"
             aria-controls={trackId}
-            class="flex items-center justify-center w-12 h-12 rounded-full border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 transition-colors hover:bg-primary hover:border-primary hover:text-white"
+            class="absolute right-0 translate-x-1/2 lg:translate-x-3/4 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center w-12 h-12 rounded-full border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-200 shadow-md transition-colors hover:bg-primary hover:border-primary hover:text-white"
           >
             <Icon name="tabler:arrow-right" class="w-5 h-5" />
           </button>
         </div>
+
+        <div id={dotsId} class="flex justify-center gap-3 mt-6" role="tablist" aria-label="Carousel pagination" />
       </>
     )
   }
 </WidgetWrapper>
 
-<script define:vars={{ trackId, prevId, nextId }}>
+<script define:vars={{ trackId, prevId, nextId, dotsId }}>
   const track = document.getElementById(trackId);
   const prev = document.getElementById(prevId);
   const next = document.getElementById(nextId);
+  const dots = document.getElementById(dotsId);
 
-  if (track && prev && next) {
-    const step = () => Math.min(track.clientWidth * 0.85, 352);
-    prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
-    next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+  if (track && prev && next && dots) {
+    const metrics = () => {
+      const first = track.querySelector('li');
+      if (!first) return { per: 1, step: track.clientWidth, pages: 1 };
+      const cardW = first.getBoundingClientRect().width;
+      const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
+      const per = Math.max(1, Math.round((track.clientWidth + gap) / (cardW + gap)));
+      const step = per * (cardW + gap);
+      const pages = Math.max(1, Math.ceil(track.children.length / per));
+      return { per, step, pages };
+    };
+
+    let { step, pages } = metrics();
+
+    const activePage = () => Math.min(pages - 1, Math.round(track.scrollLeft / step));
+
+    const renderDots = () => {
+      const current = activePage();
+      dots.innerHTML = '';
+      for (let i = 0; i < pages; i++) {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.setAttribute('role', 'tab');
+        dot.setAttribute('aria-label', `Go to slide group ${i + 1}`);
+        const isActive = i === current;
+        dot.setAttribute('aria-selected', String(isActive));
+        dot.className =
+          'h-2.5 rounded-full transition-all ' +
+          (isActive ? 'w-6 bg-primary' : 'w-2.5 bg-gray-300 dark:bg-gray-600 hover:bg-gray-400');
+        dot.addEventListener('click', () => track.scrollTo({ left: i * step, behavior: 'smooth' }));
+        dots.appendChild(dot);
+      }
+    };
+
+    const syncActive = () => {
+      const current = activePage();
+      Array.from(dots.children).forEach((dot, i) => {
+        const isActive = i === current;
+        dot.setAttribute('aria-selected', String(isActive));
+        dot.className =
+          'h-2.5 rounded-full transition-all ' +
+          (isActive ? 'w-6 bg-primary' : 'w-2.5 bg-gray-300 dark:bg-gray-600 hover:bg-gray-400');
+      });
+    };
+
+    prev.addEventListener('click', () => track.scrollBy({ left: -step, behavior: 'smooth' }));
+    next.addEventListener('click', () => track.scrollBy({ left: step, behavior: 'smooth' }));
+    track.addEventListener('scroll', syncActive, { passive: true });
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        ({ step, pages } = metrics());
+        renderDots();
+      }, 150);
+    });
+
+    renderDots();
   }
 </script>

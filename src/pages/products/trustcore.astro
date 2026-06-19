@@ -5,17 +5,15 @@ import JsonLd from '~/components/common/JsonLd.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import TrustCoreInterface from '~/components/widgets/TrustCoreInterface.astro';
 import TrustCoreGraph from '~/components/widgets/TrustCoreGraph.astro';
-import Brands from '~/components/widgets/Brands.astro';
 import Content from '~/components/widgets/Content.astro';
-import Features from '~/components/widgets/Features.astro';
-import Features2 from '~/components/widgets/Features2.astro';
+import FeaturesCarousel from '~/components/widgets/FeaturesCarousel.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import Prices from '~/components/widgets/Pricing.astro';
-import Note from '~/components/widgets/Note.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 import imgTrustCore from '~/assets/images/trustcore.png';
+import imgRag from '~/assets/images/rag.png';
 
 const metadata = {
   title: 'TrustCore — Answer Questions About Your Own Documents, On Your Own Hardware',
@@ -111,25 +109,10 @@ const metadata = {
     </div>
   </section>
 
-  <!-- Supported chat sites -->
-
-  <Brands
-    title="Works Inside the Chat Site You Already Use"
-    subtitle="TrustCore opens its own panel on the page and answers from your documents. The chat site's own input box keeps working as normal — TrustCore does not take it over or reroute it. Perplexity is supported alongside the logos shown."
-    images={[
-      { src: '~/assets/images/openai.png', alt: 'ChatGPT' },
-      { src: '~/assets/images/gemini-color.png', alt: 'Gemini' },
-      { src: '~/assets/images/claude-color.png', alt: 'Claude' },
-      { src: '~/assets/images/deepseek.png', alt: 'DeepSeek' },
-      { src: '~/assets/images/openwebui.png', alt: 'OpenWebUI' },
-    ]}
-  />
-
   <!-- What TrustCore does -->
 
-  <Features
+  <FeaturesCarousel
     id="features"
-    columns={3}
     tagline="What TrustCore Does"
     title="Answers You Can Trace, Without Sending Your Documents Anywhere"
     subtitle="Two things are always true: your documents and questions stay on your machine, and every answer is tied to the exact passage it came from."
@@ -212,8 +195,9 @@ const metadata = {
 
   <Content
     isAfterContent
-    tagline="Retrieval"
-    title="A Graph, Not Just Similarity"
+    columns={2}
+    tagline="Retrieval & Reasoning"
+    title="Graph RAG, Not Just Similarity"
     items={[
       {
         title: 'Hybrid retrieval',
@@ -230,27 +214,6 @@ const metadata = {
         description:
           'In legal and compliance documents, similar wording appears in a master agreement, a superseding amendment, and a schedule. Similarity alone can answer with high confidence from the wrong one.',
       },
-    ]}
-    image={{ src: '~/assets/images/rag.png', alt: 'Graph RAG retrieval over document entities' }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        Built to Make Cross-Document Relationships Explicit
-      </h3>
-      TrustCore builds a graph of the people, organizations, dates, amounts, and references in your
-      documents and reasons over it, so connections that are invisible in any single file become
-      queryable.
-    </Fragment>
-  </Content>
-
-  <!-- Verifiable reasoning -->
-
-  <Content
-    isReversed
-    isAfterContent
-    tagline="Verifiable Reasoning"
-    title="Answers That Arrive With Their Evidence Already Checked"
-    items={[
       {
         title: 'Proof paths',
         description:
@@ -267,14 +230,17 @@ const metadata = {
           'For a chosen "as of" date, the reasoner resolves which provision is in force, labels superseded clauses with their effective dates, and shows both — never silently dropping the old one. Available on the Team plan and above.',
       },
     ]}
-    image={{ src: '~/assets/images/guardrails.png', alt: 'Verifiable reasoning and checked citations' }}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        The Difference Between an Answer You Re-Verify and One You Can Read
-      </h3>
-      For work where a wrong or unsupported statement has consequences, the evidence arriving
-      attached and checked is the point of the product.
+      <img
+        src={imgRag.src}
+        alt="Graph RAG retrieval over document entities"
+        class="mx-auto mb-6 h-20 w-auto object-contain"
+      />
+      TrustCore builds a graph of the people, organizations, dates, amounts, and references in your
+      documents and reasons over it, so connections invisible in any single file become queryable —
+      and for work where a wrong or unsupported statement has consequences, the evidence arrives
+      attached and already checked.
     </Fragment>
   </Content>
 
@@ -433,57 +399,6 @@ const metadata = {
     }}
   />
 
-  <!-- What TrustCore deliberately does not do -->
-
-  <Features2
-    tagline="By Design"
-    title="What TrustCore Deliberately Does Not Do"
-    subtitle="These are part of the position, not limitations to apologize for."
-    columns={2}
-    items={[
-      {
-        title: 'It Does Not Host Your Documents',
-        description:
-          'There is no backend that holds them. The extension runs in your browser and the optional companion runs on your own machine or server.',
-        icon: 'tabler:cloud-off',
-      },
-      {
-        title: 'It Does Not Send Content to the Vendor',
-        description:
-          'Document content is not uploaded to TrustCore and is not shipped in telemetry. There is no product telemetry that carries document content.',
-        icon: 'tabler:ban',
-      },
-      {
-        title: 'It Does Not Add a Subprocessor on the Local Path',
-        description:
-          'There is no third party in the data path that could leak a document or personal data. On the paid path, the only processor is the endpoint you choose and control.',
-        icon: 'tabler:shield-lock',
-      },
-      {
-        title: 'It Does Not Require a Third-Party AI Account',
-        description:
-          'The local path needs no external service to function — it runs entirely on the bundled local model and your own hardware.',
-        icon: 'tabler:plug-off',
-      },
-      {
-        title: 'It Does Not Answer Without Showing Its Source',
-        description:
-          'Every answer arrives with the supporting quotes, their page numbers, and, where relevant, the reasoning path and any detected conflict.',
-        icon: 'tabler:eye-check',
-      },
-      {
-        title: 'It Does Not Take Over the Chat Box',
-        description:
-          'TrustCore answers in its own panel. The chat site\'s own input box keeps working as usual; TrustCore neither intercepts nor reroutes it.',
-        icon: 'tabler:messages',
-      },
-    ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Features2>
-
   <!-- Pricing -->
 
   <Prices
@@ -562,14 +477,6 @@ const metadata = {
         },
       },
     ]}
-  />
-
-  <!-- Pricing note -->
-
-  <Note
-    icon="tabler:info-circle"
-    title="About These Prices."
-    description='Prices are quoted ex-VAT and billed annually; monthly billing is about 20% higher. Tiers follow the official EU SME size bands. <a href="/contact/" class="underline font-bold">Contact us for a quote scoped to your team</a>.'
   />
 
   <!-- FAQs -->

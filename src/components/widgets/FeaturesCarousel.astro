@@ -49,16 +49,16 @@ const nextId = `${base}-next`;
               class="flex-none snap-start w-[300px] sm:w-[340px] aurora-card p-6"
               style={`--card-accent: ${ACCENTS[i % ACCENTS.length]}`}
             >
-              <div class="flex flex-row w-full">
+              <div class="flex flex-col items-center text-center w-full">
                 <div class="flex justify-center flex-shrink-0">
                   {(icon || defaultIcon) && (
                     <Icon
                       name={icon || defaultIcon}
-                      class="text-white rounded-chip w-10 h-10 p-2 md:w-12 md:h-12 md:p-3 mr-4 rtl:ml-4 rtl:mr-0 flex-shrink-0 bg-primary"
+                      class="text-white rounded-chip w-10 h-10 p-2 md:w-12 md:h-12 md:p-3 mb-4 flex-shrink-0 bg-primary"
                     />
                   )}
                 </div>
-                <div class="mt-0.5 min-w-0">
+                <div class="min-w-0">
                   {itemTitle && (
                     <h3 class="text-xl md:text-[1.3rem] font-heading font-bold dark:text-white">{itemTitle}</h3>
                   )}

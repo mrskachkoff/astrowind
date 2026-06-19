@@ -161,7 +161,7 @@ const metadata = {
 
   <Content
     tagline="Detection"
-    title="No Detection Server, and Two Detectors That Cover Each Other's Blind Spots"
+    title="A Privacy That Comes From Architecture"
     columns={2}
     items={[
       {
@@ -187,7 +187,7 @@ const metadata = {
       {
         title: 'Transformer NER for the rest',
         description:
-          'An XLM-RoBERTa model finds the unstructured data no regex can catch reliably — names, addresses, organizations, and demographic and clinical attributes. The active English model exposes 54 entity types across seven categories.',
+          'Model finds the unstructured data no regex can catch reliably — names, addresses, organizations, and demographic and clinical attributes. Model exposes 54 entity types across Twelve languages.',
       },
       {
         title: 'One value, counted once',
@@ -197,14 +197,10 @@ const metadata = {
     ]}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        A Privacy Property That Comes From the Architecture
-      </h3>
-      For a clinic or a law firm, the fact that the text never leaves the machine for detection is
-      not an operational promise that depends on configuration — it is how the extension is built.
-      Where detection does run, two detectors work together: structured identifiers have a shape a
-      checksum can confirm, while a patient name or a clause naming a counterparty does not — so
-      TrustPrompt uses each method where it is strongest.
+      PII never leaves the machine for detection is not an operational promise that depends on
+      configuration — it is how the extension is built. Where detection does run, two detectors work
+      together: structured identifiers have a shape a checksum can confirm, while a patient name or a
+      clause naming a counterparty does not — so TrustPrompt uses each method where it is strongest.
     </Fragment>
   </Content>
 
@@ -216,7 +212,7 @@ const metadata = {
     title="A 560M-Parameter Model Running in the Browser, on Your GPU"
     items={[
       {
-        title: 'WebGPU first, with a fallback',
+        title: 'Model Runs on Your Hardware',
         description:
           'The runtime tries WebGPU with fp16, then WebGPU with q8, then WASM with q8. Backend selection is validated up front, so an incompatible GPU produces an explicit error rather than silently returning zero detections.',
       },
@@ -230,22 +226,9 @@ const metadata = {
         description:
           'The fast path needs a GPU exposing shader-f16 with around 512 MB of max buffer size. On machines without one, the WASM path keeps detection fully local at lower speed — it does not fall back to a server.',
       },
-      {
-        title: 'Twelve languages targeted',
-        description:
-          'The architecture targets twelve languages. Built today: an active English model (a 560M-parameter NER with 54 entity types) and three Spanish model variants.',
-      },
     ]}
     image={{ src: '~/assets/images/server-network.jpg', alt: 'On-device model inference via WebGPU' }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        The "No Server" Property Is Achievable Because the Model Runs on Your Hardware
-      </h3>
-      Requirements are concrete: a Chromium browser version 124 or newer, and budget for a model on
-      the order of 1 GB resident. The privacy choice and the performance choice are the same choice.
-    </Fragment>
-  </Content>
+  />
 
   <!-- How it works on Send -->
 
@@ -290,10 +273,6 @@ const metadata = {
         icon: 'tabler:send',
       },
     ]}
-    image={{
-      src: '~/assets/images/data-analytics.jpg',
-      alt: 'The detect-and-redact sequence that runs on every send',
-    }}
   />
 
   <!-- Pricing -->
@@ -366,23 +345,6 @@ const metadata = {
           { description: 'Larger team rollout' },
           { description: 'Onboarding assistance' },
           { description: 'A path to centrally managed policy' },
-        ],
-        callToAction: {
-          text: 'Contact Us',
-          href: '/contact/',
-        },
-      },
-      {
-        title: 'Enterprise',
-        subtitle: 'Centrally managed (MDM)',
-        price: 'Custom',
-        period: 'annual contract',
-        items: [
-          { description: 'Managed policy via Group Policy, Intune, or Jamf' },
-          { description: 'The policy is the entitlement — no license server' },
-          { description: 'Per-entity confidence thresholds and fail mode' },
-          { description: 'Organization regex, read-only to users' },
-          { description: 'Metadata-only audit logging webhook' },
         ],
         callToAction: {
           text: 'Contact Us',

@@ -162,7 +162,7 @@ const metadata = {
 
   <Content
     tagline="Detección"
-    title="Sin servidor de detección, y dos detectores que cubren los puntos ciegos del otro"
+    title="Una privacidad que proviene de la arquitectura"
     columns={2}
     items={[
       {
@@ -188,7 +188,7 @@ const metadata = {
       {
         title: 'NER con transformador para el resto',
         description:
-          'Un modelo XLM-RoBERTa encuentra los datos no estructurados que ningún regex captura de forma fiable — nombres, direcciones, organizaciones y atributos demográficos y clínicos. El modelo inglés activo expone 54 tipos de entidad en siete categorías.',
+          'El modelo encuentra los datos no estructurados que ningún regex captura de forma fiable — nombres, direcciones, organizaciones y atributos demográficos y clínicos. El modelo expone 54 tipos de entidad en doce idiomas.',
       },
       {
         title: 'Un valor, contado una sola vez',
@@ -198,15 +198,11 @@ const metadata = {
     ]}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        Una propiedad de privacidad que proviene de la arquitectura
-      </h3>
-      Para una clínica o un despacho, el hecho de que el texto nunca salga de la máquina para la
-      detección no es una promesa operativa que dependa de la configuración — es cómo está construida
-      la extensión. Donde sí se ejecuta la detección, dos detectores trabajan juntos: los
-      identificadores estructurados tienen una forma que una suma de comprobación puede confirmar,
-      mientras que el nombre de un paciente o una cláusula que nombra a una contraparte, no — así que
-      TrustPrompt usa cada método donde es más fuerte.
+      La PII nunca sale de la máquina para la detección — no es una promesa operativa que dependa de
+      la configuración, es cómo está construida la extensión. Donde sí se ejecuta la detección, dos
+      detectores trabajan juntos: los identificadores estructurados tienen una forma que una suma de
+      comprobación puede confirmar, mientras que el nombre de un paciente o una cláusula que nombra a
+      una contraparte, no — así que TrustPrompt usa cada método donde es más fuerte.
     </Fragment>
   </Content>
 
@@ -218,7 +214,7 @@ const metadata = {
     title="Un modelo de 560M de parámetros ejecutándose en el navegador, en tu GPU"
     items={[
       {
-        title: 'WebGPU primero, con reserva',
+        title: 'El modelo se ejecuta en tu hardware',
         description:
           'El entorno de ejecución prueba WebGPU con fp16, luego WebGPU con q8 y luego WASM con q8. La selección de backend se valida de antemano, así que una GPU incompatible produce un error explícito en lugar de devolver silenciosamente cero detecciones.',
       },
@@ -232,23 +228,9 @@ const metadata = {
         description:
           'La vía rápida necesita una GPU que exponga shader-f16 con alrededor de 512 MB de tamaño máximo de búfer. En máquinas sin ella, la vía WASM mantiene la detección totalmente local a menor velocidad — no recurre a un servidor.',
       },
-      {
-        title: 'Doce idiomas como objetivo',
-        description:
-          'La arquitectura tiene como objetivo doce idiomas. Disponibles hoy: un modelo inglés activo (un NER de 560M de parámetros con 54 tipos de entidad) y tres variantes de modelo en español.',
-      },
     ]}
     image={{ src: '~/assets/images/server-network.jpg', alt: 'Inferencia del modelo en el dispositivo mediante WebGPU' }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        La propiedad de «sin servidor» es posible porque el modelo se ejecuta en tu hardware
-      </h3>
-      Los requisitos son concretos: un navegador Chromium versión 124 o posterior y margen para un
-      modelo del orden de 1 GB residente. La decisión de privacidad y la de rendimiento son la misma
-      decisión.
-    </Fragment>
-  </Content>
+  />
 
   <!-- Cómo funciona al enviar -->
 
@@ -293,10 +275,6 @@ const metadata = {
         icon: 'tabler:send',
       },
     ]}
-    image={{
-      src: '~/assets/images/data-analytics.jpg',
-      alt: 'La secuencia de detección y redacción que se ejecuta en cada envío',
-    }}
   />
 
   <!-- Precios -->
@@ -369,23 +347,6 @@ const metadata = {
           { description: 'Despliegue para equipos mayores' },
           { description: 'Asistencia en la puesta en marcha' },
           { description: 'Una vía hacia la política gestionada de forma centralizada' },
-        ],
-        callToAction: {
-          text: 'Contactar',
-          href: '/es/contacto/',
-        },
-      },
-      {
-        title: 'Corporativo',
-        subtitle: 'Gestionado de forma centralizada (MDM)',
-        price: 'A medida',
-        period: 'contrato anual',
-        items: [
-          { description: 'Política gestionada mediante directiva de grupo, Intune o Jamf' },
-          { description: 'La política es la habilitación — sin servidor de licencias' },
-          { description: 'Umbrales de confianza por entidad y modo de fallo' },
-          { description: 'Regex de organización, de solo lectura para los usuarios' },
-          { description: 'Webhook de registro de auditoría solo con metadatos' },
         ],
         callToAction: {
           text: 'Contactar',

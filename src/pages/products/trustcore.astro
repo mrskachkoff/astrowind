@@ -7,7 +7,6 @@ import TrustCoreInterface from '~/components/widgets/TrustCoreInterface.astro';
 import TrustCoreGraph from '~/components/widgets/TrustCoreGraph.astro';
 import Content from '~/components/widgets/Content.astro';
 import FeaturesCarousel from '~/components/widgets/FeaturesCarousel.astro';
-import Steps from '~/components/widgets/Steps.astro';
 import Prices from '~/components/widgets/Pricing.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
@@ -314,55 +313,6 @@ const metadata = {
       most-connected nodes, and the map states when it has done so.
     </Fragment>
   </Content>
-
-  <!-- How indexing works -->
-
-  <Steps
-    title="How a Document Is Indexed"
-    subtitle="Each file moves through the same six steps on your machine, from capture to a queryable entity graph."
-    items={[
-      {
-        title: 'Step 1: <span class="font-medium">Capture and De-Duplicate</span>',
-        description:
-          'Each file is hashed; a document already in the project is skipped, so the same file is never indexed twice.',
-        icon: 'tabler:file-import',
-      },
-      {
-        title: 'Step 2: <span class="font-medium">Extract Text</span>',
-        description:
-          'Text-based PDFs are read directly, scanned PDFs go to OCR, and plain text and Markdown are read as-is.',
-        icon: 'tabler:file-text',
-      },
-      {
-        title: 'Step 3: <span class="font-medium">Chunk</span>',
-        description:
-          'Text is split into passages. When OCR provides layout, each chunk keeps its page number and bounding box, so a quote can later be located on the page.',
-        icon: 'tabler:layout-rows',
-      },
-      {
-        title: 'Step 4: <span class="font-medium">Embed</span>',
-        description:
-          'Each chunk is turned into a vector by the bundled bge-m3 model, on your GPU through WebGPU or on the CPU when no usable GPU is present.',
-        icon: 'tabler:cpu',
-      },
-      {
-        title: 'Step 5: <span class="font-medium">Store</span>',
-        description:
-          'Chunks, vectors, and the full-text index are written together into the on-device SQLite database.',
-        icon: 'tabler:database',
-      },
-      {
-        title: 'Step 6: <span class="font-medium">Build the Graph</span>',
-        description:
-          'Entities and the relationships between them — including supersession and effective-date links — are extracted from the chunks and written to the graph tables.',
-        icon: 'tabler:topology-star-3',
-      },
-    ]}
-    image={{
-      src: '~/assets/images/data-analytics.jpg',
-      alt: 'Document indexing pipeline',
-    }}
-  />
 
   <!-- Pricing -->
 

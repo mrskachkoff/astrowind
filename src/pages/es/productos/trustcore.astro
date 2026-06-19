@@ -7,7 +7,6 @@ import TrustCoreInterface from '~/components/widgets/TrustCoreInterface.astro';
 import TrustCoreGraph from '~/components/widgets/TrustCoreGraph.astro';
 import Content from '~/components/widgets/Content.astro';
 import FeaturesCarousel from '~/components/widgets/FeaturesCarousel.astro';
-import Steps from '~/components/widgets/Steps.astro';
 import Prices from '~/components/widgets/Pricing.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
@@ -316,55 +315,6 @@ const metadata = {
       muy grandes se limitan a los nodos más conectados, y el mapa indica cuándo lo ha hecho.
     </Fragment>
   </Content>
-
-  <!-- Cómo funciona la indexación -->
-
-  <Steps
-    title="Cómo se indexa un documento"
-    subtitle="Cada archivo pasa por los mismos seis pasos en tu máquina, desde la captura hasta un grafo de entidades consultable."
-    items={[
-      {
-        title: 'Paso 1: <span class="font-medium">Captura y desduplicación</span>',
-        description:
-          'Cada archivo se hashea; un documento que ya está en el proyecto se omite, de modo que el mismo archivo nunca se indexa dos veces.',
-        icon: 'tabler:file-import',
-      },
-      {
-        title: 'Paso 2: <span class="font-medium">Extracción de texto</span>',
-        description:
-          'Los PDF de texto se leen directamente, los PDF escaneados pasan por OCR, y el texto plano y el Markdown se leen tal cual.',
-        icon: 'tabler:file-text',
-      },
-      {
-        title: 'Paso 3: <span class="font-medium">Fragmentación</span>',
-        description:
-          'El texto se divide en fragmentos. Cuando el OCR proporciona maquetación, cada fragmento conserva su número de página y cuadro delimitador, lo que permite localizar una cita en la página más adelante.',
-        icon: 'tabler:layout-rows',
-      },
-      {
-        title: 'Paso 4: <span class="font-medium">Incrustación</span>',
-        description:
-          'Cada fragmento se convierte en un vector mediante el modelo bge-m3 incluido, en tu GPU a través de WebGPU o en la CPU cuando no hay GPU disponible.',
-        icon: 'tabler:cpu',
-      },
-      {
-        title: 'Paso 5: <span class="font-medium">Almacenamiento</span>',
-        description:
-          'Los fragmentos, vectores y el índice de texto completo se escriben conjuntamente en la base de datos SQLite del dispositivo.',
-        icon: 'tabler:database',
-      },
-      {
-        title: 'Paso 6: <span class="font-medium">Construcción del grafo</span>',
-        description:
-          'Las entidades y las relaciones entre ellas — incluidos los vínculos de derogación y fecha de vigencia — se extraen de los fragmentos y se escriben en las tablas del grafo.',
-        icon: 'tabler:topology-star-3',
-      },
-    ]}
-    image={{
-      src: '~/assets/images/data-analytics.jpg',
-      alt: 'Flujo de indexación de documentos',
-    }}
-  />
 
   <!-- Precios -->
 

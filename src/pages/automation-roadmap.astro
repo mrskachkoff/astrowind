@@ -8,7 +8,6 @@ import FeaturesCarousel from '~/components/widgets/FeaturesCarousel.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
-import HeroText from '~/components/widgets/HeroText.astro';
 import Prices from '~/components/widgets/Pricing.astro';
 
 const metadata = {
@@ -248,17 +247,12 @@ const pricingSchema = {
 
   <JsonLd schema={pricingSchema} />
 
-  <HeroText
-    tagline="Pricing"
-    title="Transparent Pricing, No Hidden Costs"
-    subtitle="Every engagement starts with a free automation roadmap. Implementation and support pricing is based on your organisation's specific needs — no surprises."
-  />
-
   <!-- Pricing tiers -->
 
   <Prices
-    title="Our service tiers"
-    subtitle="Start free, scale as needed"
+    tagline="Pricing"
+    title="Transparent Pricing, No Hidden Costs"
+    subtitle="Every engagement starts with a free automation roadmap. Implementation and support pricing is based on your organisation's specific needs — no surprises."
     prices={[
       {
         title: 'Automation Roadmap',

@@ -8,7 +8,6 @@ import Steps from '~/components/widgets/Steps.astro';
 import Content from '~/components/widgets/Content.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
-import HeroText from '~/components/widgets/HeroText.astro';
 import Prices from '~/components/widgets/Pricing.astro';
 
 const metadata = {
@@ -251,17 +250,12 @@ const pricingSchema = {
 
   <JsonLd schema={pricingSchema} />
 
-  <HeroText
-    tagline="Precios"
-    title="Precios Transparentes, Sin Costes Ocultos"
-    subtitle="Cada proceso empieza con una hoja de ruta gratuita. Los precios de implementación y soporte se basan en las necesidades específicas de tu consulta — sin sorpresas."
-  />
-
   <!-- Niveles de servicio -->
 
   <Prices
-    title="Nuestros niveles de servicio"
-    subtitle="Comienza gratis, escala según necesites"
+    tagline="Precios"
+    title="Precios Transparentes, Sin Costes Ocultos"
+    subtitle="Cada proceso empieza con una hoja de ruta gratuita. Los precios de implementación y soporte se basan en las necesidades específicas de tu consulta — sin sorpresas."
     prices={[
       {
         title: 'Hoja de Ruta de Automatización',

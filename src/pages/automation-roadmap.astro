@@ -10,7 +10,6 @@ import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
 import Prices from '~/components/widgets/Pricing.astro';
-import Features3 from '~/components/widgets/Features3.astro';
 
 const metadata = {
   title: 'Free Automation Roadmap — AI Compliance & Risk Assessment',
@@ -211,36 +210,6 @@ const pricingSchema = {
     ]}
   />
 
-  <!-- Roadmap FAQs -->
-
-  <FAQs
-    title="Roadmap Questions"
-    subtitle="Common questions about the free automation roadmap."
-    classes={{ container: 'max-w-6xl' }}
-    items={[
-      {
-        title: 'How much of my time does it require?',
-        description: 'About 2-3 short conversations totaling 60-75 minutes. We do the heavy analysis work. Your role is to answer questions about your current operations and tools.',
-      },
-      {
-        title: 'Is there really no obligation?',
-        description: 'None. You receive a complete report you can act on independently. There is no pressure or commitment required.',
-      },
-      {
-        title: 'What if you find serious compliance issues?',
-        description: 'We report them clearly and prioritize them in your roadmap. This happens frequently — most companies have gaps they\'re unaware of. We never use findings to pressure you. We present facts and recommendations.',
-      },
-      {
-        title: 'Can we implement the recommendations ourselves?',
-        description: 'Yes. The report is designed to be actionable regardless of whether you work with us. We include specific steps, not vague suggestions. Many practices fix simple compliance gaps on their own.',
-      },
-      {
-        title: 'What happens after the roadmap?',
-        description: 'We present the report and walk you through the findings. If you want to proceed with implementation, we provide a fixed-price proposal based on the roadmap findings. If not, you keep the report with no strings attached.',
-      },
-    ]}
-  />
-
   <!-- Service Overview: 3 Pillars -->
 
   <Features2
@@ -368,49 +337,33 @@ const pricingSchema = {
     ]}
   />
 
-  <!-- Ongoing Support -->
-
-  <Features3
-    title="Ongoing support plans"
-    subtitle="Long-term partnership for continuous compliance and optimization"
-    columns={2}
-    items={[
-      {
-        title: 'Monthly AI Support (from €200/mo)',
-        description: 'Dedicated support for your automations, troubleshooting, adjustments, and performance optimization as your organisation grows.',
-        icon: 'tabler:heart-handshake',
-      },
-      {
-        title: 'Compliance Updates',
-        description: 'We update your compliance controls and documentation as GDPR, AEPD, and EU AI Act requirements evolve. Stay current without the research.',
-        icon: 'tabler:refresh',
-      },
-      {
-        title: 'Performance Monitoring',
-        description: 'Regular reviews of automation performance, time savings metrics, and identification of new optimization opportunities.',
-        icon: 'tabler:chart-line',
-      },
-      {
-        title: 'Priority Support',
-        description: 'Direct access to our team for urgent issues. We respond within business hours to keep your operations running smoothly.',
-        icon: 'tabler:headset',
-      },
-      {
-        title: 'New Automation Opportunities',
-        description: 'As your organisation grows, we identify additional workflows that can be safely automated — building on the foundation already in place.',
-        icon: 'tabler:bulb',
-      },
-    ]}
-    classes={{ container: 'max-w-5xl' }}
-  />
-
-  <!-- Pricing FAQs -->
+  <!-- Roadmap FAQs -->
 
   <FAQs
-    title="Pricing Questions"
-    subtitle="Common questions about our pricing and engagement model."
-    columns={1}
+    title="Roadmap Questions"
+    subtitle="Common questions about the automation roadmap."
+    classes={{ container: 'max-w-6xl' }}
     items={[
+      {
+        title: 'How much of my time does it require?',
+        description: 'About 2-3 short conversations totaling 60-75 minutes. We do the heavy analysis work. Your role is to answer questions about your current operations and tools.',
+      },
+      {
+        title: 'Is there really no obligation?',
+        description: 'None. You receive a complete report you can act on independently. There is no pressure or commitment required.',
+      },
+      {
+        title: 'What if you find serious compliance issues?',
+        description: 'We report them clearly and prioritize them in your roadmap. This happens frequently — most companies have gaps they\'re unaware of. We never use findings to pressure you. We present facts and recommendations.',
+      },
+      {
+        title: 'Can we implement the recommendations ourselves?',
+        description: 'Yes. The report is designed to be actionable regardless of whether you work with us. We include specific steps, not vague suggestions. Many practices fix simple compliance gaps on their own.',
+      },
+      {
+        title: 'What happens after the roadmap?',
+        description: 'We present the report and walk you through the findings. If you want to proceed with implementation, we provide a fixed-price proposal based on the roadmap findings. If not, you keep the report with no strings attached.',
+      },
       {
         title: 'Why is the roadmap free?',
         description:

@@ -10,7 +10,6 @@ import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
 import Prices from '~/components/widgets/Pricing.astro';
-import Features3 from '~/components/widgets/Features3.astro';
 
 const metadata = {
   title: 'Hoja de Ruta de Automatización Sanitaria Gratuita',
@@ -248,36 +247,6 @@ const pricingSchema = {
     ]}
   />
 
-  <!-- Roadmap FAQs -->
-
-  <FAQs
-    title="Preguntas sobre la Hoja de Ruta"
-    subtitle="Preguntas comunes sobre la hoja de ruta gratuita de automatización."
-    classes={{ container: 'max-w-6xl' }}
-    items={[
-      {
-        title: '¿Cuánto tiempo requiere de mi parte?',
-        description: 'Aproximadamente 2-3 conversaciones breves totalizando 60-75 minutos. Nosotros hacemos el trabajo de análisis pesado. Tu papel es responder preguntas sobre tus operaciones y herramientas actuales.',
-      },
-      {
-        title: '¿Realmente no hay ninguna obligación?',
-        description: 'Ninguna. Recibes un informe completo con el que puedes actuar de forma independiente. No hay ningún tipo de presión ni compromiso.',
-      },
-      {
-        title: '¿Qué pasa si encuentran problemas graves de cumplimiento?',
-        description: 'Los comunicamos claramente y los priorizamos en tu hoja de ruta. Esto sucede con frecuencia — la mayoría de las clínicas tienen brechas de las que no son conscientes. Nunca usamos los hallazgos para presionarte. Presentamos hechos y recomendaciones.',
-      },
-      {
-        title: '¿Podemos implementar las recomendaciones nosotros mismos?',
-        description: 'Sí. El informe está diseñado para ser accionable independientemente de si trabaja con nosotros. Incluimos pasos específicos, no sugerencias vagas. Muchas prácticas corrigen brechas simples de cumplimiento por su cuenta.',
-      },
-      {
-        title: '¿Qué sucede después de la hoja de ruta?',
-        description: 'Presentamos el informe y te guiamos a través de los hallazgos. Si deseas proceder con la implementación, proporcionamos una propuesta de precio fijo basada en los hallazgos de la hoja de ruta. Si no, conservas el informe sin compromiso.',
-      },
-    ]}
-  />
-
   <!-- Precios -->
 
   <JsonLd schema={pricingSchema} />
@@ -371,49 +340,33 @@ const pricingSchema = {
     ]}
   />
 
-  <!-- Soporte Continuo -->
-
-  <Features3
-    title="Planes de soporte continuo"
-    subtitle="Asociación a largo plazo para cumplimiento y optimización continuos"
-    columns={2}
-    items={[
-      {
-        title: 'Soporte IA Mensual (desde €200/mes)',
-        description: 'Soporte dedicado para tus automatizaciones, resolución de problemas, ajustes y optimización del rendimiento conforme crece tu consulta.',
-        icon: 'tabler:heart-handshake',
-      },
-      {
-        title: 'Actualizaciones de Cumplimiento',
-        description: 'Actualizamos tus controles de cumplimiento y documentación conforme evolucionan los requisitos del RGPD, la AEPD y la Ley de IA de la UE. Sin que tengas que investigar nada por tu cuenta.',
-        icon: 'tabler:refresh',
-      },
-      {
-        title: 'Monitorización del Rendimiento',
-        description: 'Revisiones regulares del rendimiento de automatización, métricas de ahorro de tiempo e identificación de nuevas oportunidades de optimización.',
-        icon: 'tabler:chart-line',
-      },
-      {
-        title: 'Soporte Prioritario',
-        description: 'Acceso directo a nuestro equipo para problemas urgentes. Respondemos en horario laboral para mantener tu consulta funcionando sin problemas.',
-        icon: 'tabler:headset',
-      },
-      {
-        title: 'Nuevas Oportunidades de Automatización',
-        description: 'A medida que tu consulta crece, identificamos flujos de trabajo adicionales que se pueden automatizar de forma segura, aprovechando la base ya implantada.',
-        icon: 'tabler:bulb',
-      },
-    ]}
-    classes={{ container: 'max-w-5xl' }}
-  />
-
-  <!-- FAQs de Precios -->
+  <!-- Roadmap FAQs -->
 
   <FAQs
-    title="Preguntas sobre Precios"
-    subtitle="Preguntas comunes sobre nuestros precios y modelo de compromiso."
-    columns={1}
+    title="Preguntas sobre la Hoja de Ruta"
+    subtitle="Preguntas comunes sobre la hoja de ruta de automatización."
+    classes={{ container: 'max-w-6xl' }}
     items={[
+      {
+        title: '¿Cuánto tiempo requiere de mi parte?',
+        description: 'Aproximadamente 2-3 conversaciones breves totalizando 60-75 minutos. Nosotros hacemos el trabajo de análisis pesado. Tu papel es responder preguntas sobre tus operaciones y herramientas actuales.',
+      },
+      {
+        title: '¿Realmente no hay ninguna obligación?',
+        description: 'Ninguna. Recibes un informe completo con el que puedes actuar de forma independiente. No hay ningún tipo de presión ni compromiso.',
+      },
+      {
+        title: '¿Qué pasa si encuentran problemas graves de cumplimiento?',
+        description: 'Los comunicamos claramente y los priorizamos en tu hoja de ruta. Esto sucede con frecuencia — la mayoría de las clínicas tienen brechas de las que no son conscientes. Nunca usamos los hallazgos para presionarte. Presentamos hechos y recomendaciones.',
+      },
+      {
+        title: '¿Podemos implementar las recomendaciones nosotros mismos?',
+        description: 'Sí. El informe está diseñado para ser accionable independientemente de si trabaja con nosotros. Incluimos pasos específicos, no sugerencias vagas. Muchas prácticas corrigen brechas simples de cumplimiento por su cuenta.',
+      },
+      {
+        title: '¿Qué sucede después de la hoja de ruta?',
+        description: 'Presentamos el informe y te guiamos a través de los hallazgos. Si deseas proceder con la implementación, proporcionamos una propuesta de precio fijo basada en los hallazgos de la hoja de ruta. Si no, conservas el informe sin compromiso.',
+      },
       {
         title: '¿Por qué la hoja de ruta es gratuita?',
         description:

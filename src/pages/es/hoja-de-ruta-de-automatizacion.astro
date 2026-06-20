@@ -3,7 +3,7 @@ import Layout from '~/layouts/PageLayout.astro';
 import JsonLd from '~/components/common/JsonLd.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
-import Features2 from '~/components/widgets/Features2.astro';
+import FeaturesCarousel from '~/components/widgets/FeaturesCarousel.astro';
 import Features from '~/components/widgets/Features.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import Content from '~/components/widgets/Content.astro';
@@ -130,40 +130,6 @@ const pricingSchema = {
     </Fragment>
   </Hero>
 
-  <!-- Value Prop: What You'll Receive -->
-
-  <Features2
-    title="Qué recibes"
-    subtitle="Una evaluación integral de cumplimiento y automatización entregada en 5-7 días laborables."
-    tagline="Entregables"
-    items={[
-      {
-        title: 'Puntuación de Riesgo de IA y Cumplimiento',
-        description: 'Una calificación clara de las prácticas de manejo de datos de tu clínica y de tu preparación para la automatización, con áreas de riesgo específicas identificadas.',
-        icon: 'tabler:report-analytics',
-      },
-      {
-        title: 'Diagrama de Flujo de Datos',
-        description: 'Un mapa visual de cómo se mueven los datos de pacientes a través de tu clínica — dónde se almacenan, quién accede a ellos y dónde existen brechas.',
-        icon: 'tabler:hierarchy',
-      },
-      {
-        title: 'Matriz de Viabilidad de Automatización',
-        description: 'Un análisis puntuado de cada flujo de trabajo — qué tareas son seguras de automatizar, cuáles son arriesgadas y cuáles nunca deben automatizarse.',
-        icon: 'tabler:table',
-      },
-      {
-        title: 'Hoja de Ruta de Implementación',
-        description: 'Un plan por fases: primero corregir brechas de cumplimiento, luego implementar automatizaciones seguras, después establecer monitorización continua.',
-        icon: 'tabler:road',
-      },
-    ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 dark:bg-transparent" style="background-image: var(--grad-lilac);"></div>
-    </Fragment>
-  </Features2>
-
   <!-- Roadmap Coverage: 5 Blocks -->
 
   <Features
@@ -274,14 +240,21 @@ const pricingSchema = {
 
   <!-- Specific Deliverables -->
 
-  <Features2
+  <FeaturesCarousel
+    id="entregables"
+    tagline="Entregables"
     title="Qué incluye el informe"
-    subtitle="Cada hoja de ruta entrega estos resultados específicos y accionables."
+    subtitle="Cada hoja de ruta entrega estos resultados específicos y accionables — una evaluación integral de cumplimiento y automatización en 5-7 días laborables."
     items={[
       {
-        title: 'Resumen Ejecutivo de Riesgo',
-        description: 'Una visión general de 2 páginas para propietarios de consultas — lenguaje claro, sin jerga, enfocado en lo que importa para tu negocio.',
-        icon: 'tabler:file-text',
+        title: 'Resumen Ejecutivo de Riesgo y Puntuación',
+        description: 'Una visión general de 2 páginas en lenguaje claro — sin jerga — con una calificación clara de tu manejo de datos y tu preparación para la automatización que señala tus áreas de riesgo específicas.',
+        icon: 'tabler:report-analytics',
+      },
+      {
+        title: 'Diagrama de Flujo de Datos',
+        description: 'Un mapa visual de cómo se mueven los datos de pacientes a través de tu clínica — dónde se almacenan, quién accede a ellos y dónde existen brechas.',
+        icon: 'tabler:hierarchy',
       },
       {
         title: 'Lista de Brechas de Cumplimiento',
@@ -294,14 +267,14 @@ const pricingSchema = {
         icon: 'tabler:traffic-lights',
       },
       {
-        title: 'Plan de Arquitectura Aprobado',
-        description: 'Para cada automatización segura, el enfoque recomendado — local, híbrido o (raramente) nube — con justificación RGPD.',
-        icon: 'tabler:server',
-      },
-      {
         title: 'Matriz de Automatización de Flujos de Trabajo',
         description: 'Cada proceso administrativo puntuado por esfuerzo manual, riesgo de error, sensibilidad de datos, potencial de automatización y exposición al cumplimiento.',
         icon: 'tabler:table',
+      },
+      {
+        title: 'Plan de Arquitectura Aprobado',
+        description: 'Para cada automatización segura, el enfoque recomendado — local, híbrido o (raramente) nube — con justificación RGPD.',
+        icon: 'tabler:server',
       },
       {
         title: 'Hoja de Ruta de Implementación por Fases',

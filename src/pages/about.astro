@@ -5,14 +5,14 @@ import JsonLd from '~/components/common/JsonLd.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Content from '~/components/widgets/Content.astro';
 import Features2 from '~/components/widgets/Features2.astro';
-import Steps2 from '~/components/widgets/Steps2.astro';
 import Features from '~/components/widgets/Features.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'About | Healthcare AI Compliance Spain',
-  description: 'Futurion Solutions is a compliance-first AI automation agency for healthcare in Spain and the EU. Founded by Ivan Skachkov, compliance and process expert.',
+  title: 'About | Futurion Solutions',
+  description:
+    'Futurion Solutions is a software company in Valencia. We build TrustPrompt, TrustCore and TrustAuto for legal, compliance, finance and healthcare teams, so sensitive data stays on infrastructure they control.',
   openGraph: {
     images: [{ url: '~/assets/images/team-meeting.jpg' }],
   },
@@ -25,7 +25,8 @@ const aboutSchema = [
     '@id': 'https://solutions.futurion.es/about/#webpage',
     url: 'https://solutions.futurion.es/about/',
     name: 'About Futurion Solutions',
-    description: 'Futurion Solutions is a compliance-first AI automation agency helping small healthcare providers in Spain and the EU automate safely under GDPR.',
+    description:
+      'Futurion Solutions builds private AI tools — TrustPrompt, TrustCore and TrustAuto — for legal, compliance, finance and healthcare teams, designed to run on infrastructure the customer controls rather than a shared cloud service.',
     inLanguage: 'en',
     publisher: { '@id': 'https://solutions.futurion.es/#organization' },
     mainEntity: { '@id': 'https://solutions.futurion.es/#organization' },
@@ -36,7 +37,7 @@ const aboutSchema = [
     name: 'Ivan Skachkov',
     jobTitle: 'Founder',
     worksFor: { '@id': 'https://solutions.futurion.es/#organization' },
-    knowsAbout: ['GDPR', 'Healthcare AI', 'Business Process Optimization', 'EU AI Act', 'Data Protection'],
+    knowsAbout: ['GDPR', 'EU AI Act', 'ISO 27001', 'SOC 2', 'Data Protection', 'Private AI', 'Business Process Design'],
     url: 'https://solutions.futurion.es/about/',
   },
 ];
@@ -51,78 +52,84 @@ const aboutSchema = [
     tagline="About Futurion Solutions"
     image={{
       src: '~/assets/images/team-collaboration.jpg',
-      alt: 'Professional team working together',
+      alt: 'The Futurion Solutions team at work',
     }}
   >
     <Fragment slot="title">
-      Transforming Healthcare Operations<br />
-      <span class="text-accent dark:text-white">Through Intelligent, Compliant Automation</span>
+      We build AI that stays<br />
+      <span class="text-accent dark:text-white">inside your own boundary</span>
     </Fragment>
 
     <Fragment slot="subtitle">
-      We're an AI automation agency that understands both the technology and the regulatory requirements. Founded by a compliance and business process optimization expert, Futurion Solutions brings enterprise-level expertise to small healthcare businesses.
+      We build solutions for legal, compliance, finance and healthcare teams that care about customer privacy.
     </Fragment>
   </Hero>
 
-  <!-- Mission -->
+  <!-- Why we exist -->
 
   <Content
-    tagline="Our Mission"
-    title="AI automation should be compliant from day one"
+    tagline="Why we exist"
+    title="Using AI should not create a new place where your data lives"
     items={[
       {
-        title: 'Who we are',
+        title: 'What we build',
         description:
-          'Futurion Solutions is an AI automation agency specializing in helping healthcare organizations reclaim their time, reduce operational costs, and focus on patient care. From small practices needing compliant workflow automation to medium healthcare groups requiring fully on-premise medical AI infrastructure through MedCore Private AI.',
+          'TrustPrompt removes personal data in the browser before a prompt is sent to a public LLM. TrustCore answers questions about your own documents on your own hardware. TrustAuto is a non-SaaS, fully on-premises compliance control center that connects to your existing systems and continuously checks whether your organisation is meeting the security controls and privacy standards it is held to — SOC 2, ISO 27001, HIPAA and GDPR.',
       },
       {
-        title: 'Our founder',
+        title: 'Where it runs',
         description:
-          'Founded by Ivan Skachkov, a compliance and business process automation expert with deep expertise in SOC2, ISO 27001, HIPAA, and GDPR frameworks. We understand both the technology AND the regulatory requirements.',
+          'On your own hardware or your own cloud account. There is no Futurion backend that holds your documents, and nothing is sent to us to make the software work.',
       },
       {
-        title: 'Our approach',
+        title: 'How we work',
         description:
-          'We don\'t just automate — we optimize first, then automate compliantly. With years of enterprise process optimization experience, we know how to design AI solutions that are efficient, secure, and built on a foundation of data privacy best practices.',
+          'Each deployment is documented against the obligations you answer to — GDPR, the EU AI Act, ISO 27001 and SOC 2, plus HIPAA and AEPD requirements in healthcare.',
       },
     ]}
     image={{
       src: '~/assets/images/abstract-light.jpg',
-      alt: 'Innovation and compliance',
+      alt: 'Data kept within a defined boundary',
     }}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Compliance meets innovation</h3>
-      In healthcare, patient data is sacred. We bridge the gap between AI innovation and regulatory requirements — so practices don't have to choose.
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Built to remove a data-protection problem, not add one
+      </h3>
+      Legal, clinical and financial work runs on documents that are privileged, confidential, or personal data under the GDPR. The moment that text is sent to a shared AI service, it lands with a third party that may log or retain it — and for many of these teams that alone is disqualifying. We build software so that using AI does not move the data anywhere new.
     </Fragment>
   </Content>
 
-  <!-- The Gap We Fill -->
+  <!-- How we build -->
 
   <Features2
-    title="The gap we fill"
-    subtitle="Why healthcare SMBs need a specialized AI automation partner."
-    tagline="The Problem"
+    title="The same commitments in everything we ship"
+    subtitle="These are properties of how the software is built, not promises layered on top."
+    tagline="How we build"
     items={[
       {
-        title: 'AI agencies don\'t understand compliance',
-        description: 'Most AI agencies build fast and worry about regulations later. In healthcare, that approach creates GDPR liability and puts patient data at risk.',
-        icon: 'tabler:alert-triangle',
+        title: 'No backend to leak',
+        description:
+          'There is no hosted service that receives your data. The work runs in your browser or on your own machine, so there is no third party in the data path that could leak a document.',
+        icon: 'tabler:server-off',
       },
       {
-        title: 'Compliance consultants don\'t understand AI',
-        description: 'Traditional compliance advisors can identify risks but can\'t build the automation solutions that address them. You end up with reports but no results.',
-        icon: 'tabler:file-alert',
+        title: 'On infrastructure you control',
+        description:
+          'Everything runs on your hardware or your cloud account. For heavier workloads you point the tools at endpoints you already run, rather than ones we introduce.',
+        icon: 'tabler:lock',
       },
       {
-        title: 'Enterprise solutions are too expensive',
-        description: 'Large hospitals have dedicated IT teams and compliance officers. Small practices face the same regulations but without the resources to address them.',
-        icon: 'tabler:currency-euro',
+        title: 'Evidence you can check',
+        description:
+          'Answers are tied to the exact passage and page they came from, and facts that conflict across documents are flagged with their sources — so a result can be verified, not just trusted.',
+        icon: 'tabler:list-check',
       },
       {
-        title: 'Generic tools miss healthcare nuances',
-        description: 'Off-the-shelf AI tools aren\'t designed for healthcare data sensitivity. Patient records, imaging data, and health information require specialized handling.',
-        icon: 'tabler:puzzle',
+        title: 'Mapped to your obligations',
+        description:
+          'Each deployment is documented against the regulations you answer to, with the records kept inspection-ready.',
+        icon: 'tabler:shield-check',
       },
     ]}
   >
@@ -131,107 +138,37 @@ const aboutSchema = [
     </Fragment>
   </Features2>
 
-  <!-- Values -->
-
-  <Steps2
-    title="Our values"
-    subtitle="The principles that guide every engagement, every automation, and every recommendation we make."
-    items={[
-      {
-        title: 'Compliant from day one',
-        description:
-          'Data privacy isn\'t optional in healthcare. Every solution we build has GDPR, audit trails, and security controls baked in from the architecture level — never bolted on later.',
-      },
-      {
-        title: 'Optimize before automating',
-        description:
-          'We don\'t digitize broken workflows. We analyze and fix processes first, then automate them. This means you get efficiency gains that actually stick.',
-      },
-      {
-        title: 'Transparency and trust',
-        description:
-          'You should understand exactly what your automations do with patient data. We explain everything in clear language and earn trust through results, not contracts.',
-      },
-      {
-        title: 'Start small, scale smart',
-        description:
-          'Begin with high-impact, low-risk automations and expand strategically. No big-bang implementations, no unnecessary risk.',
-      },
-    ]}
-  />
-
-  <!-- Expertise -->
-
-  <Features
-    title="Our expertise"
-    subtitle="A unique combination of compliance knowledge, process optimization experience, and AI implementation skills."
-    columns={3}
-    items={[
-      {
-        title: 'GDPR & Data Privacy',
-        description: 'Deep understanding of EU data protection regulations, Spanish AEPD requirements, and healthcare-specific data handling obligations.',
-        icon: 'tabler:shield-lock',
-      },
-      {
-        title: 'SOC2 & ISO 27001',
-        description: 'Enterprise security framework experience applied to small healthcare businesses — proper controls without enterprise complexity.',
-        icon: 'tabler:certificate',
-      },
-      {
-        title: 'HIPAA Compliance',
-        description: 'Understanding of Protected Health Information (PHI) requirements and how to handle sensitive healthcare data securely in automated systems.',
-        icon: 'tabler:stethoscope',
-      },
-      {
-        title: 'Business Process Optimization',
-        description: 'Years of analyzing and optimizing workflows in organizations of all sizes. We identify bottlenecks, eliminate waste, and redesign for efficiency.',
-        icon: 'tabler:arrows-sort',
-      },
-      {
-        title: 'AI & Automation Architecture',
-        description: 'Designing secure, scalable AI solutions from hybrid setups for small practices to fully on-premise MedCore Private AI deployments with medical-grade language models for larger organizations.',
-        icon: 'tabler:cpu',
-      },
-      {
-        title: 'Healthcare Operations',
-        description: 'Focused expertise in dental clinics, pharmacies, and small medical practices — we understand your workflows, regulations, and daily challenges.',
-        icon: 'tabler:building-hospital',
-      },
-    ]}
-  />
-
-  <!-- Who We Serve -->
+  <!-- Who's behind it -->
 
   <Content
     isReversed
-    tagline="Who We Serve"
-    title="Small healthcare practices that deserve enterprise-level solutions"
+    tagline="Who's behind it"
+    title="A compliance and process background, applied to software"
     items={[
       {
-        title: 'Same compliance requirements, fewer resources',
-        description: 'Small practices face the same GDPR and data protection requirements as large hospitals — without dedicated IT teams or compliance officers.',
+        title: 'Compliance, then code',
+        description:
+          'The products start from the obligations these teams carry — GDPR, the EU AI Act, ISO 27001, SOC 2 — and are built to satisfy them by design rather than documented around afterwards.',
       },
       {
-        title: 'High administrative overhead',
-        description: 'Administrative staff are expensive and their time is valuable. Repetitive tasks like scheduling, billing, and follow-ups consume hours that could serve patients.',
+        title: 'Process before automation',
+        description:
+          'We map how work actually flows before automating any of it, so the result removes effort instead of digitising a broken process.',
       },
       {
-        title: 'Standardized, automatable workflows',
-        description: 'Healthcare practices have highly standardized processes that are ideal for automation — when done with proper compliance controls.',
-      },
-      {
-        title: 'Direct impact on patient care',
-        description: 'Small improvements in efficiency translate directly to better patient care and healthier bottom lines. Every hour saved goes back to what matters.',
+        title: 'Plain answers',
+        description:
+          'We explain what the software does with your data in clear terms — and what it deliberately does not do.',
       },
     ]}
     image={{
-      src: '~/assets/images/medical-office.jpg',
-      alt: 'Healthcare clinic environment',
+      src: '~/assets/images/business-meeting.jpg',
+      alt: 'Working session at Futurion Solutions',
     }}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">An underserved market</h3>
-      While large hospital systems have compliance officers and IT departments, independent practices often struggle alone. We're here to change that.
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Founded by Ivan Skachkov</h3>
+      Futurion Solutions was founded by Ivan Skachkov, who works in data protection and business-process design. The company is based in Valencia and works with organisations across Spain and the EU.
     </Fragment>
 
     <Fragment slot="bg">
@@ -239,15 +176,61 @@ const aboutSchema = [
     </Fragment>
   </Content>
 
+  <!-- Expertise (kept section, wording realigned) -->
+
+  <Features
+    title="Our expertise"
+    subtitle="A combination of data-protection knowledge, process design, and applied AI engineering."
+    columns={3}
+    items={[
+      {
+        title: 'GDPR & Data Privacy',
+        description:
+          'EU data-protection law, Spanish AEPD requirements, and the handling obligations that come with confidential and special-category data.',
+        icon: 'tabler:shield-lock',
+      },
+      {
+        title: 'ISO 27001 & SOC 2',
+        description:
+          'Security-framework controls applied at a workable scale — proper safeguards without the overhead of a large enterprise programme.',
+        icon: 'tabler:certificate',
+      },
+      {
+        title: 'EU AI Act & AI Governance',
+        description:
+          'The obligations that apply to AI systems handling personal or sensitive data, mapped to each deployment so the use of AI stays accountable.',
+        icon: 'tabler:scale',
+      },
+      {
+        title: 'Process Design & Optimisation',
+        description:
+          'Years of analysing and redesigning workflows. We find the bottlenecks, remove the waste, and fix the process before anything is automated.',
+        icon: 'tabler:arrows-sort',
+      },
+      {
+        title: 'Private AI Architecture',
+        description:
+          'Designing AI systems that run on-premise or in a hybrid setup — local models, retrieval and embeddings on infrastructure you control.',
+        icon: 'tabler:cpu',
+      },
+      {
+        title: 'Regulated-Sector Operations',
+        description:
+          'A working understanding of how legal, compliance, finance and healthcare teams operate, and the data rules each one answers to.',
+        icon: 'tabler:building-bank',
+      },
+    ]}
+  />
+
   <!-- Stats -->
 
   <Stats
-    title="Our commitment in numbers"
+    title="Futurion Solutions in brief"
     stats={[
-      { title: 'Compliance Frameworks', amount: '4+', icon: 'tabler:shield-check' },
-      { title: 'Hours Saved / Week', amount: '10-15', icon: 'tabler:clock' },
-      { title: 'Roadmap Duration (Days)', amount: '5-7', icon: 'tabler:calendar' },
       { title: 'Based in', amount: 'Valencia', icon: 'tabler:map-pin' },
+      { title: 'Compliance frameworks mapped', amount: '4', icon: 'tabler:shield-check' },
+      { title: 'Sent to a Futurion server', amount: 'None', icon: 'tabler:server-off' },
+      { title: 'Where the work runs', amount: 'Your hardware', icon: 'tabler:device-desktop' },
     ]}
   />
 
@@ -257,12 +240,12 @@ const aboutSchema = [
     actions={[
       {
         variant: 'primary',
-        text: 'Get Your Free Automation Roadmap',
-        href: '/automation-roadmap/',
+        text: 'Talk to us',
+        href: '/contact/',
         icon: 'tabler:arrow-right',
       },
     ]}
-    title="Ready to modernize your practice compliantly?"
-    subtitle="Every engagement begins with our free Automation Roadmap — a no-pressure assessment where we identify exactly where AI can help your practice while ensuring compliance. No obligations, just honest recommendations."
+    title="Work with data that can't leave your control?"
+    subtitle="Tell us what you work with and the rules you operate under. We'll show you what can run on your own infrastructure."
   />
 </Layout>

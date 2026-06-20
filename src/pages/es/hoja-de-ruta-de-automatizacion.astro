@@ -134,7 +134,7 @@ const pricingSchema = {
 
   <Features
     title="Qué evaluamos"
-    subtitle="Nuestra hoja de ruta cubre cinco áreas críticas que la mayoría de agencias de IA ignoran por completo."
+    subtitle="La hoja de ruta abarca cinco áreas clave."
     columns={3}
     items={[
       {
@@ -154,7 +154,7 @@ const pricingSchema = {
       },
       {
         title: 'Evaluación de Riesgo y Arquitectura de IA',
-        description: 'Para cada candidato a automatización, evaluamos si la IA en la nube, híbrida o local es apropiada — con referencias a artículos del RGPD para cada decisión.',
+        description: 'Para cada proceso candidato a automatización, evaluamos si la IA más adecuada es en la nube, híbrida o en local — reservando la IA externa exclusivamente para tareas no sensibles, con referencias al artículo del RGPD correspondiente a cada decisión.',
         icon: 'tabler:cpu',
       },
       {
@@ -188,7 +188,7 @@ const pricingSchema = {
       },
       {
         title: 'Días 6-7: <span class="font-medium">Informe y Recomendaciones</span>',
-        description: 'Recibes un informe completo: puntuaciones de riesgo, diagramas de flujo de datos, matriz de automatización y una hoja de ruta clara de implementación sobre la que puedes actuar — con o sin nosotros.',
+        description: 'Recibes un informe escrito completo sobre el que puedes actuar de forma inmediata, con nosotros o por tu cuenta. El apartado siguiente detalla exactamente qué contiene.',
         icon: 'tabler:file-report',
       },
     ]}
@@ -297,7 +297,7 @@ const pricingSchema = {
       },
       {
         title: '¿Realmente no hay ninguna obligación?',
-        description: 'Ninguna. Recibes un informe completo sobre el que puedes actuar de forma independiente. Aproximadamente el 40-60% de las clínicas que completan la hoja de ruta eligen proceder con la implementación, pero no hay presión ni compromiso requerido.',
+        description: 'Ninguna. Recibes un informe completo con el que puedes actuar de forma independiente. No hay ningún tipo de presión ni compromiso.',
       },
       {
         title: '¿Qué pasa si encuentran problemas graves de cumplimiento?',
@@ -308,35 +308,11 @@ const pricingSchema = {
         description: 'Sí. El informe está diseñado para ser accionable independientemente de si trabaja con nosotros. Incluimos pasos específicos, no sugerencias vagas. Muchas prácticas corrigen brechas simples de cumplimiento por su cuenta.',
       },
       {
-        title: '¿Por qué ofrecen esto gratis?',
-        description: 'La hoja de ruta genera confianza y demuestra nuestra experiencia. Cuando las prácticas ven la profundidad del análisis y la calidad de las recomendaciones, muchas eligen trabajar con nosotros para la implementación. Es nuestra forma de demostrar valor antes de pedir un compromiso.',
-      },
-      {
         title: '¿Qué sucede después de la hoja de ruta?',
         description: 'Presentamos el informe y te guiamos a través de los hallazgos. Si deseas proceder con la implementación, proporcionamos una propuesta de precio fijo basada en los hallazgos de la hoja de ruta. Si no, conservas el informe sin compromiso.',
       },
     ]}
   />
-
-  <!-- Urgency CTA -->
-
-  <CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Solicita tu hoja de ruta gratuita ahora',
-        href: 'https://outlook.office.com/book/FuturionSolutions@futurion.es/',
-        target: '_blank',
-        icon: 'tabler:arrow-right',
-      },
-    ]}
-  >
-    <Fragment slot="title">Limitado a 8 hojas de ruta al mes</Fragment>
-
-    <Fragment slot="subtitle">
-      Cada hoja de ruta recibe nuestra atención completa — análisis exhaustivo, informes detallados y recomendaciones personalizadas. Limitamos la capacidad para mantener la calidad. Asegura tu lugar hoy.
-    </Fragment>
-  </CallToAction>
 
   <!-- Precios -->
 
@@ -381,7 +357,7 @@ const pricingSchema = {
           { description: 'Entrega en 2-4 semanas' },
           { description: 'Arquitectura local o híbrida' },
           { description: 'Controles de cumplimiento RGPD incluidos' },
-          { description: 'Registros de auditoría y documentación' },
+          { description: 'Registros de auditoría, acuerdos de tratamiento de datos y gestión del consentimiento' },
           { description: '30 días de soporte post-lanzamiento' },
         ],
         callToAction: {
@@ -418,7 +394,7 @@ const pricingSchema = {
           { description: 'Despliegue IA local' },
           { description: 'Modelos de lenguaje de grado médico' },
           { description: 'Ajuste fino y pipelines RAG' },
-          { description: 'Hardware preparado para IA incluido' },
+          { description: 'Hardware de servidor incluido' },
           { description: 'Multicumplimiento (RGPD, HIPAA, SOC2)' },
           { description: 'Soporte multilingüe UE' },
           { description: 'Gestión de ciclo de vida completo' },
@@ -458,6 +434,11 @@ const pricingSchema = {
         description: 'Acceso directo a nuestro equipo para problemas urgentes. Respondemos en horario laboral para mantener tu consulta funcionando sin problemas.',
         icon: 'tabler:headset',
       },
+      {
+        title: 'Nuevas Oportunidades de Automatización',
+        description: 'A medida que tu consulta crece, identificamos flujos de trabajo adicionales que se pueden automatizar de forma segura, aprovechando la base ya implantada.',
+        icon: 'tabler:bulb',
+      },
     ]}
     classes={{ container: 'max-w-5xl' }}
   />
@@ -477,7 +458,7 @@ const pricingSchema = {
       {
         title: '¿Cómo se determinan los precios de implementación?',
         description:
-          'Los precios se basan en los hallazgos de la hoja de ruta — número de flujos a automatizar, complejidad y requisitos de cumplimiento. Proporcionamos una propuesta a precio fijo después de la hoja de ruta para que no haya sorpresas. Las mejoras inmediatas comienzan en €1.500, los paquetes completos en €5.000.',
+          'Los precios se basan en los hallazgos de la hoja de ruta — número de flujos a automatizar, complejidad y requisitos de cumplimiento. Proporcionamos una propuesta a precio fijo después de la hoja de ruta para que no haya sorpresas. Las mejoras inmediatas suelen rondar entre 1.500 y 3.000 €; el paquete completo, entre 5.000 y 15.000 €.',
       },
       {
         title: '¿Es obligatorio el plan de soporte mensual?',

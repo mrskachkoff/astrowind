@@ -72,7 +72,7 @@ apps:
 analytics:
   vendors:
     googleAnalytics:
-      id: "G-CWM1N7R89S"
+      id: "G-EQ1JB7WMNZ"
 
 ui:
   theme: 'system'

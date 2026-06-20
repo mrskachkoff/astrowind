@@ -6,6 +6,7 @@ import Hero from '~/components/widgets/Hero.astro';
 import FeaturesCarousel from '~/components/widgets/FeaturesCarousel.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import Prices from '~/components/widgets/Pricing.astro';
@@ -202,45 +203,43 @@ const pricingSchema = {
     }}
   />
 
-  <!-- Who It's For -->
+  <!-- Resumen de Servicios: 3 Pilares -->
 
-  <Content
-    isReversed
-    tagline="¿Es esto para ti?"
-    title="Diseñado para el sector sanitario"
+  <Features2
+    title="Nuestros pilares de servicio"
+    subtitle="Cada servicio se construye sobre el anterior, desde la hoja de ruta gratuita hasta la implementación y el soporte continuo — con opciones para organizaciones más grandes."
+    columns={2}
     items={[
       {
-        title: 'Clínicas dentales con 1-10 empleados',
-        description: 'Desde profesionales individuales hasta pequeñas prácticas grupales que gestionan citas, comunicaciones con pacientes y facturación.',
+        title: 'Hoja de Ruta de Automatización Gratuita',
+        description:
+          'Una evaluación de 5-7 días de tus flujos de datos, postura de cumplimiento y oportunidades de automatización. Recibes un informe detallado con puntuaciones de riesgo y una hoja de ruta clara.',
+        icon: 'tabler:clipboard-check',
       },
       {
-        title: 'Farmacias independientes',
-        description: 'Farmacias que manejan datos de pacientes, flujos de trabajo de prescripciones y comunicaciones con proveedores que necesitan automatización conforme al cumplimiento.',
+        title: 'Implementación Conforme',
+        description:
+          'Primero corregimos los flujos de trabajo defectuosos y después los automatizamos — recordatorios, seguimientos o facturación — con arquitecturas locales o híbridas y principios RGPD integrados desde el primer día.',
+        icon: 'tabler:settings-automation',
       },
       {
-        title: 'Pequeñas clínicas médicas (2-5 profesionales)',
-        description: 'Clínicas multiprofesionales con alta carga administrativa, programación compleja y requisitos de cumplimiento de datos de pacientes.',
+        title: 'Soporte y Monitorización Continuos',
+        description:
+          'Optimización continua, actualizaciones de cumplimiento conforme evolucionan las regulaciones y monitorización del rendimiento. Tu socio de cumplimiento IA a largo plazo.',
+        icon: 'tabler:heart-handshake',
       },
       {
-        title: 'Propietarios de prácticas que están...',
-        description: 'Abrumados por tareas administrativas, preocupados por la privacidad de datos con nuevas tecnologías, o considerando contratar personal adicional para manejar la carga de trabajo.',
+        title: 'MedCore Private AI (Empresarial)',
+        description:
+          'Infraestructura IA de grado médico completamente local para organizaciones sanitarias medianas. LLMs especializados, ajuste fino y soberanía completa de datos.',
+        icon: 'tabler:server-2',
       },
     ]}
-    image={{
-      src: '~/assets/images/medical-office.jpg',
-      alt: 'Ambiente de clínica dental',
-    }}
   >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">No necesitas un gran presupuesto de TI</h3>
-      Nuestra hoja de ruta está diseñada para consultas que no tienen equipos de TI dedicados ni responsables de cumplimiento — eso es exactamente por qué es valiosa.
-      Problemas recientes de disponibilidad de IA clínica, como la <a href="/es/es-retirada-openevidence-ue-reino-unido-sanidad-on-premise-nube-soberana/" class="underline font-bold">retirada de OpenEvidence de la UE y Reino Unido</a>, son precisamente el tipo de riesgo arquitectónico que evaluamos antes de automatizar.
-    </Fragment>
-
     <Fragment slot="bg">
       <div class="absolute inset-0 dark:bg-transparent" style="background-image: var(--grad-lilac);"></div>
     </Fragment>
-  </Content>
+  </Features2>
 
   <!-- Precios -->
 

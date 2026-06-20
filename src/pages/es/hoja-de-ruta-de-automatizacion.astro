@@ -4,7 +4,6 @@ import JsonLd from '~/components/common/JsonLd.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
 import FeaturesCarousel from '~/components/widgets/FeaturesCarousel.astro';
-import Features from '~/components/widgets/Features.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import Content from '~/components/widgets/Content.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
@@ -130,65 +129,30 @@ const pricingSchema = {
     </Fragment>
   </Hero>
 
-  <!-- Roadmap Coverage: 5 Blocks -->
-
-  <Features
-    title="Qué evaluamos"
-    subtitle="La hoja de ruta abarca cinco áreas clave."
-    columns={3}
-    items={[
-      {
-        title: 'Perfil de Clínica y Contexto de Riesgo',
-        description: 'Evaluamos el tamaño de tu clínica, el volumen de pacientes, la madurez digital y las herramientas existentes para determinar tu nivel de riesgo y preparación para la automatización.',
-        icon: 'tabler:building-hospital',
-      },
-      {
-        title: 'Mapeo de Datos y Cumplimiento RGPD',
-        description: 'Mapeamos cada flujo de datos de pacientes — admisión, registros, imágenes, facturación, comunicaciones — y clasificamos cada uno por sensibilidad y exposición al cumplimiento.',
-        icon: 'tabler:database',
-      },
-      {
-        title: 'Análisis de Cuellos de Botella en Procesos',
-        description: 'Identificamos flujos de trabajo con mucha carga administrativa, puntuamos cada uno por esfuerzo manual, riesgo de error y sensibilidad de datos, luego preseleccionamos candidatos seguros para automatización.',
-        icon: 'tabler:analyze',
-      },
-      {
-        title: 'Evaluación de Riesgo y Arquitectura de IA',
-        description: 'Para cada proceso candidato a automatización, evaluamos si la IA más adecuada es en la nube, híbrida o en local — reservando la IA externa exclusivamente para tareas no sensibles, con referencias al artículo del RGPD correspondiente a cada decisión.',
-        icon: 'tabler:cpu',
-      },
-      {
-        title: 'Brecha de Cumplimiento y Plan de Acción',
-        description: 'Identificamos documentación faltante, manejo inseguro de datos y brechas de gobernanza — luego convertimos los hallazgos en un plan de implementación claro y priorizado.',
-        icon: 'tabler:checklist',
-      },
-    ]}
-  />
-
   <!-- Process Timeline -->
 
   <Steps
     title="Cómo funciona la hoja de ruta"
-    subtitle="Un proceso estructurado que respeta tu tiempo y entrega resultados exhaustivos."
+    subtitle="Un proceso estructurado de una semana que respeta tu tiempo y cubre las cinco áreas críticas de evaluación."
     items={[
       {
         title: 'Día 1: <span class="font-medium">Consulta Inicial</span>',
-        description: 'Una conversación guiada de 60-75 minutos sobre las operaciones, herramientas, manejo de datos y puntos débiles de tu clínica. Sin jerga técnica — hacemos preguntas que puedes responder.',
+        description: 'Una conversación guiada de 60-75 minutos sobre las operaciones, herramientas, manejo de datos y puntos débiles de tu clínica, sin jerga técnica. Aquí evaluamos el <span class="font-medium">perfil de clínica y contexto de riesgo</span>: tamaño, madurez digital y herramientas existentes, para determinar tu nivel de riesgo y preparación para la automatización.',
         icon: 'tabler:messages',
       },
       {
         title: 'Días 2-3: <span class="font-medium">Mapeo de Datos y Análisis</span>',
-        description: 'Mapeamos tus flujos de datos, clasificamos información sensible y analizamos cada flujo de trabajo para potencial de automatización y exposición al cumplimiento.',
+        description: 'Mapeamos cada flujo de datos de pacientes — admisión, registros, imágenes, facturación, comunicaciones — clasificando cada uno por sensibilidad y exposición al <span class="font-medium">cumplimiento RGPD</span>. En paralelo, un <span class="font-medium">análisis de cuellos de botella en procesos</span> puntúa cada flujo de trabajo con alta carga administrativa por esfuerzo manual, riesgo de error y sensibilidad de datos, para preseleccionar los candidatos seguros a automatización.',
         icon: 'tabler:search',
       },
       {
         title: 'Días 4-5: <span class="font-medium">Evaluación de Riesgo y Arquitectura</span>',
-        description: 'Evaluamos opciones de IA para cada proceso, determinamos arquitecturas seguras (local vs. híbrida) e identificamos brechas de cumplimiento.',
+        description: 'Para cada proceso candidato, una <span class="font-medium">evaluación de riesgo y arquitectura de IA</span> determina si la solución más adecuada es en la nube, híbrida o en local — reservando la IA externa exclusivamente para tareas no sensibles, con referencias al artículo del RGPD correspondiente a cada decisión.',
         icon: 'tabler:shield-check',
       },
       {
         title: 'Días 6-7: <span class="font-medium">Informe y Recomendaciones</span>',
-        description: 'Recibes un informe escrito completo sobre el que puedes actuar de forma inmediata, con nosotros o por tu cuenta. El apartado siguiente detalla exactamente qué contiene.',
+        description: 'Convertimos los hallazgos en una <span class="font-medium">brecha de cumplimiento y plan de acción</span>: documentación faltante, manejo inseguro de datos y brechas de gobernanza, priorizados en un plan claro. Recibes un informe escrito completo sobre el que puedes actuar de inmediato, con nosotros o por tu cuenta. El apartado siguiente detalla exactamente qué contiene.',
         icon: 'tabler:file-report',
       },
     ]}

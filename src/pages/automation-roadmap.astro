@@ -5,7 +5,6 @@ import JsonLd from '~/components/common/JsonLd.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 import FeaturesCarousel from '~/components/widgets/FeaturesCarousel.astro';
-import Features from '~/components/widgets/Features.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
@@ -129,65 +128,34 @@ const pricingSchema = {
     </Fragment>
   </Hero>
 
-  <!-- Roadmap Coverage: 5 Blocks -->
-
-  <Features
-    title="What we assess"
-    subtitle="Our roadmap covers five critical areas."
-    columns={3}
-    items={[
-      {
-        title: 'Company Profile & Risk Context',
-        description: 'We assess your company size, digital maturity, and existing tools to determine your risk tier and automation readiness.',
-        icon: 'tabler:building-hospital',
-      },
-      {
-        title: 'Data Mapping & GDPR Compliance',
-        description: 'We map every customer data flow — intake, records, imaging, billing, communications — and classify each by sensitivity and compliance exposure.',
-        icon: 'tabler:database',
-      },
-      {
-        title: 'Process Bottleneck Analysis',
-        description: 'We identify admin-heavy workflows, score each by manual effort, error risk, and data sensitivity, then shortlist safe automation candidates.',
-        icon: 'tabler:analyze',
-      },
-      {
-        title: 'AI Risk & Architecture Assessment',
-        description: 'For each automation candidate, we evaluate whether cloud, hybrid, or on-prem AI is appropriate — keeping external AI to non-sensitive tasks, with GDPR article references for each decision.',
-        icon: 'tabler:cpu',
-      },
-      {
-        title: 'Compliance Gap & Action Plan',
-        description: 'We identify missing documentation, unsafe data handling, and governance gaps — then turn findings into a clear, prioritized implementation plan.',
-        icon: 'tabler:checklist',
-      },
-    ]}
-  />
-
-  <!-- Process Timeline -->
+  <!-- Process Timeline (with assessment coverage folded in) -->
 
   <Steps
     title="How the roadmap works"
-    subtitle="A structured process that respects your time while delivering thorough results."
+    subtitle="A structured one-week process that respects your time while covering all five critical areas."
     items={[
       {
         title: 'Day 1: <span class="font-medium">Initial Consultation</span>',
-        description: 'A 60-75 minute guided conversation about your operations, tools, data handling, and pain points. No technical jargon — we ask questions you can answer.',
+        description:
+          'A 60-75 minute guided conversation about your operations, tools, data handling, and pain points — no technical jargon. This is where we assess your <span class="font-medium">company profile and risk context</span>: size, digital maturity, and existing tools, to determine your risk tier and automation readiness.',
         icon: 'tabler:messages',
       },
       {
         title: 'Days 2-3: <span class="font-medium">Data Mapping & Analysis</span>',
-        description: 'We map your data flows, classify sensitive information, and analyze every workflow for automation potential and compliance exposure.',
+        description:
+          'We map every data flow — intake, records, imaging, billing, communications — classifying each by sensitivity and <span class="font-medium">GDPR compliance</span> exposure. In parallel, a <span class="font-medium">process bottleneck analysis</span> scores each admin-heavy workflow by manual effort, error risk, and data sensitivity to shortlist safe automation candidates.',
         icon: 'tabler:search',
       },
       {
         title: 'Days 4-5: <span class="font-medium">Risk Assessment & Architecture</span>',
-        description: 'We evaluate AI options for each process, determine safe architectures (on-prem vs. hybrid), and identify compliance gaps.',
+        description:
+          'For each candidate, an <span class="font-medium">AI risk & architecture assessment</span> evaluates whether cloud, hybrid, or on-prem AI is appropriate — keeping external AI to non-sensitive tasks, with GDPR article references for every decision.',
         icon: 'tabler:shield-check',
       },
       {
         title: 'Days 6-7: <span class="font-medium">Report & Recommendations</span>',
-        description: 'You receive a complete written report you can act on — with or without us. The next section details exactly what it contains.',
+        description:
+          'We turn findings into a <span class="font-medium">compliance gap & action plan</span> — missing documentation, unsafe data handling, and governance gaps, prioritized into a clear plan. You receive a complete written report you can act on, with or without us. The next section details exactly what it contains.',
         icon: 'tabler:file-report',
       },
     ]}

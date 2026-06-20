@@ -358,5 +358,23 @@ export default defineConfig({
         '~': path.resolve(__dirname, './src'),
       },
     },
+    build: {
+      rollupOptions: {
+        // Astro 6's own dist file (node_modules/astro/dist/assets/utils/index.js)
+        // imports several helpers from "@astrojs/internal-helpers/remote" that it
+        // doesn't use, producing a harmless UNUSED_EXTERNAL_IMPORT warning we can't
+        // fix upstream. Suppress only that exact warning; pass everything else through.
+        onwarn(warning, warn) {
+          if (
+            warning.code === 'UNUSED_EXTERNAL_IMPORT' &&
+            typeof warning.exporter === 'string' &&
+            warning.exporter.includes('@astrojs/internal-helpers')
+          ) {
+            return;
+          }
+          warn(warning);
+        },
+      },
+    },
   },
 });

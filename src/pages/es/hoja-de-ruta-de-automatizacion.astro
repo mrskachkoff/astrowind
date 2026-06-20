@@ -112,10 +112,6 @@ const pricingSchema = {
         icon: 'tabler:arrow-right',
       },
     ]}
-    image={{
-      src: '~/assets/images/business-planning.jpg',
-      alt: 'Profesional revisando documentos de cumplimiento',
-    }}
   >
     <Fragment slot="title">
       5-7 Días Gratuitos<br />
@@ -126,6 +122,52 @@ const pricingSchema = {
       Evaluamos el manejo de datos de tu clínica, mapeamos brechas de cumplimiento e identificamos dónde la IA puede automatizar tareas de forma segura — completamente gratis. Recibe un informe detallado con puntuaciones de riesgo, recomendaciones de automatización segura y una hoja de ruta clara.
     </Fragment>
   </Hero>
+
+  <!-- Specific Deliverables -->
+
+  <FeaturesCarousel
+    id="entregables"
+    tagline="Entregables"
+    title="Qué incluye el informe"
+    subtitle="Cada hoja de ruta entrega estos resultados específicos y accionables — una evaluación integral de cumplimiento y automatización en 5-7 días laborables."
+    items={[
+      {
+        title: 'Resumen Ejecutivo de Riesgo y Puntuación',
+        description: 'Una visión general de 2 páginas en lenguaje claro — sin jerga — con una calificación clara de tu manejo de datos y tu preparación para la automatización que señala tus áreas de riesgo específicas.',
+        icon: 'tabler:report-analytics',
+      },
+      {
+        title: 'Diagrama de Flujo de Datos',
+        description: 'Un mapa visual de cómo se mueven los datos de pacientes a través de tu clínica — dónde se almacenan, quién accede a ellos y dónde existen brechas.',
+        icon: 'tabler:hierarchy',
+      },
+      {
+        title: 'Lista de Brechas de Cumplimiento',
+        description: 'Cada documento faltante, práctica insegura y brecha de gobernanza — priorizados por nivel de riesgo y esfuerzo para corregir.',
+        icon: 'tabler:list-check',
+      },
+      {
+        title: 'Lista de IA Segura / Insegura / Condicional',
+        description: 'Cada flujo de trabajo claramente calificado: qué es seguro automatizar, qué requiere condiciones y qué nunca debe automatizarse.',
+        icon: 'tabler:traffic-lights',
+      },
+      {
+        title: 'Matriz de Automatización de Flujos de Trabajo',
+        description: 'Cada proceso administrativo puntuado por esfuerzo manual, riesgo de error, sensibilidad de datos, potencial de automatización y exposición al cumplimiento.',
+        icon: 'tabler:table',
+      },
+      {
+        title: 'Plan de Arquitectura Aprobado',
+        description: 'Para cada automatización segura, el enfoque recomendado — local, híbrido o (raramente) nube — con justificación RGPD.',
+        icon: 'tabler:server',
+      },
+      {
+        title: 'Hoja de Ruta de Implementación por Fases',
+        description: 'Fase 1: Corregir riesgos de cumplimiento. Fase 2: Implementar automatizaciones seguras. Fase 3: Establecer monitorización continua y optimización.',
+        icon: 'tabler:road',
+      },
+    ]}
+  />
 
   <!-- Process Timeline -->
 
@@ -199,52 +241,6 @@ const pricingSchema = {
       <div class="absolute inset-0 dark:bg-transparent" style="background-image: var(--grad-lilac);"></div>
     </Fragment>
   </Content>
-
-  <!-- Specific Deliverables -->
-
-  <FeaturesCarousel
-    id="entregables"
-    tagline="Entregables"
-    title="Qué incluye el informe"
-    subtitle="Cada hoja de ruta entrega estos resultados específicos y accionables — una evaluación integral de cumplimiento y automatización en 5-7 días laborables."
-    items={[
-      {
-        title: 'Resumen Ejecutivo de Riesgo y Puntuación',
-        description: 'Una visión general de 2 páginas en lenguaje claro — sin jerga — con una calificación clara de tu manejo de datos y tu preparación para la automatización que señala tus áreas de riesgo específicas.',
-        icon: 'tabler:report-analytics',
-      },
-      {
-        title: 'Diagrama de Flujo de Datos',
-        description: 'Un mapa visual de cómo se mueven los datos de pacientes a través de tu clínica — dónde se almacenan, quién accede a ellos y dónde existen brechas.',
-        icon: 'tabler:hierarchy',
-      },
-      {
-        title: 'Lista de Brechas de Cumplimiento',
-        description: 'Cada documento faltante, práctica insegura y brecha de gobernanza — priorizados por nivel de riesgo y esfuerzo para corregir.',
-        icon: 'tabler:list-check',
-      },
-      {
-        title: 'Lista de IA Segura / Insegura / Condicional',
-        description: 'Cada flujo de trabajo claramente calificado: qué es seguro automatizar, qué requiere condiciones y qué nunca debe automatizarse.',
-        icon: 'tabler:traffic-lights',
-      },
-      {
-        title: 'Matriz de Automatización de Flujos de Trabajo',
-        description: 'Cada proceso administrativo puntuado por esfuerzo manual, riesgo de error, sensibilidad de datos, potencial de automatización y exposición al cumplimiento.',
-        icon: 'tabler:table',
-      },
-      {
-        title: 'Plan de Arquitectura Aprobado',
-        description: 'Para cada automatización segura, el enfoque recomendado — local, híbrido o (raramente) nube — con justificación RGPD.',
-        icon: 'tabler:server',
-      },
-      {
-        title: 'Hoja de Ruta de Implementación por Fases',
-        description: 'Fase 1: Corregir riesgos de cumplimiento. Fase 2: Implementar automatizaciones seguras. Fase 3: Establecer monitorización continua y optimización.',
-        icon: 'tabler:road',
-      },
-    ]}
-  />
 
   <!-- Precios -->
 

@@ -112,10 +112,6 @@ const pricingSchema = {
         icon: 'tabler:arrow-right',
       },
     ]}
-    image={{
-      src: '~/assets/images/business-planning.jpg',
-      alt: 'Professional reviewing compliance documents',
-    }}
   >
     <Fragment slot="title">
       A Clear Path to <span class="text-accent dark:text-white">Compliant Automation</span>
@@ -125,43 +121,6 @@ const pricingSchema = {
       It starts with a free roadmap and continues through implementation and ongoing support. Every step is built around customer data privacy. Not a sales pitch — a genuine assessment you can act on independently, with options for larger organisations.
     </Fragment>
   </Hero>
-
-  <!-- Process Timeline (with assessment coverage folded in) -->
-
-  <Steps
-    title="How the roadmap works"
-    subtitle="A structured one-week process that respects your time while covering all five critical areas."
-    items={[
-      {
-        title: 'Day 1: <span class="font-medium">Initial Consultation</span>',
-        description:
-          'A 60-75 minute guided conversation about your operations, tools, data handling, and pain points — no technical jargon. This is where we assess your <span class="font-medium">company profile and risk context</span>: size, digital maturity, and existing tools, to determine your risk tier and automation readiness.',
-        icon: 'tabler:messages',
-      },
-      {
-        title: 'Days 2-3: <span class="font-medium">Data Mapping & Analysis</span>',
-        description:
-          'We map every data flow — intake, records, imaging, billing, communications — classifying each by sensitivity and <span class="font-medium">GDPR compliance</span> exposure. In parallel, a <span class="font-medium">process bottleneck analysis</span> scores each admin-heavy workflow by manual effort, error risk, and data sensitivity to shortlist safe automation candidates.',
-        icon: 'tabler:search',
-      },
-      {
-        title: 'Days 4-5: <span class="font-medium">Risk Assessment & Architecture</span>',
-        description:
-          'For each candidate, an <span class="font-medium">AI risk & architecture assessment</span> evaluates whether cloud, hybrid, or on-prem AI is appropriate — keeping external AI to non-sensitive tasks, with GDPR article references for every decision.',
-        icon: 'tabler:shield-check',
-      },
-      {
-        title: 'Days 6-7: <span class="font-medium">Report & Recommendations</span>',
-        description:
-          'We turn findings into a <span class="font-medium">compliance gap & action plan</span> — missing documentation, unsafe data handling, and governance gaps, prioritized into a clear plan. You receive a complete written report you can act on, with or without us. The next section details exactly what it contains.',
-        icon: 'tabler:file-report',
-      },
-    ]}
-    image={{
-      src: '~/assets/images/strategy-session.jpg',
-      alt: 'Structured planning process',
-    }}
-  />
 
   <!-- Specific Deliverables -->
 
@@ -207,6 +166,43 @@ const pricingSchema = {
         icon: 'tabler:road',
       },
     ]}
+  />
+
+  <!-- Process Timeline (with assessment coverage folded in) -->
+
+  <Steps
+    title="How the roadmap works"
+    subtitle="A structured one-week process that respects your time while covering all five critical areas."
+    items={[
+      {
+        title: 'Day 1: <span class="font-medium">Initial Consultation</span>',
+        description:
+          'A 60-75 minute guided conversation about your operations, tools, data handling, and pain points — no technical jargon. This is where we assess your <span class="font-medium">company profile and risk context</span>: size, digital maturity, and existing tools, to determine your risk tier and automation readiness.',
+        icon: 'tabler:messages',
+      },
+      {
+        title: 'Days 2-3: <span class="font-medium">Data Mapping & Analysis</span>',
+        description:
+          'We map every data flow — intake, records, imaging, billing, communications — classifying each by sensitivity and <span class="font-medium">GDPR compliance</span> exposure. In parallel, a <span class="font-medium">process bottleneck analysis</span> scores each admin-heavy workflow by manual effort, error risk, and data sensitivity to shortlist safe automation candidates.',
+        icon: 'tabler:search',
+      },
+      {
+        title: 'Days 4-5: <span class="font-medium">Risk Assessment & Architecture</span>',
+        description:
+          'For each candidate, an <span class="font-medium">AI risk & architecture assessment</span> evaluates whether cloud, hybrid, or on-prem AI is appropriate — keeping external AI to non-sensitive tasks, with GDPR article references for every decision.',
+        icon: 'tabler:shield-check',
+      },
+      {
+        title: 'Days 6-7: <span class="font-medium">Report & Recommendations</span>',
+        description:
+          'We turn findings into a <span class="font-medium">compliance gap & action plan</span> — missing documentation, unsafe data handling, and governance gaps, prioritized into a clear plan. You receive a complete written report you can act on, with or without us. The next section details exactly what it contains.',
+        icon: 'tabler:file-report',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/strategy-session.jpg',
+      alt: 'Structured planning process',
+    }}
   />
 
   <!-- Service Overview: 3 Pillars -->

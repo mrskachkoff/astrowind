@@ -6,18 +6,6 @@
     "condition": null
   },
   {
-    "source": "/services",
-    "target": "/services/",
-    "status": "301",
-    "condition": null
-  },
-  {
-    "source": "/pricing",
-    "target": "/pricing/",
-    "status": "301",
-    "condition": null
-  },
-  {
     "source": "/contact",
     "target": "/contact/",
     "status": "301",
@@ -62,18 +50,6 @@
   {
     "source": "/es/nosotros",
     "target": "/es/nosotros/",
-    "status": "301",
-    "condition": null
-  },
-  {
-    "source": "/es/servicios",
-    "target": "/es/servicios/",
-    "status": "301",
-    "condition": null
-  },
-  {
-    "source": "/es/precios",
-    "target": "/es/precios/",
     "status": "301",
     "condition": null
   },
@@ -313,6 +289,54 @@
   },
   {
     "source": "/es/auditoria-ia-gratuita/",
+    "target": "/es/hoja-de-ruta-de-automatizacion/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/services",
+    "target": "/medcore-private-ai/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/services/",
+    "target": "/medcore-private-ai/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/pricing",
+    "target": "/automation-roadmap/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/pricing/",
+    "target": "/automation-roadmap/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/servicios",
+    "target": "/es/medcore-ia-privada/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/servicios/",
+    "target": "/es/medcore-ia-privada/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/precios",
+    "target": "/es/hoja-de-ruta-de-automatizacion/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/precios/",
     "target": "/es/hoja-de-ruta-de-automatizacion/",
     "status": "301",
     "condition": null

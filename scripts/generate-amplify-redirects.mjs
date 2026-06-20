@@ -5,18 +5,26 @@ const outputPath = path.resolve('amplify-redirects.json');
 const postsDir = path.resolve('src/data/post');
 const args = new Set(process.argv.slice(2));
 
+// Legacy paths that are NOT real pages: they redirect to a different canonical page.
+// Both the bare and trailing-slash variants must land directly on the target so we
+// never chain through an Astro redirect stub (e.g. /services -> /services/ -> target).
+// Targets must match the `redirects` map in astro.config.ts.
 const staticRedirects = [
   ['/free-ai-audit', '/automation-roadmap/'],
   ['/es/auditoria-ia-gratuita', '/es/hoja-de-ruta-de-automatizacion/'],
+  ['/services', '/medcore-private-ai/'],
+  ['/pricing', '/automation-roadmap/'],
+  ['/es/servicios', '/es/medcore-ia-privada/'],
+  ['/es/precios', '/es/hoja-de-ruta-de-automatizacion/'],
 ];
 
 // Trailing-slash enforcement for all indexable static pages.
 // Amplify may serve both /about and /about/ without redirect; these rules ensure
 // the canonical (trailing-slash) URL is always the one Google lands on.
+// NOTE: only real pages belong here. Legacy redirect sources (/services, /pricing,
+// /es/servicios, /es/precios) live in staticRedirects above.
 const trailingSlashPages = [
   '/about',
-  '/services',
-  '/pricing',
   '/contact',
   '/automation-roadmap',
   '/medcore-private-ai',
@@ -25,8 +33,6 @@ const trailingSlashPages = [
   '/blog',
   '/es',
   '/es/nosotros',
-  '/es/servicios',
-  '/es/precios',
   '/es/contacto',
   '/es/hoja-de-ruta-de-automatizacion',
   '/es/medcore-ia-privada',

@@ -4,6 +4,7 @@ import JsonLd from '~/components/common/JsonLd.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
 import Features2 from '~/components/widgets/Features2.astro';
+import FeaturesCarousel from '~/components/widgets/FeaturesCarousel.astro';
 import Features from '~/components/widgets/Features.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import Content from '~/components/widgets/Content.astro';
@@ -14,8 +15,8 @@ import Prices from '~/components/widgets/Pricing.astro';
 import Features3 from '~/components/widgets/Features3.astro';
 
 const metadata = {
-  title: 'Free Automation Roadmap for Healthcare Clinics',
-  description: 'Get a free 5-7 day AI compliance assessment for your healthcare practice. We map data flows, identify GDPR-safe automations, and deliver a roadmap.',
+  title: 'Free Automation Roadmap — AI Compliance & Risk Assessment',
+  description: 'Get a free 5-7 day AI compliance assessment for your company. We map data flows, identify GDPR-safe automations, and deliver a roadmap.',
   openGraph: {
     images: [{ url: '~/assets/images/ai-workflow-tablet.jpg' }],
   },
@@ -24,8 +25,8 @@ const metadata = {
 const roadmapSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  name: 'Free Automation Roadmap for Healthcare Clinics',
-  description: 'A free 5-7 day AI compliance assessment for healthcare practices. Includes data flow mapping, GDPR compliance gap analysis, and a prioritised automation roadmap delivered at no cost.',
+  name: 'Free Automation Roadmap — AI Compliance & Risk Assessment',
+  description: 'A free 5-7 day AI compliance assessment for companies. Includes data flow mapping, GDPR compliance gap analysis, and a prioritised automation roadmap delivered at no cost.',
   inLanguage: 'en',
   provider: { '@id': 'https://solutions.futurion.es/#organization' },
   offers: {
@@ -47,7 +48,7 @@ const pricingSchema = {
   '@context': 'https://schema.org',
   '@type': 'OfferCatalog',
   name: 'AI Automation Services Pricing — Futurion Solutions',
-  description: 'Transparent pricing for compliance-first AI automation for healthcare providers in Spain and the EU.',
+  description: 'Transparent pricing for compliance-first AI automation for companies in Spain and the EU.',
   inLanguage: 'en',
   provider: { '@id': 'https://solutions.futurion.es/#organization' },
   url: 'https://solutions.futurion.es/automation-roadmap/',
@@ -121,18 +122,18 @@ const pricingSchema = {
     }}
   >
     <Fragment slot="title">
-      Free 5-7 Day<br />
-      <span class="text-accent dark:text-white">Automation Roadmap</span>
+      Automation That Puts <span class="text-accent dark:text-white">Compliance First</span>
     </Fragment>
 
     <Fragment slot="subtitle">
-      We assess your clinic's data handling, map compliance gaps, and identify where AI can safely automate tasks — completely free. You receive a detailed report with risk scores, safe automation recommendations, and a clear roadmap.
+      From your Automation Roadmap to ongoing support, we deliver solutions designed for customer data privacy at their core. Service pillars that work together to transform your practice safely — with enterprise-grade options for larger organizations.
     </Fragment>
   </Hero>
 
   <!-- Value Prop: What You'll Receive -->
 
-  <Features2
+  <FeaturesCarousel
+    id="deliverables"
     title="What you'll receive"
     subtitle="A comprehensive compliance and automation assessment delivered in 5-7 business days."
     tagline="Deliverables"
@@ -158,11 +159,7 @@ const pricingSchema = {
         icon: 'tabler:road',
       },
     ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 dark:bg-transparent" style="background-image: var(--grad-lilac);"></div>
-    </Fragment>
-  </Features2>
+  />
 
   <!-- Roadmap Coverage: 5 Blocks -->
 
@@ -172,13 +169,13 @@ const pricingSchema = {
     columns={3}
     items={[
       {
-        title: 'Clinic Profile & Risk Context',
-        description: 'We assess your clinic size, patient volume, digital maturity, and existing tools to determine your risk tier and automation readiness.',
+        title: 'Company Profile & Risk Context',
+        description: 'We assess your company size, digital maturity, and existing tools to determine your risk tier and automation readiness.',
         icon: 'tabler:building-hospital',
       },
       {
         title: 'Data Mapping & GDPR Compliance',
-        description: 'We map every patient data flow — intake, records, imaging, billing, communications — and classify each by sensitivity and compliance exposure.',
+        description: 'We map every customer data flow — intake, records, imaging, billing, communications — and classify each by sensitivity and compliance exposure.',
         icon: 'tabler:database',
       },
       {
@@ -232,46 +229,6 @@ const pricingSchema = {
     }}
   />
 
-  <!-- Who It's For -->
-
-  <Content
-    isReversed
-    tagline="Is this for you?"
-    title="Built for healthcare"
-    items={[
-      {
-        title: 'Dental clinics with 1-10 employees',
-        description: 'Solo practitioners to small group practices dealing with appointment management, patient communications, and billing.',
-      },
-      {
-        title: 'Independent pharmacies',
-        description: 'Pharmacies handling patient data, prescription workflows, and supplier communications that need compliance-safe automation.',
-      },
-      {
-        title: 'Small medical clinics (2-5 practitioners)',
-        description: 'Multi-practitioner clinics with high admin overhead, complex scheduling, and patient data compliance requirements.',
-      },
-      {
-        title: 'Practice owners who are...',
-        description: 'Overwhelmed by administrative tasks, concerned about data privacy with new technology, or considering hiring additional staff to handle the workload.',
-      },
-    ]}
-    image={{
-      src: '~/assets/images/medical-office.jpg',
-      alt: 'Dental clinic environment',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">You don't need a big IT budget</h3>
-      Our roadmap is designed for practices that don't have dedicated IT teams or compliance officers — that's exactly why it's valuable.
-      Recent clinical AI availability issues, including <a href="/openevidence-eu-uk-withdrawal-private-on-prem-sovereign-cloud/" class="underline font-bold">OpenEvidence's EU/UK withdrawal</a>, are exactly the kind of architecture risk we assess before automation begins.
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 dark:bg-transparent" style="background-image: var(--grad-lilac);"></div>
-    </Fragment>
-  </Content>
-
   <!-- Specific Deliverables -->
 
   <Features2
@@ -324,11 +281,11 @@ const pricingSchema = {
       },
       {
         title: 'Is there really no obligation?',
-        description: 'None. You receive a complete report you can act on independently. About 40-60% of clinics that complete a roadmap choose to proceed with implementation, but there is no pressure or commitment required.',
+        description: 'None. You receive a complete report you can act on independently. About 40-60% of customers that complete a roadmap choose to proceed with implementation, but there is no pressure or commitment required.',
       },
       {
         title: 'What if you find serious compliance issues?',
-        description: 'We report them clearly and prioritize them in your roadmap. This happens frequently — most clinics have gaps they\'re unaware of. We never use findings to pressure you. We present facts and recommendations.',
+        description: 'We report them clearly and prioritize them in your roadmap. This happens frequently — most companies have gaps they\'re unaware of. We never use findings to pressure you. We present facts and recommendations.',
       },
       {
         title: 'Can we implement the recommendations ourselves?',
@@ -336,7 +293,7 @@ const pricingSchema = {
       },
       {
         title: 'Why do you offer this for free?',
-        description: 'The roadmap builds trust and demonstrates our expertise. When practices see the depth of analysis and the quality of recommendations, many choose to work with us for implementation. It\'s our way of proving value before asking for a commitment.',
+        description: 'The roadmap builds trust and demonstrates our expertise. When clients see the depth of analysis and the quality of recommendations, many choose to work with us for implementation. It\'s our way of proving value before asking for a commitment.',
       },
       {
         title: 'What happens after the roadmap?',
@@ -364,21 +321,6 @@ const pricingSchema = {
       Each roadmap receives our full attention — thorough analysis, detailed reporting, and personalized recommendations. We limit capacity to maintain quality. Secure your spot today.
     </Fragment>
   </CallToAction>
-
-  <!-- Hero -->
-
-  <Hero
-    tagline="Our Services"
-    title="AI Automation That Puts Compliance First"
-    subtitle="From your Automation Roadmap to ongoing support, we deliver AI solutions designed with healthcare data privacy at their core. Service pillars that work together to transform your practice safely — with enterprise-grade options for larger organizations."
-    actions={[
-      { variant: 'primary', text: 'Start with Automation Roadmap', href: '/automation-roadmap/', icon: 'tabler:arrow-right' },
-    ]}
-    image={{
-      src: '~/assets/images/team-working.jpg',
-      alt: 'Professional team working together',
-    }}
-  />
 
   <!-- Service Overview: 3 Pillars -->
 
@@ -657,7 +599,7 @@ const pricingSchema = {
       {
         title: 'Why is the roadmap free?',
         description:
-          'The roadmap builds trust and demonstrates our expertise. When practices see the depth of analysis, many choose to proceed with implementation. It\'s our way of proving value before asking for a commitment. About 40-60% of clinics that complete a roadmap proceed.',
+          'The roadmap builds trust and demonstrates our expertise. When clients see the depth of analysis, many choose to proceed with implementation. It\'s our way of proving value before asking for a commitment. About 40-60% of clinics that complete a roadmap proceed.',
       },
       {
         title: 'How do you determine implementation pricing?',

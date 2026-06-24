@@ -116,7 +116,7 @@ const homeHref = lang === 'es' ? '/es/' : getHomePermalink();
                           ]}
                           href={href2}
                         >
-                          {logo2 && <img src={logo2.src} width="20" height="20" class="object-contain flex-shrink-0" alt="" />}
+                          {logo2 && <img src={logo2.src} width="20" height="20" class="object-contain flex-shrink-0" alt={text2} aria-hidden="true" />}
                           {text2}
                         </a>
                       </li>

@@ -26,7 +26,7 @@ const faqSchema = {
       "name": "What does Futurion Solutions do?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "We build private AI tools — TrustPrompt and TrustCore — and run an automation practice, TrustAuto, for organisations that work with sensitive or regulated data. Everything is designed to run on infrastructure you control rather than a shared cloud service."
+        "text": "We build private AI tools — TrustPrompt, TrustCore and TrustAuto — and run an automation practice (our Automation Roadmap) for organisations that work with sensitive or regulated data. Everything is designed to run on infrastructure you control rather than a shared cloud service."
       }
     },
     {
@@ -34,7 +34,7 @@ const faqSchema = {
       "name": "Does our data leave our own infrastructure?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. TrustPrompt analyses text in the browser, TrustCore answers from documents on your own machine, and TrustAuto automations run on-premise or in a hybrid setup. Sensitive data stays inside your boundary."
+        "text": "No. TrustPrompt analyses text in the browser, TrustCore answers from documents on your own machine, and TrustAuto runs entirely on your own premises alongside the systems it checks. Sensitive data stays inside your boundary."
       }
     },
     {
@@ -315,6 +315,45 @@ const faqSchema = {
   <Content
     id="trustauto"
     tagline="TrustAuto"
+    title="An On-Premises Compliance Control Center"
+    items={[
+      {
+        title: 'Connects to your existing systems',
+        description:
+          'Plugs into the infrastructure you already run. Nothing is handed to a SaaS vendor.',
+      },
+      {
+        title: 'Continuous compliance checks',
+        description:
+          'Continuously verifies whether your controls still satisfy SOC 2, ISO 27001, HIPAA and GDPR — not a once-a-year snapshot.',
+      },
+      {
+        title: 'Non-SaaS, on-premises by design',
+        description:
+          'Fully self-hosted, so the systems and evidence it inspects never leave your boundary.',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/security-compliance-dashboard.jpg',
+      alt: 'On-premises compliance control center dashboard',
+    }}
+    callToAction={{
+      text: 'Explore TrustAuto',
+      href: '/products/trustauto/',
+      icon: 'tabler:chevron-right',
+    }}
+  >
+    <Fragment slot="content">
+      TrustAuto is a non-SaaS, fully on-premises compliance control center. It connects to the systems you already run and continuously checks whether your organisation is meeting the security controls and privacy standards it&apos;s held to — SOC&nbsp;2, ISO&nbsp;27001, HIPAA and GDPR.
+    </Fragment>
+  </Content>
+
+  <!-- Automation Roadmap -->
+
+  <Content
+    id="automation-roadmap"
+    isReversed
+    tagline="Automation Roadmap"
     title="Compliance Automation, Built on Infrastructure You Control"
     items={[
       {
@@ -338,7 +377,7 @@ const faqSchema = {
       alt: 'Team reviewing automated compliance workflows',
     }}
     callToAction={{
-      text: 'Explore Compliant Automation',
+      text: 'Explore the Roadmap',
       href: '/automation-roadmap/',
       icon: 'tabler:chevron-right',
     }}
@@ -348,12 +387,11 @@ const faqSchema = {
     </Fragment>
   </Content>
 
-  <!-- MedCore (TrustAuto for healthcare) -->
+  <!-- MedCore (Private AI for healthcare) -->
 
   <Content
     id="medcore"
-    isReversed
-    tagline="TrustAuto for Healthcare"
+    tagline="Private AI for Healthcare"
     title="MedCore — Private AI for Medical Organisations"
     items={[
       {
@@ -383,7 +421,7 @@ const faqSchema = {
     }}
   >
     <Fragment slot="content">
-      MedCore is the TrustAuto offering for hospitals, clinics and medical groups: medical-grade AI infrastructure that runs entirely on your premises, built on HAPI FHIR and OpenEHR with clinical models that run locally. For context, read our analysis of <a href="/openevidence-eu-uk-withdrawal-private-on-prem-sovereign-cloud/" class="underline">OpenEvidence&apos;s EU/UK withdrawal</a> and what it means for clinical AI architecture.
+      MedCore is our private-AI solution for hospitals, clinics and medical groups: medical-grade AI infrastructure that runs entirely on your premises, built on HAPI FHIR and OpenEHR with clinical models that run locally. For context, read our analysis of <a href="/openevidence-eu-uk-withdrawal-private-on-prem-sovereign-cloud/" class="underline">OpenEvidence&apos;s EU/UK withdrawal</a> and what it means for clinical AI architecture.
     </Fragment>
   </Content>
 
@@ -398,12 +436,12 @@ const faqSchema = {
       {
         title: 'What does Futurion Solutions do?',
         description:
-          'We build private AI tools — TrustPrompt and TrustCore — and run an automation practice, TrustAuto, for organisations that work with sensitive or regulated data. Everything is designed to run on infrastructure you control rather than a shared cloud service.',
+          'We build private AI tools — TrustPrompt, TrustCore and TrustAuto — and run an automation practice (our Automation Roadmap) for organisations that work with sensitive or regulated data. Everything is designed to run on infrastructure you control rather than a shared cloud service.',
       },
       {
         title: 'Does our data leave our own infrastructure?',
         description:
-          'No. TrustPrompt analyses text in the browser, TrustCore answers from documents on your own machine, and TrustAuto automations run on-premise or in a hybrid setup. Sensitive data stays inside your boundary.',
+          'No. TrustPrompt analyses text in the browser, TrustCore answers from documents on your own machine, and TrustAuto runs entirely on your own premises alongside the systems it checks. Sensitive data stays inside your boundary.',
       },
       {
         title: 'Which compliance frameworks do you map to?',

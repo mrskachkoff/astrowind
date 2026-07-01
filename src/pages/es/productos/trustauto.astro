@@ -1,36 +1,427 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import HeroText from '~/components/widgets/HeroText.astro';
+import JsonLd from '~/components/common/JsonLd.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import FeaturesCarousel from '~/components/widgets/FeaturesCarousel.astro';
+import Prices from '~/components/widgets/Pricing.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
 
 import imgTrustAuto from '~/assets/images/trustauto.png';
+import imgWorkflow from '~/assets/images/ai-workflow-tablet.jpg';
 
 const metadata = {
-  title: 'TrustAuto — Cumplimiento On-Premise',
+  title: 'TrustAuto — Automatización de procesos de negocio, en tus condiciones',
   description:
-    'Centro de control de cumplimiento on-premise, sin SaaS, conectado a tus sistemas. Verifica SOC 2, ISO 27001, HIPAA y RGPD continuamente. Próximamente.',
+    'Automatiza el trabajo administrativo repetitivo de tu empresa — recordatorios, seguimientos, altas, facturación, aprobaciones — sobre Power Automate o n8n, en tu propia infraestructura.',
   openGraph: {
     images: [{ url: '~/assets/images/trustauto.png' }],
   },
 };
+
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'TrustAuto',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'On-premises o híbrido (Microsoft Power Automate o n8n autoalojado)',
+  description:
+    'Automatización de procesos de negocio para pequeñas y medianas empresas. TrustAuto gestiona el trabajo administrativo repetitivo — recordatorios, seguimientos, altas, facturación, aprobaciones y movimiento de datos entre sistemas — sobre Power Automate o n8n autoalojado, ejecutándose en tu propia infraestructura o en un entorno híbrido, en torno a los sistemas que ya utilizas. El motor de flujos de trabajo orquesta tareas, aprobaciones, temporizadores y escalados sin convertirse en la fuente de verdad; el acceso es por roles, cada acción queda registrada y una persona decide cuando se requiere criterio.',
+  url: 'https://solutions.futurion.es/es/productos/trustauto/',
+  inLanguage: 'es',
+  featureList: [
+    'Construido sobre Microsoft Power Automate o n8n autoalojado',
+    'El motor de flujos orquesta sin convertirse en la fuente de verdad',
+    'Los conectores actúan como adaptadores, no como propietarios de tus datos',
+    'Acceso por roles con alcance definido a los datos',
+    'Cada acción registrada y atribuible',
+    'Aprobación humana donde se requiere criterio',
+    'Se ejecuta on-premises o en un entorno híbrido',
+    'Funciona como capa sobre tus sistemas existentes',
+  ],
+  author: { '@id': 'https://solutions.futurion.es/#organization' },
+  offers: {
+    '@type': 'Offer',
+    priceSpecification: {
+      '@type': 'PriceSpecification',
+      minPrice: '0',
+      priceCurrency: 'EUR',
+    },
+    availability: 'https://schema.org/InStock',
+  },
+};
+
+const pricingSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'OfferCatalog',
+  name: 'Precios de Servicios de Automatización TrustAuto — Futurion Solutions',
+  description: 'Precios transparentes para automatización de procesos de negocio conforme al RGPD para empresas en España y la UE.',
+  inLanguage: 'es',
+  provider: { '@id': 'https://solutions.futurion.es/#organization' },
+  url: 'https://solutions.futurion.es/es/productos/trustauto/',
+  itemListElement: [
+    {
+      '@type': 'Offer',
+      name: 'Hoja de Ruta de Automatización',
+      description: 'Evaluación gratuita de automatización IA en 5-7 días con mapeo de flujos de datos, análisis de brechas y hoja de ruta priorizada.',
+      price: '0',
+      priceCurrency: 'EUR',
+      availability: 'https://schema.org/InStock',
+      url: 'https://solutions.futurion.es/es/hoja-de-ruta-de-automatizacion/',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Implementación Quick-Win',
+      description: '1-2 automatizaciones de alto impacto entregadas en 2-4 semanas. Arquitectura local o híbrida con controles de cumplimiento RGPD.',
+      priceSpecification: { '@type': 'PriceSpecification', minPrice: '1500', priceCurrency: 'EUR' },
+      availability: 'https://schema.org/InStock',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Paquete Integral',
+      description: 'Transformación completa de la consulta en 6-12 semanas. Múltiples automatizaciones con marco de cumplimiento integrado y formación del personal.',
+      priceSpecification: { '@type': 'PriceSpecification', minPrice: '5000', priceCurrency: 'EUR' },
+      availability: 'https://schema.org/InStock',
+    },
+    {
+      '@type': 'Offer',
+      name: 'MedCore Private AI',
+      description: 'Infraestructura IA de grado médico completamente local para organizaciones sanitarias medianas. Precio por proyecto.',
+      priceSpecification: { '@type': 'PriceSpecification', minPrice: '25000', priceCurrency: 'EUR' },
+      availability: 'https://schema.org/InStock',
+      url: 'https://solutions.futurion.es/es/medcore-ia-privada/',
+    },
+  ],
+};
 ---
 
 <Layout metadata={metadata}>
-  <HeroText tagline="Próximamente">
+  <JsonLd schema={productSchema} />
+
+  <!-- Hero -->
+
+  <Hero
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Contáctanos',
+        href: '/es/contacto/',
+        icon: 'tabler:arrow-right',
+      },
+      {
+        variant: 'secondary',
+        text: 'Ver Precios',
+        href: '#precios',
+      },
+    ]}
+  >
     <Fragment slot="title">
       <img
         src={imgTrustAuto.src}
-        alt="Logo TrustAuto"
-        width="120"
-        height="120"
-        class="mx-auto mb-6 object-contain"
+        alt="TrustAuto logo"
+        width="84"
+        height="84"
+        class="mx-auto mb-4 object-contain drop-shadow-lg"
       />
-      TrustAuto
+      TrustAuto<br />
+      <span class="text-accent dark:text-white highlight">Automatiza el trabajo mecánico sin ceder el control de tus sistemas ni de tus datos</span>
     </Fragment>
 
     <Fragment slot="subtitle">
-      Un centro de control de cumplimiento normativo sin SaaS, completamente on-premise. TrustAuto se conecta a sus
-      sistemas existentes y verifica de forma continua si su organización está cumpliendo los controles de seguridad
-      y los estándares de privacidad a los que está sujeta — SOC&nbsp;2, ISO&nbsp;27001, HIPAA y RGPD.
+      <span class="hidden sm:inline">
+        TrustAuto elimina el trabajo administrativo repetitivo de tu equipo — recordatorios de citas y
+        pagos, seguimientos, formularios de alta, facturación, aprobaciones y movimiento de datos entre
+        las herramientas que ya utilizas. Se construye sobre <span class="font-medium">Power Automate</span> o
+        <span class="font-medium">n8n autoalojado</span>, y se ejecuta en tu propia infraestructura o en
+        un entorno híbrido.
+      </span>
+      <span class="block mb-1 sm:hidden font-bold text-green-700">Tus sistemas siguen en su lugar. La automatización trabaja a su alrededor.</span>
+      Tus sistemas actuales permanecen intactos; la automatización trabaja a su alrededor, no al revés.
     </Fragment>
-  </HeroText>
+  </Hero>
+
+  <!-- Qué hace TrustAuto -->
+
+  <FeaturesCarousel
+    id="features"
+    tagline="Qué hace TrustAuto"
+    title="Automatización que puedes gobernar, sobre tu propia infraestructura"
+    subtitle="Dos cosas se cumplen siempre: tus sistemas existentes mantienen el registro autorizado, y cada acción que ejecuta la automatización tiene alcance definido, queda registrada y es atribuible a una persona."
+    items={[
+      {
+        title: 'Construido sobre herramientas que puedes ejecutar tú mismo',
+        description:
+          'Power Automate cuando tu empresa ya trabaja en Microsoft 365; n8n autoalojado cuando quieres todo en tus propios servidores sin dependencia de SaaS por tarea. No hay ningún motor propietario que te genere dependencia.',
+        icon: 'tabler:plug-connected',
+      },
+      {
+        title: 'El motor orquesta — no es tu fuente de verdad',
+        description:
+          'TrustAuto gestiona tareas, aprobaciones, temporizadores, escalados y excepciones. Tu CRM, ERP y registros siguen siendo la copia autorizada. La capa de flujos de trabajo nunca se convierte en silencio en el lugar donde viven tus datos.',
+        icon: 'tabler:topology-ring',
+      },
+      {
+        title: 'Los conectores son adaptadores, no propietarios',
+        description:
+          'El correo electrónico, la mensajería y las integraciones con sistemas entregan, transforman y conectan. No asumen la propiedad de tu lógica de negocio ni de los datos de tus clientes.',
+        icon: 'tabler:transform',
+      },
+      {
+        title: 'Acceso por roles con alcance definido',
+        description:
+          'Una persona, un rol o una integración solo accede a los datos que necesita para su tarea. Un paso de facturación no recibe el expediente completo del cliente; un recordatorio no lleva datos que no le corresponden.',
+        icon: 'tabler:lock-access',
+      },
+      {
+        title: 'Cada acción, registrada y atribuible',
+        description:
+          'Quién la activó, qué datos utilizó, qué sistema la ejecutó, quién la aprobó, dónde se almacenó el resultado. El registro de auditoría forma parte de la construcción, no es un añadido posterior.',
+        icon: 'tabler:list-check',
+      },
+      {
+        title: 'Las personas deciden donde importa',
+        description:
+          'La automatización redacta, enruta y prepara el trabajo; una persona toma la decisión en todo lo que requiere criterio. La revisión humana es parte del proceso, no un parche.',
+        icon: 'tabler:user-check',
+      },
+      {
+        title: 'On-premises o híbrido por diseño',
+        description:
+          'Los datos sensibles no tienen que salir de tus instalaciones para que un flujo funcione. Tú decides qué permanece en local y qué, si acaso, utiliza servicios externos.',
+        icon: 'tabler:server',
+      },
+      {
+        title: 'Funciona con los sistemas que ya tienes',
+        description:
+          'TrustAuto es una capa sobre tus herramientas actuales, no una plataforma a la que migrar. No hay nada que desarraigar ni que aprender de cero.',
+        icon: 'tabler:stack-2',
+      },
+    ]}
+  />
+
+  <!-- Mapear el proceso antes de automatizar -->
+
+  <Content
+    columns={2}
+    tagline="Cómo lo construimos"
+    title="Mapeamos el proceso antes de automatizarlo"
+    items={[
+      {
+        title: 'Entender el proceso',
+        description: 'Lo que ocurre realmente hoy, paso a paso — antes de elegir ninguna herramienta.',
+      },
+      {
+        title: 'Identificar los requisitos',
+        description: 'Qué datos intervienen en cada paso y qué reglas se les aplican.',
+      },
+      {
+        title: 'Diseñar la arquitectura',
+        description: 'Dónde se ejecuta cada paso y dónde residen los datos — on-prem, híbrido o externo.',
+      },
+      {
+        title: 'Construir con controles',
+        description: 'Registros de auditoría, acceso con alcance definido y puntos de control humanos desde el inicio.',
+      },
+      {
+        title: 'Implementar y supervisar',
+        description: 'Desplegar y mantener la vigilancia conforme cambian los volúmenes, las excepciones y los requisitos.',
+      },
+    ]}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        La mayoría de las automatizaciones fracasan porque el proceso nunca se documentó
+      </h3>
+      El problema rara vez es la falta de herramientas — es la automatización añadida sobre un proceso
+      que nadie documentó antes. TrustAuto funciona al revés: automatizamos sobre los procesos que ya
+      funcionan, eliminando la fricción repetitiva sin obligar a tu equipo a cambiar su forma de trabajar
+      ni a reaprender software cerrado.
+    </Fragment>
+  </Content>
+
+  <!-- Power Automate o n8n -->
+
+  <Content
+    isAfterContent
+    columns={2}
+    tagline="Power Automate o n8n"
+    title="Dos motores, un mismo enfoque"
+    items={[
+      {
+        title: 'Power Automate',
+        description:
+          'Encaja cuando tu empresa está estandarizada en Microsoft 365 y Dataverse. Se conecta de forma nativa al entorno Office con el que tu equipo ya trabaja, con la gobernanza gestionada desde tu tenant existente.',
+      },
+      {
+        title: 'n8n autoalojado',
+        description:
+          'Encaja cuando quieres control total en tus propios servidores — sin licencias por tarea, sin que los datos salgan de tus instalaciones, y la libertad de ejecutarlo íntegramente on-prem o en una nube soberana que controlas.',
+      },
+      {
+        title: 'La misma arquitectura en ambos casos',
+        description:
+          'Sea cual sea el motor, lo que lo rodea no cambia: acceso con alcance definido, acciones registradas, puntos de control humanos y tus sistemas intactos.',
+      },
+    ]}
+  >
+    <Fragment slot="image">
+      <img
+        src={imgWorkflow.src}
+        alt="Automatización de procesos de negocio sobre tu propia infraestructura"
+        class="w-full rounded-lg shadow-lg"
+      />
+    </Fragment>
+  </Content>
+
+  <!-- Precios -->
+
+  <JsonLd schema={pricingSchema} />
+
+  <Prices
+    id="precios"
+    tagline="Precios"
+    title="Precios transparentes, sin costes ocultos"
+    subtitle="Cada proyecto comienza con una hoja de ruta de automatización gratuita. Los precios de implementación y soporte se ajustan a las necesidades concretas de tu organización — sin sorpresas."
+    prices={[
+      {
+        title: 'Hoja de Ruta de Automatización',
+        subtitle: 'El mejor lugar para empezar',
+        price: 0,
+        period: 'única',
+        items: [
+          { description: 'Evaluación completa de 5-7 días' },
+          { description: 'Mapeo y clasificación de flujos de datos' },
+          { description: 'Análisis de brechas de cumplimiento' },
+          { description: 'Matriz de viabilidad de automatización' },
+          { description: 'Hoja de ruta de implementación' },
+        ],
+        callToAction: { text: 'Solicitar Hoja de Ruta Gratuita', href: '/es/hoja-de-ruta-de-automatizacion/' },
+      },
+      {
+        title: 'Implementación de Mejora Inmediata',
+        subtitle: '1-2 automatizaciones de alto impacto',
+        price: '1.500',
+        period: 'desde',
+        items: [
+          { description: '1-2 automatizaciones específicas' },
+          { description: 'Entrega en 2-4 semanas' },
+          { description: 'Arquitectura local o híbrida' },
+          { description: 'Controles de cumplimiento RGPD incluidos' },
+          { description: 'Registros de auditoría, acuerdos de tratamiento de datos y gestión del consentimiento' },
+          { description: '30 días de soporte post-lanzamiento' },
+        ],
+        callToAction: { text: 'Comenzar con la Hoja de Ruta Gratuita', href: '/es/hoja-de-ruta-de-automatizacion/' },
+        hasRibbon: true,
+        ribbonTitle: 'más popular',
+      },
+      {
+        title: 'Paquete Completo',
+        subtitle: 'Transformación completa de la consulta',
+        price: '5.000',
+        period: 'desde',
+        items: [
+          { description: 'Múltiples automatizaciones de flujos' },
+          { description: 'Entrega en 6-12 semanas' },
+          { description: 'Marco de cumplimiento integrado' },
+          { description: 'Formación del personal incluida' },
+          { description: 'Documentación completa' },
+          { description: '90 días de soporte post-lanzamiento' },
+        ],
+        callToAction: { text: 'Comenzar con la Hoja de Ruta Gratuita', href: '/es/hoja-de-ruta-de-automatizacion/' },
+      },
+      {
+        title: 'MedCore Private AI',
+        subtitle: 'Plataforma IA médica empresarial',
+        price: 'Personalizado',
+        period: 'Contacta para presupuesto',
+        items: [
+          { description: 'Despliegue IA local' },
+          { description: 'Modelos de lenguaje de grado médico' },
+          { description: 'Ajuste fino y pipelines RAG' },
+          { description: 'Hardware de servidor incluido' },
+          { description: 'Multicumplimiento (RGPD, HIPAA, SOC2)' },
+          { description: 'Soporte multilingüe UE' },
+          { description: 'Gestión de ciclo de vida completo' },
+        ],
+        callToAction: { text: 'Programar Consulta', href: '/es/contacto/' },
+      },
+    ]}
+  />
+
+  <!-- Preguntas frecuentes -->
+
+  <FAQs
+    title="TrustAuto — Preguntas frecuentes"
+    subtitle="Respuestas directas para equipos que deciden qué automatizar y dónde van sus datos."
+    tagline="FAQs"
+    classes={{ container: 'max-w-6xl' }}
+    items={[
+      {
+        title: '¿Power Automate o n8n — cuál elegimos?',
+        description:
+          'El que encaje con tu configuración. Si tu empresa trabaja sobre Microsoft 365, Power Automate suele conectar con la menor fricción. Si quieres todo en tus propios servidores sin licencias por tarea, n8n autoalojado es la mejor base. Recomendamos uno durante la hoja de ruta, según tus sistemas — no antes.',
+      },
+      {
+        title: '¿Reemplazáis nuestros sistemas actuales?',
+        description:
+          'No. TrustAuto es una capa sobre las herramientas que ya utilizas. Tu CRM, sistema de gestión, contabilidad o ERP sigue siendo el registro autorizado; la automatización se conecta a él en lugar de absorberlo.',
+      },
+      {
+        title: '¿Dónde residen nuestros datos?',
+        description:
+          'Donde tú decidas. El motor puede ejecutarse íntegramente on-premises o en un entorno híbrido. Tú eliges qué pasos, si alguno, utilizan servicios externos, y los datos sensibles no tienen que salir de tus instalaciones para que un flujo funcione.',
+      },
+      {
+        title: '¿Quién puede ver qué?',
+        description:
+          'El acceso está definido por rol. Una persona, un rol o una integración solo accede a los datos que requiere su tarea concreta — un paso de facturación nunca recibe un expediente completo del cliente que no tiene motivo para tener.',
+      },
+      {
+        title: '¿Existe un registro de auditoría?',
+        description:
+          'Sí, en cada acción: quién la activó, qué datos utilizó, qué sistema la ejecutó, quién la aprobó y dónde se almacenó el resultado. Ese registro es parte de cómo se construye la automatización, no un complemento.',
+      },
+      {
+        title: '¿Qué ocurre cuando una automatización encuentra algo inesperado?',
+        description:
+          'Se detiene y enruta la excepción a una persona en lugar de adivinar. Los temporizadores, escalados y pasos de aprobación forman parte del diseño, de modo que los casos extremos llegan al miembro del equipo adecuado en lugar de fallar en silencio.',
+      },
+      {
+        title: '¿La hoja de ruta gratuita es el punto de partida?',
+        description:
+          'Es el punto de partida recomendado. La hoja de ruta documenta tus procesos, datos y postura de cumplimiento para que la implementación se ajuste a lo que realmente ejecutas. Puedes actuar sobre ella con nosotros o de forma independiente.',
+      },
+    ]}
+  />
+
+  <!-- CTA -->
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Contáctanos',
+        href: '/es/contacto/',
+        icon: 'tabler:arrow-right',
+      },
+    ]}
+    title="Libera a tu equipo del trabajo mecánico — sin perder el control"
+    subtitle="Cuéntanos sobre el trabajo repetitivo que ralentiza tu empresa y los sistemas que ya utilizas. Te mostraremos qué es seguro automatizar, en tu infraestructura y en tus condiciones."
+  />
 </Layout>
+
+<script>
+  document.addEventListener('click', (e) => {
+    const link = (e.target as HTMLElement).closest('a[href*="outlook.office.com/book"]');
+    if (!link) return;
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'generate_lead', {
+        event_category: 'Roadmap',
+        event_label: 'TrustAuto',
+        language: 'es',
+      });
+    }
+  });
+</script>

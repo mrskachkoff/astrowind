@@ -1,36 +1,451 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import HeroText from '~/components/widgets/HeroText.astro';
+import JsonLd from '~/components/common/JsonLd.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import FeaturesCarousel from '~/components/widgets/FeaturesCarousel.astro';
+import Prices from '~/components/widgets/Pricing.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
 
 import imgTrustAuto from '~/assets/images/trustauto.png';
+import imgWorkflow from '~/assets/images/ai-workflow-tablet.jpg';
 
 const metadata = {
-  title: 'TrustAuto — On-Prem Compliance Center',
+  title: 'TrustAuto — Business Process Automation, On Your Terms',
   description:
-    'Non-SaaS, on-premises compliance control center that connects to your existing systems and continuously checks SOC 2, ISO 27001, HIPAA and GDPR. Coming soon.',
+    'Automate the repetitive admin work in your business — reminders, follow-ups, intake, invoicing, approvals — built on Power Automate or n8n, on your own infrastructure.',
   openGraph: {
     images: [{ url: '~/assets/images/trustauto.png' }],
   },
 };
+
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'TrustAuto',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'On-premises or hybrid (Microsoft Power Automate or self-hosted n8n)',
+  description:
+    'Business process automation for small and medium businesses. TrustAuto orchestrates the repetitive admin work — reminders, follow-ups, intake, invoicing, approvals, and data moving between systems — built on Power Automate or self-hosted n8n, running on your own infrastructure or a hybrid setup, around the systems you already use. The workflow engine orchestrates tasks, approvals, timers, and escalations without becoming the source of truth; access is role-based, every action is logged, and a person decides where judgment is needed.',
+  url: 'https://solutions.futurion.es/products/trustauto/',
+  inLanguage: 'en',
+  featureList: [
+    'Built on Microsoft Power Automate or self-hosted n8n',
+    'The workflow engine orchestrates without becoming the source of truth',
+    'Connectors act as adapters, not owners of your data',
+    'Role-based, scoped access to data',
+    'Every action logged and attributable',
+    'Human approval where judgment is needed',
+    'Runs on-premises or in a hybrid setup',
+    'Works as a layer over your existing systems',
+  ],
+  author: { '@id': 'https://solutions.futurion.es/#organization' },
+  offers: {
+    '@type': 'Offer',
+    priceSpecification: {
+      '@type': 'PriceSpecification',
+      minPrice: '0',
+      priceCurrency: 'EUR',
+    },
+    availability: 'https://schema.org/InStock',
+  },
+};
+
+const pricingSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'OfferCatalog',
+  name: 'TrustAuto Automation Services Pricing — Futurion Solutions',
+  description: 'Transparent pricing for GDPR-compliant business process automation for companies in Spain and the EU.',
+  inLanguage: 'en',
+  provider: { '@id': 'https://solutions.futurion.es/#organization' },
+  url: 'https://solutions.futurion.es/products/trustauto/',
+  itemListElement: [
+    {
+      '@type': 'Offer',
+      name: 'Automation Roadmap',
+      description: 'Free 5-7 day comprehensive AI compliance assessment with data flow mapping, gap analysis, and prioritised roadmap.',
+      price: '0',
+      priceCurrency: 'EUR',
+      availability: 'https://schema.org/InStock',
+      url: 'https://solutions.futurion.es/automation-roadmap/',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Quick-Win Implementation',
+      description: '1-2 high-impact automations delivered in 2-4 weeks. On-prem or hybrid architecture with GDPR compliance controls.',
+      priceSpecification: {
+        '@type': 'PriceSpecification',
+        minPrice: '1500',
+        priceCurrency: 'EUR',
+      },
+      availability: 'https://schema.org/InStock',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Comprehensive Package',
+      description: 'Full practice transformation over 6-12 weeks. Multiple workflow automations with integrated compliance framework and staff training.',
+      priceSpecification: {
+        '@type': 'PriceSpecification',
+        minPrice: '5000',
+        priceCurrency: 'EUR',
+      },
+      availability: 'https://schema.org/InStock',
+    },
+    {
+      '@type': 'Offer',
+      name: 'MedCore Private AI',
+      description: 'Fully on-premise medical-grade AI infrastructure for medium healthcare organizations. Project-based pricing.',
+      priceSpecification: {
+        '@type': 'PriceSpecification',
+        minPrice: '25000',
+        priceCurrency: 'EUR',
+      },
+      availability: 'https://schema.org/InStock',
+      url: 'https://solutions.futurion.es/medcore-private-ai/',
+    },
+  ],
+};
 ---
 
 <Layout metadata={metadata}>
-  <HeroText tagline="Coming soon">
+  <JsonLd schema={productSchema} />
+
+  <!-- Hero -->
+
+  <Hero
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Contact Us',
+        href: '/contact/',
+        icon: 'tabler:arrow-right',
+      },
+      {
+        variant: 'secondary',
+        text: 'See Pricing',
+        href: '#pricing',
+      },
+    ]}
+  >
     <Fragment slot="title">
       <img
         src={imgTrustAuto.src}
         alt="TrustAuto logo"
-        width="120"
-        height="120"
-        class="mx-auto mb-6 object-contain"
+        width="84"
+        height="84"
+        class="mx-auto mb-4 object-contain drop-shadow-lg"
       />
-      TrustAuto
+      TrustAuto<br />
+      <span class="text-accent dark:text-white highlight">Automate the Busywork Without Handing Over Your Systems or Your Data</span>
     </Fragment>
 
     <Fragment slot="subtitle">
-      A non-SaaS, fully on-premises compliance control center. TrustAuto connects to your existing systems and
-      continuously checks whether your organization is meeting the security controls and privacy standards it's held to
-      — SOC&nbsp;2, ISO&nbsp;27001, HIPAA, and GDPR.
+      <span class="hidden sm:inline">
+        TrustAuto takes the repetitive admin work off your team — appointment and payment reminders,
+        follow-ups, intake forms, invoicing, approvals, and moving data between the tools you already
+        use. It is built on <span class="font-medium">Power Automate</span> or
+        <span class="font-medium">self-hosted n8n</span>, and it runs on your own infrastructure or a
+        hybrid setup.
+      </span>
+      <span class="block mb-1 sm:hidden font-bold text-green-700">Your systems stay in place. The automation works around them.</span>
+      Your existing systems stay in place; the automation works around them, not the other way round.
     </Fragment>
-  </HeroText>
+  </Hero>
+
+  <!-- What TrustAuto does -->
+
+  <FeaturesCarousel
+    id="features"
+    tagline="What TrustAuto Does"
+    title="Automation You Can Govern, Run on Your Own Infrastructure"
+    subtitle="Two things are always true: your existing systems stay the authoritative record, and every action the automation takes is scoped, logged, and traceable to a person."
+    items={[
+      {
+        title: 'Built on Tools You Can Run Yourself',
+        description:
+          'Power Automate when your business already lives in Microsoft 365; self-hosted n8n when you want everything on your own servers with no per-task SaaS dependency. There is no proprietary engine to get locked into.',
+        icon: 'tabler:plug-connected',
+      },
+      {
+        title: 'The Engine Orchestrates — It Is Not Your Source of Truth',
+        description:
+          'TrustAuto handles tasks, approvals, timers, escalations, and exceptions. Your CRM, ERP, and records stay the authoritative copy. The workflow layer never quietly becomes the place your data lives.',
+        icon: 'tabler:topology-ring',
+      },
+      {
+        title: 'Connectors Are Adapters, Not Owners',
+        description:
+          'Email, messaging, and system integrations deliver, transform, and connect. They do not take ownership of your business logic or your customer data.',
+        icon: 'tabler:transform',
+      },
+      {
+        title: 'Scoped, Role-Based Access',
+        description:
+          'A person, a role, or an integration only ever touches the data its task needs. An invoicing step does not get the full customer record; a reminder does not carry details it should not.',
+        icon: 'tabler:lock-access',
+      },
+      {
+        title: 'Every Action Is Logged and Attributable',
+        description:
+          'Who triggered it, what data it used, which system ran it, who approved it, where the result was stored. The audit trail is built in, not bolted on afterward.',
+        icon: 'tabler:list-check',
+      },
+      {
+        title: 'People Decide Where It Matters',
+        description:
+          'Automation drafts, routes, and prepares the work; a person makes the call on anything that needs judgment. Human review is part of the process, not a workaround.',
+        icon: 'tabler:user-check',
+      },
+      {
+        title: 'On-Premises or Hybrid by Design',
+        description:
+          'Sensitive data does not have to leave your premises to make a workflow run. You choose what stays local and what, if anything, uses external services.',
+        icon: 'tabler:server',
+      },
+      {
+        title: 'Works With the Systems You Already Have',
+        description:
+          'TrustAuto is a layer over your existing tools, not a platform you migrate onto. Nothing gets ripped out and relearned from scratch.',
+        icon: 'tabler:stack-2',
+      },
+    ]}
+  />
+
+  <!-- Map the process before automating -->
+
+  <Content
+    columns={2}
+    tagline="How We Build It"
+    title="We Map the Process Before We Automate It"
+    items={[
+      {
+        title: 'Understand the process',
+        description: 'What actually happens today, step by step — before any tool is chosen.',
+      },
+      {
+        title: 'Identify the requirements',
+        description: 'What data is involved at each step, and what rules apply to it.',
+      },
+      {
+        title: 'Design the architecture',
+        description: 'Where each step runs and where the data sits — on-prem, hybrid, or external.',
+      },
+      {
+        title: 'Build with controls',
+        description: 'Audit trails, scoped access, and human checkpoints in place from the start.',
+      },
+      {
+        title: 'Implement and monitor',
+        description: 'Deploy, then keep watch as volumes, exceptions, and requirements change.',
+      },
+    ]}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Most Automation Fails Because the Process Was Never Mapped
+      </h3>
+      The problem is rarely the lack of tools — it is automation bolted onto a process nobody mapped
+      beforehand. TrustAuto works the other way round: we automate on top of the processes that already
+      work, removing the repetitive friction without forcing your team to change how they operate or
+      relearn closed software.
+    </Fragment>
+  </Content>
+
+  <!-- Power Automate or n8n -->
+
+  <Content
+    isAfterContent
+    columns={2}
+    tagline="Power Automate or n8n"
+    title="Two Engines, One Approach"
+    items={[
+      {
+        title: 'Power Automate',
+        description:
+          'Fits when you are standardized on Microsoft 365 and Dataverse. It connects natively to the Office estate your team already signs into, with governance handled through your existing tenant.',
+      },
+      {
+        title: 'Self-hosted n8n',
+        description:
+          'Fits when you want full control on your own servers — no per-task licensing, no data leaving your premises, and the freedom to run it entirely on-prem or in a sovereign cloud you control.',
+      },
+      {
+        title: 'The same architecture either way',
+        description:
+          'Whichever engine fits, what surrounds it does not change: scoped access, logged actions, human checkpoints, and your systems left in place.',
+      },
+    ]}
+  >
+    <Fragment slot="image">
+      <img
+        src={imgWorkflow.src}
+        alt="Business process automation running on your own infrastructure"
+        class="w-full rounded-lg shadow-lg"
+      />
+    </Fragment>
+  </Content>
+
+  <!-- Pricing -->
+
+  <JsonLd schema={pricingSchema} />
+
+  <Prices
+    id="pricing"
+    tagline="Pricing"
+    title="Transparent Pricing, No Hidden Costs"
+    subtitle="Every engagement starts with a free automation roadmap. Implementation and support pricing is based on your organisation's specific needs — no surprises."
+    prices={[
+      {
+        title: 'Automation Roadmap',
+        subtitle: 'The best place to start',
+        price: 0,
+        period: 'one-time',
+        items: [
+          { description: '5-7 day comprehensive assessment' },
+          { description: 'Data flow mapping & classification' },
+          { description: 'Compliance gap analysis' },
+          { description: 'Automation feasibility matrix' },
+          { description: 'Implementation roadmap' },
+        ],
+        callToAction: {
+          text: 'Book Automation Roadmap',
+          href: '/automation-roadmap/',
+        },
+      },
+      {
+        title: 'Quick-Win Implementation',
+        subtitle: '1-2 high-impact automations',
+        price: '1,500',
+        period: 'starting from',
+        items: [
+          { description: '1-2 targeted automations' },
+          { description: '2-4 week delivery' },
+          { description: 'On-prem or hybrid architecture' },
+          { description: 'GDPR compliance controls included' },
+          { description: 'Audit trails, DPAs & consent management' },
+          { description: '30 days post-launch support' },
+        ],
+        callToAction: {
+          text: 'Start with Automation Roadmap',
+          href: '/automation-roadmap/',
+        },
+        hasRibbon: true,
+        ribbonTitle: 'most popular',
+      },
+      {
+        title: 'Comprehensive Package',
+        subtitle: 'Full practice transformation',
+        price: '5,000',
+        period: 'starting from',
+        items: [
+          { description: 'Multiple workflow automations' },
+          { description: '6-12 week delivery' },
+          { description: 'Integrated compliance framework' },
+          { description: 'Staff training included' },
+          { description: 'Complete documentation' },
+          { description: '90 days post-launch support' },
+        ],
+        callToAction: {
+          text: 'Start with Automation Roadmap',
+          href: '/automation-roadmap/',
+        },
+      },
+      {
+        title: 'MedCore Private AI',
+        subtitle: 'Enterprise medical AI platform',
+        price: 'Custom',
+        period: 'Contact for quote',
+        items: [
+          { description: 'On-premise AI deployment' },
+          { description: 'Medical-grade language models' },
+          { description: 'Fine-tuning & RAG pipelines' },
+          { description: 'Server hardware included' },
+          { description: 'Multi-compliance (GDPR, HIPAA, SOC2)' },
+          { description: 'Multilingual EU support' },
+          { description: 'Full lifecycle management' },
+        ],
+        callToAction: {
+          text: 'Schedule Consultation',
+          href: '/contact/',
+        },
+      },
+    ]}
+  />
+
+  <!-- FAQs -->
+
+  <FAQs
+    title="TrustAuto — Frequently Asked Questions"
+    subtitle="Straight answers for teams deciding what to automate and where their data goes."
+    tagline="FAQs"
+    classes={{ container: 'max-w-6xl' }}
+    items={[
+      {
+        title: 'Power Automate or n8n — which one do we get?',
+        description:
+          'Whichever fits your setup. If your business runs on Microsoft 365, Power Automate usually connects with the least friction. If you want everything on your own servers with no per-task licensing, self-hosted n8n is the better base. We recommend one during the roadmap, based on your systems — not before.',
+      },
+      {
+        title: 'Do you replace our existing systems?',
+        description:
+          'No. TrustAuto is a layer over the tools you already use. Your CRM, practice-management, accounting, or ERP system stays the authoritative record; the automation connects to it rather than absorbing it.',
+      },
+      {
+        title: 'Where does our data live?',
+        description:
+          'Wherever you decide. The engine can run fully on-premises or in a hybrid setup. You choose which steps, if any, use external services, and sensitive data does not have to leave your premises for a workflow to run.',
+      },
+      {
+        title: 'Who can see what?',
+        description:
+          'Access is scoped by role. A person, a role, or an integration only ever touches the data its specific task requires — an invoicing step never receives a full customer record it has no reason to hold.',
+      },
+      {
+        title: 'Is there an audit trail?',
+        description:
+          'Yes, on every action: who triggered it, what data it used, which system executed it, who approved it, and where the result was stored. That record is part of how the automation is built, not an add-on.',
+      },
+      {
+        title: 'What happens when an automation hits something unexpected?',
+        description:
+          'It stops and routes the exception to a person rather than guessing. Timers, escalations, and approval steps are part of the design, so edge cases land with the right staff member instead of failing silently.',
+      },
+      {
+        title: 'Is the free roadmap the starting point?',
+        description:
+          'It is the recommended starting point. The roadmap maps your processes, data, and compliance posture so the implementation is scoped to what you actually run. You can act on it with us or independently.',
+      },
+    ]}
+  />
+
+  <!-- CTA -->
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Contact Us',
+        href: '/contact/',
+        icon: 'tabler:arrow-right',
+      },
+    ]}
+    title="Take the Busywork Off Your Team — Without Giving Up Control"
+    subtitle="Tell us about the repetitive work slowing your business down and the systems you already run. We will show you what is safe to automate, on your infrastructure and your terms."
+  />
 </Layout>
+
+<script>
+  document.addEventListener('click', (e) => {
+    const link = (e.target as HTMLElement).closest('a[href*="outlook.office.com/book"]');
+    if (!link) return;
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'generate_lead', {
+        event_category: 'Roadmap',
+        event_label: 'TrustAuto',
+        language: 'en',
+      });
+    }
+  });
+</script>

@@ -8,7 +8,6 @@ import FeaturesCarousel from '~/components/widgets/FeaturesCarousel.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
-import Prices from '~/components/widgets/Pricing.astro';
 
 const metadata = {
   title: 'Free Automation & Compliance Roadmap',
@@ -38,61 +37,6 @@ const roadmapSchema = {
   ],
   serviceType: 'AI Compliance Assessment',
   url: 'https://solutions.futurion.es/automation-roadmap/',
-};
-
-const pricingSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'OfferCatalog',
-  name: 'AI Automation Services Pricing — Futurion Solutions',
-  description: 'Transparent pricing for GDPR-compliant AI automation for companies in Spain and the EU.',
-  inLanguage: 'en',
-  provider: { '@id': 'https://solutions.futurion.es/#organization' },
-  url: 'https://solutions.futurion.es/automation-roadmap/',
-  itemListElement: [
-    {
-      '@type': 'Offer',
-      name: 'Automation Roadmap',
-      description: 'Free 5-7 day comprehensive AI compliance assessment with data flow mapping, gap analysis, and prioritised roadmap.',
-      price: '0',
-      priceCurrency: 'EUR',
-      availability: 'https://schema.org/InStock',
-      url: 'https://solutions.futurion.es/automation-roadmap/',
-    },
-    {
-      '@type': 'Offer',
-      name: 'Quick-Win Implementation',
-      description: '1-2 high-impact automations delivered in 2-4 weeks. On-prem or hybrid architecture with GDPR compliance controls.',
-      priceSpecification: {
-        '@type': 'PriceSpecification',
-        minPrice: '1500',
-        priceCurrency: 'EUR',
-      },
-      availability: 'https://schema.org/InStock',
-    },
-    {
-      '@type': 'Offer',
-      name: 'Comprehensive Package',
-      description: 'Full practice transformation over 6-12 weeks. Multiple workflow automations with integrated compliance framework and staff training.',
-      priceSpecification: {
-        '@type': 'PriceSpecification',
-        minPrice: '5000',
-        priceCurrency: 'EUR',
-      },
-      availability: 'https://schema.org/InStock',
-    },
-    {
-      '@type': 'Offer',
-      name: 'MedCore Private AI',
-      description: 'Fully on-premise medical-grade AI infrastructure for medium healthcare organizations. Project-based pricing.',
-      priceSpecification: {
-        '@type': 'PriceSpecification',
-        minPrice: '25000',
-        priceCurrency: 'EUR',
-      },
-      availability: 'https://schema.org/InStock',
-      url: 'https://solutions.futurion.es/medcore-private-ai/',
-    },
-  ],
 };
 ---
 
@@ -238,94 +182,6 @@ const pricingSchema = {
       <div class="absolute inset-0 dark:bg-transparent" style="background-image: var(--grad-lilac);"></div>
     </Fragment>
   </Features2>
-
-  <!-- Pricing -->
-
-  <JsonLd schema={pricingSchema} />
-
-  <!-- Pricing tiers -->
-
-  <Prices
-    tagline="Pricing"
-    title="Transparent Pricing, No Hidden Costs"
-    subtitle="Every engagement starts with a free automation roadmap. Implementation and support pricing is based on your organisation's specific needs — no surprises."
-    prices={[
-      {
-        title: 'Automation Roadmap',
-        subtitle: 'The best place to start',
-        price: 0,
-        period: 'one-time',
-        items: [
-          { description: '5-7 day comprehensive assessment' },
-          { description: 'Data flow mapping & classification' },
-          { description: 'Compliance gap analysis' },
-          { description: 'Automation feasibility matrix' },
-          { description: 'Implementation roadmap' },
-        ],
-        callToAction: {
-          text: 'Book Automation Roadmap',
-          href: '/automation-roadmap/',
-        },
-      },
-      {
-        title: 'Quick-Win Implementation',
-        subtitle: '1-2 high-impact automations',
-        price: '1,500',
-        period: 'starting from',
-        items: [
-          { description: '1-2 targeted automations' },
-          { description: '2-4 week delivery' },
-          { description: 'On-prem or hybrid architecture' },
-          { description: 'GDPR compliance controls included' },
-          { description: 'Audit trails, DPAs & consent management' },
-          { description: '30 days post-launch support' },
-        ],
-        callToAction: {
-          text: 'Start with Automation Roadmap',
-          href: '/automation-roadmap/',
-        },
-        hasRibbon: true,
-        ribbonTitle: 'most popular',
-      },
-      {
-        title: 'Comprehensive Package',
-        subtitle: 'Full practice transformation',
-        price: '5,000',
-        period: 'starting from',
-        items: [
-          { description: 'Multiple workflow automations' },
-          { description: '6-12 week delivery' },
-          { description: 'Integrated compliance framework' },
-          { description: 'Staff training included' },
-          { description: 'Complete documentation' },
-          { description: '90 days post-launch support' },
-        ],
-        callToAction: {
-          text: 'Start with Automation Roadmap',
-          href: '/automation-roadmap/',
-        },
-      },
-      {
-        title: 'MedCore Private AI',
-        subtitle: 'Enterprise medical AI platform',
-        price: 'Custom',
-        period: 'Contact for quote',
-        items: [
-          { description: 'On-premise AI deployment' },
-          { description: 'Medical-grade language models' },
-          { description: 'Fine-tuning & RAG pipelines' },
-          { description: 'Server hardware included' },
-          { description: 'Multi-compliance (GDPR, HIPAA, SOC2)' },
-          { description: 'Multilingual EU support' },
-          { description: 'Full lifecycle management' },
-        ],
-        callToAction: {
-          text: 'Schedule Consultation',
-          href: '/contact/',
-        },
-      },
-    ]}
-  />
 
   <!-- Roadmap FAQs -->
 

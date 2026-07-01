@@ -172,7 +172,7 @@ const DATA = {
 const dataset = DATA[lang] ?? DATA.en;
 // Attach colors server-side so the script needs no palette logic.
 const payload = {
-  nodes: dataset.nodes.map((n) => ({ ...n, color: C[n.group] })),
+  nodes: dataset.nodes.map((n) => ({ ...n, color: C[n.group as keyof typeof C] })),
   edges: dataset.edges,
   i18n: { nodes: t.nodes, edges: t.edges, connected: t.connected, source: t.source, passage: t.passage },
 };

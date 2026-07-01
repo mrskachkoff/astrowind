@@ -103,11 +103,12 @@ export const getAsset = (path: string): string =>
 const definitivePermalink = (permalink: string): string => createPath(BASE_PATHNAME, permalink);
 
 /** */
-export const applyGetPermalinks = (menu: object = {}) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- transforms arbitrary untyped nav config
+export const applyGetPermalinks = (menu: any = {}): any => {
   if (Array.isArray(menu)) {
     return menu.map((item) => applyGetPermalinks(item));
   } else if (typeof menu === 'object' && menu !== null) {
-    const obj = {};
+    const obj: Record<string, unknown> = {};
     for (const key in menu) {
       if (key === 'href') {
         if (typeof menu[key] === 'string') {

@@ -11,6 +11,7 @@ import partytown from '@astrojs/partytown';
 import icon from 'astro-icon';
 
 import compress from 'astro-compress';
+import tailwindcss from '@tailwindcss/vite';
 import * as yaml from 'js-yaml';
 import type { AstroIntegration } from 'astro';
 
@@ -356,6 +357,7 @@ export default defineConfig({
   },
 
   vite: {
+    plugins: [tailwindcss()],
     resolve: {
       alias: {
         '~': path.resolve(__dirname, './src'),

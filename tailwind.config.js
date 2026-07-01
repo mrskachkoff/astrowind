@@ -1,5 +1,4 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
-import plugin from 'tailwindcss/plugin';
 import typographyPlugin from '@tailwindcss/typography';
 
 export default {
@@ -65,11 +64,9 @@ export default {
       },
     },
   },
-  plugins: [
-    typographyPlugin,
-    plugin(({ addVariant }) => {
-      addVariant('intersect', '&:not([no-intersect])');
-    }),
-  ],
+  // The `intersect` variant is defined natively via `@custom-variant` in
+  // src/assets/styles/tailwind.css (Tailwind v4 does not honor a legacy
+  // addVariant plugin loaded through `@config`).
+  plugins: [typographyPlugin],
   darkMode: 'class',
 };

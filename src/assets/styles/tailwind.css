@@ -1,6 +1,24 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+/* Load the legacy JS config (theme tokens, gradients, radii, shadows, the
+   `intersect` variant, darkMode:'class', and the typography plugin) via
+   Tailwind v4's compatibility path, avoiding a full CSS-first rewrite. */
+@config '../../../tailwind.config.js';
+
+/* @tailwindcss/vite detects classes via the module graph, so utilities that
+   appear ONLY inside dynamic expressions — twMerge() args, class:list object
+   keys, `${…}` ternaries — are not seen and never generated. (@source globs are
+   ignored by the vite plugin in build mode.) A full v3-vs-v4 output diff found
+   the complete set of such classes in this codebase; safelist them here. Add to
+   this list if you introduce a utility that lives only in a dynamic expression. */
+@source inline("intersect:animate-fade");
+@source inline("motion-safe:md:intersect:animate-fade");
+@source inline("{,md:}flex-row-reverse");
+
+/* The legacy config's `addVariant('intersect', …)` plugin is not picked up
+   through v4's compat layer, so declare it natively. Drives scroll-triggered
+   `intersect:animate-fade` reveals. */
+@custom-variant intersect (&:not([no-intersect]));
 
 @layer utilities {
   .bg-page {

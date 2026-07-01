@@ -740,9 +740,9 @@ const payloadJson = JSON.stringify(payload);
     function endDrag(ev: PointerEvent) {
       if (!dragging) return;
       dragging = false;
-      canvas.classList.remove('is-grabbing');
+      canvas!.classList.remove('is-grabbing');
       if (!moved) {
-        const rect = canvas.getBoundingClientRect();
+        const rect = canvas!.getBoundingClientRect();
         const hit = pick(ev.clientX - rect.left, ev.clientY - rect.top);
         if (hit) showDetail(hit);
         else hideDetail();

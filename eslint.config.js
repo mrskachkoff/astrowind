@@ -1,4 +1,4 @@
-import astroEslintParser from 'astro-eslint-parser';
+import * as astroEslintParser from 'astro-eslint-parser';
 import eslintPluginAstro from 'eslint-plugin-astro';
 import globals from 'globals';
 import js from '@eslint/js';
@@ -18,6 +18,9 @@ export default [
     },
   },
   {
+    // Re-assert the Astro parser for `.astro` files. This must come after
+    // `typescript-eslint`'s recommended config, which otherwise sets the TS
+    // parser globally and breaks parsing of the Astro frontmatter fence.
     files: ['**/*.astro'],
     languageOptions: {
       parser: astroEslintParser,
@@ -54,6 +57,6 @@ export default [
     },
   },
   {
-    ignores: ['dist', 'node_modules', '.github', 'types.generated.d.ts', '.astro'],
+    ignores: ['dist', 'node_modules', '.github', 'types.generated.d.ts', '.astro', 'design', 'tmp'],
   },
 ];

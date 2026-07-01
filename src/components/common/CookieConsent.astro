@@ -137,13 +137,13 @@ const t = useTranslations(lang);
 
 <script is:inline>
   (function () {
-    var STORAGE_KEY = 'cookie-consent';
+    const STORAGE_KEY = 'cookie-consent';
 
     function getConsent() {
       try {
-        var raw = localStorage.getItem(STORAGE_KEY);
+        const raw = localStorage.getItem(STORAGE_KEY);
         return raw ? JSON.parse(raw) : null;
-      } catch (e) {
+      } catch {
         return null;
       }
     }
@@ -159,7 +159,7 @@ const t = useTranslations(lang);
     };
 
     function showBanner() {
-      var banner = document.getElementById('cookie-banner');
+      const banner = document.getElementById('cookie-banner');
       if (banner) {
         banner.classList.remove('translate-y-full');
         banner.classList.add('translate-y-0');
@@ -167,7 +167,7 @@ const t = useTranslations(lang);
     }
 
     function hideBanner() {
-      var banner = document.getElementById('cookie-banner');
+      const banner = document.getElementById('cookie-banner');
       if (banner) {
         banner.classList.remove('translate-y-0');
         banner.classList.add('translate-y-full');
@@ -175,20 +175,20 @@ const t = useTranslations(lang);
     }
 
     function openModal() {
-      var modal = document.getElementById('cookie-modal');
+      const modal = document.getElementById('cookie-modal');
       if (!modal) return;
       modal.classList.remove('hidden');
-      var consent = getConsent();
-      var analyticsToggle = document.getElementById('cookie-toggle-analytics');
-      var marketingToggle = document.getElementById('cookie-toggle-marketing');
+      const consent = getConsent();
+      const analyticsToggle = document.getElementById('cookie-toggle-analytics');
+      const marketingToggle = document.getElementById('cookie-toggle-marketing');
       if (analyticsToggle) analyticsToggle.checked = consent ? consent.analytics : false;
       if (marketingToggle) marketingToggle.checked = consent ? consent.marketing : false;
-      var closeBtn = document.getElementById('cookie-modal-close');
+      const closeBtn = document.getElementById('cookie-modal-close');
       if (closeBtn) closeBtn.focus();
     }
 
     function closeModal() {
-      var modal = document.getElementById('cookie-modal');
+      const modal = document.getElementById('cookie-modal');
       if (modal) modal.classList.add('hidden');
     }
 
@@ -205,8 +205,8 @@ const t = useTranslations(lang);
     }
 
     function savePreferences() {
-      var analyticsToggle = document.getElementById('cookie-toggle-analytics');
-      var marketingToggle = document.getElementById('cookie-toggle-marketing');
+      const analyticsToggle = document.getElementById('cookie-toggle-analytics');
+      const marketingToggle = document.getElementById('cookie-toggle-marketing');
       setConsent({
         necessary: true,
         analytics: analyticsToggle ? analyticsToggle.checked : false,
@@ -217,20 +217,20 @@ const t = useTranslations(lang);
     }
 
     function init() {
-      var consent = getConsent();
+      const consent = getConsent();
       if (!consent) {
         showBanner();
       } else {
         hideBanner();
       }
 
-      var acceptBtn = document.getElementById('cookie-accept');
-      var rejectBtn = document.getElementById('cookie-reject');
-      var customizeBtn = document.getElementById('cookie-customize');
-      var saveBtn = document.getElementById('cookie-save');
-      var acceptAllModalBtn = document.getElementById('cookie-accept-all-modal');
-      var modalCloseBtn = document.getElementById('cookie-modal-close');
-      var modal = document.getElementById('cookie-modal');
+      const acceptBtn = document.getElementById('cookie-accept');
+      const rejectBtn = document.getElementById('cookie-reject');
+      const customizeBtn = document.getElementById('cookie-customize');
+      const saveBtn = document.getElementById('cookie-save');
+      const acceptAllModalBtn = document.getElementById('cookie-accept-all-modal');
+      const modalCloseBtn = document.getElementById('cookie-modal-close');
+      const modal = document.getElementById('cookie-modal');
 
       if (acceptBtn) acceptBtn.onclick = acceptAll;
       if (rejectBtn) rejectBtn.onclick = rejectAll;
@@ -247,7 +247,7 @@ const t = useTranslations(lang);
 
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
-          var modal = document.getElementById('cookie-modal');
+          const modal = document.getElementById('cookie-modal');
           if (modal && !modal.classList.contains('hidden')) {
             closeModal();
           }

@@ -11,7 +11,7 @@ import partytown from '@astrojs/partytown';
 import icon from 'astro-icon';
 
 import compress from 'astro-compress';
-import yaml from 'js-yaml';
+import * as yaml from 'js-yaml';
 import type { AstroIntegration } from 'astro';
 
 import astrowind from './vendor/integration';

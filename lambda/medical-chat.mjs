@@ -62,7 +62,7 @@ const PHI_PATTERNS = [
   /\b\d{3}-\d{2}-\d{4}\b/,        // SSN
   /\b\d{9}\b/,                      // 9-digit IDs
   /\b[A-Z]{2}\d{6,8}\b/i,           // ID numbers
-  /\b\d{1,2}[/\-]\d{1,2}[/\-]\d{2,4}\b/, // Date of birth patterns
+  /\b\d{1,2}[/-]\d{1,2}[/-]\d{2,4}\b/, // Date of birth patterns
 ];
 
 function containsPotentialPHI(text) {

@@ -1,4 +1,4 @@
-import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
+import { getAsset } from './utils/permalinks';
 import { useTranslations, getLocalizedPath } from './i18n/utils';
 import type { Locale } from './i18n/utils';
 import type { ImageMetadata } from 'astro';

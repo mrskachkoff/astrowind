@@ -2,7 +2,7 @@ import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { Readable } from 'node:stream';
 
-import yaml from 'js-yaml';
+import * as yaml from 'js-yaml';
 import { parseSitemap } from 'sitemap';
 import ts from 'typescript';
 

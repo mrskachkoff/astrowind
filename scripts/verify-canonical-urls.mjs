@@ -35,30 +35,23 @@ function extensionOf(pathname) {
   return idx === -1 ? '' : basename.slice(idx).toLowerCase();
 }
 
-function isIgnoredUrl(rawUrl) {
-  return (
-    !rawUrl ||
-    rawUrl.startsWith('#') ||
-    rawUrl.startsWith('mailto:') ||
-    rawUrl.startsWith('tel:') ||
-    rawUrl.startsWith('data:') ||
-    rawUrl.startsWith('javascript:') ||
-    rawUrl.startsWith('//')
-  );
-}
-
+// Return the internal page path for a URL, or null if it is not a same-origin page URL.
+// Allowlist by positive validation: only root-relative paths or http(s) URLs on our own
+// origin are accepted. Every other scheme (mailto:, tel:, data:, javascript:, ...),
+// protocol-relative "//host", fragments and cross-origin URLs fall through to null.
 function parseInternalPath(rawUrl) {
-  if (isIgnoredUrl(rawUrl)) return null;
+  if (!rawUrl) return null;
 
   try {
-    if (rawUrl.startsWith('http://') || rawUrl.startsWith('https://')) {
-      const parsed = new URL(rawUrl);
-      if (parsed.origin !== site) return null;
-      return parsed.pathname;
+    // Root-relative path — but not protocol-relative "//host".
+    if (rawUrl.startsWith('/') && !rawUrl.startsWith('//')) {
+      return new URL(rawUrl, site).pathname;
     }
 
-    if (rawUrl.startsWith('/')) {
-      return new URL(rawUrl, site).pathname;
+    // Absolute URL: accept only the http/https schemes on our own origin.
+    const parsed = new URL(rawUrl);
+    if ((parsed.protocol === 'http:' || parsed.protocol === 'https:') && parsed.origin === site) {
+      return parsed.pathname;
     }
   } catch {
     return null;

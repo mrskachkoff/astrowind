@@ -19,6 +19,19 @@
   **options with a recommendation** — not open questions. Reserve questions for genuine
   product/preference choices only the user can determine.
 
+## Never hide, suppress, or fake a fix (hard rule)
+
+- **Never suppress a finding to make output look clean.** No `.snyk` ignores, no silencing
+  deprecation/lint/scanner warnings, no "mark false positive and move on." The only acceptable
+  outcomes for a security/scan finding are: **(a) actually fix it** (upgrade, override, refactor), or
+  **(b) leave it fully visible** and tell the user plainly it is unfixed and why.
+- **Never claim "fixed / done / clean" without showing the proof** (command output, rescan result).
+- **Never declare something "unfixable" without exhausting real fixes first** — check newer major
+  versions, `overrides`, alternative packages, and code refactors, and show what was tried. "I gave
+  up" is not "it can't be done."
+- **Never disguise an unfixed problem as fixed**, and never answer an easier adjacent question than the
+  one asked.
+
 # Known build-time npm warnings (not bugs, not ours to fix)
 
 Amplify deploy logs contain `npm warn deprecated ...` lines. Before claiming anything is "broken" or

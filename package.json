@@ -46,7 +46,8 @@
     "zod": "^4.4.3"
   },
   "overrides": {
-    "yaml": "^2.8.3"
+    "yaml": "^2.8.3",
+    "encoding-sniffer": "^1.0.2"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",

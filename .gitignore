@@ -22,3 +22,8 @@ pnpm-debug.log*
 pnpm-lock.yaml
 
 .astro
+
+# local scratch / working files (not part of the repo)
+tmp/
+design/
+Title-long.csv

@@ -313,7 +313,13 @@ export default defineConfig({
     ),
 
     compress({
-      CSS: true,
+      // CSS compression is DISABLED: astro-compress's minifier (csso) does not
+      // understand Tailwind v4's modern range-syntax media queries
+      // (`@media (width >= 48rem)`) and silently strips every responsive
+      // breakpoint rule, which drops all sm:/md:/lg:/xl: utilities and collapses
+      // every page to its mobile single-column layout. Vite already minifies the
+      // bundled CSS during the build, so this only skips a redundant second pass.
+      CSS: false,
       HTML: {
         'html-minifier-terser': {
           removeAttributeQuotes: false,

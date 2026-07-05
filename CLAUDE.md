@@ -1,8 +1,8 @@
 # Git workflow
 
-- **Always push to `main`.** Commit changes directly to `main` and run `git push origin main`.
-- **Never create a branch.** Do not create feature branches, do not open PRs, and do not ask which branch to use — unless the user explicitly asks for a branch or PR.
-- Pushing to `main` triggers the AWS Amplify deploy, so ensure `npm run build` and `npm run verify:seo` pass before pushing.
+- **Commit directly to `main`.** Do not create feature branches or open PRs unless the user explicitly asks.
+- **Never push automatically.** Do not run `git push` after committing. Push only when the user explicitly approves/asks for it.
+- When a push IS approved: pushing to `main` triggers the AWS Amplify deploy, so ensure `npm run build` and `npm run verify:seo` pass before pushing.
 
 # The rule: no fake success (non-negotiable)
 

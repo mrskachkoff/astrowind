@@ -1,5 +1,6 @@
 ---
 publishDate: 2026-03-30T10:00:00Z
+updateDate: 2026-07-05T00:00:00Z
 draft: false
 title: "Data Protection Impact Assessment in Healthcare AI: What It Is, Why It Matters, and Where It Applies"
 excerpt: "Before deploying any AI in a clinic, GDPR mandates a DPIA. This guide explains what a Data Protection Impact Assessment is, when it is legally required in healthcare, and how to conduct one in seven structured steps."
@@ -55,6 +56,14 @@ Healthcare is arguably the domain where data protection failures carry the most 
 AI amplifies these stakes considerably. When an algorithm influences whether a patient receives a particular diagnosis, treatment pathway, or level of urgency, errors in that algorithm are not merely technical failures — they are clinical events with real human consequences. Bias embedded in training data can lead to systematic discrimination against particular patient groups. Opaque model outputs can undermine the ability of clinicians to exercise meaningful oversight. Function creep — the gradual repurposing of data collected for care towards commercial, insurance, or research ends — becomes harder to detect and control once data flows are automated.
 
 The DPIA framework addresses these risks directly. By requiring organisations to document what data is processed, justify why it is necessary, assess what could go wrong, and demonstrate what protections are in place, the DPIA creates accountability. It turns vague intentions about data protection into verifiable commitments. And crucially, if after completing the DPIA an organisation cannot demonstrate that residual risks are adequately mitigated, it is required to consult with the supervisory authority before proceeding — a safeguard that places an external check on the deployment of potentially harmful systems.
+
+## What Enforcement Actually Looks Like in Spain
+
+It helps to ground the DPIA obligation in what the Spanish supervisory authority actually does. In 2025 the AEPD received 30,931 complaints — a record, up 64% year on year — and concluded 34 sanction or warning procedures in the health sector, a 278% increase over 2024. The sharpest growth was in breach handling: procedures tied to security breaches rose 157%, from 30 in 2024 to 77 in 2025, and produced €19.8 million in fines — roughly 40% of everything the AEPD imposed that year ([AEPD 2025 annual report press note](https://www.aepd.es/prensa-y-comunicacion/notas-de-prensa/la-agencia-recibio-mas-de-30.000-reclamaciones-en-2025-un-64-mas)).
+
+Two resolved cases show how this lands on ordinary clinics rather than hospital groups. A Barcelona dental clinic was fined €30,000: €20,000 under Article 5(1)(c) for demanding a copy of a patient's DNI to process a refund it could have completed with the data it already held, plus €10,000 under Article 38 for failing to pass the complaint to its own data protection officer ([Economist & Jurist](https://www.economistjurist.es/actualidad-juridica/jurisprudencia/sancionan-con-30-000-euros-a-una-clinica-dental-por-pedir-una-copia-del-dni-para-una-devolucion-economica/)). Another dental clinic paid €20,000 after a ransomware attack that entered through an open remote-desktop port: €15,000 for lacking appropriate security measures and €5,000 for notifying the AEPD 22 days after the attack — the GDPR window is 72 hours ([case summary](https://www.lksnext.com/es/noticias_boletin/sancion-de-20-000-euros-a-una-clinica-dental-como-consecuencia-de-la-encriptacion-de-los-datos-de-sus-pacientes/)).
+
+Two things are worth reading correctly in these numbers. Enforcement against healthcare providers is complaint-driven and, in absolute terms, still rare — 34 procedures a year across the whole country is not a wave of inspections. But when a procedure does open, what decides the outcome is documentation: whether the organisation can show it assessed the risks, chose proportionate measures, and involved the right people before the incident. That is precisely the evidence a DPIA produces. The clinic sanctioned for reactive security measures was fined, in essence, for having no record of having thought about the risk beforehand.
 
 ## How to Conduct a DPIA: The Seven Key Steps
 

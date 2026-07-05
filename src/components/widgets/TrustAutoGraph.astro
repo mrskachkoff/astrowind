@@ -1,23 +1,38 @@
 ---
 /**
  * TrustAutoGraph.astro
- * "Orbiting systems" map for TrustAuto — the same self-contained, dependency-free
- * pseudo-3D force graph engine as TrustCoreGraph.astro (Canvas 2D + an HTML label
- * overlay), re-skinned for business-process automation.
+ * "Your automation stack" map for TrustAuto. It reuses ONLY the visual design of
+ * the TrustCore "3D Map" (TrustCoreGraph.astro) — dark navy fds-card surface,
+ * aurora accent palette, glow, pill labels, click-a-node → detail panel,
+ * status/hint chrome, and the self-contained Canvas-2D pseudo-3D orbit with
+ * drag-to-rotate. The content is a genuine automation stack: the Power Automate
+ * and n8n engines orchestrating the customer's business apps and a local, on-prem
+ * AI layer. Each node is a real product/tool logo drawn as an "app tile", not a
+ * coloured dot. The TrustAuto logo is pinned at the top as the brand mark.
  *
- * A central automation ENGINE (Power Automate / self-hosted n8n) orbited by the
- * customer's connected systems, the workflow steps, a human checkpoint and the
- * governance concepts that surround every run. The dataset is SYNTHETIC and
- * PII-free (an invoice-intake example).
- *
- * The engine node renders the TrustAuto logo on the canvas instead of a plain
- * sphere. Pointer-only interactivity (drag to spin, hover to highlight, click for
- * detail, export the map as JSON). Controls are tabindex=-1 because the host
+ * The dataset is synthetic and PII-free. Pointer-only interactivity (drag to spin,
+ * hover to highlight, click for detail). Controls are tabindex=-1 because the host
  * Content widget marks the image column aria-hidden.
  */
 
 import imgPoster from '~/assets/images/ai-workflow-tablet.jpg';
-import imgLogo from '~/assets/images/trustauto.png';
+import imgBrand from '~/assets/images/trustauto.png';
+
+// Node logos (copied/rasterized into the committed asset tree — design/ is gitignored).
+import icPowerAutomate from '~/assets/images/automation/power-automate.png';
+import icN8n from '~/assets/images/automation/n8n.png';
+import icM365 from '~/assets/images/automation/microsoft-365.png';
+import icInbox from '~/assets/images/automation/inbox.png';
+import icCrm from '~/assets/images/automation/crm.png';
+import icErp from '~/assets/images/automation/erp.png';
+import icFiles from '~/assets/images/automation/files.png';
+import icRag from '~/assets/images/automation/rag.png';
+import icMistral from '~/assets/images/automation/mistral.png';
+import icOllama from '~/assets/images/automation/ollama.png';
+import icGemma from '~/assets/images/automation/gemma.png';
+import icDeepseek from '~/assets/images/automation/deepseek.png';
+import icCheckpoint from '~/assets/images/automation/checkpoint.png';
+import icOnPrem from '~/assets/images/automation/on-prem.png';
 
 interface Props {
   lang?: 'en' | 'es';
@@ -27,24 +42,22 @@ const { lang = 'en' } = Astro.props;
 
 const STRINGS = {
   en: {
-    aria: 'Interactive 3D automation map: the engine, your connected systems, workflow steps and human checkpoints, on your own infrastructure.',
-    systems: 'systems',
-    steps: 'steps',
-    exportLabel: '⬇ Export workflow',
+    aria: 'Interactive 3D automation map: the Power Automate and n8n engines orchestrating your business apps and a local AI layer, on your own infrastructure.',
+    apps: 'apps',
+    models: 'models',
     connected: 'Connected',
-    source: 'Runs on',
-    passage: 'What it does',
+    source: 'Role',
+    passage: 'What it is',
     close: 'Close',
     hint: 'Drag to rotate · click a node',
   },
   es: {
-    aria: 'Mapa de automatización 3D interactivo: el motor, tus sistemas conectados, los pasos del flujo y los puntos de control humanos, sobre tu propia infraestructura.',
-    systems: 'sistemas',
-    steps: 'pasos',
-    exportLabel: '⬇ Exportar flujo',
+    aria: 'Mapa de automatización 3D interactivo: los motores Power Automate y n8n orquestando tus aplicaciones empresariales y una capa de IA local, sobre tu propia infraestructura.',
+    apps: 'apps',
+    models: 'modelos',
     connected: 'Conexiones',
-    source: 'Se ejecuta en',
-    passage: 'Qué hace',
+    source: 'Función',
+    passage: 'Qué es',
     close: 'Cerrar',
     hint: 'Arrastra para rotar · haz clic en un nodo',
   },
@@ -52,299 +65,295 @@ const STRINGS = {
 
 const t = STRINGS[lang] ?? STRINGS.en;
 
-// Accent palette (mirrors --fds-acc-* tokens) — same hexes as TrustCoreGraph,
-// remapped to the automation domain.
+// Accent palette (mirrors --fds-acc-* tokens) — used for each tile's glow + border.
 const C = {
-  engine: '#0065fe', // the automation engine (Power Automate / n8n)
-  system: '#2d7bf2', // connected systems: M365, ERP, CRM, files, inbox
-  step: '#a459ff', // workflow actions: read, extract, draft, post
+  engine: '#0065fe', // Power Automate, n8n
+  system: '#2d7bf2', // business apps: M365, Inbox, CRM, ERP, Files
+  ai: '#a459ff', // local AI layer: RAG + open models
   checkpoint: '#ff2f70', // human-approval gate
-  outcome: '#83e31e', // logged action / scoped access
-  concept: '#96bdf9', // governance concepts: on-prem, systems left in place
+  infra: '#83e31e', // on-prem infrastructure
 };
 
-// Synthetic, PII-free automation graph (EN + ES label sets).
+const ICON = {
+  PA: icPowerAutomate.src,
+  N8: icN8n.src,
+  M365: icM365.src,
+  INB: icInbox.src,
+  CRM: icCrm.src,
+  ERP: icErp.src,
+  FIL: icFiles.src,
+  RAG: icRag.src,
+  MIS: icMistral.src,
+  OLL: icOllama.src,
+  GEM: icGemma.src,
+  DES: icDeepseek.src,
+  CHK: icCheckpoint.src,
+  ONP: icOnPrem.src,
+};
+
+// Synthetic, PII-free automation-stack graph (EN + ES). Icons attached below.
 const DATA = {
   en: {
     nodes: [
       {
-        id: 'ENG',
-        label: 'Automation engine',
+        id: 'PA',
+        label: 'Power Automate',
         group: 'engine',
-        src: 'Your servers or tenant',
-        q: 'Power Automate or self-hosted n8n, running on your own infrastructure. It orchestrates every step below.',
+        src: 'Automation engine',
+        q: 'Fits when you are standardized on Microsoft 365. Connects natively to the Office estate, governed through your existing tenant.',
       },
       {
-        id: 'S1',
+        id: 'N8',
+        label: 'n8n',
+        group: 'engine',
+        src: 'Automation engine',
+        q: 'Self-hosted on your own servers — no per-task licensing, no data leaving your premises.',
+      },
+      {
+        id: 'M365',
         label: 'Microsoft 365',
         group: 'system',
-        src: 'Your Microsoft 365 tenant',
+        src: 'Business app',
         q: 'Mailbox, SharePoint and Teams, reached through your existing tenant and its governance.',
       },
       {
-        id: 'S2',
-        label: 'ERP / Finance',
-        group: 'system',
-        src: 'Your ERP / finance system',
-        q: 'Approved entries are written back to your finance system — nothing is posted before a person approves.',
-      },
-      {
-        id: 'S3',
-        label: 'CRM',
-        group: 'system',
-        src: 'Your CRM',
-        q: 'Contacts and deals are kept in step with the rest of the workflow.',
-      },
-      {
-        id: 'S4',
-        label: 'File store',
-        group: 'system',
-        src: 'Your file store',
-        q: 'Documents are read and filed on storage you control.',
-      },
-      {
-        id: 'S5',
+        id: 'INB',
         label: 'Inbox',
         group: 'system',
-        src: 'Your mailbox',
+        src: 'Business app',
         q: 'Where intake arrives and replies are drafted for a person to send.',
       },
       {
-        id: 'W1',
-        label: 'Read invoice',
-        group: 'step',
-        src: 'Automation engine',
-        q: 'Picks up a new invoice from the inbox and reads it. Read-only access, nothing changed.',
+        id: 'CRM',
+        label: 'CRM',
+        group: 'system',
+        src: 'Business app',
+        q: 'Contacts and deals kept in step with the rest of the workflow.',
       },
       {
-        id: 'W2',
-        label: 'Extract fields',
-        group: 'step',
-        src: 'Automation engine',
-        q: 'Pulls the supplier, amount and due date into structured fields for review.',
+        id: 'ERP',
+        label: 'ERP',
+        group: 'system',
+        src: 'Business app',
+        q: 'Approved entries are written back to your finance system — nothing posts before a person approves.',
       },
       {
-        id: 'W3',
-        label: 'Draft reply',
-        group: 'step',
-        src: 'Automation engine',
-        q: 'Prepares a reply as a draft. A person reviews and sends it — the workflow never sends on its own.',
+        id: 'FIL',
+        label: 'Files',
+        group: 'system',
+        src: 'Business app',
+        q: 'Documents read and filed on storage you control.',
       },
       {
-        id: 'W4',
-        label: 'Post to ERP',
-        group: 'step',
-        src: 'Automation engine',
-        q: 'Writes the approved entry to the finance system, with the full action logged.',
+        id: 'RAG',
+        label: 'RAG',
+        group: 'ai',
+        src: 'Local AI layer',
+        q: 'Retrieval over your own documents — answers grounded in your sources, not the open web.',
       },
       {
-        id: 'H1',
+        id: 'MIS',
+        label: 'Mistral',
+        group: 'ai',
+        src: 'Local model',
+        q: 'An open-weight model you can run on your own hardware.',
+      },
+      {
+        id: 'OLL',
+        label: 'Ollama',
+        group: 'ai',
+        src: 'Local runtime',
+        q: 'Runs open models on your own machines, offline.',
+      },
+      { id: 'GEM', label: 'Gemma', group: 'ai', src: 'Local model', q: 'An open-weight model, run in-house.' },
+      { id: 'DES', label: 'Deepseek', group: 'ai', src: 'Local model', q: 'An open-weight model, run in-house.' },
+      {
+        id: 'CHK',
         label: 'Human approval',
         group: 'checkpoint',
         src: 'Human checkpoint',
         q: 'The workflow pauses here. Nothing moves to your systems until a person approves.',
       },
       {
-        id: 'O1',
-        label: 'Logged action',
-        group: 'outcome',
-        src: 'Audit log',
-        q: 'Every step writes an entry — who ran it, what it touched and when.',
-      },
-      {
-        id: 'O2',
-        label: 'Scoped access',
-        group: 'outcome',
-        src: 'Access policy',
-        q: 'Each step is granted only the permissions it needs, and no more.',
-      },
-      {
-        id: 'K1',
-        label: 'Systems left in place',
-        group: 'concept',
-        src: 'Architecture',
-        q: 'Automation sits on top of the tools you already use. Nothing is replaced.',
-      },
-      {
-        id: 'K2',
-        label: 'On-prem / sovereign',
-        group: 'concept',
-        src: 'Architecture',
-        q: 'Runs entirely on your premises or in a sovereign cloud you control — no data leaves.',
+        id: 'ONP',
+        label: 'On-prem',
+        group: 'infra',
+        src: 'Your infrastructure',
+        q: 'Everything runs on your premises or a sovereign cloud you control — the data does not leave.',
       },
     ],
     edges: [
-      { s: 'ENG', t: 'S1', r: 'orchestrates' },
-      { s: 'ENG', t: 'S2', r: 'orchestrates' },
-      { s: 'ENG', t: 'S3', r: 'orchestrates' },
-      { s: 'ENG', t: 'S4', r: 'orchestrates' },
-      { s: 'ENG', t: 'S5', r: 'orchestrates' },
-      { s: 'ENG', t: 'W1', r: 'runs' },
-      { s: 'W1', t: 'S5', r: 'reads' },
-      { s: 'W1', t: 'W2', r: 'then' },
-      { s: 'W2', t: 'H1', r: 'pauses at' },
-      { s: 'H1', t: 'W4', r: 'on approval' },
-      { s: 'W4', t: 'S2', r: 'writes to' },
-      { s: 'W2', t: 'W3', r: 'then' },
-      { s: 'W3', t: 'S5', r: 'drafts in' },
-      { s: 'W1', t: 'O2', r: 'scoped by' },
-      { s: 'W3', t: 'O2', r: 'scoped by' },
-      { s: 'W4', t: 'O1', r: 'logged as' },
-      { s: 'H1', t: 'O1', r: 'logged as' },
-      { s: 'ENG', t: 'K1', r: 'keeps' },
-      { s: 'ENG', t: 'K2', r: 'runs' },
+      { s: 'PA', t: 'N8', r: 'or' },
+      { s: 'PA', t: 'M365', r: 'orchestrates' },
+      { s: 'PA', t: 'INB', r: 'orchestrates' },
+      { s: 'PA', t: 'ERP', r: 'orchestrates' },
+      { s: 'N8', t: 'CRM', r: 'orchestrates' },
+      { s: 'N8', t: 'FIL', r: 'orchestrates' },
+      { s: 'N8', t: 'ERP', r: 'orchestrates' },
+      { s: 'PA', t: 'RAG', r: 'calls' },
+      { s: 'N8', t: 'RAG', r: 'calls' },
+      { s: 'RAG', t: 'MIS', r: 'uses' },
+      { s: 'RAG', t: 'OLL', r: 'runs on' },
+      { s: 'RAG', t: 'GEM', r: 'uses' },
+      { s: 'RAG', t: 'DES', r: 'uses' },
+      { s: 'PA', t: 'CHK', r: 'pauses at' },
+      { s: 'N8', t: 'CHK', r: 'pauses at' },
+      { s: 'CHK', t: 'ERP', r: 'approves before' },
+      { s: 'CHK', t: 'M365', r: 'approves before' },
+      { s: 'PA', t: 'ONP', r: 'runs on' },
+      { s: 'N8', t: 'ONP', r: 'runs on' },
+      { s: 'RAG', t: 'ONP', r: 'runs on' },
+      { s: 'OLL', t: 'ONP', r: 'runs on' },
     ],
   },
   es: {
     nodes: [
       {
-        id: 'ENG',
-        label: 'Motor de automatización',
+        id: 'PA',
+        label: 'Power Automate',
         group: 'engine',
-        src: 'Tus servidores o tenant',
-        q: 'Power Automate o n8n autoalojado, ejecutado en tu propia infraestructura. Orquesta cada uno de los pasos siguientes.',
+        src: 'Motor de automatización',
+        q: 'Encaja cuando estás estandarizado en Microsoft 365. Se conecta de forma nativa con el ecosistema Office, gobernado desde tu tenant actual.',
       },
       {
-        id: 'S1',
+        id: 'N8',
+        label: 'n8n',
+        group: 'engine',
+        src: 'Motor de automatización',
+        q: 'Autoalojado en tus propios servidores — sin licencias por tarea, sin que los datos salgan de tus instalaciones.',
+      },
+      {
+        id: 'M365',
         label: 'Microsoft 365',
         group: 'system',
-        src: 'Tu tenant de Microsoft 365',
-        q: 'Buzón de correo, SharePoint y Teams, accesibles a través de tu tenant y su gobernanza.',
+        src: 'Aplicación empresarial',
+        q: 'Buzón, SharePoint y Teams, accesibles desde tu tenant actual y su modelo de gobernanza.',
       },
       {
-        id: 'S2',
-        label: 'ERP / Finanzas',
-        group: 'system',
-        src: 'Tu ERP / sistema financiero',
-        q: 'Las entradas aprobadas se registran en tu sistema financiero — nada se contabiliza antes de que una persona lo apruebe.',
-      },
-      {
-        id: 'S3',
-        label: 'CRM',
-        group: 'system',
-        src: 'Tu CRM',
-        q: 'Los contactos y oportunidades se mantienen sincronizados con el resto del flujo de trabajo.',
-      },
-      {
-        id: 'S4',
-        label: 'Almacén de archivos',
-        group: 'system',
-        src: 'Tu almacén de archivos',
-        q: 'Los documentos se leen y archivan en el almacenamiento que tú controlas.',
-      },
-      {
-        id: 'S5',
+        id: 'INB',
         label: 'Bandeja de entrada',
         group: 'system',
-        src: 'Tu buzón',
-        q: 'Donde llegan las solicitudes entrantes y se redactan los borradores de respuesta para que una persona los envíe.',
+        src: 'Aplicación empresarial',
+        q: 'Donde llegan las solicitudes y se redactan las respuestas para que una persona las envíe.',
       },
       {
-        id: 'W1',
-        label: 'Leer factura',
-        group: 'step',
-        src: 'Motor de automatización',
-        q: 'Recoge una nueva factura de la bandeja de entrada y la lee. Acceso de solo lectura, sin modificaciones.',
+        id: 'CRM',
+        label: 'CRM',
+        group: 'system',
+        src: 'Aplicación empresarial',
+        q: 'Contactos y oportunidades sincronizados con el resto del flujo de trabajo.',
       },
       {
-        id: 'W2',
-        label: 'Extraer campos',
-        group: 'step',
-        src: 'Motor de automatización',
-        q: 'Extrae el proveedor, el importe y la fecha de vencimiento en campos estructurados para su revisión.',
+        id: 'ERP',
+        label: 'ERP',
+        group: 'system',
+        src: 'Aplicación empresarial',
+        q: 'Los registros aprobados se escriben en tu sistema financiero — nada se registra antes de que una persona lo apruebe.',
       },
       {
-        id: 'W3',
-        label: 'Redactar respuesta',
-        group: 'step',
-        src: 'Motor de automatización',
-        q: 'Prepara la respuesta como borrador. Una persona la revisa y la envía — el flujo de trabajo no envía nada por sí solo.',
+        id: 'FIL',
+        label: 'Archivos',
+        group: 'system',
+        src: 'Aplicación empresarial',
+        q: 'Documentos leídos y archivados en el almacenamiento que tú controlas.',
       },
       {
-        id: 'W4',
-        label: 'Registrar en ERP',
-        group: 'step',
-        src: 'Motor de automatización',
-        q: 'Escribe la entrada aprobada en el sistema financiero, con el registro completo de la acción.',
+        id: 'RAG',
+        label: 'RAG',
+        group: 'ai',
+        src: 'Capa de IA local',
+        q: 'Recuperación sobre tus propios documentos — respuestas basadas en tus fuentes, no en la web abierta.',
       },
       {
-        id: 'H1',
+        id: 'MIS',
+        label: 'Mistral',
+        group: 'ai',
+        src: 'Modelo local',
+        q: 'Un modelo de pesos abiertos que puedes ejecutar en tu propio hardware.',
+      },
+      {
+        id: 'OLL',
+        label: 'Ollama',
+        group: 'ai',
+        src: 'Entorno de ejecución local',
+        q: 'Ejecuta modelos abiertos en tus propias máquinas, sin conexión.',
+      },
+      {
+        id: 'GEM',
+        label: 'Gemma',
+        group: 'ai',
+        src: 'Modelo local',
+        q: 'Un modelo de pesos abiertos, ejecutado en tus instalaciones.',
+      },
+      {
+        id: 'DES',
+        label: 'Deepseek',
+        group: 'ai',
+        src: 'Modelo local',
+        q: 'Un modelo de pesos abiertos, ejecutado en tus instalaciones.',
+      },
+      {
+        id: 'CHK',
         label: 'Aprobación humana',
         group: 'checkpoint',
-        src: 'Punto de revisión humana',
-        q: 'El flujo de trabajo se detiene aquí. Nada pasa a tus sistemas hasta que una persona lo aprueba.',
+        src: 'Punto de control humano',
+        q: 'El flujo de trabajo se detiene aquí. Nada avanza hacia tus sistemas hasta que una persona lo aprueba.',
       },
       {
-        id: 'O1',
-        label: 'Acción registrada',
-        group: 'outcome',
-        src: 'Registro de auditoría',
-        q: 'Cada paso genera una entrada — quién lo ejecutó, qué tocó y cuándo.',
-      },
-      {
-        id: 'O2',
-        label: 'Acceso acotado',
-        group: 'outcome',
-        src: 'Política de acceso',
-        q: 'Cada paso recibe únicamente los permisos que necesita, y ninguno más.',
-      },
-      {
-        id: 'K1',
-        label: 'Sistemas intactos',
-        group: 'concept',
-        src: 'Arquitectura',
-        q: 'La automatización se superpone a las herramientas que ya utilizas. No se sustituye nada.',
-      },
-      {
-        id: 'K2',
-        label: 'On-prem / soberano',
-        group: 'concept',
-        src: 'Arquitectura',
-        q: 'Se ejecuta íntegramente en tus instalaciones o en una nube soberana que tú controlas — los datos no salen.',
+        id: 'ONP',
+        label: 'On-prem',
+        group: 'infra',
+        src: 'Tu infraestructura',
+        q: 'Todo se ejecuta en tus instalaciones o en una nube soberana que tú controlas — los datos no salen.',
       },
     ],
     edges: [
-      { s: 'ENG', t: 'S1', r: 'orquesta' },
-      { s: 'ENG', t: 'S2', r: 'orquesta' },
-      { s: 'ENG', t: 'S3', r: 'orquesta' },
-      { s: 'ENG', t: 'S4', r: 'orquesta' },
-      { s: 'ENG', t: 'S5', r: 'orquesta' },
-      { s: 'ENG', t: 'W1', r: 'ejecuta' },
-      { s: 'W1', t: 'S5', r: 'lee' },
-      { s: 'W1', t: 'W2', r: 'luego' },
-      { s: 'W2', t: 'H1', r: 'pausa en' },
-      { s: 'H1', t: 'W4', r: 'tras aprobación' },
-      { s: 'W4', t: 'S2', r: 'escribe en' },
-      { s: 'W2', t: 'W3', r: 'luego' },
-      { s: 'W3', t: 'S5', r: 'redacta en' },
-      { s: 'W1', t: 'O2', r: 'acotado por' },
-      { s: 'W3', t: 'O2', r: 'acotado por' },
-      { s: 'W4', t: 'O1', r: 'registra como' },
-      { s: 'H1', t: 'O1', r: 'registra como' },
-      { s: 'ENG', t: 'K1', r: 'mantiene' },
-      { s: 'ENG', t: 'K2', r: 'ejecuta' },
+      { s: 'PA', t: 'N8', r: 'o' },
+      { s: 'PA', t: 'M365', r: 'orquesta' },
+      { s: 'PA', t: 'INB', r: 'orquesta' },
+      { s: 'PA', t: 'ERP', r: 'orquesta' },
+      { s: 'N8', t: 'CRM', r: 'orquesta' },
+      { s: 'N8', t: 'FIL', r: 'orquesta' },
+      { s: 'N8', t: 'ERP', r: 'orquesta' },
+      { s: 'PA', t: 'RAG', r: 'invoca' },
+      { s: 'N8', t: 'RAG', r: 'invoca' },
+      { s: 'RAG', t: 'MIS', r: 'usa' },
+      { s: 'RAG', t: 'OLL', r: 'se ejecuta en' },
+      { s: 'RAG', t: 'GEM', r: 'usa' },
+      { s: 'RAG', t: 'DES', r: 'usa' },
+      { s: 'PA', t: 'CHK', r: 'pausa en' },
+      { s: 'N8', t: 'CHK', r: 'pausa en' },
+      { s: 'CHK', t: 'ERP', r: 'aprueba antes de' },
+      { s: 'CHK', t: 'M365', r: 'aprueba antes de' },
+      { s: 'PA', t: 'ONP', r: 'se ejecuta en' },
+      { s: 'N8', t: 'ONP', r: 'se ejecuta en' },
+      { s: 'RAG', t: 'ONP', r: 'se ejecuta en' },
+      { s: 'OLL', t: 'ONP', r: 'se ejecuta en' },
     ],
   },
 };
 
 const dataset = DATA[lang] ?? DATA.en;
-// Attach colors server-side so the script needs no palette logic.
+// Attach colours + icon URLs server-side so the script needs no palette/asset logic.
 const payload = {
-  nodes: dataset.nodes.map((n) => ({ ...n, color: C[n.group as keyof typeof C] })),
+  nodes: dataset.nodes.map((n) => ({
+    ...n,
+    color: C[n.group as keyof typeof C],
+    icon: ICON[n.id as keyof typeof ICON],
+  })),
   edges: dataset.edges,
-  i18n: { connected: t.connected, source: t.source, passage: t.passage, systems: t.systems, steps: t.steps },
+  i18n: { connected: t.connected, source: t.source, passage: t.passage, apps: t.apps, models: t.models },
 };
 const payloadJson = JSON.stringify(payload);
 ---
 
-<figure class="tag" data-tag data-logo={imgLogo.src} aria-label={t.aria}>
-  <img class="tag-poster" src={imgPoster.src} alt="TrustAuto automation map" aria-hidden="true" />
+<figure class="tag" data-tag data-brand={imgBrand.src} aria-label={t.aria}>
+  <img class="tag-poster" src={imgPoster.src} alt="TrustAuto automation stack" aria-hidden="true" />
   <canvas class="tag-canvas" aria-hidden="true"></canvas>
   <div class="tag-labels" aria-hidden="true"></div>
 
   <div class="tag-status fds-card"><span class="tag-dot"></span><span class="tag-count"></span></div>
   <div class="tag-hint">{t.hint}</div>
-  <button class="tag-export fds-card" type="button" tabindex="-1">{t.exportLabel}</button>
 
   <aside class="tag-detail fds-card" hidden aria-hidden="true">
     <div class="tag-detail-head">
@@ -408,7 +417,9 @@ const payloadJson = JSON.stringify(payload);
     pointer-events: none;
   }
 
-  .fds-node-label {
+  /* :global — these elements are created in JS, so they never receive Astro's
+     data-astro-cid scoping attribute; scoped selectors would not match them. */
+  :global(.tag-node-label) {
     position: absolute;
     top: 0;
     left: 0;
@@ -428,7 +439,7 @@ const payloadJson = JSON.stringify(payload);
     will-change: transform, opacity;
   }
 
-  /* Shared surface for status / export / detail (the snapshot's .fds-card) */
+  /* Shared surface for status / detail (the snapshot's .fds-card) */
   .fds-card {
     background: rgba(10, 15, 46, 0.82);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -469,22 +480,6 @@ const payloadJson = JSON.stringify(payload);
     color: #5a6286;
     pointer-events: none;
     white-space: nowrap;
-  }
-
-  .tag-export {
-    position: absolute;
-    right: 12px;
-    bottom: 12px;
-    padding: 6px 12px;
-    font-family: 'Poppins', system-ui, sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    color: #6fb0ff;
-    cursor: pointer;
-  }
-  .tag-export:hover {
-    color: #a0d0ff;
-    border-color: rgba(45, 123, 242, 0.55);
   }
 
   .tag-detail {
@@ -531,7 +526,9 @@ const payloadJson = JSON.stringify(payload);
     color: #9aa2c4;
     line-height: 1.5;
   }
-  .tag-quote {
+  /* :global — the detail panel body is filled via innerHTML, so these children
+     also lack the scoping attribute. */
+  :global(.tag-quote) {
     font-size: 11.5px;
     font-style: italic;
     color: #c8d8ff;
@@ -540,10 +537,10 @@ const payloadJson = JSON.stringify(payload);
     padding-left: 8px;
     margin-bottom: 7px;
   }
-  .tag-detail-kv {
+  :global(.tag-detail-kv) {
     margin-top: 6px;
   }
-  .tag-detail-kv b {
+  :global(.tag-detail-kv b) {
     display: block;
     font-size: 9px;
     font-weight: 700;
@@ -552,7 +549,7 @@ const payloadJson = JSON.stringify(payload);
     color: #3d4468;
     margin-bottom: 2px;
   }
-  .tag-detail-chip {
+  :global(.tag-detail-chip) {
     display: inline-block;
     margin: 0 3px 3px 0;
     padding: 1px 7px;
@@ -570,7 +567,7 @@ const payloadJson = JSON.stringify(payload);
     .tag-hint {
       display: none;
     }
-    .fds-node-label {
+    :global(.tag-node-label) {
       font-size: 9px;
     }
   }
@@ -596,6 +593,7 @@ const payloadJson = JSON.stringify(payload);
     label: string;
     group: string;
     color: string;
+    icon: string;
     src?: string;
     q?: string;
     x: number;
@@ -611,14 +609,13 @@ const payloadJson = JSON.stringify(payload);
     rr: number;
     el: HTMLDivElement;
   };
-  type GEdge = { s: string; t: string; r: string; kind?: string };
+  type GEdge = { s: string; t: string; r: string };
 
   function initTrustAutoGraph(root: HTMLElement) {
     const canvas = root.querySelector<HTMLCanvasElement>('.tag-canvas');
     const labelLayer = root.querySelector<HTMLElement>('.tag-labels');
     const dataEl = root.querySelector<HTMLElement>('[data-tag-data]');
     const countEl = root.querySelector<HTMLElement>('.tag-count');
-    const exportBtn = root.querySelector<HTMLButtonElement>('.tag-export');
     const detail = root.querySelector<HTMLElement>('.tag-detail');
     const detailTitle = root.querySelector<HTMLElement>('.tag-detail-title');
     const detailBody = root.querySelector<HTMLElement>('.tag-detail-body');
@@ -637,24 +634,36 @@ const payloadJson = JSON.stringify(payload);
 
     const i18n = data.i18n || {
       connected: 'Connected',
-      source: 'Runs on',
-      passage: 'What it does',
-      systems: 'systems',
-      steps: 'steps',
+      source: 'Role',
+      passage: 'What it is',
+      apps: 'apps',
+      models: 'models',
     };
     const esc = (s: string) =>
       s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c] || c);
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // TrustAuto logo, drawn on the canvas for the central engine node.
-    const logoImg = new Image();
-    let logoReady = false;
-    logoImg.onload = () => {
-      logoReady = true;
-      if (reduceMotion || !running) render();
-    };
-    logoImg.src = root.dataset.logo || '';
-    if (logoImg.complete && logoImg.naturalWidth) logoReady = true;
+    // ── Icon + brand image preload ─────────────────────────────────────
+    type Ico = { img: HTMLImageElement; ready: boolean };
+    const icons = new Map<string, Ico>();
+    function getIcon(url: string): Ico | null {
+      if (!url) return null;
+      let e = icons.get(url);
+      if (!e) {
+        const img = new Image();
+        const rec: Ico = { img, ready: false };
+        img.onload = () => {
+          rec.ready = true;
+          if (reduceMotion || !running) render();
+        };
+        img.src = url;
+        if (img.complete && img.naturalWidth) rec.ready = true;
+        icons.set(url, rec);
+        e = rec;
+      }
+      return e;
+    }
+    const brand = getIcon(root.dataset.brand || '');
 
     // Deterministic Fibonacci-sphere seeding (no Math.random → stable across builds).
     const nodes: GNode[] = data.nodes as unknown as GNode[];
@@ -668,8 +677,10 @@ const payloadJson = JSON.stringify(payload);
       n.y = yy;
       n.z = Math.sin(th) * rad;
       n.vx = n.vy = n.vz = 0;
-      n.r = n.group === 'engine' ? 8 : n.group === 'system' ? 6 : 4.2;
+      // Tile half-size in layout units; engines a touch larger.
+      n.r = n.group === 'engine' ? 15 : 13;
       n.rr = n.r;
+      getIcon(n.icon);
     });
 
     const byId: Record<string, GNode> = {};
@@ -684,14 +695,14 @@ const payloadJson = JSON.stringify(payload);
       adj[e.t].add(e.s);
     });
 
-    const systemsN = nodes.filter((n) => n.group === 'system').length;
-    const stepsN = nodes.filter((n) => n.group === 'step').length;
-    countEl.textContent = `ON-PREM · ${systemsN} ${i18n.systems} · ${stepsN} ${i18n.steps}`;
+    const appsN = nodes.filter((n) => n.group === 'system').length;
+    const modelsN = nodes.filter((n) => n.group === 'ai').length;
+    countEl.textContent = `ON-PREM · ${appsN} ${i18n.apps} · ${modelsN} ${i18n.models}`;
 
     // Label divs (CSS2D overlay).
     nodes.forEach((n) => {
       const el = document.createElement('div');
-      el.className = 'fds-node-label';
+      el.className = 'tag-node-label';
       el.style.setProperty('--acc', n.color);
       el.style.visibility = 'hidden'; // hidden by default; revealed on hover/click
       el.style.opacity = '0';
@@ -702,9 +713,9 @@ const payloadJson = JSON.stringify(payload);
 
     // ── 3D spring layout (warmup then settle) ──────────────────────────
     function tick(dt: number) {
-      const kRep = 0.9;
+      const kRep = 1.1;
       const kSpring = 0.04;
-      const rest = 1.7;
+      const rest = 1.8;
       const center = 0.012;
       for (let i = 0; i < N; i++) {
         const a = nodes[i];
@@ -757,14 +768,7 @@ const payloadJson = JSON.stringify(payload);
         n.vz *= 0.82;
       });
     }
-    for (let i = 0; i < 260; i++) tick(1);
-    // Pull the engine toward the centre so the logo sits in the middle.
-    const eng = byId['ENG'];
-    if (eng) {
-      eng.x = 0;
-      eng.y = 0;
-      eng.z = 0;
-    }
+    for (let i = 0; i < 280; i++) tick(1);
     // Normalise to unit-ish radius.
     let maxR = 0.0001;
     nodes.forEach((n) => (maxR = Math.max(maxR, Math.hypot(n.x, n.y, n.z))));
@@ -783,30 +787,30 @@ const payloadJson = JSON.stringify(payload);
       spread = 0,
       dpr = 1;
     let rotY = 0.6;
-    const tiltX = -0.42;
+    const tiltX = -0.38;
     let autoSpin = !reduceMotion;
     let hoverId: string | null = null;
     let selectedId: string | null = null;
-    // Labels are hidden by default; this holds the ids whose labels are revealed
-    // (a clicked node + its related entities). null = nothing revealed.
     let activeSet: Set<string> | null = null;
 
     function resize() {
-      const w = root.clientWidth || 1;
-      const h = root.clientHeight || 1;
+      // getBoundingClientRect reflects the real laid-out size even inside the
+      // two-column grid (clientWidth can read stale/half-size before layout settles).
+      const rect = root.getBoundingClientRect();
+      const w = Math.round(rect.width) || root.clientWidth || 1;
+      const h = Math.round(rect.height) || root.clientHeight || 1;
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       W = w;
       H = h;
       cx = w / 2;
-      cy = h / 2;
-      spread = Math.min(w, h) * 0.34;
+      cy = h / 2 + h * 0.06; // nudge orbit down to clear the pinned brand logo
+      spread = Math.min(w, h) * 0.36;
       canvas!.width = Math.round(w * dpr);
       canvas!.height = Math.round(h * dpr);
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
     function project(n: GNode) {
-      // rotate about Y then tilt about X
       const cosY = Math.cos(rotY),
         sinY = Math.sin(rotY);
       const x = n.x * cosY - n.z * sinY;
@@ -815,13 +819,74 @@ const payloadJson = JSON.stringify(payload);
         sinX = Math.sin(tiltX);
       const y = n.y * cosX - z * sinX;
       z = n.y * sinX + z * cosX;
-      const persp = 2.4 / (2.4 - z); // z in [-1,1]
+      const persp = 2.4 / (2.4 - z);
       n.sx = cx + x * spread * persp;
       n.sy = cy + y * spread * persp;
       n.sz = z;
     }
 
+    function roundRectPath(x: number, y: number, w: number, h: number, r: number) {
+      const rr = Math.min(r, w / 2, h / 2);
+      ctx!.beginPath();
+      ctx!.moveTo(x + rr, y);
+      ctx!.arcTo(x + w, y, x + w, y + h, rr);
+      ctx!.arcTo(x + w, y + h, x, y + h, rr);
+      ctx!.arcTo(x, y + h, x, y, rr);
+      ctx!.arcTo(x, y, x + w, y, rr);
+      ctx!.closePath();
+    }
+
+    function drawTile(n: GNode, hi: string | null, lit: boolean) {
+      const persp = 2.4 / (2.4 - n.sz);
+      const half = n.r * persp;
+      const s = half * 2;
+      const x = n.sx - half;
+      const y = n.sy - half;
+      const rad = half * 0.34;
+      n.rr = half;
+      ctx!.save();
+      ctx!.globalAlpha = lit ? 1 : 0.25;
+      // glassy tile background + colour glow
+      ctx!.shadowBlur = lit ? (n.id === hi ? 22 : 15) : 6;
+      ctx!.shadowColor = n.color;
+      roundRectPath(x, y, s, s, rad);
+      ctx!.fillStyle = 'rgba(233, 238, 252, 0.96)';
+      ctx!.fill();
+      ctx!.shadowBlur = 0;
+      // border
+      roundRectPath(x, y, s, s, rad);
+      ctx!.lineWidth = n.id === hi ? 2.5 : 1.5;
+      ctx!.strokeStyle = n.color;
+      ctx!.stroke();
+      // icon (clipped to the tile)
+      const ic = getIcon(n.icon);
+      if (ic && ic.ready) {
+        const pad = s * 0.17;
+        roundRectPath(x, y, s, s, rad);
+        ctx!.clip();
+        ctx!.drawImage(ic.img, x + pad, y + pad, s - 2 * pad, s - 2 * pad);
+      }
+      ctx!.restore();
+    }
+
+    function drawBrand() {
+      if (!brand || !brand.ready) return;
+      const h = Math.max(34, H * 0.15);
+      const aspect = (brand.img.naturalWidth || 503) / (brand.img.naturalHeight || 587);
+      const w = h * aspect;
+      const x = cx - w / 2;
+      const y = H * 0.05;
+      ctx!.save();
+      ctx!.shadowBlur = 18;
+      ctx!.shadowColor = 'rgba(0, 101, 254, 0.6)';
+      ctx!.drawImage(brand.img, x, y, w, h);
+      ctx!.restore();
+    }
+
     function render() {
+      // Self-heal size on every render path (covers reduced-motion + detail renders,
+      // not just the animation loop) so labels and tiles never drift out of sync.
+      if (Math.abs((root.clientWidth || W) - W) > 1) resize();
       ctx!.clearRect(0, 0, W, H);
       nodes.forEach(project);
       const order = [...nodes].sort((a, b) => a.sz - b.sz);
@@ -842,66 +907,38 @@ const payloadJson = JSON.stringify(payload);
         ctx!.stroke();
       });
 
-      // nodes
+      // tiles (painter's order: far → near)
       order.forEach((n) => {
-        const persp = 2.4 / (2.4 - n.sz);
-        const rr = n.r * persp;
-        const on = lit(n.id);
-        ctx!.globalAlpha = on ? 1 : 0.22;
-
-        if (n.group === 'engine' && logoReady) {
-          // Draw the TrustAuto logo instead of a plain sphere.
-          const logoH = spread * 0.62 * persp;
-          const aspect = (logoImg.naturalWidth || 503) / (logoImg.naturalHeight || 587);
-          const logoW = logoH * aspect;
-          ctx!.shadowBlur = on ? 22 : 6;
-          ctx!.shadowColor = n.color;
-          ctx!.drawImage(logoImg, n.sx - logoW / 2, n.sy - logoH / 2, logoW, logoH);
-          ctx!.shadowBlur = 0;
-          n.rr = logoH / 2;
-        } else {
-          ctx!.beginPath();
-          ctx!.arc(n.sx, n.sy, rr, 0, Math.PI * 2);
-          ctx!.fillStyle = n.color;
-          ctx!.shadowBlur = on ? 12 : 0;
-          ctx!.shadowColor = n.color;
-          ctx!.fill();
-          ctx!.shadowBlur = 0;
-          if (n.id === hi) {
-            ctx!.lineWidth = 2;
-            ctx!.strokeStyle = '#fff';
-            ctx!.stroke();
-          }
-          n.rr = rr;
-        }
-
-        // label — hidden by default; shown only for the active set or the hovered node
-        const depth = (n.sz + 1) / 2; // 0 back .. 1 front
+        drawTile(n, hi, lit(n.id));
+        const depth = (n.sz + 1) / 2;
         const el = n.el;
-        el.style.transform = `translate(-50%,-50%) translate(${n.sx.toFixed(1)}px, ${(n.sy - n.rr - 8).toFixed(1)}px)`;
+        el.style.transform = `translate(-50%,-50%) translate(${n.sx.toFixed(1)}px, ${(n.sy - n.rr - 9).toFixed(1)}px)`;
         el.style.zIndex = String(Math.round(depth * 100));
         const labelShown = (activeSet !== null && activeSet.has(n.id)) || n.id === hoverId;
         if (labelShown) {
           el.style.visibility = 'visible';
-          el.style.opacity = on ? String(0.55 + depth * 0.45) : '0.4';
+          el.style.opacity = lit(n.id) ? String(0.6 + depth * 0.4) : '0.4';
         } else {
           el.style.visibility = 'hidden';
           el.style.opacity = '0';
         }
       });
       ctx!.globalAlpha = 1;
+
+      drawBrand();
     }
 
     // ── Animation loop ─────────────────────────────────────────────────
     let raf = 0;
     let running = false;
     function frame() {
-      if (autoSpin) rotY += 0.0028;
+      if (autoSpin) rotY += 0.0026;
       render();
       raf = requestAnimationFrame(frame);
     }
     function start() {
       if (running) return;
+      resize();
       running = true;
       if (reduceMotion) {
         render();
@@ -917,11 +954,11 @@ const payloadJson = JSON.stringify(payload);
     // ── Interaction ────────────────────────────────────────────────────
     function pick(px: number, py: number): GNode | null {
       let best: GNode | null = null;
-      let bd = 18 * 18;
+      let bd = Infinity;
       nodes.forEach((n) => {
+        const reach = n.rr + 3;
         const dx = n.sx - px,
           dy = n.sy - py;
-        const reach = Math.max(18, n.rr + 6);
         const d = dx * dx + dy * dy;
         if (d < reach * reach && d < bd) {
           bd = d;
@@ -989,7 +1026,6 @@ const payloadJson = JSON.stringify(payload);
 
     function showDetail(n: GNode) {
       selectedId = n.id;
-      // Reveal this node + its related entities in the graph.
       activeSet = new Set<string>([n.id, ...adj[n.id]]);
       autoSpin = false;
       if (detail && detailTitle && detailBody) {
@@ -1019,26 +1055,20 @@ const payloadJson = JSON.stringify(payload);
     }
     detailClose?.addEventListener('click', hideDetail);
 
-    // Export the automation map as a small JSON workflow file.
-    exportBtn?.addEventListener('click', () => {
-      const workflow = {
-        name: 'TrustAuto — workflow map',
-        generatedBy: 'TrustAuto',
-        nodes: nodes.map((n) => ({ id: n.id, name: n.label, group: n.group })),
-        connections: edges.map((e) => ({ from: byId[e.s].label, to: byId[e.t].label, rel: e.r })),
-      };
-      const blob = new Blob([JSON.stringify(workflow, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'trustauto-workflow.json';
-      a.click();
-      URL.revokeObjectURL(url);
-    });
-
     // ── Boot ───────────────────────────────────────────────────────────
     resize();
     root.classList.add('is-ready');
+    render();
+    // Re-measure after layout settles (two-column grid can still be reflowing at
+    // init) so the static/reduced-motion first paint is not sized off a stale box.
+    requestAnimationFrame(() => {
+      resize();
+      if (!running) render();
+    });
+    window.addEventListener('load', () => {
+      resize();
+      if (!running) render();
+    });
     if ('ResizeObserver' in window) {
       const ro = new ResizeObserver(() => {
         resize();

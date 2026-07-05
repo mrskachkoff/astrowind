@@ -278,13 +278,15 @@ const pricingSchema = {
         description:
           'Fits when you want full control on your own servers — no per-task licensing, no data leaving your premises, and the freedom to run it entirely on-prem or in a sovereign cloud you control.',
       },
-      {
-        title: 'The same architecture either way',
-        description:
-          'Whichever engine fits, what surrounds it does not change: scoped access, logged actions, human checkpoints, and your systems left in place.',
-      },
     ]}
   >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        The same architecture either way
+      </h3>
+      Whichever engine fits, what surrounds it does not change: scoped access, logged actions, human checkpoints, and
+      your systems left in place.
+    </Fragment>
     <Fragment slot="image">
       <TrustAutoGraph />
     </Fragment>

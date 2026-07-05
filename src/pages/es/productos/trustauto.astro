@@ -268,13 +268,15 @@ const pricingSchema = {
         description:
           'Encaja cuando quieres control total en tus propios servidores — sin licencias por tarea, sin que los datos salgan de tus instalaciones, y la libertad de ejecutarlo íntegramente on-prem o en una nube soberana que controlas.',
       },
-      {
-        title: 'La misma arquitectura en ambos casos',
-        description:
-          'Sea cual sea el motor, lo que lo rodea no cambia: acceso con alcance definido, acciones registradas, puntos de control humanos y tus sistemas intactos.',
-      },
     ]}
   >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        La misma arquitectura en ambos casos
+      </h3>
+      Sea cual sea el motor, lo que lo rodea no cambia: acceso con alcance definido, acciones registradas, puntos de
+      control humanos y tus sistemas intactos.
+    </Fragment>
     <Fragment slot="image">
       <TrustAutoGraph lang="es" />
     </Fragment>

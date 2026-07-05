@@ -52,7 +52,7 @@ const lang = Astro.currentLocale || 'en';
               url: 'https://solutions.futurion.es/web-app-manifest-512x512.png',
             },
             description:
-              'Compliance-first AI automation agency helping small healthcare providers in Spain and the EU automate safely under GDPR. Specialists in dental clinics, pharmacies, and medical practices with 1–10 employees.',
+              'Software company in Valencia building private AI tools — TrustPrompt, TrustCore and TrustAuto — that run on infrastructure the customer controls, for legal, compliance, finance and healthcare teams in Spain and the EU.',
             contactPoint: {
               '@type': 'ContactPoint',
               contactType: 'customer service',
@@ -60,7 +60,13 @@ const lang = Astro.currentLocale || 'en';
               availableLanguage: ['Spanish', 'English'],
               email: 'solutions@futurion.es',
             },
-            sameAs: ['https://www.linkedin.com/company/futurion-solutions'],
+            founder: { '@id': 'https://solutions.futurion.es/#author' },
+            sameAs: [
+              'https://www.linkedin.com/company/111621147/',
+              'https://www.instagram.com/solutions.futurion.es/',
+              'https://www.facebook.com/solutions.futurion.es/',
+              'https://futurion.es',
+            ],
           },
           {
             '@type': 'ProfessionalService',
@@ -68,7 +74,7 @@ const lang = Astro.currentLocale || 'en';
             name: 'Futurion Solutions',
             url: 'https://solutions.futurion.es',
             description:
-              'Compliance-first AI automation agency helping small healthcare providers in Spain and the EU automate safely under GDPR.',
+              'Private AI products and deployment services for regulated organisations in Spain and the EU — data stays on infrastructure the customer controls.',
             address: {
               '@type': 'PostalAddress',
               addressLocality: 'Valencia',
@@ -85,7 +91,7 @@ const lang = Astro.currentLocale || 'en';
             '@id': 'https://solutions.futurion.es/#website',
             url: 'https://solutions.futurion.es',
             name: 'Futurion Solutions',
-            description: 'Compliance-first AI automation for healthcare providers in Spain and the EU',
+            description: 'Private AI for regulated organisations — TrustPrompt, TrustCore and TrustAuto',
             inLanguage: ['en', 'es'],
             publisher: { '@id': 'https://solutions.futurion.es/#organization' },
           },
@@ -96,6 +102,7 @@ const lang = Astro.currentLocale || 'en';
             url: 'https://solutions.futurion.es/about/',
             jobTitle: 'Founder',
             worksFor: { '@id': 'https://solutions.futurion.es/#organization' },
+            sameAs: ['https://www.linkedin.com/in/ivan-skachkov/'],
             knowsAbout: ['GDPR', 'Healthcare AI', 'EU AI Act', 'Data Protection', 'HIPAA', 'AEPD'],
           },
         ],

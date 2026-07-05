@@ -9,7 +9,7 @@ import Features from '~/components/widgets/Features.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'About | Futurion Solutions',
+  title: 'About',
   description:
     'Futurion Solutions is a software company in Valencia building TrustPrompt, TrustCore and TrustAuto, so legal, compliance and finance teams keep data in-house.',
   openGraph: {
@@ -33,9 +33,11 @@ const aboutSchema = [
   {
     '@context': 'https://schema.org',
     '@type': 'Person',
+    '@id': 'https://solutions.futurion.es/#author',
     name: 'Ivan Skachkov',
     jobTitle: 'Founder',
     worksFor: { '@id': 'https://solutions.futurion.es/#organization' },
+    sameAs: ['https://www.linkedin.com/in/ivan-skachkov/'],
     knowsAbout: ['GDPR', 'EU AI Act', 'ISO 27001', 'SOC 2', 'Data Protection', 'Private AI', 'Business Process Design'],
     url: 'https://solutions.futurion.es/about/',
   },
@@ -167,7 +169,7 @@ const aboutSchema = [
   >
     <Fragment slot="content">
       <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Founded by Ivan Skachkov</h3>
-      Futurion Solutions was founded by Ivan Skachkov, who works in data protection and business-process design. The company is based in Valencia and works with organisations across Spain and the EU.
+      Futurion Solutions was founded by <a class="underline hover:no-underline" href="https://www.linkedin.com/in/ivan-skachkov/" rel="me" target="_blank">Ivan Skachkov</a>, who works in data protection and business-process design. The company is based in Valencia and works with organisations across Spain and the EU.
     </Fragment>
 
     <Fragment slot="bg">

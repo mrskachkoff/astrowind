@@ -35,11 +35,22 @@ const localizeTaxonomyHref = (href: string) =>
           <Icon name="tabler:clock" class="w-4 h-4 inline-block -mt-0.5 dark:text-gray-400" />
           <time datetime={String(post.publishDate)} class="inline-block">{getFormattedDate(post.publishDate)}</time>
           {
+            post.updateDate && String(post.updateDate) !== String(post.publishDate) && (
+              <>
+                {' '}
+                · <span class="inline-block">{lang === 'es' ? 'Actualizado' : 'Updated'}</span>{' '}
+                <time datetime={String(post.updateDate)} class="inline-block">{getFormattedDate(post.updateDate)}</time>
+              </>
+            )
+          }
+          {
             post.author && (
               <>
                 {' '}
                 · <Icon name="tabler:user" class="w-4 h-4 inline-block -mt-0.5 dark:text-gray-400" />
-                <span class="inline-block">{post.author}</span>
+                <a class="hover:underline inline-block" href={lang === 'es' ? '/es/nosotros/' : '/about/'}>
+                  {post.author}
+                </a>
               </>
             )
           }

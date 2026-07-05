@@ -1,17 +1,19 @@
 # Futurion Solutions
 
-> Futurion Solutions is a compliance-first AI automation agency helping small healthcare providers in Spain and the EU automate administrative tasks safely under GDPR. We serve dental clinics, pharmacies, and medical practices with 1–10 employees. We offer a free 5–7 day AI compliance audit, compliant automation implementation (€1,500–€15,000), and ongoing support (from €200/month). Patient data never leaves the clinic — we use on-premise and hybrid AI architectures. Based in Valencia, Spain.
+> Futurion Solutions is a software company in Valencia, Spain, building private AI tools that run on infrastructure the customer controls: TrustPrompt (redacts personal data in the browser before it reaches AI services), TrustCore (on-device document Q&A), and TrustAuto (on-premises business process automation with compliance controls). We work with legal, compliance, finance and healthcare teams in Spain and the EU. We also deploy MedCore Private AI, an on-premise medical AI platform, and offer a free Automation Roadmap assessment.
 
 ## Key pages
 
-- [Homepage (English)](https://solutions.futurion.es/): Overview of compliance-first AI automation for healthcare, free audit offer, how it works, FAQ
-- [Homepage (Spanish)](https://solutions.futurion.es/es/): Spanish-language overview — Automatización IA con cumplimiento normativo para sanidad
-- [Services](https://solutions.futurion.es/services/): Full list of AI automation services — appointment scheduling, patient communications, billing, compliance documentation
-- [Servicios (ES)](https://solutions.futurion.es/es/servicios/): Spanish services page
-- [Free AI Compliance Audit](https://solutions.futurion.es/automation-roadmap/): Request the free 5–7 day GDPR + AI feasibility audit
-- [Hoja de Ruta de Automatización (ES)](https://solutions.futurion.es/es/hoja-de-ruta-de-automatizacion/): Spanish audit request page
-- [Pricing](https://solutions.futurion.es/pricing/): Transparent pricing for audit, implementation packages, and monthly support
-- [Precios (ES)](https://solutions.futurion.es/es/precios/): Spanish pricing page
+- [Homepage (English)](https://solutions.futurion.es/): Overview of the private AI product line — TrustPrompt, TrustCore, TrustAuto — how it works, FAQ
+- [Homepage (Spanish)](https://solutions.futurion.es/es/): Spanish-language overview — IA privada para organizaciones reguladas
+- [TrustPrompt](https://solutions.futurion.es/products/trustprompt/): Browser extension that redacts personal data before prompts leave the device
+- [TrustPrompt (ES)](https://solutions.futurion.es/es/productos/trustprompt/): Página de TrustPrompt en español
+- [TrustCore](https://solutions.futurion.es/products/trustcore/): On-device document Q&A — documents never leave the machine
+- [TrustCore (ES)](https://solutions.futurion.es/es/productos/trustcore/): Página de TrustCore en español
+- [TrustAuto](https://solutions.futurion.es/products/trustauto/): On-premises business process automation with compliance controls
+- [TrustAuto (ES)](https://solutions.futurion.es/es/productos/trustauto/): Página de TrustAuto en español
+- [Free Automation Roadmap](https://solutions.futurion.es/automation-roadmap/): Request the free automation and compliance assessment
+- [Hoja de Ruta de Automatización (ES)](https://solutions.futurion.es/es/hoja-de-ruta-de-automatizacion/): Página de la hoja de ruta en español
 - [MedCore Private AI](https://solutions.futurion.es/medcore-private-ai/): On-premise medical-grade AI infrastructure for medium healthcare organizations
 - [MedCore IA Privada (ES)](https://solutions.futurion.es/es/medcore-ia-privada/): Spanish MedCore page
 - [About](https://solutions.futurion.es/about/): About Futurion Solutions — team, mission, location (Valencia, Spain)
@@ -61,12 +63,12 @@
 
 - Location: Valencia, Spain
 - Languages: English, Spanish
-- Target clients: Dental clinics, pharmacies, small medical practices (1–10 employees) in Spain and the EU
+- Products: TrustPrompt (browser PII redaction), TrustCore (on-device document Q&A), TrustAuto (on-prem process automation), MedCore Private AI (on-premise medical AI)
+- Target users: legal, compliance, finance and healthcare teams in Spain and the EU
 - Compliance frameworks: GDPR, HIPAA, SOC2, ISO 27001, AEPD (Spain)
-- Free audit: 5–7 business days, no obligation, includes risk scores and automation roadmap
+- Free Automation Roadmap: no obligation, includes findings and prioritised recommendations
 - Implementation pricing: €1,500–€3,000 (quick-win), €5,000–€15,000 (comprehensive)
 - Monthly support: from €200/month
-- Time savings: 10–15 hours per week per practice
-- Data architecture: on-premise and hybrid — patient data stays in the clinic
+- Data architecture: on-premise and hybrid — customer data stays on customer infrastructure
 - Contact: solutions@futurion.es
-- LinkedIn: https://www.linkedin.com/company/futurion-solutions
+- LinkedIn: https://www.linkedin.com/company/111621147/

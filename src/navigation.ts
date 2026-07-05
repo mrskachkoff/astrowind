@@ -117,7 +117,7 @@ export function getFooterData(lang: Locale = 'en') {
       { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset(lang === 'es' ? '/es/rss.xml' : '/rss.xml') },
     ],
     footNote: `
-    &copy; ${new Date().getFullYear()} Futurion Solutions. ${t('footer.allRightsReserved')}.
+    &copy; ${new Date().getFullYear()} Futurion Solutions · Valencia, ${lang === 'es' ? 'España' : 'Spain'} · solutions@futurion.es. ${t('footer.allRightsReserved')}.
   `,
   };
 }

@@ -8,9 +8,9 @@ import FeaturesCarousel from '~/components/widgets/FeaturesCarousel.astro';
 import Prices from '~/components/widgets/Pricing.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import TrustAutoGraph from '~/components/widgets/TrustAutoGraph.astro';
 
 import imgTrustAuto from '~/assets/images/trustauto.png';
-import imgWorkflow from '~/assets/images/ai-workflow-tablet.jpg';
 
 const metadata = {
   title: 'TrustAuto — Automatización de procesos de negocio, en tus condiciones',
@@ -57,7 +57,8 @@ const pricingSchema = {
   '@context': 'https://schema.org',
   '@type': 'OfferCatalog',
   name: 'Precios de Servicios de Automatización TrustAuto — Futurion Solutions',
-  description: 'Precios transparentes para automatización de procesos de negocio conforme al RGPD para empresas en España y la UE.',
+  description:
+    'Precios transparentes para automatización de procesos de negocio conforme al RGPD para empresas en España y la UE.',
   inLanguage: 'es',
   provider: { '@id': 'https://solutions.futurion.es/#organization' },
   url: 'https://solutions.futurion.es/es/productos/trustauto/',
@@ -65,7 +66,8 @@ const pricingSchema = {
     {
       '@type': 'Offer',
       name: 'Hoja de Ruta de Automatización',
-      description: 'Evaluación gratuita de automatización IA en 5-7 días con mapeo de flujos de datos, análisis de brechas y hoja de ruta priorizada.',
+      description:
+        'Evaluación gratuita de automatización IA en 5-7 días con mapeo de flujos de datos, análisis de brechas y hoja de ruta priorizada.',
       price: '0',
       priceCurrency: 'EUR',
       availability: 'https://schema.org/InStock',
@@ -74,21 +76,24 @@ const pricingSchema = {
     {
       '@type': 'Offer',
       name: 'Implementación Quick-Win',
-      description: '1-2 automatizaciones de alto impacto entregadas en 2-4 semanas. Arquitectura local o híbrida con controles de cumplimiento RGPD.',
+      description:
+        '1-2 automatizaciones de alto impacto entregadas en 2-4 semanas. Arquitectura local o híbrida con controles de cumplimiento RGPD.',
       priceSpecification: { '@type': 'PriceSpecification', minPrice: '1500', priceCurrency: 'EUR' },
       availability: 'https://schema.org/InStock',
     },
     {
       '@type': 'Offer',
       name: 'Paquete Integral',
-      description: 'Transformación completa de la consulta en 6-12 semanas. Múltiples automatizaciones con marco de cumplimiento integrado y formación del personal.',
+      description:
+        'Transformación completa de la consulta en 6-12 semanas. Múltiples automatizaciones con marco de cumplimiento integrado y formación del personal.',
       priceSpecification: { '@type': 'PriceSpecification', minPrice: '5000', priceCurrency: 'EUR' },
       availability: 'https://schema.org/InStock',
     },
     {
       '@type': 'Offer',
       name: 'MedCore Private AI',
-      description: 'Infraestructura IA de grado médico completamente local para organizaciones sanitarias medianas. Precio por proyecto.',
+      description:
+        'Infraestructura IA de grado médico completamente local para organizaciones sanitarias medianas. Precio por proyecto.',
       priceSpecification: { '@type': 'PriceSpecification', minPrice: '25000', priceCurrency: 'EUR' },
       availability: 'https://schema.org/InStock',
       url: 'https://solutions.futurion.es/es/medcore-ia-privada/',
@@ -126,18 +131,22 @@ const pricingSchema = {
         class="mx-auto mb-4 object-contain drop-shadow-lg"
       />
       TrustAuto<br />
-      <span class="text-accent dark:text-white highlight">Automatiza el trabajo mecánico sin ceder el control de tus sistemas ni de tus datos</span>
+      <span class="text-accent dark:text-white highlight"
+        >Automatiza el trabajo mecánico sin ceder el control de tus sistemas ni de tus datos</span
+      >
     </Fragment>
 
     <Fragment slot="subtitle">
       <span class="hidden sm:inline">
-        TrustAuto elimina el trabajo administrativo repetitivo de tu equipo — recordatorios de citas y
-        pagos, seguimientos, formularios de alta, facturación, aprobaciones y movimiento de datos entre
-        las herramientas que ya utilizas. Se construye sobre <span class="font-medium">Power Automate</span> o
-        <span class="font-medium">n8n autoalojado</span>, y se ejecuta en tu propia infraestructura o en
-        un entorno híbrido.
+        TrustAuto elimina el trabajo administrativo repetitivo de tu equipo — recordatorios de citas y pagos,
+        seguimientos, formularios de alta, facturación, aprobaciones y movimiento de datos entre las herramientas que ya
+        utilizas. Se construye sobre <span class="font-medium">Power Automate</span> o
+        <span class="font-medium">n8n autoalojado</span>, y se ejecuta en tu propia infraestructura o en un entorno
+        híbrido.
       </span>
-      <span class="block mb-1 sm:hidden font-bold text-green-700">Tus sistemas siguen en su lugar. La automatización trabaja a su alrededor.</span>
+      <span class="block mb-1 sm:hidden font-bold text-green-700"
+        >Tus sistemas siguen en su lugar. La automatización trabaja a su alrededor.</span
+      >
       Tus sistemas actuales permanecen intactos; la automatización trabaja a su alrededor, no al revés.
     </Fragment>
   </Hero>
@@ -226,7 +235,8 @@ const pricingSchema = {
       },
       {
         title: 'Implementar y supervisar',
-        description: 'Desplegar y mantener la vigilancia conforme cambian los volúmenes, las excepciones y los requisitos.',
+        description:
+          'Desplegar y mantener la vigilancia conforme cambian los volúmenes, las excepciones y los requisitos.',
       },
     ]}
   >
@@ -234,10 +244,9 @@ const pricingSchema = {
       <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
         La mayoría de las automatizaciones fracasan porque el proceso nunca se documentó
       </h3>
-      El problema rara vez es la falta de herramientas — es la automatización añadida sobre un proceso
-      que nadie documentó antes. TrustAuto funciona al revés: automatizamos sobre los procesos que ya
-      funcionan, eliminando la fricción repetitiva sin obligar a tu equipo a cambiar su forma de trabajar
-      ni a reaprender software cerrado.
+      El problema rara vez es la falta de herramientas — es la automatización añadida sobre un proceso que nadie documentó
+      antes. TrustAuto funciona al revés: automatizamos sobre los procesos que ya funcionan, eliminando la fricción repetitiva
+      sin obligar a tu equipo a cambiar su forma de trabajar ni a reaprender software cerrado.
     </Fragment>
   </Content>
 
@@ -267,11 +276,7 @@ const pricingSchema = {
     ]}
   >
     <Fragment slot="image">
-      <img
-        src={imgWorkflow.src}
-        alt="Automatización de procesos de negocio sobre tu propia infraestructura"
-        class="w-full rounded-lg shadow-lg"
-      />
+      <TrustAutoGraph lang="es" />
     </Fragment>
   </Content>
 

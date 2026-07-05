@@ -1,0 +1,1064 @@
+---
+/**
+ * TrustAutoGraph.astro
+ * "Orbiting systems" map for TrustAuto — the same self-contained, dependency-free
+ * pseudo-3D force graph engine as TrustCoreGraph.astro (Canvas 2D + an HTML label
+ * overlay), re-skinned for business-process automation.
+ *
+ * A central automation ENGINE (Power Automate / self-hosted n8n) orbited by the
+ * customer's connected systems, the workflow steps, a human checkpoint and the
+ * governance concepts that surround every run. The dataset is SYNTHETIC and
+ * PII-free (an invoice-intake example).
+ *
+ * The engine node renders the TrustAuto logo on the canvas instead of a plain
+ * sphere. Pointer-only interactivity (drag to spin, hover to highlight, click for
+ * detail, export the map as JSON). Controls are tabindex=-1 because the host
+ * Content widget marks the image column aria-hidden.
+ */
+
+import imgPoster from '~/assets/images/ai-workflow-tablet.jpg';
+import imgLogo from '~/assets/images/trustauto.png';
+
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = 'en' } = Astro.props;
+
+const STRINGS = {
+  en: {
+    aria: 'Interactive 3D automation map: the engine, your connected systems, workflow steps and human checkpoints, on your own infrastructure.',
+    systems: 'systems',
+    steps: 'steps',
+    exportLabel: '⬇ Export workflow',
+    connected: 'Connected',
+    source: 'Runs on',
+    passage: 'What it does',
+    close: 'Close',
+    hint: 'Drag to rotate · click a node',
+  },
+  es: {
+    aria: 'Mapa de automatización 3D interactivo: el motor, tus sistemas conectados, los pasos del flujo y los puntos de control humanos, sobre tu propia infraestructura.',
+    systems: 'sistemas',
+    steps: 'pasos',
+    exportLabel: '⬇ Exportar flujo',
+    connected: 'Conexiones',
+    source: 'Se ejecuta en',
+    passage: 'Qué hace',
+    close: 'Cerrar',
+    hint: 'Arrastra para rotar · haz clic en un nodo',
+  },
+};
+
+const t = STRINGS[lang] ?? STRINGS.en;
+
+// Accent palette (mirrors --fds-acc-* tokens) — same hexes as TrustCoreGraph,
+// remapped to the automation domain.
+const C = {
+  engine: '#0065fe', // the automation engine (Power Automate / n8n)
+  system: '#2d7bf2', // connected systems: M365, ERP, CRM, files, inbox
+  step: '#a459ff', // workflow actions: read, extract, draft, post
+  checkpoint: '#ff2f70', // human-approval gate
+  outcome: '#83e31e', // logged action / scoped access
+  concept: '#96bdf9', // governance concepts: on-prem, systems left in place
+};
+
+// Synthetic, PII-free automation graph (EN + ES label sets).
+const DATA = {
+  en: {
+    nodes: [
+      {
+        id: 'ENG',
+        label: 'Automation engine',
+        group: 'engine',
+        src: 'Your servers or tenant',
+        q: 'Power Automate or self-hosted n8n, running on your own infrastructure. It orchestrates every step below.',
+      },
+      {
+        id: 'S1',
+        label: 'Microsoft 365',
+        group: 'system',
+        src: 'Your Microsoft 365 tenant',
+        q: 'Mailbox, SharePoint and Teams, reached through your existing tenant and its governance.',
+      },
+      {
+        id: 'S2',
+        label: 'ERP / Finance',
+        group: 'system',
+        src: 'Your ERP / finance system',
+        q: 'Approved entries are written back to your finance system — nothing is posted before a person approves.',
+      },
+      {
+        id: 'S3',
+        label: 'CRM',
+        group: 'system',
+        src: 'Your CRM',
+        q: 'Contacts and deals are kept in step with the rest of the workflow.',
+      },
+      {
+        id: 'S4',
+        label: 'File store',
+        group: 'system',
+        src: 'Your file store',
+        q: 'Documents are read and filed on storage you control.',
+      },
+      {
+        id: 'S5',
+        label: 'Inbox',
+        group: 'system',
+        src: 'Your mailbox',
+        q: 'Where intake arrives and replies are drafted for a person to send.',
+      },
+      {
+        id: 'W1',
+        label: 'Read invoice',
+        group: 'step',
+        src: 'Automation engine',
+        q: 'Picks up a new invoice from the inbox and reads it. Read-only access, nothing changed.',
+      },
+      {
+        id: 'W2',
+        label: 'Extract fields',
+        group: 'step',
+        src: 'Automation engine',
+        q: 'Pulls the supplier, amount and due date into structured fields for review.',
+      },
+      {
+        id: 'W3',
+        label: 'Draft reply',
+        group: 'step',
+        src: 'Automation engine',
+        q: 'Prepares a reply as a draft. A person reviews and sends it — the workflow never sends on its own.',
+      },
+      {
+        id: 'W4',
+        label: 'Post to ERP',
+        group: 'step',
+        src: 'Automation engine',
+        q: 'Writes the approved entry to the finance system, with the full action logged.',
+      },
+      {
+        id: 'H1',
+        label: 'Human approval',
+        group: 'checkpoint',
+        src: 'Human checkpoint',
+        q: 'The workflow pauses here. Nothing moves to your systems until a person approves.',
+      },
+      {
+        id: 'O1',
+        label: 'Logged action',
+        group: 'outcome',
+        src: 'Audit log',
+        q: 'Every step writes an entry — who ran it, what it touched and when.',
+      },
+      {
+        id: 'O2',
+        label: 'Scoped access',
+        group: 'outcome',
+        src: 'Access policy',
+        q: 'Each step is granted only the permissions it needs, and no more.',
+      },
+      {
+        id: 'K1',
+        label: 'Systems left in place',
+        group: 'concept',
+        src: 'Architecture',
+        q: 'Automation sits on top of the tools you already use. Nothing is replaced.',
+      },
+      {
+        id: 'K2',
+        label: 'On-prem / sovereign',
+        group: 'concept',
+        src: 'Architecture',
+        q: 'Runs entirely on your premises or in a sovereign cloud you control — no data leaves.',
+      },
+    ],
+    edges: [
+      { s: 'ENG', t: 'S1', r: 'orchestrates' },
+      { s: 'ENG', t: 'S2', r: 'orchestrates' },
+      { s: 'ENG', t: 'S3', r: 'orchestrates' },
+      { s: 'ENG', t: 'S4', r: 'orchestrates' },
+      { s: 'ENG', t: 'S5', r: 'orchestrates' },
+      { s: 'ENG', t: 'W1', r: 'runs' },
+      { s: 'W1', t: 'S5', r: 'reads' },
+      { s: 'W1', t: 'W2', r: 'then' },
+      { s: 'W2', t: 'H1', r: 'pauses at' },
+      { s: 'H1', t: 'W4', r: 'on approval' },
+      { s: 'W4', t: 'S2', r: 'writes to' },
+      { s: 'W2', t: 'W3', r: 'then' },
+      { s: 'W3', t: 'S5', r: 'drafts in' },
+      { s: 'W1', t: 'O2', r: 'scoped by' },
+      { s: 'W3', t: 'O2', r: 'scoped by' },
+      { s: 'W4', t: 'O1', r: 'logged as' },
+      { s: 'H1', t: 'O1', r: 'logged as' },
+      { s: 'ENG', t: 'K1', r: 'keeps' },
+      { s: 'ENG', t: 'K2', r: 'runs' },
+    ],
+  },
+  es: {
+    nodes: [
+      {
+        id: 'ENG',
+        label: 'Motor de automatización',
+        group: 'engine',
+        src: 'Tus servidores o tenant',
+        q: 'Power Automate o n8n autoalojado, ejecutado en tu propia infraestructura. Orquesta cada uno de los pasos siguientes.',
+      },
+      {
+        id: 'S1',
+        label: 'Microsoft 365',
+        group: 'system',
+        src: 'Tu tenant de Microsoft 365',
+        q: 'Buzón de correo, SharePoint y Teams, accesibles a través de tu tenant y su gobernanza.',
+      },
+      {
+        id: 'S2',
+        label: 'ERP / Finanzas',
+        group: 'system',
+        src: 'Tu ERP / sistema financiero',
+        q: 'Las entradas aprobadas se registran en tu sistema financiero — nada se contabiliza antes de que una persona lo apruebe.',
+      },
+      {
+        id: 'S3',
+        label: 'CRM',
+        group: 'system',
+        src: 'Tu CRM',
+        q: 'Los contactos y oportunidades se mantienen sincronizados con el resto del flujo de trabajo.',
+      },
+      {
+        id: 'S4',
+        label: 'Almacén de archivos',
+        group: 'system',
+        src: 'Tu almacén de archivos',
+        q: 'Los documentos se leen y archivan en el almacenamiento que tú controlas.',
+      },
+      {
+        id: 'S5',
+        label: 'Bandeja de entrada',
+        group: 'system',
+        src: 'Tu buzón',
+        q: 'Donde llegan las solicitudes entrantes y se redactan los borradores de respuesta para que una persona los envíe.',
+      },
+      {
+        id: 'W1',
+        label: 'Leer factura',
+        group: 'step',
+        src: 'Motor de automatización',
+        q: 'Recoge una nueva factura de la bandeja de entrada y la lee. Acceso de solo lectura, sin modificaciones.',
+      },
+      {
+        id: 'W2',
+        label: 'Extraer campos',
+        group: 'step',
+        src: 'Motor de automatización',
+        q: 'Extrae el proveedor, el importe y la fecha de vencimiento en campos estructurados para su revisión.',
+      },
+      {
+        id: 'W3',
+        label: 'Redactar respuesta',
+        group: 'step',
+        src: 'Motor de automatización',
+        q: 'Prepara la respuesta como borrador. Una persona la revisa y la envía — el flujo de trabajo no envía nada por sí solo.',
+      },
+      {
+        id: 'W4',
+        label: 'Registrar en ERP',
+        group: 'step',
+        src: 'Motor de automatización',
+        q: 'Escribe la entrada aprobada en el sistema financiero, con el registro completo de la acción.',
+      },
+      {
+        id: 'H1',
+        label: 'Aprobación humana',
+        group: 'checkpoint',
+        src: 'Punto de revisión humana',
+        q: 'El flujo de trabajo se detiene aquí. Nada pasa a tus sistemas hasta que una persona lo aprueba.',
+      },
+      {
+        id: 'O1',
+        label: 'Acción registrada',
+        group: 'outcome',
+        src: 'Registro de auditoría',
+        q: 'Cada paso genera una entrada — quién lo ejecutó, qué tocó y cuándo.',
+      },
+      {
+        id: 'O2',
+        label: 'Acceso acotado',
+        group: 'outcome',
+        src: 'Política de acceso',
+        q: 'Cada paso recibe únicamente los permisos que necesita, y ninguno más.',
+      },
+      {
+        id: 'K1',
+        label: 'Sistemas intactos',
+        group: 'concept',
+        src: 'Arquitectura',
+        q: 'La automatización se superpone a las herramientas que ya utilizas. No se sustituye nada.',
+      },
+      {
+        id: 'K2',
+        label: 'On-prem / soberano',
+        group: 'concept',
+        src: 'Arquitectura',
+        q: 'Se ejecuta íntegramente en tus instalaciones o en una nube soberana que tú controlas — los datos no salen.',
+      },
+    ],
+    edges: [
+      { s: 'ENG', t: 'S1', r: 'orquesta' },
+      { s: 'ENG', t: 'S2', r: 'orquesta' },
+      { s: 'ENG', t: 'S3', r: 'orquesta' },
+      { s: 'ENG', t: 'S4', r: 'orquesta' },
+      { s: 'ENG', t: 'S5', r: 'orquesta' },
+      { s: 'ENG', t: 'W1', r: 'ejecuta' },
+      { s: 'W1', t: 'S5', r: 'lee' },
+      { s: 'W1', t: 'W2', r: 'luego' },
+      { s: 'W2', t: 'H1', r: 'pausa en' },
+      { s: 'H1', t: 'W4', r: 'tras aprobación' },
+      { s: 'W4', t: 'S2', r: 'escribe en' },
+      { s: 'W2', t: 'W3', r: 'luego' },
+      { s: 'W3', t: 'S5', r: 'redacta en' },
+      { s: 'W1', t: 'O2', r: 'acotado por' },
+      { s: 'W3', t: 'O2', r: 'acotado por' },
+      { s: 'W4', t: 'O1', r: 'registra como' },
+      { s: 'H1', t: 'O1', r: 'registra como' },
+      { s: 'ENG', t: 'K1', r: 'mantiene' },
+      { s: 'ENG', t: 'K2', r: 'ejecuta' },
+    ],
+  },
+};
+
+const dataset = DATA[lang] ?? DATA.en;
+// Attach colors server-side so the script needs no palette logic.
+const payload = {
+  nodes: dataset.nodes.map((n) => ({ ...n, color: C[n.group as keyof typeof C] })),
+  edges: dataset.edges,
+  i18n: { connected: t.connected, source: t.source, passage: t.passage, systems: t.systems, steps: t.steps },
+};
+const payloadJson = JSON.stringify(payload);
+---
+
+<figure class="tag" data-tag data-logo={imgLogo.src} aria-label={t.aria}>
+  <img class="tag-poster" src={imgPoster.src} alt="TrustAuto automation map" aria-hidden="true" />
+  <canvas class="tag-canvas" aria-hidden="true"></canvas>
+  <div class="tag-labels" aria-hidden="true"></div>
+
+  <div class="tag-status fds-card"><span class="tag-dot"></span><span class="tag-count"></span></div>
+  <div class="tag-hint">{t.hint}</div>
+  <button class="tag-export fds-card" type="button" tabindex="-1">{t.exportLabel}</button>
+
+  <aside class="tag-detail fds-card" hidden aria-hidden="true">
+    <div class="tag-detail-head">
+      <span class="tag-detail-title"></span>
+      <button class="tag-detail-close" type="button" tabindex="-1" aria-label={t.close}>×</button>
+    </div>
+    <div class="tag-detail-body"></div>
+  </aside>
+
+  <script type="application/json" data-tag-data set:html={payloadJson} />
+</figure>
+
+<style>
+  .tag {
+    --acc: #2d7bf2;
+    position: relative;
+    margin: 0;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--fds-r-card, 16px);
+    overflow: hidden;
+    background: radial-gradient(120% 120% at 50% 18%, #131a44 0%, #0a0f2e 62%, #070b22 100%);
+    border: 1px solid rgba(45, 123, 242, 0.4);
+    box-shadow: var(--fds-shadow-figure, 0 40px 80px -30px rgba(0, 0, 0, 0.6));
+    font-family: 'Inter Variable', system-ui, sans-serif;
+    user-select: none;
+    touch-action: pan-y;
+  }
+
+  .tag-poster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.5;
+    transition: opacity 0.4s ease;
+  }
+  .tag.is-ready .tag-poster {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .tag-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: grab;
+  }
+  .tag-canvas.is-grabbing {
+    cursor: grabbing;
+  }
+
+  .tag-labels {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .fds-node-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    padding: 2px 7px;
+    border-radius: 9999px;
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    color: #eaf0ff;
+    background: rgba(8, 12, 34, 0.62);
+    border: 1px solid var(--acc);
+    box-shadow: 0 0 10px -2px var(--acc);
+    will-change: transform, opacity;
+  }
+
+  /* Shared surface for status / export / detail (the snapshot's .fds-card) */
+  .fds-card {
+    background: rgba(10, 15, 46, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 8px 28px -10px rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .tag-status {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 11px;
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: #aab2e0;
+  }
+  .tag-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 9999px;
+    background: #83e31e;
+    box-shadow: 0 0 8px #83e31e;
+  }
+
+  .tag-hint {
+    position: absolute;
+    left: 50%;
+    bottom: 12px;
+    transform: translateX(-50%);
+    font-size: 10.5px;
+    color: #5a6286;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .tag-export {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    padding: 6px 12px;
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #6fb0ff;
+    cursor: pointer;
+  }
+  .tag-export:hover {
+    color: #a0d0ff;
+    border-color: rgba(45, 123, 242, 0.55);
+  }
+
+  .tag-detail {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: min(240px, 64%);
+    padding: 10px 12px 12px;
+    z-index: 5;
+  }
+  .tag-detail[hidden] {
+    display: none;
+  }
+  .tag-detail-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tag-detail-title {
+    flex: 1;
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #eaf0ff;
+    line-height: 1.3;
+  }
+  .tag-detail-close {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border: none;
+    background: transparent;
+    color: #aab2e0;
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .tag-detail-close:hover {
+    color: #fff;
+  }
+  .tag-detail-body {
+    margin-top: 7px;
+    font-size: 11px;
+    color: #9aa2c4;
+    line-height: 1.5;
+  }
+  .tag-quote {
+    font-size: 11.5px;
+    font-style: italic;
+    color: #c8d8ff;
+    line-height: 1.5;
+    border-left: 2px solid var(--acc, #2d7bf2);
+    padding-left: 8px;
+    margin-bottom: 7px;
+  }
+  .tag-detail-kv {
+    margin-top: 6px;
+  }
+  .tag-detail-kv b {
+    display: block;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: #3d4468;
+    margin-bottom: 2px;
+  }
+  .tag-detail-chip {
+    display: inline-block;
+    margin: 0 3px 3px 0;
+    padding: 1px 7px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #c4c9e4;
+    font-size: 10px;
+  }
+
+  @media (max-width: 600px) {
+    .tag {
+      aspect-ratio: 1 / 1;
+    }
+    .tag-hint {
+      display: none;
+    }
+    .fds-node-label {
+      font-size: 9px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tag-poster {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll<HTMLElement>('[data-tag]').forEach((root) => {
+      if (root.dataset.tagInit) return;
+      root.dataset.tagInit = '1';
+      initTrustAutoGraph(root);
+    });
+  });
+
+  type GNode = {
+    id: string;
+    label: string;
+    group: string;
+    color: string;
+    src?: string;
+    q?: string;
+    x: number;
+    y: number;
+    z: number;
+    vx: number;
+    vy: number;
+    vz: number;
+    sx: number;
+    sy: number;
+    sz: number;
+    r: number;
+    rr: number;
+    el: HTMLDivElement;
+  };
+  type GEdge = { s: string; t: string; r: string; kind?: string };
+
+  function initTrustAutoGraph(root: HTMLElement) {
+    const canvas = root.querySelector<HTMLCanvasElement>('.tag-canvas');
+    const labelLayer = root.querySelector<HTMLElement>('.tag-labels');
+    const dataEl = root.querySelector<HTMLElement>('[data-tag-data]');
+    const countEl = root.querySelector<HTMLElement>('.tag-count');
+    const exportBtn = root.querySelector<HTMLButtonElement>('.tag-export');
+    const detail = root.querySelector<HTMLElement>('.tag-detail');
+    const detailTitle = root.querySelector<HTMLElement>('.tag-detail-title');
+    const detailBody = root.querySelector<HTMLElement>('.tag-detail-body');
+    const detailClose = root.querySelector<HTMLButtonElement>('.tag-detail-close');
+    if (!canvas || !labelLayer || !dataEl || !countEl) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let data: { nodes: GNode[]; edges: GEdge[]; i18n: Record<string, string> };
+    try {
+      data = JSON.parse(dataEl.textContent || '{}');
+    } catch {
+      return;
+    }
+    if (!data.nodes || !data.nodes.length) return;
+
+    const i18n = data.i18n || {
+      connected: 'Connected',
+      source: 'Runs on',
+      passage: 'What it does',
+      systems: 'systems',
+      steps: 'steps',
+    };
+    const esc = (s: string) =>
+      s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c] || c);
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // TrustAuto logo, drawn on the canvas for the central engine node.
+    const logoImg = new Image();
+    let logoReady = false;
+    logoImg.onload = () => {
+      logoReady = true;
+      if (reduceMotion || !running) render();
+    };
+    logoImg.src = root.dataset.logo || '';
+    if (logoImg.complete && logoImg.naturalWidth) logoReady = true;
+
+    // Deterministic Fibonacci-sphere seeding (no Math.random → stable across builds).
+    const nodes: GNode[] = data.nodes as unknown as GNode[];
+    const N = nodes.length;
+    const golden = Math.PI * (3 - Math.sqrt(5));
+    nodes.forEach((n, i) => {
+      const yy = 1 - (i / (N - 1)) * 2;
+      const rad = Math.sqrt(Math.max(0, 1 - yy * yy));
+      const th = golden * i;
+      n.x = Math.cos(th) * rad;
+      n.y = yy;
+      n.z = Math.sin(th) * rad;
+      n.vx = n.vy = n.vz = 0;
+      n.r = n.group === 'engine' ? 8 : n.group === 'system' ? 6 : 4.2;
+      n.rr = n.r;
+    });
+
+    const byId: Record<string, GNode> = {};
+    nodes.forEach((n) => (byId[n.id] = n));
+    const edges = (data.edges || []).filter((e) => byId[e.s] && byId[e.t]);
+
+    // Adjacency for highlight + detail.
+    const adj: Record<string, Set<string>> = {};
+    nodes.forEach((n) => (adj[n.id] = new Set()));
+    edges.forEach((e) => {
+      adj[e.s].add(e.t);
+      adj[e.t].add(e.s);
+    });
+
+    const systemsN = nodes.filter((n) => n.group === 'system').length;
+    const stepsN = nodes.filter((n) => n.group === 'step').length;
+    countEl.textContent = `ON-PREM · ${systemsN} ${i18n.systems} · ${stepsN} ${i18n.steps}`;
+
+    // Label divs (CSS2D overlay).
+    nodes.forEach((n) => {
+      const el = document.createElement('div');
+      el.className = 'fds-node-label';
+      el.style.setProperty('--acc', n.color);
+      el.style.visibility = 'hidden'; // hidden by default; revealed on hover/click
+      el.style.opacity = '0';
+      el.textContent = n.label;
+      labelLayer.appendChild(el);
+      n.el = el;
+    });
+
+    // ── 3D spring layout (warmup then settle) ──────────────────────────
+    function tick(dt: number) {
+      const kRep = 0.9;
+      const kSpring = 0.04;
+      const rest = 1.7;
+      const center = 0.012;
+      for (let i = 0; i < N; i++) {
+        const a = nodes[i];
+        for (let j = i + 1; j < N; j++) {
+          const b = nodes[j];
+          let dx = a.x - b.x,
+            dy = a.y - b.y,
+            dz = a.z - b.z;
+          const d2 = dx * dx + dy * dy + dz * dz + 0.01;
+          const f = (kRep / d2) * dt;
+          const d = Math.sqrt(d2);
+          dx /= d;
+          dy /= d;
+          dz /= d;
+          a.vx += dx * f;
+          a.vy += dy * f;
+          a.vz += dz * f;
+          b.vx -= dx * f;
+          b.vy -= dy * f;
+          b.vz -= dz * f;
+        }
+      }
+      edges.forEach((e) => {
+        const a = byId[e.s],
+          b = byId[e.t];
+        let dx = b.x - a.x,
+          dy = b.y - a.y,
+          dz = b.z - a.z;
+        const d = Math.sqrt(dx * dx + dy * dy + dz * dz) + 0.001;
+        const f = kSpring * (d - rest) * dt;
+        dx /= d;
+        dy /= d;
+        dz /= d;
+        a.vx += dx * f;
+        a.vy += dy * f;
+        a.vz += dz * f;
+        b.vx -= dx * f;
+        b.vy -= dy * f;
+        b.vz -= dz * f;
+      });
+      nodes.forEach((n) => {
+        n.vx -= n.x * center;
+        n.vy -= n.y * center;
+        n.vz -= n.z * center;
+        n.x += n.vx;
+        n.y += n.vy;
+        n.z += n.vz;
+        n.vx *= 0.82;
+        n.vy *= 0.82;
+        n.vz *= 0.82;
+      });
+    }
+    for (let i = 0; i < 260; i++) tick(1);
+    // Pull the engine toward the centre so the logo sits in the middle.
+    const eng = byId['ENG'];
+    if (eng) {
+      eng.x = 0;
+      eng.y = 0;
+      eng.z = 0;
+    }
+    // Normalise to unit-ish radius.
+    let maxR = 0.0001;
+    nodes.forEach((n) => (maxR = Math.max(maxR, Math.hypot(n.x, n.y, n.z))));
+    const norm = 1 / maxR;
+    nodes.forEach((n) => {
+      n.x *= norm;
+      n.y *= norm;
+      n.z *= norm;
+    });
+
+    // ── Render state ───────────────────────────────────────────────────
+    let W = 0,
+      H = 0,
+      cx = 0,
+      cy = 0,
+      spread = 0,
+      dpr = 1;
+    let rotY = 0.6;
+    const tiltX = -0.42;
+    let autoSpin = !reduceMotion;
+    let hoverId: string | null = null;
+    let selectedId: string | null = null;
+    // Labels are hidden by default; this holds the ids whose labels are revealed
+    // (a clicked node + its related entities). null = nothing revealed.
+    let activeSet: Set<string> | null = null;
+
+    function resize() {
+      const w = root.clientWidth || 1;
+      const h = root.clientHeight || 1;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = w;
+      H = h;
+      cx = w / 2;
+      cy = h / 2;
+      spread = Math.min(w, h) * 0.34;
+      canvas!.width = Math.round(w * dpr);
+      canvas!.height = Math.round(h * dpr);
+      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function project(n: GNode) {
+      // rotate about Y then tilt about X
+      const cosY = Math.cos(rotY),
+        sinY = Math.sin(rotY);
+      const x = n.x * cosY - n.z * sinY;
+      let z = n.x * sinY + n.z * cosY;
+      const cosX = Math.cos(tiltX),
+        sinX = Math.sin(tiltX);
+      const y = n.y * cosX - z * sinX;
+      z = n.y * sinX + z * cosX;
+      const persp = 2.4 / (2.4 - z); // z in [-1,1]
+      n.sx = cx + x * spread * persp;
+      n.sy = cy + y * spread * persp;
+      n.sz = z;
+    }
+
+    function render() {
+      ctx!.clearRect(0, 0, W, H);
+      nodes.forEach(project);
+      const order = [...nodes].sort((a, b) => a.sz - b.sz);
+
+      const hi = hoverId || selectedId;
+      const lit = (id: string) => !hi || id === hi || adj[hi].has(id);
+
+      // edges
+      edges.forEach((e) => {
+        const a = byId[e.s],
+          b = byId[e.t];
+        const on = !hi || e.s === hi || e.t === hi;
+        ctx!.beginPath();
+        ctx!.moveTo(a.sx, a.sy);
+        ctx!.lineTo(b.sx, b.sy);
+        ctx!.lineWidth = 1;
+        ctx!.strokeStyle = `rgba(120, 150, 230, ${on ? 0.5 : 0.08})`;
+        ctx!.stroke();
+      });
+
+      // nodes
+      order.forEach((n) => {
+        const persp = 2.4 / (2.4 - n.sz);
+        const rr = n.r * persp;
+        const on = lit(n.id);
+        ctx!.globalAlpha = on ? 1 : 0.22;
+
+        if (n.group === 'engine' && logoReady) {
+          // Draw the TrustAuto logo instead of a plain sphere.
+          const logoH = spread * 0.62 * persp;
+          const aspect = (logoImg.naturalWidth || 503) / (logoImg.naturalHeight || 587);
+          const logoW = logoH * aspect;
+          ctx!.shadowBlur = on ? 22 : 6;
+          ctx!.shadowColor = n.color;
+          ctx!.drawImage(logoImg, n.sx - logoW / 2, n.sy - logoH / 2, logoW, logoH);
+          ctx!.shadowBlur = 0;
+          n.rr = logoH / 2;
+        } else {
+          ctx!.beginPath();
+          ctx!.arc(n.sx, n.sy, rr, 0, Math.PI * 2);
+          ctx!.fillStyle = n.color;
+          ctx!.shadowBlur = on ? 12 : 0;
+          ctx!.shadowColor = n.color;
+          ctx!.fill();
+          ctx!.shadowBlur = 0;
+          if (n.id === hi) {
+            ctx!.lineWidth = 2;
+            ctx!.strokeStyle = '#fff';
+            ctx!.stroke();
+          }
+          n.rr = rr;
+        }
+
+        // label — hidden by default; shown only for the active set or the hovered node
+        const depth = (n.sz + 1) / 2; // 0 back .. 1 front
+        const el = n.el;
+        el.style.transform = `translate(-50%,-50%) translate(${n.sx.toFixed(1)}px, ${(n.sy - n.rr - 8).toFixed(1)}px)`;
+        el.style.zIndex = String(Math.round(depth * 100));
+        const labelShown = (activeSet !== null && activeSet.has(n.id)) || n.id === hoverId;
+        if (labelShown) {
+          el.style.visibility = 'visible';
+          el.style.opacity = on ? String(0.55 + depth * 0.45) : '0.4';
+        } else {
+          el.style.visibility = 'hidden';
+          el.style.opacity = '0';
+        }
+      });
+      ctx!.globalAlpha = 1;
+    }
+
+    // ── Animation loop ─────────────────────────────────────────────────
+    let raf = 0;
+    let running = false;
+    function frame() {
+      if (autoSpin) rotY += 0.0028;
+      render();
+      raf = requestAnimationFrame(frame);
+    }
+    function start() {
+      if (running) return;
+      running = true;
+      if (reduceMotion) {
+        render();
+      } else {
+        raf = requestAnimationFrame(frame);
+      }
+    }
+    function stop() {
+      running = false;
+      cancelAnimationFrame(raf);
+    }
+
+    // ── Interaction ────────────────────────────────────────────────────
+    function pick(px: number, py: number): GNode | null {
+      let best: GNode | null = null;
+      let bd = 18 * 18;
+      nodes.forEach((n) => {
+        const dx = n.sx - px,
+          dy = n.sy - py;
+        const reach = Math.max(18, n.rr + 6);
+        const d = dx * dx + dy * dy;
+        if (d < reach * reach && d < bd) {
+          bd = d;
+          best = n;
+        }
+      });
+      return best;
+    }
+
+    let dragging = false;
+    let moved = false;
+    let lastX = 0,
+      lastY = 0;
+
+    canvas.addEventListener('pointerdown', (ev) => {
+      dragging = true;
+      moved = false;
+      lastX = ev.clientX;
+      lastY = ev.clientY;
+      autoSpin = false;
+      canvas.classList.add('is-grabbing');
+      canvas.setPointerCapture(ev.pointerId);
+    });
+    canvas.addEventListener('pointermove', (ev) => {
+      const rect = canvas.getBoundingClientRect();
+      const px = ev.clientX - rect.left;
+      const py = ev.clientY - rect.top;
+      if (dragging) {
+        const dx = ev.clientX - lastX;
+        if (Math.abs(ev.clientX - lastX) + Math.abs(ev.clientY - lastY) > 3) moved = true;
+        rotY += dx * 0.006;
+        lastX = ev.clientX;
+        lastY = ev.clientY;
+        if (reduceMotion) render();
+        return;
+      }
+      const hit = pick(px, py);
+      const id = hit ? hit.id : null;
+      if (id !== hoverId) {
+        hoverId = id;
+        canvas.style.cursor = id ? 'pointer' : 'grab';
+        if (reduceMotion) render();
+      }
+    });
+    function endDrag(ev: PointerEvent) {
+      if (!dragging) return;
+      dragging = false;
+      canvas!.classList.remove('is-grabbing');
+      if (!moved) {
+        const rect = canvas!.getBoundingClientRect();
+        const hit = pick(ev.clientX - rect.left, ev.clientY - rect.top);
+        if (hit) showDetail(hit);
+        else hideDetail();
+      }
+      if (!reduceMotion && !selectedId) autoSpin = true;
+    }
+    canvas.addEventListener('pointerup', endDrag);
+    canvas.addEventListener('pointercancel', endDrag);
+    canvas.addEventListener('pointerleave', () => {
+      if (!dragging && hoverId) {
+        hoverId = null;
+        if (reduceMotion) render();
+      }
+    });
+
+    function showDetail(n: GNode) {
+      selectedId = n.id;
+      // Reveal this node + its related entities in the graph.
+      activeSet = new Set<string>([n.id, ...adj[n.id]]);
+      autoSpin = false;
+      if (detail && detailTitle && detailBody) {
+        detailTitle.textContent = n.label;
+        detail.style.setProperty('--acc', n.color);
+        const neighbours = [...adj[n.id]].map((id) => byId[id].label);
+        let html = '';
+        if (n.q)
+          html += `<div class="tag-detail-kv"><b>${i18n.passage}</b></div><div class="tag-quote">${esc(n.q)}</div>`;
+        if (n.src) html += `<div class="tag-detail-kv"><b>${i18n.source}</b>${esc(n.src)}</div>`;
+        if (neighbours.length)
+          html +=
+            `<div class="tag-detail-kv"><b>${i18n.connected}</b>` +
+            neighbours.map((l) => `<span class="tag-detail-chip">${esc(l)}</span>`).join('') +
+            `</div>`;
+        detailBody.innerHTML = html;
+        detail.hidden = false;
+      }
+      if (reduceMotion) render();
+    }
+    function hideDetail() {
+      selectedId = null;
+      activeSet = null;
+      if (detail) detail.hidden = true;
+      if (!reduceMotion) autoSpin = true;
+      if (reduceMotion) render();
+    }
+    detailClose?.addEventListener('click', hideDetail);
+
+    // Export the automation map as a small JSON workflow file.
+    exportBtn?.addEventListener('click', () => {
+      const workflow = {
+        name: 'TrustAuto — workflow map',
+        generatedBy: 'TrustAuto',
+        nodes: nodes.map((n) => ({ id: n.id, name: n.label, group: n.group })),
+        connections: edges.map((e) => ({ from: byId[e.s].label, to: byId[e.t].label, rel: e.r })),
+      };
+      const blob = new Blob([JSON.stringify(workflow, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'trustauto-workflow.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // ── Boot ───────────────────────────────────────────────────────────
+    resize();
+    root.classList.add('is-ready');
+    if ('ResizeObserver' in window) {
+      const ro = new ResizeObserver(() => {
+        resize();
+        if (reduceMotion || !running) render();
+      });
+      ro.observe(root);
+    }
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) start();
+            else stop();
+          });
+        },
+        { threshold: 0.05 }
+      );
+      io.observe(root);
+    } else {
+      start();
+    }
+  }
+</script>

@@ -1,0 +1,459 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import JsonLd from '~/components/common/JsonLd.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import FeaturesCarousel from '~/components/widgets/FeaturesCarousel.astro';
+import Prices from '~/components/widgets/Pricing.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+import imgSmsEagleLogo from '~/assets/images/smseagle.png';
+import imgSmsEagleDevice from '~/assets/images/smseagle-device.jpg';
+
+const metadata = {
+  title: 'SMSEagle en España — Pasarela SMS hardware, Technology Partner oficial',
+  description:
+    'Futurion Solutions es Technology Partner oficial de SMSEagle en España. Pasarela SMS hardware on-premise para alertas críticas: suministro, instalación, integración con tu infraestructura y servicio gestionado.',
+  openGraph: {
+    images: [{ url: '~/assets/images/smseagle-device.jpg' }],
+  },
+};
+
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'Pasarela SMS Hardware SMSEagle',
+  brand: { '@type': 'Organization', name: 'SMSEagle', url: 'https://www.smseagle.eu/' },
+  manufacturer: { '@type': 'Organization', name: 'SMSEagle', url: 'https://www.smseagle.eu/' },
+  description:
+    'Pasarela SMS hardware on-premise: un dispositivo de rack con tarjeta SIM propia que envía alertas por SMS, MMS, WhatsApp, Signal y voz directamente a través de la red móvil mediante REST API, SMPP, email-to-SMS y webhooks. Futurion Solutions suministra, instala, integra y puede gestionar el dispositivo como Technology Partner oficial de SMSEagle para España.',
+  url: 'https://solutions.futurion.es/es/smseagle/',
+  inLanguage: 'es',
+  offers: {
+    '@type': 'AggregateOffer',
+    lowPrice: '989',
+    highPrice: '2694',
+    priceCurrency: 'EUR',
+    availability: 'https://schema.org/InStock',
+    seller: { '@id': 'https://solutions.futurion.es/#organization' },
+  },
+};
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: 'Integración de pasarela SMS y alertas gestionadas',
+  name: 'Suministro, Instalación e Integración de SMSEagle',
+  description:
+    'Dimensionamiento, suministro, instalación e integración de pasarelas SMS hardware SMSEagle con sistemas de monitorización y de negocio, más servicio opcional de alertas gestionadas.',
+  provider: { '@id': 'https://solutions.futurion.es/#organization' },
+  areaServed: {
+    '@type': 'Country',
+    name: 'España',
+  },
+  url: 'https://solutions.futurion.es/es/smseagle/',
+  inLanguage: 'es',
+};
+
+const pricingSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'OfferCatalog',
+  name: 'Paquetes de Suministro e Integración SMSEagle — Futurion Solutions',
+  description: 'Paquetes para suministrar, instalar, integrar y gestionar pasarelas SMS hardware SMSEagle en España.',
+  inLanguage: 'es',
+  provider: { '@id': 'https://solutions.futurion.es/#organization' },
+  url: 'https://solutions.futurion.es/es/smseagle/',
+  itemListElement: [
+    {
+      '@type': 'Offer',
+      name: 'Suministro e Instalación',
+      description:
+        'Dimensionamiento y adquisición del dispositivo al precio de lista del fabricante, instalación en rack, configuración de red/SIM, hardening LDAP/MFA, configuración de email-to-SMS, una integración de monitorización y un informe de prueba de entrega.',
+      availability: 'https://schema.org/InStock',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Proyecto de Integración',
+      description:
+        'Todo lo incluido en Suministro e Instalación, más diseño de grupos de escalado y turnos, e integración con tus flujos de trabajo (n8n, Power Automate, REST o SMPP a medida), pruebas de aceptación y documentación.',
+      availability: 'https://schema.org/InStock',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Configuración Crítica / Alta Disponibilidad',
+      description:
+        'Dos dispositivos en failover MASTER/BACKUP, failover de módem, diseño de escalado y guardias, runbook y evidencia de entrega.',
+      availability: 'https://schema.org/InStock',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Alertas Gestionadas',
+      description:
+        'Actualizaciones de firmware y seguridad, cambios en reglas de escalado, prueba mensual de entrega extremo a extremo con informe, gestión de SIM y plan, respuesta prioritaria.',
+      availability: 'https://schema.org/InStock',
+    },
+  ],
+};
+---
+
+<Layout metadata={metadata}>
+  <JsonLd schema={productSchema} />
+  <JsonLd schema={serviceSchema} />
+
+  <!-- Hero -->
+
+  <Hero
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Contáctanos',
+        href: '/es/contacto/',
+        icon: 'tabler:arrow-right',
+      },
+      {
+        variant: 'secondary',
+        text: 'Ver paquetes',
+        href: '#pricing',
+      },
+    ]}
+  >
+    <Fragment slot="title">
+      <img
+        src={imgSmsEagleLogo.src}
+        alt="Logotipo de SMSEagle"
+        width="180"
+        height="64"
+        class="mx-auto mb-4 object-contain drop-shadow-lg"
+      />
+      <span class="text-accent dark:text-white highlight">Alertas críticas que no dependen de Internet</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      <span class="hidden sm:inline">
+        SMSEagle es una pasarela SMS hardware fabricada en la UE: un dispositivo en tu rack con tarjeta SIM propia que
+        envía alertas por SMS, WhatsApp, Signal y voz directamente a través de la red móvil. Sin servicio en la nube
+        de por medio, sin coste por mensaje, sin terceros que retengan tus números de teléfono. Suministramos el
+        dispositivo, lo integramos con tus sistemas de monitorización y de negocio, y podemos gestionarlo por ti como
+        <span class="font-medium">Technology Partner</span> oficial de SMSEagle para España.
+      </span>
+      <span class="block mb-1 sm:hidden font-bold text-green-700"
+        >Alertas que salen por la SIM, no por la nube.</span
+      >
+      Un dispositivo en tu rack. Tus sistemas de monitorización y de negocio lo activan; la SIM hace el resto.
+    </Fragment>
+  </Hero>
+
+  <!-- Device photo -->
+
+  <section class="px-4 md:px-6 -mt-6 md:-mt-10">
+    <div class="max-w-xs mx-auto">
+      <img
+        src={imgSmsEagleDevice.src}
+        alt="Pasarela SMS hardware SMSEagle NXS-9700"
+        width={imgSmsEagleDevice.width}
+        height={imgSmsEagleDevice.height}
+        class="w-full h-auto object-contain rounded-lg"
+      />
+    </div>
+  </section>
+
+  <!-- What the device does -->
+
+  <FeaturesCarousel
+    id="features"
+    tagline="Qué Hace el Dispositivo"
+    title="Un Solo Equipo, Todos los Canales de Alerta"
+    subtitle="Todo se ejecuta en el propio dispositivo: no hay ninguna nube de terceros de por medio."
+    items={[
+      {
+        title: 'SMS, MMS y Voz Desde Cualquier Sistema',
+        description:
+          'Activa alertas mediante REST API, servidor SMPP integrado o webhooks desde cualquier sistema que monitorice o gestione tu negocio.',
+        icon: 'tabler:message-2',
+      },
+      {
+        title: 'Email-to-SMS',
+        description:
+          'Cualquier sistema que pueda enviar un correo puede enviar un SMS: el dispositivo consulta un buzón y responde de vuelta a la bandeja de entrada.',
+        icon: 'tabler:mail-forward',
+      },
+      {
+        title: 'Monitorización Integrada',
+        description:
+          'Sondas ICMP, puerto TCP/UDP, SNMP v1/v2 y traps, y Modbus TCP: la propia pasarela vigila tus hosts y PLCs.',
+        icon: 'tabler:activity-heartbeat',
+      },
+      {
+        title: 'WhatsApp y Signal con Reserva por SMS',
+        description:
+          'Si un número no es alcanzable por WhatsApp o Signal, el mensaje se envía automáticamente por SMS en su lugar.',
+        icon: 'tabler:brand-whatsapp',
+      },
+      {
+        title: 'Grupos de Escalado y Turnos de Guardia',
+        description: 'Las alertas siguen tu turno y escalan a la siguiente persona hasta que alguien las confirma.',
+        icon: 'tabler:users-group',
+      },
+      {
+        title: 'Texto a Voz y Llamadas de Aviso',
+        description:
+          'Llamadas de voz con texto a voz para las alertas que necesitan despertar a alguien, no solo avisarle.',
+        icon: 'tabler:phone-call',
+      },
+      {
+        title: 'Automatización de Flujos de Trabajo',
+        description:
+          'Reglas entre canales (correo a SMS, SMS a WhatsApp, condiciones AND/OR/NOT y regex) configuradas sin código.',
+        icon: 'tabler:sitemap',
+      },
+      {
+        title: 'Alta Disponibilidad',
+        description: 'Dos dispositivos en failover MASTER/BACKUP con IP flotante para las rutas de alerta que no pueden fallar.',
+        icon: 'tabler:shield-check',
+      },
+    ]}
+  />
+
+  <!-- Why hardware, on your premises -->
+
+  <Content
+    columns={2}
+    tagline="Por Qué Hardware, en tus Instalaciones"
+    title="Ningún Proveedor Cloud en la Ruta del Mensaje"
+    items={[
+      {
+        title: 'La ruta es corta',
+        description:
+          'Tu sistema → el dispositivo en tu rack → la red móvil del operador. Ningún proveedor de SMS en la nube se interpone, por lo que ningún subencargado retiene el contenido de los mensajes ni los números de teléfono.',
+      },
+      {
+        title: 'WhatsApp y Signal, con honestidad',
+        description:
+          'Esos mensajes viajan por las propias redes de Meta o Signal, por la propia naturaleza del canal: SMSEagle no añade ningún proveedor cloud adicional a esa ruta, y recurre automáticamente al SMS normal como reserva.',
+      },
+      {
+        title: 'Sigue alertando aunque falle tu Internet',
+        description:
+          'Enlace caído, DNS roto, VPN inactiva, incidente del proveedor cloud: el SMS sigue saliendo por la SIM. Un apagón nacional prolongado también degrada las redes móviles; el decreto de resiliencia pendiente en España exigirá a los operadores mantener cuatro horas de cobertura móvil para el 75% de la población durante los cortes.',
+      },
+      {
+        title: 'Una compra única, no una suscripción',
+        description:
+          'Dispositivo más plan de SIM, sin medición por mensaje, sin licencias por usuario. SMSEagle publica una comparativa de punto de equilibrio frente a las API de SMS en la nube en torno a los 10.000 mensajes/mes: es una afirmación del propio fabricante, que conviene contrastar con tus propios volúmenes.',
+      },
+    ]}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Fabricado en la UE, Certificado, Alineado con el RGPD por Arquitectura
+      </h3>
+      Los dispositivos SMSEagle se fabrican en la UE por una empresa certificada en ISO 27001, cuentan con certificación
+      CE, FCC y UKCA, y están alineados con el RGPD por diseño, porque de entrada no hay ningún servicio en la nube en
+      la ruta, no por una declaración de cumplimiento añadida encima.
+    </Fragment>
+  </Content>
+
+  <!-- What we do as your integrator -->
+
+  <Content
+    isAfterContent
+    tagline="Qué Hacemos Como tu Integrador"
+    title="Cinco Pasos del Dispositivo a una Ruta de Alerta Funcionando"
+    items={[
+      {
+        title: 'Dimensionamiento y suministro',
+        description:
+          'Qué modelo — uno, dos u ocho módems — más el complemento de voz, la garantía y el plan de SIM. Cotizamos al precio de lista del fabricante.',
+      },
+      {
+        title: 'Instalación',
+        description: 'Montaje en rack o carril DIN, configuración de red, activación de la SIM, hardening LDAP/MFA, y un plan de pruebas con evidencia de entrega.',
+      },
+      {
+        title: 'Integración',
+        description:
+          'Tu stack de monitorización — Zabbix, PRTG, Nagios, Icinga, Checkmk, Pandora FMS — o tus flujos de trabajo — n8n, Power Automate — o un desarrollo a medida a partir de la REST API, SMPP, email-to-SMS o MQTT del dispositivo.',
+      },
+      {
+        title: 'Diseño de escalado',
+        description: 'Quién recibe la alerta, en qué orden, por qué canal, y con qué reserva si nadie la confirma.',
+      },
+      {
+        title: 'Servicio gestionado (opcional)',
+        description: 'Actualizaciones, mantenimiento de reglas, pruebas mensuales de entrega y gestión de SIM — consulta los paquetes más abajo.',
+      },
+    ]}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        La Tienda Vende el Hardware — Esta es la Parte que no Puede Enviarte
+      </h3>
+      El dispositivo es el mismo que vende SMSEagle directamente, al mismo precio de lista. Lo que aporta un integrador
+      es soporte en español, un técnico que realiza la instalación, una integración que realmente se comunica con tus
+      sistemas, y un único interlocutor local responsable de toda la ruta de alerta.
+    </Fragment>
+  </Content>
+
+  <!-- Pricing -->
+
+  <JsonLd schema={pricingSchema} />
+
+  <Prices
+    id="pricing"
+    tagline="Paquetes"
+    title="Suministro, Instalación, Integración y Alertas Gestionadas"
+    subtitle="El hardware siempre se cotiza al precio de lista público de SMSEagle. Nuestros honorarios cubren dimensionamiento, instalación, integración y gestión continua — ajustados a lo que realmente necesitas."
+    prices={[
+      {
+        title: 'Suministro e Instalación',
+        subtitle: 'Pon en marcha un dispositivo',
+        price: 'A medida',
+        period: 'Contacta para presupuesto',
+        items: [
+          { description: 'Dimensionamiento y adquisición del dispositivo al precio de lista' },
+          { description: 'Instalación en rack y configuración de red/SIM' },
+          { description: 'Hardening LDAP/MFA' },
+          { description: 'Una integración de monitorización' },
+          { description: 'Informe de prueba de entrega' },
+        ],
+        callToAction: {
+          text: 'Contáctanos',
+          href: '/es/contacto/',
+        },
+      },
+      {
+        title: 'Proyecto de Integración',
+        subtitle: 'Conéctalo a tus flujos de trabajo',
+        price: 'A medida',
+        period: 'Contacta para presupuesto',
+        items: [
+          { description: 'Todo lo incluido en Suministro e Instalación' },
+          { description: 'Diseño de grupos de escalado y turnos de guardia' },
+          { description: 'Integración con n8n / Power Automate / REST / SMPP' },
+          { description: 'Pruebas de aceptación y documentación' },
+        ],
+        callToAction: {
+          text: 'Contáctanos',
+          href: '/es/contacto/',
+        },
+        hasRibbon: true,
+        ribbonTitle: 'más habitual',
+      },
+      {
+        title: 'Configuración Crítica / Alta Disponibilidad',
+        subtitle: 'Para rutas que no pueden fallar',
+        price: 'A medida',
+        period: 'Contacta para presupuesto',
+        items: [
+          { description: 'Dos dispositivos, failover MASTER/BACKUP' },
+          { description: 'Failover de módem' },
+          { description: 'Diseño de escalado y guardias' },
+          { description: 'Runbook y evidencia de entrega' },
+        ],
+        callToAction: {
+          text: 'Contáctanos',
+          href: '/es/contacto/',
+        },
+      },
+      {
+        title: 'Alertas Gestionadas',
+        subtitle: 'Nosotros lo mantenemos en marcha',
+        price: 'A medida',
+        period: 'Contacta para presupuesto',
+        items: [
+          { description: 'Actualizaciones de firmware y seguridad' },
+          { description: 'Mantenimiento de reglas de escalado' },
+          { description: 'Prueba mensual de entrega con informe' },
+          { description: 'Gestión de SIM y plan' },
+          { description: 'Respuesta prioritaria' },
+        ],
+        callToAction: {
+          text: 'Contáctanos',
+          href: '/es/contacto/',
+        },
+      },
+    ]}
+  />
+
+  <!-- FAQs -->
+
+  <FAQs
+    title="SMSEagle — Preguntas Frecuentes"
+    subtitle="Respuestas directas sobre el dispositivo, el canal y lo que hacemos como tu integrador."
+    tagline="Preguntas Frecuentes"
+    classes={{ container: 'max-w-6xl' }}
+    items={[
+      {
+        title: '¿Necesita conexión a Internet?',
+        description:
+          'No para enviar SMS o voz: los mensajes salen por la SIM a través de la red móvil. Internet/LAN se usa para recibir activaciones desde tus sistemas y para la interfaz web/API en tu red. Email-to-SMS necesita que tu flujo de correo llegue al dispositivo.',
+      },
+      {
+        title: '¿Funciona durante un apagón eléctrico?',
+        description:
+          'El dispositivo funciona con un SAI, como el resto de tu rack. Las propias redes móviles se degradaron entre dos y ocho horas durante el apagón de abril de 2025, y el decreto de resiliencia pendiente en España exigirá a los operadores mantener cuatro horas de cobertura para el 75% de la población. Es un canal de alertas fuera de banda para el caso habitual: que falle tu conectividad, no la red eléctrica nacional.',
+      },
+      {
+        title: '¿Enviáis nuestros datos a través de un proveedor de SMS en la nube?',
+        description:
+          'No. El SMS normal y la voz van del dispositivo al operador directamente. Los mensajes de WhatsApp y Signal viajan por esas redes por la propia naturaleza del canal, con reserva automática por SMS: no se añade ningún proveedor cloud adicional a la ruta.',
+      },
+      {
+        title: '¿Cuánto cuesta el dispositivo?',
+        description:
+          'Los precios de lista del fabricante van desde 989 € (un solo módem 4G) hasta 2.694 € (ocho módems), sin IVA, pago único: sin licencia de software, sin coste por mensaje. Cotizamos los mismos precios de lista; nuestros honorarios son por la instalación, la integración y el servicio gestionado.',
+      },
+      {
+        title: '¿Con qué herramientas de monitorización se integra?',
+        description:
+          'SMSEagle publica alrededor de 80 plugins listos para usar — Zabbix, Nagios, PRTG, Icinga, Checkmk, Centreon, LibreNMS, SolarWinds, SCOM, n8n, Zapier y más. Cualquier otro sistema se integra mediante REST API, SMPP, email-to-SMS o MQTT.',
+      },
+      {
+        title: '¿Esto ayuda con NIS2, ENS o DORA?',
+        description:
+          'Esos marcos normativos esperan que detectes, reacciones y notifiques a tiempo, y DORA exige explícitamente canales de comunicación alternativos cuando fallan los principales. Una ruta de alertas fuera de banda respalda esas obligaciones — por sí sola no te hace cumplir la normativa.',
+      },
+      {
+        title: '¿Podéis gestionarlo vosotros?',
+        description:
+          'Sí — las alertas gestionadas incluyen actualizaciones de firmware, mantenimiento de reglas de escalado, pruebas mensuales de entrega y gestión de SIM, facturado por dispositivo y mes.',
+      },
+      {
+        title: '¿Por qué trabajar con Futurion en lugar de comprar directamente en la tienda de SMSEagle?',
+        description:
+          'El mismo precio de lista para el hardware. Como Technology Partner de SMSEagle, nuestro trabajo es la parte que la tienda no puede enviarte: desplegar el dispositivo de forma eficiente en tu infraestructura — soporte en español, instalación, integración con tus sistemas, diseño de escalado, y un único interlocutor local responsable de toda la ruta de alerta.',
+      },
+    ]}
+  />
+
+  <!-- CTA -->
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Contáctanos',
+        href: '/es/contacto/',
+        icon: 'tabler:arrow-right',
+      },
+    ]}
+    title="Hablemos de tus Alertas"
+    subtitle="Cuéntanos qué necesita avisar a alguien cuando falle y a qué sistemas tiene que conectarse. Dimensionaremos el dispositivo, cotizaremos al precio de lista y definiremos el alcance de la integración."
+  />
+</Layout>
+
+<script>
+  document.addEventListener('click', (e) => {
+    const link = (e.target as HTMLElement).closest('a[href*="outlook.office.com/book"]');
+    if (!link) return;
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'generate_lead', {
+        event_category: 'Roadmap',
+        event_label: 'SMSEagle',
+        language: 'es',
+      });
+    }
+  });
+</script>

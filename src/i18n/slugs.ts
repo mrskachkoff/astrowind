@@ -16,6 +16,7 @@ export const slugMap: Record<string, Record<string, string>> = {
     '/products/trustprompt': '/products/trustprompt',
     '/products/trustcore': '/products/trustcore',
     '/products/trustauto': '/products/trustauto',
+    '/smseagle': '/smseagle',
   },
   es: {
     '/': '/es',
@@ -29,6 +30,7 @@ export const slugMap: Record<string, Record<string, string>> = {
     '/products/trustprompt': '/es/productos/trustprompt',
     '/products/trustcore': '/es/productos/trustcore',
     '/products/trustauto': '/es/productos/trustauto',
+    '/smseagle': '/es/smseagle',
   },
 };
 

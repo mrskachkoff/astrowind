@@ -39,6 +39,10 @@ export function getHeaderData(lang: Locale = 'en') {
             href: getLocalizedPath('/medcore-private-ai', lang),
           },
           {
+            text: t('nav.smseagle'),
+            href: getLocalizedPath('/smseagle', lang),
+          },
+          {
             text: t('nav.freeAiAudit'),
             href: getLocalizedPath('/automation-roadmap', lang),
           },
@@ -89,6 +93,7 @@ export function getFooterData(lang: Locale = 'en') {
         title: t('footer.services'),
         links: [
           { text: t('footer.medcorePrivateAi'), href: getLocalizedPath('/medcore-private-ai', lang) },
+          { text: t('footer.smseagle'), href: getLocalizedPath('/smseagle', lang) },
           { text: t('footer.freeAiAudit'), href: getLocalizedPath('/automation-roadmap', lang) },
         ],
       },

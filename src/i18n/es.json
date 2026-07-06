@@ -2,6 +2,7 @@
   "nav": {
     "services": "Soluciones",
     "medcorePrivateAi": "MedCore IA Privada",
+    "smseagle": "SMSEagle Pasarela SMS",
     "freeAiAudit": "Tu Ruta de Automatización",
     "blog": "Blog",
     "about": "Nosotros",
@@ -12,6 +13,7 @@
   "footer": {
     "services": "Soluciones",
     "medcorePrivateAi": "MedCore IA Privada",
+    "smseagle": "SMSEagle Pasarela SMS",
     "freeAiAudit": "Ruta de Automatización Gratis",
     "medicalAiDemo": "Demo IA Médica",
     "company": "Empresa",

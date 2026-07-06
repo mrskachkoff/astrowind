@@ -2,6 +2,7 @@
   "nav": {
     "services": "Solutions",
     "medcorePrivateAi": "MedCore Private AI",
+    "smseagle": "SMSEagle SMS Gateway",
     "freeAiAudit": "Automation Roadmap",
     "blog": "Blog",
     "about": "About",
@@ -12,6 +13,7 @@
   "footer": {
     "services": "Solutions",
     "medcorePrivateAi": "MedCore Private AI",
+    "smseagle": "SMSEagle SMS Gateway",
     "freeAiAudit": "Free Automation Roadmap",
     "medicalAiDemo": "Medical AI Demo",
     "company": "Company",

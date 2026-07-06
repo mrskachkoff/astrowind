@@ -5,6 +5,7 @@ import JsonLd from '~/components/common/JsonLd.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Content from '~/components/widgets/Content.astro';
 import FeaturesCarousel from '~/components/widgets/FeaturesCarousel.astro';
+import Features2 from '~/components/widgets/Features2.astro';
 import Prices from '~/components/widgets/Pricing.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
@@ -13,9 +14,9 @@ import imgSmsEagleLogo from '~/assets/images/smseagle.png';
 import imgSmsEagleDevice from '~/assets/images/smseagle-device.jpg';
 
 const metadata = {
-  title: 'SMSEagle in Spain — Hardware SMS Gateway, Official Technology Partner',
+  title: 'SMSEagle in Spain — Hardware SMS Gateway for Automation',
   description:
-    'Futurion Solutions is an official SMSEagle Technology Partner in Spain. On-premise hardware SMS gateway for critical alerts: supply, installation, integration with your infrastructure, and managed service.',
+    'Futurion Solutions is an official SMSEagle Technology Partner in Spain. On-premises hardware SMS gateway as the messaging component of your workflows: n8n, Power Automate, chatbots, 2FA codes, customer notifications and IT alerting — supply, integration and managed service.',
   openGraph: {
     images: [{ url: '~/assets/images/smseagle-device.jpg' }],
   },
@@ -28,7 +29,7 @@ const productSchema = {
   brand: { '@type': 'Organization', name: 'SMSEagle', url: 'https://www.smseagle.eu/' },
   manufacturer: { '@type': 'Organization', name: 'SMSEagle', url: 'https://www.smseagle.eu/' },
   description:
-    'On-premise hardware SMS gateway: a rack device with its own SIM card that sends SMS, MMS, WhatsApp, Signal and voice alerts directly over the mobile network via REST API, SMPP, email-to-SMS and webhooks. Futurion Solutions supplies, installs, integrates and can manage the device as an official SMSEagle Technology Partner for Spain.',
+    'On-premises hardware SMS gateway: a rack device with its own SIM cards that sends and receives SMS, MMS, WhatsApp, Signal and voice through the mobile network. A REST API, webhooks, SMPP server, MQTT and email-to-SMS make it the messaging component of automated workflows (n8n, Power Automate, chatbots, OTP delivery) and of monitoring alert paths. One-time purchase, no messaging SaaS subscription. Futurion Solutions supplies, installs, integrates and can manage the device as an official SMSEagle Technology Partner for Spain.',
   url: 'https://solutions.futurion.es/smseagle/',
   inLanguage: 'en',
   offers: {
@@ -44,10 +45,10 @@ const productSchema = {
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  serviceType: 'SMS gateway integration and managed alerting',
+  serviceType: 'SMS gateway integration and messaging automation',
   name: 'SMSEagle Supply, Installation and Integration',
   description:
-    'Sizing, supply, installation, and integration of SMSEagle hardware SMS gateways with monitoring and business systems, plus optional managed alerting service.',
+    'Sizing, supply, installation, and integration of SMSEagle hardware SMS gateways with workflow platforms, business systems and monitoring, plus optional managed service.',
   provider: { '@id': 'https://solutions.futurion.es/#organization' },
   areaServed: {
     '@type': 'Country',
@@ -70,14 +71,14 @@ const pricingSchema = {
       '@type': 'Offer',
       name: 'Supply & Install',
       description:
-        'Device sizing and procurement at manufacturer list price, rack installation, network/SIM configuration, LDAP/MFA hardening, email-to-SMS setup, one monitoring integration, and a delivery test report.',
+        'Device sizing and procurement at manufacturer list price, rack installation, network/SIM configuration, LDAP/MFA hardening, email-to-SMS setup, one integration (monitoring or workflow), and a delivery test report.',
       availability: 'https://schema.org/InStock',
     },
     {
       '@type': 'Offer',
       name: 'Integration Project',
       description:
-        'Everything in Supply & Install, plus escalation-group and shift design and integration with your workflows (n8n, Power Automate, custom REST or SMPP), acceptance tests, and documentation.',
+        'Everything in Supply & Install, plus message-flow design (routing, webhooks, opt-in lists, escalation) and integration with your workflows (n8n, Power Automate, custom REST or SMPP), acceptance tests, and documentation.',
       availability: 'https://schema.org/InStock',
     },
     {
@@ -89,9 +90,9 @@ const pricingSchema = {
     },
     {
       '@type': 'Offer',
-      name: 'Managed Alerting',
+      name: 'Managed Service',
       description:
-        'Firmware and security updates, escalation-rule changes, monthly end-to-end delivery test with report, SIM and plan management, priority response.',
+        'Firmware and security updates, rule and workflow changes, monthly end-to-end delivery test with report, SIM and plan management, priority response.',
       availability: 'https://schema.org/InStock',
     },
   ],
@@ -127,22 +128,24 @@ const pricingSchema = {
         height="64"
         class="mx-auto mb-4 object-contain drop-shadow-lg"
       />
-      <span class="text-accent dark:text-white highlight">Critical Alerts That Don't Depend on the Internet</span>
+      <span class="text-accent dark:text-white highlight">The Messaging Hardware Inside Your Automations</span>
     </Fragment>
 
     <Fragment slot="subtitle">
       <span class="hidden sm:inline">
-        SMSEagle is a hardware SMS gateway made in the EU: a device in your rack with its own SIM card that sends SMS,
-        WhatsApp, Signal and voice alerts directly over the mobile network. No cloud service in the path, no
-        per-message fees, no third party holding your phone numbers. We supply the device, integrate it with your
-        monitoring and business systems, and can run it for you as an official <span class="font-medium"
-          >SMSEagle Technology Partner</span
+        SMSEagle is a hardware SMS gateway made in the EU: a device in your rack with its own SIM cards and a full REST
+        API. Your workflows — n8n, Power Automate, a chatbot, your ERP, your own code — call it to send SMS, WhatsApp,
+        Signal and voice messages, and every incoming message fires a webhook back into them. <span class="font-medium"
+          >You buy the device once — no monthly SaaS subscription, no per-message fees, no cloud SMS provider in the
+          path, no third party holding your phone numbers.</span
+        > We supply the device, integrate it into your workflows, and can run it for you as an official <span
+          class="font-medium">SMSEagle Technology Partner</span
         > for Spain.
       </span>
       <span class="block mb-1 sm:hidden font-bold text-green-700"
-        >Alerts that leave through the SIM, not the cloud.</span
+        >One-time purchase. Messages leave through the SIM, not a SaaS provider.</span
       >
-      One device in your rack. Your monitoring and business systems trigger it; the SIM does the rest.
+      One device in your rack. Your workflows call its API; incoming messages fire webhooks back.
     </Fragment>
   </Hero>
 
@@ -160,58 +163,104 @@ const pricingSchema = {
     </div>
   </section>
 
-  <!-- What the device does -->
+  <!-- Scenarios -->
 
   <FeaturesCarousel
     id="features"
-    tagline="What the Device Does"
-    title="One Box, Every Alert Channel"
-    subtitle="Everything runs on the device itself — there is no vendor cloud in between."
+    tagline="What Companies Build With It"
+    title="One Device, Many Message Flows"
+    subtitle="Each of these runs through the same box: your systems talk to its REST API and webhooks; the SIMs talk to the mobile network."
     items={[
       {
-        title: 'SMS, MMS & Voice From Any System',
+        title: 'Customer Communication',
         description:
-          'Trigger alerts over REST API, embedded SMPP server, or webhooks from whatever monitors or runs your business.',
-        icon: 'tabler:message-2',
+          'Appointment confirmations, order and delivery updates, payment reminders — sent from your ERP or CRM via REST API or email-to-SMS, with delivery-status callbacks reporting back to the workflow. Opt-in/opt-out keyword lists manage recipient groups on the device.',
+        icon: 'tabler:messages',
       },
       {
-        title: 'Email-to-SMS',
+        title: 'Chatbots & Two-Way Conversations',
         description:
-          'Any system that can send an email can send an SMS — the device polls a mailbox and replies back to the inbox.',
-        icon: 'tabler:mail-forward',
+          'Every incoming SMS, WhatsApp or Signal message fires a webhook — with sender and content conditions, retried for up to 24 hours — into n8n, Power Automate or your code; the workflow decides and replies through the API. Simple keyword autoreplies run on the device itself.',
+        icon: 'tabler:message-chatbot',
       },
       {
-        title: 'Monitoring Built In',
+        title: '2FA & One-Time Codes',
         description:
-          'ICMP, TCP/UDP port, SNMP v1/v2 and traps, and Modbus TCP probes — the gateway itself watches your hosts and PLCs.',
+          'Your application sends OTP codes through the device’s REST API over your own SIMs — no cloud SMS provider handles your users’ phone numbers.',
+        icon: 'tabler:lock-check',
+      },
+      {
+        title: 'An LLM in the Loop',
+        description:
+          'Inbound message → webhook → your workflow → a language model — including one hosted on your own servers → reply via the API. The device has no bot logic; it is the on-prem send/receive channel, and the intelligence stays in your workflow layer.',
+        icon: 'tabler:cpu',
+      },
+      {
+        title: 'IT/OT Alerting',
+        description:
+          'Built-in ICMP, TCP/UDP, SNMP and Modbus TCP probes, ~80 monitoring plugins — Zabbix, PRTG, Nagios, Icinga, Checkmk, Pandora FMS — escalation groups, on-call shifts, wake-up voice calls, and MASTER/BACKUP high availability.',
         icon: 'tabler:activity-heartbeat',
       },
       {
-        title: 'WhatsApp & Signal With SMS Fallback',
+        title: 'Cross-Channel Rules Without Code',
         description:
-          "If a number isn't reachable on WhatsApp or Signal, the message automatically goes out as SMS instead.",
+          'On-device rules with AND/OR/NOT and regex conditions route messages across channels — email to SMS, SMS to WhatsApp, SMS to MQTT — configured in the web GUI.',
+        icon: 'tabler:sitemap',
+      },
+    ]}
+  />
+
+  <!-- How it connects -->
+
+  <Features2
+    tagline="Interfaces"
+    title="How Your Systems Talk to It"
+    subtitle="Pick whichever interface your stack already speaks — they all run on the device itself, on your network."
+    columns={3}
+    items={[
+      {
+        title: 'REST API',
+        description:
+          'A full HTTP API — the OpenAPI spec is served by the device — for sending and reading SMS, MMS, WhatsApp and Signal, managing the phonebook, and checking delivery status.',
+        icon: 'tabler:api',
+      },
+      {
+        title: 'Webhooks',
+        description:
+          'Every incoming message can call any URL (GET/POST) in real time, with conditional rules and retries for up to 24 hours — plus callbacks when an outgoing message’s status changes.',
+        icon: 'tabler:webhook',
+      },
+      {
+        title: 'n8n & Power Automate',
+        description:
+          'A ready-made n8n node and HTTP-based Power Automate flows — among the ~80 plugins SMSEagle publishes, including Zapier.',
+        icon: 'tabler:plug-connected',
+      },
+      {
+        title: 'Email-to-SMS / SMS-to-Email',
+        description:
+          'Anything that can send an email can send an SMS — and incoming SMS can land in an inbox.',
+        icon: 'tabler:mail-forward',
+      },
+      {
+        title: 'SMPP Server',
+        description: 'An embedded SMPP server for systems that speak the telecom protocol directly.',
+        icon: 'tabler:server',
+      },
+      {
+        title: 'MQTT',
+        description: 'SMS-to-MQTT and MQTT-to-SMS for IoT and OT brokers.',
+        icon: 'tabler:antenna',
+      },
+      {
+        title: 'WhatsApp & Signal With SMS Fallback',
+        description: "If a number isn't reachable on the app, the message automatically goes out as SMS instead.",
         icon: 'tabler:brand-whatsapp',
       },
       {
-        title: 'Escalation Groups & On-Call Shifts',
-        description: 'Alerts follow your rota and escalate to the next person until someone acknowledges.',
-        icon: 'tabler:users-group',
-      },
-      {
-        title: 'Text-to-Speech & Wake-Up Calls',
-        description: 'Voice calls with text-to-speech for the alerts that need to wake someone up, not just ping them.',
+        title: 'Voice & Text-to-Speech',
+        description: 'Voice calls, wake-up calls and text-to-speech for messages that need to ring, not ping.',
         icon: 'tabler:phone-call',
-      },
-      {
-        title: 'Workflow Automation',
-        description:
-          'Cross-channel rules — email to SMS, SMS to WhatsApp, AND/OR/NOT and regex conditions — configured without code.',
-        icon: 'tabler:sitemap',
-      },
-      {
-        title: 'High Availability',
-        description: 'Two devices in MASTER/BACKUP failover with a floating IP for the alert paths that cannot go down.',
-        icon: 'tabler:shield-check',
       },
     ]}
   />
@@ -234,14 +283,14 @@ const pricingSchema = {
           'Those messages travel Meta’s or Signal’s own networks by nature of the channel — SMSEagle adds no additional cloud vendor to that path, and falls back to plain SMS automatically.',
       },
       {
-        title: 'It keeps alerting when your internet doesn’t',
+        title: 'It keeps sending when your internet doesn’t',
         description:
           'Uplink down, DNS broken, VPN dead, cloud provider incident — the SMS still leaves through the SIM. A prolonged national power cut degrades mobile networks too; Spain’s pending resilience decree will require operators to sustain four hours of mobile coverage for 75% of the population during outages.',
       },
       {
         title: 'One purchase, not a subscription',
         description:
-          'Device plus SIM plan, no per-message metering, no seat licenses. SMSEagle publishes a break-even comparison against cloud SMS APIs near 10,000 messages/month — that is the manufacturer’s own claim, worth checking against your own volumes.',
+          'Device plus SIM plan, no per-message metering, no seat licenses, no monthly payments to a messaging SaaS provider. SMSEagle publishes a break-even comparison against cloud SMS APIs near 10,000 messages/month — that is the manufacturer’s own claim, worth checking against your own volumes.',
       },
     ]}
   >
@@ -260,7 +309,7 @@ const pricingSchema = {
   <Content
     isAfterContent
     tagline="What We Do as Your Integrator"
-    title="Five Steps From Device to Working Alert Path"
+    title="Five Steps From Device to Working Message Flow"
     items={[
       {
         title: 'Sizing and supply',
@@ -274,11 +323,12 @@ const pricingSchema = {
       {
         title: 'Integration',
         description:
-          'Your monitoring stack — Zabbix, PRTG, Nagios, Icinga, Checkmk, Pandora FMS — or your workflows — n8n, Power Automate — or a custom build from the device’s REST API, SMPP, email-to-SMS or MQTT.',
+          'Your workflows — n8n, Power Automate, a chatbot, your ERP or CRM — your monitoring stack — Zabbix, PRTG, Nagios, Icinga, Checkmk, Pandora FMS — or a custom build from the device’s REST API, webhooks, SMPP, email-to-SMS or MQTT.',
       },
       {
-        title: 'Escalation design',
-        description: 'Who gets alerted, in what order, on which channel, with what fallback if nobody acknowledges.',
+        title: 'Flow design',
+        description:
+          'Who gets which message on which channel — routing, opt-in lists, autoreplies, and escalation with fallback when it’s an alert nobody acknowledged.',
       },
       {
         title: 'Managed service (optional)',
@@ -292,7 +342,7 @@ const pricingSchema = {
       </h3>
       The device is the same one SMSEagle sells directly, at the same list price. What an integrator adds is
       Spanish-language support, a technician who does the install, an integration that actually talks to your systems,
-      and one local party responsible for the whole alert path.
+      and one local party responsible for the whole message path.
     </Fragment>
   </Content>
 
@@ -303,7 +353,7 @@ const pricingSchema = {
   <Prices
     id="pricing"
     tagline="Packages"
-    title="Supply, Installation, Integration and Managed Alerting"
+    title="Supply, Installation, Integration and Managed Service"
     subtitle="Hardware is always quoted at SMSEagle's public list price. Our fees cover sizing, installation, integration and ongoing management — scoped to what you actually need."
     prices={[
       {
@@ -315,7 +365,7 @@ const pricingSchema = {
           { description: 'Device sizing & procurement at list price' },
           { description: 'Rack install & network/SIM configuration' },
           { description: 'LDAP/MFA hardening' },
-          { description: 'One monitoring integration' },
+          { description: 'One integration (monitoring or workflow)' },
           { description: 'Delivery test report' },
         ],
         callToAction: {
@@ -330,7 +380,7 @@ const pricingSchema = {
         period: 'Contact for quote',
         items: [
           { description: 'Everything in Supply & Install' },
-          { description: 'Escalation groups & on-call shift design' },
+          { description: 'Message-flow design (routing, webhooks, opt-in lists, escalation)' },
           { description: 'n8n / Power Automate / REST / SMPP integration' },
           { description: 'Acceptance tests & documentation' },
         ],
@@ -358,13 +408,13 @@ const pricingSchema = {
         },
       },
       {
-        title: 'Managed Alerting',
+        title: 'Managed Service',
         subtitle: 'We keep it running',
         price: 'Custom',
         period: 'Contact for quote',
         items: [
           { description: 'Firmware & security updates' },
-          { description: 'Escalation-rule maintenance' },
+          { description: 'Rule & workflow maintenance' },
           { description: 'Monthly delivery test with report' },
           { description: 'SIM & plan management' },
           { description: 'Priority response' },
@@ -381,10 +431,25 @@ const pricingSchema = {
 
   <FAQs
     title="SMSEagle — Frequently Asked Questions"
-    subtitle="Straight answers about the device, the channel and what we do as your integrator."
+    subtitle="Straight answers about the device, the channels and what we do as your integrator."
     tagline="FAQs"
     classes={{ container: 'max-w-6xl' }}
     items={[
+      {
+        title: 'Can it power a chatbot or two-way conversation?',
+        description:
+          'Yes, as the send/receive channel. Every incoming SMS, WhatsApp or Signal message fires a webhook into n8n, Power Automate or your own code; your workflow decides what to answer and replies through the REST API. The device itself only does simple keyword autoreplies — the conversation logic lives in your workflow layer.',
+      },
+      {
+        title: 'Can it work with an LLM — including one we host ourselves?',
+        description:
+          'Yes. The pattern is: inbound message → webhook → your workflow → a language model → reply via the REST API. The model can run in a cloud service or on your own servers — we also deploy on-premises AI — so the whole conversational loop, model included, can stay in-house.',
+      },
+      {
+        title: 'Can we use it for 2FA / one-time passwords?',
+        description:
+          'Yes — your application sends OTP codes through the REST API and they go out over your own SIMs, so no cloud SMS provider sees your users’ phone numbers. The device also enforces MFA on its own admin login.',
+      },
       {
         title: 'Does it need an internet connection?',
         description:
@@ -403,12 +468,12 @@ const pricingSchema = {
       {
         title: 'What does the device cost?',
         description:
-          'Manufacturer list prices run from €989 (single-modem 4G) to €2,694 (eight modems), ex-VAT, one-time — no software license, no per-message fee. We quote the same list prices; our fees are for installation, integration and managed service.',
+          'Manufacturer list prices run from €989 (single-modem 4G) to €2,694 (eight modems), ex-VAT, one-time — no software license, no per-message fee, no monthly SaaS subscription. We quote the same list prices; our fees are for installation, integration and managed service.',
       },
       {
-        title: 'Which monitoring tools does it integrate with?',
+        title: 'What does it integrate with?',
         description:
-          'SMSEagle publishes around 80 ready plugins — Zabbix, Nagios, PRTG, Icinga, Checkmk, Centreon, LibreNMS, SolarWinds, SCOM, n8n, Zapier and more. Anything else integrates via REST API, SMPP, email-to-SMS or MQTT.',
+          'Workflow tools first: n8n, Zapier, and Power Automate via HTTP. Then monitoring: SMSEagle publishes around 80 ready plugins — Zabbix, Nagios, PRTG, Icinga, Checkmk, Centreon, LibreNMS, SolarWinds, SCOM and more. Anything else integrates via REST API, webhooks, SMPP, email-to-SMS or MQTT.',
       },
       {
         title: 'Does this help with NIS2, ENS or DORA?',
@@ -418,12 +483,12 @@ const pricingSchema = {
       {
         title: 'Can you run it for us?',
         description:
-          'Yes — managed alerting includes firmware updates, escalation-rule maintenance, monthly delivery tests, and SIM management, billed per device per month.',
+          'Yes — managed service includes firmware updates, rule and workflow maintenance, monthly delivery tests, and SIM management, billed per device per month.',
       },
       {
         title: 'Why work with Futurion instead of buying from the SMSEagle store?',
         description:
-          'Same list price for the hardware. As SMSEagle\'s Technology Partner, our job is the part the store can\'t ship: deploying the device efficiently into your infrastructure — Spanish-language support, installation, integration with your systems, escalation design, and one local party responsible for the whole alert path.',
+          'Same list price for the hardware. As SMSEagle\'s Technology Partner, our job is the part the store can\'t ship: deploying the device efficiently into your infrastructure — Spanish-language support, installation, integration with your systems, message-flow design, and one local party responsible for the whole message path.',
       },
     ]}
   />
@@ -439,8 +504,8 @@ const pricingSchema = {
         icon: 'tabler:arrow-right',
       },
     ]}
-    title="Talk to Us About Your Alerting"
-    subtitle="Tell us what needs to page someone when it breaks and what systems it needs to connect to. We'll size the device, quote at list price, and scope the integration."
+    title="Tell Us What the Messages Need to Do"
+    subtitle="Describe the flow — what triggers a message, who receives it, and what happens when they reply. We'll size the device, quote at list price, and scope the integration into your workflows."
   />
 </Layout>
 

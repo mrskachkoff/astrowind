@@ -102,6 +102,12 @@
     "condition": null
   },
   {
+    "source": "/ai-governance-playbook-where-to-start",
+    "target": "/ai-governance-playbook-where-to-start/",
+    "status": "301",
+    "condition": null
+  },
+  {
     "source": "/consultant-or-decision-maker-ai-clinical-accountability",
     "target": "/consultant-or-decision-maker-ai-clinical-accountability/",
     "status": "301",
@@ -152,6 +158,12 @@
   {
     "source": "/introducing-medcore-private-ai",
     "target": "/introducing-medcore-private-ai/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/on-prem-is-back-ai-sovereignty",
+    "target": "/on-prem-is-back-ai-sovereignty/",
     "status": "301",
     "condition": null
   },
@@ -240,6 +252,12 @@
     "condition": null
   },
   {
+    "source": "/es/es-guia-gobernanza-ia-por-donde-empezar",
+    "target": "/es/es-guia-gobernanza-ia-por-donde-empezar/",
+    "status": "301",
+    "condition": null
+  },
+  {
     "source": "/es/es-por-que-sanidad-necesita-ia-local",
     "target": "/es/es-por-que-sanidad-necesita-ia-local/",
     "status": "301",
@@ -266,6 +284,12 @@
   {
     "source": "/es/es-soluciones-ia-hibridas-sanidad",
     "target": "/es/es-soluciones-ia-hibridas-sanidad/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/es-vuelve-el-on-premise-soberania-ia",
+    "target": "/es/es-vuelve-el-on-premise-soberania-ia/",
     "status": "301",
     "condition": null
   },
@@ -702,6 +726,30 @@
     "condition": null
   },
   {
+    "source": "/es-guia-gobernanza-ia-por-donde-empezar",
+    "target": "/es/es-guia-gobernanza-ia-por-donde-empezar/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-guia-gobernanza-ia-por-donde-empezar/",
+    "target": "/es/es-guia-gobernanza-ia-por-donde-empezar/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/guia-gobernanza-ia-por-donde-empezar",
+    "target": "/es/es-guia-gobernanza-ia-por-donde-empezar/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/guia-gobernanza-ia-por-donde-empezar/",
+    "target": "/es/es-guia-gobernanza-ia-por-donde-empezar/",
+    "status": "301",
+    "condition": null
+  },
+  {
     "source": "/es-por-que-sanidad-necesita-ia-local",
     "target": "/es/es-por-que-sanidad-necesita-ia-local/",
     "status": "301",
@@ -818,6 +866,30 @@
   {
     "source": "/es/soluciones-ia-hibridas-sanidad/",
     "target": "/es/es-soluciones-ia-hibridas-sanidad/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-vuelve-el-on-premise-soberania-ia",
+    "target": "/es/es-vuelve-el-on-premise-soberania-ia/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-vuelve-el-on-premise-soberania-ia/",
+    "target": "/es/es-vuelve-el-on-premise-soberania-ia/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/vuelve-el-on-premise-soberania-ia",
+    "target": "/es/es-vuelve-el-on-premise-soberania-ia/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/vuelve-el-on-premise-soberania-ia/",
+    "target": "/es/es-vuelve-el-on-premise-soberania-ia/",
     "status": "301",
     "condition": null
   }

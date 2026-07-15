@@ -1,0 +1,294 @@
+---
+publishDate: 2026-07-15T10:00:00Z
+lang: en
+author: 'Ivan Skachkov'
+title: 'On-Prem Is Back — And This Time It''s About Sovereignty'
+excerpt: "AI infrastructure now splits into three blocks — American, Chinese, European — each with a different price, legal exposure, and level of control. On-prem is returning because sovereignty has become a business requirement."
+image: ~/assets/images/on-prem-is-back-ai-sovereignty.png
+category: AI Infrastructure
+tags:
+  - on-premise
+  - data-sovereignty
+  - ai
+  - open-weights
+  - eu-ai-act
+  - private-ai
+metadata:
+  title: 'On-Prem Is Back: AI Sovereignty Guide'
+  description: 'American, Chinese, and European AI model blocks compared on cost, control, and jurisdiction. Why on-premises and sovereign infrastructure are returning to enterprise AI decisions.'
+  robots:
+    index: true
+    follow: true
+  openGraph:
+    type: article
+    images:
+      - url: ~/assets/images/on-prem-is-back-ai-sovereignty.png
+        width: 1200
+        height: 630
+  twitter:
+    cardType: summary_large_image
+---
+
+In October last year, the CEO of Airbnb said something that should not have been controversial, but it was.
+
+He said the company was relying a lot on Alibaba's Qwen model. He said it was good, fast, and cheap. He also said Airbnb used OpenAI's latest models, but usually did not use them that much in production.
+
+A large American company, quietly running parts of its workload on a Chinese model.
+
+Six months later, the House Homeland Security Committee sent Airbnb a formal letter asking for a national security justification.
+
+On the surface, that looked like a story about geopolitics.
+
+Underneath, it was something more practical.
+
+It was about cost. It was about control. And it was about a decision many companies are already making, whether they describe it this way or not.
+
+The market is no longer just choosing between tools. It is choosing between infrastructure blocks.
+
+There is the American block. There is the Chinese block. And there is the European block.
+
+Each comes with a different price, a different legal exposure, and a different level of control.
+
+That is why on-prem is back.
+
+Not because companies want to return to the old server room. Not because cloud stopped working. And not because every workload needs to be pulled back inside the building.
+
+On-prem is back because sovereignty has become a real business requirement.
+
+## The American block: capability with dependency
+
+Most companies default to the American block without thinking about it.
+
+OpenAI, Anthropic, Google, Microsoft Copilot. These are the names most buyers already know. They are embedded into email, productivity software, developer tools, and enterprise workflows.
+
+This block leads on capability. Not by an overwhelming margin, but measurably.
+
+An independent evaluation by the US Center for AI Standards and Innovation, part of NIST, found that DeepSeek's V4 Pro model lagged frontier capability by about eight months.
+
+That gives a useful frame. The gap is real. But it is not infinite.
+
+The American block also has a clear architectural philosophy. At the frontier, it is closed.
+
+The strongest models are usually accessed through an API. You rent access. You do not own the weights. You do not run the system independently. You build on top of another company's servers.
+
+That has advantages. It is simple to start. It gives access to leading capability. It avoids the operational work of hosting.
+
+But it also means the provider holds the dial.
+
+They can change pricing. They can deprecate a version. They can restrict a use case. They can take access offline. Your product may sit on their infrastructure, but the control layer belongs to them.
+
+This matters less when the workload is experimental.
+
+It matters much more when the workload becomes operational.
+
+Once a company puts customer service, internal knowledge work, compliance processes, coding workflows, or regulated data pipelines on top of a closed external provider, the relationship changes. It is no longer just software procurement. It becomes infrastructure dependency.
+
+The American block is also the most expensive of the three. Top American models can cost roughly five to ten times more per output token than comparable Chinese alternatives. In the Airbnb example, the difference was even sharper: Qwen at around $1.80 per million output tokens versus GPT-5.5 at $30 per million output tokens.
+
+That is a 16:1 ratio.
+
+At small volumes, this may not matter. At enterprise scale, it changes the budget.
+
+For European companies, there is another issue: jurisdiction.
+
+The Cloud Act allows US authorities, with a court order, to compel US-headquartered companies to hand over data they hold, regardless of where that data is physically stored.
+
+For many businesses, that is acceptable.
+
+For healthcare, finance, public sector contractors, or companies handling regulated European data, it is a procurement issue. The question is not only where the data is stored. The question is who can compel access to it.
+
+That is where the on-prem conversation starts to return.
+
+## The Chinese block: cheaper, open, and politically exposed
+
+The Airbnb case looked political from the outside. But the reason Airbnb used Qwen was mostly economic.
+
+The math is simple. Qwen costs about $0.30 per million input tokens and $1.80 per million output tokens. GPT-5.5 costs $5 per million input tokens and $30 per million output tokens.
+
+For a company running large volumes of inference, that gap is not marginal.
+
+It determines whether a capability can be placed into every customer interaction or only used in selected cases.
+
+Airbnb is not the only example.
+
+Cursor's Composer 2 model tells a similar story. Cursor launched it without initially mentioning the underlying model. Developers later spotted internal references showing a Kimi K2.5 base from Moonshot, a Chinese lab. Cursor's co-founder later said it was a mistake not to mention the Kimi base from the start.
+
+That matters because Cursor is used by a large share of Fortune 500 companies.
+
+In other words, many companies may already be using Chinese models indirectly, through products built on top of them.
+
+The Chinese block has a strong economic argument. It is cheaper. It is improving quickly. It often provides open weights. Those weights can be downloaded and run inside a company's own infrastructure.
+
+That is a major difference.
+
+With an API, the provider keeps the dial. With open weights, the buyer can take control after release. The model can be hosted internally. It can be isolated from the public provider. It can continue running even if the original lab changes strategy.
+
+That is why Chinese models are attractive to cost-sensitive workloads.
+
+But the trade-offs are real.
+
+When a company uses a Chinese model through a public API, traffic routes to China and Chinese data laws apply. Many enterprise users avoid that by running open weights on their own infrastructure. That removes the direct data exposure, but it also means the company must handle hosting, operations, and deployment.
+
+There is also geopolitical scrutiny.
+
+The Airbnb letter shows that even consumer companies can attract political attention when the scale is visible enough. For defense, government, healthcare, and other regulated sectors, the scrutiny can be sharper.
+
+The Chinese block is therefore not a simple answer.
+
+It can be the cheapest credible option. It can give companies more architectural control through open weights. But it also carries political and procurement risk, especially for companies operating across jurisdictions.
+
+## The European block: not the strongest, not the cheapest, but aligned
+
+The European block exists because the other two blocks do not solve every problem.
+
+The American block gives capability, but comes with US legal reach and closed infrastructure dependency.
+
+The Chinese block gives cost and open weights, but comes with geopolitical exposure and public API data concerns.
+
+For some companies, neither is acceptable.
+
+That is where the European block becomes relevant.
+
+The European ecosystem is smaller. France has Mistral. Germany has Aleph Alpha and Black Forest Labs. There are other smaller players across the continent. But Mistral is the center of gravity.
+
+Mistral is not the capability leader. It is not the cost leader.
+
+Its value is sovereignty.
+
+In practical terms, sovereignty means that data can be processed under European law and stored on European infrastructure. That matters for companies handling EU customer data, operating across jurisdictions, or wanting options that do not depend entirely on US or Chinese providers.
+
+Mistral's partnerships include the French Ministry of Armies, BNP Paribas, ASML, SAP, and others. Its revenue grew from around $20 million in early 2025 to $400 million by February of this year.
+
+That growth is not because Europe suddenly outspent the United States.
+
+It is because certain buyers need jurisdictional alignment.
+
+Mistral is also investing in infrastructure, including Nvidia GB300 GPUs near Paris, a data center in Sweden, and a partnership with SAP to embed sovereign systems into European government services.
+
+This is a different game.
+
+The American block sells frontier capability.
+
+The Chinese block sells cost efficiency and open access.
+
+The European block sells regulatory alignment and jurisdictional choice.
+
+For a Spanish company, a bank, a hospital group, a public sector supplier, or an industrial company with sensitive data, that distinction matters.
+
+The issue is not whether European providers are always the most powerful. They are not.
+
+The issue is whether the workload can legally, commercially, and strategically depend on infrastructure outside European control.
+
+## Why on-prem is returning
+
+For years, on-prem was treated as the old answer.
+
+Cloud was simpler. Cloud was faster to start. Cloud converted capital expenditure into operating expenditure. Cloud reduced the need to own and maintain infrastructure.
+
+That logic still holds for many workloads.
+
+But model infrastructure changes the calculation.
+
+When usage scales linearly with tokens, cost becomes a structural issue. When data is regulated, jurisdiction becomes a structural issue. When a company depends on a closed external model, architecture becomes a structural issue.
+
+On-prem returns because it answers a different question.
+
+Not: "Can we avoid the cloud?"
+
+But: "Which workloads do we need to control?"
+
+That distinction matters.
+
+On-prem does not need to replace every cloud service. It does not need to become a universal default. It makes sense where control matters more than convenience.
+
+The clearest cases are regulated data, high-volume inference, sensitive internal knowledge, customer data, and workloads where provider lock-in would create business risk.
+
+This is also where sovereign cloud fits.
+
+For many companies, the decision is not binary. It is not public cloud versus a server room. It is a spectrum: external API, sovereign cloud, private cloud, on-prem deployment, or hybrid architecture.
+
+The important change is that companies can no longer treat infrastructure as invisible.
+
+The model, the hosting location, the provider's legal jurisdiction, and the ability to operate independently all matter.
+
+## The six questions buyers should ask
+
+A practical framework helps here, because it moves the conversation away from slogans.
+
+The questions are simple.
+
+How much does top capability actually matter for the workload?
+
+If the work requires frontier performance, the American block may be hard to avoid. But for customer service, internal automation, document processing, or other high-volume operational use cases, the capability gap may matter less than cost and control.
+
+How sensitive is the workload to token pricing?
+
+At low volume, price differences may be invisible. At large volume, they decide whether the system can be deployed broadly or only selectively.
+
+Open weights or closed weights?
+
+Closed access is easier to start with, but the provider holds the dial. Open weights require hosting, but they give the buyer more control.
+
+Where can the data legally live?
+
+This is not optional for regulated sectors. American providers bring US legal reach. Chinese public APIs bring PRC exposure. European infrastructure gives jurisdictional alignment.
+
+How exposed is the supply chain?
+
+Every block still depends heavily on advanced chips manufactured by TSMC. Self-hosting does not remove every supply chain risk, but it gives companies more control over the compute they already operate.
+
+Will the provider still be the same provider in three to five years?
+
+Labs can be acquired. Strategic direction can change. A European company can become part of an American block. A vendor that looks aligned today may not look the same during the life of a long contract.
+
+These are not theoretical questions.
+
+They are procurement questions. Risk questions. Budget questions. Board-level questions.
+
+## The real reason sovereignty matters
+
+Sovereignty is often discussed as a political idea.
+
+For companies, it is more concrete.
+
+It means knowing where the workload runs. It means knowing which law applies. It means knowing who can compel access. It means having options if a provider changes pricing, restricts access, or shifts strategy.
+
+That is why on-prem is back.
+
+Not because the cloud failed.
+
+Because the next layer of enterprise infrastructure is too important to leave entirely outside the company's control.
+
+The companies that understand this early will not ask only which model is best.
+
+They will ask which architecture gives them the right balance of capability, cost, jurisdiction, supply chain resilience, and ownership.
+
+For many European companies, the answer will not be one block.
+
+It will be a controlled mix.
+
+Some workloads may stay with American providers. Some may use cheaper open-weight models. Some may need European sovereign infrastructure. Some may need to run on-prem.
+
+The point is not to reject one block and choose another blindly.
+
+The point is to make the choice deliberately.
+
+On-prem is back because infrastructure ownership matters again.
+
+And this time, it is about sovereignty.
+
+---
+
+## How We Can Help
+
+Deciding which workloads need to stay on-prem starts with knowing where your data actually flows today. Our free **[Automation Roadmap](/automation-roadmap/)** maps your data flows and automation candidates, and flags for each one whether cloud, hybrid, or on-prem is the right architecture — with the jurisdictional reasoning behind it.
+
+For workloads that need to run under your own control:
+
+- **[TrustCore](/products/trustcore/)** — on-device document Q&A with verified citations. No SaaS, no data egress.
+- **[MedCore Private AI](/medcore-private-ai/)** — private, on-premises AI infrastructure built for regulated data.
+- **[TrustAuto](/products/trustauto/)** — process automation that runs on your own infrastructure, with scoped access and full audit logging.
+
+No commitment. No sales call required.
+
+**[Request your free Automation Roadmap →](/automation-roadmap/)**

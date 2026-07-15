@@ -40,6 +40,8 @@
 - [Healthcare Automation Must Be Built Differently](https://solutions.futurion.es/healthcare-automation-architecture/): Why responsible healthcare automation requires privacy-first architecture, role-based access, auditability, interoperability, and human accountability
 - [Why OpenEvidence's EU/UK Withdrawal push Healthcare Toward Private On-prem or sovereign cloud](https://solutions.futurion.es/openevidence-eu-uk-withdrawal-private-on-prem-sovereign-cloud/): Why OpenEvidence's EU/UK withdrawal points clinical AI toward private on-premises and sovereign cloud architecture
 - [Stop Pretending People Will Not Use AI](https://solutions.futurion.es/healthcare-ai-privacy-guardrails-presidio-openai-privacy-filter/): A guardrail is a privacy checkpoint that helps control what happens before data passes from one system to another
+- [The AI Governance Playbook: Where to Start](https://solutions.futurion.es/ai-governance-playbook-where-to-start/): A practical starting point for enterprise AI governance — principles, ownership, the NIST AI RMF, lifecycle controls, and training
+- [On-Prem Is Back — And This Time It's About Sovereignty](https://solutions.futurion.es/on-prem-is-back-ai-sovereignty/): American, Chinese, and European AI model blocks compared on cost, control, and jurisdiction — why on-premises infrastructure is returning
 
 ## Artículos del blog (Español)
 
@@ -58,6 +60,8 @@
 - [La automatización sanitaria debe construirse de otra manera](https://solutions.futurion.es/es/es-automatizacion-responsable/): Por qué la automatización sanitaria responsable requiere privacidad, permisos por rol, auditabilidad, interoperabilidad y responsabilidad humana
 - [Por qué la retirada de OpenEvidence de la UE/Reino Unido empuja a la sanidad hacia soluciones on-premise o nube EU soberana](https://solutions.futurion.es/es/es-retirada-openevidence-ue-reino-unido-sanidad-on-premise-nube-soberana/): Por qué la retirada de OpenEvidence apunta a IA sanitaria on-premise, nube soberana y control de subencargados
 - [Dejad de fingir que la gente no va a usar la IA](https://solutions.futurion.es/es/es-barreras-control-privacidad-ia-sanitaria-presidio-openai-privacy-filter/): La finalidad práctica de una barrera de control es sencilla: reducir la exposición innecesaria
+- [La guía de gobernanza de IA: por dónde empezar](https://solutions.futurion.es/es/es-guia-gobernanza-ia-por-donde-empezar/): Un punto de partida práctico para la gobernanza de IA empresarial — principios, responsabilidad, el NIST AI RMF, controles del ciclo de vida y formación
+- [Vuelve el on-premise: esta vez, por soberanía](https://solutions.futurion.es/es/es-vuelve-el-on-premise-soberania-ia/): Los bloques de modelos de IA americano, chino y europeo comparados en coste, control y jurisdicción — por qué vuelve la infraestructura local
 
 ## Key facts
 

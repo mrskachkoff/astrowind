@@ -20,8 +20,8 @@
 - [Nosotros (ES)](https://solutions.futurion.es/es/nosotros/): Spanish about page
 - [Blog](https://solutions.futurion.es/blog/): Articles on healthcare AI compliance, GDPR, automation, and data privacy
 - [Blog (ES)](https://solutions.futurion.es/es/blog/): Spanish-language blog
-- [Contact](https://solutions.futurion.es/contact/): Contact form — solutions@futurion.es
-- [Contacto (ES)](https://solutions.futurion.es/es/contacto/): Formulario de contacto — solutions@futurion.es
+- [Contact](https://solutions.futurion.es/contact/): Contact form
+- [Contacto (ES)](https://solutions.futurion.es/es/contacto/): Formulario de contacto
 
 ## Blog articles (English)
 
@@ -74,5 +74,5 @@
 - Implementation pricing: €1,500–€3,000 (quick-win), €5,000–€15,000 (comprehensive)
 - Monthly support: from €200/month
 - Data architecture: on-premise and hybrid — customer data stays on customer infrastructure
-- Contact: solutions@futurion.es
+- Contact: via contact form at https://solutions.futurion.es/contact/
 - LinkedIn: https://www.linkedin.com/company/111621147/

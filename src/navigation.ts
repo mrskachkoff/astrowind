@@ -118,7 +118,9 @@ export function getFooterData(lang: Locale = 'en') {
       { text: t('footer.privacyPolicy'), href: getLocalizedPath('/privacy', lang) },
     ],
     socialLinks: [
-      { ariaLabel: 'LinkedIn', icon: 'tabler:brand-linkedin', href: 'https://linkedin.com/in/ivan-skachkov' },
+      { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: 'https://www.facebook.com/solutions.futurion.es/' },
+      { ariaLabel: 'LinkedIn', icon: 'tabler:brand-linkedin', href: 'https://www.linkedin.com/company/111621147/' },
+      { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: 'https://www.instagram.com/solutions.futurion.es/' },
       { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset(lang === 'es' ? '/es/rss.xml' : '/rss.xml') },
     ],
     footNote: `

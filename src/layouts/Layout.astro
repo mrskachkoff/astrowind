@@ -46,6 +46,7 @@ const lang = Astro.currentLocale || 'en';
             '@type': 'Organization',
             '@id': 'https://solutions.futurion.es/#organization',
             name: 'Futurion Solutions',
+            legalName: 'Futurion Solutions S.L.',
             url: 'https://solutions.futurion.es',
             logo: {
               '@type': 'ImageObject',
@@ -53,6 +54,16 @@ const lang = Astro.currentLocale || 'en';
             },
             description:
               'Software company in Valencia building private AI tools — TrustPrompt, TrustCore and TrustAuto — that run on infrastructure the customer controls, for legal, compliance, finance and healthcare teams in Spain and the EU.',
+            taxID: 'B90451234',
+            vatID: 'ESB90451234',
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: 'Calle Lucio del Valle, 10, 6',
+              postalCode: '46022',
+              addressLocality: 'Valencia',
+              addressRegion: 'Comunidad Valenciana',
+              addressCountry: 'ES',
+            },
             contactPoint: {
               '@type': 'ContactPoint',
               contactType: 'customer service',
@@ -72,12 +83,16 @@ const lang = Astro.currentLocale || 'en';
             '@type': 'ProfessionalService',
             '@id': 'https://solutions.futurion.es/#localbusiness',
             name: 'Futurion Solutions',
+            legalName: 'Futurion Solutions S.L.',
             url: 'https://solutions.futurion.es',
             description:
               'Private AI products and deployment services for regulated organisations in Spain and the EU — data stays on infrastructure the customer controls.',
             address: {
               '@type': 'PostalAddress',
+              streetAddress: 'Calle Lucio del Valle, 10, 6',
+              postalCode: '46022',
               addressLocality: 'Valencia',
+              addressRegion: 'Comunidad Valenciana',
               addressCountry: 'ES',
             },
             areaServed: [

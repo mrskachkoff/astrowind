@@ -1,0 +1,12 @@
+{
+  "name": "futurion-lambda-trustprompt-download",
+  "private": true,
+  "type": "module",
+  "description": "Build artifact source for the trustprompt-download Lambda Function URL. Not part of the Astro build — deployed independently via npm run build:lambda:download.",
+  "dependencies": {
+    "@aws-sdk/client-s3": "3.1095.0",
+    "@aws-sdk/client-ssm": "3.1095.0",
+    "@aws-sdk/client-ses": "3.1095.0",
+    "@aws-sdk/cloudfront-signer": "3.1095.0"
+  }
+}

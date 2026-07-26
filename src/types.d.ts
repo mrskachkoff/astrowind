@@ -222,6 +222,14 @@ export interface Form {
   apiUrl?: string;
 }
 
+export interface DownloadForm {
+  inputs?: Array<Input>;
+  disclaimer?: Disclaimer;
+  button?: string;
+  description?: string;
+  apiUrl?: string;
+}
+
 // WIDGETS
 export interface Hero extends Omit<Headline, 'classes'>, Omit<Widget, 'isDark' | 'classes'> {
   content?: string;
@@ -289,3 +297,5 @@ export interface Content extends Omit<Headline, 'classes'>, Widget {
 }
 
 export interface Contact extends Omit<Headline, 'classes'>, Form, Widget {}
+
+export interface DownloadGate extends Omit<Headline, 'classes'>, DownloadForm, Widget {}

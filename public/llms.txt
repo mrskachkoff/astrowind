@@ -8,6 +8,8 @@
 - [Homepage (Spanish)](https://solutions.futurion.es/es/): Spanish-language overview — IA privada para organizaciones reguladas
 - [TrustPrompt](https://solutions.futurion.es/products/trustprompt/): Browser extension that redacts personal data before prompts leave the device
 - [TrustPrompt (ES)](https://solutions.futurion.es/es/productos/trustprompt/): Página de TrustPrompt en español
+- [Download TrustPrompt](https://solutions.futurion.es/products/trustprompt-download/): Free individual TrustPrompt build, gated download by language
+- [Descargar TrustPrompt (ES)](https://solutions.futurion.es/es/productos/trustprompt-descarga/): Página de descarga de TrustPrompt en español
 - [TrustCore](https://solutions.futurion.es/products/trustcore/): On-device document Q&A — documents never leave the machine
 - [TrustCore (ES)](https://solutions.futurion.es/es/productos/trustcore/): Página de TrustCore en español
 - [TrustAuto](https://solutions.futurion.es/products/trustauto/): On-premises business process automation with compliance controls

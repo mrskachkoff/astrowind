@@ -1,0 +1,69 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import JsonLd from '~/components/common/JsonLd.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import DownloadGate from '~/components/widgets/DownloadGate.astro';
+
+const metadata = {
+  title: 'Descargar TrustPrompt — Versión individual gratuita',
+  description:
+    'Consigue la versión individual gratuita de TrustPrompt. Elige un idioma, confirma tus datos y generamos un enlace de descarga de corta duración para esa versión.',
+};
+---
+
+<Layout metadata={metadata}>
+  <JsonLd
+    schema={{
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      '@id': 'https://solutions.futurion.es/es/productos/trustprompt-descarga/',
+      url: 'https://solutions.futurion.es/es/productos/trustprompt-descarga/',
+      name: 'Descargar TrustPrompt — Versión individual gratuita',
+      description: 'Consigue la versión individual gratuita de TrustPrompt, para un usuario y totalmente local.',
+      inLanguage: 'es',
+      isPartOf: { '@id': 'https://solutions.futurion.es/#organization' },
+    }}
+  />
+
+  <!-- HeroText -->
+
+  <HeroText
+    tagline="Descarga gratuita"
+    title="Consigue TrustPrompt — Individual"
+    subtitle="Un usuario, totalmente local. Elige tu idioma a continuación y generaremos un enlace de descarga para esa versión."
+  />
+
+  <DownloadGate
+    id="download"
+    title="Descargar TrustPrompt"
+    subtitle="Te enviaremos los detalles por correo y generaremos un enlace de corta duración para la versión que solicites."
+    inputs={[
+      {
+        type: 'text',
+        name: 'name',
+        label: 'Tu nombre',
+      },
+      {
+        type: 'email',
+        name: 'email',
+        label: 'Correo electrónico',
+      },
+      {
+        type: 'text',
+        name: 'company',
+        label: 'Empresa (opcional)',
+      },
+      {
+        type: 'text',
+        name: 'role',
+        label: 'Cargo (opcional)',
+      },
+    ]}
+    disclaimer={{
+      label:
+        'Al enviar este formulario, aceptas la recogida de tu información con el fin de proporcionarte esta descarga. Tus datos se tratan de acuerdo con nuestra Política de Privacidad y el RGPD.',
+    }}
+    button="Descargar gratis"
+    description="El enlace caduca poco después de generarse — si vence antes de que termine tu descarga, usa el botón de la pantalla de confirmación para obtener uno nuevo."
+  />
+</Layout>

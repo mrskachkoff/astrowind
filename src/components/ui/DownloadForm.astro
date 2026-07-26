@@ -1,0 +1,298 @@
+---
+import type { DownloadForm as Props } from '~/types';
+import Button from '~/components/ui/Button.astro';
+import { MODEL_LANGUAGES } from '~/i18n/modelLanguages';
+
+const { inputs, disclaimer, button = 'Download', description = '', apiUrl = '' } = Astro.props;
+
+const lang = Astro.url.pathname.startsWith('/es') ? 'es' : 'en';
+---
+
+<!--
+  Deliberately NOT `data-api-url` — src/components/ui/Form.astro binds every
+  `form[data-api-url]` on the page with its own (contact) submit handler.
+  Using the same attribute here would make that script hijack this form and
+  POST a contact payload to the download endpoint.
+-->
+<form data-download-api-url={apiUrl || undefined} data-lang={lang}>
+  {
+    inputs &&
+      inputs.map(
+        ({ type = 'text', name, label = '', autocomplete = 'on', placeholder = '' }) =>
+          name && (
+            <div class="mb-6">
+              {label && (
+                <label for={name} class="block text-sm font-medium">
+                  {label}
+                </label>
+              )}
+              <input
+                type={type}
+                name={name}
+                id={name}
+                autocomplete={autocomplete}
+                placeholder={placeholder}
+                class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+              />
+            </div>
+          )
+      )
+  }
+
+  <div class="mb-6">
+    <label for="model_locale" class="block text-sm font-medium">
+      {lang === 'es' ? 'Idioma del modelo' : 'Model language'}
+    </label>
+    <select
+      name="model_locale"
+      id="model_locale"
+      class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+    >
+      {
+        MODEL_LANGUAGES.map((l) => (
+          <option value={l.code}>
+            {lang === 'es' ? l.es : l.en}
+            {!l.available && (lang === 'es' ? ' — próximamente' : ' — coming soon')}
+          </option>
+        ))
+      }
+    </select>
+  </div>
+
+  <!-- Honeypot field — hidden from real users, bots auto-fill it -->
+  <div class="hidden" aria-hidden="true">
+    <input type="text" name="website" tabindex="-1" autocomplete="off" />
+  </div>
+
+  {
+    disclaimer && (
+      <div class="mt-3 flex items-start">
+        <div class="flex mt-0.5">
+          <input
+            id="disclaimer"
+            name="disclaimer"
+            type="checkbox"
+            class="cursor-pointer mt-1 py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+          />
+        </div>
+        <div class="ml-3">
+          <label for="disclaimer" class="cursor-pointer select-none text-sm text-gray-600 dark:text-gray-400">
+            {disclaimer.label}
+          </label>
+        </div>
+      </div>
+    )
+  }
+
+  {
+    button && (
+      <div class="mt-10 grid">
+        <Button variant="primary" type="submit">
+          {button}
+        </Button>
+      </div>
+    )
+  }
+
+  <div id="form-feedback" class="mt-4 hidden"></div>
+
+  {
+    description && (
+      <div class="mt-3 text-center">
+        <p class="text-sm text-gray-600 dark:text-gray-400">{description}</p>
+      </div>
+    )
+  }
+</form>
+
+<script>
+  const i18n = {
+    en: {
+      sending: 'Generating link...',
+      nameRequired: 'Please enter your name.',
+      emailRequired: 'Please enter a valid email address.',
+      disclaimerRequired: 'Please accept the privacy disclaimer.',
+      success: 'Your download is starting.',
+      expiresIn: (mins: number) => `This link expires in ${mins} minutes.`,
+      regenerate: 'Generate a new link',
+      notAvailable:
+        "That language build isn't published yet — we've noted your interest and will email you when it's ready.",
+      error: 'Something went wrong. Please try again later.',
+      rateLimited: 'Too many requests. Please try again in a little while.',
+    },
+    es: {
+      sending: 'Generando enlace...',
+      nameRequired: 'Por favor, introduce tu nombre.',
+      emailRequired: 'Por favor, introduce una dirección de correo electrónico válida.',
+      disclaimerRequired: 'Debes aceptar la política de privacidad.',
+      success: 'Tu descarga está empezando.',
+      expiresIn: (mins: number) => `Este enlace caduca en ${mins} minutos.`,
+      regenerate: 'Generar un nuevo enlace',
+      notAvailable:
+        'Esa versión del modelo aún no está publicada — hemos anotado tu interés y te avisaremos por correo cuando esté lista.',
+      error: 'Algo salió mal. Por favor, inténtalo de nuevo más tarde.',
+      rateLimited: 'Demasiadas solicitudes. Por favor, inténtalo de nuevo en un momento.',
+    },
+  };
+
+  function initDownloadForm() {
+    const forms = document.querySelectorAll<HTMLFormElement>('form[data-download-api-url]');
+
+    forms.forEach((form) => {
+      const apiUrl = form.dataset.downloadApiUrl;
+      if (!apiUrl) return;
+
+      // Prevent double-binding after View Transitions
+      if (form.dataset.bound === 'true') return;
+      form.dataset.bound = 'true';
+
+      const pageLoadedAt = Date.now();
+      const lang = (form.dataset.lang || 'en') as 'en' | 'es';
+      const t = i18n[lang] || i18n.en;
+
+      // Kept across a successful submit so the "generate a new link" button
+      // can re-request without asking the user to fill the form again.
+      let lastRenewToken: string | null = null;
+      let lastLocale = '';
+
+      async function requestDownload(payload: Record<string, unknown>) {
+        const feedback = form.querySelector<HTMLDivElement>('#form-feedback');
+        if (!feedback) return;
+
+        feedback.className = 'mt-4 hidden';
+        feedback.textContent = '';
+
+        try {
+          const response = await fetch(apiUrl as string, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+
+          const data = await response.json().catch(() => ({}));
+
+          if (response.ok && data.url) {
+            if (typeof window.gtag === 'function') {
+              window.gtag('event', 'generate_lead', {
+                event_category: 'Download',
+                event_label: payload.model_locale,
+                language: lang,
+              });
+              window.gtag('event', 'file_download', {
+                file_name: data.filename,
+                file_extension: 'zip',
+                model_locale: payload.model_locale,
+              });
+            }
+
+            lastRenewToken = data.dl || null;
+            lastLocale = String(payload.model_locale || lastLocale);
+
+            const minutes = Math.round((data.expiresInSeconds || 300) / 60);
+            const sizeGb = data.sizeBytes ? (data.sizeBytes / 1073741824).toFixed(2) : null;
+
+            form.innerHTML = `
+              <div class="text-center py-8">
+                <svg class="w-16 h-16 mx-auto text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <p class="text-lg font-medium text-gray-900 dark:text-white">${t.success}</p>
+                <p class="mt-2 font-mono text-sm break-all text-gray-700 dark:text-gray-300"></p>
+                <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">${t.expiresIn(minutes)}${sizeGb ? ` · ${sizeGb} GB` : ''}</p>
+                <button type="button" id="regen" class="mt-6 text-sm underline">${t.regenerate}</button>
+              </div>
+            `;
+            // Set filename via textContent (not innerHTML) — it comes from the
+            // server response and must never be interpreted as markup.
+            const filenameEl = form.querySelector('p.font-mono');
+            if (filenameEl) filenameEl.textContent = String(data.filename || '');
+
+            // Top-level navigation to a Content-Disposition: attachment
+            // response starts the download without unloading this page, and
+            // is NOT a CORS-governed request — no CloudFront/S3 CORS config
+            // needed. Do not replace this with fetch(): that would require
+            // CORS and buffer a ~1.5GB file into JS memory.
+            window.location.assign(data.url);
+
+            const regenBtn = form.querySelector<HTMLButtonElement>('#regen');
+            regenBtn?.addEventListener('click', async () => {
+              if (!lastRenewToken) return;
+              regenBtn.disabled = true;
+              await requestDownload({ dl: lastRenewToken, model_locale: lastLocale });
+            });
+            return;
+          }
+
+          if (response.status === 409) {
+            showFeedback(feedback, t.notAvailable, 'error');
+          } else if (response.status === 429) {
+            showFeedback(feedback, t.rateLimited, 'error');
+          } else {
+            showFeedback(feedback, t.error, 'error');
+          }
+        } catch {
+          showFeedback(feedback, t.error, 'error');
+        }
+      }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const feedback = form.querySelector<HTMLDivElement>('#form-feedback');
+        const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+        if (!feedback || !submitBtn) return;
+
+        const formData = new FormData(form);
+        const name = ((formData.get('name') as string) || '').trim();
+        const email = ((formData.get('email') as string) || '').trim();
+        const modelLocale = ((formData.get('model_locale') as string) || '').trim();
+        const disclaimerChecked = form.querySelector<HTMLInputElement>('#disclaimer')?.checked ?? false;
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!name) return showFeedback(feedback, t.nameRequired, 'error');
+        if (!email || !emailRegex.test(email)) return showFeedback(feedback, t.emailRequired, 'error');
+        if (!disclaimerChecked) return showFeedback(feedback, t.disclaimerRequired, 'error');
+
+        const params = new URLSearchParams(window.location.search);
+
+        const payload = {
+          name,
+          email,
+          company: ((formData.get('company') as string) || '').trim(),
+          role: ((formData.get('role') as string) || '').trim(),
+          model_locale: modelLocale,
+          disclaimer: disclaimerChecked,
+          website: ((formData.get('website') as string) || '').trim(),
+          utm_source: params.get('utm_source') || '',
+          utm_medium: params.get('utm_medium') || '',
+          utm_campaign: params.get('utm_campaign') || '',
+          language: lang,
+          _t: pageLoadedAt,
+        };
+
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = t.sending;
+
+        await requestDownload(payload);
+
+        // Only reachable on the error paths — success replaces form.innerHTML.
+        if (document.body.contains(submitBtn)) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+        }
+      });
+    });
+  }
+
+  function showFeedback(el: HTMLDivElement, message: string, type: 'error' | 'success') {
+    el.className =
+      type === 'error'
+        ? 'mt-4 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 text-sm'
+        : 'mt-4 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 text-sm';
+    el.textContent = message;
+  }
+
+  document.addEventListener('astro:page-load', initDownloadForm);
+</script>

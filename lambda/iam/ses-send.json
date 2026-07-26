@@ -7,7 +7,8 @@
       "Action": ["ses:SendEmail", "ses:SendRawEmail"],
       "Resource": [
         "arn:aws:ses:eu-west-3:211125757125:identity/solutions@futurion.es",
-        "arn:aws:ses:eu-west-3:211125757125:identity/futurion.es"
+        "arn:aws:ses:eu-west-3:211125757125:identity/futurion.es",
+        "arn:aws:ses:eu-west-3:211125757125:configuration-set/my-first-configuration-set"
       ]
     }
   ]

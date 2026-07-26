@@ -241,6 +241,12 @@ function buildEmailHtml(data) {
   `;
 }
 
+// Both SES identities below carry a default configuration set
+// ("my-first-configuration-set"), so SES authorizes SendEmail against BOTH the
+// identity ARN and the configuration-set ARN. lambda/iam/ses-send.json must
+// list both, or every send 403s with AccessDenied on the config-set resource
+// (this bit us: the download still "succeeded" because SES failures are
+// caught below and never surface to the user).
 async function sendLeadEmail(data) {
   const subjectPrefix = data.status === 'WAITLIST' ? 'WAITLIST — ' : '';
   const subject = `[TrustPrompt Download] ${subjectPrefix}${data.model_locale.toUpperCase()} — ${data.name}`;

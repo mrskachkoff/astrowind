@@ -1,0 +1,447 @@
+---
+import Button from '~/components/ui/Button.astro';
+
+/**
+ * Catalogue item shape passed down from the CheckoutForm widget (a subset of
+ * lambda/payments-catalogue.mjs's CATALOGUE entries, plus pre-computed VAT/
+ * gross). Rendered here server-side for every SKU so the displayed prices
+ * can never diverge from the server that will actually create the invoice.
+ */
+interface CatalogueItemProp {
+  sku: string;
+  product: string;
+  kind: 'licence' | 'deposit';
+  netCents: number;
+  vatCents: number;
+  grossCents: number;
+  name: { en: string; es: string };
+  offer: { en: string; es: string };
+  description: { en: string; es: string };
+}
+
+interface Props {
+  apiUrl?: string;
+  catalogueItems: CatalogueItemProp[];
+}
+
+const { apiUrl = '', catalogueItems } = Astro.props as Props;
+
+const lang = Astro.url.pathname.startsWith('/es') ? 'es' : 'en';
+const termsHref = lang === 'es' ? '/es/terminos/' : '/terms/';
+const privacyHref = lang === 'es' ? '/es/privacidad/' : '/privacy/';
+// Visible only to help the owner tell environments apart during the §10
+// sandbox verification gate — never affects behavior.
+const isSandbox = /sandbox|staging/i.test(apiUrl);
+
+const formatEuros = (cents: number) => `€${(cents / 100).toFixed(2)}`;
+
+const fieldClass =
+  'py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900';
+---
+
+<!--
+  Deliberately NOT `data-api-url` (src/components/ui/Form.astro) or
+  `data-download-api-url` (src/components/ui/DownloadForm.astro) — both bind
+  every matching form document-wide, so reusing either would hijack this form
+  or get hijacked by it.
+-->
+<form data-checkout-api-url={apiUrl || undefined} data-lang={lang}>
+  {
+    isSandbox && (
+      <div class="mb-4 rounded-lg border border-amber-400 bg-amber-50 dark:bg-amber-900/20 p-3 text-sm text-amber-800 dark:text-amber-200">
+        {lang === 'es'
+          ? 'Entorno de pruebas (sandbox) — no se realizará ningún cargo real.'
+          : 'Sandbox environment — no real charge will be made.'}
+      </div>
+    )
+  }
+
+  <div id="checkout-picker">
+    <p class="mb-4 text-sm text-muted">{lang === 'es' ? 'Elige un plan:' : 'Choose a plan:'}</p>
+    <ul class="space-y-2 mb-8">
+      {
+        catalogueItems.map((item) => (
+          <li>
+            <a
+              href={`?sku=${item.sku}`}
+              class="block rounded-lg border border-gray-200 dark:border-gray-700 p-3 hover:border-accent"
+              data-sku-link={item.sku}
+            >
+              <span class="font-medium">
+                {item.name[lang]} — {item.offer[lang]}
+              </span>
+              <span class="block text-sm text-muted">
+                {formatEuros(item.grossCents)} {lang === 'es' ? '(IVA incluido)' : '(VAT included)'}
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div id="checkout-summary" class="hidden mb-8 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+    <h3 id="checkout-product" class="font-semibold text-lg"></h3>
+    <p id="checkout-offer" class="text-muted"></p>
+    <p id="checkout-description" class="mt-2 text-sm text-muted"></p>
+    <dl class="mt-4 text-sm space-y-1">
+      <div class="flex justify-between">
+        <dt>{lang === 'es' ? 'Base imponible' : 'Net'}</dt>
+        <dd id="checkout-net"></dd>
+      </div>
+      <div class="flex justify-between">
+        <dt>{lang === 'es' ? 'IVA (21%)' : 'VAT (21%)'}</dt>
+        <dd id="checkout-vat"></dd>
+      </div>
+      <div class="flex justify-between font-semibold border-t border-gray-200 dark:border-gray-700 pt-1 mt-1">
+        <dt>Total</dt>
+        <dd id="checkout-gross"></dd>
+      </div>
+    </dl>
+    <a href="?" id="checkout-change-plan" class="mt-3 inline-block text-sm underline">
+      {lang === 'es' ? 'Cambiar de plan' : 'Change plan'}
+    </a>
+  </div>
+
+  <div id="checkout-fields" class="hidden">
+    <input type="hidden" name="sku" id="sku-field" />
+    <!-- Spain-only B2B checkout (tmp/payments.md §1) — country is fixed, not user input. -->
+    <input type="hidden" name="country" value="ES" />
+
+    <div class="mb-6">
+      <label for="companyName" class="block text-sm font-medium">
+        {lang === 'es' ? 'Nombre de la empresa' : 'Company name'}
+      </label>
+      <input type="text" name="companyName" id="companyName" autocomplete="organization" class={fieldClass} />
+    </div>
+
+    <div class="mb-6">
+      <label for="taxId" class="block text-sm font-medium">{lang === 'es' ? 'NIF / CIF' : 'Tax ID (NIF/CIF)'}</label>
+      <input type="text" name="taxId" id="taxId" class={fieldClass} />
+    </div>
+
+    <div class="mb-6">
+      <label for="contactName" class="block text-sm font-medium">
+        {lang === 'es' ? 'Persona de contacto' : 'Contact name'}
+      </label>
+      <input type="text" name="contactName" id="contactName" autocomplete="name" class={fieldClass} />
+    </div>
+
+    <div class="mb-6">
+      <label for="email" class="block text-sm font-medium">
+        {lang === 'es' ? 'Correo electrónico' : 'Email address'}
+      </label>
+      <input type="email" name="email" id="email" autocomplete="email" class={fieldClass} />
+    </div>
+
+    <div class="mb-6">
+      <label for="line1" class="block text-sm font-medium">{lang === 'es' ? 'Dirección' : 'Address'}</label>
+      <input type="text" name="line1" id="line1" autocomplete="street-address" class={fieldClass} />
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 mb-6">
+      <div>
+        <label for="postalCode" class="block text-sm font-medium">
+          {lang === 'es' ? 'Código postal' : 'Postal code'}
+        </label>
+        <input type="text" name="postalCode" id="postalCode" autocomplete="postal-code" class={fieldClass} />
+      </div>
+      <div>
+        <label for="city" class="block text-sm font-medium">{lang === 'es' ? 'Ciudad' : 'City'}</label>
+        <input type="text" name="city" id="city" autocomplete="address-level2" class={fieldClass} />
+      </div>
+    </div>
+
+    <div class="mb-6">
+      <label for="province" class="block text-sm font-medium">{lang === 'es' ? 'Provincia' : 'Province'}</label>
+      <input type="text" name="province" id="province" autocomplete="address-level1" class={fieldClass} />
+    </div>
+
+    <!-- Honeypot field — hidden from real users, bots auto-fill it -->
+    <div class="hidden" aria-hidden="true">
+      <input type="text" name="website" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <div class="mt-3 flex items-start">
+      <div class="flex mt-0.5">
+        <input id="termsAccepted" name="termsAccepted" type="checkbox" class={`cursor-pointer mt-1 ${fieldClass}`} />
+      </div>
+      <div class="ml-3">
+        <label for="termsAccepted" class="cursor-pointer select-none text-sm text-gray-600 dark:text-gray-400">
+          {
+            lang === 'es' ? (
+              <Fragment>
+                He leído y acepto los{' '}
+                <a href={termsHref} class="underline">
+                  Términos de Servicio
+                </a>{' '}
+                y la{' '}
+                <a href={privacyHref} class="underline">
+                  Política de Privacidad
+                </a>
+                .
+              </Fragment>
+            ) : (
+              <Fragment>
+                I have read and accept the{' '}
+                <a href={termsHref} class="underline">
+                  Terms of Service
+                </a>{' '}
+                and{' '}
+                <a href={privacyHref} class="underline">
+                  Privacy Policy
+                </a>
+                .
+              </Fragment>
+            )
+          }
+        </label>
+      </div>
+    </div>
+
+    <div class="mt-10 grid">
+      <Button variant="primary" type="submit">
+        {lang === 'es' ? 'Continuar al pago' : 'Continue to payment'}
+      </Button>
+    </div>
+  </div>
+
+  <div id="form-feedback" class="mt-4 hidden"></div>
+</form>
+
+<script type="application/json" id="checkout-catalogue-data" set:html={JSON.stringify(catalogueItems)} />
+
+<script>
+  interface CatalogueItem {
+    sku: string;
+    product: string;
+    kind: 'licence' | 'deposit';
+    netCents: number;
+    vatCents: number;
+    grossCents: number;
+    name: { en: string; es: string };
+    offer: { en: string; es: string };
+    description: { en: string; es: string };
+  }
+
+  const i18n = {
+    en: {
+      sending: 'Processing...',
+      redirecting: 'Redirecting to secure payment...',
+      pickPlan: 'Please choose a plan.',
+      companyRequired: 'Please enter your company name.',
+      taxIdRequired: 'Please enter a valid NIF/CIF.',
+      contactRequired: 'Please enter a contact name.',
+      emailRequired: 'Please enter a valid email address.',
+      addressRequired: 'Please complete your billing address.',
+      termsRequired: 'Please accept the Terms of Service and Privacy Policy.',
+      error: 'Something went wrong. Please try again later.',
+      codes: {
+        invalid_sku: 'Please choose a valid plan.',
+        invalid_locale: 'Something went wrong. Please try again later.',
+        invalid_country: 'Online checkout is currently available for companies in Spain only.',
+        invalid_tax_id: 'Please enter a valid NIF/CIF.',
+        invalid_email: 'Please enter a valid email address.',
+        invalid_fields: 'Please complete all required fields.',
+        terms_required: 'Please accept the Terms of Service and Privacy Policy.',
+        manual_review: "We couldn't process this automatically — we'll contact you shortly by email.",
+        rate_limited: 'Too many requests. Please try again in a little while.',
+        expired: 'Your session expired — please try again.',
+        server_error: 'Something went wrong. Please try again later.',
+        bad_request: 'Something went wrong. Please try again later.',
+      } as Record<string, string>,
+    },
+    es: {
+      sending: 'Procesando...',
+      redirecting: 'Redirigiendo al pago seguro...',
+      pickPlan: 'Por favor, elige un plan.',
+      companyRequired: 'Por favor, introduce el nombre de tu empresa.',
+      taxIdRequired: 'Por favor, introduce un NIF/CIF válido.',
+      contactRequired: 'Por favor, introduce el nombre de la persona de contacto.',
+      emailRequired: 'Por favor, introduce una dirección de correo electrónico válida.',
+      addressRequired: 'Por favor, completa tu dirección de facturación.',
+      termsRequired: 'Debes aceptar los Términos de Servicio y la Política de Privacidad.',
+      error: 'Algo salió mal. Por favor, inténtalo de nuevo más tarde.',
+      codes: {
+        invalid_sku: 'Por favor, elige un plan válido.',
+        invalid_locale: 'Algo salió mal. Por favor, inténtalo de nuevo más tarde.',
+        invalid_country: 'La compra en línea está disponible únicamente para empresas en España.',
+        invalid_tax_id: 'Por favor, introduce un NIF/CIF válido.',
+        invalid_email: 'Por favor, introduce una dirección de correo electrónico válida.',
+        invalid_fields: 'Por favor, completa todos los campos obligatorios.',
+        terms_required: 'Debes aceptar los Términos de Servicio y la Política de Privacidad.',
+        manual_review: 'No hemos podido procesarlo automáticamente — te contactaremos en breve por correo.',
+        rate_limited: 'Demasiadas solicitudes. Por favor, inténtalo de nuevo en un momento.',
+        expired: 'Tu sesión ha caducado — por favor, inténtalo de nuevo.',
+        server_error: 'Algo salió mal. Por favor, inténtalo de nuevo más tarde.',
+        bad_request: 'Algo salió mal. Por favor, inténtalo de nuevo más tarde.',
+      } as Record<string, string>,
+    },
+  };
+
+  function formatEuros(cents: number) {
+    return `€${(cents / 100).toFixed(2)}`;
+  }
+
+  function showFeedback(el: HTMLDivElement, message: string, type: 'error' | 'success') {
+    el.className =
+      type === 'error'
+        ? 'mt-4 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 text-sm'
+        : 'mt-4 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 text-sm';
+    el.textContent = message;
+  }
+
+  function initCheckoutForm() {
+    const forms = document.querySelectorAll<HTMLFormElement>('form[data-checkout-api-url]');
+
+    forms.forEach((form) => {
+      const apiUrl = form.dataset.checkoutApiUrl;
+      if (!apiUrl) return;
+
+      // Prevent double-binding after View Transitions
+      if (form.dataset.bound === 'true') return;
+      form.dataset.bound = 'true';
+
+      const pageLoadedAt = Date.now();
+      const lang = (form.dataset.lang || 'en') as 'en' | 'es';
+      const t = i18n[lang] || i18n.en;
+
+      const catalogueDataEl = document.getElementById('checkout-catalogue-data');
+      let catalogue: CatalogueItem[] = [];
+      try {
+        catalogue = JSON.parse(catalogueDataEl?.textContent || '[]');
+      } catch {
+        catalogue = [];
+      }
+
+      const picker = form.querySelector<HTMLDivElement>('#checkout-picker');
+      const summary = form.querySelector<HTMLDivElement>('#checkout-summary');
+      const fields = form.querySelector<HTMLDivElement>('#checkout-fields');
+      const skuField = form.querySelector<HTMLInputElement>('#sku-field');
+
+      function selectSku(sku: string | null) {
+        const item = catalogue.find((c) => c.sku === sku);
+
+        if (!item) {
+          picker?.classList.remove('hidden');
+          summary?.classList.add('hidden');
+          fields?.classList.add('hidden');
+          return;
+        }
+
+        picker?.classList.add('hidden');
+        summary?.classList.remove('hidden');
+        fields?.classList.remove('hidden');
+        if (skuField) skuField.value = item.sku;
+
+        const productEl = form.querySelector('#checkout-product');
+        const offerEl = form.querySelector('#checkout-offer');
+        const descEl = form.querySelector('#checkout-description');
+        const netEl = form.querySelector('#checkout-net');
+        const vatEl = form.querySelector('#checkout-vat');
+        const grossEl = form.querySelector('#checkout-gross');
+
+        if (productEl) productEl.textContent = item.name[lang];
+        if (offerEl) offerEl.textContent = item.offer[lang];
+        if (descEl) descEl.textContent = item.description[lang];
+        if (netEl) netEl.textContent = formatEuros(item.netCents);
+        if (vatEl) vatEl.textContent = formatEuros(item.vatCents);
+        if (grossEl) grossEl.textContent = formatEuros(item.grossCents);
+
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'begin_checkout', {
+            currency: 'EUR',
+            value: item.grossCents / 100,
+            items: [{ item_id: item.sku, item_name: item.product }],
+          });
+        }
+      }
+
+      const initialParams = new URLSearchParams(window.location.search);
+      selectSku(initialParams.get('sku'));
+
+      const changePlanLink = form.querySelector<HTMLAnchorElement>('#checkout-change-plan');
+      changePlanLink?.addEventListener('click', (e) => {
+        e.preventDefault();
+        history.replaceState(null, '', window.location.pathname);
+        selectSku(null);
+      });
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const feedback = form.querySelector<HTMLDivElement>('#form-feedback');
+        const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+        if (!feedback || !submitBtn) return;
+
+        const formData = new FormData(form);
+        const sku = ((formData.get('sku') as string) || '').trim();
+        const companyName = ((formData.get('companyName') as string) || '').trim();
+        const taxId = ((formData.get('taxId') as string) || '').trim();
+        const contactName = ((formData.get('contactName') as string) || '').trim();
+        const email = ((formData.get('email') as string) || '').trim();
+        const line1 = ((formData.get('line1') as string) || '').trim();
+        const postalCode = ((formData.get('postalCode') as string) || '').trim();
+        const city = ((formData.get('city') as string) || '').trim();
+        const province = ((formData.get('province') as string) || '').trim();
+        const website = ((formData.get('website') as string) || '').trim();
+        const termsAccepted = form.querySelector<HTMLInputElement>('#termsAccepted')?.checked ?? false;
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!sku) return showFeedback(feedback, t.pickPlan, 'error');
+        if (!companyName) return showFeedback(feedback, t.companyRequired, 'error');
+        if (!taxId) return showFeedback(feedback, t.taxIdRequired, 'error');
+        if (!contactName) return showFeedback(feedback, t.contactRequired, 'error');
+        if (!email || !emailRegex.test(email)) return showFeedback(feedback, t.emailRequired, 'error');
+        if (!line1 || !postalCode || !city || !province) return showFeedback(feedback, t.addressRequired, 'error');
+        if (!termsAccepted) return showFeedback(feedback, t.termsRequired, 'error');
+
+        const payload = {
+          sku,
+          locale: lang,
+          customer: {
+            companyName,
+            taxId,
+            contactName,
+            email,
+            billingAddress: { line1, postalCode, city, province, country: 'ES' },
+          },
+          termsAccepted,
+          website,
+          _t: pageLoadedAt,
+        };
+
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = t.sending;
+
+        try {
+          const response = await fetch(apiUrl as string, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          const data = await response.json().catch(() => ({}));
+
+          if (response.ok && data.invoiceUrl) {
+            showFeedback(feedback, t.redirecting, 'success');
+            // Top-level navigation to Qonto's hosted invoice page — the
+            // customer pays there; this page's job is done once redirected.
+            window.location.assign(data.invoiceUrl);
+            return;
+          }
+
+          showFeedback(feedback, t.codes[data.code] || t.error, 'error');
+        } catch {
+          showFeedback(feedback, t.error, 'error');
+        }
+
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initCheckoutForm);
+</script>

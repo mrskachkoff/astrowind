@@ -14,6 +14,14 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import imgTrustCore from '~/assets/images/trustcore.png';
 import imgRag from '~/assets/images/rag.png';
 
+// Checkout stays disabled (CTAs keep their current /es/contacto/ hrefs) until
+// PUBLIC_PAYMENTS_ENABLED is the literal string "true" — a build-time
+// constant on this static site (tmp/payments.md §7.4).
+const paymentsEnabled = import.meta.env.PUBLIC_PAYMENTS_ENABLED === 'true';
+const buyHref = (sku: string) => (paymentsEnabled ? `/es/pago/?sku=${sku}` : '/es/contacto/');
+const buyText = paymentsEnabled ? 'Comprar ahora' : 'Contactar';
+const buyUrl = (sku: string) => `https://solutions.futurion.es${buyHref(sku)}`;
+
 const metadata = {
   title: 'TrustCore — Q&A de documentos en local',
   description:
@@ -25,37 +33,68 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <JsonLd schema={{
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "TrustCore",
-    "applicationCategory": "BusinessApplication",
-    "operatingSystem": "Chromium browser (Chrome, Edge, Brave) 124+",
-    "description": "Extensión de navegador, con un acompañante local opcional, que responde preguntas sobre tus propios documentos en tu propio hardware. Recuperación Graph RAG, citas verificadas, detección de conflictos entre documentos e incrustaciones locales — sin servidor alojado y sin salida de documentos. Diseñada para trabajo jurídico, de cumplimiento y de investigación.",
-    "url": "https://solutions.futurion.es/es/productos/trustcore/",
-    "inLanguage": "es",
-    "featureList": [
-      "Se ejecuta en tu navegador; sin servidor alojado",
-      "Los documentos y las preguntas permanecen en tu máquina",
-      "Recuperación Graph RAG (vectores + BM25 + expansión de grafo)",
-      "Cada respuesta vinculada a un fragmento fuente verificado",
-      "Detección de conflictos entre documentos y cadenas de razonamiento",
-      "Incrustaciones locales (bge-m3) mediante WebGPU, con reserva por CPU",
-      "Conecta tu propio cómputo on-premise o en la nube (formato compatible con OpenAI)",
-      "Ve y audita el grafo de entidades como un mapa 3D interactivo (WebGPU)",
-      "Exporta el grafo a una bóveda compatible con Obsidian"
-    ],
-    "author": { "@id": "https://solutions.futurion.es/#organization" },
-    "offers": {
-      "@type": "Offer",
-      "priceSpecification": {
-        "@type": "PriceSpecification",
-        "minPrice": "0",
-        "priceCurrency": "EUR"
-      },
-      "availability": "https://schema.org/InStock"
-    }
-  }} />
+  <JsonLd
+    schema={{
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: 'TrustCore',
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Chromium browser (Chrome, Edge, Brave) 124+',
+      description:
+        'Extensión de navegador, con un acompañante local opcional, que responde preguntas sobre tus propios documentos en tu propio hardware. Recuperación Graph RAG, citas verificadas, detección de conflictos entre documentos e incrustaciones locales — sin servidor alojado y sin salida de documentos. Diseñada para trabajo jurídico, de cumplimiento y de investigación.',
+      url: 'https://solutions.futurion.es/es/productos/trustcore/',
+      inLanguage: 'es',
+      featureList: [
+        'Se ejecuta en tu navegador; sin servidor alojado',
+        'Los documentos y las preguntas permanecen en tu máquina',
+        'Recuperación Graph RAG (vectores + BM25 + expansión de grafo)',
+        'Cada respuesta vinculada a un fragmento fuente verificado',
+        'Detección de conflictos entre documentos y cadenas de razonamiento',
+        'Incrustaciones locales (bge-m3) mediante WebGPU, con reserva por CPU',
+        'Conecta tu propio cómputo on-premise o en la nube (formato compatible con OpenAI)',
+        'Ve y audita el grafo de entidades como un mapa 3D interactivo (WebGPU)',
+        'Exporta el grafo a una bóveda compatible con Obsidian',
+      ],
+      author: { '@id': 'https://solutions.futurion.es/#organization' },
+      offers: [
+        {
+          '@type': 'Offer',
+          name: 'Gratis (un usuario, totalmente local)',
+          price: '0',
+          priceCurrency: 'EUR',
+          availability: 'https://schema.org/InStock',
+          url: 'https://solutions.futurion.es/es/contacto/',
+        },
+        {
+          '@type': 'Offer',
+          name: 'Starter (1 puesto)',
+          price: '348.00',
+          priceCurrency: 'EUR',
+          availability: 'https://schema.org/InStock',
+          url: buyUrl('trustcore-starter-1-seat'),
+          description: 'Licencia de un año, 1 puesto, más 21% de IVA',
+        },
+        {
+          '@type': 'Offer',
+          name: 'Team (10 puestos)',
+          price: '2880.00',
+          priceCurrency: 'EUR',
+          availability: 'https://schema.org/InStock',
+          url: buyUrl('trustcore-team-10-seats'),
+          description: 'Licencia de un año, 10 puestos, más 21% de IVA',
+        },
+        {
+          '@type': 'Offer',
+          name: 'Business (50 puestos)',
+          price: '11400.00',
+          priceCurrency: 'EUR',
+          availability: 'https://schema.org/InStock',
+          url: buyUrl('trustcore-business-50-seats'),
+          description: 'Licencia de un año, 50 puestos, más 21% de IVA',
+        },
+      ],
+    }}
+  />
 
   <!-- Hero -->
 
@@ -83,21 +122,24 @@ const metadata = {
         class="mx-auto mb-4 object-contain drop-shadow-lg"
       />
       TrustCore<br />
-      <span class="text-accent dark:text-white highlight">Responde preguntas sobre tus propios documentos, en tu propio hardware</span>
+      <span class="text-accent dark:text-white highlight"
+        >Responde preguntas sobre tus propios documentos, en tu propio hardware</span
+      >
     </Fragment>
 
     <Fragment slot="subtitle">
       <span class="hidden sm:inline">
-        TrustCore es una extensión de navegador, con un acompañante local opcional, que responde
-        preguntas sobre los documentos que le añades. Preguntas desde el propio panel de TrustCore
-        en la página de chat que ya usas — ChatGPT, Gemini, Claude, DeepSeek, Perplexity o un
-        OpenWebUI local — y la respuesta proviene de tus documentos indexados, calculada en tu
-        máquina. La pregunta y los documentos nunca se envían al proveedor de chat, y no existe
-        ningún servidor de TrustCore detrás.
+        TrustCore es una extensión de navegador, con un acompañante local opcional, que responde preguntas sobre los
+        documentos que le añades. Preguntas desde el propio panel de TrustCore en la página de chat que ya usas —
+        ChatGPT, Gemini, Claude, DeepSeek, Perplexity o un OpenWebUI local — y la respuesta proviene de tus documentos
+        indexados, calculada en tu máquina. La pregunta y los documentos nunca se envían al proveedor de chat, y no
+        existe ningún servidor de TrustCore detrás.
       </span>
-      <span class="block mb-1 sm:hidden font-bold text-green-700">Tus documentos permanecen en tu máquina. Cada respuesta cita su fuente.</span>
-      Diseñada para trabajo jurídico, de cumplimiento y de investigación, donde los documentos son
-      con frecuencia privilegiados, confidenciales o datos personales sujetos al RGPD.
+      <span class="block mb-1 sm:hidden font-bold text-green-700"
+        >Tus documentos permanecen en tu máquina. Cada respuesta cita su fuente.</span
+      >
+      Diseñada para trabajo jurídico, de cumplimiento y de investigación, donde los documentos son con frecuencia privilegiados,
+      confidenciales o datos personales sujetos al RGPD.
     </Fragment>
   </Hero>
 
@@ -217,12 +259,11 @@ const metadata = {
       <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
         Usarlo no crea un nuevo lugar donde vivan los documentos
       </h3>
-      Para material privilegiado, confidencial o regulado por el RGPD — y para el trabajo bajo secreto
-      profesional, como el <span class="italic">secreto profesional</span> en España o el secreto
-      profesional abogado-cliente en Irlanda — subir documentos a un servicio compartido de terceros
-      puede ser en sí mismo el problema. Y cuando conectas cómputo externo para modelos más pesados, el
-      resto del sistema se comporta igual — solo cambia dónde se ejecuta el trabajo numérico; el único
-      procesador involucrado es el endpoint que tú controlas.
+      Para material privilegiado, confidencial o regulado por el RGPD — y para el trabajo bajo secreto profesional, como el
+      <span class="italic">secreto profesional</span> en España o el secreto profesional abogado-cliente en Irlanda — subir
+      documentos a un servicio compartido de terceros puede ser en sí mismo el problema. Y cuando conectas cómputo externo
+      para modelos más pesados, el resto del sistema se comporta igual — solo cambia dónde se ejecuta el trabajo numérico;
+      el único procesador involucrado es el endpoint que tú controlas.
     </Fragment>
   </Content>
 
@@ -272,10 +313,9 @@ const metadata = {
         alt="Recuperación Graph RAG sobre entidades de documentos"
         class="mx-auto mb-6 h-20 w-auto object-contain"
       />
-      TrustCore construye un grafo de las personas, organizaciones, fechas, importes y referencias de
-      tus documentos y razona sobre él, de modo que las conexiones invisibles en cualquier archivo
-      individual se vuelven consultables — y para el trabajo en el que una afirmación incorrecta o no
-      respaldada tiene consecuencias, la evidencia llega adjunta y ya comprobada.
+      TrustCore construye un grafo de las personas, organizaciones, fechas, importes y referencias de tus documentos y razona
+      sobre él, de modo que las conexiones invisibles en cualquier archivo individual se vuelven consultables — y para el
+      trabajo en el que una afirmación incorrecta o no respaldada tiene consecuencias, la evidencia llega adjunta y ya comprobada.
     </Fragment>
   </Content>
 
@@ -310,9 +350,9 @@ const metadata = {
       <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
         Construido en solo lectura a partir de datos del dispositivo, dibujado en tu GPU
       </h3>
-      El mapa se renderiza mediante WebGPU, con WebGL y una vista 2D como reservas. Nada se envía a
-      ningún sitio y construirlo no realiza ninguna llamada a un modelo ni al acompañante. Los grafos
-      muy grandes se limitan a los nodos más conectados, y el mapa indica cuándo lo ha hecho.
+      El mapa se renderiza mediante WebGPU, con WebGL y una vista 2D como reservas. Nada se envía a ningún sitio y construirlo
+      no realiza ninguna llamada a un modelo ni al acompañante. Los grafos muy grandes se limitan a los nodos más conectados,
+      y el mapa indica cuándo lo ha hecho.
     </Fragment>
   </Content>
 
@@ -321,8 +361,8 @@ const metadata = {
   <Prices
     id="precios"
     tagline="Precios"
-    title="Planes por puesto para equipos de cualquier tamaño"
-    subtitle="Empieza completamente en local sin coste. Los planes de pago añaden la capacidad que una organización con su propia infraestructura no puede obtener gratis: conectar tu propio cómputo. Precios sin IVA, por puesto, con facturación anual."
+    title="Paquetes anuales fijos para equipos de cualquier tamaño"
+    subtitle="Empieza completamente en local sin coste. Los planes de pago añaden la capacidad que una organización con su propia infraestructura no puede obtener gratis: conectar tu propio cómputo. Licencias de un año para 1, 10 o 50 puestos — precios sin IVA."
     prices={[
       {
         title: 'Free',
@@ -343,9 +383,10 @@ const metadata = {
       },
       {
         title: 'Starter',
-        subtitle: 'Microorganizaciones (1-9 puestos)',
-        price: 29,
-        period: 'por puesto / mes',
+        subtitle: '1 puesto',
+        price: 348,
+        period: 'al año',
+        note: paymentsEnabled ? '+ 21% IVA al pagar' : undefined,
         items: [
           { description: 'Todo lo del plan Free' },
           { description: 'Conecta cómputo externo — on-premise o en la nube' },
@@ -354,17 +395,18 @@ const metadata = {
           { description: 'Proyectos locales ilimitados' },
         ],
         callToAction: {
-          text: 'Contactar',
-          href: '/es/contacto/',
+          text: buyText,
+          href: buyHref('trustcore-starter-1-seat'),
         },
         hasRibbon: true,
         ribbonTitle: 'más popular',
       },
       {
         title: 'Team',
-        subtitle: 'Organizaciones pequeñas (10-49 puestos)',
-        price: 24,
-        period: 'por puesto / mes',
+        subtitle: '10 puestos',
+        price: 2880,
+        period: 'al año',
+        note: paymentsEnabled ? '+ 21% IVA al pagar' : undefined,
         items: [
           { description: 'Todo lo del plan Starter' },
           { description: 'System Prompt por proyecto' },
@@ -373,15 +415,16 @@ const metadata = {
           { description: 'Soporte prioritario' },
         ],
         callToAction: {
-          text: 'Contactar',
-          href: '/es/contacto/',
+          text: buyText,
+          href: buyHref('trustcore-team-10-seats'),
         },
       },
       {
         title: 'Business',
-        subtitle: 'Organizaciones medianas (50-249 puestos)',
-        price: 19,
-        period: 'por puesto / mes',
+        subtitle: '50 puestos',
+        price: 11400,
+        period: 'al año',
+        note: paymentsEnabled ? '+ 21% IVA al pagar' : undefined,
         items: [
           { description: 'Todo lo del plan Team' },
           { description: 'Controles de política de administrador — forzar endpoints, bloquear modelo' },
@@ -389,8 +432,8 @@ const metadata = {
           { description: 'Soporte con SLA' },
         ],
         callToAction: {
-          text: 'Contactar',
-          href: '/es/contacto/',
+          text: buyText,
+          href: buyHref('trustcore-business-50-seats'),
         },
       },
     ]}

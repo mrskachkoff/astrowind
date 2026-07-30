@@ -1,0 +1,23 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ReadWebhookSecret",
+      "Effect": "Allow",
+      "Action": "ssm:GetParameter",
+      "Resource": "arn:aws:ssm:eu-west-3:211125757125:parameter/futurion/payments/webhook-secret"
+    },
+    {
+      "Sid": "DecryptWebhookSecret",
+      "Effect": "Allow",
+      "Action": "kms:Decrypt",
+      "Resource": "arn:aws:kms:eu-west-3:211125757125:alias/aws/ssm"
+    },
+    {
+      "Sid": "InvokeFulfilLambdaOnly",
+      "Effect": "Allow",
+      "Action": "lambda:InvokeFunction",
+      "Resource": "arn:aws:lambda:eu-west-3:211125757125:function:payments-fulfil"
+    }
+  ]
+}

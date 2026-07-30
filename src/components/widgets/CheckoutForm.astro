@@ -1,0 +1,75 @@
+---
+import CheckoutFormFields from '~/components/ui/CheckoutFormFields.astro';
+import Headline from '~/components/ui/Headline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Button from '~/components/ui/Button.astro';
+import type { CheckoutGate as Props } from '~/types';
+// Relative import (not the `~/` alias) — this file lives outside src/, so it
+// isn't resolved by the tsconfig path alias, only by Vite's default resolver.
+// tmp/payments.md §3: the catalogue has no imports of its own, which is what
+// makes this work at build time.
+import { CATALOGUE, vatCents, grossCents } from '../../../lambda/payments-catalogue.mjs';
+
+const checkoutApiUrl = import.meta.env.PUBLIC_CHECKOUT_API_URL;
+const paymentsEnabled = import.meta.env.PUBLIC_PAYMENTS_ENABLED === 'true';
+
+const {
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  tagline = await Astro.slots.render('tagline'),
+
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+
+const lang = Astro.url.pathname.startsWith('/es') ? 'es' : 'en';
+const contactHref = lang === 'es' ? '/es/contacto/' : '/contact/';
+
+// Every SKU panel is built here, server-side, from the same catalogue the
+// checkout Lambda uses — the page and the server can never disagree on a
+// price (tmp/payments.md §7.2). The client only ever reveals the one
+// matching ?sku=; it never computes a price itself.
+const catalogueItems = Object.entries(CATALOGUE).map(([sku, entry]) => ({
+  sku,
+  product: entry.product,
+  kind: entry.kind,
+  netCents: entry.netCents,
+  vatCents: vatCents(entry.netCents),
+  grossCents: grossCents(entry.netCents),
+  name: entry.name,
+  offer: entry.offer,
+  description: entry.description,
+}));
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+  <Headline title={title} subtitle={subtitle} tagline={tagline} />
+
+  <div
+    class="flex flex-col max-w-xl mx-auto rounded-lg backdrop-blur border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900 shadow p-4 sm:p-6 lg:p-8 w-full"
+  >
+    {
+      paymentsEnabled ? (
+        <CheckoutFormFields apiUrl={checkoutApiUrl} catalogueItems={catalogueItems} />
+      ) : (
+        <div class="text-center py-8">
+          <p class="text-lg font-medium text-gray-900 dark:text-white">
+            {lang === 'es' ? 'La compra en línea no está disponible todavía.' : "Online checkout isn't available yet."}
+          </p>
+          <p class="mt-2 text-sm text-muted">
+            {lang === 'es'
+              ? 'Contáctanos y te ayudamos a completar tu compra.'
+              : "Contact us and we'll help you complete your purchase."}
+          </p>
+          <div class="mt-6">
+            <Button variant="primary" href={contactHref}>
+              {lang === 'es' ? 'Contactar' : 'Contact Us'}
+            </Button>
+          </div>
+        </div>
+      )
+    }
+  </div>
+</WidgetWrapper>

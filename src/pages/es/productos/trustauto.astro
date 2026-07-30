@@ -12,6 +12,17 @@ import TrustAutoGraph from '~/components/widgets/TrustAutoGraph.astro';
 
 import imgTrustAuto from '~/assets/images/trustauto.png';
 
+// Checkout stays disabled (CTAs keep their current /es/hoja-de-ruta-de-
+// automatizacion/ hrefs) until PUBLIC_PAYMENTS_ENABLED is the literal string
+// "true" — a build-time constant on this static site (tmp/payments.md §7.4).
+// Quick-Win and Comprehensive are deposits credited against the final
+// project invoice, not flat project prices — labelled as such regardless of
+// whether checkout is live yet.
+const paymentsEnabled = import.meta.env.PUBLIC_PAYMENTS_ENABLED === 'true';
+const buyHref = (sku: string) => (paymentsEnabled ? `/es/pago/?sku=${sku}` : '/es/hoja-de-ruta-de-automatizacion/');
+const buyText = paymentsEnabled ? 'Pagar depósito' : 'Comenzar con la Hoja de Ruta Gratuita';
+const buyUrl = (sku: string) => `https://solutions.futurion.es${buyHref(sku)}`;
+
 const metadata = {
   title: 'TrustAuto — Automatización en local',
   description:
@@ -75,19 +86,23 @@ const pricingSchema = {
     },
     {
       '@type': 'Offer',
-      name: 'Implementación Quick-Win',
+      name: 'Implementación Quick-Win — depósito',
       description:
-        '1-2 automatizaciones de alto impacto entregadas en 2-4 semanas. Arquitectura local o híbrida con controles de cumplimiento RGPD.',
-      priceSpecification: { '@type': 'PriceSpecification', minPrice: '1500', priceCurrency: 'EUR' },
+        '1-2 automatizaciones de alto impacto entregadas en 2-4 semanas. Arquitectura local o híbrida con controles de cumplimiento RGPD. Depósito de 1.500 € más 21% de IVA, se abona en la factura final del proyecto.',
+      price: '1500.00',
+      priceCurrency: 'EUR',
       availability: 'https://schema.org/InStock',
+      url: buyUrl('trustauto-quick-win-deposit'),
     },
     {
       '@type': 'Offer',
-      name: 'Paquete Integral',
+      name: 'Paquete Integral — depósito',
       description:
-        'Transformación completa de la consulta en 6-12 semanas. Múltiples automatizaciones con marco de cumplimiento integrado y formación del personal.',
-      priceSpecification: { '@type': 'PriceSpecification', minPrice: '5000', priceCurrency: 'EUR' },
+        'Transformación completa de la consulta en 6-12 semanas. Múltiples automatizaciones con marco de cumplimiento integrado y formación del personal. Depósito de 5.000 € más 21% de IVA, se abona en la factura final del proyecto.',
+      price: '5000.00',
+      priceCurrency: 'EUR',
       availability: 'https://schema.org/InStock',
+      url: buyUrl('trustauto-comprehensive-deposit'),
     },
     {
       '@type': 'Offer',
@@ -273,11 +288,10 @@ const pricingSchema = {
       <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
         La misma arquitectura en ambos casos
       </h3>
-      Sea cual sea el motor, lo que lo rodea no cambia: acceso con alcance definido, acciones registradas, puntos de
-      control humanos y tus sistemas intactos. Para las notificaciones, cualquiera de los dos motores puede entregarlas
-      a través de una <a href="/es/smseagle/" class="underline">pasarela SMS SMSEagle</a> on-premise — SMS o WhatsApp
-      con reserva automática — de forma que los números de teléfono de los destinatarios nunca pasan por un proveedor
-      de SMS en la nube.
+      Sea cual sea el motor, lo que lo rodea no cambia: acceso con alcance definido, acciones registradas, puntos de control
+      humanos y tus sistemas intactos. Para las notificaciones, cualquiera de los dos motores puede entregarlas a través de
+      una <a href="/es/smseagle/" class="underline">pasarela SMS SMSEagle</a> on-premise — SMS o WhatsApp con reserva automática
+      — de forma que los números de teléfono de los destinatarios nunca pasan por un proveedor de SMS en la nube.
     </Fragment>
     <Fragment slot="image">
       <TrustAutoGraph lang="es" />
@@ -312,7 +326,8 @@ const pricingSchema = {
         title: 'Implementación de Mejora Inmediata',
         subtitle: '1-2 automatizaciones de alto impacto',
         price: '1.500',
-        period: 'desde',
+        period: paymentsEnabled ? 'depósito' : 'desde',
+        note: '+ 21% de IVA, se abona en la factura final del proyecto',
         items: [
           { description: '1-2 automatizaciones específicas' },
           { description: 'Entrega en 2-4 semanas' },
@@ -321,7 +336,7 @@ const pricingSchema = {
           { description: 'Registros de auditoría, acuerdos de tratamiento de datos y gestión del consentimiento' },
           { description: '30 días de soporte post-lanzamiento' },
         ],
-        callToAction: { text: 'Comenzar con la Hoja de Ruta Gratuita', href: '/es/hoja-de-ruta-de-automatizacion/' },
+        callToAction: { text: buyText, href: buyHref('trustauto-quick-win-deposit') },
         hasRibbon: true,
         ribbonTitle: 'más popular',
       },
@@ -329,7 +344,8 @@ const pricingSchema = {
         title: 'Paquete Completo',
         subtitle: 'Transformación completa de la consulta',
         price: '5.000',
-        period: 'desde',
+        period: paymentsEnabled ? 'depósito' : 'desde',
+        note: '+ 21% de IVA, se abona en la factura final del proyecto',
         items: [
           { description: 'Múltiples automatizaciones de flujos' },
           { description: 'Entrega en 6-12 semanas' },
@@ -338,7 +354,7 @@ const pricingSchema = {
           { description: 'Documentación completa' },
           { description: '90 días de soporte post-lanzamiento' },
         ],
-        callToAction: { text: 'Comenzar con la Hoja de Ruta Gratuita', href: '/es/hoja-de-ruta-de-automatizacion/' },
+        callToAction: { text: buyText, href: buyHref('trustauto-comprehensive-deposit') },
       },
       {
         title: 'MedCore Private AI',

@@ -154,6 +154,8 @@ export interface Price {
   description?: string;
   price?: number | string;
   period?: string;
+  /** Short note rendered under the price (e.g. "+ 21% VAT", "credited against the final invoice"). */
+  note?: string;
   items?: Array<Item>;
   callToAction?: CallToAction;
   hasRibbon?: boolean;
@@ -230,6 +232,15 @@ export interface DownloadForm {
   apiUrl?: string;
 }
 
+export interface CheckoutForm {
+  apiUrl?: string;
+  paymentsEnabled?: boolean;
+}
+
+export interface PaymentAccess {
+  apiUrl?: string;
+}
+
 // WIDGETS
 export interface Hero extends Omit<Headline, 'classes'>, Omit<Widget, 'isDark' | 'classes'> {
   content?: string;
@@ -299,3 +310,7 @@ export interface Content extends Omit<Headline, 'classes'>, Widget {
 export interface Contact extends Omit<Headline, 'classes'>, Form, Widget {}
 
 export interface DownloadGate extends Omit<Headline, 'classes'>, DownloadForm, Widget {}
+
+export interface CheckoutGate extends Omit<Headline, 'classes'>, CheckoutForm, Widget {}
+
+export interface PaymentAccessGate extends Omit<Headline, 'classes'>, PaymentAccess, Widget {}

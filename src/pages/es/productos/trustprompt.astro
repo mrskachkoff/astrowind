@@ -13,6 +13,14 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 
 import imgTrustPrompt from '~/assets/images/trustprompt.png';
 
+// Checkout stays disabled (CTAs keep their current /es/contacto/ hrefs) until
+// PUBLIC_PAYMENTS_ENABLED is the literal string "true" — a build-time
+// constant on this static site (tmp/payments.md §7.4).
+const paymentsEnabled = import.meta.env.PUBLIC_PAYMENTS_ENABLED === 'true';
+const buyHref = (sku: string) => (paymentsEnabled ? `/es/pago/?sku=${sku}` : '/es/contacto/');
+const buyText = paymentsEnabled ? 'Comprar ahora' : 'Contactar';
+const buyUrl = (sku: string) => `https://solutions.futurion.es${buyHref(sku)}`;
+
 const metadata = {
   title: 'TrustPrompt — Redacta datos personales',
   description:
@@ -24,36 +32,67 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <JsonLd schema={{
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "TrustPrompt",
-    "applicationCategory": "SecurityApplication",
-    "operatingSystem": "Chrome/Edge (Chromium) 124+",
-    "description": "Extensión para Chrome y Edge que detecta y redacta datos personales dentro del navegador, antes de que el prompt se envíe a un LLM público. La detección se ejecuta en la propia máquina del usuario: el modelo viaja en la extensión y las cargas remotas de modelo están deshabilitadas, por lo que no existe ningún servidor de detección. Funciona en nueve aplicaciones web de LLM, combina 40 reglas regex validadas por suma de comprobación con un modelo NER en el dispositivo de 560M de parámetros y, por defecto, falla en seguro.",
-    "url": "https://solutions.futurion.es/es/productos/trustprompt/",
-    "inLanguage": "es",
-    "featureList": [
-      "La detección se ejecuta en tu propia máquina; no existe servidor de detección",
-      "Redacta los datos personales antes de enviar el prompt al LLM",
-      "Funciona en nueve aplicaciones web de LLM (ChatGPT, Claude, Gemini, Perplexity, Mistral, Grok, DeepSeek, OpenEvidence)",
-      "40 reglas regex validadas por suma de comprobación más un modelo NER en el dispositivo de 560M de parámetros (54 tipos de entidad)",
-      "Falla en seguro por defecto: si una fase da error, el envío permanece bloqueado",
-      "Sin telemetría; la única llamada saliente es un webhook de auditoría opcional, solo con metadatos",
-      "Permisos mínimos (offscreen, storage, activeTab); el mapa de marcadores se mantiene solo en memoria",
-      "Gestión centralizada por política mediante directiva de grupo, Microsoft Intune o Jamf — sin servidor de licencias"
-    ],
-    "author": { "@id": "https://solutions.futurion.es/#organization" },
-    "offers": {
-      "@type": "Offer",
-      "priceSpecification": {
-        "@type": "PriceSpecification",
-        "minPrice": "0",
-        "priceCurrency": "EUR"
-      },
-      "availability": "https://schema.org/InStock"
-    }
-  }} />
+  <JsonLd
+    schema={{
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: 'TrustPrompt',
+      applicationCategory: 'SecurityApplication',
+      operatingSystem: 'Chrome/Edge (Chromium) 124+',
+      description:
+        'Extensión para Chrome y Edge que detecta y redacta datos personales dentro del navegador, antes de que el prompt se envíe a un LLM público. La detección se ejecuta en la propia máquina del usuario: el modelo viaja en la extensión y las cargas remotas de modelo están deshabilitadas, por lo que no existe ningún servidor de detección. Funciona en nueve aplicaciones web de LLM, combina 40 reglas regex validadas por suma de comprobación con un modelo NER en el dispositivo de 560M de parámetros y, por defecto, falla en seguro.',
+      url: 'https://solutions.futurion.es/es/productos/trustprompt/',
+      inLanguage: 'es',
+      featureList: [
+        'La detección se ejecuta en tu propia máquina; no existe servidor de detección',
+        'Redacta los datos personales antes de enviar el prompt al LLM',
+        'Funciona en nueve aplicaciones web de LLM (ChatGPT, Claude, Gemini, Perplexity, Mistral, Grok, DeepSeek, OpenEvidence)',
+        '40 reglas regex validadas por suma de comprobación más un modelo NER en el dispositivo de 560M de parámetros (54 tipos de entidad)',
+        'Falla en seguro por defecto: si una fase da error, el envío permanece bloqueado',
+        'Sin telemetría; la única llamada saliente es un webhook de auditoría opcional, solo con metadatos',
+        'Permisos mínimos (offscreen, storage, activeTab); el mapa de marcadores se mantiene solo en memoria',
+        'Gestión centralizada por política mediante directiva de grupo, Microsoft Intune o Jamf — sin servidor de licencias',
+      ],
+      author: { '@id': 'https://solutions.futurion.es/#organization' },
+      offers: [
+        {
+          '@type': 'Offer',
+          name: 'Individual',
+          price: '0',
+          priceCurrency: 'EUR',
+          availability: 'https://schema.org/InStock',
+          url: 'https://solutions.futurion.es/es/productos/trustprompt-descarga/',
+        },
+        {
+          '@type': 'Offer',
+          name: 'Equipo pequeño (hasta 25 usuarios)',
+          price: '990.00',
+          priceCurrency: 'EUR',
+          availability: 'https://schema.org/InStock',
+          url: buyUrl('trustprompt-small-team'),
+          description: 'Licencia de un año, hasta 25 usuarios, más 21% de IVA',
+        },
+        {
+          '@type': 'Offer',
+          name: 'Empresa (hasta 100 usuarios)',
+          price: '2900.00',
+          priceCurrency: 'EUR',
+          availability: 'https://schema.org/InStock',
+          url: buyUrl('trustprompt-business'),
+          description: 'Licencia de un año, hasta 100 usuarios, más 21% de IVA',
+        },
+        {
+          '@type': 'Offer',
+          name: 'Crecimiento (hasta 250 usuarios)',
+          price: '5900.00',
+          priceCurrency: 'EUR',
+          availability: 'https://schema.org/InStock',
+          url: buyUrl('trustprompt-growth'),
+          description: 'Licencia de un año, hasta 250 usuarios, más 21% de IVA',
+        },
+      ],
+    }}
+  />
 
   <!-- Hero -->
 
@@ -81,23 +120,26 @@ const metadata = {
         class="mx-auto mb-4 object-contain drop-shadow-lg"
       />
       TrustPrompt<br />
-      <span class="text-accent dark:text-white highlight">Redacta datos personales en el navegador, antes de enviar el prompt</span>
+      <span class="text-accent dark:text-white highlight"
+        >Redacta datos personales en el navegador, antes de enviar el prompt</span
+      >
     </Fragment>
 
     <Fragment slot="subtitle">
       <span class="hidden sm:inline">
-        TrustPrompt es una extensión para Chrome y Edge que detecta y redacta datos personales dentro
-        del navegador, antes de que el prompt se envíe a un LLM público. Funciona en nueve
-        aplicaciones web de LLM y sustituye cada valor detectado por un marcador con tipo —
-        <span class="font-mono text-sm">[FIRST_NAME_1]</span>, <span class="font-mono text-sm">[IBAN_2]</span> —
-        en el cuadro de redacción, y luego deja que el mensaje se envíe. El texto que escribes se
-        analiza en tu propia máquina y nunca se transmite a ningún sitio para detectarlo: el modelo
-        viaja en la extensión y las cargas remotas de modelo están deshabilitadas, por lo que no
-        existe ningún servidor de detección.
+        TrustPrompt es una extensión para Chrome y Edge que detecta y redacta datos personales dentro del navegador,
+        antes de que el prompt se envíe a un LLM público. Funciona en nueve aplicaciones web de LLM y sustituye cada
+        valor detectado por un marcador con tipo —
+        <span class="font-mono text-sm">[FIRST_NAME_1]</span>, <span class="font-mono text-sm">[IBAN_2]</span> — en el cuadro
+        de redacción, y luego deja que el mensaje se envíe. El texto que escribes se analiza en tu propia máquina y nunca
+        se transmite a ningún sitio para detectarlo: el modelo viaja en la extensión y las cargas remotas de modelo están
+        deshabilitadas, por lo que no existe ningún servidor de detección.
       </span>
-      <span class="block mb-1 sm:hidden font-bold text-green-700">La detección se ejecuta en tu máquina. Los datos personales se redactan antes de enviar el prompt.</span>
-      Diseñada para las clínicas y los despachos donde un prompt pegado puede contener datos del
-      paciente o del cliente sujetos al RGPD.
+      <span class="block mb-1 sm:hidden font-bold text-green-700"
+        >La detección se ejecuta en tu máquina. Los datos personales se redactan antes de enviar el prompt.</span
+      >
+      Diseñada para las clínicas y los despachos donde un prompt pegado puede contener datos del paciente o del cliente sujetos
+      al RGPD.
     </Fragment>
   </Hero>
 
@@ -106,7 +148,10 @@ const metadata = {
   <Brands
     title="Funciona en los sitios de LLM que ya usas"
     subtitle="TrustPrompt funciona en nueve aplicaciones web de LLM. Además de los logotipos mostrados, también cubre Perplexity, Grok en X y OpenEvidence — la redacción ocurre en el cuadro de redacción de cada sitio antes de enviar el mensaje."
-    classes={{ items: 'flex-nowrap overflow-x-auto gap-x-6 sm:gap-x-8 lg:gap-x-10 [&_img]:!h-12 [&_img]:!w-auto [&_img]:!object-contain' }}
+    classes={{
+      items:
+        'flex-nowrap overflow-x-auto gap-x-6 sm:gap-x-8 lg:gap-x-10 [&_img]:!h-12 [&_img]:!w-auto [&_img]:!object-contain',
+    }}
     images={[
       { src: '~/assets/images/openai.png', alt: 'ChatGPT' },
       { src: '~/assets/images/claude-color.png', alt: 'Claude' },
@@ -198,11 +243,11 @@ const metadata = {
     ]}
   >
     <Fragment slot="content">
-      La PII nunca sale de la máquina para la detección — no es una promesa operativa que dependa de
-      la configuración, es cómo está construida la extensión. Donde sí se ejecuta la detección, dos
-      detectores trabajan juntos: los identificadores estructurados tienen una forma que una suma de
-      comprobación puede confirmar, mientras que el nombre de un paciente o una cláusula que nombra a
-      una contraparte, no — así que TrustPrompt usa cada método donde es más fuerte.
+      La PII nunca sale de la máquina para la detección — no es una promesa operativa que dependa de la configuración,
+      es cómo está construida la extensión. Donde sí se ejecuta la detección, dos detectores trabajan juntos: los
+      identificadores estructurados tienen una forma que una suma de comprobación puede confirmar, mientras que el
+      nombre de un paciente o una cláusula que nombra a una contraparte, no — así que TrustPrompt usa cada método donde
+      es más fuerte.
     </Fragment>
   </Content>
 
@@ -229,7 +274,10 @@ const metadata = {
           'La vía rápida necesita una GPU que exponga shader-f16 con alrededor de 512 MB de tamaño máximo de búfer. En máquinas sin ella, la vía WASM mantiene la detección totalmente local a menor velocidad — no recurre a un servidor.',
       },
     ]}
-    image={{ src: '~/assets/images/server-network.jpg', alt: 'Inferencia del modelo en el dispositivo mediante WebGPU' }}
+    image={{
+      src: '~/assets/images/server-network.jpg',
+      alt: 'Inferencia del modelo en el dispositivo mediante WebGPU',
+    }}
   />
 
   <!-- Cómo funciona al enviar -->
@@ -307,6 +355,7 @@ const metadata = {
         subtitle: 'Hasta 25 usuarios',
         price: 990,
         period: 'al año',
+        note: paymentsEnabled ? '+ 21% IVA al pagar' : undefined,
         items: [
           { description: 'Todo lo de Individual' },
           { description: 'Ajustes de sensibilidad compartidos' },
@@ -315,8 +364,8 @@ const metadata = {
           { description: 'Despliegue más simple que un MDM completo' },
         ],
         callToAction: {
-          text: 'Contactar',
-          href: '/es/contacto/',
+          text: buyText,
+          href: buyHref('trustprompt-small-team'),
         },
         hasRibbon: true,
         ribbonTitle: 'más popular',
@@ -326,6 +375,7 @@ const metadata = {
         subtitle: 'Hasta 100 usuarios',
         price: 2900,
         period: 'al año',
+        note: paymentsEnabled ? '+ 21% IVA al pagar' : undefined,
         items: [
           { description: 'Todo lo de Equipo pequeño' },
           { description: 'Configuración compartida en todo el equipo' },
@@ -333,8 +383,8 @@ const metadata = {
           { description: 'Soporte prioritario' },
         ],
         callToAction: {
-          text: 'Contactar',
-          href: '/es/contacto/',
+          text: buyText,
+          href: buyHref('trustprompt-business'),
         },
       },
       {
@@ -342,6 +392,7 @@ const metadata = {
         subtitle: 'Hasta 250 usuarios',
         price: 5900,
         period: 'al año',
+        note: paymentsEnabled ? '+ 21% IVA al pagar' : undefined,
         items: [
           { description: 'Todo lo de Empresa' },
           { description: 'Despliegue para equipos mayores' },
@@ -349,8 +400,8 @@ const metadata = {
           { description: 'Una vía hacia la política gestionada de forma centralizada' },
         ],
         callToAction: {
-          text: 'Contactar',
-          href: '/es/contacto/',
+          text: buyText,
+          href: buyHref('trustprompt-growth'),
         },
       },
     ]}

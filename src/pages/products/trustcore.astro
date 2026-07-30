@@ -14,6 +14,14 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import imgTrustCore from '~/assets/images/trustcore.png';
 import imgRag from '~/assets/images/rag.png';
 
+// Checkout stays disabled (CTAs keep their current /contact/ hrefs) until
+// PUBLIC_PAYMENTS_ENABLED is the literal string "true" — a build-time
+// constant on this static site (tmp/payments.md §7.4).
+const paymentsEnabled = import.meta.env.PUBLIC_PAYMENTS_ENABLED === 'true';
+const buyHref = (sku: string) => (paymentsEnabled ? `/checkout/?sku=${sku}` : '/contact/');
+const buyText = paymentsEnabled ? 'Buy Now' : 'Contact Us';
+const buyUrl = (sku: string) => `https://solutions.futurion.es${buyHref(sku)}`;
+
 const metadata = {
   title: 'TrustCore — On-Device Document Q&A',
   description:
@@ -25,37 +33,68 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <JsonLd schema={{
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "TrustCore",
-    "applicationCategory": "BusinessApplication",
-    "operatingSystem": "Chromium browser (Chrome, Edge, Brave) 124+",
-    "description": "Browser extension, with an optional local companion, that answers questions about your own documents on your own hardware. Graph RAG retrieval, verified citations, cross-document conflict detection, and local embeddings — with no hosted backend and no document egress. Built for legal, compliance, and investigation work.",
-    "url": "https://solutions.futurion.es/products/trustcore/",
-    "inLanguage": "en",
-    "featureList": [
-      "Runs in your browser; no hosted backend",
-      "Documents and questions stay on your machine",
-      "Graph RAG retrieval (vector + BM25 + graph expansion)",
-      "Every answer tied to a checked source passage",
-      "Cross-document conflict detection and proof paths",
-      "Local embeddings (bge-m3) via WebGPU, with CPU fallback",
-      "Connect your own on-prem or cloud compute (OpenAI-compatible)",
-      "See and audit the entity graph as an interactive 3D map (WebGPU)",
-      "Export the graph to an Obsidian-compatible vault"
-    ],
-    "author": { "@id": "https://solutions.futurion.es/#organization" },
-    "offers": {
-      "@type": "Offer",
-      "priceSpecification": {
-        "@type": "PriceSpecification",
-        "minPrice": "0",
-        "priceCurrency": "EUR"
-      },
-      "availability": "https://schema.org/InStock"
-    }
-  }} />
+  <JsonLd
+    schema={{
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: 'TrustCore',
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Chromium browser (Chrome, Edge, Brave) 124+',
+      description:
+        'Browser extension, with an optional local companion, that answers questions about your own documents on your own hardware. Graph RAG retrieval, verified citations, cross-document conflict detection, and local embeddings — with no hosted backend and no document egress. Built for legal, compliance, and investigation work.',
+      url: 'https://solutions.futurion.es/products/trustcore/',
+      inLanguage: 'en',
+      featureList: [
+        'Runs in your browser; no hosted backend',
+        'Documents and questions stay on your machine',
+        'Graph RAG retrieval (vector + BM25 + graph expansion)',
+        'Every answer tied to a checked source passage',
+        'Cross-document conflict detection and proof paths',
+        'Local embeddings (bge-m3) via WebGPU, with CPU fallback',
+        'Connect your own on-prem or cloud compute (OpenAI-compatible)',
+        'See and audit the entity graph as an interactive 3D map (WebGPU)',
+        'Export the graph to an Obsidian-compatible vault',
+      ],
+      author: { '@id': 'https://solutions.futurion.es/#organization' },
+      offers: [
+        {
+          '@type': 'Offer',
+          name: 'Free (single user, fully local)',
+          price: '0',
+          priceCurrency: 'EUR',
+          availability: 'https://schema.org/InStock',
+          url: 'https://solutions.futurion.es/contact/',
+        },
+        {
+          '@type': 'Offer',
+          name: 'Starter (1 seat)',
+          price: '348.00',
+          priceCurrency: 'EUR',
+          availability: 'https://schema.org/InStock',
+          url: buyUrl('trustcore-starter-1-seat'),
+          description: 'One-year licence, 1 seat, plus 21% VAT',
+        },
+        {
+          '@type': 'Offer',
+          name: 'Team (10 seats)',
+          price: '2880.00',
+          priceCurrency: 'EUR',
+          availability: 'https://schema.org/InStock',
+          url: buyUrl('trustcore-team-10-seats'),
+          description: 'One-year licence, 10 seats, plus 21% VAT',
+        },
+        {
+          '@type': 'Offer',
+          name: 'Business (50 seats)',
+          price: '11400.00',
+          priceCurrency: 'EUR',
+          availability: 'https://schema.org/InStock',
+          url: buyUrl('trustcore-business-50-seats'),
+          description: 'One-year licence, 50 seats, plus 21% VAT',
+        },
+      ],
+    }}
+  />
 
   <!-- Hero -->
 
@@ -83,20 +122,24 @@ const metadata = {
         class="mx-auto mb-4 object-contain drop-shadow-lg"
       />
       TrustCore<br />
-      <span class="text-accent dark:text-white highlight">Answer Questions About Your Own Documents, On Your Own Hardware</span>
+      <span class="text-accent dark:text-white highlight"
+        >Answer Questions About Your Own Documents, On Your Own Hardware</span
+      >
     </Fragment>
 
     <Fragment slot="subtitle">
       <span class="hidden sm:inline">
-        TrustCore is a browser extension, with an optional local companion, that answers questions
-        about the documents you add to it. You ask in TrustCore's own panel on the chat page you
-        already use — ChatGPT, Gemini, Claude, DeepSeek, Perplexity, or a local OpenWebUI — and the
-        answer comes from your indexed documents, computed on your machine. The question and the
-        documents are never sent to the chat provider, and there is no TrustCore server behind it.
+        TrustCore is a browser extension, with an optional local companion, that answers questions about the documents
+        you add to it. You ask in TrustCore's own panel on the chat page you already use — ChatGPT, Gemini, Claude,
+        DeepSeek, Perplexity, or a local OpenWebUI — and the answer comes from your indexed documents, computed on your
+        machine. The question and the documents are never sent to the chat provider, and there is no TrustCore server
+        behind it.
       </span>
-      <span class="block mb-1 sm:hidden font-bold text-green-700">Your documents stay on your machine. Every answer cites its source.</span>
-      Built for legal, compliance, and investigation work, where the documents are often privileged,
-      confidential, or personal data under the GDPR.
+      <span class="block mb-1 sm:hidden font-bold text-green-700"
+        >Your documents stay on your machine. Every answer cites its source.</span
+      >
+      Built for legal, compliance, and investigation work, where the documents are often privileged, confidential, or personal
+      data under the GDPR.
     </Fragment>
   </Hero>
 
@@ -119,7 +162,7 @@ const metadata = {
       {
         title: 'Runs Where You Already Work',
         description:
-          'A panel on ChatGPT, Gemini, Claude, DeepSeek, Perplexity, or a local OpenWebUI. The chat site keeps working as normal; TrustCore does not reroute the page\'s own input box.',
+          "A panel on ChatGPT, Gemini, Claude, DeepSeek, Perplexity, or a local OpenWebUI. The chat site keeps working as normal; TrustCore does not reroute the page's own input box.",
         icon: 'tabler:browser',
       },
       {
@@ -193,7 +236,7 @@ const metadata = {
       {
         title: 'You choose what stays local',
         description:
-          'Questions asked in TrustCore\'s panel are answered on your machine. Anything you type into the chat site\'s own box still goes to that site as usual. The boundary is explicit and under your control.',
+          "Questions asked in TrustCore's panel are answered on your machine. Anything you type into the chat site's own box still goes to that site as usual. The boundary is explicit and under your control.",
       },
       {
         title: 'OpenAI-compatible interface',
@@ -216,10 +259,10 @@ const metadata = {
       <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
         Using It Does Not Create a New Place Where the Documents Live
       </h3>
-      For privileged, confidential, or GDPR-regulated material — and work under professional secrecy
-      such as <span class="italic">secreto profesional</span> in Spain or solicitor–client privilege
-      in Ireland — uploading documents to a shared third-party service can itself be the problem. And
-      when you connect external compute for heavier models, the rest of the system behaves the same —
+      For privileged, confidential, or GDPR-regulated material — and work under professional secrecy such as <span
+        class="italic">secreto profesional</span
+      > in Spain or solicitor–client privilege in Ireland — uploading documents to a shared third-party service can itself
+      be the problem. And when you connect external compute for heavier models, the rest of the system behaves the same —
       only where the numeric work runs changes; the only processor involved is the endpoint you control.
     </Fragment>
   </Content>
@@ -250,7 +293,7 @@ const metadata = {
       {
         title: 'Proof paths',
         description:
-          'A symbolic reasoner produces an explicit chain of relationships from the question\'s subject to the supporting facts, so a person can see why the answer follows.',
+          "A symbolic reasoner produces an explicit chain of relationships from the question's subject to the supporting facts, so a person can see why the answer follows.",
       },
       {
         title: 'Citation admissibility check',
@@ -270,10 +313,9 @@ const metadata = {
         alt="Graph RAG retrieval over document entities"
         class="mx-auto mb-6 h-20 w-auto object-contain"
       />
-      TrustCore builds a graph of the people, organizations, dates, amounts, and references in your
-      documents and reasons over it, so connections invisible in any single file become queryable —
-      and for work where a wrong or unsupported statement has consequences, the evidence arrives
-      attached and already checked.
+      TrustCore builds a graph of the people, organizations, dates, amounts, and references in your documents and reasons
+      over it, so connections invisible in any single file become queryable — and for work where a wrong or unsupported statement
+      has consequences, the evidence arrives attached and already checked.
     </Fragment>
   </Content>
 
@@ -308,9 +350,9 @@ const metadata = {
       <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
         Built Read-Only From On-Device Data, Drawn on Your GPU
       </h3>
-      The map renders through WebGPU, with WebGL and a 2D view as fallbacks. Nothing is sent anywhere
-      and building it makes no model or companion call. Very large graphs are capped at the
-      most-connected nodes, and the map states when it has done so.
+      The map renders through WebGPU, with WebGL and a 2D view as fallbacks. Nothing is sent anywhere and building it makes
+      no model or companion call. Very large graphs are capped at the most-connected nodes, and the map states when it has
+      done so.
     </Fragment>
   </Content>
 
@@ -319,8 +361,8 @@ const metadata = {
   <Prices
     id="pricing"
     tagline="Pricing"
-    title="Per-Seat Plans for Teams of Every Size"
-    subtitle="Start fully local at no cost. Paid tiers add the capability an organization with its own infrastructure cannot get for free: connecting your own compute. Prices are ex-VAT, per seat, billed annually."
+    title="Fixed Annual Packages for Teams of Every Size"
+    subtitle="Start fully local at no cost. Paid tiers add the capability an organization with its own infrastructure cannot get for free: connecting your own compute. One-year licences for 1, 10, or 50 seats — prices are ex-VAT."
     prices={[
       {
         title: 'Free',
@@ -341,9 +383,10 @@ const metadata = {
       },
       {
         title: 'Starter',
-        subtitle: 'Micro organizations (1–9 seats)',
-        price: 29,
-        period: 'per seat / month',
+        subtitle: '1 seat',
+        price: 348,
+        period: 'per year',
+        note: paymentsEnabled ? '+ 21% VAT at checkout' : undefined,
         items: [
           { description: 'Everything in Free' },
           { description: 'Connect external compute — on-prem or cloud' },
@@ -352,17 +395,18 @@ const metadata = {
           { description: 'Unlimited local projects' },
         ],
         callToAction: {
-          text: 'Contact Us',
-          href: '/contact/',
+          text: buyText,
+          href: buyHref('trustcore-starter-1-seat'),
         },
         hasRibbon: true,
         ribbonTitle: 'most popular',
       },
       {
         title: 'Team',
-        subtitle: 'Small organizations (10–49 seats)',
-        price: 24,
-        period: 'per seat / month',
+        subtitle: '10 seats',
+        price: 2880,
+        period: 'per year',
+        note: paymentsEnabled ? '+ 21% VAT at checkout' : undefined,
         items: [
           { description: 'Everything in Starter' },
           { description: 'System Prompt per project' },
@@ -371,15 +415,16 @@ const metadata = {
           { description: 'Priority support' },
         ],
         callToAction: {
-          text: 'Contact Us',
-          href: '/contact/',
+          text: buyText,
+          href: buyHref('trustcore-team-10-seats'),
         },
       },
       {
         title: 'Business',
-        subtitle: 'Medium organizations (50–249 seats)',
-        price: 19,
-        period: 'per seat / month',
+        subtitle: '50 seats',
+        price: 11400,
+        period: 'per year',
+        note: paymentsEnabled ? '+ 21% VAT at checkout' : undefined,
         items: [
           { description: 'Everything in Team' },
           { description: 'Admin policy controls — force endpoints, lock model' },
@@ -387,8 +432,8 @@ const metadata = {
           { description: 'SLA support' },
         ],
         callToAction: {
-          text: 'Contact Us',
-          href: '/contact/',
+          text: buyText,
+          href: buyHref('trustcore-business-50-seats'),
         },
       },
     ]}
@@ -410,7 +455,7 @@ const metadata = {
       {
         title: 'Which chat sites does TrustCore work with?',
         description:
-          'TrustCore opens its own panel on ChatGPT, Gemini, Claude, DeepSeek, Perplexity, and a local OpenWebUI. It answers from your indexed documents in that panel. The chat site\'s own input box keeps working as normal — TrustCore does not intercept or reroute it.',
+          "TrustCore opens its own panel on ChatGPT, Gemini, Claude, DeepSeek, Perplexity, and a local OpenWebUI. It answers from your indexed documents in that panel. The chat site's own input box keeps working as normal — TrustCore does not intercept or reroute it.",
       },
       {
         title: 'Do I need a GPU?',
@@ -430,7 +475,7 @@ const metadata = {
       {
         title: 'Can I see and check the graph behind an answer?',
         description:
-          'Yes. The project\'s entity graph opens as an interactive 3D map from the panel. Selecting a node opens the exact passage and page it came from, so you audit the evidence by eye. The map renders on your own GPU through WebGPU with nothing sent out. You can mark a clause superseded by hand — that correction survives re-indexing — and export the whole graph as an Obsidian-compatible vault.',
+          "Yes. The project's entity graph opens as an interactive 3D map from the panel. Selecting a node opens the exact passage and page it came from, so you audit the evidence by eye. The map renders on your own GPU through WebGPU with nothing sent out. You can mark a clause superseded by hand — that correction survives re-indexing — and export the whole graph as an Obsidian-compatible vault.",
       },
       {
         title: 'What is the difference between Free and the paid tiers?',

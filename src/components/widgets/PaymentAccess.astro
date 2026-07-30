@@ -1,0 +1,178 @@
+---
+import Headline from '~/components/ui/Headline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import type { PaymentAccessGate as Props } from '~/types';
+
+const accessApiUrl = import.meta.env.PUBLIC_PAYMENT_ACCESS_API_URL;
+
+const {
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  tagline = await Astro.slots.render('tagline'),
+
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+
+const lang = Astro.url.pathname.startsWith('/es') ? 'es' : 'en';
+const contactHref = lang === 'es' ? '/es/contacto/' : '/contact/';
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+  <Headline title={title} subtitle={subtitle} tagline={tagline} />
+
+  <div
+    id="payment-access"
+    data-access-api-url={accessApiUrl || undefined}
+    data-lang={lang}
+    class="flex flex-col max-w-xl mx-auto rounded-lg backdrop-blur border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900 shadow p-4 sm:p-6 lg:p-8 w-full text-center"
+  >
+    <div id="access-state-loading">
+      <p class="text-muted">
+        {lang === 'es' ? 'Comprobando tu enlace de acceso...' : 'Checking your access link...'}
+      </p>
+    </div>
+
+    <div id="access-state-missing" class="hidden">
+      <p class="font-medium text-gray-900 dark:text-white">
+        {lang === 'es' ? 'No hemos encontrado ningún enlace de acceso.' : "We couldn't find an access link here."}
+      </p>
+      <p class="mt-2 text-sm text-muted">
+        {
+          lang === 'es'
+            ? 'Utiliza el enlace del correo electrónico que recibiste tras tu compra.'
+            : 'Please use the link from the email you received after your purchase.'
+        }
+      </p>
+    </div>
+
+    <div id="access-state-error" class="hidden">
+      <p class="font-medium text-gray-900 dark:text-white" id="access-error-message"></p>
+      <p class="mt-2 text-sm text-muted">
+        {
+          lang === 'es' ? (
+            <Fragment>
+              ¿Necesitas ayuda?{' '}
+              <a class="underline" href={contactHref}>
+                Contáctanos
+              </a>
+              .
+            </Fragment>
+          ) : (
+            <Fragment>
+              Need help?{' '}
+              <a class="underline" href={contactHref}>
+                Contact us
+              </a>
+              .
+            </Fragment>
+          )
+        }
+      </p>
+    </div>
+
+    <div id="access-state-success" class="hidden">
+      <svg class="w-16 h-16 mx-auto text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+      </svg>
+      <p class="font-medium text-gray-900 dark:text-white">
+        {lang === 'es' ? 'Tu descarga está empezando.' : 'Your download is starting.'}
+      </p>
+      <p class="mt-2 font-mono text-sm break-all text-gray-700 dark:text-gray-300" id="access-filename"></p>
+    </div>
+  </div>
+</WidgetWrapper>
+
+<script>
+  const i18n = {
+    en: {
+      expired: 'This access link has expired or is invalid.',
+      notDownloadable: 'This link does not grant a download.',
+      notPaid: 'We could not confirm payment for this order yet.',
+      unavailable: 'The download is temporarily unavailable — we have been notified.',
+      rateLimited: 'Too many requests. Please try again in a little while.',
+      error: 'Something went wrong. Please try again later.',
+    },
+    es: {
+      expired: 'Este enlace de acceso ha caducado o no es válido.',
+      notDownloadable: 'Este enlace no da acceso a una descarga.',
+      notPaid: 'Todavía no hemos podido confirmar el pago de este pedido.',
+      unavailable: 'La descarga no está disponible temporalmente — ya hemos sido notificados.',
+      rateLimited: 'Demasiadas solicitudes. Por favor, inténtalo de nuevo en un momento.',
+      error: 'Algo salió mal. Por favor, inténtalo de nuevo más tarde.',
+    },
+  };
+
+  type MessageKey = keyof (typeof i18n)['en'];
+
+  const CODE_MESSAGES: Record<string, MessageKey> = {
+    token_invalid_or_expired: 'expired',
+    not_downloadable: 'notDownloadable',
+    invoice_not_paid: 'notPaid',
+    download_unavailable: 'unavailable',
+    rate_limited: 'rateLimited',
+  };
+
+  function initPaymentAccess() {
+    const container = document.querySelector<HTMLDivElement>('#payment-access');
+    if (!container) return;
+
+    // Prevent double-binding after View Transitions
+    if (container.dataset.bound === 'true') return;
+    container.dataset.bound = 'true';
+
+    const apiUrl = container.dataset.accessApiUrl;
+    const lang = (container.dataset.lang || 'en') as 'en' | 'es';
+    const t = i18n[lang] || i18n.en;
+
+    const loading = container.querySelector<HTMLDivElement>('#access-state-loading');
+    const missing = container.querySelector<HTMLDivElement>('#access-state-missing');
+    const errorState = container.querySelector<HTMLDivElement>('#access-state-error');
+    const success = container.querySelector<HTMLDivElement>('#access-state-success');
+
+    function showState(state: HTMLDivElement | null) {
+      [loading, missing, errorState, success].forEach((el) => el?.classList.add('hidden'));
+      state?.classList.remove('hidden');
+    }
+
+    function showError(key: MessageKey) {
+      const messageEl = container?.querySelector<HTMLParagraphElement>('#access-error-message');
+      if (messageEl) messageEl.textContent = t[key];
+      showState(errorState);
+    }
+
+    // The token lives in the URL fragment (never sent to the server in a
+    // Referer header or access log) — read it client-side only.
+    const match = /(?:^|[#&])token=([^&]+)/.exec(window.location.hash);
+    const token = match ? decodeURIComponent(match[1]) : null;
+
+    if (!token || !apiUrl) {
+      showState(missing);
+      return;
+    }
+
+    fetch(apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token }),
+    })
+      .then(async (response) => {
+        const data = await response.json().catch(() => ({}));
+
+        if (response.ok && data.url) {
+          const filenameEl = container.querySelector('#access-filename');
+          if (filenameEl) filenameEl.textContent = String(data.filename || '');
+          showState(success);
+          window.location.assign(data.url);
+          return;
+        }
+
+        showError(CODE_MESSAGES[data.code] || 'error');
+      })
+      .catch(() => showError('error'));
+  }
+
+  document.addEventListener('astro:page-load', initPaymentAccess);
+</script>

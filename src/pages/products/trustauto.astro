@@ -12,6 +12,17 @@ import TrustAutoGraph from '~/components/widgets/TrustAutoGraph.astro';
 
 import imgTrustAuto from '~/assets/images/trustauto.png';
 
+// Checkout stays disabled (CTAs keep their current /automation-roadmap/
+// hrefs) until PUBLIC_PAYMENTS_ENABLED is the literal string "true" — a
+// build-time constant on this static site (tmp/payments.md §7.4). The
+// Quick-Win and Comprehensive tiers are deposits credited against the final
+// project invoice, not flat project prices — labelled as such regardless of
+// whether checkout is live yet.
+const paymentsEnabled = import.meta.env.PUBLIC_PAYMENTS_ENABLED === 'true';
+const buyHref = (sku: string) => (paymentsEnabled ? `/checkout/?sku=${sku}` : '/automation-roadmap/');
+const buyText = paymentsEnabled ? 'Pay Deposit' : 'Start with Automation Roadmap';
+const buyUrl = (sku: string) => `https://solutions.futurion.es${buyHref(sku)}`;
+
 const metadata = {
   title: 'TrustAuto — On-Prem Process Automation',
   description:
@@ -74,27 +85,23 @@ const pricingSchema = {
     },
     {
       '@type': 'Offer',
-      name: 'Quick-Win Implementation',
+      name: 'Quick-Win Implementation — deposit',
       description:
-        '1-2 high-impact automations delivered in 2-4 weeks. On-prem or hybrid architecture with GDPR compliance controls.',
-      priceSpecification: {
-        '@type': 'PriceSpecification',
-        minPrice: '1500',
-        priceCurrency: 'EUR',
-      },
+        '1-2 high-impact automations delivered in 2-4 weeks. On-prem or hybrid architecture with GDPR compliance controls. €1,500 deposit plus 21% VAT, credited against the final project invoice.',
+      price: '1500.00',
+      priceCurrency: 'EUR',
       availability: 'https://schema.org/InStock',
+      url: buyUrl('trustauto-quick-win-deposit'),
     },
     {
       '@type': 'Offer',
-      name: 'Comprehensive Package',
+      name: 'Comprehensive Package — deposit',
       description:
-        'Full practice transformation over 6-12 weeks. Multiple workflow automations with integrated compliance framework and staff training.',
-      priceSpecification: {
-        '@type': 'PriceSpecification',
-        minPrice: '5000',
-        priceCurrency: 'EUR',
-      },
+        'Full practice transformation over 6-12 weeks. Multiple workflow automations with integrated compliance framework and staff training. €5,000 deposit plus 21% VAT, credited against the final project invoice.',
+      price: '5000.00',
+      priceCurrency: 'EUR',
       availability: 'https://schema.org/InStock',
+      url: buyUrl('trustauto-comprehensive-deposit'),
     },
     {
       '@type': 'Offer',
@@ -283,12 +290,11 @@ const pricingSchema = {
       <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
         The same architecture either way
       </h3>
-      Whichever engine fits, what surrounds it does not change: scoped access, logged actions, human checkpoints, and
-      your systems left in place. For notifications, either engine can deliver through an on-prem <a
+      Whichever engine fits, what surrounds it does not change: scoped access, logged actions, human checkpoints, and your
+      systems left in place. For notifications, either engine can deliver through an on-prem <a
         href="/smseagle/"
         class="underline">SMSEagle SMS gateway</a
-      > — SMS or WhatsApp with automatic fallback — so recipient phone numbers never pass through a cloud SMS
-      provider.
+      > — SMS or WhatsApp with automatic fallback — so recipient phone numbers never pass through a cloud SMS provider.
     </Fragment>
     <Fragment slot="image">
       <TrustAutoGraph />
@@ -326,7 +332,8 @@ const pricingSchema = {
         title: 'Quick-Win Implementation',
         subtitle: '1-2 high-impact automations',
         price: '1,500',
-        period: 'starting from',
+        period: paymentsEnabled ? 'deposit' : 'starting from',
+        note: '+ 21% VAT, credited against the final project invoice',
         items: [
           { description: '1-2 targeted automations' },
           { description: '2-4 week delivery' },
@@ -336,8 +343,8 @@ const pricingSchema = {
           { description: '30 days post-launch support' },
         ],
         callToAction: {
-          text: 'Start with Automation Roadmap',
-          href: '/automation-roadmap/',
+          text: buyText,
+          href: buyHref('trustauto-quick-win-deposit'),
         },
         hasRibbon: true,
         ribbonTitle: 'most popular',
@@ -346,7 +353,8 @@ const pricingSchema = {
         title: 'Comprehensive Package',
         subtitle: 'Full practice transformation',
         price: '5,000',
-        period: 'starting from',
+        period: paymentsEnabled ? 'deposit' : 'starting from',
+        note: '+ 21% VAT, credited against the final project invoice',
         items: [
           { description: 'Multiple workflow automations' },
           { description: '6-12 week delivery' },
@@ -356,8 +364,8 @@ const pricingSchema = {
           { description: '90 days post-launch support' },
         ],
         callToAction: {
-          text: 'Start with Automation Roadmap',
-          href: '/automation-roadmap/',
+          text: buyText,
+          href: buyHref('trustauto-comprehensive-deposit'),
         },
       },
       {

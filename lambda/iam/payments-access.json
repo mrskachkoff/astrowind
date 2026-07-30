@@ -1,0 +1,32 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ReadPaymentsAndCloudFrontSecrets",
+      "Effect": "Allow",
+      "Action": "ssm:GetParameter",
+      "Resource": [
+        "arn:aws:ssm:eu-west-3:211125757125:parameter/futurion/payments/qonto-auth",
+        "arn:aws:ssm:eu-west-3:211125757125:parameter/futurion/payments/entitlement-secret",
+        "arn:aws:ssm:eu-west-3:211125757125:parameter/futurion/trustprompt/cf-private-key"
+      ]
+    },
+    {
+      "Sid": "DecryptSecrets",
+      "Effect": "Allow",
+      "Action": "kms:Decrypt",
+      "Resource": "arn:aws:kms:eu-west-3:211125757125:alias/aws/ssm"
+    },
+    {
+      "Sid": "ListOnlyPaidArtifactPrefixesPLACEHOLDERUpdateBeforeDeploy",
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": "arn:aws:s3:::es-futurion-trustprompt",
+      "Condition": {
+        "StringLike": {
+          "s3:prefix": ["PENDING-OWNER-SUPPLIED-PREFIX-tmp-payments-md-section-12/*"]
+        }
+      }
+    }
+  ]
+}

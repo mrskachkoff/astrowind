@@ -3,7 +3,7 @@ title: 'Política de Privacidad'
 layout: '~/layouts/MarkdownLayout.astro'
 ---
 
-_Última actualización_: 22 de julio de 2026
+_Última actualización_: 30 de julio de 2026
 
 ## 1. Introducción y Alcance
 
@@ -85,7 +85,21 @@ correspondiente (LinkedIn, Meta) puede compartir con nosotros datos agregados de
 conversión, sujetos a las propias condiciones de privacidad de dicha plataforma y a la configuración
 de consentimiento que usted tenga en ella.
 
-### 4.4 Categorías especiales de datos
+### 4.4 Datos que usted nos proporciona al comprar en línea
+
+Cuando compra una licencia de TrustPrompt o TrustCore, o abona un depósito de TrustAuto, a través de
+nuestra pasarela de pago en línea, recopilamos:
+
+- Nombre de la empresa y número de identificación fiscal (NIF/CIF)
+- Dirección de facturación
+- Nombre de contacto y dirección de correo electrónico
+- El producto y el plan adquiridos, y el importe abonado
+
+No construimos una base de datos de clientes propia para estas compras: estos datos se envían
+directamente a nuestro proveedor de facturación, Qonto, para generar su factura y procesar el pago —
+consulte el [§7](#7-destinatarios-y-encargados-del-tratamiento) y el [§9](#9-conservación-de-datos).
+
+### 4.5 Categorías especiales de datos
 
 No pretendemos recopilar categorías especiales de datos personales (datos de salud, datos biométricos,
 etc.) a través de este sitio web. Le rogamos que no incluya este tipo de datos al enviar un formulario
@@ -93,14 +107,16 @@ de contacto, salvo que sea estrictamente necesario y directamente relevante para
 
 ## 5. Finalidades y Bases Legales del Tratamiento
 
-| Finalidad | Base legal (Art. 6 RGPD) |
-|---|---|
-| Responder a su consulta o mensaje | Consentimiento (Art. 6(1)(a)) — otorgado al enviar el formulario |
-| Programar y entregar una Hoja de Ruta de Automatización gratuita | Consentimiento / medidas precontractuales (Art. 6(1)(a) y (b)) |
-| Ejecutar un contrato una vez que usted se convierte en cliente | Ejecución de un contrato (Art. 6(1)(b)) |
-| Analítica, seguridad y mejora del sitio web | Interés legítimo (Art. 6(1)(f)); las cookies únicamente con consentimiento conforme al Art. 22.2 de la LSSI-CE |
-| Comunicaciones de marketing y medición publicitaria | Consentimiento (Art. 6(1)(a)), revocable en cualquier momento |
-| Contabilidad, obligaciones fiscales y otros registros legales | Obligación legal (Art. 6(1)(c)) |
+| Finalidad                                                        | Base legal (Art. 6 RGPD)                                                                                       |
+| ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Responder a su consulta o mensaje                                | Consentimiento (Art. 6(1)(a)) — otorgado al enviar el formulario                                               |
+| Programar y entregar una Hoja de Ruta de Automatización gratuita | Consentimiento / medidas precontractuales (Art. 6(1)(a) y (b))                                                 |
+| Ejecutar un contrato una vez que usted se convierte en cliente   | Ejecución de un contrato (Art. 6(1)(b))                                                                        |
+| Procesar una compra en línea y emitir la factura                 | Ejecución de un contrato (Art. 6(1)(b))                                                                        |
+| Verificar el pago y prevenir el fraude                           | Interés legítimo (Art. 6(1)(f))                                                                                |
+| Analítica, seguridad y mejora del sitio web                      | Interés legítimo (Art. 6(1)(f)); las cookies únicamente con consentimiento conforme al Art. 22.2 de la LSSI-CE |
+| Comunicaciones de marketing y medición publicitaria              | Consentimiento (Art. 6(1)(a)), revocable en cualquier momento                                                  |
+| Contabilidad, obligaciones fiscales y otros registros legales    | Obligación legal (Art. 6(1)(c))                                                                                |
 
 **No** utilizamos decisiones automatizadas ni elaboración de perfiles que produzcan efectos jurídicos o
 similares de importancia sobre usted.
@@ -130,6 +146,11 @@ un contrato de encargado del tratamiento (Art. 28 RGPD) cuando resulte de aplica
   formulario de contacto.
 - **Microsoft 365 (región UE)** — nuestro correo electrónico corporativo y sistema de reserva de citas
   (Outlook Bookings) para la programación de la Hoja de Ruta de Automatización.
+- **Qonto (Qonto SAS, Francia)** — facturación y procesamiento de pagos para compras en línea. Qonto es
+  el responsable del tratamiento del pago en sí; nosotros solo le enviamos los datos de compra
+  descritos en el [§4.4](#44-datos-que-usted-nos-proporciona-al-comprar-en-línea).
+- **Mollie**, el procesador de pagos con tarjeta de Qonto — procesa los datos de la tarjeta en la
+  página de pago alojada por Qonto; nunca recibimos ni almacenamos el número de su tarjeta.
 - **Google Analytics** — analítica de uso del sitio web, únicamente con su consentimiento.
 - **Meta (Meta Pixel)** y **LinkedIn (Insight Tag)** — medición publicitaria, únicamente con su
   consentimiento.
@@ -143,7 +164,8 @@ descritos en esta Política.
 El alojamiento de nuestro sitio web y los datos del formulario de contacto se mantienen dentro del
 Espacio Económico Europeo (EEE) (región UE de AWS), y nuestro correo electrónico corporativo y sistema
 de reserva de citas se procesan mediante Microsoft 365 en la región europea de Microsoft — ninguno de
-estos datos se transfiere a Estados Unidos. Otros de nuestros encargados del tratamiento — Google,
+estos datos se transfiere a Estados Unidos. Qonto (Francia) y Mollie (Países Bajos) tratan igualmente
+los datos de compra y pago dentro del EEE. Otros de nuestros encargados del tratamiento — Google,
 Meta y LinkedIn — tienen su sede en Estados Unidos o transfieren datos a dicho país. Cuando esto
 ocurre, la transferencia se protege mediante las Cláusulas Contractuales Tipo de la Comisión Europea
 y, cuando resulte de aplicación, la certificación del proveedor conforme al Marco de Privacidad de
@@ -159,6 +181,10 @@ que fueron recopilados:
 - **Datos de clientes:** durante la duración de nuestra relación comercial, más los plazos de
   conservación exigidos por la legislación mercantil y fiscal española (por lo general, hasta 6 años
   para los registros contables).
+- **Compras en línea:** no mantenemos una base de datos de pedidos propia. Su factura y el estado del
+  pago los conserva Qonto conforme a sus propias obligaciones de conservación (incluido el plazo
+  contable legal); los correos de confirmación y de notificación interna que enviamos se conservan en
+  nuestro correo electrónico corporativo habitual, sujetos al plazo indicado para datos de clientes.
 - **Datos de analítica del sitio web:** hasta 14 meses, conforme al plazo de conservación
   predeterminado de Google Analytics.
 

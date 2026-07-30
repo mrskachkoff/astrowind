@@ -1,0 +1,27 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ReadQontoAuth",
+      "Effect": "Allow",
+      "Action": "ssm:GetParameter",
+      "Resource": "arn:aws:ssm:eu-west-3:211125757125:parameter/futurion/payments/qonto-auth"
+    },
+    {
+      "Sid": "DecryptQontoAuth",
+      "Effect": "Allow",
+      "Action": "kms:Decrypt",
+      "Resource": "arn:aws:kms:eu-west-3:211125757125:alias/aws/ssm"
+    },
+    {
+      "Sid": "SendManualReviewAlert",
+      "Effect": "Allow",
+      "Action": ["ses:SendEmail", "ses:SendRawEmail"],
+      "Resource": [
+        "arn:aws:ses:eu-west-3:211125757125:identity/solutions@futurion.es",
+        "arn:aws:ses:eu-west-3:211125757125:identity/futurion.es",
+        "arn:aws:ses:eu-west-3:211125757125:configuration-set/my-first-configuration-set"
+      ]
+    }
+  ]
+}

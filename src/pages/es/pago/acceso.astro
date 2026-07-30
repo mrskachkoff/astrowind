@@ -1,0 +1,20 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import PaymentAccess from '~/components/widgets/PaymentAccess.astro';
+
+// Transactional page reached only via the emailed entitlement link (its
+// token lives in the URL fragment, read client-side only) — kept out of
+// src/i18n/slugs.ts and marked noindex on purpose (tmp/payments.md §7.1).
+const metadata = {
+  title: 'Accede a tu Compra',
+  description: 'Accede a la descarga de tu compra de TrustPrompt o TrustCore.',
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
+---
+
+<Layout metadata={metadata}>
+  <PaymentAccess id="acceso" title="Accede a tu Compra" />
+</Layout>

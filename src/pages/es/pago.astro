@@ -1,0 +1,24 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import CheckoutForm from '~/components/widgets/CheckoutForm.astro';
+
+// Transactional page, reached only from a product-page CTA (never from nav
+// or search) — kept out of src/i18n/slugs.ts and marked noindex on purpose,
+// so it never enters the sitemap/hreflang (tmp/payments.md §7.1).
+const metadata = {
+  title: 'Pago',
+  description: 'Completa los datos de tu empresa para recibir un enlace de pago seguro de Qonto.',
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
+---
+
+<Layout metadata={metadata}>
+  <CheckoutForm
+    id="pago"
+    title="Pago"
+    subtitle="Elige tu plan y completa los datos de tu empresa. Serás redirigido a una página de pago segura de Qonto para completar el pago."
+  />
+</Layout>

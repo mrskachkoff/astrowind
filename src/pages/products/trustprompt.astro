@@ -13,6 +13,14 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 
 import imgTrustPrompt from '~/assets/images/trustprompt.png';
 
+// Checkout stays disabled (CTAs keep their current /contact/ hrefs) until
+// PUBLIC_PAYMENTS_ENABLED is the literal string "true" — a build-time
+// constant on this static site (tmp/payments.md §7.4).
+const paymentsEnabled = import.meta.env.PUBLIC_PAYMENTS_ENABLED === 'true';
+const buyHref = (sku: string) => (paymentsEnabled ? `/checkout/?sku=${sku}` : '/contact/');
+const buyText = paymentsEnabled ? 'Buy Now' : 'Contact Us';
+const buyUrl = (sku: string) => `https://solutions.futurion.es${buyHref(sku)}`;
+
 const metadata = {
   title: 'TrustPrompt — Redact PII in the Browser',
   description:
@@ -24,36 +32,67 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <JsonLd schema={{
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "TrustPrompt",
-    "applicationCategory": "SecurityApplication",
-    "operatingSystem": "Chrome/Edge (Chromium) 124+",
-    "description": "Chrome and Edge browser extension that detects and redacts personal data inside the browser, before a prompt is sent to a public LLM. Detection runs on the user's own machine: the model ships in the extension and remote model loads are disabled, so there is no detection server. Works on nine LLM web apps, combines 40 checksum-validated regex rules with a 560M-parameter on-device NER model, and is fail-closed by default.",
-    "url": "https://solutions.futurion.es/products/trustprompt/",
-    "inLanguage": "en",
-    "featureList": [
-      "Detection runs on your own machine; there is no detection server",
-      "Redacts personal data before the prompt is sent to the LLM",
-      "Works on nine LLM web apps (ChatGPT, Claude, Gemini, Perplexity, Mistral, Grok, DeepSeek, OpenEvidence)",
-      "40 checksum-validated regex rules plus a 560M-parameter on-device NER model (54 entity types)",
-      "Fail-closed by default: if any stage errors, the send stays blocked",
-      "No telemetry; the only outbound call is an optional metadata-only audit webhook",
-      "Minimal permissions (offscreen, storage, activeTab); placeholder map kept in memory only",
-      "Centrally managed by policy via Group Policy, Microsoft Intune, or Jamf — no license server"
-    ],
-    "author": { "@id": "https://solutions.futurion.es/#organization" },
-    "offers": {
-      "@type": "Offer",
-      "priceSpecification": {
-        "@type": "PriceSpecification",
-        "minPrice": "0",
-        "priceCurrency": "EUR"
-      },
-      "availability": "https://schema.org/InStock"
-    }
-  }} />
+  <JsonLd
+    schema={{
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: 'TrustPrompt',
+      applicationCategory: 'SecurityApplication',
+      operatingSystem: 'Chrome/Edge (Chromium) 124+',
+      description:
+        "Chrome and Edge browser extension that detects and redacts personal data inside the browser, before a prompt is sent to a public LLM. Detection runs on the user's own machine: the model ships in the extension and remote model loads are disabled, so there is no detection server. Works on nine LLM web apps, combines 40 checksum-validated regex rules with a 560M-parameter on-device NER model, and is fail-closed by default.",
+      url: 'https://solutions.futurion.es/products/trustprompt/',
+      inLanguage: 'en',
+      featureList: [
+        'Detection runs on your own machine; there is no detection server',
+        'Redacts personal data before the prompt is sent to the LLM',
+        'Works on nine LLM web apps (ChatGPT, Claude, Gemini, Perplexity, Mistral, Grok, DeepSeek, OpenEvidence)',
+        '40 checksum-validated regex rules plus a 560M-parameter on-device NER model (54 entity types)',
+        'Fail-closed by default: if any stage errors, the send stays blocked',
+        'No telemetry; the only outbound call is an optional metadata-only audit webhook',
+        'Minimal permissions (offscreen, storage, activeTab); placeholder map kept in memory only',
+        'Centrally managed by policy via Group Policy, Microsoft Intune, or Jamf — no license server',
+      ],
+      author: { '@id': 'https://solutions.futurion.es/#organization' },
+      offers: [
+        {
+          '@type': 'Offer',
+          name: 'Individual',
+          price: '0',
+          priceCurrency: 'EUR',
+          availability: 'https://schema.org/InStock',
+          url: 'https://solutions.futurion.es/products/trustprompt-download/',
+        },
+        {
+          '@type': 'Offer',
+          name: 'Small Team (up to 25 users)',
+          price: '990.00',
+          priceCurrency: 'EUR',
+          availability: 'https://schema.org/InStock',
+          url: buyUrl('trustprompt-small-team'),
+          description: 'One-year licence, up to 25 users, plus 21% VAT',
+        },
+        {
+          '@type': 'Offer',
+          name: 'Business (up to 100 users)',
+          price: '2900.00',
+          priceCurrency: 'EUR',
+          availability: 'https://schema.org/InStock',
+          url: buyUrl('trustprompt-business'),
+          description: 'One-year licence, up to 100 users, plus 21% VAT',
+        },
+        {
+          '@type': 'Offer',
+          name: 'Growth (up to 250 users)',
+          price: '5900.00',
+          priceCurrency: 'EUR',
+          availability: 'https://schema.org/InStock',
+          url: buyUrl('trustprompt-growth'),
+          description: 'One-year licence, up to 250 users, plus 21% VAT',
+        },
+      ],
+    }}
+  />
 
   <!-- Hero -->
 
@@ -81,22 +120,24 @@ const metadata = {
         class="mx-auto mb-4 object-contain drop-shadow-lg"
       />
       TrustPrompt<br />
-      <span class="text-accent dark:text-white highlight">Redact Personal Data in the Browser, Before a Prompt Is Sent</span>
+      <span class="text-accent dark:text-white highlight"
+        >Redact Personal Data in the Browser, Before a Prompt Is Sent</span
+      >
     </Fragment>
 
     <Fragment slot="subtitle">
       <span class="hidden sm:inline">
-        TrustPrompt is a Chrome and Edge extension that detects and redacts personal data inside the
-        browser, before a prompt is sent to a public LLM. It runs on nine LLM web apps and replaces
-        each detected value with a typed placeholder — <span class="font-mono text-sm">[FIRST_NAME_1]</span>,
-        <span class="font-mono text-sm">[IBAN_2]</span> — in the composer, then lets the message
-        send. The text you type is analyzed on your own machine and is never transmitted anywhere for
-        detection: the model ships in the extension and remote model loads are disabled, so there is
-        no detection server.
+        TrustPrompt is a Chrome and Edge extension that detects and redacts personal data inside the browser, before a
+        prompt is sent to a public LLM. It runs on nine LLM web apps and replaces each detected value with a typed
+        placeholder — <span class="font-mono text-sm">[FIRST_NAME_1]</span>,
+        <span class="font-mono text-sm">[IBAN_2]</span> — in the composer, then lets the message send. The text you type is
+        analyzed on your own machine and is never transmitted anywhere for detection: the model ships in the extension and
+        remote model loads are disabled, so there is no detection server.
       </span>
-      <span class="block mb-1 sm:hidden font-bold text-green-700">Detection runs on your machine. Personal data is redacted before the prompt is sent.</span>
-      Built for the clinics and law firms where a pasted prompt can carry patient or client data
-      under the GDPR.
+      <span class="block mb-1 sm:hidden font-bold text-green-700"
+        >Detection runs on your machine. Personal data is redacted before the prompt is sent.</span
+      >
+      Built for the clinics and law firms where a pasted prompt can carry patient or client data under the GDPR.
     </Fragment>
   </Hero>
 
@@ -105,7 +146,10 @@ const metadata = {
   <Brands
     title="Works on the LLM Sites You Already Use"
     subtitle="TrustPrompt runs on nine LLM web apps. Alongside the logos shown, it also covers Perplexity, Grok on X, and OpenEvidence — redaction happens in each site's composer before the message is sent."
-    classes={{ items: 'flex-nowrap overflow-x-auto gap-x-6 sm:gap-x-8 lg:gap-x-10 [&_img]:!h-12 [&_img]:!w-auto [&_img]:!object-contain' }}
+    classes={{
+      items:
+        'flex-nowrap overflow-x-auto gap-x-6 sm:gap-x-8 lg:gap-x-10 [&_img]:!h-12 [&_img]:!w-auto [&_img]:!object-contain',
+    }}
     images={[
       { src: '~/assets/images/openai.png', alt: 'ChatGPT' },
       { src: '~/assets/images/claude-color.png', alt: 'Claude' },
@@ -197,10 +241,10 @@ const metadata = {
     ]}
   >
     <Fragment slot="content">
-      PII never leaves the machine for detection is not an operational promise that depends on
-      configuration — it is how the extension is built. Where detection does run, two detectors work
-      together: structured identifiers have a shape a checksum can confirm, while a patient name or a
-      clause naming a counterparty does not — so TrustPrompt uses each method where it is strongest.
+      PII never leaves the machine for detection is not an operational promise that depends on configuration — it is how
+      the extension is built. Where detection does run, two detectors work together: structured identifiers have a shape
+      a checksum can confirm, while a patient name or a clause naming a counterparty does not — so TrustPrompt uses each
+      method where it is strongest.
     </Fragment>
   </Content>
 
@@ -239,7 +283,7 @@ const metadata = {
       {
         title: 'Step 1: <span class="font-medium">Block the Native Send</span>',
         description:
-          'The site\'s own send is intercepted in the capture phase and held, so nothing leaves the page until detection and redaction have run.',
+          "The site's own send is intercepted in the capture phase and held, so nothing leaves the page until detection and redaction have run.",
         icon: 'tabler:hand-stop',
       },
       {
@@ -305,6 +349,7 @@ const metadata = {
         subtitle: 'Up to 25 users',
         price: 990,
         period: 'per year',
+        note: paymentsEnabled ? '+ 21% VAT at checkout' : undefined,
         items: [
           { description: 'Everything in Individual' },
           { description: 'Shared sensitivity settings' },
@@ -313,8 +358,8 @@ const metadata = {
           { description: 'Simpler rollout than full MDM' },
         ],
         callToAction: {
-          text: 'Contact Us',
-          href: '/contact/',
+          text: buyText,
+          href: buyHref('trustprompt-small-team'),
         },
         hasRibbon: true,
         ribbonTitle: 'most popular',
@@ -324,6 +369,7 @@ const metadata = {
         subtitle: 'Up to 100 users',
         price: 2900,
         period: 'per year',
+        note: paymentsEnabled ? '+ 21% VAT at checkout' : undefined,
         items: [
           { description: 'Everything in Small Team' },
           { description: 'Shared configuration across the team' },
@@ -331,8 +377,8 @@ const metadata = {
           { description: 'Priority support' },
         ],
         callToAction: {
-          text: 'Contact Us',
-          href: '/contact/',
+          text: buyText,
+          href: buyHref('trustprompt-business'),
         },
       },
       {
@@ -340,6 +386,7 @@ const metadata = {
         subtitle: 'Up to 250 users',
         price: 5900,
         period: 'per year',
+        note: paymentsEnabled ? '+ 21% VAT at checkout' : undefined,
         items: [
           { description: 'Everything in Business' },
           { description: 'Larger team rollout' },
@@ -347,8 +394,8 @@ const metadata = {
           { description: 'A path to centrally managed policy' },
         ],
         callToAction: {
-          text: 'Contact Us',
-          href: '/contact/',
+          text: buyText,
+          href: buyHref('trustprompt-growth'),
         },
       },
     ]}

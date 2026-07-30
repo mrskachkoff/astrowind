@@ -317,7 +317,10 @@ export async function handler(event) {
         {
           title: `${catalogueEntry.name[locale]} — ${catalogueEntry.offer[locale]}`,
           description: catalogueEntry.description[locale],
-          quantity: 1,
+          // Qonto's API rejects a numeric quantity: "json: cannot unmarshal
+          // number into Go struct field InvoiceItem.items.quantity of type
+          // string" (verified against a live 422 in sandbox, July 2026).
+          quantity: '1',
           unit_price: { value: centsToDecimalString(catalogueEntry.netCents), currency: 'EUR' },
           vat_rate: '0.21',
         },

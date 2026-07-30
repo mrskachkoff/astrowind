@@ -118,7 +118,11 @@ export async function handler(event) {
     // token — this is the only revocation mechanism (tokens can't otherwise
     // be revoked before their 7-day expiry, tmp/payments.md §11).
     const authHeader = await getQontoAuthHeader();
-    const qonto = createQontoClient({ baseUrl: process.env.QONTO_API_BASE_URL, authHeader });
+    const qonto = createQontoClient({
+      baseUrl: process.env.QONTO_API_BASE_URL,
+      authHeader,
+      stagingToken: process.env.QONTO_STAGING_TOKEN,
+    });
 
     let invoice;
     try {

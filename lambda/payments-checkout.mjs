@@ -182,7 +182,11 @@ export async function handler(event) {
     // --- Business logic: find/create Qonto client, then create an invoice ---
 
     const authHeader = await getQontoAuthHeader();
-    const qonto = createQontoClient({ baseUrl: process.env.QONTO_API_BASE_URL, authHeader });
+    const qonto = createQontoClient({
+      baseUrl: process.env.QONTO_API_BASE_URL,
+      authHeader,
+      stagingToken: process.env.QONTO_STAGING_TOKEN,
+    });
 
     let clientId;
     try {

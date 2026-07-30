@@ -16,8 +16,14 @@
  * Usage (run once per environment — sandbox first, then production):
  *   export QONTO_API_BASE_URL=https://thirdparty-sandbox.staging.qonto.co
  *   export QONTO_AUTH="<login>:<secret-key>"
+ *   export QONTO_STAGING_TOKEN="<from the Qonto Developer Portal>"  # sandbox only — omit in production
  *   export WEBHOOK_TARGET_URL="https://<webhook-function-url>.lambda-url.eu-west-3.on.aws/"
  *   node lambda/scripts/setup-qonto-webhook.mjs
+ *
+ * QONTO_STAGING_TOKEN is required for every sandbox request (it bypasses the
+ * OneLogin SSO gate in front of the whole sandbox environment — see
+ * docs.qonto.com/get-started/general/sandbox-access) and must be omitted
+ * against production, which does not accept it.
  *
  * The printed secret is NOT saved anywhere by this script — copy it
  * immediately into SSM yourself:
@@ -39,7 +45,7 @@ if (!baseUrl || !authHeader || !targetUrl) {
   process.exit(1);
 }
 
-const qonto = createQontoClient({ baseUrl, authHeader });
+const qonto = createQontoClient({ baseUrl, authHeader, stagingToken: process.env.QONTO_STAGING_TOKEN });
 
 console.log(`Creating a Qonto webhook subscription at ${baseUrl} -> ${targetUrl} ...`);
 

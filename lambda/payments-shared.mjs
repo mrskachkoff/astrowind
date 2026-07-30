@@ -299,6 +299,14 @@ export function centsToDecimalString(cents) {
 // Plain fetch, 10s timeout, JSON in/out. Auth is header `Authorization:
 // <login>:<secret-key>` (plain concatenation, no Base64 — verified against
 // Qonto docs, July 2026).
+//
+// Sandbox-only requirement (docs.qonto.com/get-started/general/sandbox-access,
+// verified July 2026): every request to thirdparty-sandbox.staging.qonto.co
+// must also carry `X-Qonto-Staging-Token`, a per-application credential from
+// the Qonto Developer Portal that bypasses the OneLogin SSO gate in front of
+// the whole sandbox environment. It is a no-op in production — Qonto does not
+// even accept it there — so `stagingToken` is simply omitted for the
+// production client (leave the QONTO_STAGING_TOKEN Lambda env var unset).
 
 export class QontoApiError extends Error {
   constructor(message, { status, body } = {}) {
@@ -309,7 +317,7 @@ export class QontoApiError extends Error {
   }
 }
 
-export function createQontoClient({ baseUrl, authHeader, timeoutMs = 10_000 }) {
+export function createQontoClient({ baseUrl, authHeader, stagingToken, timeoutMs = 10_000 }) {
   async function request(method, path, body) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeoutMs);
@@ -320,6 +328,7 @@ export function createQontoClient({ baseUrl, authHeader, timeoutMs = 10_000 }) {
           Authorization: authHeader,
           'Content-Type': 'application/json',
           Accept: 'application/json',
+          ...(stagingToken ? { 'X-Qonto-Staging-Token': stagingToken } : {}),
         },
         body: body !== undefined ? JSON.stringify(body) : undefined,
         signal: controller.signal,

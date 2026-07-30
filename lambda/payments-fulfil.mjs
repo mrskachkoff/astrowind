@@ -98,7 +98,11 @@ export async function handler(event) {
   }
 
   const authHeader = await getQontoAuthHeader();
-  const qonto = createQontoClient({ baseUrl: process.env.QONTO_API_BASE_URL, authHeader });
+  const qonto = createQontoClient({
+    baseUrl: process.env.QONTO_API_BASE_URL,
+    authHeader,
+    stagingToken: process.env.QONTO_STAGING_TOKEN,
+  });
 
   // The only trusted source — the webhook that triggered this invocation is
   // a hint, never proof.

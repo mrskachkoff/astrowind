@@ -1,0 +1,152 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+
+// Operator-only OAuth redirect target for lambda/scripts/qonto-oauth-bootstrap.mjs
+// (tmp/payments.md §10 step 1 — there is no client_credentials grant, so a
+// one-time human consent in a browser is required). Never linked from
+// anywhere on the site, EN-only, deliberately absent from src/i18n/slugs.ts
+// so it stays out of the sitemap and hreflang, and noindex like the other
+// transactional payment pages (tmp/payments.md §7.1). This page makes no
+// network calls of its own — it only displays the `code`/`state` query
+// params so the operator can paste `code` into the bootstrap script's
+// terminal prompt within its 10-minute TTL.
+const metadata = {
+  title: 'OAuth callback',
+  description: 'Internal OAuth redirect target for the Qonto payments bootstrap script.',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+---
+
+<Layout metadata={metadata}>
+  <WidgetWrapper id="oauth-callback" containerClass="max-w-3xl mx-auto">
+    <Headline
+      title="OAuth callback"
+      subtitle="Internal page used only during the one-time Qonto OAuth setup (lambda/scripts/qonto-oauth-bootstrap.mjs)."
+    />
+
+    <div
+      id="oauth-callback-panel"
+      class="flex flex-col max-w-xl mx-auto rounded-lg backdrop-blur border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900 shadow p-4 sm:p-6 lg:p-8 w-full text-center"
+    >
+      <div id="oauth-state-loading">
+        <p class="text-muted">Reading the redirect parameters…</p>
+      </div>
+
+      <div id="oauth-state-missing" class="hidden">
+        <p class="font-medium text-gray-900 dark:text-white">No authorization code found in this URL.</p>
+        <p class="mt-2 text-sm text-muted">
+          This page is only reached from the redirect Qonto sends after approving OAuth access during
+          <code class="font-mono">qonto-oauth-bootstrap.mjs</code>. If you got here another way, there is nothing to do
+          here.
+        </p>
+      </div>
+
+      <div id="oauth-state-error" class="hidden">
+        <p class="font-medium text-gray-900 dark:text-white">Qonto returned an error.</p>
+        <p class="mt-2 font-mono text-sm break-all text-gray-700 dark:text-gray-300" id="oauth-error-code"></p>
+        <p class="mt-2 text-sm text-muted" id="oauth-error-description"></p>
+      </div>
+
+      <div id="oauth-state-result" class="hidden text-left">
+        <p class="font-medium text-gray-900 dark:text-white text-center">Authorization code received.</p>
+
+        <p class="mt-4 text-sm font-medium text-gray-900 dark:text-white">state</p>
+        <div class="mt-1 flex items-center gap-2">
+          <p class="flex-1 font-mono text-sm break-all text-gray-700 dark:text-gray-300" id="oauth-state-value"></p>
+          <button
+            type="button"
+            data-copy-target="oauth-state-value"
+            class="shrink-0 text-xs font-medium underline text-gray-700 dark:text-gray-300">Copy</button
+          >
+        </div>
+
+        <p class="mt-4 text-sm font-medium text-gray-900 dark:text-white">code</p>
+        <div class="mt-1 flex items-center gap-2">
+          <p class="flex-1 font-mono text-sm break-all text-gray-700 dark:text-gray-300" id="oauth-code-value"></p>
+          <button
+            type="button"
+            data-copy-target="oauth-code-value"
+            class="shrink-0 text-xs font-medium underline text-gray-700 dark:text-gray-300">Copy</button
+          >
+        </div>
+
+        <p class="mt-4 text-sm text-muted">
+          Compare <code class="font-mono">state</code> with the value printed by the bootstrap script before pasting the code
+          — a mismatch means this is not the response to the request you just made. The code is single-use and expires 10
+          minutes after issue. Close this tab once you're done.
+        </p>
+      </div>
+    </div>
+  </WidgetWrapper>
+</Layout>
+
+<script>
+  function initOAuthCallback() {
+    const panel = document.querySelector<HTMLDivElement>('#oauth-callback-panel');
+    if (!panel) return;
+
+    // Prevent double-binding after View Transitions
+    if (panel.dataset.bound === 'true') return;
+    panel.dataset.bound = 'true';
+
+    const loading = panel.querySelector<HTMLDivElement>('#oauth-state-loading');
+    const missing = panel.querySelector<HTMLDivElement>('#oauth-state-missing');
+    const errorState = panel.querySelector<HTMLDivElement>('#oauth-state-error');
+    const result = panel.querySelector<HTMLDivElement>('#oauth-state-result');
+
+    function showState(state: HTMLDivElement | null) {
+      [loading, missing, errorState, result].forEach((el) => el?.classList.add('hidden'));
+      state?.classList.remove('hidden');
+    }
+
+    // No fetch, no navigation — this page only ever reads its own URL. The
+    // code must never leave the browser except via the operator's own paste
+    // into the bootstrap script's terminal prompt.
+    const params = new URLSearchParams(window.location.search);
+    const error = params.get('error');
+    const code = params.get('code');
+    const state = params.get('state');
+
+    if (error) {
+      const codeEl = panel.querySelector<HTMLParagraphElement>('#oauth-error-code');
+      const descEl = panel.querySelector<HTMLParagraphElement>('#oauth-error-description');
+      if (codeEl) codeEl.textContent = error;
+      if (descEl) descEl.textContent = params.get('error_description') || '';
+      showState(errorState);
+      return;
+    }
+
+    if (!code) {
+      showState(missing);
+      return;
+    }
+
+    const codeValueEl = panel.querySelector<HTMLParagraphElement>('#oauth-code-value');
+    const stateValueEl = panel.querySelector<HTMLParagraphElement>('#oauth-state-value');
+    if (codeValueEl) codeValueEl.textContent = code;
+    if (stateValueEl) stateValueEl.textContent = state || '(none)';
+    showState(result);
+
+    panel.querySelectorAll<HTMLButtonElement>('[data-copy-target]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const targetId = button.dataset.copyTarget;
+        const value = targetId ? panel.querySelector(`#${targetId}`)?.textContent : null;
+        if (!value || !navigator.clipboard?.writeText) return;
+        navigator.clipboard.writeText(value).then(() => {
+          const original = button.textContent;
+          button.textContent = 'Copied';
+          setTimeout(() => {
+            button.textContent = original;
+          }, 1500);
+        });
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initOAuthCallback);
+</script>

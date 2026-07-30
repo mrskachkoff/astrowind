@@ -6,14 +6,23 @@
       "Effect": "Allow",
       "Action": "ssm:GetParameter",
       "Resource": [
-        "arn:aws:ssm:eu-west-3:211125757125:parameter/futurion/payments/qonto-auth",
+        "arn:aws:ssm:eu-west-3:211125757125:parameter/futurion/payments/oauth-client",
         "arn:aws:ssm:eu-west-3:211125757125:parameter/futurion/payments/entitlement-secret"
       ]
     },
     {
-      "Sid": "DecryptPaymentsSecrets",
+      "Sid": "ReadWriteOAuthTokens",
       "Effect": "Allow",
-      "Action": "kms:Decrypt",
+      "Action": ["ssm:GetParameter", "ssm:PutParameter"],
+      "Resource": [
+        "arn:aws:ssm:eu-west-3:211125757125:parameter/futurion/payments/oauth-refresh-token",
+        "arn:aws:ssm:eu-west-3:211125757125:parameter/futurion/payments/oauth-access-token"
+      ]
+    },
+    {
+      "Sid": "DecryptAndEncryptPaymentsSecrets",
+      "Effect": "Allow",
+      "Action": ["kms:Decrypt", "kms:Encrypt"],
       "Resource": "arn:aws:kms:eu-west-3:211125757125:alias/aws/ssm"
     },
     {

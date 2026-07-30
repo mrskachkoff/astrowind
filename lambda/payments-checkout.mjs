@@ -2,18 +2,20 @@
  * Lambda handler for the Qonto checkout Function URL (tmp/payments.md §5.1).
  *
  * POST only. Validates the checkout form, finds-or-creates the customer as a
- * Qonto client, creates a Qonto client invoice, and returns its hosted
- * invoice_url for the browser to redirect to. No database: Qonto is the
- * system of record; the only local state is an in-memory per-IP rate limit
- * (resets on cold start, same accepted limitation as
- * lambda/trustprompt-download.mjs).
+ * Qonto client, creates a Qonto client invoice, then creates a Qonto payment
+ * link (card/Apple Pay/PayPal, backed by the org's Mollie connection) for
+ * that invoice and returns its hosted URL for the browser to redirect to.
+ * If payment-link creation fails (connection not enabled, provider error),
+ * falls back to the invoice's own hosted page (bank transfer only) rather
+ * than failing the checkout — see paymentMethod in the response.
  *
- * IMPORTANT — not verified against a live Qonto account: the exact Qonto
- * request/response field names below (client search/create, invoice create,
- * unpaid-invoice filter) follow tmp/payments.md §5.1 and the Qonto docs
- * headings it cites. This machine has never called the Qonto API. Confirm
- * every field name against the sandbox during the tmp/payments.md §10
- * sandbox verification gate before any production traffic.
+ * No database: Qonto is the system of record; the only local state is an
+ * in-memory per-IP rate limit (resets on cold start, same accepted
+ * limitation as lambda/trustprompt-download.mjs).
+ *
+ * Auth is OAuth 2.0 (lambda/payments-oauth.mjs) — required because
+ * POST /v2/payment_links is OAuth-only (verified against Qonto docs, July
+ * 2026; see the comment above createQontoClient in payments-shared.mjs).
  */
 
 import { SSMClient } from '@aws-sdk/client-ssm';
@@ -24,7 +26,6 @@ import {
   sanitize,
   createRateLimiter,
   isTimestampValid,
-  getSecret,
   sendEmail,
   CATALOGUE,
   vatCents,
@@ -35,7 +36,9 @@ import {
   normalizeSpanishTaxId,
   createQontoClient,
   centsToDecimalString,
+  buildClientCreatePayload,
 } from './payments-shared.mjs';
+import { getAccessToken } from './payments-oauth.mjs';
 
 const ssm = new SSMClient({ region: 'eu-west-3' });
 const ses = new SESClient({ region: 'eu-west-3' });
@@ -47,6 +50,8 @@ const MAX_BODY_BYTES = 8 * 1024;
 const MAX_FIELD_LENGTH = 200;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const DUPLICATE_ORDER_WINDOW_MS = 30 * 60 * 1000;
+const RETRY_LOOKUP_WINDOW_MS = 5 * 60 * 1000;
+const PAYMENT_METHODS = ['credit_card', 'apple_pay', 'paypal'];
 
 // 5/hour per IP — same shape as trustprompt-download.mjs's checkRateLimit,
 // but its own independent bucket (a bot hammering /checkout should not affect
@@ -63,8 +68,34 @@ function hasOnlyAllowedKeys(obj, allowed) {
   );
 }
 
-async function getQontoAuthHeader() {
-  return getSecret(ssm, '/futurion/payments/qonto-auth');
+function getQontoToken() {
+  return getAccessToken(ssm, {
+    oauthBaseUrl: process.env.QONTO_OAUTH_BASE_URL,
+    stagingToken: process.env.QONTO_STAGING_TOKEN,
+  });
+}
+
+/**
+ * Creates a card/Apple Pay/PayPal payment link for an already-created
+ * invoice. Never throws to the caller — a failed connection to the payment
+ * provider must degrade to the invoice's own bank-transfer page, not break
+ * checkout (tmp/payments.md §4). Returns null on failure; the caller alerts.
+ */
+async function tryCreatePaymentLink(qonto, { invoiceId, invoiceNumber, debitorName, gross }) {
+  try {
+    const res = await qonto.post('/v2/payment_links', {
+      invoice_id: invoiceId,
+      invoice_number: invoiceNumber,
+      debitor_name: debitorName,
+      amount: { value: centsToDecimalString(gross), currency: 'EUR' },
+      potential_payment_methods: PAYMENT_METHODS,
+    });
+    const link = res.payment_link ?? res;
+    return link?.url ? link : null;
+  } catch (err) {
+    console.error('Payment link creation failed:', err);
+    return null;
+  }
 }
 
 async function sendInternalAlert(subject, text) {
@@ -181,10 +212,9 @@ export async function handler(event) {
 
     // --- Business logic: find/create Qonto client, then create an invoice ---
 
-    const authHeader = await getQontoAuthHeader();
     const qonto = createQontoClient({
       baseUrl: process.env.QONTO_API_BASE_URL,
-      authHeader,
+      getToken: getQontoToken,
       stagingToken: process.env.QONTO_STAGING_TOKEN,
     });
 
@@ -207,13 +237,10 @@ export async function handler(event) {
       if (matches.length === 1) {
         clientId = matches[0].id;
       } else {
-        const created = await qonto.post('/v2/clients', {
-          name: companyName,
-          tax_identification_number: taxId,
-          email,
-          locale,
-          billing_address: { first_line: line1, zip_code: postalCode, city, province, country_code: 'ES' },
-        });
+        const created = await qonto.post(
+          '/v2/clients',
+          buildClientCreatePayload({ companyName, taxId, email, locale, line1, postalCode, city, province })
+        );
         clientId = created.client?.id ?? created.id;
       }
     } catch (err) {
@@ -229,20 +256,41 @@ export async function handler(event) {
     // Duplicate-order guard — best-effort, not transactional (tmp/payments.md
     // §11): worst case is two unpaid invoices, one paid, the other expiring
     // unpaid. A failed lookup here must not block checkout.
+    //
+    // GET /v2/client_invoices supports ONLY filter[status] and
+    // filter[created_at_from/to] (plus due_date/updated_at/paging) — there is
+    // no filter[client_id] and no filter[purchase_order] (verified against
+    // Qonto's OpenAPI, July 2026). So the query narrows by status+time only,
+    // and the client id / order ref / SKU match happens in JS.
     try {
+      const cutoffIso = new Date(Date.now() - DUPLICATE_ORDER_WINDOW_MS).toISOString();
       const unpaid = await qonto.get(
-        `/v2/client_invoices?filter[client_id]=${encodeURIComponent(clientId)}&filter[status]=unpaid`
+        `/v2/client_invoices?filter[status]=unpaid&filter[created_at_from]=${encodeURIComponent(cutoffIso)}&per_page=100`
       );
-      const cutoff = Date.now() - DUPLICATE_ORDER_WINDOW_MS;
       const existing = (unpaid.client_invoices ?? []).find((inv) => {
         const parsed = parseOrderRef(inv.purchase_order);
-        return parsed && parsed.sku === sku && new Date(inv.created_at).getTime() > cutoff;
+        return parsed && parsed.sku === sku && inv.client?.id === clientId;
       });
       if (existing) {
         console.log(JSON.stringify({ event: 'checkout_duplicate_reused', orderRef: existing.purchase_order, sku }));
+        const paymentLink = await tryCreatePaymentLink(qonto, {
+          invoiceId: existing.id,
+          invoiceNumber: existing.number,
+          debitorName: companyName,
+          gross: grossCents(catalogueEntry.netCents),
+        });
+        if (!paymentLink) {
+          await sendInternalAlert(
+            'Payment link unavailable (reused invoice)',
+            `Invoice ${existing.id} (order ${existing.purchase_order}) has no card payment link. ` +
+              'Customer was sent the bank-transfer invoice page instead.'
+          );
+        }
         return jsonResponse(200, {
           orderRef: existing.purchase_order,
+          paymentUrl: paymentLink?.url || existing.invoice_url,
           invoiceUrl: existing.invoice_url,
+          paymentMethod: paymentLink ? 'card' : 'transfer',
           product: catalogueEntry.product,
           offer: catalogueEntry.offer[locale],
           netCents: catalogueEntry.netCents,
@@ -282,19 +330,37 @@ export async function handler(event) {
       created = invoice.client_invoice ?? invoice;
     } catch (err) {
       // Timeout/5xx after a possible partial success on Qonto's side: retry
-      // once via a list-by-purchase_order lookup before creating a genuine
-      // duplicate invoice.
+      // once via a recent-invoices lookup, matched on the exact purchase_order
+      // in JS (there is no server-side filter for it) before creating a
+      // genuine duplicate invoice. NEVER take [0] of an unfiltered list — an
+      // unmatched result must fall through to a fresh creation attempt.
       console.error('Qonto invoice creation failed, checking for a partial success:', err);
       try {
+        const retryCutoffIso = new Date(Date.now() - RETRY_LOOKUP_WINDOW_MS).toISOString();
         const retryLookup = await qonto.get(
-          `/v2/client_invoices?filter[purchase_order]=${encodeURIComponent(orderRef)}`
+          `/v2/client_invoices?filter[created_at_from]=${encodeURIComponent(retryCutoffIso)}&per_page=100`
         );
-        created = (retryLookup.client_invoices ?? [])[0];
+        created = (retryLookup.client_invoices ?? []).find((inv) => inv.purchase_order === orderRef);
         if (!created) return jsonResponse(502, { code: 'server_error' });
       } catch (retryErr) {
         console.error('Qonto invoice retry lookup failed:', retryErr);
         return jsonResponse(502, { code: 'server_error' });
       }
+    }
+
+    const paymentLink = await tryCreatePaymentLink(qonto, {
+      invoiceId: created.id,
+      invoiceNumber: created.number,
+      debitorName: companyName,
+      gross: grossCents(catalogueEntry.netCents),
+    });
+    if (!paymentLink) {
+      await sendInternalAlert(
+        'Payment link unavailable',
+        `Invoice ${created.id} (order ${orderRef}) was created but no card payment link could be created ` +
+          "(the org's payment-link connection may not be enabled). Customer was sent the bank-transfer " +
+          'invoice page instead.'
+      );
     }
 
     // Structured log — never log tax IDs, addresses, or the API key.
@@ -305,12 +371,15 @@ export async function handler(event) {
         invoiceId: created.id,
         clientId,
         sku,
+        paymentMethod: paymentLink ? 'card' : 'transfer',
       })
     );
 
     return jsonResponse(200, {
       orderRef,
+      paymentUrl: paymentLink?.url || created.invoice_url,
       invoiceUrl: created.invoice_url,
+      paymentMethod: paymentLink ? 'card' : 'transfer',
       product: catalogueEntry.product,
       offer: catalogueEntry.offer[locale],
       netCents: catalogueEntry.netCents,

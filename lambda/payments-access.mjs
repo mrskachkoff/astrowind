@@ -7,9 +7,10 @@
  * 15-minute CloudFront signed URL. Only lists the allowlisted S3 prefix for
  * that SKU (never reads object bytes: CloudFront's OAC does that, same
  * pattern as lambda/trustprompt-download.mjs). IAM here is list-only S3 + SSM
- * read for two parameters — no SES, so a missing artifact mapping fails
- * closed with a structured error log rather than an email (see the comment
- * at ARTIFACT_MAP below for why).
+ * read/write for the OAuth token parameters (lambda/payments-oauth.mjs) plus
+ * read for the entitlement secret and the CloudFront private key — no SES,
+ * so a missing artifact mapping fails closed with a structured error log
+ * rather than an email (see the comment at ARTIFACT_MAP below for why).
  *
  * The artifact prefixes are an owner input (tmp/payments.md §12) not yet
  * supplied — every SKU maps to null until then, which returns 503 and NEVER
@@ -28,6 +29,7 @@ import {
   verifyToken,
   createQontoClient,
 } from './payments-shared.mjs';
+import { getAccessToken } from './payments-oauth.mjs';
 
 // The bucket lives in an opt-in region (eu-south-2) — see the identical
 // comment in trustprompt-download.mjs. SSM/SES stay in eu-west-3.
@@ -65,8 +67,11 @@ const ARTIFACT_MAP = Object.freeze({
   'trustcore-business-50-seats': null,
 });
 
-async function getQontoAuthHeader() {
-  return getSecret(ssm, '/futurion/payments/qonto-auth');
+function getQontoToken() {
+  return getAccessToken(ssm, {
+    oauthBaseUrl: process.env.QONTO_OAUTH_BASE_URL,
+    stagingToken: process.env.QONTO_STAGING_TOKEN,
+  });
 }
 
 async function getEntitlementSecret() {
@@ -117,10 +122,9 @@ export async function handler(event) {
     // invoice must stop downloads immediately even with a valid, unexpired
     // token — this is the only revocation mechanism (tokens can't otherwise
     // be revoked before their 7-day expiry, tmp/payments.md §11).
-    const authHeader = await getQontoAuthHeader();
     const qonto = createQontoClient({
       baseUrl: process.env.QONTO_API_BASE_URL,
-      authHeader,
+      getToken: getQontoToken,
       stagingToken: process.env.QONTO_STAGING_TOKEN,
     });
 

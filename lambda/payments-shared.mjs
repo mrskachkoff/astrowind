@@ -271,6 +271,34 @@ export function isValidSpanishTaxId(raw) {
   return isValidNifOrNie(id) || isValidCif(id);
 }
 
+// --- Qonto client-creation payload builder -----------------------------------
+// Pure function so the exact field names (a source of a real bug, D3: the
+// original implementation sent kind-less payloads with first_line/province
+// instead of the required kind/currency + street_address/province_code) are
+// unit-testable without a network call. docs.qonto.com/api-reference/
+// business-api/clients/create-a-client.md, verified July 2026: kind and
+// currency are both required for a client to be usable for invoicing, and
+// the billing_address sub-object field names are street_address, zip_code,
+// city, province_code, country_code.
+
+export function buildClientCreatePayload({ companyName, taxId, email, locale, line1, postalCode, city, province }) {
+  return {
+    kind: 'company',
+    name: companyName,
+    tax_identification_number: taxId,
+    email,
+    locale,
+    currency: 'EUR',
+    billing_address: {
+      street_address: line1,
+      zip_code: postalCode,
+      city,
+      province_code: province,
+      country_code: 'ES',
+    },
+  };
+}
+
 // --- Decimal-string <-> integer-cents conversion ------------------------------
 // Qonto serializes money as decimal strings ("3509.00"). Never use parseFloat
 // on money — do the conversion with string/integer math only.
@@ -295,10 +323,27 @@ export function centsToDecimalString(cents) {
   return `${sign}${intPart}.${fracPart}`;
 }
 
+/**
+ * Qonto serializes money on invoice/payment-link *responses* as an object
+ * `{ value: "3509.00", currency: "EUR" }`, not a bare decimal string (only
+ * request bodies use the bare-string form for `unit_price`). Returns null for
+ * anything malformed or non-EUR — never silently coerces a foreign currency.
+ */
+export function amountToCents(amount) {
+  if (!amount || typeof amount !== 'object' || Array.isArray(amount)) return null;
+  if (amount.currency !== 'EUR') return null;
+  return decimalStringToCents(amount.value);
+}
+
 // --- Qonto API client ----------------------------------------------------------
-// Plain fetch, 10s timeout, JSON in/out. Auth is header `Authorization:
-// <login>:<secret-key>` (plain concatenation, no Base64 — verified against
-// Qonto docs, July 2026).
+// Plain fetch, 10s timeout, JSON in/out. Auth is OAuth 2.0: `Authorization:
+// Bearer <access_token>` (see payments-oauth.mjs for how the token is
+// obtained/refreshed). Verified against Qonto docs, July 2026: the API-key
+// scheme (`Authorization: <login>:<secret-key>`) does NOT cover the two
+// endpoints this feature depends on — POST /v2/payment_links* and
+// POST /v2/webhook_subscriptions are OAuth-only — so OAuth is used
+// everywhere for one consistent auth path, even on the endpoints that would
+// also accept an API key (client/invoice reads and writes).
 //
 // Sandbox-only requirement (docs.qonto.com/get-started/general/sandbox-access,
 // verified July 2026): every request to thirdparty-sandbox.staging.qonto.co
@@ -317,15 +362,22 @@ export class QontoApiError extends Error {
   }
 }
 
-export function createQontoClient({ baseUrl, authHeader, stagingToken, timeoutMs = 10_000 }) {
+/**
+ * `getToken` is an async function returning the current access token (see
+ * payments-oauth.mjs's getAccessToken) — a function, not a plain string, so
+ * the client always uses a fresh/non-expired token on every request without
+ * the caller having to re-create the client after each refresh.
+ */
+export function createQontoClient({ baseUrl, getToken, stagingToken, timeoutMs = 10_000 }) {
   async function request(method, path, body) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeoutMs);
     try {
+      const token = await getToken();
       const res = await fetch(`${baseUrl}${path}`, {
         method,
         headers: {
-          Authorization: authHeader,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
           Accept: 'application/json',
           ...(stagingToken ? { 'X-Qonto-Staging-Token': stagingToken } : {}),

@@ -1,54 +1,64 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { createHmac, timingSafeEqual, randomBytes } from 'node:crypto';
+import { createHmac } from 'node:crypto';
+import { verifySignature, parseSignatureHeader } from '../../lambda/payments-webhook.mjs';
 
-// payments-webhook.mjs verifies Qonto's HMAC-SHA256 signature over the raw
-// request body using crypto.timingSafeEqual. Qonto's docs (webhooks/setup.md)
-// don't publish a fixed test vector as of July 2026, so this test builds a
-// self-generated fixture with the exact primitives the handler uses, and
-// exercises the same verification helper the handler will call.
+// Qonto's official published test vector (docs.qonto.com/api-reference/
+// business-api/webhooks/setup.md, verified July 2026):
+//   Payload received: {"test":"data"}
+//   X-Qonto-Signature header: t=1704110400,v1=56aff06dc227db80d6568a5070f912c601c31f20451745d257cbc0b5dfa93805
+//   Secret: test-secret
+const VECTOR_BODY = '{"test":"data"}';
+const VECTOR_SECRET = 'test-secret';
+const VECTOR_HEADER = 't=1704110400,v1=56aff06dc227db80d6568a5070f912c601c31f20451745d257cbc0b5dfa93805';
+const VECTOR_TIME_MS = 1704110400 * 1000;
 
-function verifyWebhookSignature(rawBody, signatureHeader, secret) {
-  if (typeof signatureHeader !== 'string' || !signatureHeader) return false;
-  const expected = createHmac('sha256', secret).update(rawBody, 'utf8').digest('hex');
-  const a = Buffer.from(signatureHeader);
-  const b = Buffer.from(expected);
-  if (a.length !== b.length) return false;
-  return timingSafeEqual(a, b);
-}
-
-// Generated fresh per test run rather than a hardcoded literal — this is a
-// disposable test fixture standing in for a Qonto webhook signing secret,
-// not a credential.
-const SECRET = `whsec_test_${randomBytes(16).toString('hex')}`;
-
-test('valid signature over the exact raw body is accepted', () => {
-  const rawBody = JSON.stringify({ event: 'invoice.updated', data: { id: 'inv_1', status: 'paid' } });
-  const signature = createHmac('sha256', SECRET).update(rawBody, 'utf8').digest('hex');
-  assert.equal(verifyWebhookSignature(rawBody, signature, SECRET), true);
+test('official Qonto test vector verifies (checked at its own timestamp)', () => {
+  assert.equal(verifySignature(VECTOR_BODY, VECTOR_HEADER, VECTOR_SECRET, { now: VECTOR_TIME_MS }), true);
 });
 
-test('signature computed over a different body is rejected (body was tampered after signing)', () => {
-  const signedBody = JSON.stringify({ event: 'invoice.updated', data: { id: 'inv_1', status: 'paid' } });
-  const signature = createHmac('sha256', SECRET).update(signedBody, 'utf8').digest('hex');
-  const deliveredBody = JSON.stringify({ event: 'invoice.updated', data: { id: 'inv_1', status: 'draft' } });
-  assert.equal(verifyWebhookSignature(deliveredBody, signature, SECRET), false);
+test('parseSignatureHeader extracts timestamp and signature', () => {
+  assert.deepEqual(parseSignatureHeader(VECTOR_HEADER), {
+    timestamp: '1704110400',
+    signature: '56aff06dc227db80d6568a5070f912c601c31f20451745d257cbc0b5dfa93805',
+  });
+});
+
+test('malformed header shapes are rejected', () => {
+  for (const bad of [undefined, null, '', 'not-the-right-shape', 'v1=abc', 't=123', 't=abc,v1=xyz']) {
+    assert.equal(parseSignatureHeader(bad), null, `expected null for ${JSON.stringify(bad)}`);
+  }
+});
+
+test('a body tampered with after signing is rejected', () => {
+  const tamperedBody = '{"test":"tampered"}';
+  assert.equal(verifySignature(tamperedBody, VECTOR_HEADER, VECTOR_SECRET, { now: VECTOR_TIME_MS }), false);
 });
 
 test('wrong secret is rejected', () => {
-  const rawBody = JSON.stringify({ event: 'invoice.updated', data: { id: 'inv_1', status: 'paid' } });
-  const signature = createHmac('sha256', SECRET).update(rawBody, 'utf8').digest('hex');
-  assert.equal(verifyWebhookSignature(rawBody, signature, 'a-different-secret'), false);
+  assert.equal(verifySignature(VECTOR_BODY, VECTOR_HEADER, 'a-different-secret', { now: VECTOR_TIME_MS }), false);
+});
+
+test('a signature computed without the timestamp prefix (old, wrong scheme) is rejected', () => {
+  const wrongSchemeSignature = createHmac('sha256', VECTOR_SECRET).update(VECTOR_BODY, 'utf8').digest('hex');
+  const header = `t=1704110400,v1=${wrongSchemeSignature}`;
+  assert.equal(verifySignature(VECTOR_BODY, header, VECTOR_SECRET, { now: VECTOR_TIME_MS }), false);
+});
+
+test('a stale timestamp (outside the replay window) is rejected even with a valid signature', () => {
+  // Verifying "now" far away from the vector's own timestamp — a real replay
+  // of a captured delivery, long after it was sent.
+  const now = VECTOR_TIME_MS + 10 * 60 * 1000; // 10 minutes later
+  assert.equal(verifySignature(VECTOR_BODY, VECTOR_HEADER, VECTOR_SECRET, { now }), false);
+});
+
+test('a timestamp just inside the 5-minute window is accepted', () => {
+  const now = VECTOR_TIME_MS + 4 * 60 * 1000;
+  assert.equal(verifySignature(VECTOR_BODY, VECTOR_HEADER, VECTOR_SECRET, { now }), true);
 });
 
 test('missing or empty signature header is rejected', () => {
-  const rawBody = '{}';
-  assert.equal(verifyWebhookSignature(rawBody, '', SECRET), false);
-  assert.equal(verifyWebhookSignature(rawBody, undefined, SECRET), false);
-  assert.equal(verifyWebhookSignature(rawBody, null, SECRET), false);
-});
-
-test('signature of different length than expected is rejected without throwing', () => {
-  const rawBody = '{}';
-  assert.equal(verifyWebhookSignature(rawBody, 'tooshort', SECRET), false);
+  assert.equal(verifySignature('{}', '', VECTOR_SECRET, { now: VECTOR_TIME_MS }), false);
+  assert.equal(verifySignature('{}', undefined, VECTOR_SECRET, { now: VECTOR_TIME_MS }), false);
+  assert.equal(verifySignature('{}', null, VECTOR_SECRET, { now: VECTOR_TIME_MS }), false);
 });

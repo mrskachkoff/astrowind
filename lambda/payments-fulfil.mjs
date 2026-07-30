@@ -1,24 +1,28 @@
 /**
  * Lambda handler for payment fulfilment (tmp/payments.md §5.3).
  *
- * Invoked asynchronously by payments-webhook.mjs with only `{ invoiceId }` —
- * never trusts the webhook payload. Re-fetches the invoice from Qonto (the
- * only trusted source), verifies it is genuinely paid at the exact catalogue
- * amount, then emails the customer their entitlement (licence) or deposit
- * confirmation, plus an internal sales notification. There is no order
- * database and no status endpoint: fulfilment arrives by email, so SES
- * failures are allowed to throw and let Lambda's async-invocation retry (2x,
- * tmp/payments.md §5.2) try again — unlike trustprompt-download.mjs, which
- * deliberately swallows SES failures because the user did nothing wrong,
- * here the only way the customer ever gets their access link is this email.
+ * Invoked asynchronously by payments-webhook.mjs with `{ invoiceId }` (bank
+ * transfer) or `{ invoiceId, paymentLinkId }` (card/Apple Pay/PayPal) — never
+ * trusts the webhook payload. Re-fetches the invoice from Qonto (the only
+ * trusted source for the amount and customer), verifies it is genuinely paid
+ * at the exact catalogue amount, then emails the customer their entitlement
+ * (licence) or deposit confirmation, plus an internal sales notification.
+ * There is no order database and no status endpoint: fulfilment arrives by
+ * email, so SES failures are allowed to throw and let Lambda's
+ * async-invocation retry (2x, tmp/payments.md §5.2) try again — unlike
+ * trustprompt-download.mjs, which deliberately swallows SES failures because
+ * the user did nothing wrong, here the only way the customer ever gets their
+ * access link is this email.
+ *
+ * Payment proof: `invoice.status === 'paid'` OR (a `paymentLinkId` is
+ * present AND its own status is `paid` AND it points back at this invoice AND
+ * its amount matches). It is unverified whether a card payment marks the
+ * client invoice `paid` immediately — the payment-link check is the
+ * card-payment proof path; confirm the real timing during the tmp/payments.md
+ * §6 sandbox gate.
  *
  * Duplicate webhook deliveries re-run all of this — the customer may get a
  * second, equally valid email. Accepted (tmp/payments.md §11).
- *
- * NOT verified against a live Qonto account: the invoice response shape
- * (`invoice.client.email` / `.name`, `invoice.number`) is this plan's best
- * inference from tmp/payments.md §5.2 ("payload data includes ... client
- * info"). Confirm against the sandbox during the §10 verification gate.
  */
 
 import { SSMClient } from '@aws-sdk/client-ssm';
@@ -30,9 +34,10 @@ import {
   grossCents,
   parseOrderRef,
   signToken,
-  decimalStringToCents,
+  amountToCents,
   createQontoClient,
 } from './payments-shared.mjs';
+import { getAccessToken } from './payments-oauth.mjs';
 
 const ssm = new SSMClient({ region: 'eu-west-3' });
 const ses = new SESClient({ region: 'eu-west-3' });
@@ -41,8 +46,11 @@ const FROM_EMAIL = 'solutions@futurion.es';
 const INTERNAL_EMAIL = process.env.INTERNAL_EMAIL || 'solutions@futurion.es';
 const ENTITLEMENT_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 
-async function getQontoAuthHeader() {
-  return getSecret(ssm, '/futurion/payments/qonto-auth');
+function getQontoToken() {
+  return getAccessToken(ssm, {
+    oauthBaseUrl: process.env.QONTO_OAUTH_BASE_URL,
+    stagingToken: process.env.QONTO_STAGING_TOKEN,
+  });
 }
 
 async function getEntitlementSecret() {
@@ -92,15 +100,15 @@ const COPY = {
 
 export async function handler(event) {
   const invoiceId = event?.invoiceId;
+  const paymentLinkId = event?.paymentLinkId;
   if (!invoiceId) {
     console.error('payments-fulfil invoked without an invoiceId');
     return;
   }
 
-  const authHeader = await getQontoAuthHeader();
   const qonto = createQontoClient({
     baseUrl: process.env.QONTO_API_BASE_URL,
-    authHeader,
+    getToken: getQontoToken,
     stagingToken: process.env.QONTO_STAGING_TOKEN,
   });
 
@@ -117,12 +125,39 @@ export async function handler(event) {
 
   const parsed = parseOrderRef(invoice.purchase_order);
   const entry = parsed ? CATALOGUE[parsed.sku] : null;
+  const expectedGross = entry ? grossCents(entry.netCents) : null;
 
-  if (invoice.status !== 'paid' || invoice.currency !== 'EUR' || !parsed || !entry) {
+  // Payment proof: the invoice itself is paid, OR a payment link points back
+  // at this exact invoice, is itself paid, and matches the expected amount.
+  // (docs.qonto.com/api-reference/business-api/payments-transfers/
+  // payment-links/*, verified July 2026.) Card-payment webhooks carry a
+  // paymentLinkId; whether the client invoice's own status also flips to
+  // `paid` promptly for a card payment is unverified — this dual check
+  // covers both cases without assuming either.
+  let paidViaInvoice = invoice.status === 'paid';
+  let paidViaPaymentLink = false;
+
+  if (!paidViaInvoice && paymentLinkId) {
+    try {
+      const linkRes = await qonto.get(`/v2/payment_links/${encodeURIComponent(paymentLinkId)}`);
+      const link = linkRes.payment_link ?? linkRes;
+      paidViaPaymentLink =
+        link.status === 'paid' &&
+        link.resource_id === invoiceId &&
+        expectedGross !== null &&
+        amountToCents(link.amount) === expectedGross;
+    } catch (err) {
+      console.error('Failed to re-fetch payment link from Qonto:', err);
+      throw err; // transient Qonto outage — let the async-invocation retry handle it
+    }
+  }
+
+  if ((!paidViaInvoice && !paidViaPaymentLink) || invoice.currency !== 'EUR' || !parsed || !entry) {
     console.log(
       JSON.stringify({
         event: 'fulfil_skipped',
         invoiceId,
+        paymentLinkId: paymentLinkId || null,
         status: invoice.status,
         currency: invoice.currency,
         hasOrderRef: Boolean(parsed),
@@ -131,15 +166,15 @@ export async function handler(event) {
     return;
   }
 
-  const expectedGross = grossCents(entry.netCents);
-  const actualGross = decimalStringToCents(invoice.total_amount);
+  const actualGross = amountToCents(invoice.total_amount);
 
   if (actualGross !== expectedGross) {
     console.error(JSON.stringify({ event: 'fulfil_amount_mismatch', invoiceId, expectedGross, actualGross }));
     await sendInternalAlert(
       'Amount mismatch — fulfilment stopped',
-      `Invoice ${invoiceId} (order ${parsed.orderRef}) is marked paid but total_amount "${invoice.total_amount}" ` +
-        `does not match the expected gross of ${expectedGross} cents for SKU ${parsed.sku}. No entitlement was issued.`
+      `Invoice ${invoiceId} (order ${parsed.orderRef}) is marked paid but total_amount ` +
+        `${JSON.stringify(invoice.total_amount)} does not match the expected gross of ${expectedGross} cents ` +
+        `for SKU ${parsed.sku}. No entitlement was issued.`
     );
     return;
   }

@@ -228,6 +228,7 @@ const fieldClass =
     en: {
       sending: 'Processing...',
       redirecting: 'Redirecting to secure payment...',
+      redirectingTransfer: "Redirecting to your invoice — pay by bank transfer; access arrives once it's cleared.",
       pickPlan: 'Please choose a plan.',
       companyRequired: 'Please enter your company name.',
       taxIdRequired: 'Please enter a valid NIF/CIF.',
@@ -254,6 +255,8 @@ const fieldClass =
     es: {
       sending: 'Procesando...',
       redirecting: 'Redirigiendo al pago seguro...',
+      redirectingTransfer:
+        'Redirigiendo a tu factura — paga por transferencia bancaria; el acceso llegará una vez confirmado el pago.',
       pickPlan: 'Por favor, elige un plan.',
       companyRequired: 'Por favor, introduce el nombre de tu empresa.',
       taxIdRequired: 'Por favor, introduce un NIF/CIF válido.',
@@ -424,11 +427,13 @@ const fieldClass =
           });
           const data = await response.json().catch(() => ({}));
 
-          if (response.ok && data.invoiceUrl) {
-            showFeedback(feedback, t.redirecting, 'success');
-            // Top-level navigation to Qonto's hosted invoice page — the
-            // customer pays there; this page's job is done once redirected.
-            window.location.assign(data.invoiceUrl);
+          if (response.ok && data.paymentUrl) {
+            const isTransfer = data.paymentMethod === 'transfer';
+            showFeedback(feedback, isTransfer ? t.redirectingTransfer : t.redirecting, 'success');
+            // Top-level navigation to Qonto's hosted payment page (card) or
+            // invoice page (bank transfer fallback) — the customer pays
+            // there; this page's job is done once redirected.
+            window.location.assign(data.paymentUrl);
             return;
           }
 

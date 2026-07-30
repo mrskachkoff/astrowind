@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { decimalStringToCents, centsToDecimalString } from '../../lambda/payments-shared.mjs';
+import { decimalStringToCents, centsToDecimalString, amountToCents } from '../../lambda/payments-shared.mjs';
 import { CATALOGUE, grossCents } from '../../lambda/payments-catalogue.mjs';
 
 test('"3509.00" <-> 350900 round-trips exactly', () => {
@@ -41,4 +41,32 @@ test('rejects non-numeric or malformed strings instead of silently coercing', ()
 test('negative amounts (e.g. a credit note) round-trip too', () => {
   assert.equal(decimalStringToCents('-50.00'), -5000);
   assert.equal(centsToDecimalString(-5000), '-50.00');
+});
+
+// D2 regression: Qonto's invoice/payment-link responses serialize money as
+// { value, currency }, not a bare decimal string. lambda/payments-fulfil.mjs
+// used to call decimalStringToCents(invoice.total_amount) directly, which
+// silently returned null for every real invoice — every paid order aborted
+// as an amount mismatch. amountToCents is the fix: it unwraps the object.
+test('amountToCents converts the {value, currency} response shape', () => {
+  assert.equal(amountToCents({ value: '3509.00', currency: 'EUR' }), 350900);
+  assert.equal(amountToCents({ value: '0.29', currency: 'EUR' }), 29);
+});
+
+test('amountToCents round-trips every catalogue gross amount', () => {
+  for (const entry of Object.values(CATALOGUE)) {
+    const gross = grossCents(entry.netCents);
+    assert.equal(amountToCents({ value: centsToDecimalString(gross), currency: 'EUR' }), gross);
+  }
+});
+
+test('amountToCents rejects a non-EUR currency instead of silently accepting it', () => {
+  assert.equal(amountToCents({ value: '100.00', currency: 'USD' }), null);
+  assert.equal(amountToCents({ value: '100.00', currency: 'GBP' }), null);
+});
+
+test('amountToCents rejects the bare-string shape and other malformed input (the D2 regression)', () => {
+  for (const bad of ['3509.00', null, undefined, 42, {}, { value: '10.00' }, { currency: 'EUR' }, []]) {
+    assert.equal(amountToCents(bad), null, `expected null for ${JSON.stringify(bad)}`);
+  }
 });

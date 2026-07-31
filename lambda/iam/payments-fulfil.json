@@ -7,8 +7,7 @@
       "Action": "ssm:GetParameter",
       "Resource": [
         "arn:aws:ssm:eu-west-3:211125757125:parameter/futurion/payments/oauth-client",
-        "arn:aws:ssm:eu-west-3:211125757125:parameter/futurion/payments/entitlement-secret",
-        "arn:aws:ssm:eu-west-3:211125757125:parameter/futurion/payments/stripe-secret-key"
+        "arn:aws:ssm:eu-west-3:211125757125:parameter/futurion/payments/entitlement-secret"
       ]
     },
     {

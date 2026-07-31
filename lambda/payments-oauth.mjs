@@ -2,12 +2,11 @@
  * OAuth 2.0 access-token management for the payment Lambdas
  * (tmp/payments.md §3 — Token architecture).
  *
- * Qonto's Business API key auth does NOT cover two endpoints this feature
- * depends on — POST /v2/payment_links* (card payment) and
- * POST /v2/webhook_subscriptions (registering the fulfilment webhook) are
- * OAuth-only (docs.qonto.com/get-started/business-api/authentication/
- * introduction.md, verified July 2026). So all four payment Lambdas use
- * OAuth exclusively rather than mixing it with the API key.
+ * Qonto's Business API key auth does NOT cover the endpoint this feature
+ * depends on — POST /v2/webhook_subscriptions (registering the fulfilment
+ * webhook) is OAuth-only (docs.qonto.com/get-started/business-api/
+ * authentication/introduction.md, verified July 2026). So all four payment
+ * Lambdas use OAuth exclusively rather than mixing it with the API key.
  *
  * Storage (SSM SecureStrings, eu-west-3, matching the existing
  * /futurion/payments/* convention):

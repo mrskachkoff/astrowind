@@ -73,8 +73,10 @@ async function getEntitlementSecret() {
   return getSecret(ssm, '/futurion/payments/entitlement-secret');
 }
 
-async function getStripeSecretKey() {
-  return getSecret(ssm, '/futurion/payments/stripe-secret-key');
+// Read from a plain Lambda environment variable, not SSM like the other
+// secrets here — by owner choice, set directly in the function's config.
+function getStripeSecretKey() {
+  return process.env.STRIPE_SECRET_KEY;
 }
 
 async function sendInternalAlert(subject, text) {

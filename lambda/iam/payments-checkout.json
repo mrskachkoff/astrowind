@@ -8,12 +8,6 @@
       "Resource": "arn:aws:ssm:eu-west-3:211125757125:parameter/futurion/payments/oauth-client"
     },
     {
-      "Sid": "ReadStripeSecretKey",
-      "Effect": "Allow",
-      "Action": "ssm:GetParameter",
-      "Resource": "arn:aws:ssm:eu-west-3:211125757125:parameter/futurion/payments/stripe-secret-key"
-    },
-    {
       "Sid": "ReadWriteOAuthTokens",
       "Effect": "Allow",
       "Action": ["ssm:GetParameter", "ssm:PutParameter"],

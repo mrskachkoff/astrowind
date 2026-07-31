@@ -27,8 +27,7 @@
  * (required for a refresh token), client.read/write, client_invoices.read,
  * client_invoice.write (also covers POST .../mark_as_paid, used by the card
  * path once Stripe confirms payment), webhook, organization.read (used for
- * the one-off connectivity check). No payment_link.* scope — the Qonto
- * payment-link/Mollie card path has been replaced by Stripe.
+ * the one-off connectivity check).
  */
 
 import { randomBytes } from 'node:crypto';

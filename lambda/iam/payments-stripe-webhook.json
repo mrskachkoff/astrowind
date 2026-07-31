@@ -2,18 +2,6 @@
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "ReadStripeWebhookSecret",
-      "Effect": "Allow",
-      "Action": "ssm:GetParameter",
-      "Resource": "arn:aws:ssm:eu-west-3:211125757125:parameter/futurion/payments/stripe-webhook-secret"
-    },
-    {
-      "Sid": "DecryptStripeWebhookSecret",
-      "Effect": "Allow",
-      "Action": "kms:Decrypt",
-      "Resource": "arn:aws:kms:eu-west-3:211125757125:alias/aws/ssm"
-    },
-    {
       "Sid": "InvokeFulfilLambdaOnly",
       "Effect": "Allow",
       "Action": "lambda:InvokeFunction",

@@ -8,9 +8,8 @@
  * forwarded; fulfil always re-fetches the invoice from Qonto as the only
  * trusted source.
  *
- * This handler only ever sees the bank-transfer path now. Card payments went
- * through Qonto's payment-link/Mollie connection, which has been removed —
- * card checkout is Stripe (lambda/payments-stripe-webhook.mjs).
+ * This handler only ever sees the bank-transfer path. Card checkout is
+ * Stripe (lambda/payments-stripe-webhook.mjs).
  *
  * Hard rule: this handler makes NO Qonto or SES calls. Qonto's delivery
  * budget is ~1 second; the only work here is a signature check (after the

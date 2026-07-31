@@ -43,7 +43,7 @@ test('negative amounts (e.g. a credit note) round-trip too', () => {
   assert.equal(centsToDecimalString(-5000), '-50.00');
 });
 
-// D2 regression: Qonto's invoice/payment-link responses serialize money as
+// D2 regression: Qonto's invoice responses serialize money as
 // { value, currency }, not a bare decimal string. lambda/payments-fulfil.mjs
 // used to call decimalStringToCents(invoice.total_amount) directly, which
 // silently returned null for every real invoice — every paid order aborted

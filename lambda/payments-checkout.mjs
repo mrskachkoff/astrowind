@@ -24,7 +24,10 @@
  *
  * Qonto auth is OAuth 2.0 (lambda/payments-oauth.mjs) — required because
  * POST /v2/webhook_subscriptions is OAuth-only (the bank-transfer webhook
- * this checkout ultimately depends on). Stripe auth is a static secret key.
+ * this checkout ultimately depends on). Stripe auth is a static secret key,
+ * read from the plain Lambda environment variable STRIPE_SECRET_KEY (set
+ * directly in the function's console/CLI config, by owner choice — not SSM
+ * like the other secrets here).
  */
 
 import { SSMClient } from '@aws-sdk/client-ssm';
@@ -36,7 +39,6 @@ import {
   createRateLimiter,
   isTimestampValid,
   sendEmail,
-  getSecret,
   CATALOGUE,
   vatCents,
   grossCents,
@@ -94,8 +96,8 @@ function getQontoToken() {
   });
 }
 
-async function getStripeSecretKey() {
-  return getSecret(ssm, '/futurion/payments/stripe-secret-key');
+function getStripeSecretKey() {
+  return process.env.STRIPE_SECRET_KEY;
 }
 
 function buildThankYouUrl(locale) {

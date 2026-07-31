@@ -18,19 +18,22 @@
  * `{timestamp}.{raw_body}`, HMAC-SHA256 — except Stripe may send more than
  * one `v1` value (e.g. during a signing-secret rotation). The shared
  * verifier in payments-shared.mjs accepts a match against any v1 value.
+ *
+ * The signing secret is read from the plain Lambda environment variable
+ * STRIPE_WEBHOOK_SECRET, not SSM like the other secrets here — by owner
+ * choice, set directly in the function's console/CLI config. No SSM client
+ * is needed in this file as a result.
  */
 
-import { SSMClient } from '@aws-sdk/client-ssm';
 import { LambdaClient, InvokeCommand } from '@aws-sdk/client-lambda';
-import { jsonResponse, getSecret, verifySignature } from './payments-shared.mjs';
+import { jsonResponse, verifySignature } from './payments-shared.mjs';
 
-const ssm = new SSMClient({ region: 'eu-west-3' });
 const lambda = new LambdaClient({ region: 'eu-west-3' });
 
 const SIGNATURE_HEADER = 'stripe-signature';
 
-async function getWebhookSecret() {
-  return getSecret(ssm, '/futurion/payments/stripe-webhook-secret');
+function getWebhookSecret() {
+  return process.env.STRIPE_WEBHOOK_SECRET;
 }
 
 export async function handler(event) {

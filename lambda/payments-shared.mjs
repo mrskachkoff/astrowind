@@ -440,7 +440,7 @@ export function centsToDecimalString(cents) {
 }
 
 /**
- * Qonto serializes money on invoice/payment-link *responses* as an object
+ * Qonto serializes money on invoice *responses* as an object
  * `{ value: "3509.00", currency: "EUR" }`, not a bare decimal string (only
  * request bodies use the bare-string form for `unit_price`). Returns null for
  * anything malformed or non-EUR — never silently coerces a foreign currency.
@@ -455,11 +455,11 @@ export function amountToCents(amount) {
 // Plain fetch, 10s timeout, JSON in/out. Auth is OAuth 2.0: `Authorization:
 // Bearer <access_token>` (see payments-oauth.mjs for how the token is
 // obtained/refreshed). Verified against Qonto docs, July 2026: the API-key
-// scheme (`Authorization: <login>:<secret-key>`) does NOT cover the two
-// endpoints this feature depends on — POST /v2/payment_links* and
-// POST /v2/webhook_subscriptions are OAuth-only — so OAuth is used
-// everywhere for one consistent auth path, even on the endpoints that would
-// also accept an API key (client/invoice reads and writes).
+// scheme (`Authorization: <login>:<secret-key>`) does NOT cover the
+// endpoint this feature depends on — POST /v2/webhook_subscriptions is
+// OAuth-only — so OAuth is used everywhere for one consistent auth path,
+// even on the endpoints that would also accept an API key (client/invoice
+// reads and writes).
 //
 // Sandbox-only requirement (docs.qonto.com/get-started/general/sandbox-access,
 // verified July 2026): every request to thirdparty-sandbox.staging.qonto.co

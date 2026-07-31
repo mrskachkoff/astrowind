@@ -4,9 +4,19 @@ import { buildClientCreatePayload } from '../../lambda/payments-shared.mjs';
 
 // D3 regression: POST /v2/clients requires `kind` and `currency` for the
 // client to be usable for invoicing, and its billing_address sub-object uses
-// street_address/zip_code/city/province_code/country_code — NOT
-// first_line/province, which the original implementation sent. Both bugs
-// would 422 on every first-time customer.
+// street_address/zip_code/city/country_code — NOT first_line, which the
+// original implementation sent. Both bugs would 422 on every first-time
+// customer.
+//
+// D5 regression: `province_code` is NOT a generic state/region field — it is
+// Italy-only ("required only for Italian organizations", max 2 chars) and
+// Qonto validates that length regardless of the client's country. Sending a
+// free-text Spanish province name (e.g. "Madrid") into it 422s on every
+// single checkout: "Field validation for 'province_code' failed on the 'max'
+// tag" (reproduced live against the Qonto sandbox, July 2026 — the previous
+// version of this test only asserted field NAMES, never called the live API,
+// so it never caught this). billing_address must not include province_code
+// at all for a Spain-only checkout.
 
 const INPUT = {
   companyName: 'Acme SL',
@@ -16,7 +26,6 @@ const INPUT = {
   line1: 'Calle Mayor 1',
   postalCode: '28001',
   city: 'Madrid',
-  province: 'Madrid',
 };
 
 test('includes the required kind and currency fields', () => {
@@ -25,17 +34,17 @@ test('includes the required kind and currency fields', () => {
   assert.equal(payload.currency, 'EUR');
 });
 
-test('billing_address uses the real Qonto field names, not first_line/province', () => {
+test('billing_address uses the real Qonto field names, not first_line, and omits province_code entirely', () => {
   const payload = buildClientCreatePayload(INPUT);
   assert.deepEqual(payload.billing_address, {
     street_address: 'Calle Mayor 1',
     zip_code: '28001',
     city: 'Madrid',
-    province_code: 'Madrid',
     country_code: 'ES',
   });
   assert.equal('first_line' in payload.billing_address, false);
   assert.equal('province' in payload.billing_address, false);
+  assert.equal('province_code' in payload.billing_address, false);
 });
 
 test('carries through name, tax id, email, and locale unchanged', () => {

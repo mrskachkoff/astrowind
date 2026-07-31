@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHmac } from 'node:crypto';
-import { verifySignature, parseSignatureHeader } from '../../lambda/payments-webhook.mjs';
+import { verifySignature, parseSignatureHeader } from '../../lambda/payments-shared.mjs';
 
 // Qonto's official published test vector (docs.qonto.com/api-reference/
 // business-api/webhooks/setup.md, verified July 2026):
@@ -17,10 +17,10 @@ test('official Qonto test vector verifies (checked at its own timestamp)', () =>
   assert.equal(verifySignature(VECTOR_BODY, VECTOR_HEADER, VECTOR_SECRET, { now: VECTOR_TIME_MS }), true);
 });
 
-test('parseSignatureHeader extracts timestamp and signature', () => {
+test('parseSignatureHeader extracts timestamp and signature (as a single-element signatures array)', () => {
   assert.deepEqual(parseSignatureHeader(VECTOR_HEADER), {
     timestamp: '1704110400',
-    signature: '56aff06dc227db80d6568a5070f912c601c31f20451745d257cbc0b5dfa93805',
+    signatures: ['56aff06dc227db80d6568a5070f912c601c31f20451745d257cbc0b5dfa93805'],
   });
 });
 

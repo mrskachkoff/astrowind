@@ -3,11 +3,14 @@
  *
  * POST only, from Qonto (not the browser — no CORS/origin allowlist here).
  * Verifies the HMAC signature over the *exact raw body bytes*, filters for a
- * paid `v1/client-invoices` or `v1/payment-links` event, and async-invokes
- * the fulfil Lambda with only the invoice id (and payment link id, if that's
- * the source) — the webhook payload itself is never trusted or forwarded;
- * fulfil always re-fetches the invoice (and payment link, where relevant)
- * from Qonto as the only trusted source.
+ * paid `v1/client-invoices` event, and async-invokes the fulfil Lambda with
+ * only the invoice id — the webhook payload itself is never trusted or
+ * forwarded; fulfil always re-fetches the invoice from Qonto as the only
+ * trusted source.
+ *
+ * This handler only ever sees the bank-transfer path now. Card payments went
+ * through Qonto's payment-link/Mollie connection, which has been removed —
+ * card checkout is Stripe (lambda/payments-stripe-webhook.mjs).
  *
  * Hard rule: this handler makes NO Qonto or SES calls. Qonto's delivery
  * budget is ~1 second; the only work here is a signature check (after the
@@ -18,48 +21,22 @@
  * `X-Qonto-Signature: t={timestamp},v1={signature}`; the signed payload is
  * `{timestamp}.{raw_body}`, HMAC-SHA256 with the subscription secret. This
  * is doc-verified, not inferred — confirmed against the docs' own published
- * test vector (payload `{"test":"data"}`, secret `test-secret`).
+ * test vector (payload `{"test":"data"}`, secret `test-secret`). The verifier
+ * itself lives in payments-shared.mjs, shared with the Stripe webhook — both
+ * providers sign `{t}.{raw_body}` the same way.
  */
 
 import { SSMClient } from '@aws-sdk/client-ssm';
 import { LambdaClient, InvokeCommand } from '@aws-sdk/client-lambda';
-import { createHmac, timingSafeEqual } from 'node:crypto';
-import { jsonResponse, getSecret, parseOrderRef } from './payments-shared.mjs';
+import { jsonResponse, getSecret, parseOrderRef, verifySignature } from './payments-shared.mjs';
 
 const ssm = new SSMClient({ region: 'eu-west-3' });
 const lambda = new LambdaClient({ region: 'eu-west-3' });
 
 const SIGNATURE_HEADER = 'x-qonto-signature';
-const MAX_SIGNATURE_AGE_MS = 5 * 60 * 1000; // reject stale/replayed deliveries
 
 async function getWebhookSecret() {
   return getSecret(ssm, '/futurion/payments/webhook-secret');
-}
-
-/**
- * Parses `t={timestamp},v1={signature}` into { timestamp, signature }, or
- * null if the header doesn't match that shape.
- */
-export function parseSignatureHeader(header) {
-  if (typeof header !== 'string') return null;
-  const match = /^t=(\d+),v1=([0-9a-f]+)$/.exec(header.trim());
-  if (!match) return null;
-  return { timestamp: match[1], signature: match[2] };
-}
-
-export function verifySignature(rawBody, signatureHeader, secret, { now = Date.now() } = {}) {
-  const parsed = parseSignatureHeader(signatureHeader);
-  if (!parsed) return false;
-
-  const timestampMs = Number(parsed.timestamp) * 1000;
-  if (!Number.isFinite(timestampMs) || Math.abs(now - timestampMs) > MAX_SIGNATURE_AGE_MS) return false;
-
-  const signedPayload = `${parsed.timestamp}.${rawBody}`;
-  const expected = createHmac('sha256', secret).update(signedPayload).digest('hex');
-  const a = Buffer.from(parsed.signature);
-  const b = Buffer.from(expected);
-  if (a.length !== b.length) return false;
-  return timingSafeEqual(a, b);
 }
 
 export async function handler(event) {
@@ -96,20 +73,10 @@ export async function handler(event) {
     let fulfilPayload = null;
 
     if (payload?.type === 'v1/client-invoices') {
-      // The bank-transfer path (and a backstop for card payments — it is
-      // unverified whether a card payment marks the client invoice `paid`
-      // immediately; confirmed either way during the sandbox gate).
+      // The bank-transfer path — the only path this webhook handles now.
       const parsed = parseOrderRef(data.purchase_order);
       if (parsed && data.status === 'paid') {
         fulfilPayload = { invoiceId: data.id };
-      }
-    } else if (payload?.type === 'v1/payment-links') {
-      // Card/Apple Pay/PayPal path. This event carries no purchase_order —
-      // fulfil re-fetches the invoice by id and validates our order-ref shape
-      // there (docs.qonto.com/api-reference/business-api/webhooks/
-      // supported-webhooks/v1-payment-links.md, verified July 2026).
-      if (data.resource_type === 'Invoice' && data.status === 'paid' && data.resource_id) {
-        fulfilPayload = { invoiceId: data.resource_id, paymentLinkId: data.payment_link_id };
       }
     }
 

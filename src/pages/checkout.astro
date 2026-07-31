@@ -7,7 +7,7 @@ import CheckoutForm from '~/components/widgets/CheckoutForm.astro';
 // so it never enters the sitemap/hreflang (tmp/payments.md §7.1).
 const metadata = {
   title: 'Checkout',
-  description: 'Complete your company details to receive a secure Qonto payment link.',
+  description: 'Complete your company details and choose how to pay: card or bank transfer invoice.',
   robots: {
     index: false,
     follow: true,
@@ -19,6 +19,6 @@ const metadata = {
   <CheckoutForm
     id="checkout"
     title="Checkout"
-    subtitle="Choose your plan and complete your company details. You'll be redirected to a secure Qonto payment page to complete payment."
+    subtitle="Choose your plan, complete your company details, and pick how to pay. You'll be redirected to a secure payment page to complete payment."
   />
 </Layout>

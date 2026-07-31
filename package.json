@@ -32,7 +32,7 @@
     "fix:eslint": "eslint --fix .",
     "fix:prettier": "prettier -w .",
     "build:lambda:download": "cd lambda && npm ci --omit=dev && rm -rf build trustprompt-download.zip && mkdir -p build && cp trustprompt-download.mjs build/ && cp -R node_modules build/ && cd build && zip -qr ../trustprompt-download.zip . && cd .. && rm -rf build",
-    "build:lambda:payments": "cd lambda && npm ci --omit=dev && rm -rf build payments.zip && mkdir -p build && cp payments-checkout.mjs payments-webhook.mjs payments-fulfil.mjs payments-access.mjs payments-shared.mjs payments-catalogue.mjs payments-oauth.mjs build/ && cp -R node_modules build/ && cd build && zip -qr ../payments.zip . && cd .. && rm -rf build",
+    "build:lambda:payments": "cd lambda && npm ci --omit=dev && rm -rf build payments.zip && mkdir -p build && cp payments-checkout.mjs payments-webhook.mjs payments-fulfil.mjs payments-access.mjs payments-shared.mjs payments-catalogue.mjs payments-oauth.mjs payments-stripe.mjs payments-stripe-webhook.mjs build/ && cp -R node_modules build/ && cd build && zip -qr ../payments.zip . && cd .. && rm -rf build",
     "test:payments": "node --test tests/payments/*.test.mjs"
   },
   "dependencies": {

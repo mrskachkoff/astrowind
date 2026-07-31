@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 /**
  * One-off, owner-run script: creates the Qonto webhook subscription for
- * `v1/client-invoices` and `v1/payment-links` events pointing at the
+ * `v1/client-invoices` events (the bank-transfer path) pointing at the
  * deployed payments-webhook Function URL, and stores the signing secret in
  * SSM before the request is sent (never scraped out of this script's
- * stdout).
+ * stdout). The card path is Stripe now — its webhook subscription is created
+ * directly in the Stripe Dashboard/CLI, not by this script.
  *
  * Run lambda/scripts/qonto-oauth-bootstrap.mjs first — this script reads the
  * OAuth tokens it stores, because `POST /v2/webhook_subscriptions` is
@@ -67,9 +68,9 @@ console.log(`Creating a Qonto webhook subscription at ${baseUrl} -> ${targetUrl}
 // which 404s).
 const response = await qonto.post('/v2/webhook_subscriptions', {
   callback_url: targetUrl,
-  types: ['v1/client-invoices', 'v1/payment-links'],
+  types: ['v1/client-invoices'],
   secret: webhookSecret,
-  description: 'solutions.futurion.es checkout fulfilment',
+  description: 'solutions.futurion.es checkout fulfilment (bank transfer)',
 });
 
 console.log('Qonto response:');

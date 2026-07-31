@@ -1,21 +1,30 @@
 /**
- * Lambda handler for the Qonto checkout Function URL (tmp/payments.md §5.1).
+ * Lambda handler for the checkout Function URL (tmp/payments.md §5.1).
  *
  * POST only. Validates the checkout form, finds-or-creates the customer as a
- * Qonto client, creates a Qonto client invoice, then creates a Qonto payment
- * link (card/Apple Pay/PayPal, backed by the org's Mollie connection) for
- * that invoice and returns its hosted URL for the browser to redirect to.
- * If payment-link creation fails (connection not enabled, provider error),
- * falls back to the invoice's own hosted page (bank transfer only) rather
- * than failing the checkout — see paymentMethod in the response.
+ * Qonto client, then branches on the customer's own choice of
+ * `paymentMethod`:
  *
- * No database: Qonto is the system of record; the only local state is an
- * in-memory per-IP rate limit (resets on cold start, same accepted
- * limitation as lambda/trustprompt-download.mjs).
+ *   - 'transfer': creates a Qonto client invoice now and returns its hosted
+ *     `invoice_url` (bank transfer). Unchanged from the original design.
+ *   - 'card': creates NO Qonto invoice yet — goes straight to a Stripe
+ *     Checkout Session and returns its hosted `url`. The Qonto invoice is
+ *     created (and immediately marked paid) by payments-fulfil.mjs only
+ *     after Stripe confirms payment, so an abandoned card checkout never
+ *     burns an invoice number. See lambda/payments-stripe.mjs.
  *
- * Auth is OAuth 2.0 (lambda/payments-oauth.mjs) — required because
- * POST /v2/payment_links is OAuth-only (verified against Qonto docs, July
- * 2026; see the comment above createQontoClient in payments-shared.mjs).
+ * There is no silent fallback between the two anymore: the customer chose,
+ * and a provider failure on their chosen method is a hard error with an
+ * internal alert, not a downgrade to the other method.
+ *
+ * No database: Qonto is the system of record for the transfer path, Stripe
+ * (until fulfilled into a Qonto invoice) for the card path; the only local
+ * state is an in-memory per-IP rate limit (resets on cold start, same
+ * accepted limitation as lambda/trustprompt-download.mjs).
+ *
+ * Qonto auth is OAuth 2.0 (lambda/payments-oauth.mjs) — required because
+ * POST /v2/webhook_subscriptions is OAuth-only (the bank-transfer webhook
+ * this checkout ultimately depends on). Stripe auth is a static secret key.
  */
 
 import { SSMClient } from '@aws-sdk/client-ssm';
@@ -27,6 +36,7 @@ import {
   createRateLimiter,
   isTimestampValid,
   sendEmail,
+  getSecret,
   CATALOGUE,
   vatCents,
   grossCents,
@@ -35,10 +45,12 @@ import {
   isValidSpanishTaxId,
   normalizeSpanishTaxId,
   createQontoClient,
-  centsToDecimalString,
   buildClientCreatePayload,
+  buildInvoicePayload,
+  findInvoiceByOrderRef,
 } from './payments-shared.mjs';
 import { getAccessToken } from './payments-oauth.mjs';
+import { createStripeClient } from './payments-stripe.mjs';
 
 const ssm = new SSMClient({ region: 'eu-west-3' });
 const ses = new SESClient({ region: 'eu-west-3' });
@@ -51,14 +63,21 @@ const MAX_FIELD_LENGTH = 200;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const DUPLICATE_ORDER_WINDOW_MS = 30 * 60 * 1000;
 const RETRY_LOOKUP_WINDOW_MS = 5 * 60 * 1000;
-const PAYMENT_METHODS = ['credit_card', 'apple_pay', 'paypal'];
 
 // 5/hour per IP — same shape as trustprompt-download.mjs's checkRateLimit,
 // but its own independent bucket (a bot hammering /checkout should not affect
 // the download endpoint's budget, or vice versa).
 const checkRateLimit = createRateLimiter({ maxRequests: 5, windowMs: 60 * 60 * 1000 });
 
-const ALLOWED_TOP_LEVEL_FIELDS = new Set(['sku', 'locale', 'customer', 'termsAccepted', '_t', 'website']);
+const ALLOWED_TOP_LEVEL_FIELDS = new Set([
+  'sku',
+  'locale',
+  'paymentMethod',
+  'customer',
+  'termsAccepted',
+  '_t',
+  'website',
+]);
 const ALLOWED_CUSTOMER_FIELDS = new Set(['companyName', 'taxId', 'contactName', 'email', 'billingAddress']);
 const ALLOWED_ADDRESS_FIELDS = new Set(['line1', 'postalCode', 'city', 'province', 'country']);
 
@@ -75,27 +94,20 @@ function getQontoToken() {
   });
 }
 
-/**
- * Creates a card/Apple Pay/PayPal payment link for an already-created
- * invoice. Never throws to the caller — a failed connection to the payment
- * provider must degrade to the invoice's own bank-transfer page, not break
- * checkout (tmp/payments.md §4). Returns null on failure; the caller alerts.
- */
-async function tryCreatePaymentLink(qonto, { invoiceId, invoiceNumber, debitorName, gross }) {
-  try {
-    const res = await qonto.post('/v2/payment_links', {
-      invoice_id: invoiceId,
-      invoice_number: invoiceNumber,
-      debitor_name: debitorName,
-      amount: { value: centsToDecimalString(gross), currency: 'EUR' },
-      potential_payment_methods: PAYMENT_METHODS,
-    });
-    const link = res.payment_link ?? res;
-    return link?.url ? link : null;
-  } catch (err) {
-    console.error('Payment link creation failed:', err);
-    return null;
-  }
+async function getStripeSecretKey() {
+  return getSecret(ssm, '/futurion/payments/stripe-secret-key');
+}
+
+function buildThankYouUrl(locale) {
+  const base = process.env.CHECKOUT_SUCCESS_URL || 'https://solutions.futurion.es';
+  const path = locale === 'es' ? '/es/pago/gracias/' : '/payment/thank-you/';
+  return `${base}${path}?session_id={CHECKOUT_SESSION_ID}`;
+}
+
+function buildCancelUrl(locale, sku) {
+  const base = process.env.CHECKOUT_CANCEL_URL || 'https://solutions.futurion.es';
+  const path = locale === 'es' ? '/es/pago/' : '/checkout/';
+  return `${base}${path}?sku=${encodeURIComponent(sku)}`;
 }
 
 async function sendInternalAlert(subject, text) {
@@ -177,6 +189,12 @@ export async function handler(event) {
       return jsonResponse(400, { code: 'invalid_locale' });
     }
 
+    const paymentMethod =
+      body.paymentMethod === 'card' ? 'card' : body.paymentMethod === 'transfer' ? 'transfer' : null;
+    if (!paymentMethod) {
+      return jsonResponse(400, { code: 'invalid_payment_method' });
+    }
+
     const customer = body.customer && typeof body.customer === 'object' ? body.customer : {};
     const billingAddress =
       customer.billingAddress && typeof customer.billingAddress === 'object' ? customer.billingAddress : {};
@@ -210,7 +228,9 @@ export async function handler(event) {
       return jsonResponse(400, { code: 'terms_required' });
     }
 
-    // --- Business logic: find/create Qonto client, then create an invoice ---
+    // --- Business logic: find/create Qonto client (both payment methods need
+    // a Qonto client — the card path passes its id through to Stripe metadata
+    // so fulfil can create the invoice against it once payment is proven) ---
 
     const qonto = createQontoClient({
       baseUrl: process.env.QONTO_API_BASE_URL,
@@ -239,7 +259,7 @@ export async function handler(event) {
       } else {
         const created = await qonto.post(
           '/v2/clients',
-          buildClientCreatePayload({ companyName, taxId, email, locale, line1, postalCode, city, province })
+          buildClientCreatePayload({ companyName, taxId, email, locale, line1, postalCode, city })
         );
         clientId = created.client?.id ?? created.id;
       }
@@ -252,6 +272,70 @@ export async function handler(event) {
       console.error('Qonto client id missing after lookup/create');
       return jsonResponse(502, { code: 'server_error' });
     }
+
+    const orderRef = mintOrderRef(sku, locale);
+
+    // --- Card path: Stripe Checkout Session, no Qonto invoice yet ----------
+
+    if (paymentMethod === 'card') {
+      const stripe = createStripeClient({ secretKey: await getStripeSecretKey() });
+      let session;
+      try {
+        session = await stripe.createCheckoutSession({
+          orderRef,
+          sku,
+          entry: catalogueEntry,
+          locale,
+          email,
+          clientId,
+          successUrl: buildThankYouUrl(locale),
+          cancelUrl: buildCancelUrl(locale, sku),
+          grossCents: grossCents(catalogueEntry.netCents),
+        });
+      } catch (err) {
+        console.error('Stripe checkout session creation failed:', err);
+        await sendInternalAlert(
+          'Stripe checkout session creation failed',
+          `Order ${orderRef} (client ${clientId}, SKU ${sku}) could not create a Stripe session. Customer saw an error.`
+        );
+        return jsonResponse(502, { code: 'server_error' });
+      }
+
+      if (!session?.url) {
+        console.error('Stripe session created without a url:', session?.id);
+        await sendInternalAlert(
+          'Stripe checkout session missing url',
+          `Order ${orderRef} — session ${session?.id ?? 'unknown'} was created but has no url.`
+        );
+        return jsonResponse(502, { code: 'server_error' });
+      }
+
+      console.log(
+        JSON.stringify({
+          event: 'checkout_created',
+          orderRef,
+          clientId,
+          sku,
+          paymentMethod: 'card',
+          stripeSessionId: session.id,
+        })
+      );
+
+      return jsonResponse(200, {
+        orderRef,
+        paymentUrl: session.url,
+        invoiceUrl: null,
+        paymentMethod: 'card',
+        product: catalogueEntry.product,
+        offer: catalogueEntry.offer[locale],
+        netCents: catalogueEntry.netCents,
+        vatCents: vatCents(catalogueEntry.netCents),
+        grossCents: grossCents(catalogueEntry.netCents),
+        currency: 'EUR',
+      });
+    }
+
+    // --- Transfer path: create the Qonto invoice now, as before ------------
 
     // Duplicate-order guard — best-effort, not transactional (tmp/payments.md
     // §11): worst case is two unpaid invoices, one paid, the other expiring
@@ -273,24 +357,11 @@ export async function handler(event) {
       });
       if (existing) {
         console.log(JSON.stringify({ event: 'checkout_duplicate_reused', orderRef: existing.purchase_order, sku }));
-        const paymentLink = await tryCreatePaymentLink(qonto, {
-          invoiceId: existing.id,
-          invoiceNumber: existing.number,
-          debitorName: companyName,
-          gross: grossCents(catalogueEntry.netCents),
-        });
-        if (!paymentLink) {
-          await sendInternalAlert(
-            'Payment link unavailable (reused invoice)',
-            `Invoice ${existing.id} (order ${existing.purchase_order}) has no card payment link. ` +
-              'Customer was sent the bank-transfer invoice page instead.'
-          );
-        }
         return jsonResponse(200, {
           orderRef: existing.purchase_order,
-          paymentUrl: paymentLink?.url || existing.invoice_url,
+          paymentUrl: existing.invoice_url,
           invoiceUrl: existing.invoice_url,
-          paymentMethod: paymentLink ? 'card' : 'transfer',
+          paymentMethod: 'transfer',
           product: catalogueEntry.product,
           offer: catalogueEntry.offer[locale],
           netCents: catalogueEntry.netCents,
@@ -303,29 +374,13 @@ export async function handler(event) {
       console.error('Duplicate-order lookup failed, proceeding to create a new invoice:', err);
     }
 
-    const orderRef = mintOrderRef(sku, locale);
-    const today = new Date().toISOString().slice(0, 10);
-
-    const invoiceBody = {
-      client_id: clientId,
-      currency: 'EUR',
-      issue_date: today,
-      due_date: today,
-      purchase_order: orderRef,
-      payment_methods: { iban: process.env.QONTO_BANK_IBAN },
-      items: [
-        {
-          title: `${catalogueEntry.name[locale]} — ${catalogueEntry.offer[locale]}`,
-          description: catalogueEntry.description[locale],
-          // Qonto's API rejects a numeric quantity: "json: cannot unmarshal
-          // number into Go struct field InvoiceItem.items.quantity of type
-          // string" (verified against a live 422 in sandbox, July 2026).
-          quantity: '1',
-          unit_price: { value: centsToDecimalString(catalogueEntry.netCents), currency: 'EUR' },
-          vat_rate: '0.21',
-        },
-      ],
-    };
+    const invoiceBody = buildInvoicePayload({
+      clientId,
+      entry: catalogueEntry,
+      locale,
+      orderRef,
+      iban: process.env.QONTO_BANK_IBAN,
+    });
 
     let created;
     try {
@@ -339,31 +394,12 @@ export async function handler(event) {
       // unmatched result must fall through to a fresh creation attempt.
       console.error('Qonto invoice creation failed, checking for a partial success:', err);
       try {
-        const retryCutoffIso = new Date(Date.now() - RETRY_LOOKUP_WINDOW_MS).toISOString();
-        const retryLookup = await qonto.get(
-          `/v2/client_invoices?filter[created_at_from]=${encodeURIComponent(retryCutoffIso)}&per_page=100`
-        );
-        created = (retryLookup.client_invoices ?? []).find((inv) => inv.purchase_order === orderRef);
+        created = await findInvoiceByOrderRef(qonto, orderRef, RETRY_LOOKUP_WINDOW_MS);
         if (!created) return jsonResponse(502, { code: 'server_error' });
       } catch (retryErr) {
         console.error('Qonto invoice retry lookup failed:', retryErr);
         return jsonResponse(502, { code: 'server_error' });
       }
-    }
-
-    const paymentLink = await tryCreatePaymentLink(qonto, {
-      invoiceId: created.id,
-      invoiceNumber: created.number,
-      debitorName: companyName,
-      gross: grossCents(catalogueEntry.netCents),
-    });
-    if (!paymentLink) {
-      await sendInternalAlert(
-        'Payment link unavailable',
-        `Invoice ${created.id} (order ${orderRef}) was created but no card payment link could be created ` +
-          "(the org's payment-link connection may not be enabled). Customer was sent the bank-transfer " +
-          'invoice page instead.'
-      );
     }
 
     // Structured log — never log tax IDs, addresses, or the API key.
@@ -374,15 +410,15 @@ export async function handler(event) {
         invoiceId: created.id,
         clientId,
         sku,
-        paymentMethod: paymentLink ? 'card' : 'transfer',
+        paymentMethod: 'transfer',
       })
     );
 
     return jsonResponse(200, {
       orderRef,
-      paymentUrl: paymentLink?.url || created.invoice_url,
+      paymentUrl: created.invoice_url,
       invoiceUrl: created.invoice_url,
-      paymentMethod: paymentLink ? 'card' : 'transfer',
+      paymentMethod: 'transfer',
       product: catalogueEntry.product,
       offer: catalogueEntry.offer[locale],
       netCents: catalogueEntry.netCents,

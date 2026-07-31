@@ -23,10 +23,12 @@
  * then paste back the `code` query-string value from the redirect (valid for
  * only 10 minutes) when prompted.
  *
- * Scopes requested match everything the four payment Lambdas call:
- * offline_access (required for a refresh token), client.read/write,
- * client_invoices.read, client_invoice.write, payment_link.read/write,
- * webhook, organization.read (used for the one-off connectivity check).
+ * Scopes requested match everything the payment Lambdas call: offline_access
+ * (required for a refresh token), client.read/write, client_invoices.read,
+ * client_invoice.write (also covers POST .../mark_as_paid, used by the card
+ * path once Stripe confirms payment), webhook, organization.read (used for
+ * the one-off connectivity check). No payment_link.* scope — the Qonto
+ * payment-link/Mollie card path has been replaced by Stripe.
  */
 
 import { randomBytes } from 'node:crypto';
@@ -54,8 +56,6 @@ const SCOPES = [
   'client.write',
   'client_invoices.read',
   'client_invoice.write',
-  'payment_link.read',
-  'payment_link.write',
   'webhook',
 ].join(' ');
 

@@ -162,6 +162,42 @@ const fieldClass =
       <input type="text" name="website" tabindex="-1" autocomplete="off" />
     </div>
 
+    <fieldset class="mb-6">
+      <legend class="block text-sm font-medium mb-2">
+        {lang === 'es' ? 'Forma de pago' : 'Payment method'}
+      </legend>
+      <div class="space-y-2">
+        <label class="flex items-start gap-3 rounded-lg border border-gray-200 dark:border-gray-700 p-3 cursor-pointer">
+          <input type="radio" name="paymentMethod" value="card" checked class="mt-1" />
+          <span>
+            <span class="block font-medium">{lang === 'es' ? 'Tarjeta' : 'Card'}</span>
+            <span class="block text-sm text-muted">
+              {
+                lang === 'es'
+                  ? 'Pago inmediato con tarjeta; acceso en cuanto se confirme el pago.'
+                  : 'Immediate card payment; access as soon as payment is confirmed.'
+              }
+            </span>
+          </span>
+        </label>
+        <label class="flex items-start gap-3 rounded-lg border border-gray-200 dark:border-gray-700 p-3 cursor-pointer">
+          <input type="radio" name="paymentMethod" value="transfer" class="mt-1" />
+          <span>
+            <span class="block font-medium">
+              {lang === 'es' ? 'Transferencia bancaria (factura)' : 'Bank transfer (invoice)'}
+            </span>
+            <span class="block text-sm text-muted">
+              {
+                lang === 'es'
+                  ? 'Recibirás una factura; el acceso llega una vez confirmado el pago.'
+                  : "You'll receive an invoice; access arrives once the transfer clears."
+              }
+            </span>
+          </span>
+        </label>
+      </div>
+    </fieldset>
+
     <div class="mt-3 flex items-start">
       <div class="flex mt-0.5">
         <input id="termsAccepted" name="termsAccepted" type="checkbox" class={`cursor-pointer mt-1 ${fieldClass}`} />
@@ -241,6 +277,7 @@ const fieldClass =
         invalid_sku: 'Please choose a valid plan.',
         invalid_locale: 'Something went wrong. Please try again later.',
         invalid_country: 'Online checkout is currently available for companies in Spain only.',
+        invalid_payment_method: 'Please choose a payment method.',
         invalid_tax_id: 'Please enter a valid NIF/CIF.',
         invalid_email: 'Please enter a valid email address.',
         invalid_fields: 'Please complete all required fields.',
@@ -269,6 +306,7 @@ const fieldClass =
         invalid_sku: 'Por favor, elige un plan válido.',
         invalid_locale: 'Algo salió mal. Por favor, inténtalo de nuevo más tarde.',
         invalid_country: 'La compra en línea está disponible únicamente para empresas en España.',
+        invalid_payment_method: 'Por favor, elige una forma de pago.',
         invalid_tax_id: 'Por favor, introduce un NIF/CIF válido.',
         invalid_email: 'Por favor, introduce una dirección de correo electrónico válida.',
         invalid_fields: 'Por favor, completa todos los campos obligatorios.',
@@ -389,10 +427,14 @@ const fieldClass =
         const province = ((formData.get('province') as string) || '').trim();
         const website = ((formData.get('website') as string) || '').trim();
         const termsAccepted = form.querySelector<HTMLInputElement>('#termsAccepted')?.checked ?? false;
+        const paymentMethod = ((formData.get('paymentMethod') as string) || '').trim() as 'card' | 'transfer' | '';
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if (!sku) return showFeedback(feedback, t.pickPlan, 'error');
+        if (paymentMethod !== 'card' && paymentMethod !== 'transfer') {
+          return showFeedback(feedback, t.codes.invalid_payment_method, 'error');
+        }
         if (!companyName) return showFeedback(feedback, t.companyRequired, 'error');
         if (!taxId) return showFeedback(feedback, t.taxIdRequired, 'error');
         if (!contactName) return showFeedback(feedback, t.contactRequired, 'error');
@@ -403,6 +445,7 @@ const fieldClass =
         const payload = {
           sku,
           locale: lang,
+          paymentMethod,
           customer: {
             companyName,
             taxId,
@@ -428,11 +471,14 @@ const fieldClass =
           const data = await response.json().catch(() => ({}));
 
           if (response.ok && data.paymentUrl) {
-            const isTransfer = data.paymentMethod === 'transfer';
-            showFeedback(feedback, isTransfer ? t.redirectingTransfer : t.redirecting, 'success');
-            // Top-level navigation to Qonto's hosted payment page (card) or
-            // invoice page (bank transfer fallback) — the customer pays
-            // there; this page's job is done once redirected.
+            // Use the customer's own choice for the notice text — there is
+            // no server-side fallback between methods anymore, so the
+            // response's paymentMethod always matches what was sent.
+            showFeedback(feedback, paymentMethod === 'transfer' ? t.redirectingTransfer : t.redirecting, 'success');
+            // Top-level navigation to the hosted payment page: Stripe
+            // Checkout (card) or the Qonto invoice page (bank transfer) —
+            // the customer pays there; this page's job is done once
+            // redirected.
             window.location.assign(data.paymentUrl);
             return;
           }

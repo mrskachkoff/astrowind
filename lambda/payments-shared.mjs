@@ -271,6 +271,111 @@ export function isValidSpanishTaxId(raw) {
   return isValidNifOrNie(id) || isValidCif(id);
 }
 
+// --- Webhook signature verification (shared shape: Qonto AND Stripe) --------
+// Both providers sign `{timestamp}.{raw_body}` with HMAC-SHA256 and deliver it
+// as `t={timestamp},v1={signature}[,v1={signature}...]`. Qonto's header always
+// has exactly one v1 value; Stripe's can carry more than one (e.g. during a
+// webhook signing-secret rotation, or an unrelated v0 scheme) — a parser that
+// only recognizes a single v1 rejects every real Stripe delivery. This parser
+// collects ALL v1 values and verification accepts a match against any of them.
+
+export const MAX_SIGNATURE_AGE_MS = 5 * 60 * 1000; // reject stale/replayed deliveries
+
+/**
+ * Parses `t={timestamp},v1={sig}[,v1={sig}...][,v0={sig}...]` into
+ * { timestamp, signatures: string[] } (only v1 values are collected — v0 is a
+ * different, unrelated scheme neither provider asks us to check), or null if
+ * the header is missing a timestamp or has no v1 value at all.
+ */
+export function parseSignatureHeader(header) {
+  if (typeof header !== 'string') return null;
+
+  let timestamp = null;
+  const signatures = [];
+  for (const part of header.trim().split(',')) {
+    const eq = part.indexOf('=');
+    if (eq === -1) continue;
+    const key = part.slice(0, eq).trim();
+    const value = part.slice(eq + 1).trim();
+    if (key === 't') timestamp = value;
+    else if (key === 'v1') signatures.push(value);
+  }
+
+  if (!timestamp || !/^\d+$/.test(timestamp)) return null;
+  if (signatures.length === 0 || !signatures.every((s) => /^[0-9a-f]+$/.test(s))) return null;
+  return { timestamp, signatures };
+}
+
+export function verifySignature(
+  rawBody,
+  signatureHeader,
+  secret,
+  { now = Date.now(), maxAgeMs = MAX_SIGNATURE_AGE_MS } = {}
+) {
+  const parsed = parseSignatureHeader(signatureHeader);
+  if (!parsed) return false;
+
+  const timestampMs = Number(parsed.timestamp) * 1000;
+  if (!Number.isFinite(timestampMs) || Math.abs(now - timestampMs) > maxAgeMs) return false;
+
+  const signedPayload = `${parsed.timestamp}.${rawBody}`;
+  const expected = createHmac('sha256', secret).update(signedPayload).digest('hex');
+  const expectedBuf = Buffer.from(expected);
+
+  return parsed.signatures.some((sig) => {
+    const sigBuf = Buffer.from(sig);
+    return sigBuf.length === expectedBuf.length && timingSafeEqual(sigBuf, expectedBuf);
+  });
+}
+
+// --- Client-invoice payload builder (shared by the transfer and card paths) --
+// The bank-transfer path creates this invoice up front; the card path creates
+// it only after Stripe confirms payment (payments-fulfil.mjs). Both must build
+// an identical shape so they can never drift.
+
+export function buildInvoicePayload({ clientId, entry, locale, orderRef, iban }) {
+  const today = new Date().toISOString().slice(0, 10);
+  return {
+    client_id: clientId,
+    currency: 'EUR',
+    issue_date: today,
+    due_date: today,
+    purchase_order: orderRef,
+    ...(iban ? { payment_methods: { iban } } : {}),
+    items: [
+      {
+        title: `${entry.name[locale]} — ${entry.offer[locale]}`,
+        description: entry.description[locale],
+        // Qonto's API rejects a numeric quantity: "json: cannot unmarshal
+        // number into Go struct field InvoiceItem.items.quantity of type
+        // string" (verified against a live 422 in sandbox, July 2026).
+        quantity: '1',
+        unit_price: { value: centsToDecimalString(entry.netCents), currency: 'EUR' },
+        vat_rate: '0.21',
+      },
+    ],
+  };
+}
+
+/**
+ * Time-boxed lookup for an invoice by its EXACT purchase_order. There is no
+ * server-side filter[purchase_order] or filter[client_id] on
+ * GET /v2/client_invoices (verified against Qonto's OpenAPI, July 2026) — only
+ * filter[status] and filter[created_at_from/to] — so the match happens in JS.
+ * Used by: the checkout Lambda's post-creation-failure retry check (was a
+ * possible partial success?), and the fulfil Lambda's card-path idempotency
+ * guard (a replayed Stripe webhook must reuse the invoice, not create a
+ * second one). NEVER take [0] of the unfiltered list — an unmatched result
+ * must fall through to a fresh creation attempt.
+ */
+export async function findInvoiceByOrderRef(qonto, orderRef, windowMs) {
+  const cutoffIso = new Date(Date.now() - windowMs).toISOString();
+  const list = await qonto.get(
+    `/v2/client_invoices?filter[created_at_from]=${encodeURIComponent(cutoffIso)}&per_page=100`
+  );
+  return (list.client_invoices ?? []).find((inv) => inv.purchase_order === orderRef) || null;
+}
+
 // --- Qonto client-creation payload builder -----------------------------------
 // Pure function so the exact field names (a source of a real bug, D3: the
 // original implementation sent kind-less payloads with first_line/province
@@ -280,8 +385,20 @@ export function isValidSpanishTaxId(raw) {
 // currency are both required for a client to be usable for invoicing, and
 // the billing_address sub-object field names are street_address, zip_code,
 // city, province_code, country_code.
+//
+// province_code is NOT a generic "state/region" field — Qonto's own field
+// description is "Province code of the client's billing address. It is
+// required only for Italian organizations", max 2 chars, and Qonto validates
+// that length regardless of the client's country. The original implementation
+// sent the free-text Spanish province name (e.g. "Madrid") into it, which
+// 422s on every single checkout: "Field validation for 'province_code'
+// failed on the 'max' tag" (reproduced live against the Qonto sandbox, July
+// 2026 — this was never caught because client-payload.test.mjs only asserted
+// field NAMES, never called the live API). Since Spain-only checkout (§1) has
+// no Qonto field for the region, `province` is accepted here but
+// deliberately not forwarded to Qonto at all.
 
-export function buildClientCreatePayload({ companyName, taxId, email, locale, line1, postalCode, city, province }) {
+export function buildClientCreatePayload({ companyName, taxId, email, locale, line1, postalCode, city }) {
   return {
     kind: 'company',
     name: companyName,
@@ -293,7 +410,6 @@ export function buildClientCreatePayload({ companyName, taxId, email, locale, li
       street_address: line1,
       zip_code: postalCode,
       city,
-      province_code: province,
       country_code: 'ES',
     },
   };

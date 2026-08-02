@@ -3,7 +3,7 @@ title: 'Política de Privacidad'
 layout: '~/layouts/MarkdownLayout.astro'
 ---
 
-_Última actualización_: 30 de julio de 2026
+_Fecha de entrada en vigor / Última actualización_: 2 de agosto de 2026
 
 ## 1. Introducción y Alcance
 
@@ -13,10 +13,14 @@ recopilamos, usamos, compartimos y protegemos los datos personales cuando visita
 (https://solutions.futurion.es), envía un formulario de contacto o de Hoja de Ruta de Automatización, o
 interactúa con nosotros de cualquier otra forma como cliente potencial o actual.
 
-Esta Política cubre nuestro **sitio web y la relación comercial con usted**. No cubre los datos
-personales que nuestros clientes procesan utilizando nuestros productos (TrustPrompt, TrustCore,
-TrustAuto) en su propia infraestructura — consulte el [§12, Productos y Datos de Clientes](#12-productos-y-datos-de-clientes)
-a continuación.
+Esta Política cubre nuestro **sitio web y la relación comercial con usted**, así como el tratamiento
+exclusivamente local de datos de la extensión de navegador TrustPaste. El tratamiento realizado por
+el sitio web y los servicios empresariales es distinto del tratamiento realizado por TrustPaste:
+TrustPaste trata los datos descritos en la [§13, Extensión de navegador
+TrustPaste](#13-extensión-de-navegador-trustpaste) únicamente en el perfil de su dispositivo o
+navegador. No cubre los datos personales que nuestros clientes procesan utilizando TrustPrompt,
+TrustCore o TrustAuto en su propia infraestructura — consulte el [§12, Productos y Datos de
+Clientes](#12-productos-y-datos-de-clientes) a continuación.
 
 Procesamos datos personales de acuerdo con:
 
@@ -248,7 +252,49 @@ datos por cuenta del cliente (por ejemplo, durante el despliegue, el soporte o e
 tratamiento se rige por un contrato de encargado del tratamiento independiente (Art. 28 RGPD) con el
 cliente, y no por esta Política.
 
-## 13. Privacidad de los Menores
+TrustPaste se rige de forma independiente en la [§13, Extensión de navegador
+TrustPaste](#13-extensión-de-navegador-trustpaste).
+
+## 13. Extensión de navegador TrustPaste
+
+TrustPaste permite seleccionar valores de los datos JSON que usted importa e inserta un valor
+seleccionado únicamente en un campo que usted elige. Como el JSON importado es arbitrario, puede
+contener datos personales, financieros o de pago, de salud, de autenticación, de comunicaciones, de
+ubicación, de navegación o actividad, contenido de sitios web, datos generados por usuarios u otros
+datos que usted proporcione. Usted es responsable de asegurarse de que dispone de autoridad para
+importar y utilizar dichos datos; TrustPaste no impide técnicamente que estas categorías aparezcan en
+JSON arbitrario.
+
+Los datos de perfil importados, el nombre del archivo de origen, las preferencias, los favoritos, los
+metadatos de rutas recientes y su confirmación de haber leído la política de privacidad se almacenan
+únicamente en el almacenamiento local de la extensión de Chrome (`chrome.storage.local`) del perfil
+de su dispositivo o navegador. TrustPaste no dispone de cuenta, sincronización en la nube,
+telemetría, analítica, publicidad, código remoto ni transmisión de red a terceros. La consulta de su
+hoja de estilos empaquetada es local.
+
+Cuando usted invoca TrustPaste de forma expresa, la extensión lee temporalmente el contexto del campo
+editable y el contexto cercano de la página o del formulario necesarios para clasificar valores y
+realizar la inserción solicitada. Esto puede incluir metadatos de la página y del formulario, así
+como el contenido existente del campo cuando sea necesario para insertar en la posición del cursor.
+Ese contexto no se transmite ni se conserva como registro independiente.
+
+El tratamiento es exclusivamente local: búsqueda, clasificación, vista previa, funcionalidad de
+favoritos y recientes, e inserción solicitada por usted. TrustPaste no envía formularios, no hace
+clic en botones, no acepta condiciones, no interactúa con CAPTCHA ni inserta datos en campos de
+contraseña o de pago.
+
+Futurion no recibe los datos de perfil ni los datos de página o formulario de TrustPaste, ni los
+vende, alquila, comparte o transfiere. Las cookies, la analítica, las etiquetas publicitarias, el
+tratamiento de formularios de contacto, AWS, Microsoft 365, Stripe, Qonto, Google Analytics, Meta,
+LinkedIn y otros proveedores del sitio web o de servicios empresariales no se aplican a TrustPaste.
+
+Puede utilizar **Restablecer TrustPaste**, los controles individuales de perfiles, historial o
+favoritos, o eliminar la extensión. Al eliminar la extensión, se borra su almacenamiento local
+aislado; los archivos exportados permanecen bajo su control. La identidad del responsable, el
+formulario de contacto y el procedimiento para ejercer los derechos del RGPD indicados en esta
+Política se aplican a las consultas y solicitudes relativas a TrustPaste.
+
+## 14. Privacidad de los Menores
 
 Nuestros servicios son de empresa a empresa y no están dirigidos ni destinados a menores de edad. De
 acuerdo con la legislación española (Art. 7 LOPDGDD), la edad mínima para que un menor pueda prestar su
@@ -256,13 +302,13 @@ consentimiento de forma independiente para el tratamiento de datos basado en el 
 14 años. No recopilamos conscientemente datos personales de nadie por debajo de esa edad a través de
 este sitio web.
 
-## 14. Cambios a esta Política de Privacidad
+## 15. Cambios a esta Política de Privacidad
 
 Podemos actualizar esta Política de Privacidad periódicamente para reflejar cambios en nuestras
 prácticas o en la legislación aplicable. Los cambios materiales se publicarán en esta página con una
 fecha de "Última actualización" revisada.
 
-## 15. Contáctenos
+## 16. Contáctenos
 
 Si tiene alguna pregunta sobre esta Política de Privacidad o desea ejercer sus derechos de protección
 de datos, utilice nuestro [formulario de contacto](/es/contacto/). Responderemos en el plazo de un mes.

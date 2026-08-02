@@ -3,7 +3,7 @@ title: 'Privacy Policy'
 layout: '~/layouts/MarkdownLayout.astro'
 ---
 
-_Last updated_: July 30, 2026
+_Effective date / Last updated_: August 2, 2026
 
 ## 1. Introduction and Scope
 
@@ -12,9 +12,12 @@ protecting your personal data. This Privacy Policy explains how we collect, use,
 personal data when you visit our website (https://solutions.futurion.es), submit a contact or
 Automation Roadmap form, or otherwise interact with us as a prospective or existing client.
 
-This Policy covers our **website and commercial relationship with you**. It does not cover personal
-data that our clients process using our products (TrustPrompt, TrustCore, TrustAuto) on their own
-infrastructure — see [§12, Products and Client Data](#12-products-and-client-data) below.
+This Policy covers our **website and commercial relationship with you**, and the local-only data
+handling of the TrustPaste browser extension. Website and business-service processing are distinct
+from TrustPaste processing: TrustPaste processes the data described in [§13, TrustPaste Browser
+Extension](#13-trustpaste-browser-extension) only in your device/browser profile. This Policy does
+not cover personal data that our clients process using TrustPrompt, TrustCore, or TrustAuto on their
+own infrastructure — see [§12, Products and Client Data](#12-products-and-client-data) below.
 
 We process personal data in accordance with:
 
@@ -226,19 +229,55 @@ processing. Where Futurion processes such data on the client's behalf (for examp
 deployment, support, or maintenance), that processing is governed by a separate data processing
 agreement (GDPR Art. 28) with the client, not by this Policy.
 
-## 13. Children's Privacy
+TrustPaste is governed separately by [§13, TrustPaste Browser Extension](#13-trustpaste-browser-extension).
+
+## 13. TrustPaste Browser Extension
+
+TrustPaste lets you select values from JSON data that you import and inserts a selected value only
+into a field that you select. Because imported JSON is arbitrary, it may contain personal,
+financial or payment, health, authentication, communications, location, browsing or activity,
+website-content, user-generated, or other data that you supply. You are responsible for ensuring
+that you have the authority to import and use that data; TrustPaste does not technically prevent
+these categories from appearing in arbitrary JSON.
+
+Imported profile data, the source filename, preferences, favourites, recent-path metadata, and your
+privacy-policy acknowledgement are stored only in Chrome extension local storage
+(`chrome.storage.local`) in your device/browser profile. TrustPaste has no account, cloud sync,
+telemetry, analytics, advertising, remote code, or third-party network transmission. Its packaged
+stylesheet lookup is local.
+
+When you explicitly invoke TrustPaste, it temporarily reads the editable-field and nearby page or
+form context needed to rank values and make the requested insertion. This can include page and form
+metadata and existing field content where cursor insertion requires it. That context is not
+transmitted or retained as a separate record.
+
+Processing is exclusively local: search, ranking, preview, favourites and recent functionality, and
+the insertion you request. TrustPaste does not submit forms, click buttons, accept terms, interact
+with CAPTCHAs, or insert into password or payment fields.
+
+Futurion does not receive TrustPaste profile or page/form data and does not sell, rent, share, or
+transfer it. Website cookies, analytics, advertising tags, contact-form processing, AWS, Microsoft
+365, Stripe, Qonto, Google Analytics, Meta, LinkedIn, and other website or business-service
+providers do not apply to TrustPaste.
+
+You can use **Reset TrustPaste**, the individual profile, history, or favourites controls, or remove
+the extension. Removing the extension clears its isolated extension local storage; exported files
+remain under your control. The controller identity, contact form, and GDPR-rights process in this
+Policy apply to TrustPaste questions and requests.
+
+## 14. Children's Privacy
 
 Our services are business-to-business and not directed at, or intended for, minors. In accordance
 with Spanish law (LOPDGDD Art. 7), the minimum age for a minor to independently consent to data
 processing based on consent is 14 years. We do not knowingly collect personal data from anyone under
 that age through this Website.
 
-## 14. Changes to This Privacy Policy
+## 15. Changes to This Privacy Policy
 
 We may update this Privacy Policy from time to time to reflect changes in our practices or applicable
 law. Material changes will be posted on this page with a revised "Last updated" date.
 
-## 15. Contact Us
+## 16. Contact Us
 
 If you have questions about this Privacy Policy or want to exercise your data protection rights,
 please use our [contact form](/contact/). We will respond within one month.

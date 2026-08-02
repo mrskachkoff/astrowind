@@ -10,8 +10,8 @@ import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'Hoja de Ruta de Automatización Gratis',
-  description: 'Hoja de ruta de automatización RGPD gratuita en 5-7 días para consultas sanitarias. Identificamos automatizaciones seguras y entregamos un plan de acción.',
+  title: 'Hoja de ruta gratuita de automatización y cumplimiento',
+  description: 'Obtén una evaluación gratuita de cumplimiento de IA de 5 a 7 días para tu organización. Mapeamos los flujos de datos, identificamos automatizaciones conformes al RGPD y te entregamos una hoja de ruta.',
   openGraph: {
     images: [{ url: '~/assets/images/ai-workflow-tablet.jpg' }],
   },
@@ -20,8 +20,8 @@ const metadata = {
 const roadmapSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  name: 'Hoja de Ruta de Automatización Sanitaria Gratuita',
-  description: 'Evaluación gratuita de automatización IA en 5-7 días para consultas sanitarias. Incluye mapeo de flujos de datos, análisis de brechas RGPD y una hoja de ruta de automatización priorizada sin coste.',
+  name: 'Hoja de ruta gratuita de automatización — Evaluación de cumplimiento y riesgos de IA',
+  description: 'Una evaluación gratuita de cumplimiento de IA de 5 a 7 días para organizaciones. Incluye el mapeo de flujos de datos, el análisis de brechas de cumplimiento del RGPD y una hoja de ruta de automatización priorizada sin coste.',
   inLanguage: 'es',
   provider: { '@id': 'https://solutions.futurion.es/#organization' },
   offers: {
@@ -29,13 +29,13 @@ const roadmapSchema = {
     price: '0',
     priceCurrency: 'EUR',
     availability: 'https://schema.org/InStock',
-    description: 'Evaluación de automatización IA gratuita en 5-7 días',
+    description: 'Evaluación gratuita de cumplimiento de IA de 5 a 7 días',
   },
   areaServed: [
-    { '@type': 'Country', name: 'Spain' },
-    { '@type': 'Place', name: 'European Union' },
+    { '@type': 'Country', name: 'España' },
+    { '@type': 'Place', name: 'Unión Europea' },
   ],
-  serviceType: 'Evaluación de Cumplimiento IA',
+  serviceType: 'Evaluación de cumplimiento de IA',
   url: 'https://solutions.futurion.es/es/hoja-de-ruta-de-automatizacion/',
 };
 ---
@@ -46,11 +46,11 @@ const roadmapSchema = {
   <!-- Hero -->
 
   <Hero
-    tagline="Hoja de Ruta de Automatización"
+    tagline="Hoja de ruta de automatización"
     actions={[
       {
         variant: 'primary',
-        text: 'Solicita tu hoja de ruta gratuita',
+        text: 'Reserva tu hoja de ruta gratuita',
         href: 'https://outlook.office.com/book/FuturionSolutions@futurion.es/',
         target: '_blank',
         icon: 'tabler:arrow-right',
@@ -58,12 +58,11 @@ const roadmapSchema = {
     ]}
   >
     <Fragment slot="title">
-      5-7 Días Gratuitos<br />
-      <span class="text-accent dark:text-white">Hoja de Ruta de Automatización</span>
+      Un camino claro hacia la <span class="text-accent dark:text-white">automatización conforme a la normativa</span>
     </Fragment>
 
     <Fragment slot="subtitle">
-      Evaluamos el manejo de datos de tu clínica, mapeamos brechas de cumplimiento e identificamos dónde la IA puede automatizar tareas de forma segura — completamente gratis. Recibe un informe detallado con puntuaciones de riesgo, recomendaciones de automatización segura y una hoja de ruta clara.
+      Todo empieza con una hoja de ruta gratuita y continúa con la implementación y el soporte permanente. Cada paso se articula en torno a la privacidad de los datos de tus clientes. No es una propuesta comercial, sino una evaluación real que puedes aplicar por tu cuenta, con opciones para organizaciones más grandes.
     </Fragment>
   </Hero>
 
@@ -73,41 +72,41 @@ const roadmapSchema = {
     id="entregables"
     tagline="Entregables"
     title="Qué incluye el informe"
-    subtitle="Cada hoja de ruta entrega estos resultados específicos y accionables — una evaluación integral de cumplimiento y automatización en 5-7 días laborables."
+    subtitle="Cada hoja de ruta ofrece estos resultados concretos y aplicables: una evaluación completa del cumplimiento y la automatización en un plazo de 5 a 7 días laborables."
     items={[
       {
-        title: 'Resumen Ejecutivo de Riesgo y Puntuación',
-        description: 'Una visión general de 2 páginas en lenguaje claro — sin jerga — con una calificación clara de tu manejo de datos y tu preparación para la automatización que señala tus áreas de riesgo específicas.',
+        title: 'Resumen ejecutivo de riesgos y puntuación',
+        description: 'Un resumen de dos páginas, claro y sin jerga, con una valoración precisa de cómo gestionas los datos y de tu preparación para automatizar, que señala tus áreas de riesgo específicas.',
         icon: 'tabler:report-analytics',
       },
       {
-        title: 'Diagrama de Flujo de Datos',
-        description: 'Un mapa visual de cómo se mueven los datos de pacientes a través de tu clínica — dónde se almacenan, quién accede a ellos y dónde existen brechas.',
+        title: 'Diagrama de flujo de datos',
+        description: 'Un mapa visual de cómo circulan los datos sensibles por tu organización: dónde se almacenan, quién accede a ellos y dónde existen carencias.',
         icon: 'tabler:hierarchy',
       },
       {
-        title: 'Lista de Brechas de Cumplimiento',
-        description: 'Cada documento faltante, práctica insegura y brecha de gobernanza — priorizados por nivel de riesgo y esfuerzo para corregir.',
+        title: 'Lista de brechas de cumplimiento',
+        description: 'Todos los documentos que faltan, las prácticas inseguras y las carencias de gobernanza, priorizados según el nivel de riesgo y el esfuerzo necesario para corregirlos.',
         icon: 'tabler:list-check',
       },
       {
-        title: 'Lista de IA Segura / Insegura / Condicional',
-        description: 'Cada flujo de trabajo claramente calificado: qué es seguro automatizar, qué requiere condiciones y qué nunca debe automatizarse.',
+        title: 'Lista de usos de IA seguros, no seguros y condicionados',
+        description: 'Cada flujo de trabajo se clasifica con claridad: qué se puede automatizar de forma segura, qué requiere condiciones y qué no debe automatizarse nunca.',
         icon: 'tabler:traffic-lights',
       },
       {
-        title: 'Matriz de Automatización de Flujos de Trabajo',
-        description: 'Cada proceso administrativo puntuado por esfuerzo manual, riesgo de error, sensibilidad de datos, potencial de automatización y exposición al cumplimiento.',
+        title: 'Matriz de automatización de flujos de trabajo',
+        description: 'Cada proceso administrativo se puntúa según el esfuerzo manual, el riesgo de error, la sensibilidad de los datos, el potencial de automatización y la exposición a riesgos de cumplimiento.',
         icon: 'tabler:table',
       },
       {
-        title: 'Plan de Arquitectura Aprobado',
-        description: 'Para cada automatización segura, el enfoque recomendado — local, híbrido o (raramente) nube — con justificación RGPD.',
+        title: 'Plan de arquitectura aprobado',
+        description: 'Para cada automatización segura, se recomienda el enfoque adecuado —local, híbrido o, en contadas ocasiones, en la nube— y se justifica conforme al RGPD.',
         icon: 'tabler:server',
       },
       {
-        title: 'Hoja de Ruta de Implementación por Fases',
-        description: 'Fase 1: Corregir riesgos de cumplimiento. Fase 2: Implementar automatizaciones seguras. Fase 3: Establecer monitorización continua y optimización.',
+        title: 'Hoja de ruta de implementación por fases',
+        description: 'Fase 1: corregir los riesgos de cumplimiento. Fase 2: implementar automatizaciones seguras. Fase 3: establecer una supervisión y una optimización continuas.',
         icon: 'tabler:road',
       },
     ]}
@@ -117,32 +116,32 @@ const roadmapSchema = {
 
   <Steps
     title="Cómo funciona la hoja de ruta"
-    subtitle="Un proceso estructurado de una semana que respeta tu tiempo y cubre las cinco áreas críticas de evaluación."
+    subtitle="Un proceso estructurado de una semana que respeta tu tiempo y abarca las cinco áreas críticas."
     items={[
       {
-        title: 'Día 1: <span class="font-medium">Consulta Inicial</span>',
-        description: 'Una conversación guiada de 60-75 minutos sobre las operaciones, herramientas, manejo de datos y puntos débiles de tu clínica, sin jerga técnica. Aquí evaluamos el <span class="font-medium">perfil de clínica y contexto de riesgo</span>: tamaño, madurez digital y herramientas existentes, para determinar tu nivel de riesgo y preparación para la automatización.',
+        title: 'Día 1: <span class="font-medium">Consulta inicial</span>',
+        description: 'Una conversación guiada de entre 60 y 75 minutos sobre tus operaciones, herramientas, tratamiento de datos y principales dificultades, sin jerga técnica. En ella evaluamos el <span class="font-medium">perfil de tu organización y su contexto de riesgo</span>: tamaño, madurez digital y herramientas existentes, para determinar el nivel de riesgo y la preparación para automatizar.',
         icon: 'tabler:messages',
       },
       {
-        title: 'Días 2-3: <span class="font-medium">Mapeo de Datos y Análisis</span>',
-        description: 'Mapeamos cada flujo de datos de pacientes — admisión, registros, imágenes, facturación, comunicaciones — clasificando cada uno por sensibilidad y exposición al <span class="font-medium">cumplimiento RGPD</span>. En paralelo, un <span class="font-medium">análisis de cuellos de botella en procesos</span> puntúa cada flujo de trabajo con alta carga administrativa por esfuerzo manual, riesgo de error y sensibilidad de datos, para preseleccionar los candidatos seguros a automatización.',
+        title: 'Días 2-3: <span class="font-medium">Mapeo y análisis de datos</span>',
+        description: 'El cliente selecciona tres procesos que quiere mejorar. Mapeamos sus flujos de datos —admisión, registros, imágenes, facturación y comunicaciones— y los clasificamos según su sensibilidad y su exposición a riesgos de cumplimiento del RGPD.',
         icon: 'tabler:search',
       },
       {
-        title: 'Días 4-5: <span class="font-medium">Evaluación de Riesgo y Arquitectura</span>',
-        description: 'Para cada proceso candidato, una <span class="font-medium">evaluación de riesgo y arquitectura de IA</span> determina si la solución más adecuada es en la nube, híbrida o en local — reservando la IA externa exclusivamente para tareas no sensibles, con referencias al artículo del RGPD correspondiente a cada decisión.',
+        title: 'Días 4-5: <span class="font-medium">Evaluación de riesgos y arquitectura</span>',
+        description: 'Para cada proceso candidato, una <span class="font-medium">evaluación de riesgos y arquitectura de IA</span> determina si conviene usar IA en la nube, híbrida o local. La IA externa se reserva para tareas no sensibles y cada decisión incluye las referencias pertinentes a los artículos del RGPD.',
         icon: 'tabler:shield-check',
       },
       {
-        title: 'Días 6-7: <span class="font-medium">Informe y Recomendaciones</span>',
-        description: 'Convertimos los hallazgos en una <span class="font-medium">brecha de cumplimiento y plan de acción</span>: documentación faltante, manejo inseguro de datos y brechas de gobernanza, priorizados en un plan claro. Recibes un informe escrito completo sobre el que puedes actuar de inmediato, con nosotros o por tu cuenta. El apartado siguiente detalla exactamente qué contiene.',
+        title: 'Días 6-7: <span class="font-medium">Informe y recomendaciones</span>',
+        description: 'Convertimos los hallazgos en un <span class="font-medium">análisis de brechas de cumplimiento y un plan de acción</span>: documentación que falta, tratamiento inseguro de datos y carencias de gobernanza, todo ello priorizado en un plan claro. Recibes un informe escrito completo que puedes aplicar con nosotros o por tu cuenta. El apartado siguiente detalla exactamente qué contiene.',
         icon: 'tabler:file-report',
       },
     ]}
     image={{
       src: '~/assets/images/strategy-session.jpg',
-      alt: 'Proceso de planificación estructurada',
+      alt: 'Proceso de planificación estructurado',
     }}
   />
 
@@ -150,31 +149,31 @@ const roadmapSchema = {
 
   <Features2
     title="Nuestros pilares de servicio"
-    subtitle="Cada servicio se construye sobre el anterior, desde la hoja de ruta gratuita hasta la implementación y el soporte continuo — con opciones para organizaciones más grandes."
+    subtitle="Cada servicio se basa en el anterior, desde la hoja de ruta gratuita hasta la implementación y el soporte permanente, con opciones para organizaciones más grandes."
     columns={2}
     items={[
       {
-        title: 'Hoja de Ruta de Automatización Gratuita',
+        title: 'Hoja de ruta de automatización gratuita',
         description:
-          'Una evaluación de 5-7 días de tus flujos de datos, postura de cumplimiento y oportunidades de automatización. Recibes un informe detallado con puntuaciones de riesgo y una hoja de ruta clara.',
+          'Una evaluación de entre 5 y 7 días de tus flujos de datos, tu situación de cumplimiento y tus oportunidades de automatización. Recibes un informe detallado con puntuaciones de riesgo y una hoja de ruta clara.',
         icon: 'tabler:clipboard-check',
       },
       {
-        title: 'Implementación Conforme',
+        title: 'Implementación conforme a la normativa',
         description:
-          'Primero corregimos los flujos de trabajo defectuosos y después los automatizamos — recordatorios, seguimientos o facturación — con arquitecturas locales o híbridas y principios RGPD integrados desde el primer día. Cuando la alerta necesita salir completamente de la red, podemos definir el alcance de una <a href="/es/smseagle/" class="underline">pasarela SMS SMSEagle</a> on-premise como canal de entrega.',
+          'Primero corregimos los flujos de trabajo deficientes y después los automatizamos —por ejemplo, recordatorios, seguimientos o facturación— mediante arquitecturas locales o híbridas, con los principios del RGPD integrados desde el primer día. Cuando la alerta debe salir por completo de la red, podemos incluir una <a href="/es/smseagle/" class="underline">pasarela SMS SMSEagle local</a> como canal de entrega.',
         icon: 'tabler:settings-automation',
       },
       {
-        title: 'Soporte y Monitorización Continuos',
+        title: 'Soporte y supervisión permanentes',
         description:
-          'Optimización continua, actualizaciones de cumplimiento conforme evolucionan las regulaciones y monitorización del rendimiento. Tu socio de cumplimiento IA a largo plazo.',
+          'Optimización continua, actualizaciones de cumplimiento a medida que evoluciona la normativa y supervisión del rendimiento. Tu socio a largo plazo para cumplir la normativa en materia de IA.',
         icon: 'tabler:heart-handshake',
       },
       {
-        title: 'MedCore Private AI (Empresarial)',
+        title: 'MedCore Private AI (para empresas)',
         description:
-          'Infraestructura IA de grado médico completamente local para organizaciones sanitarias medianas. LLMs especializados, ajuste fino y soberanía completa de datos.',
+          'Infraestructura de IA de grado médico totalmente local para organizaciones sanitarias medianas. Modelos LLM especializados, ajuste fino y plena soberanía de los datos.',
         icon: 'tabler:server-2',
       },
     ]}
@@ -187,59 +186,59 @@ const roadmapSchema = {
   <!-- Roadmap FAQs -->
 
   <FAQs
-    title="Preguntas sobre la Hoja de Ruta"
-    subtitle="Preguntas comunes sobre la hoja de ruta de automatización."
+    title="Preguntas sobre la hoja de ruta"
+    subtitle="Preguntas frecuentes sobre la hoja de ruta de automatización."
     classes={{ container: 'max-w-6xl' }}
     items={[
       {
-        title: '¿Cuánto tiempo requiere de mi parte?',
-        description: 'Aproximadamente 2-3 conversaciones breves totalizando 60-75 minutos. Nosotros hacemos el trabajo de análisis pesado. Tu papel es responder preguntas sobre tus operaciones y herramientas actuales.',
+        title: '¿Cuánto tiempo tengo que dedicar?',
+        description: 'Entre dos y tres conversaciones breves, con una duración total de entre 60 y 75 minutos. Nosotros hacemos la mayor parte del análisis. Tú solo tienes que responder a preguntas sobre tus operaciones y herramientas actuales.',
       },
       {
-        title: '¿Realmente no hay ninguna obligación?',
-        description: 'Ninguna. Recibes un informe completo con el que puedes actuar de forma independiente. No hay ningún tipo de presión ni compromiso.',
+        title: '¿De verdad no implica ningún compromiso?',
+        description: 'Ninguno. Recibes un informe completo que puedes aplicar por tu cuenta. No te presionaremos ni tendrás que asumir compromiso alguno.',
       },
       {
-        title: '¿Qué pasa si encuentran problemas graves de cumplimiento?',
-        description: 'Los comunicamos claramente y los priorizamos en tu hoja de ruta. Esto sucede con frecuencia — la mayoría de las clínicas tienen brechas de las que no son conscientes. Nunca usamos los hallazgos para presionarte. Presentamos hechos y recomendaciones.',
+        title: '¿Qué ocurre si se detectan problemas graves de cumplimiento?',
+        description: 'Los exponemos con claridad y los priorizamos en tu hoja de ruta. Es algo frecuente: la mayoría de las organizaciones tienen carencias que desconocen. Nunca utilizamos los hallazgos para presionarte; presentamos los hechos y nuestras recomendaciones.',
       },
       {
-        title: '¿Podemos implementar las recomendaciones nosotros mismos?',
-        description: 'Sí. El informe está diseñado para ser accionable independientemente de si trabaja con nosotros. Incluimos pasos específicos, no sugerencias vagas. Muchas prácticas corrigen brechas simples de cumplimiento por su cuenta.',
+        title: '¿Podemos implementar las recomendaciones por nuestra cuenta?',
+        description: 'Sí. El informe está pensado para que puedas aplicarlo tanto si trabajas con nosotros como si no. Incluimos pasos concretos, no sugerencias vagas. Muchas consultas sanitarias corrigen por su cuenta las brechas de cumplimiento más sencillas.',
       },
       {
-        title: '¿Qué sucede después de la hoja de ruta?',
-        description: 'Presentamos el informe y te guiamos a través de los hallazgos. Si deseas proceder con la implementación, proporcionamos una propuesta de precio fijo basada en los hallazgos de la hoja de ruta. Si no, conservas el informe sin compromiso.',
+        title: '¿Qué ocurre después de la hoja de ruta?',
+        description: 'Te presentamos el informe y repasamos contigo los hallazgos. Si quieres seguir adelante con la implementación, te ofrecemos una propuesta a precio cerrado basada en esos hallazgos. Si no, te quedas con el informe sin ningún compromiso.',
       },
       {
         title: '¿Por qué la hoja de ruta es gratuita?',
         description:
-          'La hoja de ruta genera confianza y demuestra nuestra experiencia. Cuando las consultas ven la profundidad del análisis, muchas eligen proceder con la implementación. Es nuestra forma de demostrar valor antes de pedir un compromiso.',
+          'La hoja de ruta genera confianza y demuestra nuestra experiencia. Cuando los clientes ven el grado de detalle del análisis, muchos deciden seguir adelante con la implementación. Es nuestra forma de demostrar el valor que aportamos antes de pedirte un compromiso.',
       },
       {
-        title: '¿Cómo se determinan los precios de implementación?',
+        title: '¿Cómo se calcula el precio de la implementación?',
         description:
-          'Los precios se basan en los hallazgos de la hoja de ruta — número de flujos a automatizar, complejidad y requisitos de cumplimiento. Proporcionamos una propuesta a precio fijo después de la hoja de ruta para que no haya sorpresas. Las mejoras inmediatas suelen rondar entre 1.500 y 3.000 €; el paquete completo, entre 5.000 y 15.000 €.',
+          'El precio se basa en los hallazgos de la hoja de ruta: número de flujos de trabajo que se van a automatizar, complejidad y requisitos de cumplimiento. Después de la hoja de ruta te ofrecemos una propuesta a precio cerrado para evitar sorpresas. Las mejoras rápidas suelen costar entre 1.500 y 3.000 € y los paquetes completos, entre 5.000 y 15.000 €.',
       },
       {
         title: '¿Es obligatorio el plan de soporte mensual?',
         description:
-          'No. El soporte mensual es opcional pero recomendado. Las regulaciones cambian, las automatizaciones necesitan ajustes y surgen nuevas oportunidades. El plan de soporte garantiza que tus automatizaciones se mantengan conformes y optimizadas con el tiempo.',
+          'No. El soporte mensual es opcional, aunque lo recomendamos. La normativa cambia, las automatizaciones necesitan ajustes y surgen nuevas oportunidades. El plan de soporte garantiza que tus automatizaciones sigan cumpliendo la normativa y mantengan un rendimiento óptimo a lo largo del tiempo.',
       },
       {
-        title: '¿Qué métodos de pago aceptáis?',
+        title: '¿Con qué métodos de pago puedo pagar?',
         description:
-          'Aceptamos transferencias bancarias y métodos de pago principales comunes en España y la UE. Las condiciones de pago se acuerdan durante la fase de propuesta — normalmente un 50% por adelantado y un 50% a la entrega para proyectos de implementación.',
+          'Aceptamos transferencias bancarias y los principales métodos de pago habituales en España y la UE. Las condiciones se acuerdan durante la fase de propuesta; en los proyectos de implementación, lo habitual es abonar un 50 % por adelantado y el 50 % restante a la entrega.',
       },
       {
-        title: '¿Podemos empezar pequeño y expandir después?',
+        title: '¿Podemos empezar poco a poco y ampliar más adelante?',
         description:
-          'Por supuesto. Ese es nuestro enfoque recomendado. Comienza con la hoja de ruta gratuita, implementa 1-2 mejoras inmediatas, ve los resultados y luego decide si un paquete completo tiene sentido. Sin presión para comprometerte con todo por adelantado.',
+          'Por supuesto. Es el enfoque que recomendamos. Empieza con la hoja de ruta gratuita, implementa una o dos mejoras rápidas, comprueba los resultados y después decide si te conviene un paquete completo. No te presionaremos para que lo contrates todo desde el principio.',
       },
       {
         title: '¿Cuánto cuesta MedCore Private AI?',
         description:
-          'MedCore Private AI tiene un precio por proyecto basado en el alcance de infraestructura, requisitos de modelos y tamaño de organización. Los despliegues típicos van de €25.000 a €150.000+, con planes de soporte mensual disponibles. Esto incluye especificación y adquisición de hardware, despliegue de software, personalización de modelos, documentación de cumplimiento y formación. Contáctanos para una evaluación detallada y presupuesto.',
+          'MedCore Private AI se presupuesta por proyecto según el alcance de la infraestructura, los requisitos de los modelos y el tamaño de la organización. Los despliegues habituales cuestan entre 25.000 y más de 150.000 €, con planes de soporte mensual disponibles. El precio incluye la especificación y adquisición del hardware, el despliegue del software, la personalización de los modelos, la documentación de cumplimiento y la formación. Contacta con nosotros para obtener una evaluación detallada y un presupuesto.',
       },
     ]}
   />
@@ -247,12 +246,12 @@ const roadmapSchema = {
   <!-- CTA de Precios -->
 
   <CallToAction
-    title="Cada proceso empieza con una hoja de ruta gratuita"
-    subtitle="Sin compromiso. Conoce con claridad tus oportunidades de automatización y tu situación de cumplimiento antes de tomar ninguna decisión."
+    title="Cada colaboración empieza con una hoja de ruta de automatización gratuita"
+    subtitle="Sin ningún compromiso. Obtén una visión clara de tus oportunidades de automatización y tu situación de cumplimiento antes de tomar una decisión."
     actions={[
       {
         variant: 'primary',
-        text: 'Reserva tu hoja de ruta gratuita',
+        text: 'Reserva tu hoja de ruta de automatización',
         href: '/es/hoja-de-ruta-de-automatizacion/',
         icon: 'tabler:arrow-right',
       },
@@ -266,8 +265,8 @@ const roadmapSchema = {
     if (!link) return;
     if (typeof window.gtag === 'function') {
       window.gtag('event', 'generate_lead', {
-        event_category: 'Roadmap',
-        event_label: 'Automation Roadmap',
+        event_category: 'Hoja de ruta',
+        event_label: 'Hoja de Ruta de Automatización',
         language: 'es',
       });
     }

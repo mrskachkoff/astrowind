@@ -7,7 +7,7 @@ import Features2 from '~/components/widgets/Features2.astro';
 
 const metadata = {
   title: 'Contacto',
-  description: 'Ponte en contacto con Futurion Solutions para automatización IA conforme al RGPD. Respondemos en 24 horas laborables.',
+  description: 'Ponte en contacto con Futurion Solutions. ¿Tienes alguna pregunta sobre la automatización con IA diseñada para cumplir la normativa en tu consulta sanitaria? Respondemos en un plazo de 24 horas laborables.',
   openGraph: {
     images: [{ url: '~/assets/images/team-collaboration.jpg' }],
   },
@@ -20,8 +20,8 @@ const metadata = {
     "@type": "ContactPage",
     "@id": "https://solutions.futurion.es/es/contacto/",
     "url": "https://solutions.futurion.es/es/contacto/",
-    "name": "Contacto — Futurion Solutions",
-    "description": "Ponte en contacto con Futurion Solutions para automatización IA centrada en cumplimiento para tu consulta sanitaria.",
+    "name": "Contacto con Futurion Solutions",
+    "description": "Ponte en contacto con Futurion Solutions para implantar automatización con IA conforme a la normativa en tu consulta sanitaria.",
     "inLanguage": "es",
     "publisher": { "@id": "https://solutions.futurion.es/#organization" }
   }} />
@@ -29,15 +29,15 @@ const metadata = {
   <!-- HeroText -->
 
   <HeroText
-    tagline="Contáctanos"
-    title="Hablemos sobre tu consulta"
-    subtitle="¿Tienes preguntas sobre automatización IA centrada en cumplimiento? ¿Quieres saber cómo podemos ayudar a tu consulta sanitaria a ahorrar tiempo manteniendo el cumplimiento normativo? Nos encantaría escucharte."
+    tagline="Contacta con nosotros"
+    title="Hablemos de tu consulta"
+    subtitle="¿Tienes preguntas sobre la automatización con IA centrada en el cumplimiento normativo? ¿Quieres saber cómo podemos ayudar a tu consulta sanitaria a ahorrar tiempo sin dejar de cumplir la normativa? Nos encantará saber de ti."
   />
 
   <ContactUs
     id="form"
     title="Envíanos un mensaje"
-    subtitle="Tanto si tienes una pregunta sobre nuestros servicios, como si quieres hablar sobre las necesidades de tu consulta o ya estás listo para empezar con tu Hoja de Ruta de Automatización gratuita, déjanos un mensaje."
+    subtitle="Tanto si tienes alguna pregunta sobre nuestros servicios como si quieres hablar de tus necesidades o ya estás listo para empezar tu Hoja de Ruta de Automatización gratuita, escríbenos."
     inputs={[
       {
         type: 'text',
@@ -47,44 +47,44 @@ const metadata = {
       {
         type: 'email',
         name: 'email',
-        label: 'Dirección de Correo Electrónico',
+        label: 'Correo electrónico',
       },
       {
         type: 'text',
         name: 'practice_name',
-        label: 'Nombre de la Consulta (opcional)',
+        label: 'Nombre de la consulta (opcional)',
       },
       {
         type: 'text',
         name: 'inquiry_type',
-        label: 'Tipo de consulta (p. ej., Hoja de Ruta de Automatización, Servicios, Pregunta general)',
+        label: 'Tipo de consulta (p. ej., Hoja de Ruta de Automatización, servicios o pregunta general)',
       },
     ]}
     textarea={{
       label: 'Tu mensaje',
       name: 'message',
-      placeholder: 'Cuéntanos sobre tu consulta y cómo podemos ayudar...',
+      placeholder: 'Cuéntanos algo sobre tu consulta y cómo podemos ayudarte...',
     }}
     disclaimer={{
       label:
-        'Al enviar este formulario, aceptas la recopilación de tu información con el propósito de responder a tu consulta. Tus datos se procesan de acuerdo con nuestra Política de Privacidad y los requisitos del RGPD.',
+        'Al enviar este formulario, aceptas que recopilemos tus datos para responder a tu consulta. Trataremos tus datos de acuerdo con nuestra Política de Privacidad y los requisitos del RGPD.',
     }}
     button="Enviar mensaje"
-    description="Respondemos en 24 horas laborables."
+    description="Respondemos en un plazo de 24 horas laborables."
   />
 
   <!-- Información de Contacto -->
 
   <Features2
     title="Otras formas de contactarnos"
-    subtitle="Síguenos para conocer novedades y contenido sobre cumplimiento normativo."
+    subtitle="Síguenos para conocer información sobre cumplimiento normativo y novedades sobre nuestros productos."
     items={[
       {
         title: 'Facebook',
-        description: 'Síguenos en Facebook para novedades y anuncios.',
+        description: 'Síguenos en Facebook para estar al día de nuestras novedades y anuncios.',
         icon: 'tabler:brand-facebook',
         callToAction: {
-          text: 'Ir a Facebook',
+          text: 'Visita Facebook',
           href: 'https://www.facebook.com/solutions.futurion.es/',
           target: '_blank',
           variant: 'link',
@@ -92,10 +92,10 @@ const metadata = {
       },
       {
         title: 'LinkedIn',
-        description: 'Conéctate con nosotros en LinkedIn para obtener información sobre cumplimiento normativo y estar al día de las novedades.',
+        description: 'Conecta con nosotros en LinkedIn para conocer información sobre cumplimiento normativo y nuestras novedades.',
         icon: 'tabler:brand-linkedin',
         callToAction: {
-          text: 'Ir a LinkedIn',
+          text: 'Visita LinkedIn',
           href: 'https://www.linkedin.com/company/111621147/',
           target: '_blank',
           variant: 'link',
@@ -103,10 +103,10 @@ const metadata = {
       },
       {
         title: 'Instagram',
-        description: 'Síguenos en Instagram para contenido entre bastidores.',
+        description: 'Síguenos en Instagram para ver lo que ocurre entre bastidores.',
         icon: 'tabler:brand-instagram',
         callToAction: {
-          text: 'Ir a Instagram',
+          text: 'Visita Instagram',
           href: 'https://www.instagram.com/solutions.futurion.es/',
           target: '_blank',
           variant: 'link',

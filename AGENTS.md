@@ -8,7 +8,7 @@ Use model variables instead of hardcoding provider-specific model names in workf
 
 | Variable | Model | Intended use |
 |---|---|---|
-| `$FRONTIER_MODEL` | `gpt-5.5` | Frontier model for complex coding, research, and real-world work. Current top-tier model. |
+| `$FRONTIER_MODEL` | `gpt-5.6` | Frontier model for complex coding, research, and real-world work. Current top-tier model. |
 | `$STANDARD_MODEL` | `gpt-5.4` | Strong model for everyday coding. |
 | `$FAST_MODEL` | `gpt-5.4-mini` | Small, fast, and cost-efficient model for simpler coding tasks. |
 

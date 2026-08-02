@@ -156,6 +156,12 @@
     "condition": null
   },
   {
+    "source": "/hidden-cost-copy-paste-work",
+    "target": "/hidden-cost-copy-paste-work/",
+    "status": "301",
+    "condition": null
+  },
+  {
     "source": "/introducing-medcore-private-ai",
     "target": "/introducing-medcore-private-ai/",
     "status": "301",
@@ -224,6 +230,12 @@
   {
     "source": "/es/es-consultora-o-decisora-ia-responsabilidad-clinica",
     "target": "/es/es-consultora-o-decisora-ia-responsabilidad-clinica/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/es-coste-oculto-copiar-pegar",
+    "target": "/es/es-coste-oculto-copiar-pegar/",
     "status": "301",
     "condition": null
   },
@@ -626,6 +638,30 @@
   {
     "source": "/es/consultora-o-decisora-ia-responsabilidad-clinica/",
     "target": "/es/es-consultora-o-decisora-ia-responsabilidad-clinica/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-coste-oculto-copiar-pegar",
+    "target": "/es/es-coste-oculto-copiar-pegar/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es-coste-oculto-copiar-pegar/",
+    "target": "/es/es-coste-oculto-copiar-pegar/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/coste-oculto-copiar-pegar",
+    "target": "/es/es-coste-oculto-copiar-pegar/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/es/coste-oculto-copiar-pegar/",
+    "target": "/es/es-coste-oculto-copiar-pegar/",
     "status": "301",
     "condition": null
   },

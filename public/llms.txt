@@ -27,6 +27,7 @@
 
 ## Blog articles (English)
 
+- [The Hidden Cost of Copy-Paste Work Across Sales and Marketing Teams](https://solutions.futurion.es/hidden-cost-copy-paste-work/): How TrustPaste helps sales and marketing teams find and reuse approved business information in web forms
 - [GDPR Compliance for Growing Healthcare Providers: A Complete Guide](https://solutions.futurion.es/gdpr-compliance-small-healthcare-providers-guide/): 7 key GDPR requirements for dental clinics, pharmacies, and growing medical practices in Spain
 - [5 Ways Dental Clinics Can Automate Workflows (While Staying Compliant)](https://solutions.futurion.es/dental-clinics-automate-workflows-compliance/): Specific automation use cases for dental practices under GDPR
 - [Why Healthcare Needs On-Premise AI](https://solutions.futurion.es/why-healthcare-needs-on-premise-ai/): Data sovereignty and GDPR arguments for local AI deployment in healthcare
@@ -47,6 +48,7 @@
 
 ## Artículos del blog (Español)
 
+- [El coste oculto de copiar y pegar en los equipos de ventas y marketing](https://solutions.futurion.es/es/es-coste-oculto-copiar-pegar/): Cómo TrustPaste ayuda a los equipos de ventas y marketing a encontrar y reutilizar información empresarial aprobada en formularios web
 - [Cumplimiento RGPD para Consultas Sanitarias en Crecimiento: Guía Completa](https://solutions.futurion.es/es/es-guia-cumplimiento-rgpd-consultas-sanitarias/): 7 requisitos clave del RGPD para clínicas dentales, farmacias y consultas médicas en España
 - [5 Formas de Automatizar Flujos de Trabajo en Clínicas Dentales (Con Cumplimiento)](https://solutions.futurion.es/es/es-clinicas-dentales-automatizar-flujos-conformidad/): Casos de uso de automatización para clínicas dentales bajo el RGPD
 - [Por Qué la Sanidad Necesita IA Local](https://solutions.futurion.es/es/es-por-que-sanidad-necesita-ia-local/): Argumentos de soberanía de datos y RGPD para el despliegue de IA local en sanidad

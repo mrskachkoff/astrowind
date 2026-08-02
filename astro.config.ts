@@ -209,6 +209,8 @@ export default defineConfig({
     '/es/auditoria-ia-gratuita': '/es/hoja-de-ruta-de-automatizacion/',
 
     // Mandatory: redirects for Spanish posts (canonical: /es/es-<slug>/)
+    '/es-coste-oculto-copiar-pegar': '/es/es-coste-oculto-copiar-pegar/',
+    '/es/coste-oculto-copiar-pegar': '/es/es-coste-oculto-copiar-pegar/',
     '/es-5-tareas-clinica-dejar-hacer-manualmente': '/es/es-5-tareas-clinica-dejar-hacer-manualmente/',
     '/es/5-tareas-clinica-dejar-hacer-manualmente': '/es/es-5-tareas-clinica-dejar-hacer-manualmente/',
     '/es-clinicas-dentales-automatizar-flujos-conformidad': '/es/es-clinicas-dentales-automatizar-flujos-conformidad/',

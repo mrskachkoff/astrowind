@@ -70,6 +70,14 @@ test('deposit SKUs are download:false, licence SKUs are download:true', () => {
   }
 });
 
+test('Spanish deposit descriptions state that the deposit is deducted from the final invoice', () => {
+  for (const [sku, entry] of Object.entries(CATALOGUE)) {
+    if (entry.kind !== 'deposit') continue;
+    assert.match(entry.description.es, /se descuenta de la factura final/, `${sku}: deduction wording`);
+    assert.doesNotMatch(entry.description.es, /se abona en la factura final/, `${sku}: ambiguous payment wording`);
+  }
+});
+
 test('catalogue object is frozen (cannot be mutated at runtime)', () => {
   assert.ok(Object.isFrozen(CATALOGUE));
   const anySku = Object.keys(CATALOGUE)[0];

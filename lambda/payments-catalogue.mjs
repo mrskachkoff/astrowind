@@ -120,7 +120,7 @@ export const CATALOGUE = Object.freeze({
     offer: { en: 'Quick-Win Implementation — deposit', es: 'Implementación de Mejora Inmediata — depósito' },
     description: {
       en: 'TrustAuto Quick-Win Implementation deposit, credited against the final project invoice.',
-      es: 'Depósito de Implementación de Mejora Inmediata TrustAuto, se abona en la factura final del proyecto.',
+      es: 'Depósito de Implementación de Mejora Inmediata TrustAuto que se descuenta de la factura final del proyecto.',
     },
   },
   'trustauto-comprehensive-deposit': {
@@ -133,7 +133,7 @@ export const CATALOGUE = Object.freeze({
     offer: { en: 'Comprehensive Package — deposit', es: 'Paquete Completo — depósito' },
     description: {
       en: 'TrustAuto Comprehensive Package deposit, credited against the final project invoice.',
-      es: 'Depósito de Paquete Completo TrustAuto, se abona en la factura final del proyecto.',
+      es: 'Depósito de Paquete Completo TrustAuto que se descuenta de la factura final del proyecto.',
     },
   },
 });

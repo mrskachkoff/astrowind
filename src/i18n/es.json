@@ -41,6 +41,12 @@
     "en": "EN",
     "es": "ES"
   },
+  "accessibility": {
+    "mainNavigation": "Navegación principal",
+    "toggleMenu": "Abrir o cerrar el menú",
+    "toggleTheme": "Cambiar entre el modo oscuro y el claro",
+    "rssFeed": "Fuente RSS"
+  },
   "blog": {
     "theBlog": "El Blog",
     "subtitle": "Cumplimiento e IA para proveedores de salud en España y la UE.",
@@ -53,7 +59,7 @@
     "viewAllPosts": "Ver todos los artículos"
   },
   "cookieConsent": {
-    "message": "Usamos cookies para analizar el tráfico del sitio y optimizar tu experiencia. Puedes elegir que cookies permitir.",
+    "message": "Usamos cookies para analizar el tráfico del sitio y optimizar tu experiencia. Puedes elegir qué cookies permitir.",
     "acceptAll": "Aceptar Todas",
     "rejectAll": "Rechazar Todas",
     "customize": "Personalizar",
@@ -65,7 +71,8 @@
     "marketingTitle": "Marketing",
     "marketingDesc": "Se utilizan para ofrecer anuncios relevantes y medir el rendimiento de las campañas.",
     "savePreferences": "Guardar Preferencias",
-    "alwaysOn": "Siempre activas"
+    "alwaysOn": "Siempre activas",
+    "close": "Cerrar"
   },
   "notFound": {
     "title": "Error 404",

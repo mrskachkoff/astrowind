@@ -26,6 +26,14 @@ export interface Props {
 const { metadata = {} } = Astro.props;
 const { textDirection } = I18N;
 const lang = Astro.currentLocale || 'en';
+const isSpanish = lang === 'es';
+const localizedSiteUrl = isSpanish ? 'https://solutions.futurion.es/es/' : 'https://solutions.futurion.es';
+const localizedAboutUrl = isSpanish
+  ? 'https://solutions.futurion.es/es/nosotros/'
+  : 'https://solutions.futurion.es/about/';
+const localizedContactUrl = isSpanish
+  ? 'https://solutions.futurion.es/es/contacto/'
+  : 'https://solutions.futurion.es/contact/';
 ---
 
 <!doctype html>
@@ -47,13 +55,14 @@ const lang = Astro.currentLocale || 'en';
             '@id': 'https://solutions.futurion.es/#organization',
             name: 'Futurion Solutions',
             legalName: 'Futurion Solutions S.L.',
-            url: 'https://solutions.futurion.es',
+            url: localizedSiteUrl,
             logo: {
               '@type': 'ImageObject',
               url: 'https://solutions.futurion.es/web-app-manifest-512x512.png',
             },
-            description:
-              'Software company in Valencia building private AI tools — TrustPrompt, TrustCore and TrustAuto — that run on infrastructure the customer controls, for legal, compliance, finance and healthcare teams in Spain and the EU.',
+            description: isSpanish
+              ? 'Empresa de software de Valencia que desarrolla herramientas de IA privada — TrustPrompt, TrustCore y TrustAuto — para equipos jurídicos, de cumplimiento, finanzas y sanidad de España y la UE, y que se ejecutan en infraestructura controlada por el cliente.'
+              : 'Software company in Valencia building private AI tools — TrustPrompt, TrustCore and TrustAuto — that run on infrastructure the customer controls, for legal, compliance, finance and healthcare teams in Spain and the EU.',
             taxID: 'B93839587',
             vatID: 'ESB93839587',
             address: {
@@ -66,10 +75,10 @@ const lang = Astro.currentLocale || 'en';
             },
             contactPoint: {
               '@type': 'ContactPoint',
-              contactType: 'customer service',
+              contactType: isSpanish ? 'atención al cliente' : 'customer service',
               areaServed: ['ES', 'EU'],
-              availableLanguage: ['Spanish', 'English'],
-              url: 'https://solutions.futurion.es/contact/',
+              availableLanguage: isSpanish ? ['Español', 'Inglés'] : ['Spanish', 'English'],
+              url: localizedContactUrl,
             },
             founder: { '@id': 'https://solutions.futurion.es/#author' },
             sameAs: [
@@ -84,9 +93,10 @@ const lang = Astro.currentLocale || 'en';
             '@id': 'https://solutions.futurion.es/#localbusiness',
             name: 'Futurion Solutions',
             legalName: 'Futurion Solutions S.L.',
-            url: 'https://solutions.futurion.es',
-            description:
-              'Private AI products and deployment services for regulated organisations in Spain and the EU — data stays on infrastructure the customer controls.',
+            url: localizedSiteUrl,
+            description: isSpanish
+              ? 'Productos de IA privada y servicios de despliegue para organizaciones reguladas de España y la UE: los datos permanecen en infraestructura controlada por el cliente.'
+              : 'Private AI products and deployment services for regulated organisations in Spain and the EU — data stays on infrastructure the customer controls.',
             address: {
               '@type': 'PostalAddress',
               streetAddress: 'Calle Lucio del Valle, 10, 6',
@@ -96,17 +106,19 @@ const lang = Astro.currentLocale || 'en';
               addressCountry: 'ES',
             },
             areaServed: [
-              { '@type': 'Country', name: 'Spain' },
-              { '@type': 'Place', name: 'European Union' },
+              { '@type': 'Country', name: isSpanish ? 'España' : 'Spain' },
+              { '@type': 'Place', name: isSpanish ? 'Unión Europea' : 'European Union' },
             ],
             parentOrganization: { '@id': 'https://solutions.futurion.es/#organization' },
           },
           {
             '@type': 'WebSite',
             '@id': 'https://solutions.futurion.es/#website',
-            url: 'https://solutions.futurion.es',
+            url: localizedSiteUrl,
             name: 'Futurion Solutions',
-            description: 'Private AI for regulated organisations — TrustPrompt, TrustCore and TrustAuto',
+            description: isSpanish
+              ? 'IA privada para organizaciones reguladas — TrustPrompt, TrustCore y TrustAuto'
+              : 'Private AI for regulated organisations — TrustPrompt, TrustCore and TrustAuto',
             inLanguage: ['en', 'es'],
             publisher: { '@id': 'https://solutions.futurion.es/#organization' },
           },
@@ -114,11 +126,13 @@ const lang = Astro.currentLocale || 'en';
             '@type': 'Person',
             '@id': 'https://solutions.futurion.es/#author',
             name: 'Ivan Skachkov',
-            url: 'https://solutions.futurion.es/about/',
-            jobTitle: 'Founder',
+            url: localizedAboutUrl,
+            jobTitle: isSpanish ? 'Fundador' : 'Founder',
             worksFor: { '@id': 'https://solutions.futurion.es/#organization' },
             sameAs: ['https://www.linkedin.com/in/ivan-skachkov/'],
-            knowsAbout: ['GDPR', 'Healthcare AI', 'EU AI Act', 'Data Protection', 'HIPAA', 'AEPD'],
+            knowsAbout: isSpanish
+              ? ['RGPD', 'IA sanitaria', 'Reglamento de IA de la UE', 'Protección de datos', 'HIPAA', 'AEPD']
+              : ['GDPR', 'Healthcare AI', 'EU AI Act', 'Data Protection', 'HIPAA', 'AEPD'],
           },
         ],
       }}

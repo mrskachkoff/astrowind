@@ -114,7 +114,7 @@ const COPY = {
     licenceBody: (url) => `Descargue y active su licencia aquí (este enlace es válido durante 7 días):\n${url}`,
     depositSubject: (product) => `Su depósito de ${product} está confirmado`,
     depositBody: (offer, gross) =>
-      `Hemos recibido su depósito para ${offer}: ${gross} (IVA incluido). Se abonará en la factura final del ` +
+      `Hemos recibido su depósito para ${offer}: ${gross} (IVA incluido). Se descontará de la factura final del ` +
       `proyecto. Nos pondremos en contacto en breve para programar el trabajo.`,
     supportLine: '¿Preguntas? Responda a este correo.',
   },

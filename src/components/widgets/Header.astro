@@ -8,7 +8,7 @@ import Button from '~/components/ui/Button.astro';
 
 import { getHomePermalink } from '~/utils/permalinks';
 import { trimSlash, getAsset } from '~/utils/permalinks';
-import { getLangFromUrl } from '~/i18n/utils';
+import { getLangFromUrl, useTranslations } from '~/i18n/utils';
 import type { CallToAction } from '~/types';
 import type { ImageMetadata } from 'astro';
 
@@ -50,6 +50,7 @@ const {
 
 const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 const homeHref = lang === 'es' ? '/es/' : getHomePermalink();
 ---
 
@@ -83,12 +84,12 @@ const homeHref = lang === 'es' ? '/es/' : getHomePermalink();
       </a>
       <div class="flex items-center gap-2 md:hidden">
         <LanguageSwitcher />
-        <ToggleMenu />
+        <ToggleMenu label={t('accessibility.toggleMenu')} />
       </div>
     </div>
     <nav
       class="items-center w-full md:w-auto hidden md:flex md:mx-5 text-white/90 overflow-y-auto overflow-x-hidden md:overflow-y-visible md:overflow-x-auto md:justify-self-center"
-      aria-label="Main navigation"
+      aria-label={t('accessibility.mainNavigation')}
     >
       <ul
         class="flex flex-col md:flex-row md:self-center w-full md:w-auto text-xl md:text-[0.9375rem] tracking-[0.01rem] font-medium md:justify-center"
@@ -147,12 +148,19 @@ const homeHref = lang === 'es' ? '/es/' : getHomePermalink();
     >
       <div class="items-center flex justify-between w-full md:w-auto">
         <div class="flex items-center gap-1">
-          {showToggleTheme && <ToggleTheme iconClass="w-6 h-6 md:w-5 md:h-5 md:inline-block text-white/80 hover:text-white" />}
+          {
+            showToggleTheme && (
+              <ToggleTheme
+                label={t('accessibility.toggleTheme')}
+                iconClass="w-6 h-6 md:w-5 md:h-5 md:inline-block text-white/80 hover:text-white"
+              />
+            )
+          }
           {
             showRssFeed && (
               <a
                 class="text-white/70 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/30 rounded-lg text-sm p-2.5 inline-flex items-center transition-colors duration-150"
-                aria-label="RSS Feed"
+                aria-label={t('accessibility.rssFeed')}
                 href={getAsset(lang === 'es' ? '/es/rss.xml' : '/rss.xml')}
               >
                 <Icon name="tabler:rss" class="w-5 h-5" />

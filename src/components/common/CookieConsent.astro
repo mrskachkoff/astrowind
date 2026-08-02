@@ -57,7 +57,7 @@ const t = useTranslations(lang);
     <button
       id="cookie-modal-close"
       class="absolute right-4 top-4 text-gray-400 transition hover:text-gray-700 dark:hover:text-gray-200"
-      aria-label="Close"
+      aria-label={t('cookieConsent.close')}
     >
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
         <path
@@ -92,7 +92,12 @@ const t = useTranslations(lang);
           <p class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">{t('cookieConsent.analyticsDesc')}</p>
         </div>
         <label class="relative mt-0.5 inline-flex flex-shrink-0 cursor-pointer items-center">
-          <input type="checkbox" id="cookie-toggle-analytics" class="peer sr-only" />
+          <input
+            type="checkbox"
+            id="cookie-toggle-analytics"
+            class="peer sr-only"
+            aria-label={t('cookieConsent.analyticsTitle')}
+          />
           <div
             class="h-5 w-9 rounded-full bg-gray-300 after:absolute after:left-[2px] after:top-[2px] after:h-4 after:w-4 after:rounded-full after:bg-white after:transition-transform after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full dark:bg-gray-600"
           >
@@ -109,7 +114,12 @@ const t = useTranslations(lang);
           <p class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">{t('cookieConsent.marketingDesc')}</p>
         </div>
         <label class="relative mt-0.5 inline-flex flex-shrink-0 cursor-pointer items-center">
-          <input type="checkbox" id="cookie-toggle-marketing" class="peer sr-only" />
+          <input
+            type="checkbox"
+            id="cookie-toggle-marketing"
+            class="peer sr-only"
+            aria-label={t('cookieConsent.marketingTitle')}
+          />
           <div
             class="h-5 w-9 rounded-full bg-gray-300 after:absolute after:left-[2px] after:top-[2px] after:h-4 after:w-4 after:rounded-full after:bg-white after:transition-transform after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full dark:bg-gray-600"
           >
